@@ -1,0 +1,207 @@
+.page-help {
+  .loc_target {
+    font-size: 14px;
+    padding: 16px;
+    width: 100%;
+    background-color: $c_lagunaLighter;
+    margin-bottom: 24px;
+    border: 1px solid $c_sand; 
+    border-radius: 8px;
+    &Name {
+      color: $c_lagunaDark;
+      font-weight: 600;
+      @extend %hoverable;
+    }
+    .loc_selected {
+
+      margin-bottom: 16px;
+    }
+    .loc_description {
+
+
+      .loc_contact {
+        color: $c_black;
+        font-weight: 600;
+      }
+      .loc_smsExample {
+        display: inline-block;
+        width: fit-content;
+        border-radius: 8px;
+        background-color: $c_sand;
+        padding: 8px;
+        margin-top: 16px;
+      }
+      .loc_smsDescription {
+        display: inline-block;
+        margin-left: 16px;
+        margin-top: 16px;
+      }
+      .loc_smsComment {
+        margin-top: 16px;
+      }
+ 
+    }
+
+  }
+  .loc_addDonator {
+    font-size: 14px;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    background-color: $c_sandLight;
+    padding: 16px;
+    border: 1px solid $c_yellowLight;
+    span {
+      color: $c_black;
+      font-weight: 600;
+      &.loc_contact {
+        color: $c_lagunaDark;
+        @extend %hoverable;
+      }
+    }
+  }
+  .loc_rekviz {
+
+
+    .loc_image {
+      height: 208px;
+
+    }
+
+    .loc_top {
+      display: flex;
+    }
+
+    .loc_right {
+      padding-top: 8px;
+      .loc_item {
+        &:first-child {
+
+          margin-bottom: 16px;
+        }
+        
+        font-size: 15px;
+
+        .loc_sber, .loc_docs {
+          padding: 0 16px;
+
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+
+          img {
+            width: 24px;
+            height: 24px;
+            margin-right: 4px;
+          }
+
+          .loc_title {
+            font-weight: 600;
+          }
+
+          .loc_desc {
+            width: 100%;
+
+            span {
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+  .loc_item_other {
+    margin-top: 16px;
+    width: 100%;
+    
+
+    .loc_title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .loc_item {
+      font-size: 14px;
+      margin-top: 4px;
+
+      .loc_name {
+        font-weight: 600;
+        margin-right: 4px;
+      }
+    }
+
+  }
+}
+
+
+.layout.loc--isMobile .page-help {
+
+  .loc_target {
+    font-size: 26px;
+    line-height: 40px;
+    padding: 24px;
+    .loc_smsComment {
+      margin-top: 16px;
+    }
+    .loc_smsDescription {
+      display: inline-block;
+      margin-left: 16px;
+
+      margin-top: 16px;
+    }
+  }
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  .loc_addDonator {
+    font-size: 26px;
+    padding: 24px;
+  }
+
+
+  .loc_rekviz {
+    .loc_image {
+      height: 318px;
+    }
+
+    .loc_item {
+      font-size: 22px;
+    }
+  }
+
+  .loc_item_other {
+    padding: 0px 0px;
+margin-bottom: 24px;
+    .loc_title {
+      font-size: 22px;
+    }
+    .loc_item {
+      font-size: 22px;
+    }
+  }
+
+
+  .loc_sber, .loc_docs {
+    padding: 0 0 0 24px !important;
+    img {
+      width: 32px !important;
+      height: 32px !important;;
+    }
+  }
+  
+  
+  
+  
+}
+

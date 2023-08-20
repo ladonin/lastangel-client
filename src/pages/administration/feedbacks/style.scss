@@ -1,0 +1,107 @@
+.page-administration_feedbacks {
+  h1 {
+    margin: 16px 0 32px 0;
+  }
+  .loc_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+
+    .component-loaderIcon {
+      margin: 50px auto;
+    }
+
+    .loc_item {
+      width: 100%;
+      padding: 16px;
+      border-radius: 8px;
+      .loc_data {
+        display: flex;
+        gap: 16px;
+        .loc_name {
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+        .loc_fuck_flex {
+          margin-left: auto;
+        }
+        .loc_phone {
+          font-style: Italic;
+        }
+        .loc_email {
+          font-style: Italic;
+        }
+      }
+      .loc_text {
+        margin-bottom: 16px;
+        font-style: Italic;
+        padding-top: 8px;
+        border-top: 1px solid $c_greyMediumLight;
+      }
+      .loc_buttons {
+        display: flex;
+        justify-content: space-between; 
+      }
+      &.loc--status {
+        &_new {
+          background: $c_lagunaLightMiddle;
+        }
+
+        &_viewed {
+          background: $c_pistachioLighter;
+        }
+
+      }
+
+
+      .loc_created {
+        margin-bottom: 8px;
+        font-style: italic;
+        color: $c_greyDark;
+        font-size: 14px;
+      }
+
+
+    }
+
+
+  }
+  &_deleteModal {
+    .loc_buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 32px;
+    }
+
+  }
+}
+
+.layout.loc--isMobile .page-administration_feedbacks {
+.loc_item {
+  padding: 24px;
+.loc_created {
+  margin-bottom: 16px;
+  font-size: 26px;
+}
+  .loc_data {
+    flex-wrap: wrap;
+  }
+.loc_name {
+  margin-bottom: 16px;
+  font-size: 32px;
+  width: 100%;
+}
+  .loc_phone,.loc_email {
+    margin-bottom: 16px;
+    font-size: 32px;
+  }
+  .loc_text {
+    padding-top: 16px;
+    padding-bottom: 32px;
+    font-size: 32px;
+  }
+
+}
+
+}

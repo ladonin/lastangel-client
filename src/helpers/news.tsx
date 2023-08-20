@@ -1,0 +1,14 @@
+/*
+  import { getAnotherImagesUrl } from 'helpers/news';
+ */
+import { SIZES_ANOTHER } from "constants/photos";
+import { TGetResponseItem } from "api/types/news";
+
+import { ValuesOf } from "types/common";
+
+export const getAnotherImagesUrl = (data: TGetResponseItem, number: number, size?: ValuesOf<typeof SIZES_ANOTHER>) =>
+  data.id
+    ? `${process.env.OUTER_STORAGE_URL}media/news/${data.id}/another_${number}${size ? `_${size}` : ""}.jpeg${
+        data.updated ? `?${data.updated}` : ""
+      }`
+    : "";

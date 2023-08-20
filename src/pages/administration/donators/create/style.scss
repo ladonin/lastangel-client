@@ -1,0 +1,80 @@
+.page-administration_donators_create {
+
+  h1 {
+    margin: 16px 0 32px 0px;
+  }
+
+  .loc_error {
+    color: $c_red;
+    padding: 16px 0px;
+
+  }
+
+  .loc_wrapper_textForm {
+
+    .loc_buttons {
+      padding: 0;
+      display: flex;
+      margin-top: 36px;
+      .loc_saveButton {
+        // width: 200px;
+      }
+      .loc_cancelButton {
+        margin-left: auto;
+      }
+
+    }
+
+  }
+
+  .loc_wrapper_addedSuccess {
+    margin-left: 0;
+
+    .loc_addElseButton {
+      margin: 24px 0;
+    }
+  }
+
+
+}
+
+
+.layout.loc--isMobile .page-administration_donators_create {
+  width: 100%;
+  padding: 0;
+
+  .loc_form {
+    flex-direction: column;
+
+    .loc_left, .loc_right {
+      padding: 0;
+      width: 100%;
+
+      .loc_formInputItem {
+        margin-bottom: 48px;
+      }
+    }
+  }
+
+  .loc_buttons {
+    margin: 64px 0 24px 0;
+  }
+
+  .loc_error {
+    padding-top: 32px;
+    font-size: 32px;
+  }
+
+  .loc_wrapper_addedSuccess {
+    font-size: 40px;
+    line-height: 56px;
+
+    .loc_addElseButton {
+      margin: 48px 0;
+    }
+  }
+  
+  
+  
+  
+}

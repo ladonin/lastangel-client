@@ -1,0 +1,301 @@
+.page-pets {
+  .loc_forCurator {
+    margin-bottom: 16px;
+    padding: 16px;
+    background-color: $c_sandLight;
+    border-radius: 8px;
+    border: 1px solid $c_yellowLight;
+
+    .loc_linkToContacts {
+      color: $c_lagunaGrey;
+      font-weight: 600;
+      @extend %hoverable;
+    }
+
+    .loc_buttonWrapper {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .loc_buttonSelectPet {
+        margin-top: 16px;
+      }
+    }
+  }
+
+  .loc_list, .loc_myPet {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+    position: relative;
+    min-height: 300px;
+
+    .component-loaderIcon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      margin-top: -25px;
+      margin-left: -25px;
+    }
+
+    .loc_wrapper {
+      position: relative;
+      width: calc(25% - 12px);
+      padding: 16px 16px 24px 16px;
+      background: $c_lagunaLight;
+      border-radius: 8px;
+
+      &.loc--status {
+
+        &_5 {
+          background-color: $c_pinkPiggy;
+        }
+
+        &_6 {
+          background-color: $c_greyLight;
+
+          .loc_image {
+            border: 5px solid $c_greyDark;
+          }
+        }
+
+      }
+
+      .loc_item {
+
+
+        .loc_image {
+          position: relative;
+
+          img {
+            width: 100%;
+            cursor: pointer;
+          }
+
+          .loc_status {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: $c_white;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 16px;
+          }
+
+          .loc_atHome {
+            position: absolute;
+            background-color: $c_greenLight;
+            color: $c_white;
+            font-weight: 600;
+            font-size: 16px;
+            height: 48px;
+            display: flex;
+            justify-content: space-between;
+            white-space: nowrap;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            border-radius: 24px;
+            transform: translate(-50%, 0);
+            width: fit-content;
+            bottom: 16px;
+            left: 50%;
+
+            > img {
+              width: 32px;
+              height: 32px;
+            }
+          }
+        }
+
+        .loc_collected {
+          margin-top: 8px;
+          font-style: Italic;
+
+          .loc_val {
+            font-weight: 600;
+            font-style: normal;
+          }
+        }
+
+
+        .loc_collected {
+          .loc_val {
+            color: $c_orange;
+          }
+        }
+
+        .loc_status {
+          font-weight: 600;
+          border-radius: 0 8px 0 0;
+          opacity: 1; //0.9;
+          &.loc--status {
+            &_1 {
+              display: none;
+            }
+
+            &_2 {
+              color: $c_red;
+            }
+
+            &_3, &_4 {
+              color: $c_lagunaDark;
+            }
+
+            &_6 {
+              color: $c_black;
+            }
+          }
+
+
+        }
+
+
+        .loc_content {
+          width: 100%;
+          margin-top: 16px;
+
+          .loc_data {
+            margin-top: 16px;
+            font-weight: 400;
+            font-size: 14px;
+
+            .loc_name {
+              font-weight: 600;
+              display: inline-block;
+              font-size: 18px;
+            }
+
+            .loc_age {
+              display: inline-block;
+            }
+
+            .loc_sex {
+              display: inline-block;
+
+              &.loc--male {
+                color: $c_blue
+              }
+
+              &.loc--female {
+                color: $c_pink
+
+              }
+            }
+
+            .loc_parameters {
+              font-style: italic;
+            }
+
+            .loc_description {
+              border-top: 1px solid $c_greyDark;
+              padding-top: 16px;
+              margin-top: 16px;
+            }
+          }
+
+          .loc_button {
+            margin: 0 auto;
+          }
+        }
+
+
+      }
+
+
+    }
+  }
+
+  .loc_myPet {
+
+    flex-direction: column;
+    align-items: center;
+
+    .loc_title {
+      margin-top: 16px;
+      font-weight: 600;
+    }
+  }
+}
+
+
+.layout.loc--isMobile .page-pets {
+
+
+  width: 100% !important;
+
+
+  .loc_list, .loc_myPet {
+    padding: 0;
+
+    .loc_wrapper {
+      width: calc(50% - 8px);
+      padding: 24px 24px 32px 24px;
+      position: relative;
+
+
+      .loc_item {
+
+        .loc_status {
+          font-size: 24px;
+          padding: 16px 24px;
+        }
+
+        .loc_atHome {
+          border-radius: 64px;
+          font-size: 28px;
+          height: 80px;
+          gap: 16px;
+          padding: 0 24px;
+          width: fit-content;
+
+          bottom: 16px;
+
+          > img {
+            width: 40px;
+            height: 40px;
+          }
+        }
+
+        .loc_content {
+          margin-top: 32px;
+
+          .loc_data {
+            font-size: 26px;
+            margin-top: 32px;
+
+            .loc_name {
+              font-size: 32px;
+              font-weight: 600;
+            }
+
+            .loc_description {
+              margin-top: 24px;
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+
+  .loc_forCurator {
+    margin-bottom: 32px;
+    font-size: 32px;
+    padding: 24px;
+
+    .loc_myPet {
+      margin-top: 24px;
+    }
+
+    .loc_buttonWrapper {
+      .loc_buttonSelectPet {
+        margin-top: 24px;
+      }
+    }
+  }
+}
+

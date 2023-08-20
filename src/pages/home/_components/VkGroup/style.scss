@@ -1,0 +1,22 @@
+.page-home_vkGroup {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+
+  .loc_title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px 0px;
+    color: $c_greyDark;
+  }
+
+}
+
+.layout.loc--isMobile .page-home_vkGroup {
+
+  margin-bottom: 32px;
+  .loc_title {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+}

@@ -1,0 +1,87 @@
+.page-administration_collections_form_component {
+  .loc_form,
+  .loc_photos {
+    display: flex;
+  }
+  
+  .loc_form {
+    .loc_left {
+      width: 45%;
+      padding-right: 32px;
+    }
+    .loc_right {
+      width: 55%;
+      padding-left: 32px;
+    }
+  }
+  
+  
+  .loc_photos {
+    flex-wrap: wrap;
+    margin-top: 24px;
+    h2 {
+      width: 100%
+    }
+    .loc_left {
+      width: 35%;
+      padding-right: 32px;
+    }
+
+    .loc_right {
+      width: 65%;
+      padding-left: 32px;
+    }
+  }
+  
+  
+  .loc_formInputItem {
+    margin-bottom: 24px;
+
+    input {
+      width: 70%;
+    }
+    label {
+      width: 30%;
+    }
+  }
+
+  .loc_formTextareaItem {
+    margin-bottom: 24px;
+
+    textarea {
+      width: 70%;
+    }
+    label {
+      width: 30%;
+    }
+    &.loc__shortdescription textarea {
+      height: 103px;
+    }
+    &.loc__fulldescription textarea {
+      height: 340px;
+    }
+  }
+  
+  .loc_formSelectItem {
+    margin-bottom: 24px;
+
+    .loc_select {
+      width: 70%;
+    }
+    label {
+      width: 30%;
+    }
+  }
+
+  .loc_formCheckboxItem {
+    .loc--checkbox {
+      width: 70%;
+    }
+    .loc_label {
+      width: 30%;
+    }
+
+  }
+  
+
+}

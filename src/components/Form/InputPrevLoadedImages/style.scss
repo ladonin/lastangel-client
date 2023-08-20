@@ -1,0 +1,41 @@
+@import 'src/styles/variables.scss';
+
+.component-inputPrevLoadedImages {
+  margin-top: 24px;
+
+  .loc_labelTitle {
+    margin-bottom: 16px;
+  }
+
+  .loc_images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .loc_image,
+    .loc_image img {
+      width: 350px;
+      display: block;
+
+      .loc--deleted {
+        opacity: 0.5;
+      }
+    }
+
+    .loc_image {
+      position: relative;
+
+      .loc_delete, .loc_restore {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+      }
+    }
+  }
+}
+.layout.loc--isMobile .component-inputPrevLoadedImages {
+
+  .loc_labelTitle {
+    margin-top: 32px;
+  }
+}

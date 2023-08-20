@@ -1,0 +1,99 @@
+.page-contacts {
+  display: flex;
+  justify-content: center;
+
+
+  
+  .loc_left {
+    width: 70%;
+    padding-right: 24px;
+    .loc_title {
+      margin-bottom: 24px;
+    }
+    .loc_phone {
+
+      display: flex;
+      align-items: center; 
+      gap: 16px;
+      
+      .loc_value {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 27px;
+      }
+      .loc_fio {
+        line-height: 27px;
+        font-size: 20px;
+      }
+    }
+    .loc_content_1 {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 22px;
+    }
+    .loc_vk {
+      padding-right: 12px;
+
+    }
+    .loc_ok{
+      padding-left: 12px;
+
+    }
+    .loc_vk,.loc_inst,.loc_ok {
+      width: 50%;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      float: left;
+      img {
+        cursor: pointer;
+      }
+      .loc_link {
+        color: $c_lagunaGrey;
+        font-size: 18px;
+        font-weight: 600;
+        @extend %hoverable;
+      }
+    }
+  }
+  .loc_right {
+
+    width: 30%;
+    
+    
+    
+    
+    
+  }
+}
+
+
+
+.layout.loc--isMobile .page-contacts{
+  flex-wrap: wrap; 
+  .loc_left,.loc_right {
+    width: 100%;
+  }
+  .loc_phone {
+.loc_value {
+  font-size: 30px;
+}
+    .loc_fio {
+      font-size: 28px;
+    }
+
+  }
+  .loc_left .loc_content_1 {
+    font-size: 28px;
+    line-height: 46px;
+  }
+  .loc_vk,.loc_ok,.loc_inst {
+    width: 100%;
+  padding: 0 0 16px 0;
+.loc_link {
+  font-size: 28px;
+}
+  }
+}

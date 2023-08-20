@@ -1,0 +1,74 @@
+.component-select {
+  display: flex;
+  justify-content: space-between;
+
+  .loc_label {
+    line-height: 40px;
+    padding-right: 20px;
+  }
+
+  .loc_control {
+    border: 1px solid $c_greyMedium;
+    border-radius: 99px;
+    padding: 0 8px;
+    min-height: 40px;
+    box-shadow: none;
+
+
+    &:hover {
+      border-color: $c_greyDark;
+    }
+
+    &.loc--focused {
+      border-color: $c_blueLight;
+
+    }
+  }
+  .loc_menu {
+    .loc_menuList {
+      max-height: 600px;
+    }
+  }
+  .loc_input_star {
+    position: absolute;
+    margin-bottom: 33px;
+    right: -8px;
+    top: -4px;
+  }
+}
+
+
+.layout.loc--isMobile .component-select {
+  .loc_label {
+    line-height: 44px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+  }
+
+
+  .loc_control {
+    border: 1px solid $c_greyMedium;
+    border-radius: 99px;
+    padding: 0 32px;
+    min-height: 80px;
+    box-shadow: none;
+    font-size: 30px;
+  }
+
+  .loc_menu {
+    font-size: 32px;
+    line-height: 64px;
+  }
+  .loc_clearIndicator,.loc_dropdownIndicator {
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .loc_input_star {
+    right: -12px;
+    font-size: 28px;
+    font-weight: 900;
+  }
+}

@@ -1,0 +1,42 @@
+.component-WYSIWYGEditor {
+
+  label {
+    line-height: 20px;
+    padding-bottom: 16px;
+    display: block;
+  }
+
+  .loc_wrapper {
+    width: 100%;
+
+  }
+
+  .loc_editor {
+    border: 1px solid $c_greyMedium;
+    width: 100%;
+
+    padding: 16px;
+
+    .DraftEditor-root {
+      height: 300px;
+
+      .public-DraftStyleDefault-block {
+        margin: 0px;
+      }
+    }
+  }
+}
+
+.layout.loc--isMobile .component-WYSIWYGEditor {
+  label {
+    line-height: 44px;
+    font-size: 30px;
+  }
+
+
+  textarea {
+    font-size: 30px;
+    padding: 24px;
+  }
+
+}

@@ -1,0 +1,47 @@
+.page-home {
+
+  > .loc_top {
+    > .loc_left {
+      float: left;
+      width: 66%;
+    }
+
+    > .loc_right {
+      width: 34%;
+      padding-left: 24px;
+      float: right;
+    }
+  }
+
+  > .loc_bottom {
+
+  }
+
+  .loc_textMain {
+    padding: 24px 12px 0 12px;
+    letter-spacing: 0.5px;
+    font-size: 16px;
+  }
+
+
+}
+
+
+.layout.loc--isMobile .page-home {
+  .loc_textMain {
+    padding: 24px 0;
+    letter-spacing: 0.5px;
+    font-size: 26px;
+  }
+
+  .loc_left, .loc_right {
+    width: 100%;
+  }
+
+
+
+  .loc_right {
+    padding: 0;
+
+  }
+}

@@ -1,0 +1,435 @@
+.page-collection {
+
+  .loc_contentWrapper {
+
+    .loc_topWrapper {
+      display: flex;
+      gap: 32px;
+
+      .loc_avatar {
+        img {
+          width: 450px;
+          height: 450px;
+        }
+
+      }
+
+      .loc_donation {
+        width: 35%;
+
+        .loc_title {
+          height: 55px;
+          text-align: right;
+          font-size: 16px;
+          display: flex;
+          align-items: flex-end;
+          justify-content: flex-end;
+          padding-bottom: 8px;
+          font-weight: 600;
+          color: $c_lagunaGrey;
+        }
+
+        .loc_value {
+          text-align: right;
+          font-weight: 600;
+
+          span {
+            color: $c_orange;
+            font-size: 26px;
+          }
+        }
+
+        .loc_additionally {
+          margin-top: 8px;
+          text-align: right;
+          font-style: Italic;
+          @extend %hoverable;
+          color: $c_lagunaDark;
+        }
+
+        .loc_redactButton, .loc_donateButton {
+          margin-top: 24px;
+          margin-left: auto;
+        }
+      }
+
+      .loc_right {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+
+        align-content: flex-start;
+
+        .loc_data {
+          width: 65%;
+          align-content: flex-start;
+
+          .loc_name {
+            font-size: 40px;
+            font-weight: 600;
+            margin-left: -2px;
+          }
+
+          .loc_id {
+            margin-top: 24px;
+          }
+
+          .loc_target_animal {
+            font-weight: 600;
+            font-size: 18px;
+            margin: 0px 0 8px 0;
+
+            span {
+              color: $c_blue;
+
+              @extend %hoverable;
+            }
+          }
+
+          .loc_closed {
+            margin-top: 16px;
+            background-color: $c_greenLight;
+            color: $c_white;
+            font-weight: 600;
+            font-size: 16px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            border-radius: 24px;
+            width: 175px;
+
+            > img {
+              width: 32px;
+              height: 32px;
+            }
+          }
+
+
+
+        }
+        .loc_description {
+          margin-top: 24px;
+          align-content: flex-start;
+        }
+      }
+
+      .loc_targetSum {
+        margin-top: 8px;
+        font-weight: 600;
+        font-size: 18px;
+        color: $c_lagunaGrey;
+
+        span {
+          color: $c_orange;
+        }
+      }
+
+      .disclaimer {
+        width: 100%;
+        font-style: Italic;
+        font-size: 14px;
+        margin-top: 24px;
+      }
+    }
+
+    .loc_bottomWrapper {
+      margin-top: 32px;
+
+      .loc_slider {
+
+        .swiper-slide {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 800px;
+          background-color: $c_greyDark;
+        }
+
+        .loc_image {
+          max-height: 800px;
+        }
+      }
+
+      .loc_video {
+        display: flex;
+        width: 100%;
+        margin-bottom: 16px;
+
+        iframe {
+          margin: 0 auto;
+          width: 50% !important;
+          height: 600px !important;
+        }
+      }
+    }
+  }
+
+  &_donationsListModal {
+    .loc_title {
+      font-style: Italic;
+    }
+
+    .loc_content {
+      padding-right: 8px;
+      margin-right: -8px;
+      height: 400px;
+      overflow: auto;
+      margin-bottom: 32px;
+      margin-top: 16px;
+      position: relative;
+
+      .component-loaderIcon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 50px;
+        margin-top: -25px;
+        margin-left: -25px;
+      }
+
+      .loc_list {
+        .loc_item {
+          display: flex;
+          justify-content: space-around;
+          margin-bottom: 16px;
+
+          .loc_name {
+            &.loc--hasLink {
+              color: $c_blue;
+              @extend %hoverable;
+            }
+          }
+
+          .loc_sum {
+            margin-left: auto;
+
+            span {
+              font-weight: 600;
+              color: $c_orange;
+            }
+          }
+        }
+
+      }
+    }
+
+    .loc_buttons {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+.layout.loc--isMobile .page-collection {
+
+  .loc_contentWrapper {
+    font-size: 24px;
+
+    .loc_name {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 44px;
+      font-weight: 600;
+    }
+
+    .loc_status {
+      font-size: 32px;
+    }
+
+    .loc_topWrapper .loc_data {
+      width: calc(100% - 429px);
+
+      .loc_id, .loc_targetSum, .loc_parameters {
+        margin-top: 0;
+        margin-bottom: 8px;
+        font-size: 28px;
+      }
+
+      .loc_id {
+
+        margin-top: 24px;
+        margin-bottom: 24px;
+      }
+
+      .loc_targetSum, .loc_donation .loc_title {
+        color: $c_main;
+
+      }
+
+      .loc_targetSum span {
+        color: $c_lagunaDark;
+
+      }
+
+      .loc_parameters {
+        gap: 0;
+
+        .loc_sex {
+          width: 100%;
+          margin-bottom: 4px;
+
+          span {
+            display: none
+          }
+        }
+      }
+
+    }
+
+    .loc_topWrapper .loc_right .loc_donation .loc_title {
+      font-size: 24px;
+      height: auto;
+    }
+
+    .loc_right {
+      .loc_buttonWrapper {
+        width: 100%;
+      }
+
+      .loc_donateButton {
+        margin: 48px auto 24px auto;
+      }
+
+      .loc_redactButton {
+        margin: 24px auto 0px auto;
+      }
+    }
+
+    .disclaimer {
+      font-size: 24px;
+      margin: 0 24px 24px 24px;
+    }
+
+    .loc_topWrapper {
+      flex-wrap: wrap;
+      gap: 24px;
+
+      .loc_avatar {
+        img {
+          width: 405px;
+          height: 405px;
+        }
+      }
+
+      .loc_right {
+        width: 100%;
+
+
+        .disclaimer {
+          font-size: 24px;
+        }
+
+        .loc_description {
+          margin-top: 0;
+          font-size: 28px;
+          width: 100%;
+        }
+
+        .loc_collections {
+          width: 100%;
+          gap: 16px;
+          margin-top: 0;
+          margin-bottom: 24px;
+
+          .loc_title {
+            font-size: 28px;
+          }
+
+          .loc_item {
+            font-size: 24px;
+            padding: 8px 24px;
+            border-radius: 99px;
+          }
+
+        }
+      }
+    }
+
+    .loc_donation {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-top: 0px;
+
+      .loc_title {
+        justify-content: flex-start;
+        font-size: 28px;
+        height: auto;
+        padding-bottom: 0px;
+        align-items: flex-start;
+      }
+
+      .loc_value {
+        margin-left: 16px;
+        font-size: 28px;
+
+        align-items: flex-start;
+      }
+
+      .loc_additionally {
+        width: 100%;
+        text-align: left;
+        margin-top: 24px;
+        font-weight: 600;
+        font-size: 28px;
+      }
+
+
+    }
+
+    .loc_bottomWrapper {
+      margin: 32px -24px 0px -24px;
+
+      display: flex;
+      flex-wrap: wrap;
+
+      .loc_slider {
+        width: 100%;
+        margin-bottom: 24px;
+
+        .swiper-slide {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 1200px;
+          background-color: $c_greyDark;
+        }
+
+        .loc_image {
+          max-height: 1200px;
+          max-width: 100%;
+        }
+      }
+
+      .loc_video {
+        display: flex;
+        width: 100%;
+
+        iframe {
+          margin: 0 auto;
+          width: 70% !important;
+          height: 1190px !important;
+        }
+      }
+    }
+
+
+  }
+
+}
+
+
+.page-collection_donationsListModal {
+  .loc_title {
+    padding-bottom: 24px;
+  }
+
+  .loc_content {
+    height: 50vh;
+
+  }
+}

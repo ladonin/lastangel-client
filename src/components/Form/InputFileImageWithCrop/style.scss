@@ -1,0 +1,141 @@
+@import 'src/styles/variables.scss';
+
+.component-inputFileImage {
+  margin-top: 24px;
+
+  .loc_labelTitle {
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .loc_error {
+    font-size: 14px;
+    color: $c_red;
+
+    .loc_errorFileName {
+      color: $c_main;
+    }
+  }
+
+  .loc_description {
+    font-size: 14px;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .loc_label {
+    input[type=file] {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      display: block;
+      width: 0;
+      height: 0;
+    }
+
+    /* Focus */
+    input[type=file]:focus + .loc_selectFile {
+      box-shadow: 0 0 0 1px $c_blueLight;
+    }
+
+    /* Hover/active */
+    &:hover .loc_selectFile {
+      background-color: $c_green;
+    }
+
+    &:active .loc_selectFile {
+      background-color: $c_greenDark;
+    }
+
+    /* Disabled */
+    input[type=file]:disabled + .loc_selectFile {
+      background-color: $c_greyMedium;
+    }
+
+
+    .loc_selectFile {
+      margin-bottom: 16px;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      outline: none;
+      text-decoration: none;
+      font-size: 14px;
+      vertical-align: middle;
+      color: $c_white;
+      text-align: center;
+      border-radius: 4px;
+      background-color: $c_greenMedium;
+      line-height: 24px;
+      padding: 8px 16px;
+      box-sizing: border-box;
+      border: none;
+      transition: $transition;
+    }
+
+
+  }
+
+
+  .loc_image,
+  .loc_image img {
+    width: 350px;
+    display: block;
+  }
+
+  &_cropModal {
+    .loc_wrapper {
+      display: flex;
+      flex-direction: column;
+
+      .loc_crop {
+        width: 500px;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $c_greyDark;
+        position: relative;
+        margin-bottom: 24px;
+      }
+
+      .loc_zoom,
+      .loc_rotation {
+        width: 500px;
+        margin-bottom: 24px;
+
+        .loc_lable {
+          font-weight: 600;
+          font-size: 16px;
+          margin-bottom: 16px;
+          text-align: center;
+        }
+      }
+
+      .loc_rotation {
+        margin-bottom: 36px;
+      }
+    }
+    .loc_okButton {
+      width: 100%;
+    }
+    &.loc--isMobile {
+      .loc_zoom,.loc_rotation,.loc_crop {
+        width: 100%;
+        .loc_lable {
+          font-size: 32px;
+          margin-bottom: 40px;
+        }
+      }
+      .loc_rotation,.loc_crop {
+        margin-bottom: 56px;
+      }
+      .loc_okButton {
+        margin-bottom: 24px;
+      }
+
+    }
+  }
+
+
+}

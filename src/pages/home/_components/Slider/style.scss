@@ -1,0 +1,23 @@
+.page-home_photoSlider {
+  height: 749px;
+
+  .swiper-slide {
+    display: flex;
+    background-color: $c_greyDark;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .loc_wait {
+    background-color: $c_greyDark;
+  }
+}
+
+.layout.loc--isMobile .page-home_photoSlider {
+  margin: 0 -24px;
+}

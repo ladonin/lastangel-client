@@ -1,0 +1,56 @@
+.component-modal {
+  background: $c_white;
+  color: $c_main;
+  padding: 24px;
+  min-width: 500px;
+
+  &_header {
+    h2 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    &_closeIcon {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 12px;
+      height: 12px;
+      cursor: pointer;
+    }
+  }
+
+  &_content {
+    position: relative;
+    margin-top: 32px;
+  }
+
+  &--isMobile {
+    padding: 48px;
+    .component-modal_header {
+      padding: 0px;
+
+      h2 {
+        font-size: 48px;
+        line-height: 64px;
+      }
+
+      &_closeIcon {
+        width: 40px;
+        height: 40px;
+        top: 62px;
+        right: 48px;
+      }
+    }
+    .component-modal_content {
+      font-size: 40px;
+      line-height: 56px;
+      &_buttons {
+        margin-top: 48px;
+      }
+    }
+  }
+}
+.ReactModal__Overlay--after-open {
+  z-index: 9999999999;
+}

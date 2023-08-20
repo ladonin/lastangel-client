@@ -1,0 +1,27 @@
+.component-footer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: $c_head;
+  padding: 24px;
+  height: $layout_1_footer_height;
+  &_wrapper {
+    width: 1200px;
+  }
+}
+
+
+.layout.loc--isMobile .component-footer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  background-color: $c_head;
+  padding: 24px;
+  height: $layout_1_footer_height;
+  
+  .loc_link {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+}

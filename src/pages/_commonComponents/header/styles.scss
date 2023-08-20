@@ -1,0 +1,240 @@
+.component-header {
+  position: relative;
+  width: 100%;
+  min-width: 1200px;
+  display: flex;
+  background-color: $c_head;
+  background: url("./images/background.css.jpg") repeat;
+
+  .loc_wrapper {
+    width: 1200px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    height: $layout_1_header_height;
+    position: relative;
+    z-index: 2;
+    padding: 16px 0;
+  }
+
+
+  .loc_topPart {
+    width: 100%;
+    display: flex;
+    height: calc(100% - 40px);
+
+    .loc_logoText {
+      width: calc(350px + 16px);
+      display: flex;
+      flex-wrap: wrap;
+      padding-top: 4px;
+
+      .loc_1 {
+        width: 100%;
+        font-size: 36px;
+        font-weight: 700;
+        color: $c_white;
+      }
+
+      .loc_2 {
+        width: 100%;
+        font-size: 16px;
+        font-weight: 400;
+        color: $c_white;
+        padding-bottom: 32px;
+      }
+    }
+
+    .loc_heartLine {
+      height: 60px;
+      width: 153px;
+    }
+
+    .loc_buttons {
+      display: flex;
+      margin-left: auto;
+      width: 380px;
+      justify-content: flex-end;
+      margin-top: 10px;
+      gap: 16px;
+    }
+
+    .loc_contacts {
+      display: flex;
+      margin-left: 16px;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      height: 40px;
+      margin-top: 10px;
+      background-color: $c_white;
+      padding: 0 4px;
+
+      border-radius: 20px;
+
+      img {
+        display: block;
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+  }
+
+  .loc_bottomPart {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    height: 40px;
+    justify-content: space-between;
+
+    .loc_item {
+      font-size: 14px;
+      text-transform: uppercase;
+      font-weight: $font_bold;
+      transition: $transition;
+      display: flex;
+      align-items: center;
+      color: $c_white;
+      @extend %hoverable;
+    }
+  }
+
+  .loc_leftPart {
+    width: 170px;
+    margin-right: 32px;
+    display: flex;
+    justify-content: flex-start;
+
+    .loc_logo {
+      cursor: pointer;
+      height: 165px;
+    }
+  }
+
+  .loc_rightPart {
+    width: calc(100% - 170px);
+    flex-direction: column;
+    display: flex;
+  }
+}
+
+.component-headerMobile {
+  width: 100%;
+background-color: $c_lagunaLightMiddle;
+
+  margin-bottom: 16px;
+  .loc_wrapper {
+    display: flex;
+    width: 100%;
+    gap: 32px;
+    position: relative;
+    background-color: $c_head;
+    background: url("./images/background.css.jpg") repeat;
+    background-size: cover;
+    padding: 24px;
+  }
+
+  .loc_leftPart {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: flex-start;
+
+    .loc_logo {
+      cursor: pointer;
+      height: 100%;
+    }
+  }
+
+  .loc_rightPart {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-direction: column;
+
+    .loc_name {
+      font-weight: 600;
+      color: $c_white;
+      font-size: 50px;
+    }
+
+    .loc_description {
+      font-weight: 600;
+      color: $c_white;
+      font-size: 32px;
+    }
+  }
+
+
+  .loc_bottom {
+    display: flex;
+    padding: 40px 24px 0 24px;
+
+    .loc_buttons {
+      display: flex;
+      margin-right: auto;
+      width: 600px;
+      justify-content: flex-start;
+      gap: 16px;
+    }
+
+    .loc_contacts {
+      display: flex;
+      margin-left: auto;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+      height: 56px;
+
+      & > img {
+        display: block;
+        width: 56px;
+        height: 56px;
+      }
+    }
+  }
+
+
+  .loc_menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    padding: 40px 24px 32px 24px;
+
+    .loc_item, .loc_else {
+      color: $c_main;
+      font-size: 36px;
+      font-weight: 600;
+      @extend %hoverable;
+    }
+
+    .loc_else {
+      //margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      &.loc--opened {
+        @extend %active ;
+        .loc_caret {
+          transform: rotate(180deg);
+          transition: $transition;
+        }
+      }
+    }
+  }
+
+  .loc_subMenu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .loc_item {
+      color: $c_main;
+      font-size: 30px;
+      font-weight: 500;
+    }
+  }
+}

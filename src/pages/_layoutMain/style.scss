@@ -1,0 +1,117 @@
+.layout-main {
+  display: flex;
+  flex-direction: column;
+  //align-items: center;
+  width: 100%;
+
+  & > div {
+    width: 100%;
+  }
+
+  .page {
+    margin: 0 auto;
+    width: 1200px;
+    padding: 24px 0 48px 0;
+    min-height: calc(100vh - #{$layout_1_header_height} - #{$layout_1_footer_height});
+
+    .loc_warningMessage {
+      position: relative;
+      padding: 24px;
+      color: #000;
+      background: $c_sandLight;
+      margin: 160px 0 24px 0;
+      border-radius: 8px;
+      border: 1px solid $c_orange;
+
+      img {
+        position: absolute;
+        top: -163px;
+      }
+    }
+
+    & > div[class^='page-'] {
+      max-width: 1200px;
+      margin: 0 auto;
+
+
+    }
+
+    &_administrationMenu {
+      width: 1200px;
+      margin: 0 auto;
+      padding: 0 0 24px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+
+      .loc_addButton {
+        margin-right: auto;
+      }
+
+      .loc_emails {
+        margin-right: auto;
+        position: relative;
+        cursor: pointer;
+
+        .loc_count {
+          background-color: $c_white;
+          padding: 4px 8px;
+          font-size: 12px;
+          font-weight: 600;
+          border-radius: 99px;
+          position: absolute;
+          top: -12px;
+          right: -12px;
+          border: 1px solid $c_red;
+        }
+
+        .loc_emailButton {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+    }
+
+
+  }
+}
+
+.layout.loc--isMobile {
+  .page {
+    width: 100%;
+    padding: 24px;
+    min-height: calc(100vh - #{$layout_1_header_height} - #{$layout_1_footer_height} - #{$layout_1_height_addition_mobile});
+    .loc_warningMessage {
+      font-size: 32px;
+    }
+  }
+
+  .page_administrationMenu {
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0 0 48px 0;
+    gap: 40px;
+
+    .loc_title {
+      line-height: 80px;
+      font-size: 32px;
+    }
+
+    .loc_emails {
+      .loc_count {
+        padding: 4px 12px;
+        font-size: 22px;
+        top: -20px;
+        right: -20px;
+      }
+
+      .loc_emailButton {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+}
+
+

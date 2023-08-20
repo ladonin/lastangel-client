@@ -1,0 +1,195 @@
+.page-pet_petsList {
+  margin-bottom: 24px;
+  height: 161px;
+
+  .loc_wrapper {
+    position: relative;
+
+  }
+
+
+  .loc_slider {
+
+  }
+
+  .swiper-slide {
+    display: flex;
+    background-color: $c_white;
+    flex-direction: column;
+
+    cursor: pointer;
+
+    .loc_image {
+      position: relative;
+
+      img {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .loc_name {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background-color: $c_white;
+        border-radius: 16px;
+        padding: 0 12px;
+        font-size: 14px;
+        line-height: 28px;
+        font-weight: 600;
+
+        &.loc--male {
+          color: $c_blue
+        }
+
+        &.loc--female {
+          color: $c_pink
+
+        }
+
+      }
+
+      .loc_status {
+        
+        &.loc--status {
+          &_1 {
+            display: none;
+          }
+
+          &_2, &_3, &_4 {
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            background-color: $c_white;
+            padding: 4px 8px;
+            font-size: 12px;
+            line-height: 24px;
+            font-weight: 600;
+            border-radius: 0 4px 0 0;
+          }
+
+          &_2 {
+            color: $c_red;
+          }
+
+          &_3, &_4 {
+            color: $c_lagunaDark;
+          }
+
+
+        }
+      }
+    }
+
+    .loc_content {
+      width: 100%;
+
+      .loc_data {
+        margin: 16px;
+        font-weight: 400;
+        font-size: 16px;
+
+
+        .loc_age {
+          // font-style: Italic;
+          display: inline-block;
+
+          .loc--undefined {
+            color: $c_grey;
+            font-style: Italic;
+          }
+
+        }
+
+        .loc_sex {
+          font-weight: 600;
+          display: inline-block;
+
+          &.loc--male {
+            color: $c_blue
+          }
+
+          &.loc--female {
+            color: $c_pink
+
+          }
+        }
+
+        .loc_parameters {
+          font-style: italic;
+        }
+
+        .loc_description {
+          margin-top: 16px;
+        }
+
+        .loc_collected {
+          margin-top: 8px;
+          font-style: Italic;
+
+          .loc_val {
+            font-weight: 600;
+            color: $c_orange;
+            font-style: normal;
+          }
+        }
+
+
+      }
+
+      .loc_button {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+      }
+    }
+
+  }
+
+  .loc_categoryName {
+    max-width: 70px;
+    font-size: 14px;
+    margin-left: 8px;
+
+
+  }
+
+  .react-tabs__tab {
+    &-panel {
+      border-top-right-radius: 0;
+    }
+  }
+
+
+}
+
+
+.layout.loc--isMobile .page-pet_petsList {
+  height: auto;
+
+  .loc_slider {
+    .loc_status {
+      font-size: 22px !important;
+      padding: 16px;
+
+
+      &.loc--status {
+
+
+        &_2, &_3, &_4 {
+
+          border-radius: 0 16px 0 0;
+        }
+      }
+      
+      
+    }
+    
+  }
+
+  
+
+
+}
+
+

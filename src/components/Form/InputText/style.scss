@@ -1,0 +1,53 @@
+.component-inputText {
+  position: relative; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  label {
+    line-height: 20px;
+    padding-right: 20px;
+  }
+  input {
+    border-radius: 99px;
+    padding: 0 16px;
+    font-size: 16px;
+    height: 40px;
+    &:disabled {
+      cursor: default;
+      color: $c_greyLight;
+      background-color: $c_greyLight;
+      border-color: $c_greyMedium;
+    }
+  }
+  .loc_input_star {
+    position: absolute;
+    margin-bottom: 33px;
+    right: -8px;
+    top: -4px;
+  }
+  
+  &.loc--notvalid {
+    input {
+      border-color: $c_red;
+
+    }}
+}
+
+
+.layout.loc--isMobile .component-inputText {
+  label {
+    line-height: 44px;
+    font-size: 30px;
+  }
+  input {
+    border-radius: 99px;
+    padding: 0 32px;
+    font-size: 30px;
+    height: 80px;
+  }
+  .loc_input_star {
+    right: -12px;
+    font-size: 28px;
+    font-weight: 900;
+  }
+}

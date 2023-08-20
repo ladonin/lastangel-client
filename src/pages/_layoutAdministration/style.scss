@@ -1,0 +1,137 @@
+.layout-administration {
+  display: flex;
+  flex-direction: column;
+  //align-items: center;
+  width: 100%;
+
+  & > div {
+    width: 100%;
+  }
+
+  .page {
+    margin: 0 auto;
+    width: 1200px;
+    padding: 24px 0 48px 0;
+    min-height: calc(100vh - #{$layout_1_header_height} - #{$layout_1_footer_height});
+
+    & > div[class^='page-'] {
+      max-width: 1200px;
+      margin: 0 auto;
+
+
+    }
+
+    &_administrationMenu {
+      flex-wrap: wrap;
+      width: 1200px;
+      padding: 0 0 24px 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .loc_exitButton {
+        margin-left: auto;
+      }
+
+      .loc_title {
+        font-size: 20px;
+        line-height: 32px;
+        color: $c_lagunaDark;
+        @extend %hoverable;
+      }
+
+      .loc_buttons {
+        flex-wrap: wrap;
+        width: 1200px;
+        margin: 0 auto;
+        padding: 0;
+        display: flex;
+        justify-content: flex-start;
+        gap: 16px;
+
+      }
+
+      .loc_addPetButton {
+        margin-left: 0;
+      }
+
+      .loc_addCollectionButton {
+        margin-left: 0;
+      }
+
+      .loc_addDonationButton {
+        margin-left: 0;
+      }
+
+      .loc_addDonatorButton {
+        margin-left: 0;
+      }
+
+
+      .loc_emails {
+        position: relative;
+        cursor: pointer;
+
+        .loc_count {
+          background-color: $c_white;
+          padding: 4px 8px;
+          font-size: 12px;
+          font-weight: 600;
+          border-radius: 99px;
+          position: absolute;
+          top: -12px;
+          right: -12px;
+          border: 1px solid $c_red;
+        }
+
+        .loc_emailButton {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+
+  }
+}
+
+.layout.loc--isMobile {
+  .page {
+    width: 100%;
+    padding: 24px;
+  }
+
+
+  .page_administrationMenu {
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0 0 48px 0;
+    gap: 40px;
+    align-items: center;
+
+    .loc_title {
+      line-height: 80px;
+      font-size: 32px;
+    }
+    .loc_buttons {
+      gap: 24px;
+      .loc_addPetButton, .loc_addCollectionButton, .loc_addDonationButton, .loc_addDonatorButton, .loc_addNewsButton,.loc_addStoryButton {
+        width: 100%;
+      }
+    }
+    .loc_emails {
+      .loc_count {
+        padding: 4px 12px;
+        font-size: 22px;
+        top: -20px;
+        right: -20px;
+      }
+
+      .loc_emailButton {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+}
+

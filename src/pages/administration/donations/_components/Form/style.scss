@@ -1,0 +1,37 @@
+.page-administration_donations_form_component {
+  .loc_form {
+    display: flex;
+    .loc_left {
+      width: 45%;
+      padding-right: 32px;
+    }
+    .loc_right {
+      width: 55%;
+      padding-left: 32px;
+    }
+  }
+
+  .loc_formInputItem,.loc_formCheckboxItem {
+    margin-bottom: 24px;
+
+    input,.loc_checkbox {
+      width: 70%;
+    }
+    label,.loc_label {
+      width: 30%;
+    }
+  }
+
+  
+  .loc_formSelectItem {
+    margin-bottom: 24px;
+
+    .loc_select {
+      width: 70%;
+    }
+    label {
+      width: 30%;
+    }
+  }
+
+}

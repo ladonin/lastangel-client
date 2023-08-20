@@ -1,0 +1,36 @@
+.component-inputNumber {
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  label {
+    line-height: 20px;
+    padding-right: 20px;
+  }
+  input {
+    border-radius: 99px;
+    padding: 0 16px;
+    font-size: 16px;
+    height: 40px;
+    &:disabled {
+      cursor: default;
+      color: $c_greyLight;
+      background-color: $c_greyLight;
+      border-color: $c_greyMedium;
+    }
+  }
+}
+
+
+.layout.loc--isMobile .component-inputNumber {
+  label {
+    line-height: 44px;
+    font-size: 30px;
+  }
+  input {
+    border-radius: 99px;
+    padding: 0 32px;
+    font-size: 30px;
+    height: 80px;
+  }
+}
