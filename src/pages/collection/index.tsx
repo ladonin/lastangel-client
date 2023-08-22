@@ -11,7 +11,7 @@ import { TItem } from "api/types/collections";
 import { TGetListOutput as TListDonations, TItem as TDonationItem } from "api/types/donations";
 import LoaderIcon from "components/LoaderIcon";
 import { CollectionsApi } from "api/collections";
-import { getMainImageUrl, getAnotherImagesUrl } from "helpers/collections";
+import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/collections";
 import { numberFriendly } from "helpers/common";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 import "./style.scss";
@@ -156,7 +156,7 @@ const Collection: React.FC = () => {
 
               {isMobileState === false && renderDonation(dataState)}
               {isMobileState === true && <div className="loc_buttonWrapper">{renderDonateButton()}</div>}
-              {renderRedactButton()}
+              {isMobileState === true && renderRedactButton()}
 
               {isMobileState === false && <div className="loc_description">{dataState.description}</div>}
             </div>
@@ -167,15 +167,31 @@ const Collection: React.FC = () => {
               <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
                 {anotherImagesState.reverse().map((item, index) => (
                   <SwiperSlide key={index}>
-                    <img className="loc_image" src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)} />
+                    <img
+                      alt="nophoto"
+                      className="loc_image"
+                      src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
+                    />
                   </SwiperSlide>
                 ))}
               </Swiper>
             )}
 
-            {dataState.videoVk1 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: dataState.videoVk1 }} />}
-            {dataState.videoVk2 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: dataState.videoVk2 }} />}
-            {dataState.videoVk3 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: dataState.videoVk3 }} />}
+            {dataState.video1 && (
+              <video className="loc_video" controls>
+                <source src={getVideoUrl(dataState, dataState.video1)} type="video/mp4" />
+              </video>
+            )}
+            {dataState.video2 && (
+              <video className="loc_video" controls>
+                <source src={getVideoUrl(dataState, dataState.video2)} type="video/mp4" />
+              </video>
+            )}
+            {dataState.video3 && (
+              <video className="loc_video" controls>
+                <source src={getVideoUrl(dataState, dataState.video3)} type="video/mp4" />
+              </video>
+            )}
           </div>
         </div>
       )}

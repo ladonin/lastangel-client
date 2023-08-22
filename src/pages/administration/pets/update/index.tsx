@@ -48,13 +48,6 @@ const PetUpdate: React.FC = () => {
 
   useEffect(() => {}, [dataLoadedState]);
 
-  //
-  // продолжить с фото
-  // сделать общий валидатор формы для создания и редактирования
-
-  //
-  //
-
   const onChange = (data: TParams) => {
     setErrorState("");
     paramsRef.current = data;

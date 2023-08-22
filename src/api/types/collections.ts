@@ -12,9 +12,9 @@ export type TGetResponseItem = {
   ismajor: number;
   main_image: number;
   another_images: string;
-  videoVk1: string;
-  videoVk2: string;
-  videoVk3: string;
+  video1: string;
+  video2: string;
+  video3: string;
   target_sum: number;
   collected?: number;
   animal_name?: string;
@@ -35,9 +35,9 @@ export type TCommonDataRequest = {
   main_image: Blob;
   another_images: File[];
   another_images_for_delete?: number[];
-  videoVk1?: string;
-  videoVk2?: string;
-  videoVk3?: string;
+  video1?: string;
+  video2?: string;
+  video3?: string;
   target_sum: number;
 };
 

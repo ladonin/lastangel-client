@@ -14,8 +14,9 @@ import { Checkbox } from "components/Form/Checkbox";
 import { ValuesOf } from "types/common";
 
 import { TGetResponseItem } from "api/types/collections";
-import { getMainImageUrl, getAnotherImagesUrl } from "helpers/collections";
+import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/collections";
 import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
+import InputFileVideo from "components/Form/InputFileVideo";
 
 export type TParams = { [key: string]: any };
 
@@ -55,7 +56,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   }, [data]);
 
   const onChangeHandler = (key: string, value: any) => {
-    paramsRef.current[key] = value.value ? Number(value.value) : value;
+    paramsRef.current[key] = value?.value ? Number(value.value) : value;
     onChange(paramsRef.current);
   };
 
@@ -102,6 +103,16 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
 
   const restoreAnotherImageHandler = (val: number) => {
     anotherImagesForDeleteState && setAnotherImagesForDeleteState(anotherImagesForDeleteState.filter((id: number) => id !== val));
+  };
+
+  const setVideo1Handler = (val: null | File) => {
+    onChangeHandler("video1", val);
+  };
+  const setVideo2Handler = (val: null | File) => {
+    onChangeHandler("video2", val);
+  };
+  const setVideo3Handler = (val: null | File) => {
+    onChangeHandler("video3", val);
   };
 
   return (
@@ -160,29 +171,31 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             options={animalsOptionsState}
           />
 
-          <InputText
+          <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
+            value={data ? data.video1 : undefined}
+            setVideo={setVideo1Handler}
             label="Видео 1"
-            initValue={data ? data.videoVk1 : undefined}
-            onChange={(val) => {
-              onChangeHandler("videoVk1", val);
-            }}
-            className="loc_formInputItem"
+            className="loc_formVideoItem"
           />
-          <InputText
+
+          <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
+            value={data ? data.video2 : undefined}
+            setVideo={setVideo2Handler}
             label="Видео 2"
-            initValue={data ? data.videoVk2 : undefined}
-            onChange={(val) => {
-              onChangeHandler("videoVk2", val);
-            }}
-            className="loc_formInputItem"
+            className="loc_formVideoItem"
           />
-          <InputText
+
+          <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
+            value={data ? data.video3 : undefined}
+            setVideo={setVideo3Handler}
             label="Видео 3"
-            initValue={data ? data.videoVk3 : undefined}
-            onChange={(val) => {
-              onChangeHandler("videoVk3", val);
-            }}
-            className="loc_formInputItem"
+            className="loc_formVideoItem"
           />
 
           <Checkbox

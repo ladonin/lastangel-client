@@ -3,25 +3,28 @@
   .loc_photos {
     display: flex;
   }
-  
+
   .loc_form {
     .loc_left {
       width: 45%;
       padding-right: 32px;
     }
+
     .loc_right {
       width: 55%;
       padding-left: 32px;
     }
   }
-  
-  
+
+
   .loc_photos {
     flex-wrap: wrap;
     margin-top: 24px;
+
     h2 {
       width: 100%
     }
+
     .loc_left {
       width: 35%;
       padding-right: 32px;
@@ -32,14 +35,15 @@
       padding-left: 32px;
     }
   }
-  
-  
+
+
   .loc_formInputItem {
     margin-bottom: 24px;
 
     input {
       width: 70%;
     }
+
     label {
       width: 30%;
     }
@@ -51,23 +55,27 @@
     textarea {
       width: 70%;
     }
+
     label {
       width: 30%;
     }
+
     &.loc__shortdescription textarea {
       height: 103px;
     }
+
     &.loc__fulldescription textarea {
       height: 340px;
     }
   }
-  
+
   .loc_formSelectItem {
     margin-bottom: 24px;
 
     .loc_select {
       width: 70%;
     }
+
     label {
       width: 30%;
     }
@@ -77,11 +85,23 @@
     .loc--checkbox {
       width: 70%;
     }
+
     .loc_label {
       width: 30%;
     }
 
   }
-  
 
+  .loc_formVideoItem {
+
+    margin-bottom: 24px;
+
+    .loc_label, .loc_error, .loc_video {
+      width: 70%;
+    }
+
+    .loc_labelTitle {
+      width: 30%;
+    }
+  }
 }

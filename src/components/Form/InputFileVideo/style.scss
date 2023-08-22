@@ -1,10 +1,7 @@
 @import 'src/styles/variables.scss';
 
 .component-inputFileVideo {
-  margin-top: 24px;
   display: flex;
-
-
   position: relative;
   justify-content: space-between;
   align-items: center;
@@ -57,6 +54,7 @@
     .loc_selectFile {
       position: relative;
       display: inline-block;
+      width: fit-content;
       cursor: pointer;
       outline: none;
       text-decoration: none;
@@ -76,7 +74,7 @@
 
 
   .loc_video {
-    padding-top: 16px;
+    padding-top: 8px;
     margin-left: auto;
     .loc_name {
 
@@ -91,5 +89,31 @@
       width: fit-content;
       @extend %hoverableRed;
     }
+  }
+}
+
+
+.layout.loc--isMobile .component-inputFileVideo {
+  .loc_labelTitle {
+    line-height: 44px;
+    font-size: 30px;
+  }
+  .loc_selectFile {
+    border-radius: 16px;
+    padding: 0 32px;
+    font-size: 30px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+  }
+  .loc_video {
+    line-height: 44px;
+    font-size: 30px;
+  }
+  
+  .loc_input_star {
+    right: -12px;
+    font-size: 28px;
+    font-weight: 900;
   }
 }

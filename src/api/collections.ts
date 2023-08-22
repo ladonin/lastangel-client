@@ -9,19 +9,21 @@ import { apiService } from "./axios";
 // const paramsSerializer = (params: any): string => qs.stringify(params, { arrayFormat: "repeat" });
 
 const prepareData = (data: TCommonDataRequest) => {
-  const { main_image, another_images, ...params } = data;
-  const files = { main_image, another_images };
+  const { main_image, another_images, video1, video2, video3, ...params } = data;
   const json = JSON.stringify(params);
   const formData = new FormData();
 
   formData.append("data", json);
 
-  files.main_image && formData.append("main_image", files.main_image);
-  if (files.another_images) {
-    for (let i = 0; i < files.another_images.length; i++) {
-      formData.append("another_images[]", files.another_images[i]);
+  main_image && formData.append("main_image", main_image);
+  if (another_images) {
+    for (let i = 0; i < another_images.length; i++) {
+      formData.append("another_images[]", another_images[i]);
     }
   }
+  formData.append("video1", video1 || "");
+  formData.append("video2", video2 || "");
+  formData.append("video3", video3 || "");
   return formData;
 };
 

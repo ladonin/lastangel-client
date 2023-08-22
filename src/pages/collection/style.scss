@@ -108,8 +108,8 @@
           }
 
 
-
         }
+
         .loc_description {
           margin-top: 24px;
           align-content: flex-start;
@@ -153,10 +153,14 @@
         }
       }
 
+
       .loc_video {
         display: flex;
         width: 100%;
+        max-height: 600px;
         margin-bottom: 16px;
+
+        background-color: $c_greyDark;
 
         iframe {
           margin: 0 auto;
@@ -164,6 +168,8 @@
           height: 600px !important;
         }
       }
+
+
     }
   }
 
@@ -241,7 +247,16 @@
 
     .loc_topWrapper .loc_data {
       width: calc(100% - 429px);
+      .loc_target_animal {
+        font-weight: 600;
+        font-size: 28px;
 
+        span {
+          color: $c_blue;
+
+          @extend %hoverable;
+        }
+      }
       .loc_id, .loc_targetSum, .loc_parameters {
         margin-top: 0;
         margin-bottom: 8px;
@@ -412,7 +427,7 @@
         iframe {
           margin: 0 auto;
           width: 70% !important;
-          height: 1190px !important;
+          height: 1200px !important;
         }
       }
     }

@@ -11,7 +11,6 @@ import { apiService } from "./axios";
 // const paramsSerializer = (params: any): string => qs.stringify(params, { arrayFormat: "repeat" });
 
 const prepareData = (data: TCommonDataRequest) => {
-  console.log(data);
   const { main_image, another_images, video1, video2, video3, ...params } = data;
   const json = JSON.stringify(params);
   const formData = new FormData();

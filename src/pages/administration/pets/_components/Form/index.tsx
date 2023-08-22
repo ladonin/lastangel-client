@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
-import { getVideoUrl } from 'helpers/animals';
+import { getVideoUrl, getAnotherImagesUrl, getMainImageUrl } from "helpers/animals";
 import {
   SEX_OPTIONS,
   GRAFTED_OPTIONS,
@@ -23,7 +23,6 @@ import { Checkbox } from "components/Form/Checkbox";
 
 import { TGetResponseItem } from "api/types/animals";
 
-import { getAnotherImagesUrl, getMainImageUrl } from "helpers/animals";
 import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
 
 export type TParams = { [key: string]: any };

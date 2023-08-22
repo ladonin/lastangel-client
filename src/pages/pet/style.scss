@@ -21,15 +21,18 @@
       .loc_data {
         width: 63%;
         align-self: flex-start;
-       .loc_id {
 
-        margin-top: 24px;
-      }
+        .loc_id {
+
+          margin-top: 16px;
+        }
+
         .loc_not_published {
           background-color: $c_yellowLight;
           padding: 16px;
           margin: 24px 0;
         }
+
         .loc_name {
           font-size: 40px;
           font-weight: 600;
@@ -38,6 +41,7 @@
 
         .loc_age {
           margin-top: 4px;
+
           span {
             font-weight: 600;
           }
@@ -78,6 +82,7 @@
           font-weight: 600;
           font-size: 24px;
           display: flex;
+
           img {
             height: 36px;
             width: 36px;
@@ -125,6 +130,7 @@
         .loc_donation {
           width: 37%;
           align-self: flex-start;
+
           .loc_title {
             height: 55px;
             text-align: right;
@@ -227,8 +233,9 @@
 
       .loc_slider {
 
-          width: 100%;
-          margin-bottom: 24px;
+        width: 100%;
+        margin-bottom: 24px;
+
         .swiper-slide {
           display: flex;
           align-items: center;
@@ -249,19 +256,10 @@
         max-height: 600px;
         margin-bottom: 16px;
 
-        background-color:$c_greyDark;
-        iframe {
-          margin: 0 auto;
-          width: 50% !important;
-          height: 600px !important;
-        }
+        background-color: $c_greyDark;
       }
-      
-      
-      
-      
-      
-      
+
+
     }
   }
 
@@ -344,10 +342,12 @@
         margin-bottom: 8px;
         font-size: 28px;
       }
+
       .loc_id {
 
         margin-top: 24px;
       }
+
       .loc_parameters {
         gap: 0;
 
@@ -387,6 +387,7 @@
       .loc_right {
         width: 100%;
         flex-wrap: wrap;
+
         .loc_donation {
           width: 100%;
           display: flex;
@@ -421,9 +422,11 @@
           }
 
         }
+
         .loc_redactButton {
           margin: 24px auto 0px auto;
         }
+
         .disclaimer {
           font-size: 24px;
         }
@@ -458,12 +461,14 @@
 
     .loc_bottomWrapper {
       margin: 32px -24px 0px -24px;
-   
-      display: flex; 
+
+      display: flex;
       flex-wrap: wrap;
+
       .loc_slider {
         width: 100%;
         margin-bottom: 24px;
+
         .swiper-slide {
           display: flex;
           align-items: center;
@@ -480,13 +485,9 @@
 
       .loc_video {
         display: flex;
-width: 100%;
-        max-height: 600px;
-        iframe {
-          margin: 0 auto;
-          width: 70% !important;
-          height: 1190px !important;
-        }
+        width: 100%;
+        max-height: 1190px;
+
       }
     }
 
