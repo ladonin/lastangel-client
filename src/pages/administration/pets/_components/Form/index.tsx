@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
+import { getVideoUrl } from 'helpers/animals';
 import {
   SEX_OPTIONS,
   GRAFTED_OPTIONS,
@@ -24,11 +25,6 @@ import { TGetResponseItem } from "api/types/animals";
 
 import { getAnotherImagesUrl, getMainImageUrl } from "helpers/animals";
 import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
-
-// TODO
-// сделать цветовую дифференциацию по статусам (фон)
-// сделать фильтр по статусам и пр
-// сделать сортировку по дате рожденияи пр.
 
 export type TParams = { [key: string]: any };
 
@@ -208,6 +204,8 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           />
 
           <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
             value={data ? data.video1 : undefined}
             setVideo={setVideo1Handler}
             label="Видео 1"
@@ -215,6 +213,8 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           />
 
           <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
             value={data ? data.video2 : undefined}
             setVideo={setVideo2Handler}
             label="Видео 2"
@@ -222,6 +222,8 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           />
 
           <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
             value={data ? data.video3 : undefined}
             setVideo={setVideo3Handler}
             label="Видео 3"

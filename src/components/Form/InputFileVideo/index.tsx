@@ -1,5 +1,9 @@
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import cn from "classnames";
+import { NavLink } from "react-router-dom";
+import { isMobile } from "react-device-detect";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import Modal from "components/Modal";
 import "./style.scss";
 
 type TProps = {
@@ -8,17 +12,24 @@ type TProps = {
   required?: boolean;
   disabled?: boolean;
   setVideo: (files: File | null) => void;
+  getVideoUrl: (data: any, name: string) => string;
   value?: string;
+  data: any | { updated: number; id: number };
 };
 
 type TWrongVideoData = { file: File; error: string };
 
 const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
-  const [videoState, setVideoState] = useState<File | null>(null);
+  const { className, data, getVideoUrl, label, required, disabled = false, setVideo, value = "" } = props;
+  const [videoState, setVideoState] = useState<File | null | string>(value || null);
   const [wrongVideoState, setWrongVideoState] = useState<TWrongVideoData | null>(null);
-
+  const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState<boolean>(false);
   // const { className, setVideo, label, required, disabled = false, multiple = false, noSizeRevision = false } = props;
-  const { className, label, required, disabled = false, setVideo, value } = props;
+  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setIsMobileState(isMobile);
+  }, [isMobile]);
   const setVideoHandler = (file: File) => {
     const parts = file.name.split(".");
     if (parts.length > 1) {
@@ -44,16 +55,58 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
     setVideoState(null);
     setVideo(null);
     setWrongVideoState(null);
+    setModalDeleteIsOpenState(false);
   };
-  const renderVideo = () => (
-    <div className="loc_name">
-      {videoState?.name}
 
-      <div className="loc_deleteButton" onClick={deleteHandler}>
-        удалить
+  const renderVideo = () => {
+    const valFile: File = videoState as File;
+    const valStr: string = videoState as string;
+
+    return (
+      <div className={cn("loc_name", { "loc--existed": !valFile?.name })}>
+        {valFile?.name ? (
+          valFile?.name
+        ) : valStr ? (
+          <NavLink className="link_2" to={getVideoUrl(data, valStr)} target="_blank">
+            ранее загруженное видео
+          </NavLink>
+        ) : (
+          ""
+        )}
+
+        <div className="loc_deleteButton" onClick={() => setModalDeleteIsOpenState(true)}>
+          удалить
+        </div>
+
+        <Modal
+          isOpen={modalDeleteIsOpenState}
+          title="Удаление доната"
+          onClose={() => setModalDeleteIsOpenState(false)}
+          portalClassName="page-administration_donations_update_deleteModal"
+        >
+          Вы уверены, что хотите удалить видео?
+          <div className="loc_buttons">
+            <Button
+              className="loc_cancelButton"
+              theme={ButtonThemes.DANGER}
+              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              onClick={deleteHandler}
+            >
+              Удалить
+            </Button>
+            <Button
+              className="loc_cancelButton"
+              theme={ButtonThemes.PRIMARY}
+              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              onClick={() => setModalDeleteIsOpenState(false)}
+            >
+              Отмена
+            </Button>
+          </div>
+        </Modal>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className={cn("component-inputFileVideo", className)}>

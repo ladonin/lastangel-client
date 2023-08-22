@@ -20,7 +20,7 @@ import {
   prepareCategory,
   prepareStatus,
   prepareStatusCode,
-  getAnotherImagesUrl,
+  getAnotherImagesUrl, getVideoUrl
 } from "helpers/animals";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 
@@ -250,17 +250,25 @@ const Pet: React.FC = () => {
                 </Swiper>
               )}
 
-              {dataState.video1 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: dataState.video1 }} />}
-              {dataState.video2 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: dataState.video2 }} />}
-              {dataState.video3 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: dataState.video3 }} />}
 
-              <video width="480" controls>
+              {dataState.video1 && <video className="loc_video" controls>
                 <source
-                  src="https://archive.org/serve/Adult_Material_20201008_0145/Adult%20Material_20201008_0145.mp4"
+                  src={getVideoUrl(dataState, dataState.video1)}
                   type="video/mp4"
                 />
-              </video>
-
+              </video>}
+              {dataState.video2 && <video className="loc_video" controls>
+                <source
+                  src={getVideoUrl(dataState, dataState.video2)}
+                  type="video/mp4"
+                />
+              </video>}
+              {dataState.video3 && <video className="loc_video" controls>
+                <source
+                  src={getVideoUrl(dataState, dataState.video3)}
+                  type="video/mp4"
+                />
+              </video>}
               {isMobileState === true && renderDisclaimer()}
             </div>
           </div>

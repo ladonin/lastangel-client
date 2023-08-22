@@ -81,9 +81,14 @@
     .loc_name {
 
       color: $c_greenDark;
+      
+      &.loc--existed {
+        color: $c_lagunaBlue;
+      }
     }
     .loc_deleteButton {
       color: $c_red;
+      width: fit-content;
       @extend %hoverableRed;
     }
   }

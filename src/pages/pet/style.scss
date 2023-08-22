@@ -246,7 +246,10 @@
       .loc_video {
         display: flex;
         width: 100%;
+        max-height: 600px;
         margin-bottom: 16px;
+
+        background-color:$c_greyDark;
         iframe {
           margin: 0 auto;
           width: 50% !important;
@@ -478,6 +481,7 @@
       .loc_video {
         display: flex;
 width: 100%;
+        max-height: 600px;
         iframe {
           margin: 0 auto;
           width: 70% !important;

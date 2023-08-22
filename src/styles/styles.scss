@@ -89,6 +89,15 @@ textarea {
     color: $c_lagunaLight;
   }
 }
+.link_2 {
+  color: $c_lagunaBlue;
+  text-decoration: none;
+  transition: $transition;
+
+  &:hover {
+    color: $c_lagunaBlueLight;
+  }
+}
 
 h1, h2 {
   margin: 0;
@@ -97,6 +106,8 @@ h1, h2 {
 h2 {
   line-height: 40px;
 }
+
+
 
 .red {
   color: $c_red;

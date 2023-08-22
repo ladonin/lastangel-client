@@ -1,5 +1,6 @@
 /*
-  import { prepareGraft, prepareSex, prepareStatus, prepareSterilized, prepareCategory, getMainImageUrl } from 'helpers/animals';
+  import { getVideoUrl, prepareGraft, prepareSex, 
+  prepareStatus, prepareSterilized, prepareCategory, getMainImageUrl } from 'helpers/animals';
  */
 import React from "react";
 import { ANIMALS_STERILIZED, ANIMALS_CATEGORY, ANIMALS_GRAFTED, ANIMALS_SEX, ANIMALS_STATUS } from "constants/animals";
@@ -147,3 +148,6 @@ export const getAnotherImagesUrl = (data: TGetResponseItem, number: number, size
         data.updated ? `?${data.updated}` : ""
       }`
     : "";
+
+export const getVideoUrl = (data: TGetResponseItem, name: string) =>
+  data.id ? `${process.env.OUTER_STORAGE_URL}media/pets/${data.id}/${name}${data.updated ? `?${data.updated}` : ""}` : "";
