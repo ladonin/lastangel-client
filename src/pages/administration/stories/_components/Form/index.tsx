@@ -6,13 +6,12 @@ import InputFileImage from "components/Form/InputFileImage";
 import { STORIES_STATUS } from "constants/stories";
 import Textarea from "components/Form/Textarea";
 import { Checkbox } from "components/Form/Checkbox";
-
 import { TGetResponseItem } from "api/types/stories";
-
-import { getAnotherImagesUrl } from "helpers/stories";
+import { getAnotherImagesUrl, getVideoUrl } from "helpers/stories";
 import WYSIWYGEditor from "components/Form/WYSIWYGEditor";
 import { SIZES_ANOTHER } from "constants/photos";
 import Select from "components/Form/Select";
+import InputFileVideo from "components/Form/InputFileVideo";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
@@ -46,18 +45,9 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       paramsRef.current = data;
     }
   }, [data]);
-  // продолжить с удаления фото - главного и дополнительного на бэке - ПРОДОЛЖЕНИЕ
-  //
-  // главное фото
-  // на бэке просто пересохраняется фото в базе (ничего не меняется) и перезапись главного фото на новое (автозамена файла)
-  //
-  // потом добавление дополнительных фоток another
-  // на бэке удаляем из базы номера и из хранилища файлы
-  // сохранение с новыми инкрементированными номерами в базе и хранилище
-  //
 
   const onChangeHandler = (key: string, value: any) => {
-    paramsRef.current[key] = value.value ? Number(value.value) : value;
+    paramsRef.current[key] = value?.value ? Number(value.value) : value;
     onChange(paramsRef.current);
   };
 
@@ -68,6 +58,16 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   useEffect(() => {
     anotherImagesForDeleteState !== null && onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
   }, [anotherImagesForDeleteState]);
+
+  const setVideo1Handler = (val: null | File) => {
+    onChangeHandler("video1", val);
+  };
+  const setVideo2Handler = (val: null | File) => {
+    onChangeHandler("video2", val);
+  };
+  const setVideo3Handler = (val: null | File) => {
+    onChangeHandler("video3", val);
+  };
 
   const setAnotherImagesHandler = (images: File[]) => {
     setAnotherImagesState(images);
@@ -94,30 +94,32 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             }}
             className="loc_formInputItem"
           />
-          <InputText
+
+          <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
+            value={data ? data.video1 : undefined}
+            setVideo={setVideo1Handler}
             label="Видео 1"
-            initValue={data ? data.videoVk1 : undefined}
-            onChange={(val) => {
-              onChangeHandler("videoVk1", val);
-            }}
-            className="loc_formInputItem"
+            className="loc_formVideoItem"
           />
-          <InputText
+          <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
+            value={data ? data.video2 : undefined}
+            setVideo={setVideo2Handler}
             label="Видео 2"
-            initValue={data ? data.videoVk2 : undefined}
-            onChange={(val) => {
-              onChangeHandler("videoVk2", val);
-            }}
-            className="loc_formInputItem"
+            className="loc_formVideoItem"
           />
-          <InputText
+          <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
+            value={data ? data.video3 : undefined}
+            setVideo={setVideo3Handler}
             label="Видео 3"
-            initValue={data ? data.videoVk3 : undefined}
-            onChange={(val) => {
-              onChangeHandler("videoVk3", val);
-            }}
-            className="loc_formInputItem"
+            className="loc_formVideoItem"
           />
+
           <Checkbox
             onChange={() => {
               const value = !isMajorState;

@@ -115,12 +115,12 @@ const StoryUpdate: React.FC = () => {
   return dataLoadedState !== null ? (
     <>
       <Helmet>
-        <title>Обновление новости</title>
-        <meta name="description" content="Обновление новости" />
+        <title>Обновление истории</title>
+        <meta name="description" content="Обновление истории" />
       </Helmet>
       <div className="page-administration_pets_update">
         <h1>
-          Обновление новости{" "}
+          Обновление истории{" "}
           {!isDeletedState && (
             <Button
               className="loc_gotopageButton"

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
-import { detect as detectBrowser } from "detect-browser";
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import { TItem } from "api/types/news";
 import PAGES from "routing/routes";
-import { getAnotherImagesUrl } from "helpers/news";
+import { getAnotherImagesUrl, getVideoUrl } from "helpers/news";
 import { getDateString } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { NEWS_STATUS } from "constants/news";
@@ -19,7 +18,7 @@ import "./style.scss";
 type TProps = {
   data: TItem;
 };
-const browser = detectBrowser();
+
 const ListItem = ({ data }: TProps) => {
   const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
   const [isShowedState, setIsShowedState] = useState(false);
@@ -73,12 +72,20 @@ const ListItem = ({ data }: TProps) => {
               ))}
             </Swiper>
           )}
-          {browser?.name !== "firefox" && (
-            <>
-              {data.videoVk1 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: data.videoVk1 }} />}
-              {data.videoVk2 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: data.videoVk2 }} />}
-              {data.videoVk3 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: data.videoVk3 }} />}
-            </>
+          {data.video1 && (
+            <video className="loc_video" controls>
+              <source src={getVideoUrl(data, data.video1)} type="video/mp4" />
+            </video>
+          )}
+          {data.video2 && (
+            <video className="loc_video" controls>
+              <source src={getVideoUrl(data, data.video2)} type="video/mp4" />
+            </video>
+          )}
+          {data.video3 && (
+            <video className="loc_video" controls>
+              <source src={getVideoUrl(data, data.video3)} type="video/mp4" />
+            </video>
           )}
         </div>
       )}

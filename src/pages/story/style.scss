@@ -61,12 +61,9 @@
     .loc_video {
       display: flex;
       width: 100%;
-      margin-top: 16px;
-      iframe {
-        margin: 0 auto;
-        width: 50% !important;
-        height: 600px !important;
-      }
+      margin-bottom: 16px;
+      max-height: 600px;
+      background-color: $c_greyDark;
     }
   }
   .loc_anotherTitle {
@@ -127,12 +124,7 @@
     .loc_video {
       display: flex;
       width: 100%;
-
-      iframe {
-        margin: 0 auto;
-        width: 70% !important;
-        height: 1190px !important;
-      }
+      max-height: 1190px;
     }
   }
 }

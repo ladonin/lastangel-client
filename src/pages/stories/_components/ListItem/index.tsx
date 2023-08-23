@@ -8,7 +8,7 @@ import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import { TItem } from "api/types/stories";
 import PAGES from "routing/routes";
-import { getAnotherImagesUrl } from "helpers/stories";
+import { getVideoUrl, getAnotherImagesUrl } from "helpers/stories";
 import { getDateString } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { STORIES_STATUS } from "constants/stories";
@@ -74,12 +74,20 @@ const ListItem = ({ data }: TProps) => {
               ))}
             </Swiper>
           )}
-          {browser?.name !== "firefox" && (
-            <>
-              {data.videoVk1 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: data.videoVk1 }} />}
-              {data.videoVk2 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: data.videoVk2 }} />}
-              {data.videoVk3 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: data.videoVk3 }} />}
-            </>
+          {data.video1 && (
+            <video className="loc_video" controls>
+              <source src={getVideoUrl(data, data.video1)} type="video/mp4" />
+            </video>
+          )}
+          {data.video2 && (
+            <video className="loc_video" controls>
+              <source src={getVideoUrl(data, data.video2)} type="video/mp4" />
+            </video>
+          )}
+          {data.video3 && (
+            <video className="loc_video" controls>
+              <source src={getVideoUrl(data, data.video3)} type="video/mp4" />
+            </video>
           )}
         </div>
       )}

@@ -9,18 +9,12 @@ import InputFileImage from "components/Form/InputFileImage";
 import { NEWS_STATUS } from "constants/news";
 import Textarea from "components/Form/Textarea";
 import { Checkbox } from "components/Form/Checkbox";
-
 import { TGetResponseItem } from "api/types/news";
-
-import { getAnotherImagesUrl } from "helpers/news";
+import { getAnotherImagesUrl, getVideoUrl } from "helpers/news";
+import InputFileVideo from "components/Form/InputFileVideo";
 import WYSIWYGEditor from "components/Form/WYSIWYGEditor";
 import { SIZES_ANOTHER } from "constants/photos";
 import Select from "components/Form/Select";
-
-// TODO
-// сделать цветовую дифференциацию по статусам (фон)
-// сделать фильтр по статусам и пр
-// сделать сортировку по дате рожденияи пр.
 
 export type TParams = { [key: string]: any };
 
@@ -63,7 +57,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   //
 
   const onChangeHandler = (key: string, value: any) => {
-    paramsRef.current[key] = value.value ? Number(value.value) : value;
+    paramsRef.current[key] = value?.value ? Number(value.value) : value;
     onChange(paramsRef.current);
   };
 
@@ -74,6 +68,16 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   useEffect(() => {
     anotherImagesForDeleteState !== null && onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
   }, [anotherImagesForDeleteState]);
+
+  const setVideo1Handler = (val: null | File) => {
+    onChangeHandler("video1", val);
+  };
+  const setVideo2Handler = (val: null | File) => {
+    onChangeHandler("video2", val);
+  };
+  const setVideo3Handler = (val: null | File) => {
+    onChangeHandler("video3", val);
+  };
 
   const setAnotherImagesHandler = (images: File[]) => {
     setAnotherImagesState(images);
@@ -100,34 +104,33 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             }}
             className="loc_formInputItem"
           />
-          <InputText
+          <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
+            value={data ? data.video1 : undefined}
+            setVideo={setVideo1Handler}
             label="Видео 1"
-            initValue={data ? data.videoVk1 : undefined}
-            onChange={(val) => {
-              onChangeHandler("videoVk1", val);
-            }}
-            className="loc_formInputItem"
+            className="loc_formVideoItem"
           />
-          <InputText
+          <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
+            value={data ? data.video2 : undefined}
+            setVideo={setVideo2Handler}
             label="Видео 2"
-            initValue={data ? data.videoVk2 : undefined}
-            onChange={(val) => {
-              onChangeHandler("videoVk2", val);
-            }}
-            className="loc_formInputItem"
+            className="loc_formVideoItem"
           />
-          <InputText
+          <InputFileVideo
+            data={data}
+            getVideoUrl={getVideoUrl}
+            value={data ? data.video3 : undefined}
+            setVideo={setVideo3Handler}
             label="Видео 3"
-            initValue={data ? data.videoVk3 : undefined}
-            onChange={(val) => {
-              onChangeHandler("videoVk3", val);
-            }}
-            className="loc_formInputItem"
+            className="loc_formVideoItem"
           />
           <Checkbox
             onChange={() => {
               const value = !isMajorState;
-
               setIsMajorState(value);
               onChangeHandler("ismajor", value);
             }}
@@ -138,7 +141,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           <Checkbox
             onChange={() => {
               const value = !isAlbumHiddenState;
-
               setIsAlbumHiddenState(value);
               onChangeHandler("hide_album", value);
             }}

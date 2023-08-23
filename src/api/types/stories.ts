@@ -7,9 +7,9 @@ export type TGetResponseItem = {
   ismajor: boolean;
   hide_album: boolean;
   status: number;
-  videoVk1: string;
-  videoVk2: string;
-  videoVk3: string;
+  video1: string;
+  video2: string;
+  video3: string;
   updated: number;
   created: number;
 };
@@ -24,9 +24,9 @@ export type TCommonDataRequest = {
   description: string;
   another_images: File[];
   another_images_for_delete?: number[];
-  videoVk1?: string;
-  videoVk2?: string;
-  videoVk3?: string;
+  video1?: string;
+  video2?: string;
+  video3?: string;
 };
 
 export type TGetListOutput = TGetResponseItem[];

@@ -5,12 +5,11 @@ import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
-import { detect as detectBrowser } from "detect-browser";
 import List from "pages/newses/_components/List";
 import { TItem } from "api/types/news";
 import PAGES from "routing/routes";
 import { NewsApi } from "api/news";
-import { getAnotherImagesUrl } from "helpers/news";
+import { getVideoUrl, getAnotherImagesUrl } from "helpers/news";
 import BreadCrumbs from "components/BreadCrumbs";
 import { NEWS_STATUS } from "../../constants/news";
 import { isAdmin } from "../../utils/user";
@@ -20,7 +19,6 @@ import { Button, ButtonSizes, ButtonThemes } from "../../components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
-const browser = detectBrowser();
 const News: React.FC = () => {
   const navigate = useNavigate();
   const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
@@ -87,12 +85,20 @@ const News: React.FC = () => {
               </Swiper>
             )}
           </div>
-          {browser?.name !== "firefox" && (
-            <>
-              {dataState.videoVk1 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: dataState.videoVk1 }} />}
-              {dataState.videoVk2 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: dataState.videoVk2 }} />}
-              {dataState.videoVk3 && <div className="loc_video" dangerouslySetInnerHTML={{ __html: dataState.videoVk3 }} />}
-            </>
+          {dataState.video1 && (
+            <video className="loc_video" controls>
+              <source src={getVideoUrl(dataState, dataState.video1)} type="video/mp4" />
+            </video>
+          )}
+          {dataState.video2 && (
+            <video className="loc_video" controls>
+              <source src={getVideoUrl(dataState, dataState.video2)} type="video/mp4" />
+            </video>
+          )}
+          {dataState.video3 && (
+            <video className="loc_video" controls>
+              <source src={getVideoUrl(dataState, dataState.video3)} type="video/mp4" />
+            </video>
           )}
         </div>
       )}

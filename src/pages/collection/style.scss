@@ -81,7 +81,7 @@
             margin: 0px 0 8px 0;
 
             span {
-              color: $c_blue;
+              color: $c_lagunaBlueDark;
 
               @extend %hoverable;
             }
@@ -159,14 +159,7 @@
         width: 100%;
         max-height: 600px;
         margin-bottom: 16px;
-
         background-color: $c_greyDark;
-
-        iframe {
-          margin: 0 auto;
-          width: 50% !important;
-          height: 600px !important;
-        }
       }
 
 
@@ -252,7 +245,7 @@
         font-size: 28px;
 
         span {
-          color: $c_blue;
+          color: $c_lagunaBlueDark;
 
           @extend %hoverable;
         }
@@ -423,12 +416,7 @@
       .loc_video {
         display: flex;
         width: 100%;
-
-        iframe {
-          margin: 0 auto;
-          width: 70% !important;
-          height: 1200px !important;
-        }
+        max-height: 1190px;
       }
     }
 

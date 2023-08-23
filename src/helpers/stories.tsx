@@ -12,3 +12,6 @@ export const getAnotherImagesUrl = (data: TGetResponseItem, number: number, size
         data.updated ? `?${data.updated}` : ""
       }`
     : "";
+
+export const getVideoUrl = (data: TGetResponseItem, name: string) =>
+  data.id ? `${process.env.OUTER_STORAGE_URL}media/stories/${data.id}/${name}${data.updated ? `?${data.updated}` : ""}` : "";
