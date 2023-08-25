@@ -5,7 +5,6 @@ import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
-import { detect as detectBrowser } from "detect-browser";
 
 import List from "pages/stories/_components/List";
 import { TItem } from "api/types/stories";
@@ -15,7 +14,7 @@ import { getVideoUrl, getAnotherImagesUrl } from "helpers/stories";
 import BreadCrumbs from "components/BreadCrumbs";
 import { STORIES_STATUS } from "constants/stories";
 import { isAdmin } from "utils/user";
-import { getDateString } from "helpers/common";
+import { getDateString, getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
@@ -75,7 +74,7 @@ const Story: React.FC = () => {
             </Button>
           )}
           <div className="loc_description">
-            <div dangerouslySetInnerHTML={{ __html: dataState.description }} />
+            <div className="loc_content" dangerouslySetInnerHTML={{ __html: dataState.description }} />
 
             {!dataState.hide_album && !!anotherImagesState && !!anotherImagesState.length && (
               <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
@@ -89,17 +88,17 @@ const Story: React.FC = () => {
           </div>
           {dataState.video1 && (
             <video className="loc_video" controls>
-              <source src={getVideoUrl(dataState, dataState.video1)} type="video/mp4" />
+              <source src={getVideoUrl(dataState, dataState.video1)} type={getVideoType(dataState.video1)}/>
             </video>
           )}
           {dataState.video2 && (
             <video className="loc_video" controls>
-              <source src={getVideoUrl(dataState, dataState.video2)} type="video/mp4" />
+              <source src={getVideoUrl(dataState, dataState.video2)} type={getVideoType(dataState.video2)} />
             </video>
           )}
           {dataState.video3 && (
             <video className="loc_video" controls>
-              <source src={getVideoUrl(dataState, dataState.video3)} type="video/mp4" />
+              <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)} />
             </video>
           )}
         </div>

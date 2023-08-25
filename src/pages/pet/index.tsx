@@ -30,7 +30,7 @@ import { isAdmin } from "utils/user";
 import PAGES from "routing/routes";
 import BreadCrumbs from "components/BreadCrumbs";
 import { ANIMALS_STATUS } from "constants/animals";
-import { numberFriendly } from "helpers/common";
+import { getVideoType, numberFriendly } from "helpers/common";
 import flowerSrc from "icons/flower1.png";
 import PetsList from "./_components/PetsList";
 // Ленивая загрузка модуля
@@ -237,6 +237,7 @@ const Pet: React.FC = () => {
             </div>
 
             <div className="loc_bottomWrapper">
+              {isMobileState === true && renderDisclaimer()}
               {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
                 <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
                   {anotherImagesState.reverse().map((item, index) => (
@@ -253,20 +254,19 @@ const Pet: React.FC = () => {
 
               {dataState.video1 && (
                 <video className="loc_video" controls>
-                  <source src={getVideoUrl(dataState, dataState.video1)} type="video/mp4" />
+                  <source src={getVideoUrl(dataState, dataState.video1)} type={getVideoType(dataState.video1)} />
                 </video>
               )}
               {dataState.video2 && (
                 <video className="loc_video" controls>
-                  <source src={getVideoUrl(dataState, dataState.video2)} type="video/mp4" />
+                  <source src={getVideoUrl(dataState, dataState.video2)} type={getVideoType(dataState.video2)} />
                 </video>
               )}
               {dataState.video3 && (
                 <video className="loc_video" controls>
-                  <source src={getVideoUrl(dataState, dataState.video3)} type="video/mp4" />
+                  <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)} />
                 </video>
               )}
-              {isMobileState === true && renderDisclaimer()}
             </div>
           </div>
         </>

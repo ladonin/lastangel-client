@@ -2,6 +2,8 @@
   import { getCountWord, getTimestamp, getDateString, isObjectOptionsIsEmpty } from 'helpers/common';
  */
 
+import { isMobile } from "react-device-detect";
+
 export const getCountWord = (single: string, few: string, many: string) => (value: number) => {
   const unit = value % 10;
   const hundredUnit = value % 100;
@@ -56,3 +58,12 @@ export const isObjectOptionsIsEmpty = (obj: any) => {
 export const capitalizeFirtsLetter = (word: string) => word.charAt(0).toUpperCase() + word.slice(1);
 
 export const numberFriendly = (value?: number) => Number(value)?.toLocaleString() || 0;
+
+export const getVideoType = (value: string) => {
+  const parts = value.split(".");
+  if (parts.length > 1) {
+    const ext = parts.pop();
+    return `video/${ext}`;
+  }
+  return "";
+};

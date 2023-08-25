@@ -7,7 +7,7 @@ import { isMobile } from "react-device-detect";
 import { TItem } from "api/types/news";
 import PAGES from "routing/routes";
 import { getAnotherImagesUrl, getVideoUrl } from "helpers/news";
-import { getDateString } from "helpers/common";
+import { getDateString, getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { NEWS_STATUS } from "constants/news";
 import { isAdmin } from "utils/user";
@@ -61,7 +61,7 @@ const ListItem = ({ data }: TProps) => {
       )}
       {isShowedState === true && (
         <div className="loc_description">
-          <div dangerouslySetInnerHTML={{ __html: data.description }} />
+          <div className="loc_content" dangerouslySetInnerHTML={{ __html: data.description }} />
 
           {!data.hide_album && !!anotherImagesState && !!anotherImagesState.length && (
             <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
@@ -74,17 +74,17 @@ const ListItem = ({ data }: TProps) => {
           )}
           {data.video1 && (
             <video className="loc_video" controls>
-              <source src={getVideoUrl(data, data.video1)} type="video/mp4" />
+              <source src={getVideoUrl(data, data.video1)} type={getVideoType(data.video1)} />
             </video>
           )}
           {data.video2 && (
             <video className="loc_video" controls>
-              <source src={getVideoUrl(data, data.video2)} type="video/mp4" />
+              <source src={getVideoUrl(data, data.video2)} type={getVideoType(data.video2)} />
             </video>
           )}
           {data.video3 && (
             <video className="loc_video" controls>
-              <source src={getVideoUrl(data, data.video3)} type="video/mp4" />
+              <source src={getVideoUrl(data, data.video3)} type={getVideoType(data.video3)} />
             </video>
           )}
         </div>
