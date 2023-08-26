@@ -249,6 +249,9 @@ const Pet: React.FC = () => {
                       />
                     </SwiperSlide>
                   ))}
+                  <SwiperSlide>
+                    <img alt="nophoto" className="loc_image" src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)} />
+                  </SwiperSlide>
                 </Swiper>
               )}
 

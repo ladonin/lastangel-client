@@ -174,22 +174,25 @@ const Collection: React.FC = () => {
                     />
                   </SwiperSlide>
                 ))}
+                <SwiperSlide>
+                  <img alt="nophoto" className="loc_image" src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)} />
+                </SwiperSlide>
               </Swiper>
             )}
 
             {dataState.video1 && (
               <video className="loc_video" controls>
-                <source src={getVideoUrl(dataState, dataState.video1)} type={getVideoType(dataState.video1)}/>
+                <source src={getVideoUrl(dataState, dataState.video1)} type={getVideoType(dataState.video1)} />
               </video>
             )}
             {dataState.video2 && (
               <video className="loc_video" controls>
-                <source src={getVideoUrl(dataState, dataState.video2)} type={getVideoType(dataState.video2)}/>
+                <source src={getVideoUrl(dataState, dataState.video2)} type={getVideoType(dataState.video2)} />
               </video>
             )}
             {dataState.video3 && (
               <video className="loc_video" controls>
-                <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)}/>
+                <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)} />
               </video>
             )}
           </div>

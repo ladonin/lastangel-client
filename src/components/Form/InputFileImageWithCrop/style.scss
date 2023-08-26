@@ -1,6 +1,6 @@
 @import 'src/styles/variables.scss';
 
-.component-inputFileImage {
+.component-inputFileImageWithCrop {
   margin-top: 24px;
 
   .loc_labelTitle {
@@ -116,20 +116,25 @@
         margin-bottom: 36px;
       }
     }
+
     .loc_okButton {
       width: 100%;
     }
+
     &.loc--isMobile {
-      .loc_zoom,.loc_rotation,.loc_crop {
+      .loc_zoom, .loc_rotation, .loc_crop {
         width: 100%;
+
         .loc_lable {
           font-size: 32px;
           margin-bottom: 40px;
         }
       }
-      .loc_rotation,.loc_crop {
+
+      .loc_rotation, .loc_crop {
         margin-bottom: 56px;
       }
+
       .loc_okButton {
         margin-bottom: 24px;
       }
@@ -138,4 +143,34 @@
   }
 
 
+}
+
+@media screen and (max-height: 700px) {
+
+  .component-inputFileImageWithCrop_cropModal {
+    .loc_wrapper {
+      align-items: center !important;
+
+      .loc_crop {
+        width: 400px !important;
+        height: 400px !important;
+        margin-bottom: 16px !important;
+      }
+
+      .loc_zoom,
+      .loc_rotation {
+        width: 400px !important;
+        margin-bottom: 8px !important;
+
+        .loc_lable {
+          font-size: 14px !important;
+          margin-bottom: 4px !important;
+        }
+      }
+
+      .loc_rotation {
+        margin-bottom: 16px !important;
+      }
+    }
+  }
 }

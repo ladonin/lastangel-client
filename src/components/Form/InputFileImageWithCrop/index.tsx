@@ -3,6 +3,7 @@ import Cropper from "react-easy-crop";
 import cn from "classnames";
 import { Area } from "react-easy-crop/types";
 import Slider from "rc-slider";
+import { isMobile } from "react-device-detect";
 import Modal from "components/Modal";
 import { DIMENTIONS } from "constants/photos";
 import "rc-slider/assets/index.css";
@@ -11,7 +12,6 @@ import "./style.scss";
 import { Button, ButtonSizes, ButtonThemes } from "../../Button";
 import { useGetImageDataHook, TData as TImageData } from "../../../hooks/useGetImageDataHook";
 import getCroppedImg from "./utils";
-import {isMobile} from "react-device-detect";
 
 type TProps = {
   className?: string;
@@ -68,9 +68,15 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
         ...data,
         error: `Текущее расширение файла не поддерживается. Должно быть ${availableExtensions.join(", ")}`,
       };
-    } else if (Number(data.width) < DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH || Number(data.height) < DIMENTIONS.IMAGES_UPLOAD_MIN_HEIGHT) {
+    } else if (
+      Number(data.width) < DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH ||
+      Number(data.height) < DIMENTIONS.IMAGES_UPLOAD_MIN_HEIGHT
+    ) {
       error = { ...data, error: "Фото слишком мелкое" };
-    } else if (Number(data.width) > DIMENTIONS.IMAGES_UPLOAD_MAX_WIDTH || Number(data.height) > DIMENTIONS.IMAGES_UPLOAD_MAX_HEIGHT) {
+    } else if (
+      Number(data.width) > DIMENTIONS.IMAGES_UPLOAD_MAX_WIDTH ||
+      Number(data.height) > DIMENTIONS.IMAGES_UPLOAD_MAX_HEIGHT
+    ) {
       error = { ...data, error: "Фото слишком большое" };
     } else {
       setImageState(data.file);
@@ -108,7 +114,11 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
   const createCroppedImage = useCallback(async () => {
     if (!imageState || !cropResultState) return;
 
-    const croppedImage: Blob | null = await getCroppedImg(URL.createObjectURL(imageState), cropResultState.pixels, cropRotationState);
+    const croppedImage: Blob | null = await getCroppedImg(
+      URL.createObjectURL(imageState),
+      cropResultState.pixels,
+      cropRotationState
+    );
     if (croppedImage === null) return;
 
     setCropState(CROP_DEFAULT);
@@ -127,7 +137,7 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
   const needRenderCropModal = () => !!urlForCrop;
 
   return (
-    <div className={cn("component-inputFileImage", className)}>
+    <div className={cn("component-inputFileImageWithCrop", className)}>
       {label && (
         <div className="loc_labelTitle">
           {label} {required && <span className="red">*</span>}
@@ -137,7 +147,7 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
         isOpen={needRenderCropModal() && (!imageWasCroppedState || openCropModalState)}
         title="Подготовка фото"
         onClose={saveCrop}
-        portalClassName={cn("component-inputFileImage_cropModal", {['loc--isMobile']: isMobileState})}
+        portalClassName={cn("component-inputFileImageWithCrop_cropModal", { "loc--isMobile": isMobileState })}
       >
         <div className="loc_wrapper">
           <div className="loc_zoom">
@@ -182,11 +192,12 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
             />
           </div>
 
-          <Button 
-              className="loc_okButton" 
-                  theme={ButtonThemes.PRIMARY} 
-                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE} 
-              onClick={saveCrop}>
+          <Button
+            className="loc_okButton"
+            theme={ButtonThemes.PRIMARY}
+            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+            onClick={saveCrop}
+          >
             Готово
           </Button>
         </div>
