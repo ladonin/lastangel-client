@@ -14,6 +14,7 @@ import { isAdmin } from "utils/user";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
+import CopyLinkToPage from "components/CopyLinkToPage";
 
 type TProps = {
   data: TItem;
@@ -65,7 +66,7 @@ const ListItem = ({ data }: TProps) => {
 
           {!data.hide_album && !!anotherImagesState && !!anotherImagesState.length && (
             <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
-              {anotherImagesState.reverse().map((item, index) => (
+              {[...anotherImagesState].reverse().map((item, index) => (
                 <SwiperSlide key={index}>
                   <img alt="nophoto" className="loc_image" src={getAnotherImagesUrl(data, item, SIZES_ANOTHER.SIZE_1200)} />
                 </SwiperSlide>
@@ -87,6 +88,7 @@ const ListItem = ({ data }: TProps) => {
               <source src={getVideoUrl(data, data.video3)} type={getVideoType(data.video3)} />
             </video>
           )}
+          <CopyLinkToPage url={`${window.location.origin + PAGES.NEWS}/${data.id}`} />
         </div>
       )}
 

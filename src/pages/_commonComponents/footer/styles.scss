@@ -6,6 +6,7 @@
   background-color: $c_head;
   padding: 24px;
   height: $layout_1_footer_height;
+  min-width: 1200px;
   &_wrapper {
     width: 1200px;
   }
@@ -19,7 +20,7 @@
   background-color: $c_head;
   padding: 24px;
   height: $layout_1_footer_height;
-  
+  min-width: unset;
   .loc_link {
     font-size: 32px;
     margin-bottom: 32px;

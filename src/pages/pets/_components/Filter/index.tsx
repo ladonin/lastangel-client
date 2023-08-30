@@ -89,7 +89,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
         />
         <Select
           value={getInputIdValue()}
-          placeholder="№ животного"
+          placeholder="Номер/Имя животного"
           isClearable
           onChange={(val) => {
             setFilterState((state) => ({

@@ -104,7 +104,7 @@ const OurPets = () => {
         modules={[Lazy, Autoplay, Pagination, Navigation]}
         className="loc_slider"
       >
-        {list.map((item, index) => (
+        {[...list].reverse().map((item, index) => (
           <SwiperSlide key={index}>{renderContent(item, index)}</SwiperSlide>
         ))}
         <SwiperSlide>

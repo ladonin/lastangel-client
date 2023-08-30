@@ -11,6 +11,7 @@ import { TGetListOutput as TListDonations, TItem as TDonationItem } from "api/ty
 import LoaderIcon from "components/LoaderIcon";
 import { TItem as TCollectionItem } from "api/types/collections";
 import { AnimalsApi } from "api/animals";
+import CopyLinkToPage from "components/CopyLinkToPage";
 import {
   getMainImageUrl,
   prepareAge,
@@ -171,6 +172,7 @@ const Pet: React.FC = () => {
       время), воды и пр. расходы.
     </div>
   );
+
   return (
     <div className="page-pet">
       {!!dataState && (
@@ -225,6 +227,7 @@ const Pet: React.FC = () => {
                         >
                           Пожертвовать
                         </Button>
+                        <CopyLinkToPage url={window.location.href} />
                       </div>
                       {renderRedactButton(dataState)}
                     </div>
@@ -240,7 +243,7 @@ const Pet: React.FC = () => {
               {isMobileState === true && renderDisclaimer()}
               {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
                 <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
-                  {anotherImagesState.reverse().map((item, index) => (
+                  {[...anotherImagesState].reverse().map((item, index) => (
                     <SwiperSlide key={index}>
                       <img
                         alt="nophoto"

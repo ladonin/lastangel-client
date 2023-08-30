@@ -15,7 +15,7 @@
       }
 
       .loc_donation {
-        width: 35%;
+        width: 39%;
 
         .loc_title {
           height: 55px;
@@ -48,7 +48,10 @@
         }
 
         .loc_redactButton, .loc_donateButton {
-          margin-top: 24px;
+          padding-top: 24px;
+          margin-left: auto;
+        }
+        .component-copyLinkToPage .loc_copyLinkButton {
           margin-left: auto;
         }
       }
@@ -62,7 +65,7 @@
         align-content: flex-start;
 
         .loc_data {
-          width: 65%;
+          width: 61%;
           align-content: flex-start;
 
           .loc_name {
@@ -145,11 +148,12 @@
           align-items: center;
           justify-content: center;
           height: 800px;
+          max-height: 80vh;
           background-color: $c_greyDark;
         }
 
         .loc_image {
-          max-height: 800px;
+          max-height: 80vh;
         }
       }
 
@@ -304,6 +308,14 @@
       .loc_redactButton {
         margin: 24px auto 0px auto;
       }
+      .component-copyLinkToPage {
+        width: 100%;
+        padding-bottom: 16px;
+        .loc_copyLinkButton {
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
     }
 
     .disclaimer {
@@ -404,11 +416,12 @@
           align-items: center;
           justify-content: center;
           height: 1200px;
+          max-height: 80vh;
           background-color: $c_greyDark;
         }
 
         .loc_image {
-          max-height: 1200px;
+          max-height: 80vh;
           max-width: 100%;
         }
       }

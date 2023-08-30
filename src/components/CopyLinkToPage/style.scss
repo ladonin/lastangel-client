@@ -1,0 +1,31 @@
+.component-copyLinkToPage {
+  .loc_copyLinkButton {
+    margin-top: 16px;
+  }
+
+  .loc_copyToBufferStatus {
+    font-size: 12px;
+    font-style: Italic;
+    margin-top: 4px;
+    padding: 0 12px;
+
+  }
+
+}
+
+
+.layout.loc--isMobile .component-copyLinkToPage {
+  .loc_copyLinkButton {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
+  }
+
+  .loc_copyToBufferStatus {
+    font-size: 26px;
+    font-style: Italic;
+    margin-top: 24px;
+    padding: 0 24px;
+
+  }
+}

@@ -160,7 +160,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           />
 
           <Select
-            label="ID животного"
+            label="ID/Имя животного"
             required={needTypeAnimalId(paramsRef.current.type)}
             disabled={!needTypeAnimalId(paramsRef.current.type)}
             value={data ? String(data.animal_id) : undefined}

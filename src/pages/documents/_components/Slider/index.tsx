@@ -68,7 +68,7 @@ const Slider = () => {
       )}
       {dataState &&
         !!dataState.data.length &&
-        dataState.data.reverse().map((number, index) =>
+        [...dataState.data].reverse().map((number, index) =>
           index < 3 ? (
             <SwiperSlide>
               <>

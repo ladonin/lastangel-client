@@ -19,6 +19,7 @@ import { SIZES_ANOTHER } from "constants/photos";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
+import CopyLinkToPage from "components/CopyLinkToPage";
 
 const Story: React.FC = () => {
   const navigate = useNavigate();
@@ -88,7 +89,7 @@ const Story: React.FC = () => {
           </div>
           {dataState.video1 && (
             <video className="loc_video" controls>
-              <source src={getVideoUrl(dataState, dataState.video1)} type={getVideoType(dataState.video1)}/>
+              <source src={getVideoUrl(dataState, dataState.video1)} type={getVideoType(dataState.video1)} />
             </video>
           )}
           {dataState.video2 && (
@@ -101,6 +102,7 @@ const Story: React.FC = () => {
               <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)} />
             </video>
           )}
+          <CopyLinkToPage url={`${window.location.origin + PAGES.STORY}/${dataState.id}`} />
         </div>
       )}
       <div className="loc_anotherTitle">Другие истории:</div>

@@ -17,6 +17,7 @@ export enum ButtonThemes {
   SUCCESS = "success",
   GREY = "grey",
   GHOST = "ghost",
+  GHOST_BORDER = "ghostBorder",
   DELETE_ICON = "delete_icon",
   RESTORE_ICON = "restore_icon",
 }

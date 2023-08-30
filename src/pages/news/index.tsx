@@ -18,6 +18,7 @@ import { SIZES_ANOTHER } from "constants/photos";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
+import CopyLinkToPage from "components/CopyLinkToPage";
 
 const News: React.FC = () => {
   const navigate = useNavigate();
@@ -100,6 +101,7 @@ const News: React.FC = () => {
               <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)} />
             </video>
           )}
+          <CopyLinkToPage url={`${window.location.origin + PAGES.NEWS}/${dataState.id}`} />
         </div>
       )}
       <div className="loc_anotherTitle">Другие новости:</div>

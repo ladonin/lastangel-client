@@ -27,8 +27,8 @@ const BreadCrumbs: React.FC<TProps> = (props) => {
       </div>
       <div className="loc_delimiter">/</div>
       {!!breadCrumbs &&
-        breadCrumbs.map((item) => (
-          <>
+        breadCrumbs.map((item, index) => (
+          <React.Fragment key={index}>
             <div
               className="loc_breadCrumb"
               onClick={() => {
@@ -38,7 +38,7 @@ const BreadCrumbs: React.FC<TProps> = (props) => {
               {item.name}
             </div>
             <div className="loc_delimiter">/</div>
-          </>
+          </React.Fragment>
         ))}
       <h2 className="loc_title">{title}</h2>
     </div>

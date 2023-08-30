@@ -53,13 +53,13 @@ const Slider = () => {
       )}
       {dataState &&
         !!dataState.data.length &&
-        dataState.data.reverse().map((number, index) =>
+        [...dataState.data].reverse().map((number, index) =>
           index < 3 ? (
-            <SwiperSlide>
+            <SwiperSlide key={index}>
               <img alt="nophoto" src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)} />
             </SwiperSlide>
           ) : (
-            <SwiperSlide>
+            <SwiperSlide key={index}>
               <img
                 alt="nophoto"
                 data-src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)}

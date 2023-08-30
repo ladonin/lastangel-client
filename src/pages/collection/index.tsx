@@ -22,6 +22,7 @@ import PAGES from "routing/routes";
 import { COLLECTIONS_STATUS } from "constants/collections";
 import flowerSrc from "icons/flower1.png";
 import BreadCrumbs from "components/BreadCrumbs";
+import CopyLinkToPage from "components/CopyLinkToPage";
 
 // Ленивая загрузка модуля
 // const OtherComponent = React.lazy(() => import('components/header'));
@@ -106,6 +107,7 @@ const Collection: React.FC = () => {
 
         {isMobileState === false && renderDonateButton()}
         {isMobileState === false && renderRedactButton()}
+        {isMobileState === false && <CopyLinkToPage url={window.location.href} />}
       </div>
     );
   const renderData = () =>
@@ -157,6 +159,7 @@ const Collection: React.FC = () => {
               {isMobileState === false && renderDonation(dataState)}
               {isMobileState === true && <div className="loc_buttonWrapper">{renderDonateButton()}</div>}
               {isMobileState === true && renderRedactButton()}
+              {isMobileState === true && <CopyLinkToPage url={window.location.href} />}
 
               {isMobileState === false && <div className="loc_description">{dataState.description}</div>}
             </div>
@@ -165,7 +168,7 @@ const Collection: React.FC = () => {
           <div className="loc_bottomWrapper">
             {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
               <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
-                {anotherImagesState.reverse().map((item, index) => (
+                {[...anotherImagesState].reverse().map((item, index) => (
                   <SwiperSlide key={index}>
                     <img
                       alt="nophoto"
