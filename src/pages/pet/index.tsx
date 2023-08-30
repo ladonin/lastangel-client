@@ -227,7 +227,7 @@ const Pet: React.FC = () => {
                         >
                           Пожертвовать
                         </Button>
-                        <CopyLinkToPage url={window.location.href} />
+                        <CopyLinkToPage text="Рассказать о питомце друзьям" url={window.location.href} />
                       </div>
                       {renderRedactButton(dataState)}
                     </div>

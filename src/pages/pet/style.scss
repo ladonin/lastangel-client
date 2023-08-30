@@ -165,9 +165,17 @@
             margin-left: auto;
             margin-top: 16px;
           }
-          .component-copyLinkToPage .loc_copyLinkButton {
-            margin-left: auto;
+          .component-copyLinkToPage {
+            .loc_copyLinkButton {
+              margin-left: auto;
+            }
+            .loc_copyToBufferStatus {
+              width: 247px;
+              margin-left: auto;
+            }
           }
+          
+          
         }
 
 
@@ -427,9 +435,17 @@
           .component-copyLinkToPage {
             width: 100%;
             padding-bottom: 16px;
+            padding-left: 0;
+            padding-right: 0;
             .loc_copyLinkButton {
               margin-left: auto;
               margin-right: auto;
+            }
+            .loc_copyToBufferStatus {
+              width: 100%;
+              margin-left: 0;
+              padding-left: 0;
+              padding-right: 0;
             }
           }
         }

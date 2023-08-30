@@ -15,7 +15,7 @@
       }
 
       .loc_donation {
-        width: 39%;
+        width: 35%;
 
         .loc_title {
           height: 55px;
@@ -48,11 +48,17 @@
         }
 
         .loc_redactButton, .loc_donateButton {
-          padding-top: 24px;
+          margin-top: 24px;
           margin-left: auto;
         }
-        .component-copyLinkToPage .loc_copyLinkButton {
-          margin-left: auto;
+        .component-copyLinkToPage {
+          .loc_copyLinkButton {
+            margin-left: auto;
+          }
+          .loc_copyToBufferStatus {
+            width: 224px;
+            margin-left: auto;
+          }
         }
       }
 
@@ -65,7 +71,7 @@
         align-content: flex-start;
 
         .loc_data {
-          width: 61%;
+          width: 65%;
           align-content: flex-start;
 
           .loc_name {
@@ -311,9 +317,17 @@
       .component-copyLinkToPage {
         width: 100%;
         padding-bottom: 16px;
+        padding-left: 0;
+        padding-right: 0;
         .loc_copyLinkButton {
           margin-left: auto;
           margin-right: auto;
+        }
+        .loc_copyToBufferStatus {
+          width: 100%;
+          margin-left: 0;
+          padding-left: 0;
+          padding-right: 0;
         }
       }
     }
