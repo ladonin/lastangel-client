@@ -17,6 +17,7 @@ import { TGetResponseItem } from "api/types/collections";
 import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/collections";
 import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
 import InputFileVideo from "components/Form/InputFileVideo";
+import { ANIMALS_STATUS } from "../../../../../constants/animals";
 
 export type TParams = { [key: string]: any };
 
@@ -65,7 +66,13 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     setMainImagePrevState(0);
   };
   useEffect(() => {
-    AnimalsApi.getList({ offset: 0, limit: 999999 }).then((res) => {
+    AnimalsApi.getList({
+      offset: 0,
+      limit: 999999,
+      order: "name",
+      order_type: "asc",
+      statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
+    }).then((res) => {
       setAnimalsOptionsState(res.map((animal) => ({ value: String(animal.id), label: `${animal.name} (№${animal.id})` })));
     });
   }, []);

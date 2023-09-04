@@ -148,7 +148,7 @@ const StoryUpdate: React.FC = () => {
                 size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 onClick={updateHandler}
               >
-                Изменить
+                Обновить
               </Button>
 
               <Button

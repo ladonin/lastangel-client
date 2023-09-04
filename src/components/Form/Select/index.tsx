@@ -2,7 +2,7 @@
   import Select from 'components/Form/Select'
  */
 
-import React, { Ref } from "react";
+import React, { Ref, useEffect, useRef } from "react";
 import cn from "classnames";
 import SelectComponent, { Props } from "react-select";
 import "./style.scss";
@@ -16,7 +16,7 @@ type TProps = Props & {
   disabled?: boolean;
   value?: string;
   options: TValue[];
-  onChange: (newValue: any) => void;
+  onChange: (newValue: any, isLightClear?: boolean) => void;
 
   innerRef?: Ref<any>;
 };
@@ -34,7 +34,37 @@ const Select: React.FC<TProps> = ({
   ...rest
 }) => {
   const val = value ? options.filter(({ value: v }) => v === value)[0] : undefined;
+  const lightClearRef = useRef<string | null>(null);
 
+  const lightClear = () => {
+    // console.log('lightClear')
+    lightClearRef.current = "on";
+    (innerRef as any).current.clearValue();
+    if (innerRef) {
+      lightClearRef.current = "on";
+      console.log(3131);
+      console.log(options);
+      (innerRef as any).current.clearValue();
+    }
+  };
+  useEffect(() => {
+    if (innerRef) {
+      (innerRef as any).current.lightClear = lightClear;
+    }
+  }, [innerRef]);
+
+  const onChangeHandler = (val: any) => {
+    // console.log(options)
+    //   console.log('onChangeHandler')
+    if (lightClearRef.current === "on") {
+      // При легком сбрасывании мы просто сбрасываем значения в селекте
+      // и не вызываем событие onChange
+      lightClearRef.current = null;
+      onChange(val, true);
+    } else {
+      onChange(val);
+    }
+  };
   return (
     <div className={cn("component-select", className)}>
       {label && (
@@ -44,7 +74,7 @@ const Select: React.FC<TProps> = ({
       )}
       <div className="loc_select">
         <SelectComponent
-          onChange={onChange}
+          onChange={onChangeHandler}
           value={val}
           isDisabled={disabled}
           placeholder={placeholder}

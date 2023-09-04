@@ -41,12 +41,13 @@ const ListItem = ({ data }: TProps) => {
         "loc--isShowed": isShowedState,
         "loc--non_published": data.status === STORIES_STATUS.NON_PUBLISHED,
       })}
+      onClick={() => !isShowedState && setIsShowedState(true)}
     >
       {data.status === STORIES_STATUS.NON_PUBLISHED && <div className="loc_nonpublished">Не опубликован</div>}
-      <div className="loc_created" onClick={() => setIsShowedState(!isShowedState)}>
+      <div className="loc_created" onClick={() => isShowedState && setIsShowedState(false)}>
         {getDateString(data.created)}
       </div>
-      <div className="loc_name" onClick={() => setIsShowedState(!isShowedState)}>
+      <div className="loc_name" onClick={() => isShowedState && setIsShowedState(false)}>
         {data.name}
       </div>
       {isAdmin() && (

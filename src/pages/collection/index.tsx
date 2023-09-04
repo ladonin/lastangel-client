@@ -114,6 +114,7 @@ const Collection: React.FC = () => {
     dataState && (
       <div className="loc_data">
         <div className="loc_name">{dataState.name}</div>
+        {dataState.status === COLLECTIONS_STATUS.NON_PUBLISHED && <div className="loc_not_published">Не опубликован</div>}
 
         {!!dataState.animal_name && !!dataState.animal_id && (
           <div className="loc_target_animal">

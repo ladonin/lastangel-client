@@ -5,7 +5,8 @@
 
   flex-direction: column;
   cursor: pointer;
-  background-color: $c_greyF5;
+  //background-color: $c_greyF5;
+  border: 1px solid $c_lagunaGrey;
   padding: 24px 24px 0 24px;
   &.loc--non_published {
 
@@ -83,6 +84,12 @@
         margin-top: 0;
         margin-left: auto;
         margin-right: auto;
+      }
+      .loc_copyToBufferStatus {
+        padding: 0;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
       }
     }
   }

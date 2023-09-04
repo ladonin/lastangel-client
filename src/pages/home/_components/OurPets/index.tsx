@@ -125,7 +125,13 @@ const OurPets = () => {
     const tabsList: TTabs[] = [];
     const panelsList: ReactElement[] = [];
 
-    AnimalsApi.getList({ statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED], offset: 0, limit: 200 }).then((res) => {
+    AnimalsApi.getList({
+      statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
+      offset: 0,
+      limit: 200,
+      order: "id",
+      order_type: "asc",
+    }).then((res) => {
       const puppies = res.filter(({ category }) => category === ANIMALS_CATEGORY.PUPPY);
 
       if (puppies.length) {

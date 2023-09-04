@@ -44,7 +44,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
     AnimalsApi.getList({
       offset: 0,
       limit: 999999,
-      order: "id",
+      order: "name",
       order_type: "asc",
       statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
     }).then((res) => {

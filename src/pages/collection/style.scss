@@ -61,7 +61,11 @@
           }
         }
       }
-
+      .loc_not_published {
+        background-color: $c_yellowLight;
+        padding: 16px;
+        margin: 24px 0;
+      }
       .loc_right {
         display: flex;
         flex-wrap: wrap;
