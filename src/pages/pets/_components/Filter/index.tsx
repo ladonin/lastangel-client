@@ -1,11 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
-import { ANIMALS_CATEGORY, ANIMALS_STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS_FILTER } from "constants/animals";
+import { ANIMALS_CATEGORY, ANIMALS_KIND, ANIMALS_STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS_FILTER } from "constants/animals";
 import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
 import { AnimalsApi } from "api/animals";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { transformCategoryToParams } from "helpers/animals";
 import "./style.scss";
 
 type TProps = {
@@ -16,10 +17,14 @@ type TProps = {
 export type TFilterParams = {
   status?: ValuesOf<typeof ANIMALS_STATUS>;
   category?: ValuesOf<typeof ANIMALS_CATEGORY>;
+  kind?: ValuesOf<typeof ANIMALS_KIND>;
+  minbirthdate?: number;
+  maxbirthdate?: number;
   id?: number;
 };
 type TSelectRefProps = {
   clearValue: () => void;
+  lightClear: () => void;
 };
 const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
@@ -63,11 +68,12 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           value={getInputStatusValue()}
           placeholder="Статус"
           isClearable
-          onChange={(val) => {
+          onChange={(val, isLightClear = false) => {
             setFilterState((state) => ({
               ...state,
               status: val ? (Number(val.value) as ValuesOf<typeof ANIMALS_STATUS>) : undefined,
             }));
+            !isLightClear && selectIdRef.current?.lightClear();
           }}
           className="loc_formSelectItem"
           options={STATUS_OPTIONS_FILTER}
@@ -77,11 +83,14 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           value={getInputCategoryValue()}
           placeholder="Категория"
           isClearable
-          onChange={(val) => {
+          onChange={(val, isLightClear = false) => {
+            const category = val ? (Number(val.value) as ValuesOf<typeof ANIMALS_CATEGORY>) : undefined;
             setFilterState((state) => ({
               ...state,
-              category: val ? (Number(val.value) as ValuesOf<typeof ANIMALS_CATEGORY>) : undefined,
+              category,
+              ...transformCategoryToParams(category),
             }));
+            !isLightClear && selectIdRef.current?.lightClear();
           }}
           className="loc_formSelectItem"
           options={CATEGORY_OPTIONS}
@@ -91,11 +100,13 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           value={getInputIdValue()}
           placeholder="Номер/Имя животного"
           isClearable
-          onChange={(val) => {
+          onChange={(val, isLightClear = false) => {
             setFilterState((state) => ({
               ...state,
               id: val ? Number(val.value) : undefined,
             }));
+            !isLightClear && selectCategoryRef.current?.lightClear();
+            !isLightClear && selectStatusRef.current?.lightClear();
           }}
           className="loc_formSelectItem"
           options={animalsOptionsState}

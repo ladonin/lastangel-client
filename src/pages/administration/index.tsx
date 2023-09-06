@@ -162,15 +162,14 @@ const Administration: React.FC = () => {
   };
   const getPetsData = (params?: TGetPetsListRequest) => {
     petsLoadingStatusRef.current.isLoading = true;
-    AnimalsApi.getList({ ...petsFilterRef.current, ...params, withUnpublished: 1, order: "id", order_type: "DESC" }).then(
-      (res) => {
-        setListPetsState((prev) => (prev === null || petsPageState === 1 ? res : [...prev, ...res]));
-        petsLoadingStatusRef.current.isLoading = false;
-        if (!res.length) {
-          petsLoadingStatusRef.current.isOff = true;
-        }
+    const { category, ...filter } = petsFilterRef.current;
+    AnimalsApi.getList({ ...filter, ...params, withUnpublished: 1, order: "id", order_type: "DESC" }).then((res) => {
+      setListPetsState((prev) => (prev === null || petsPageState === 1 ? res : [...prev, ...res]));
+      petsLoadingStatusRef.current.isLoading = false;
+      if (!res.length) {
+        petsLoadingStatusRef.current.isOff = true;
       }
-    );
+    });
   };
 
   const getDonationsData = (params?: TGetDonationsListRequest) => {
@@ -296,8 +295,6 @@ const Administration: React.FC = () => {
       setDonatorsPageState(1);
     }
   };
-
-  // сделать кнопку "выбрать случайно питомца" для клиентов в списке питомцев - иногда не знашеь кому помочь - эта кнопка поможет
 
   const renderPetsContent = (data: TItemPet) => (
     <div className="loc_petItem">

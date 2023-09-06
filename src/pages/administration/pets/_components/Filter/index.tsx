@@ -1,13 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
 
 import { isMobile } from "react-device-detect";
-import { ANIMALS_CATEGORY, ANIMALS_STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS_FILTER } from "constants/animals";
+import { ANIMALS_CATEGORY, ANIMALS_KIND, ANIMALS_STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS_FILTER } from "constants/animals";
 import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
 import { AnimalsApi } from "api/animals";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
+import { transformCategoryToParams } from "helpers/animals";
 
 type TProps = {
   onChange: (filter: TFilterParams) => void;
@@ -20,6 +21,9 @@ export type TFilterParams = {
   statusExclude?: ValuesOf<typeof ANIMALS_STATUS>[];
   category?: ValuesOf<typeof ANIMALS_CATEGORY>;
   id?: number;
+  kind?: ValuesOf<typeof ANIMALS_KIND>;
+  minbirthdate?: number;
+  maxbirthdate?: number;
 };
 type TSelectRefProps = {
   clearValue: () => void;
@@ -103,10 +107,13 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           placeholder="Категория"
           isClearable
           onChange={(val, isLightClear = false) => {
+            const category = val ? (Number(val.value) as ValuesOf<typeof ANIMALS_CATEGORY>) : undefined;
             setFilterState((state) => ({
               ...state,
-              category: val ? (Number(val.value) as ValuesOf<typeof ANIMALS_CATEGORY>) : undefined,
+              category,
+              ...transformCategoryToParams(category),
             }));
+
             !isLightClear && selectIdRef.current?.lightClear();
           }}
           className="loc_formSelectItem"

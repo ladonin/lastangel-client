@@ -8,8 +8,8 @@ import {
   GRAFTED_OPTIONS,
   STERILIZED_OPTIONS,
   IS_PUBLISHED_OPTIONS,
-  CATEGORY_OPTIONS,
   STATUS_OPTIONS_CR_UP,
+  KIND_OPTIONS,
 } from "constants/animals";
 import InputText from "components/Form/InputText";
 import InputFileImageWithCrop from "components/Form/InputFileImageWithCrop";
@@ -166,14 +166,14 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             options={STERILIZED_OPTIONS}
           />
           <Select
-            label="Категория"
+            label="Вид"
             required
-            value={data ? String(data.category) : undefined}
+            value={data ? String(data.kind) : undefined}
             onChange={(val) => {
-              onChangeHandler("category", val);
+              onChangeHandler("kind", val);
             }}
-            className="loc_formSelectItem loc--category"
-            options={CATEGORY_OPTIONS}
+            className="loc_formSelectItem loc--kind"
+            options={KIND_OPTIONS}
           />
           <Select
             label="Статус"
@@ -187,6 +187,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           />
           <DatePicker
             label="Дата рождения"
+            required
             onChange={(val) => {
               onChangeHandler("birthdate", val / 1000);
             }}

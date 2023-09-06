@@ -10,7 +10,7 @@ import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
-import { getMainImageUrl, prepareSex, prepareStatus, prepareStatusCode, prepareAge } from "helpers/animals";
+import { getMainImageUrl, prepareSex, prepareStatus, prepareStatusCode, prepareAge, getCategoryCode } from "helpers/animals";
 import { AnimalsApi } from "api/animals";
 
 import { ANIMALS_CATEGORY, ANIMALS_STATUS } from "constants/animals";
@@ -132,7 +132,7 @@ const OurPets = () => {
       order: "id",
       order_type: "asc",
     }).then((res) => {
-      const puppies = res.filter(({ category }) => category === ANIMALS_CATEGORY.PUPPY);
+      const puppies = res.filter(({ kind, birthdate }) => getCategoryCode(kind, birthdate) === ANIMALS_CATEGORY.PUPPY);
 
       if (puppies.length) {
         tabsList.push({
@@ -147,7 +147,7 @@ const OurPets = () => {
         panelsList.push(renderPanel(puppies));
       }
 
-      const dogs = res.filter(({ category }) => category === ANIMALS_CATEGORY.DOG);
+      const dogs = res.filter(({ kind, birthdate }) => getCategoryCode(kind, birthdate) === ANIMALS_CATEGORY.DOG);
 
       if (dogs.length) {
         tabsList.push({
@@ -162,7 +162,7 @@ const OurPets = () => {
         panelsList.push(renderPanel(dogs));
       }
 
-      const oldDogs = res.filter(({ category }) => category === ANIMALS_CATEGORY.OLD_DOG);
+      const oldDogs = res.filter(({ kind, birthdate }) => getCategoryCode(kind, birthdate) === ANIMALS_CATEGORY.OLD_DOG);
 
       if (oldDogs.length) {
         tabsList.push({
@@ -177,7 +177,7 @@ const OurPets = () => {
         panelsList.push(renderPanel(oldDogs));
       }
 
-      const oldCats = res.filter(({ category }) => category === ANIMALS_CATEGORY.OLD_CAT);
+      const oldCats = res.filter(({ kind, birthdate }) => getCategoryCode(kind, birthdate) === ANIMALS_CATEGORY.OLD_CAT);
 
       if (oldCats.length) {
         tabsList.push({
@@ -192,7 +192,7 @@ const OurPets = () => {
         panelsList.push(renderPanel(oldCats));
       }
 
-      const cats = res.filter(({ category }) => category === ANIMALS_CATEGORY.CAT);
+      const cats = res.filter(({ kind, birthdate }) => getCategoryCode(kind, birthdate) === ANIMALS_CATEGORY.CAT);
 
       if (cats.length) {
         tabsList.push({
@@ -207,7 +207,7 @@ const OurPets = () => {
         panelsList.push(renderPanel(cats));
       }
 
-      const kittens = res.filter(({ category }) => category === ANIMALS_CATEGORY.KITTEN);
+      const kittens = res.filter(({ kind, birthdate }) => getCategoryCode(kind, birthdate) === ANIMALS_CATEGORY.KITTEN);
 
       if (kittens.length) {
         tabsList.push({

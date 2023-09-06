@@ -74,12 +74,13 @@ const PetUpdate: React.FC = () => {
 
     const {
       name,
+      birthdate,
       short_description,
       description,
       sex,
       grafted,
       sterilized,
-      category,
+      kind,
       status,
       is_published,
       main_image,
@@ -89,12 +90,13 @@ const PetUpdate: React.FC = () => {
     if (
       is_published === undefined ||
       !name ||
+      !birthdate ||
       !short_description ||
       !description ||
       !sex ||
       !grafted ||
       !sterilized ||
-      !category ||
+      !kind ||
       !status
     ) {
       setErrorState("Пожалуйста, заполните все обязательные поля");

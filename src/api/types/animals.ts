@@ -3,7 +3,8 @@ import {
   ANIMALS_CATEGORY,
   ANIMALS_SEX,
   ANIMALS_GRAFTED,
-  ANIMALS_STERILIZED
+  ANIMALS_STERILIZED,
+  ANIMALS_KIND,
 } from "constants/animals";
 import { ValuesOf } from "types/common";
 
@@ -20,7 +21,7 @@ export type TGetResponseItem = {
   sex: ValuesOf<typeof ANIMALS_SEX>;
   grafted: ValuesOf<typeof ANIMALS_GRAFTED>;
   sterilized: ValuesOf<typeof ANIMALS_STERILIZED>;
-  category: ValuesOf<typeof ANIMALS_CATEGORY>;
+  kind: ValuesOf<typeof ANIMALS_KIND>;
   status: ValuesOf<typeof ANIMALS_STATUS>;
   is_published: 1 | 0;
   need_medicine: number | null;

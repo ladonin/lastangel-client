@@ -37,6 +37,11 @@ export const ANIMALS_CATEGORY = {
   OLD_CAT: 6,
 } as const;
 
+export const ANIMALS_KIND = {
+  DOG: 1,
+  CAT: 2,
+} as const;
+
 export const SEX_OPTIONS = [
   { value: String(ANIMALS_SEX.MALE), label: "мальчик" },
   { value: String(ANIMALS_SEX.FEMALE), label: "девочка" },
@@ -72,6 +77,11 @@ export const CATEGORY_OPTIONS = [
   { value: String(ANIMALS_CATEGORY.OLD_CAT), label: "Пожилая кошка/кот" },
 ];
 
+export const KIND_OPTIONS = [
+  { value: String(ANIMALS_KIND.DOG), label: "Собака" },
+  { value: String(ANIMALS_KIND.CAT), label: "Кошка/кот" },
+];
+
 export const STATUS_OPTIONS_CR_UP = [
   { value: String(ANIMALS_STATUS.MEMBERS), label: "Здоровые жители приюта" },
   { value: String(ANIMALS_STATUS.INVALID), label: "Инвалиды" },
@@ -87,3 +97,19 @@ export const STATUS_OPTIONS_FILTER = [
   },
   ...STATUS_OPTIONS_CR_UP,
 ];
+
+// Собаки
+// 0-1 год = щенки, 1-8 лет - средний возраст, 8+лет - старики
+// Количество секунд, после которых собака перестает быть щенком = 1 год
+export const PUPPY_MAXTIMESTAMP = 31536000;
+
+// Количество секунд, после которых собака перестает быть средним возрастом = 8 лет
+export const MIDDLEDOG_MAXTIMESTAMP = 8 * 31536000;
+
+// Кошки
+// 0-1 год = котята, 1-10 лет - средний возраст, 10+лет - старики
+// Количество секунд, после которых кошка перестает быть котенком = 1 год
+export const KITTEN_MAXTIMESTAMP = 31536000;
+
+// Количество секунд, после которых кошка перестает быть средним возрастом = 12 лет
+export const MIDDLECAT_MAXTIMESTAMP = 12 * 31536000;
