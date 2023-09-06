@@ -35,11 +35,16 @@ export const ANIMALS_CATEGORY = {
   KITTEN: 4,
   CAT: 5,
   OLD_CAT: 6,
+  LITTLE_DOG: 7,
+  MEDIUM_DOG: 8,
+  BIG_DOG: 9,
 } as const;
 
 export const ANIMALS_KIND = {
-  DOG: 1,
-  CAT: 2,
+  LITTLE_DOG: 1,
+  MEDIUM_DOG: 2,
+  BIG_DOG: 3,
+  CAT: 4,
 } as const;
 
 export const SEX_OPTIONS = [
@@ -75,10 +80,15 @@ export const CATEGORY_OPTIONS = [
   { value: String(ANIMALS_CATEGORY.KITTEN), label: "Котенок" },
   { value: String(ANIMALS_CATEGORY.CAT), label: "Кошка/кот" },
   { value: String(ANIMALS_CATEGORY.OLD_CAT), label: "Пожилая кошка/кот" },
+  { value: String(ANIMALS_CATEGORY.LITTLE_DOG), label: "Маленькие собаки" },
+  { value: String(ANIMALS_CATEGORY.MEDIUM_DOG), label: "Средние собаки" },
+  { value: String(ANIMALS_CATEGORY.BIG_DOG), label: "Крупные собаки" },
 ];
 
 export const KIND_OPTIONS = [
-  { value: String(ANIMALS_KIND.DOG), label: "Собака" },
+  { value: String(ANIMALS_KIND.LITTLE_DOG), label: "Маленькая собака" },
+  { value: String(ANIMALS_KIND.MEDIUM_DOG), label: "Средняя собака" },
+  { value: String(ANIMALS_KIND.BIG_DOG), label: "Крупная собака" },
   { value: String(ANIMALS_KIND.CAT), label: "Кошка/кот" },
 ];
 
@@ -103,8 +113,10 @@ export const STATUS_OPTIONS_FILTER = [
 // Количество секунд, после которых собака перестает быть щенком = 1 год
 export const PUPPY_MAXTIMESTAMP = 31536000;
 
-// Количество секунд, после которых собака перестает быть средним возрастом = 8 лет
-export const MIDDLEDOG_MAXTIMESTAMP = 8 * 31536000;
+// Количество секунд, после которых собака перестает быть средним возрастом
+export const MIDDLEDOG_LITTLE_MAXTIMESTAMP = 10 * 31536000;
+export const MIDDLEDOG_MEDIUM_MAXTIMESTAMP = 8 * 31536000;
+export const MIDDLEDOG_BIG_MAXTIMESTAMP = 6 * 31536000;
 
 // Кошки
 // 0-1 год = котята, 1-10 лет - средний возраст, 10+лет - старики

@@ -63,6 +63,7 @@ const Pets: React.FC = () => {
   const getData = (params?: TGetPetsListRequest) => {
     petsLoadingStatusRef.current.isLoading = true;
     const { category, ...filter } = petsFilterRef.current;
+
     AnimalsApi.getList({ ...filter, ...params, order: "id", order_type: "DESC" }).then((res) => {
       setListPetsState((prev) => (!prev || petsPageState === 1 ? res : [...prev, ...res]));
       petsLoadingStatusRef.current.isLoading = false;

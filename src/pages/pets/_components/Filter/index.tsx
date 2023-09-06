@@ -17,9 +17,9 @@ type TProps = {
 export type TFilterParams = {
   status?: ValuesOf<typeof ANIMALS_STATUS>;
   category?: ValuesOf<typeof ANIMALS_CATEGORY>;
-  kind?: ValuesOf<typeof ANIMALS_KIND>;
-  minbirthdate?: number;
-  maxbirthdate?: number;
+  kind?: ValuesOf<typeof ANIMALS_KIND>[];
+  minbirthdate?: number[];
+  maxbirthdate?: number[];
   id?: number;
 };
 type TSelectRefProps = {
@@ -44,7 +44,12 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
     selectStatusRef.current?.clearValue();
     selectIdRef.current?.clearValue();
   };
-  const [animalsOptionsState, setAnimalsOptionsState] = useState<{ value: string; label: string }[]>([]);
+  const [animalsOptionsState, setAnimalsOptionsState] = useState<
+    {
+      value: string;
+      label: string;
+    }[]
+  >([]);
   useEffect(() => {
     AnimalsApi.getList({
       offset: 0,
@@ -53,7 +58,12 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
       order_type: "asc",
       statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
     }).then((res) => {
-      setAnimalsOptionsState(res.map((animal) => ({ value: String(animal.id), label: `${animal.name} (№${animal.id})` })));
+      setAnimalsOptionsState(
+        res.map((animal) => ({
+          value: String(animal.id),
+          label: `${animal.name} (№${animal.id})`,
+        }))
+      );
     });
   }, []);
 
@@ -90,6 +100,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
               category,
               ...transformCategoryToParams(category),
             }));
+
             !isLightClear && selectIdRef.current?.lightClear();
           }}
           className="loc_formSelectItem"

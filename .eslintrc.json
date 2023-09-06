@@ -37,7 +37,7 @@
     }
   },
   "rules": {
-    "max-len": ["error", { "code": 130 }],
+    "max-len": ["error", { "code": 100 }],
     "camelCase": 0,
     "default-case-last": 2,
     "react/require-default-props": "off",

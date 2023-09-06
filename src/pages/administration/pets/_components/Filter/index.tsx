@@ -21,9 +21,9 @@ export type TFilterParams = {
   statusExclude?: ValuesOf<typeof ANIMALS_STATUS>[];
   category?: ValuesOf<typeof ANIMALS_CATEGORY>;
   id?: number;
-  kind?: ValuesOf<typeof ANIMALS_KIND>;
-  minbirthdate?: number;
-  maxbirthdate?: number;
+  kind?: ValuesOf<typeof ANIMALS_KIND>[];
+  minbirthdate?: number[];
+  maxbirthdate?: number[];
 };
 type TSelectRefProps = {
   clearValue: () => void;
@@ -113,7 +113,6 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
               category,
               ...transformCategoryToParams(category),
             }));
-
             !isLightClear && selectIdRef.current?.lightClear();
           }}
           className="loc_formSelectItem"

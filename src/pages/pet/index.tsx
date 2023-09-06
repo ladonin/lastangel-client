@@ -18,7 +18,6 @@ import {
   prepareGraft,
   prepareSex,
   prepareSterilized,
-  prepareCategory,
   prepareStatus,
   prepareStatusCode,
   getAnotherImagesUrl,
@@ -140,7 +139,7 @@ const Pet: React.FC = () => {
         )}
         {!dataState.birthdate && (
           <div className="loc_age">
-            Возраст: <span>{prepareCategory(dataState.category, dataState.sex)} (точный возраст неизвестен)</span>
+            Возраст: <span>(точный возраст неизвестен)</span>
           </div>
         )}
         <div className="loc_breed">

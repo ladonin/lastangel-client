@@ -26,7 +26,7 @@ import {
   prepareGraft,
   prepareSex,
   prepareSterilized,
-  prepareStatusCode as preparePetStatusCode,
+  prepareStatusCode as preparePetStatusCode, prepareKind
 } from "helpers/animals";
 import { prepareType as prepareDonationType } from "helpers/donations";
 import {
@@ -162,6 +162,7 @@ const Administration: React.FC = () => {
   };
   const getPetsData = (params?: TGetPetsListRequest) => {
     petsLoadingStatusRef.current.isLoading = true;
+    
     const { category, ...filter } = petsFilterRef.current;
     AnimalsApi.getList({ ...filter, ...params, withUnpublished: 1, order: "id", order_type: "DESC" }).then((res) => {
       setListPetsState((prev) => (prev === null || petsPageState === 1 ? res : [...prev, ...res]));
@@ -310,7 +311,16 @@ const Administration: React.FC = () => {
         >
           Редактировать
         </Button>
-
+        <Button
+          className="loc_button loc_redactNewBlank"
+          theme={ButtonThemes.GHOST_BORDER}
+          size={isMobileState ? ButtonSizes.HUGE : ButtonSizes.SMALL}
+          onClick={() => {
+            window.open(`${PAGES.ADMINISTRATION_PET_UPDATE}/${data.id}`, '_blank');
+          }}
+        >
+          ...в новой вкладке
+        </Button>
         <div className="loc_data">
           {!data.is_published && <div className="loc_not_published">Не опубликовано</div>}
           <div className="loc_name">
@@ -320,7 +330,7 @@ const Administration: React.FC = () => {
           <div className="loc_age">{prepareAge(data.birthdate)}</div>
           <div className="loc_parameters">
             {prepareGraft(data.grafted, data.sex)}, {prepareSterilized(data.sterilized, data.sex)},{" "}
-            {data.breed || "порода неизвестна"}
+            {data.breed || "порода неизвестна"}, {prepareKind(data.kind, data.sex)}
           </div>
           <div className={`loc_status loc--status_${preparePetStatusCode(data.status, data.need_medicine)}`}>
             {preparePetStatus(data.status, data.need_medicine)}

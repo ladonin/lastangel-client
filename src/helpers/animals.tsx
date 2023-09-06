@@ -1,6 +1,6 @@
 /*
   import { getVideoUrl, prepareGraft, prepareSex, 
-  prepareStatus, prepareSterilized, prepareCategory, getMainImageUrl } from 'helpers/animals';
+  prepareStatus, prepareSterilized, getMainImageUrl } from 'helpers/animals';
  */
 import React from "react";
 import {
@@ -12,7 +12,9 @@ import {
   KIND_OPTIONS,
   ANIMALS_KIND,
   PUPPY_MAXTIMESTAMP,
-  MIDDLEDOG_MAXTIMESTAMP,
+  MIDDLEDOG_LITTLE_MAXTIMESTAMP,
+  MIDDLEDOG_MEDIUM_MAXTIMESTAMP,
+  MIDDLEDOG_BIG_MAXTIMESTAMP,
   KITTEN_MAXTIMESTAMP,
   MIDDLECAT_MAXTIMESTAMP,
 } from "constants/animals";
@@ -102,33 +104,52 @@ export const prepareSex = (sex: number) => {
 };
 
 export const transformCategoryToParams = (category?: ValuesOf<typeof ANIMALS_CATEGORY>) => {
-  let kind: ValuesOf<typeof ANIMALS_KIND> | undefined;
-  let minbirthdate: number | undefined;
-  let maxbirthdate: number | undefined;
+  let kind: ValuesOf<typeof ANIMALS_KIND>[] | undefined;
+  let minbirthdate: number[] | undefined;
+  let maxbirthdate: number[] | undefined;
   const getTimestamp = (interval: number) => Math.round(new Date().getTime() / 1000) - interval;
 
   if (category === ANIMALS_CATEGORY.PUPPY) {
-    kind = ANIMALS_KIND.DOG;
-    minbirthdate = getTimestamp(PUPPY_MAXTIMESTAMP);
-    maxbirthdate = getTimestamp(0);
+    kind = [ANIMALS_KIND.LITTLE_DOG, ANIMALS_KIND.MEDIUM_DOG, ANIMALS_KIND.BIG_DOG];
+    minbirthdate = [getTimestamp(PUPPY_MAXTIMESTAMP), getTimestamp(PUPPY_MAXTIMESTAMP), getTimestamp(PUPPY_MAXTIMESTAMP)];
+    maxbirthdate = [getTimestamp(0), getTimestamp(0), getTimestamp(0)];
   } else if (category === ANIMALS_CATEGORY.DOG) {
-    kind = ANIMALS_KIND.DOG;
-    minbirthdate = getTimestamp(MIDDLEDOG_MAXTIMESTAMP);
-    maxbirthdate = getTimestamp(PUPPY_MAXTIMESTAMP + 1);
+    kind = [ANIMALS_KIND.LITTLE_DOG, ANIMALS_KIND.MEDIUM_DOG, ANIMALS_KIND.BIG_DOG];
+    minbirthdate = [
+      getTimestamp(MIDDLEDOG_LITTLE_MAXTIMESTAMP),
+      getTimestamp(MIDDLEDOG_MEDIUM_MAXTIMESTAMP),
+      getTimestamp(MIDDLEDOG_BIG_MAXTIMESTAMP),
+    ];
+    maxbirthdate = [
+      getTimestamp(PUPPY_MAXTIMESTAMP + 1),
+      getTimestamp(PUPPY_MAXTIMESTAMP + 1),
+      getTimestamp(PUPPY_MAXTIMESTAMP + 1),
+    ];
   } else if (category === ANIMALS_CATEGORY.OLD_DOG) {
-    kind = ANIMALS_KIND.DOG;
-    maxbirthdate = getTimestamp(MIDDLEDOG_MAXTIMESTAMP + 1);
+    kind = [ANIMALS_KIND.LITTLE_DOG, ANIMALS_KIND.MEDIUM_DOG, ANIMALS_KIND.BIG_DOG];
+
+    maxbirthdate = [
+      getTimestamp(MIDDLEDOG_LITTLE_MAXTIMESTAMP + 1),
+      getTimestamp(MIDDLEDOG_MEDIUM_MAXTIMESTAMP + 1),
+      getTimestamp(MIDDLEDOG_BIG_MAXTIMESTAMP + 1),
+    ];
   } else if (category === ANIMALS_CATEGORY.KITTEN) {
-    kind = ANIMALS_KIND.CAT;
-    minbirthdate = getTimestamp(KITTEN_MAXTIMESTAMP);
-    maxbirthdate = getTimestamp(0);
+    kind = [ANIMALS_KIND.CAT];
+    minbirthdate = [getTimestamp(KITTEN_MAXTIMESTAMP)];
+    maxbirthdate = [getTimestamp(0)];
   } else if (category === ANIMALS_CATEGORY.CAT) {
-    kind = ANIMALS_KIND.CAT;
-    minbirthdate = getTimestamp(MIDDLECAT_MAXTIMESTAMP);
-    maxbirthdate = getTimestamp(KITTEN_MAXTIMESTAMP + 1);
+    kind = [ANIMALS_KIND.CAT];
+    minbirthdate = [getTimestamp(MIDDLECAT_MAXTIMESTAMP)];
+    maxbirthdate = [getTimestamp(KITTEN_MAXTIMESTAMP + 1)];
   } else if (category === ANIMALS_CATEGORY.OLD_CAT) {
-    kind = ANIMALS_KIND.CAT;
-    maxbirthdate = getTimestamp(MIDDLECAT_MAXTIMESTAMP + 1);
+    kind = [ANIMALS_KIND.CAT];
+    maxbirthdate = [getTimestamp(MIDDLECAT_MAXTIMESTAMP + 1)];
+  } else if (category === ANIMALS_CATEGORY.LITTLE_DOG) {
+    kind = [ANIMALS_KIND.LITTLE_DOG];
+  } else if (category === ANIMALS_CATEGORY.MEDIUM_DOG) {
+    kind = [ANIMALS_KIND.MEDIUM_DOG];
+  } else if (category === ANIMALS_CATEGORY.BIG_DOG) {
+    kind = [ANIMALS_KIND.BIG_DOG];
   }
   return { kind, minbirthdate, maxbirthdate };
 };
@@ -136,11 +157,17 @@ export const transformCategoryToParams = (category?: ValuesOf<typeof ANIMALS_CAT
 export const getCategoryCode = (kind: ValuesOf<typeof ANIMALS_KIND>, birthdate: number) => {
   const ageInSecs = new Date().getTime() / 1000 - birthdate;
 
-  if (kind === ANIMALS_KIND.DOG) {
+  if (kind === ANIMALS_KIND.LITTLE_DOG || kind === ANIMALS_KIND.MEDIUM_DOG || kind === ANIMALS_KIND.BIG_DOG) {
     if (ageInSecs <= PUPPY_MAXTIMESTAMP) {
       return ANIMALS_CATEGORY.PUPPY;
     }
-    if (ageInSecs <= MIDDLEDOG_MAXTIMESTAMP) {
+    if (kind === ANIMALS_KIND.LITTLE_DOG && ageInSecs <= MIDDLEDOG_LITTLE_MAXTIMESTAMP) {
+      return ANIMALS_CATEGORY.DOG;
+    }
+    if (kind === ANIMALS_KIND.MEDIUM_DOG && ageInSecs <= MIDDLEDOG_MEDIUM_MAXTIMESTAMP) {
+      return ANIMALS_CATEGORY.DOG;
+    }
+    if (kind === ANIMALS_KIND.BIG_DOG && ageInSecs <= MIDDLEDOG_BIG_MAXTIMESTAMP) {
       return ANIMALS_CATEGORY.DOG;
     }
     return ANIMALS_CATEGORY.OLD_DOG;
@@ -157,24 +184,25 @@ export const getCategoryCode = (kind: ValuesOf<typeof ANIMALS_KIND>, birthdate: 
   return 0;
 };
 
-export const prepareCategory = (code: number, sex: number) => {
-  if (code === ANIMALS_CATEGORY.PUPPY) {
-    return "щенок";
+export const prepareKind = (code: number, sex: number) => {
+  if (code === ANIMALS_KIND.LITTLE_DOG) {
+    return "маленькая собака";
   }
-  if (code === ANIMALS_CATEGORY.DOG) {
-    return "взрослая собака";
+  if (code === ANIMALS_KIND.MEDIUM_DOG) {
+    return "средняя собака";
   }
-  if (code === ANIMALS_CATEGORY.KITTEN) {
-    return "котенок";
+  if (code === ANIMALS_KIND.BIG_DOG) {
+    return "большая собака";
   }
-  if (code === ANIMALS_CATEGORY.CAT) {
+  if (code === ANIMALS_KIND.CAT) {
     if (sex === ANIMALS_SEX.MALE) {
-      return "взрослый кот";
+      return "кот";
     }
     if (sex === ANIMALS_SEX.FEMALE) {
-      return "взрослая кошка";
+      return "кошка";
     }
   }
+
   return "";
 };
 

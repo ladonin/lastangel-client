@@ -1,23 +1,25 @@
 .page-administration {
-  .loc_mainPagePhotoalbumButton,.loc_documentsButton {
+  .loc_mainPagePhotoalbumButton, .loc_documentsButton {
     margin-top: 8px;
     margin-bottom: 16px;
   }
-  
+
   .loc_buttons {
     display: flex;
     gap: 16px;
   }
-  
-  
+
+
   .loc_list {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 16px;
+
     .component-loaderIcon {
       margin: 50px auto;
     }
+
     .loc_itemWrapper {
       position: relative;
       width: calc(25% - 12px);
@@ -85,8 +87,9 @@
             }
 
           }
+
           .loc_not_published {
-text-align: center;
+            text-align: center;
             margin: 24px auto;
           }
         }
@@ -288,6 +291,10 @@ text-align: center;
 
           .loc_button {
             margin: 0 auto;
+
+            &.loc_redactNewBlank {
+              margin-top: 16px;
+            }
           }
         }
 
@@ -329,15 +336,17 @@ text-align: center;
           &_5 {
             background-color: $c_pinkPiggy;
           }
+
           &_6 {
             background-color: $c_greyLight;
           }
         }
+
         &.loc--not_published {
 
           background-color: $c_yellowLight;
         }
-        
+
       }
 
       &.loc--collection {
@@ -375,15 +384,17 @@ text-align: center;
 
 
   width: 100% !important;
-.loc_buttons {
-  flex-wrap: wrap; 
-  gap: 24px;
-  margin-bottom:48px;
-  .loc_mainPagePhotoalbumButton, .loc_documentsButton {
-    width: 100%;
-    margin:0px;
+
+  .loc_buttons {
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 48px;
+
+    .loc_mainPagePhotoalbumButton, .loc_documentsButton {
+      width: 100%;
+      margin: 0px;
+    }
   }
-}
 
   .react-tabs__tab {
     line-height: 64px;
@@ -424,7 +435,9 @@ text-align: center;
           }
         }
 
-
+        .loc_redactNewBlank {
+          margin-top: 32px;
+        }
         .loc_donatorItem {
           .loc_content, .loc_data {
             margin-top: 0;
