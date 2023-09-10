@@ -53,6 +53,27 @@ const Textarea: React.FC<TProps> = ({ label, className, value, required, onChang
           wrapperClassName="loc_wrapper"
           editorClassName="loc_editor"
           onEditorStateChange={onEditorStateChange}
+          handlePastedText={(
+            text: string,
+            html: string,
+            editorState: EditorState,
+            onChange: (editorState: EditorState) => void
+          ) => {
+            const contentBlock = htmlToDraft(text);
+            if (contentBlock) {
+              const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+              setEditorState(EditorState.createWithContent(contentState));
+            }
+            return false;
+          }}
+          toolbar={{
+            fontSize: {
+              className: "hidden",
+            },
+            fontFamily: {
+              className: "hidden",
+            },
+          }}
         />
       </div>
     </div>

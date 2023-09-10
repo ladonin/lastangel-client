@@ -46,15 +46,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       paramsRef.current = data;
     }
   }, [data]);
-  // продолжить с удаления фото - главного и дополнительного на бэке - ПРОДОЛЖЕНИЕ
-  //
-  // главное фото
-  // на бэке просто пересохраняется фото в базе (ничего не меняется) и перезапись главного фото на новое (автозамена файла)
-  //
-  // потом добавление дополнительных фоток another
-  // на бэке удаляем из базы номера и из хранилища файлы
-  // сохранение с новыми инкрементированными номерами в базе и хранилище
-  //
 
   const onChangeHandler = (key: string, value: any) => {
     paramsRef.current[key] = value?.value ? Number(value.value) : value;
@@ -180,6 +171,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           onChange={(val) => {
             onChangeHandler("description", val);
           }}
+
           label="Текст"
         />
       </div>
@@ -187,7 +179,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       <div className="loc_photos">
         <h2>Фото</h2>
         <div className="loc_left">
-          <InputFileImage noSizeRevision multiple setImage={setAnotherImagesHandler} />
+          <InputFileImage multiple setImage={setAnotherImagesHandler} />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages

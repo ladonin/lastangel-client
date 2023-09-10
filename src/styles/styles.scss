@@ -121,6 +121,10 @@ h2 {
   clear: both;
 }
 
+.hidden {
+  display: none !important;
+}
+
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);

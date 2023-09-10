@@ -7,11 +7,51 @@
   padding: 24px;
   height: $layout_1_footer_height;
   min-width: 1200px;
-  &_wrapper {
+
+  &_wrapper_1 {
     width: 1200px;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: flex-start;
+    .loc_block {
+
+      &_1 {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        color: $c_white;
+      }
+      
+      
+      
+      &_2 {
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 24px;
+        
+      }
+      &_3 {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+    }
+  }
+  .loc_link,
+  .loc_metrics {
+    display: block;
+    margin-bottom: 0px;
+  }
+  .loc_login {
+    margin-bottom: 24px;
   }
 }
-
 
 .layout.loc--isMobile .component-footer {
   position: relative;
@@ -19,10 +59,41 @@
   display: flex;
   background-color: $c_head;
   padding: 24px;
-  height: $layout_1_footer_height;
   min-width: unset;
+  height: auto;
   .loc_link {
     font-size: 32px;
-    margin-bottom: 32px;
+    margin-bottom: 0px;
+  }
+  &_wrapper_1 {
+
+    width: 100%;
+    .loc_block {
+
+      &_1 {
+        width: 100%;
+        display: block; 
+        text-align: center; 
+        font-size: 24px;
+        margin-top: 32px;
+        margin-bottom: 48px;
+      }
+
+
+
+      &_2 {
+        width: 100%;
+        gap: 24px;
+      }
+      &_3 {
+        width: 100%;
+        align-items: center;
+        flex-direction: row; 
+        justify-content: center; 
+        gap: 24px;
+        margin-top: 32px;
+        margin-bottom: 32px;
+      }
+    }
   }
 }

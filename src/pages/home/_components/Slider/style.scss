@@ -1,12 +1,14 @@
 .page-home_photoSlider {
   height: 749px;
   max-height: 80vh;
+
   .swiper-slide {
     display: flex;
     background-color: $c_greyDark;
     align-items: center;
     justify-content: center;
     max-height: 80vh;
+
     img {
       max-height: 80vh;
       max-width: 100%;
@@ -20,4 +22,9 @@
 
 .layout.loc--isMobile .page-home_photoSlider {
   margin: 0 -24px;
+  height: 900px;
+  max-height: 80vh;
+  .swiper-slide img {
+    max-height: 100%;
+  }
 }

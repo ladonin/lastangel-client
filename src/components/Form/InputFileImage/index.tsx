@@ -45,7 +45,12 @@ const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
         (noSizeRevision === false && Number(data.width) < DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH) ||
         (noSizeRevision === false && Number(data.height) < DIMENTIONS.IMAGES_UPLOAD_MIN_HEIGHT)
       ) {
-        wrongImages.push({ ...data, error: "Фото слишком мелкое" });
+        wrongImages.push({
+          ...data,
+          error: `Фото слишком мелкое: ${Number(data.width)}x${Number(data.height)}. Нужно как минимум ${
+            DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH
+          }x${DIMENTIONS.IMAGES_UPLOAD_MIN_HEIGHT}`,
+        });
       } else if (
         Number(data.width) > DIMENTIONS.IMAGES_UPLOAD_MAX_WIDTH ||
         Number(data.height) > DIMENTIONS.IMAGES_UPLOAD_MAX_HEIGHT

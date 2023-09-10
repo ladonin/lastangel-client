@@ -225,10 +225,12 @@ export const prepareAge = (bdate: number) => {
   if (months < 12) {
     return `${months} ${getCountWord("месяц", "месяца", "месяцев")(months)}`;
   }
-  const years = Math.round(months / 12);
+  const years = Math.floor(months / 12);
 
   months %= 12;
-  return `${years} ${getCountWord("год", "года", "лет")(years)} ${months} ${getCountWord("месяц", "месяца", "месяцев")(months)}`;
+  return `${years} ${getCountWord("год", "года", "лет")(years)} ${
+    months ? `${months} ${getCountWord("месяц", "месяца", "месяцев")(months)}` : ""
+  }`;
 };
 
 export const getMainImageUrl = (data: TGetResponseItem, size: ValuesOf<typeof SIZES_MAIN> = SIZES_MAIN.SQUARE) =>

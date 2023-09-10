@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
+import { isMobile, isYandex } from "react-device-detect";
 import Header from "pages/_commonComponents/header";
 import Footer from "pages/_commonComponents/footer";
 import EmailImage from "icons/email.png";
@@ -19,9 +19,6 @@ const LayoutMain: React.FC = () => {
   const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
   const { pathname } = useLocation();
   const [prevPathnameState, setPrevPathnameState] = useState<string>("");
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   const navigate = useNavigate();
   const [newFeedbacksState, setNewFeedbacksState] = useState<number>(0);
 
@@ -32,6 +29,30 @@ const LayoutMain: React.FC = () => {
         setNewFeedbacksState(Number(res));
       });
   };
+  const scrollHandlerTimerRef = useRef<any>();
+  useEffect(() => {
+    setIsMobileState(isMobile);
+
+    // Костыль для яндекс-браузера -->
+    // если сильно крутануть скролл до самого низа,
+    // то экран видимый и экран фактический смещаются относительно друг друга
+    // и нажатие происходит не на то место, куда кликаешь, а выше
+    const handleScroll = () => {
+      if (window.scrollY + document.documentElement.clientHeight + 8 >= document.documentElement.scrollHeight) {
+        scrollHandlerTimerRef.current && clearTimeout(scrollHandlerTimerRef.current);
+        scrollHandlerTimerRef.current = setTimeout(
+          () => window.scrollTo(0, document.documentElement.scrollHeight - document.documentElement.clientHeight - 7),
+          0
+        );
+      }
+    };
+    isYandex && isMobile && window.addEventListener("scroll", handleScroll);
+    return () => {
+      isYandex && isMobile && window.removeEventListener("scroll", handleScroll);
+    };
+    // <-- Костыль для яндекс-браузера
+  }, [isMobile, isYandex]);
+
   useEffect(() => {
     if (prevPathnameState.indexOf(`${PAGES.PET}/`) === 0 && pathname.indexOf(`${PAGES.PET}/`) === 0) {
       /* empty */

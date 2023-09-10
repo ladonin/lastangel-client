@@ -17,6 +17,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     setIsMobileState(isMobile);
   }, [isMobile]);
+
   return (
     <div className="page-home">
       <div className="loc_top">
@@ -74,7 +75,4 @@ const Home: React.FC = () => {
   );
 };
 
-// питомцы, сборы, новости  - делать ссылкой
-
-// далее на станицу новостей
 export default Home;

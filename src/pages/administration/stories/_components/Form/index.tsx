@@ -181,7 +181,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       <div className="loc_photos">
         <h2>Фото</h2>
         <div className="loc_left">
-          <InputFileImage noSizeRevision multiple setImage={setAnotherImagesHandler} />
+          <InputFileImage multiple setImage={setAnotherImagesHandler} />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages

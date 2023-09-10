@@ -14,8 +14,9 @@
   .loc_editor {
     border: 1px solid $c_greyMedium;
     width: 100%;
-
+    font-size: 22px;
     padding: 16px;
+    height: 800px;
 
     .DraftEditor-root {
       height: 300px;
@@ -33,6 +34,49 @@
     font-size: 30px;
   }
 
+  .rdw-block-wrapper {
+    align-items: flex-start;
+  }
+
+  .rdw-option-wrapper {
+
+    min-width: 80px;
+    height: 80px;
+    margin: 8px 16px 16px 8px;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  .rdw-dropdown-wrapper {
+    margin: 8px 16px 16px 8px;
+    padding: 10px;
+    height: 80px;
+    font-size: 28px;
+    width: 288px;
+    font-weight: 600;
+
+    .rdw-dropdown-carettoclose,
+    .rdw-dropdown-carettoopen {
+      top: 45%;
+    }
+
+    .rdw-dropdown-optionwrapper {
+      width: 100%;
+      max-height: 650px;
+
+      .rdw-dropdownoption-default {
+        padding: 16px;
+      }
+    }
+  }
+
+  .loc_editor {
+    font-size: 32px;
+    height: 1200px;
+
+  }
 
   textarea {
     font-size: 30px;

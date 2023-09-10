@@ -50,14 +50,6 @@ const StoryUpdate: React.FC = () => {
   }, [id]);
 
   useEffect(() => {}, [dataLoadedState]);
-
-  //
-  // продолжить с фото
-  // сделать общий валидатор формы для создания и редактирования
-
-  //
-  //
-
   const onChange = (data: TParams) => {
     setErrorState("");
     paramsRef.current = data;
@@ -82,8 +74,7 @@ const StoryUpdate: React.FC = () => {
   const updateHandler = () => {
     if (!paramsRef.current) return;
 
-    const { name, status, short_description, description } =
-      paramsRef.current;
+    const { name, status, short_description, description } = paramsRef.current;
 
     if (!name || !short_description || !description || description === "<p></p>\n" || !status) {
       setErrorState("Пожалуйста, заполните все обязательные поля");

@@ -9,6 +9,7 @@
     //background-color: $c_greyF5;
     border: 1px solid $c_lagunaGrey;
     padding: 24px 24px 0 24px;
+
     &.loc--non_published {
 
       background-color: $c_yellowLight;
@@ -16,30 +17,34 @@
     }
 
     .loc_created {
-      font-size: 12px;
+      font-size: 14px;
       color: $c_lagunaGrey;
     }
 
     .loc_name {
-      font-size: 22px;
+      font-size: 24px;
       margin: 4px 0 0 0;
       font-weight: 600;
       color: $c_lagunaGrey;
       @extend %hoverable;
     }
+
     .loc_redactButton {
       margin: 24px 0 10px 0;
     }
+
     .loc_nonpublished {
       margin-bottom: 16px;
     }
+
     .loc_description {
       .loc_content {
         padding-bottom: 4px;
       }
+
       color: $c_greyDark;
-      font-size: 14px;
-      line-height: 22px;
+      font-size: 18px;
+      line-height: 26px;
       //padding: 0 16px;
       //background-color: $c_pistachioLighter;
       //padding-bottom: 16px;
@@ -47,12 +52,14 @@
 
       .loc_slider {
         margin-bottom: 24px;
+
         .swiper-slide {
           display: flex;
           background-color: $c_greyDark;
           align-items: center;
           justify-content: center;
           max-height: 80vh;
+
           img {
             height: 600px;
             max-height: 80vh;
@@ -62,6 +69,7 @@
       }
 
     }
+
     .loc_video {
       display: flex;
       width: 100%;
@@ -73,11 +81,13 @@
     .component-copyLinkToPage {
       width: 100%;
       padding-bottom: 24px;
+
       .loc_copyLinkButton {
         margin-top: 0;
         margin-left: auto;
         margin-right: auto;
       }
+
       .loc_copyToBufferStatus {
         padding: 0;
         margin-left: auto;
@@ -86,6 +96,7 @@
       }
     }
   }
+
   .loc_anotherTitle {
     font-size: 18px;
     margin: 4px 0;
@@ -97,18 +108,20 @@
 
 
 .layout.loc--isMobile .page-story {
+  .loc_anotherTitle {
+    font-size: 32px;
+    margin: 0 0 24px 0;
+  }
+
   .loc_item {
-    .loc_anotherTitle {
-      font-size: 28px;
-      margin: 0 0 24px 0;
-    }
+
 
     .loc_created {
       font-size: 24px;
     }
 
     .loc_name {
-      font-size: 32px;
+      font-size: 38px;
       margin: 8px 0 0 0;
     }
 
@@ -122,12 +135,14 @@
       .loc_content {
         padding-bottom: 8px;
       }
-      font-size: 24px;
-      line-height: 34px;
+
+      font-size: 28px;
+      line-height: 38px;
 
       .loc_slider {
-        
+
         margin-bottom: 24px;
+
         .swiper-slide {
           height: 900px;
 
@@ -148,6 +163,7 @@
       width: 100%;
       max-height: 1190px;
     }
+
     .component-copyLinkToPage {
       padding-top: 16px;
       padding-bottom: 56px;

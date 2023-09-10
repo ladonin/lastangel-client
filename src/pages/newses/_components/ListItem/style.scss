@@ -15,12 +15,12 @@
   }
   
   .loc_created {
-    font-size: 12px;
+    font-size: 14px;
     color: $c_lagunaGrey;
   }
 
   .loc_name {
-    font-size: 22px;
+    font-size: 24px;
     margin: 4px 0 0 0;
     font-weight: 600;
     color: $c_lagunaGrey;
@@ -31,9 +31,9 @@
   }
   .loc_short_description {
     color: $c_greyDark;
-    font-size: 14px;
-    line-height: 22px;
-    padding-top: 14px;
+    font-size: 18px;
+    line-height: 26px;
+    padding-top: 18px;
     
     
     
@@ -43,8 +43,8 @@
   }
   .loc_description {
     color: $c_greyDark;
-    font-size: 14px;
-    line-height: 22px;
+    font-size: 18px;
+    line-height: 26px;
     .loc_content {
       padding-bottom: 4px;
     }
@@ -95,6 +95,7 @@
 
   .loc_moreButton {
     margin-top: 0px;
+    font-size: 16px;
     margin-bottom: 16px;
   }
 
@@ -117,14 +118,14 @@
     font-size: 24px;
   }
   .loc_name {
-    font-size: 32px;
+    font-size: 38px;
     margin: 8px 0 0 0;
   }
 
   .loc_short_description {
-    font-size: 24px;
-    line-height: 34px;
-    padding-top: 24px;
+    font-size: 28px;
+    line-height: 38px;
+    padding-top: 28px;
   }
 
   .loc_nonpublished {
@@ -136,8 +137,8 @@
     .loc_content {
       padding-bottom: 8px;
     }
-    font-size: 24px;
-    line-height: 34px;
+    font-size: 28px;
+    line-height: 38px;
     .loc_slider {
       margin-bottom: 24px;
       .swiper-slide {
