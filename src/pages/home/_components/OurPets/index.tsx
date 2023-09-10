@@ -53,16 +53,25 @@ const OurPets = () => {
         <div className={`loc_status loc--status_${prepareStatusCode(data.status, data.need_medicine)}`}>
           {prepareStatus(data.status, data.need_medicine, data.sex)}
         </div>
-        <img
-          alt="nophoto"
-          data-src={index < itemsNumber + 1 ? undefined : getMainImageUrl(data)}
-          src={index > itemsNumber ? undefined : getMainImageUrl(data)}
-          onClick={() => {
-            navigate(`${PAGES.PET}/${data.id}`);
-          }}
-          className="swiper-lazy"
-          loading="lazy"
-        />
+
+        {index <= itemsNumber ? (
+          <img
+            src={getMainImageUrl(data)}
+            onClick={() => {
+              navigate(`${PAGES.PET}/${data.id}`);
+            }}
+          />
+        ) : (
+          <img
+            alt="nophoto"
+            data-src={getMainImageUrl(data)}
+            onClick={() => {
+              navigate(`${PAGES.PET}/${data.id}`);
+            }}
+            className="swiper-lazy"
+            loading="lazy"
+          />
+        )}
       </div>
       <div className="loc_content">
         <Button

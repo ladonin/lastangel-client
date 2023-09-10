@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper";
+import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
 import { isMobile } from "react-device-detect";
 import Modal from "components/Modal";
 import { DonationsApi } from "api/donations";
@@ -24,7 +24,6 @@ import {
   getVideoUrl,
 } from "helpers/animals";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
-
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
 import PAGES from "routing/routes";
@@ -49,6 +48,7 @@ const Pet: React.FC = () => {
   const [donationsListModalOpenedState, setDonationsListModalOpenedState] = useState(false);
   const [donationsListState, setDonationsListState] = useState<TListDonations | null>(null);
   const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
 
   useEffect(() => {
     setIsMobileState(isMobile);
@@ -56,7 +56,9 @@ const Pet: React.FC = () => {
 
   useEffect(() => {
     if (id) {
+      setIsLoadingState(true);
       AnimalsApi.get(Number(id)).then((res) => {
+        setIsLoadingState(false);
         setDataState(res);
         res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
       });
@@ -179,7 +181,9 @@ const Pet: React.FC = () => {
           <BreadCrumbs breadCrumbs={[{ name: "Наши питомцы", link: PAGES.PETS }]} title={dataState.name} />
           <PetsList currentId={Number(id)} />
 
+          
           <div className="loc_contentWrapper">
+            {isLoadingState && <div className="loc_loader" />}
             <div className="loc_topWrapper">
               <div className="loc_avatar">
                 <img
@@ -241,20 +245,45 @@ const Pet: React.FC = () => {
             <div className="loc_bottomWrapper">
               {isMobileState === true && renderDisclaimer()}
               {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
-                <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
-                  {[...anotherImagesState].reverse().map((item, index) => (
-                    <SwiperSlide key={index}>
-                      <img
-                        alt="nophoto"
-                        className="loc_image"
-                        src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
-                      />
-                    </SwiperSlide>
-                  ))}
-                  <SwiperSlide>
-                    <img alt="nophoto" className="loc_image" src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)} />
-                  </SwiperSlide>
-                </Swiper>
+                <>
+                  {isLoadingState ? (
+                    <div className="loc_fakephotoalbum" />
+                  ) : (
+                    <Swiper
+                      slidesPerView={1}
+                      navigation
+                      modules={[Lazy, Autoplay, Pagination, Navigation]}
+                      initialSlide={0}
+                      lazy={{
+                        enabled: true,
+                        loadPrevNext: true,
+                      }}
+                      className="loc_slider"
+                    >
+                      {[...anotherImagesState].reverse().map((item, index) => (
+                        <SwiperSlide key={index}>
+                          {index === 1 ? (
+                            <img
+                              alt="nophoto"
+                              className="loc_image"
+                              src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
+                            />
+                          ) : (
+                            <img
+                              alt="nophoto"
+                              data-src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
+                              className="loc_image swiper-lazy"
+                              loading="lazy"
+                            />
+                          )}
+                        </SwiperSlide>
+                      ))}
+                      <SwiperSlide>
+                        <img alt="nophoto" className="loc_image" src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)} />
+                      </SwiperSlide>
+                    </Swiper>
+                  )}
+                </>
               )}
 
               {dataState.video1 && (

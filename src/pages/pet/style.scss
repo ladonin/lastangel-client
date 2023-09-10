@@ -1,7 +1,14 @@
 .page-pet {
 
   .loc_contentWrapper {
-
+    position: relative;
+    .loc_loader {
+      position: absolute;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.5);
+      z-index: 999;
+      width: 100%;
+    }
     .loc_topWrapper {
       display: flex;
       gap: 32px;
@@ -241,7 +248,9 @@
 
     .loc_bottomWrapper {
       margin-top: 24px;
-
+      .loc_fakephotoalbum {
+        height: 800px;
+      }
       .loc_slider {
 
         width: 100%;
@@ -257,7 +266,7 @@
         }
 
         .loc_image {
-          max-height: 80vh;
+          max-height: 100%;
         }
       }
 
@@ -491,7 +500,9 @@
 
       display: flex;
       flex-wrap: wrap;
-
+      .loc_fakephotoalbum {
+        height: 1200px;
+      }
       .loc_slider {
         width: 100%;
         margin-bottom: 24px;
@@ -506,7 +517,7 @@
         }
 
         .loc_image {
-          max-height: 80vh;
+          max-height: 100%;
           max-width: 100%;
         }
       }

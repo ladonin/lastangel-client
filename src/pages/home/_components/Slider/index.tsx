@@ -53,22 +53,22 @@ const Slider = () => {
       )}
       {dataState &&
         !!dataState.data.length &&
-        [...dataState.data].reverse().map((number, index) =>
-          index < 3 ? (
+        [...dataState.data]
+          .reverse()
+          .map((number, index) => (
             <SwiperSlide key={index}>
-              <img alt="nophoto" src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)} />
+              {index < 3 ? (
+                <img alt="nophoto" src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)} />
+              ) : (
+                <img
+                  alt="nophoto"
+                  data-src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)}
+                  className="swiper-lazy"
+                  loading="lazy"
+                />
+              )}
             </SwiperSlide>
-          ) : (
-            <SwiperSlide key={index}>
-              <img
-                alt="nophoto"
-                data-src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)}
-                className="swiper-lazy"
-                loading="lazy"
-              />
-            </SwiperSlide>
-          )
-        )}
+          ))}
       {dataState && !dataState.data.length && (
         <>
           <SwiperSlide>

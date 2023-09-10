@@ -60,16 +60,26 @@ const PetsList = ({ currentId = null }: TProps) => {
         <div className={`loc_status loc--status_${prepareStatusCode(data.status, data.need_medicine)}`}>
           {prepareStatus(data.status, data.need_medicine, data.sex)}
         </div>
-        <img
-          alt="nophoto"
-          data-src={index < itemsNumber + 1 ? undefined : getMainImageUrl(data, SIZES_MAIN.SQUARE2)}
-          src={index > itemsNumber ? undefined : getMainImageUrl(data, SIZES_MAIN.SQUARE2)}
-          onClick={() => {
-            navigate(`${PAGES.PET}/${data.id}`);
-          }}
-          className="swiper-lazy"
-          loading="lazy"
-        />
+
+        {index <= itemsNumber ? (
+          <img
+            alt="nophoto"
+            src={getMainImageUrl(data, SIZES_MAIN.SQUARE2)}
+            onClick={() => {
+              navigate(`${PAGES.PET}/${data.id}`);
+            }}
+          />
+        ) : (
+          <img
+            alt="nophoto"
+            data-src={getMainImageUrl(data, SIZES_MAIN.SQUARE2)}
+            onClick={() => {
+              navigate(`${PAGES.PET}/${data.id}`);
+            }}
+            className="swiper-lazy"
+            loading="lazy"
+          />
+        )}
       </div>
     </div>
   );

@@ -68,16 +68,14 @@ const Slider = () => {
       )}
       {dataState &&
         !!dataState.data.length &&
-        [...dataState.data].reverse().map((number, index) =>
-          index < 3 ? (
-            <SwiperSlide>
+        [...dataState.data].reverse().map((number, index) => (
+          <SwiperSlide>
+            {index < 3 ? (
               <>
                 <img alt="nophoto" src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)} />
                 {renderButton(getAnotherImagesUrl(dataState, number))}
               </>
-            </SwiperSlide>
-          ) : (
-            <SwiperSlide>
+            ) : (
               <>
                 <img
                   alt="nophoto"
@@ -87,9 +85,9 @@ const Slider = () => {
                 />
                 {renderButton(getAnotherImagesUrl(dataState, number))}
               </>
-            </SwiperSlide>
-          )
-        )}
+            )}
+          </SwiperSlide>
+        ))}
     </Swiper>
   );
 };
