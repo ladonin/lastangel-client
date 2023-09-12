@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserView, MobileView, isYandex, isMobile } from "react-device-detect";
+import { BrowserView, MobileView } from "react-device-detect";
 import { Link } from "react-router-dom";
 import { isAuthorized } from "utils/user";
 import PAGES from "routing/routes";
@@ -21,43 +21,43 @@ const renderCounter = () => (
     </a>
   </div>
 );
-const renderLinksList = () =>
-  !(isYandex && isMobile) && (
-    <>
-      <Link to={PAGES.MAIN} className="link_1 loc_link">
-        Главная
-      </Link>
-      <Link to={PAGES.PETS} className="link_1 loc_link">
-        Питомцы
-      </Link>
-      <Link to={PAGES.COLLECTIONS} className="link_1 loc_link">
-        Сборы
-      </Link>
-      <Link to={PAGES.NEWS} className="link_1 loc_link">
-        Новости
-      </Link>
-      <Link to={PAGES.STORIES} className="link_1 loc_link">
-        Истории
-      </Link>
+const renderLinksList = () => (
+  <>
+    <Link to={PAGES.MAIN} className="link_1 loc_link">
+      Главная
+    </Link>
+    <Link to={PAGES.PETS} className="link_1 loc_link">
+      Питомцы
+    </Link>
+    <Link to={PAGES.COLLECTIONS} className="link_1 loc_link">
+      Сборы
+    </Link>
+    <Link to={PAGES.NEWS} className="link_1 loc_link">
+      Новости
+    </Link>
+    <Link to={PAGES.STORIES} className="link_1 loc_link">
+      Истории
+    </Link>
 
-      <Link to={PAGES.DOCUMENTS} className="link_1 loc_link">
-        Документы
-      </Link>
-      <Link to={PAGES.HELP} className="link_1 loc_link">
-        Помощь
-      </Link>
+    <Link to={PAGES.DOCUMENTS} className="link_1 loc_link">
+      Документы
+    </Link>
+    <Link to={PAGES.HELP} className="link_1 loc_link">
+      Помощь
+    </Link>
 
-      <Link to={PAGES.FINREPORT} className="link_1 loc_link">
-        Фин. отчет
-      </Link>
-      <Link to={PAGES.CLINIC} className="link_1 loc_link">
-        Клиника
-      </Link>
-      <Link to={PAGES.CONTACTS} className="link_1 loc_link">
-        Контакты
-      </Link>
-    </>
-  );
+    <Link to={PAGES.FINREPORT} className="link_1 loc_link">
+      Фин. отчет
+    </Link>
+    <Link to={PAGES.CLINIC} className="link_1 loc_link">
+      Клиника
+    </Link>
+    <Link to={PAGES.CONTACTS} className="link_1 loc_link">
+      Контакты
+    </Link>
+  </>
+);
+
 export default function Index() {
   return (
     <div className="component-footer">

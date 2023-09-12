@@ -215,7 +215,9 @@ background-color: $c_lagunaLightMiddle;
       display: flex;
       align-items: center;
       gap: 8px;
-      
+      .loc_caret {
+        margin-top: 4px;
+      }
       &.loc--opened {
         @extend %active ;
         .loc_caret {
