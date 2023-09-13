@@ -19,7 +19,7 @@
     height: 800px;
 
     .DraftEditor-root {
-      height: 300px;
+      height: 100%;
 
       .public-DraftStyleDefault-block {
         margin: 0px;
@@ -30,8 +30,9 @@
 
 .layout.loc--isMobile .component-WYSIWYGEditor {
   label {
-    line-height: 44px;
-    font-size: 30px;
+    line-height: calc(44px * var(--viewport-koeff));
+    font-size: calc(30px * var(--viewport-koeff));
+    padding-bottom: calc(16px * var(--viewport-koeff));
   }
 
   .rdw-block-wrapper {
@@ -40,21 +41,21 @@
 
   .rdw-option-wrapper {
 
-    min-width: 80px;
-    height: 80px;
-    margin: 8px 16px 16px 8px;
+    min-width: calc(80px * var(--viewport-koeff));
+    height: calc(80px * var(--viewport-koeff));
+    margin: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff)) calc(8px * var(--viewport-koeff));
 
     img {
-      width: 40px;
+      width: calc(40px * var(--viewport-koeff));
     }
   }
 
   .rdw-dropdown-wrapper {
-    margin: 8px 16px 16px 8px;
-    padding: 10px;
-    height: 80px;
-    font-size: 28px;
-    width: 288px;
+    margin: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff)) calc(8px * var(--viewport-koeff));
+    padding: calc(10px * var(--viewport-koeff));
+    height: calc(80px * var(--viewport-koeff));
+    font-size: calc(28px * var(--viewport-koeff));
+    width: calc(288px * var(--viewport-koeff));
     font-weight: 600;
 
     .rdw-dropdown-carettoclose,
@@ -64,23 +65,23 @@
 
     .rdw-dropdown-optionwrapper {
       width: 100%;
-      max-height: 650px;
+      max-height: calc(650px * var(--viewport-koeff));
 
       .rdw-dropdownoption-default {
-        padding: 16px;
+        padding: calc(16px * var(--viewport-koeff));
       }
     }
   }
 
   .loc_editor {
-    font-size: 32px;
-    height: 1200px;
-
+    font-size: calc(32px * var(--viewport-koeff));
+    height: 70vh;
+    padding: calc(16px * var(--viewport-koeff));
   }
 
   textarea {
-    font-size: 30px;
-    padding: 24px;
+    font-size: calc(30px * var(--viewport-koeff));
+    padding: calc(24px * var(--viewport-koeff));
   }
 
 }

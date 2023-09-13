@@ -192,4 +192,68 @@
 }
 
 
+.layout.loc--isMobile,.component-modal--isMobile {
 
+  .component-button {
+
+
+    &_size {
+      &-giant {
+        font-size: calc(32px * var(--viewport-koeff));
+        height: calc(80px * var(--viewport-koeff));
+        border-radius: calc(40px * var(--viewport-koeff));
+        padding: 0 calc(48px * var(--viewport-koeff));
+
+        svg {
+          height: calc(80px * var(--viewport-koeff));
+        }
+      }
+
+      &-huge {
+        font-size: calc(28px * var(--viewport-koeff));
+        height: calc(64px * var(--viewport-koeff));
+        border-radius: calc(32px * var(--viewport-koeff));
+        padding: 0 calc(40px * var(--viewport-koeff));
+      }
+
+      &-big {
+        font-size: calc(22px * var(--viewport-koeff));
+        height: calc(56px * var(--viewport-koeff));
+        border-radius: calc(24px * var(--viewport-koeff));
+        padding: 0 calc(32px * var(--viewport-koeff));
+      }
+
+      &-large {
+        font-size: calc(18px * var(--viewport-koeff));
+        height: calc(48px * var(--viewport-koeff));
+        border-radius: calc(24px * var(--viewport-koeff));
+        padding: 0 calc(32px * var(--viewport-koeff));
+      }
+
+      &-medium {
+        font-size: calc(14px * var(--viewport-koeff));
+        height: calc(40px * var(--viewport-koeff));
+        border-radius: calc(20px * var(--viewport-koeff));
+        padding: 0 calc(24px * var(--viewport-koeff));
+
+        &.component-button_theme-delete_icon,
+        &.component-button_theme-restore_icon {
+          height: calc(40px * var(--viewport-koeff));
+          width: calc(40px * var(--viewport-koeff));
+        }
+      }
+
+      &-small {
+        font-size: calc(12px * var(--viewport-koeff));
+        height: calc(32px * var(--viewport-koeff));
+        border-radius: calc(16px * var(--viewport-koeff));
+        padding: 0 calc(16px * var(--viewport-koeff));
+
+        .component-loaderIcon {
+          height: calc(20px * var(--viewport-koeff));
+          width: calc(20px * var(--viewport-koeff));
+        }
+      }
+    }
+  }
+}

@@ -19,6 +19,14 @@
 
 
 .layout.loc--isMobile .component-infiniteScroll {
-  
+  .loc_up {
+    right: calc(12px * var(--viewport-koeff));
+    bottom: calc(12px * var(--viewport-koeff));
+
+    width: calc(100px * var(--viewport-koeff));
+    height: calc(100px * var(--viewport-koeff));
+    border-radius: calc(24px * var(--viewport-koeff));
+
+  }
 }
 

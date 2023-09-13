@@ -6,12 +6,12 @@ import { isMobile } from "react-device-detect";
 import Header from "pages/_commonComponents/header";
 import Footer from "pages/_commonComponents/footer";
 import EmailImage from "icons/email.png";
-import "./style.scss";
 import PAGES from "routing/routes";
 import dogAttentionImage from "icons/dog_attention.png";
-import { isAdmin, quit } from "../../utils/user";
-import { Button, ButtonSizes, ButtonThemes } from "../../components/Button";
-import { FeedbacksApi } from "../../api/feedbacks";
+import { isAdmin, quit } from "utils/user";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { FeedbacksApi } from "api/feedbacks";
+import "./style.scss";
 
 const LayoutMain: React.FC = () => {
   // const location = useLocation();

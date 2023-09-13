@@ -1,50 +1,60 @@
 .component-textarea {
-  position: relative; 
+  position: relative;
+
   .loc_wrapper {
     display: flex;
     justify-content: space-between;
+
     label {
       line-height: 20px;
       padding-right: 20px;
     }
   }
+
   .loc_wordsRest {
     text-align: right;
     font-style: Italic;
     font-size: 13px;
   }
+
   .loc_input_star {
     position: absolute;
     right: -8px;
     top: -4px;
   }
+
   textarea {
     border-radius: 20px;
   }
 }
+
 .layout.loc--isMobile .component-textarea {
   label {
-    line-height: 44px;
-    font-size: 30px;
+    line-height: calc(44px * var(--viewport-koeff));
+    font-size: calc(30px * var(--viewport-koeff));
+    padding-right: calc(20px * var(--viewport-koeff));
   }
+
   textarea {
-    font-size: 30px;
-    padding: 24px;
-    border-radius: 40px;
+    font-size: calc(30px * var(--viewport-koeff));
+    padding: calc(24px * var(--viewport-koeff));
+    border-radius: calc(40px * var(--viewport-koeff));
   }
+
   .loc_wordsRest {
-    text-align: right;
-    font-style: Italic;
-    font-size: 24px;
-    margin-top: 8px;
+    font-size: calc(24px * var(--viewport-koeff));
+    margin-top: calc(8px * var(--viewport-koeff));
   }
 
 
-    .loc_input_star {
-      right: -12px;
-      top: -8px;
-      font-size: 28px;
-      font-weight: 900;
-    }
+  .loc_input_star {
+    right: calc(-12px * var(--viewport-koeff));
+    top: calc(-8px * var(--viewport-koeff));
+    font-size: calc(28px * var(--viewport-koeff));
+    font-weight: 900;
+  }
 
+  textarea {
+    border-radius: calc(20px * var(--viewport-koeff));
+  }
 }

@@ -26,31 +26,38 @@
   }
 
   &--isMobile {
-    padding: 48px;
+    padding: calc(48px * var(--viewport-koeff));
+    min-width: 100%;
+
+
     .component-modal_header {
       padding: 0px;
 
       h2 {
-        font-size: 48px;
-        line-height: 64px;
+        font-size: calc(48px * var(--viewport-koeff));
+        line-height: calc(64px * var(--viewport-koeff));
       }
 
       &_closeIcon {
-        width: 40px;
-        height: 40px;
-        top: 62px;
-        right: 48px;
+        width: calc(40px * var(--viewport-koeff));
+        height: calc(40px * var(--viewport-koeff));
+        top: calc(62px * var(--viewport-koeff));
+        right: calc(48px * var(--viewport-koeff));
       }
     }
+
     .component-modal_content {
-      font-size: 40px;
-      line-height: 56px;
+      font-size: calc(40px * var(--viewport-koeff));
+      line-height: calc(56px * var(--viewport-koeff));
+      margin-top: calc(32px * var(--viewport-koeff));
+
       &_buttons {
-        margin-top: 48px;
+        margin-top: calc(48px * var(--viewport-koeff));
       }
     }
   }
 }
+
 .ReactModal__Overlay--after-open {
   z-index: 9999999999;
 }

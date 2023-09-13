@@ -61,6 +61,10 @@
   width: 100%;
   padding: 0;
 
+  h1 {
+    margin: calc(16px * var(--viewport-koeff)) 0 calc(32px * var(--viewport-koeff)) 0;
+  }
+
   .loc_form {
     flex-direction: column;
 
@@ -68,27 +72,47 @@
       padding: 0;
       width: 100%;
 
-      .loc_formInputItem, .loc_formSelectItem,.loc_formCheckboxItem {
-        margin-bottom: 48px;
+      .loc_formInputItem, .loc_formSelectItem, .loc_formCheckboxItem {
+        margin-bottom: calc(48px * var(--viewport-koeff));
       }
     }
   }
 
   .loc_buttons {
-    margin: 64px 0 24px 0;
+    margin: calc(64px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff)) 0;
   }
+
   .loc_error {
-    padding-top: 32px;
-    font-size: 32px;
+    padding-bottom: calc(16px * var(--viewport-koeff));
+    padding-top: calc(32px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
   }
+
   .loc_wrapper_updatedSuccess, .loc_wrapper_removedSuccess {
-    font-size: 40px;
-    line-height: 56px;
+    font-size: calc(40px * var(--viewport-koeff));
+    line-height: calc(56px * var(--viewport-koeff));
 
     .loc_addElseButton {
-      margin: 48px 0;
+      margin: calc(48px * var(--viewport-koeff)) 0;
     }
   }
-}
 
+  .loc_wrapper_textForm {
+
+    .loc_buttons {
+      margin-top: calc(36px * var(--viewport-koeff));
+
+      .loc_cancelButton {
+        margin-left: calc(24px * var(--viewport-koeff));
+      }
+
+    }
+
+  }
+}
+.page-administration_donations_update_deleteModal .component-modal--isMobile{
+  .loc_buttons {
+    margin-top: calc(32px * var(--viewport-koeff));
+  }
+}
 

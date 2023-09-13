@@ -33,9 +33,33 @@
     }
   }
 }
+
 .layout.loc--isMobile .component-inputPrevLoadedImages {
+  margin-top: calc(24px * var(--viewport-koeff));
 
   .loc_labelTitle {
-    margin-top: 32px;
+    margin-top: calc(32px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
   }
+
+
+  .loc_images {
+    gap: calc(16px * var(--viewport-koeff));
+
+    .loc_image,
+    .loc_image img {
+      width: 100%;
+    }
+
+    .loc_image {
+      .loc_delete, .loc_restore {
+        top: calc(24px * var(--viewport-koeff));
+        right: calc(24px * var(--viewport-koeff));
+        width: calc(60px * var(--viewport-koeff));
+        height: calc(60px * var(--viewport-koeff));
+      }
+    }
+  }
+
+
 }

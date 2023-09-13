@@ -4,3 +4,7 @@
   width: 30px;
   color: $c_green;
 }
+
+.layout.loc--isMobile .component-loaderIcon {
+  width: calc(30px * var(--viewport-koeff));
+}

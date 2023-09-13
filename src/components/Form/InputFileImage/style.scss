@@ -103,3 +103,45 @@
     }
   }
 }
+
+.layout.loc--isMobile .component-inputFileImage {
+
+  margin-top: calc(24px * var(--viewport-koeff));
+
+  .loc_labelTitle {
+    margin-bottom: calc(16px * var(--viewport-koeff));
+  }
+
+  .loc_error {
+    font-size: calc(14px * var(--viewport-koeff));
+  }
+
+  .loc_description {
+    font-size: calc(14px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
+  }
+
+  .loc_label {
+    .loc_selectFile {
+      margin-bottom: calc(16px * var(--viewport-koeff));
+      font-size: calc(14px * var(--viewport-koeff));
+      border-radius: calc(4px * var(--viewport-koeff));
+      line-height: calc(24px * var(--viewport-koeff));
+      padding: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff));
+    }
+  }
+  
+  .loc_images {
+    gap: calc(8px * var(--viewport-koeff));
+    .loc_image,
+    .loc_image img {
+      width: calc(350px * var(--viewport-koeff));
+    }
+    .loc_image {
+      .loc_delete, .loc_restore {
+        top: calc(16px * var(--viewport-koeff));
+        right: calc(16px * var(--viewport-koeff));
+      }
+    }
+  }
+}

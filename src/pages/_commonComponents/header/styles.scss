@@ -121,23 +121,23 @@
 
 .component-headerMobile {
   width: 100%;
-background-color: $c_lagunaLightMiddle;
+  background-color: $c_lagunaLightMiddle;
+  margin-bottom: calc(16px * var(--viewport-koeff));
 
-  margin-bottom: 16px;
   .loc_wrapper {
     display: flex;
     width: 100%;
-    gap: 32px;
+    gap: calc(32px * var(--viewport-koeff));
     position: relative;
     background-color: $c_head;
     background: url("./images/background.css.jpg") repeat;
     background-size: cover;
-    padding: 24px;
+    padding: calc(24px * var(--viewport-koeff));
   }
 
   .loc_leftPart {
-    width: 200px;
-    height: 200px;
+    width: calc(200px * var(--viewport-koeff));
+    height: calc(200px * var(--viewport-koeff));
     display: flex;
     justify-content: flex-start;
 
@@ -145,38 +145,40 @@ background-color: $c_lagunaLightMiddle;
       cursor: pointer;
       height: 100%;
     }
+
+
   }
 
   .loc_rightPart {
     display: flex;
-    gap: 8px;
+    gap: calc(8px * var(--viewport-koeff));
     justify-content: center;
     flex-direction: column;
 
     .loc_name {
       font-weight: 600;
       color: $c_white;
-      font-size: 50px;
+      font-size: calc(50px * var(--viewport-koeff));
     }
 
     .loc_description {
       font-weight: 600;
       color: $c_white;
-      font-size: 32px;
+      font-size: calc(32px * var(--viewport-koeff));
     }
   }
 
 
   .loc_bottom {
     display: flex;
-    padding: 40px 24px 0 24px;
+    padding: calc(40px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff));
 
     .loc_buttons {
       display: flex;
       margin-right: auto;
-      width: 600px;
+      width: calc(600px * var(--viewport-koeff));
       justify-content: flex-start;
-      gap: 16px;
+      gap: calc(16px * var(--viewport-koeff));
     }
 
     .loc_contacts {
@@ -184,13 +186,13 @@ background-color: $c_lagunaLightMiddle;
       margin-left: auto;
       align-items: center;
       justify-content: flex-end;
-      gap: 16px;
-      height: 56px;
+      gap: calc(16px * var(--viewport-koeff));
+      height: calc(56px * var(--viewport-koeff));
 
-      & > img {
+      img {
         display: block;
-        width: 56px;
-        height: 56px;
+        width: calc(56px * var(--viewport-koeff));
+        height: calc(56px * var(--viewport-koeff));
       }
     }
   }
@@ -199,13 +201,13 @@ background-color: $c_lagunaLightMiddle;
   .loc_menu {
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: calc(40px * var(--viewport-koeff));
     justify-content: space-between;
-    padding: 40px 24px 32px 24px;
+    padding: calc(40px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
 
     .loc_item, .loc_else {
       color: $c_main;
-      font-size: 36px;
+      font-size: calc(36px * var(--viewport-koeff));
       font-weight: 600;
       @extend %hoverable;
     }
@@ -214,12 +216,15 @@ background-color: $c_lagunaLightMiddle;
       //margin-left: auto;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: calc(8px * var(--viewport-koeff));
+
       .loc_caret {
-        margin-top: 4px;
+        margin-top: calc(4px * var(--viewport-koeff));
       }
+
       &.loc--opened {
         @extend %active ;
+
         .loc_caret {
           transform: rotate(180deg);
           transition: $transition;
@@ -235,7 +240,7 @@ background-color: $c_lagunaLightMiddle;
 
     .loc_item {
       color: $c_main;
-      font-size: 26px;
+      font-size: calc(26px * var(--viewport-koeff));
       font-weight: 500;
     }
   }

@@ -26,7 +26,7 @@
   }
   .loc_menu {
     .loc_menuList {
-      max-height: 600px;
+      max-height: 50vh;
     }
   }
   .loc_input_star {
@@ -40,35 +40,36 @@
 
 .layout.loc--isMobile .component-select {
   .loc_label {
-    line-height: 44px;
-    font-size: 30px;
+    line-height: calc(44px * var(--viewport-koeff));
+    font-size: calc(30px * var(--viewport-koeff));
     display: flex;
     align-items: center;
+    padding-right: calc(20px * var(--viewport-koeff));
   }
 
 
   .loc_control {
     border: 1px solid $c_greyMedium;
-    border-radius: 99px;
-    padding: 0 32px;
-    min-height: 80px;
-    box-shadow: none;
-    font-size: 30px;
+    padding: 0 calc(32px * var(--viewport-koeff));
+    min-height: calc(80px * var(--viewport-koeff));
+    font-size: calc(30px * var(--viewport-koeff));
   }
 
   .loc_menu {
-    font-size: 32px;
-    line-height: 64px;
+    font-size: calc(32px * var(--viewport-koeff));
+    line-height: calc(64px * var(--viewport-koeff));
   }
   .loc_clearIndicator,.loc_dropdownIndicator {
     svg {
-      width: 40px;
-      height: 40px;
+      width: calc(40px * var(--viewport-koeff));
+      height: calc(40px * var(--viewport-koeff));
     }
   }
   .loc_input_star {
-    right: -12px;
-    font-size: 28px;
+    right: calc(-12px * var(--viewport-koeff));
+    font-size: calc(28px * var(--viewport-koeff));
     font-weight: 900;
+    margin-bottom: calc(33px * var(--viewport-koeff));
+    top: calc(-4px * var(--viewport-koeff));
   }
 }

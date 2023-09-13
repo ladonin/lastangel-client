@@ -27,18 +27,25 @@
 
 
 .layout.loc--isMobile .component-breadCrumbs {
+
+  margin-bottom: calc(16px * var(--viewport-koeff));
+  
+  
   .loc_breadCrumb, .loc_toMain, .loc_delimiter {
-    font-size: 32px;
-    margin-bottom: 24px;
+    font-size: calc(32px * var(--viewport-koeff));
+    margin-bottom: calc(24px * var(--viewport-koeff));
   }
 
   .loc_title, .loc_breadCrumb, .loc_delimiter, .loc_toMain {
 
-    line-height: 32px;
+    line-height: calc(32px * var(--viewport-koeff));
   }
+  .loc_delimiter {
 
+    margin: 0 calc(8px * var(--viewport-koeff));
+  }
   h2 {
 
-    font-size: 32px;
+    font-size: calc(32px * var(--viewport-koeff));
   }
 }

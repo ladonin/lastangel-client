@@ -1,11 +1,13 @@
 .page-administration_documents_update {
-  
+
   h1 {
     margin: 16px 0 32px 0;
   }
+
   .loc_gotopageButton {
     float: right;
   }
+
   .loc_error {
     color: $c_red;
     padding: 16px 0px;
@@ -62,10 +64,31 @@
 .layout.loc--isMobile .page-administration_documents_update {
   width: 100%;
   padding: 0;
+
+  h1 {
+    margin: calc(16px * var(--viewport-koeff)) 0 calc(32px * var(--viewport-koeff)) 0;
+  }
+
   .loc_gotopageButton {
     float: none;
-    margin-top: 24px;
+    margin-top: calc(24px * var(--viewport-koeff));
   }
+
+
+  .loc_wrapper_textForm {
+
+    .loc_buttons {
+      margin-top: calc(36px * var(--viewport-koeff));
+
+      .loc_cancelButton {
+        margin-left: calc(24px * var(--viewport-koeff));
+      }
+
+    }
+
+  }
+
+
   .loc_form {
     flex-direction: column;
 
@@ -74,13 +97,13 @@
       width: 100%;
 
       .loc_formInputItem, .loc_formCheckboxItem, .loc_formDateItem, .loc_formSelectItem, .loc_formTextareaItem {
-        margin-bottom: 48px;
+        margin-bottom: calc(48px * var(--viewport-koeff));
       }
 
 
       .loc__shortdescription {
         textarea {
-          height: 250px;
+          height: calc(250px * var(--viewport-koeff));
 
         }
 
@@ -88,7 +111,7 @@
 
       .loc__fulldescription {
         textarea {
-          height: 500px;
+          height: calc(500px * var(--viewport-koeff));
 
         }
 
@@ -100,28 +123,28 @@
     flex-direction: column;
 
     h2 {
-      font-size: 32px;
+      font-size: calc(32px * var(--viewport-koeff));
     }
 
     .loc_left, .loc_right {
       width: 100%;
       padding: 0;
-      margin-top: 48px;
+      margin-top: calc(48px * var(--viewport-koeff));
 
       .loc_labelTitle {
-        font-size: 32px;
-        margin-bottom: 32px;
+        font-size: calc(32px * var(--viewport-koeff));
+        margin-bottom: calc(32px * var(--viewport-koeff));
       }
 
       .loc_selectFile {
-        font-size: 32px;
-        line-height: 56px;
-        padding: 16px 48px;
-        margin-bottom: 24px;
+        font-size: calc(32px * var(--viewport-koeff));
+        line-height: calc(56px * var(--viewport-koeff));
+        padding: calc(16px * var(--viewport-koeff)) calc(48px * var(--viewport-koeff));
+        margin-bottom: calc(24px * var(--viewport-koeff));
       }
 
       .loc_images {
-        gap: 24px;
+        gap: calc(24px * var(--viewport-koeff));
       }
 
       .loc_image, .loc_image img {
@@ -129,8 +152,8 @@
 
         .loc_delete, .loc_restore {
           .component-button svg {
-            width: 100px;
-            height: 100px;
+            width: calc(100px * var(--viewport-koeff));
+            height: calc(100px * var(--viewport-koeff));
           }
 
         }
@@ -141,26 +164,34 @@
       }
 
     }
+
     .loc_error {
-      padding: 32px 0px;
+      padding: calc(32px * var(--viewport-koeff)) 0;
     }
   }
 
   .loc_buttons {
-    margin: 64px 0 24px 0;
+    margin: calc(64px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff)) 0;
   }
+
   .loc_error {
-    padding-top: 32px;
-    font-size: 32px;
+    padding-bottom: calc(16px * var(--viewport-koeff));
+    padding-top: calc(32px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
   }
+
   .loc_wrapper_updatedSuccess, .loc_wrapper_removedSuccess {
-    font-size: 40px;
-    line-height: 56px;
+    font-size: calc(40px * var(--viewport-koeff));
+    line-height: calc(56px * var(--viewport-koeff));
 
     .loc_addElseButton {
-      margin: 48px 0;
+      margin: calc(48px * var(--viewport-koeff)) 0;
     }
   }
 }
-
+.page-administration_documents_update .component-modal--isMobile{
+  .loc_buttons {
+    margin-top: calc(32px * var(--viewport-koeff));
+  }
+}
 

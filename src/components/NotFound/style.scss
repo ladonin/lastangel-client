@@ -1,9 +1,10 @@
 .component-notFound {
-width: 100%;
-display: flex;
+  width: 100%;
+  display: flex;
   flex-direction: column;
   align-items: center;
   margin: 32px 0;
+
   .loc_descr {
     font-size: 24px;
     font-weight: 600;
@@ -15,3 +16,16 @@ display: flex;
 
   }
 }
+
+.layout.loc--isMobile .component-notFound {
+  margin: calc(32px * var(--viewport-koeff)) 0;
+
+  .loc_descr {
+    font-size: calc(24px * var(--viewport-koeff));
+    margin-top: calc(32px * var(--viewport-koeff));
+  }
+
+}
+
+
+
