@@ -12,27 +12,31 @@
       .loc_label {
         color: $c_white;
       }
+
       input, .loc_select {
         width: 100%;
       }
 
 
-
-
     }
+
     .loc_formSelectItem.loc--order {
       width: 20%;
     }
+
     .loc_formInputItem.loc--title {
       width: 50%;
     }
+
     .loc_resetButton {
       background-color: $c_lagunaBlue;
       color: $c_white;
       margin-left: auto;
+
       &:hover {
         background-color: $c_lagunaBlueLight;
       }
+
       &.component-button_disabled {
         background-color: $c_lagunaBlue;
         color: $c_lagunaLight;
@@ -44,9 +48,12 @@
 
 .layout.loc--isMobile .page-administration_news_filter {
   .loc_wrapper {
-    padding: 24px;
-    gap: 24px;
-    .loc_formSelectItem,.loc_formInputItem {
+    padding: calc(24px * var(--viewport-koeff));
+    gap: calc(24px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
+    border-radius: calc(8px * var(--viewport-koeff));
+
+    .loc_formSelectItem, .loc_formInputItem {
       width: 100%;
       padding: 0;
 

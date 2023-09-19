@@ -62,6 +62,9 @@
 .layout.loc--isMobile .page-administration_pets_update {
   width: 100%;
   padding: 0;
+  h1 {
+    margin: 16px 0 32px 0;
+  }
   .loc_gotopageButton {
     float: none;
     margin-top: 24px;
@@ -70,7 +73,7 @@
     flex-direction: column;
 
     .loc_left, .loc_right {
-      padding: 0;
+      padding: 0 !important;
       width: 100%;
 
       .loc_formInputItem, .loc_formCheckboxItem, .loc_formDateItem, .loc_formSelectItem, .loc_formTextareaItem, .loc_formVideoItem {
@@ -80,7 +83,7 @@
 
       .loc__shortdescription {
         textarea {
-          height: 250px;
+          height: 30vh;
 
         }
 
@@ -88,7 +91,7 @@
 
       .loc__fulldescription {
         textarea {
-          height: 500px;
+          height: 50vh;
 
         }
 
@@ -105,7 +108,7 @@
 
     .loc_left, .loc_right {
       width: 100%;
-      padding: 0;
+      padding: 0 !important;
       margin-top: 48px;
 
       .loc_labelTitle {
@@ -124,17 +127,7 @@
         gap: 24px;
       }
 
-      .loc_image, .loc_image img {
-        width: 100%;
-
-        .loc_delete, .loc_restore {
-          .component-button svg {
-            width: 100px;
-            height: 100px;
-          }
-
-        }
-      }
+ 
 
       .component-inputFileImage {
         margin: 0;
@@ -142,15 +135,18 @@
 
     }
     .loc_error {
-      padding: 32px 0px;
+      padding: calc(32px * var(--viewport-koeff)) 0;
     }
   }
 
   .loc_buttons {
     margin: 64px 0 24px 0;
+    .loc_cancelButton {
+      margin-left: 24px;
+    }
   }
   .loc_error {
-    padding-top: 32px;
+    padding: calc(32px * var(--viewport-koeff)) 0;
     font-size: 32px;
   }
   .loc_wrapper_updatedSuccess, .loc_wrapper_removedSuccess {
@@ -164,3 +160,9 @@
 }
 
 
+
+.page-administration_pets_update_deleteModal .component-modal--isMobile{
+  .loc_buttons {
+    margin-top: calc(32px * var(--viewport-koeff));
+  }
+}

@@ -1,0 +1,40 @@
+%mobileCommon {
+  html {
+    font-size: calc(24px * var(--viewport-koeff));
+  }
+
+  h1 {
+    font-size: calc(48px * var(--viewport-koeff));
+    line-height: calc(72px * var(--viewport-koeff));
+  }
+
+  h2 {
+    font-size: calc(40px * var(--viewport-koeff));
+    line-height: calc(64px * var(--viewport-koeff));
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    height: calc(60px * var(--viewport-koeff));
+    width: calc(40px * var(--viewport-koeff));
+    border-radius: calc(8px * var(--viewport-koeff));
+
+    &:after {
+      font-size: calc(32px * var(--viewport-koeff));
+    }
+  }
+
+  .swiper-button-prev {
+    left: calc(10px * var(--viewport-koeff));
+  }
+
+  .swiper-button-next {
+    right: calc(10px * var(--viewport-koeff));
+  }
+
+  textarea {
+    border-radius: calc(8px * var(--viewport-koeff));
+    padding: calc(16px * var(--viewport-koeff));
+    font-size: calc(16px * var(--viewport-koeff));
+  }
+}

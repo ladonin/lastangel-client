@@ -107,54 +107,54 @@
 }
 
 
-
-.layout.loc--isMobile .page-administration_collections_form_component {
-
-  .loc_form {
-    .loc_left {
-      padding-right: calc(32px * var(--viewport-koeff));
-    }
-
-    .loc_right {
-      padding-left: calc(32px * var(--viewport-koeff));
-    }
-  }
-
-  .loc_photos {
-    margin-top: calc(24px * var(--viewport-koeff));
-
-    .loc_left {
-      padding-right: calc(32px * var(--viewport-koeff));
-    }
-
-    .loc_right {
-      padding-left: calc(32px * var(--viewport-koeff));
-    }
-  }
-
-  .loc_formInputItem {
-    margin-bottom: calc(24px * var(--viewport-koeff));
-  }
-
-  .loc_formTextareaItem {
-    margin-bottom: calc(24px * var(--viewport-koeff));
-
-    &.loc__shortdescription textarea {
-      height: calc(103px * var(--viewport-koeff));
-    }
-
-    &.loc__fulldescription textarea {
-      height: calc(340px * var(--viewport-koeff));
-    }
-  }
-
-  .loc_formSelectItem {
-    margin-bottom: calc(24px * var(--viewport-koeff));
-  }
-
-  .loc_formVideoItem {
-    margin-bottom: calc(24px * var(--viewport-koeff));
-  }
-}
+//
+//.layout.loc--isMobile .page-administration_collections_form_component {
+//
+//  .loc_form {
+//    .loc_left {
+//      padding-right: calc(32px * var(--viewport-koeff));
+//    }
+//
+//    .loc_right {
+//      padding-left: calc(32px * var(--viewport-koeff));
+//    }
+//  }
+//
+//  .loc_photos {
+//    margin-top: calc(24px * var(--viewport-koeff));
+//
+//    .loc_left {
+//      padding-right: calc(32px * var(--viewport-koeff));
+//    }
+//
+//    .loc_right {
+//      padding-left: calc(32px * var(--viewport-koeff));
+//    }
+//  }
+//
+//  .loc_formInputItem {
+//    margin-bottom: calc(24px * var(--viewport-koeff));
+//  }
+//
+//  .loc_formTextareaItem {
+//    margin-bottom: calc(24px * var(--viewport-koeff));
+//
+//    &.loc__shortdescription textarea {
+//      height: calc(103px * var(--viewport-koeff));
+//    }
+//
+//    &.loc__fulldescription textarea {
+//      height: calc(340px * var(--viewport-koeff));
+//    }
+//  }
+//
+//  .loc_formSelectItem {
+//    margin-bottom: calc(24px * var(--viewport-koeff));
+//  }
+//
+//  .loc_formVideoItem {
+//    margin-bottom: calc(24px * var(--viewport-koeff));
+//  }
+//}
 
 

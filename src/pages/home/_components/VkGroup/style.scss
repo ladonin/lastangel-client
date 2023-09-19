@@ -13,10 +13,10 @@
 }
 
 .layout.loc--isMobile .page-home_vkGroup {
-
-  margin-bottom: 32px;
+  margin-top: calc(24px * var(--viewport-koeff));
+  margin-bottom: calc(32px * var(--viewport-koeff));
   .loc_title {
-    font-size: 28px;
-    margin-bottom: 16px;
+    font-size: calc(28px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
   }
 }

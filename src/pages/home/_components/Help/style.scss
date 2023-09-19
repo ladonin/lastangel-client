@@ -108,55 +108,82 @@
 }
 
 
-
 .layout.loc--isMobile .page-home_help {
-  margin-left: -24px;
-  margin-right: -24px;
-  margin-top: 8px;
+  margin-left: calc(-24px * var(--viewport-koeff));
+  margin-right: calc(-24px * var(--viewport-koeff));
+  margin-top: calc(8px * var(--viewport-koeff));
   width: auto;
+  margin-bottom: calc(16px * var(--viewport-koeff));
 
   > .loc_title {
-    font-size: 32px;
-    padding: 16px 24px;
+    font-size: calc(32px * var(--viewport-koeff));
+    padding: calc(16px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
 
     .loc_go {
-      font-size: 24px;
+      font-size: calc(24px * var(--viewport-koeff));
+      gap: calc(8px * var(--viewport-koeff));
 
       svg {
-        height: 20px;
+        height: calc(20px * var(--viewport-koeff));
       }
     }
   }
 
   .loc_content {
     .loc_image {
-      height: 332px;
+      height: calc(332px * var(--viewport-koeff));
     }
 
     .loc_item {
-      font-size: 22px;
+      font-size: calc(22px * var(--viewport-koeff));
     }
   }
 
   .loc_item_other {
-    padding: 16px 24px 24px 24px;
+    padding: calc(16px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
 
     .loc_title {
-      font-size: 22px;
+      font-size: calc(22px * var(--viewport-koeff));
+
+      margin-bottom: calc(4px * var(--viewport-koeff));
+
     }
+
     .loc_item {
-      font-size: 22px;
+      font-size: calc(22px * var(--viewport-koeff));
+      margin-top: calc(4px * var(--viewport-koeff));
+
+      .loc_name {
+        margin-right: calc(4px * var(--viewport-koeff));
+      }
+
     }
   }
+
   .loc_right {
 
     .loc_item {
-  .loc_sber, .loc_docs {
-    padding: 0 24px 0 16px;
-    img {
-      width: 32px ;
-      height: 32px;
+
+      margin-top: calc(16px * var(--viewport-koeff));
+      font-size: calc(15px * var(--viewport-koeff));
+
+      .loc_sber, .loc_docs {
+        padding: 0 calc(24px * var(--viewport-koeff)) 0 calc(16px * var(--viewport-koeff));
+        gap: calc(4px * var(--viewport-koeff));
+
+        img {
+          width: calc(32px * var(--viewport-koeff));
+          height: calc(32px * var(--viewport-koeff));
+          margin-right: calc(4px * var(--viewport-koeff));
+        }
+
+        .loc_desc {
+
+          span {
+            margin-right: calc(8px * var(--viewport-koeff));
+          }
+        }
+      }
     }
   }
-    }}
 }

@@ -96,6 +96,7 @@
 }
 
 .layout-administration.loc--isMobile {
+  @extend %mobileCommon;
   .page {
     width: 100%;
     padding: calc(24px * var(--viewport-koeff));

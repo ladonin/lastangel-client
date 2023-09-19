@@ -40,29 +40,18 @@
 
 }
 
-.layout.loc--isMobile .page-administration_donations_form_component {
-  .loc_form {
-
-    .loc_left {
-      padding-right: calc(32px * var(--viewport-koeff));
-    }
-
-    .loc_right {
-      padding-left: calc(32px * var(--viewport-koeff));
-    }
-  }
-
-  .loc_formInputItem, .loc_formCheckboxItem {
-    margin-bottom: calc(24px * var(--viewport-koeff));
-  }
-
-
-  .loc_formSelectItem {
-    margin-bottom: calc(24px * var(--viewport-koeff));
-
-  }
-
-}
+//.layout.loc--isMobile .page-administration_donations_form_component {
+//  .loc_form {
+//
+//    .loc_left {
+//      padding-right: calc(32px * var(--viewport-koeff));
+//    }
+//
+//    .loc_right {
+//      padding-left: calc(32px * var(--viewport-koeff));
+//    }
+//  }
+//}
 
 
 

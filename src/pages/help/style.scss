@@ -5,17 +5,20 @@
     width: 100%;
     background-color: $c_lagunaLighter;
     margin-bottom: 24px;
-    border: 1px solid $c_sand; 
+    border: 1px solid $c_sand;
     border-radius: 8px;
+
     &Name {
       color: $c_lagunaDark;
       font-weight: 600;
       @extend %hoverable;
     }
+
     .loc_selected {
 
       margin-bottom: 16px;
     }
+
     .loc_description {
 
 
@@ -23,6 +26,7 @@
         color: $c_black;
         font-weight: 600;
       }
+
       .loc_smsExample {
         display: inline-block;
         width: fit-content;
@@ -31,18 +35,21 @@
         padding: 8px;
         margin-top: 16px;
       }
+
       .loc_smsDescription {
         display: inline-block;
         margin-left: 16px;
         margin-top: 16px;
       }
+
       .loc_smsComment {
         margin-top: 16px;
       }
- 
+
     }
 
   }
+
   .loc_addDonator {
     font-size: 14px;
     margin-bottom: 24px;
@@ -50,15 +57,18 @@
     background-color: $c_sandLight;
     padding: 16px;
     border: 1px solid $c_yellowLight;
+
     span {
       color: $c_black;
       font-weight: 600;
+
       &.loc_contact {
         color: $c_lagunaDark;
         @extend %hoverable;
       }
     }
   }
+
   .loc_rekviz {
 
 
@@ -73,12 +83,13 @@
 
     .loc_right {
       padding-top: 8px;
+
       .loc_item {
         &:first-child {
 
           margin-bottom: 16px;
         }
-        
+
         font-size: 15px;
 
         .loc_sber, .loc_docs {
@@ -111,10 +122,11 @@
     }
 
   }
+
   .loc_item_other {
     margin-top: 16px;
     width: 100%;
-    
+
 
     .loc_title {
       font-weight: 600;
@@ -138,70 +150,111 @@
 
 .layout.loc--isMobile .page-help {
 
+
   .loc_target {
-    font-size: 26px;
-    line-height: 40px;
-    padding: 24px;
-    .loc_smsComment {
-      margin-top: 16px;
+    font-size: calc(26px * var(--viewport-koeff));
+    line-height: calc(40px * var(--viewport-koeff));
+    padding: calc(24px * var(--viewport-koeff));
+    margin-bottom: calc(24px * var(--viewport-koeff));
+    border-radius: calc(8px * var(--viewport-koeff));
+
+    .loc_selected {
+      margin-bottom: calc(16px * var(--viewport-koeff));
     }
+
+
+    .loc_smsExample {
+      border-radius: calc(8px * var(--viewport-koeff));
+      padding: calc(8px * var(--viewport-koeff));
+      margin-top: calc(16px * var(--viewport-koeff));
+    }
+
+    .loc_smsComment {
+      margin-top: calc(16px * var(--viewport-koeff));
+    }
+
     .loc_smsDescription {
       display: inline-block;
-      margin-left: 16px;
+      margin-left: calc(16px * var(--viewport-koeff));
 
-      margin-top: 16px;
+      margin-top: calc(16px * var(--viewport-koeff));
     }
   }
 
 
-
-
-
-  
-  
-  
-  
-  
-  
-  
   .loc_addDonator {
-    font-size: 26px;
-    padding: 24px;
+    font-size: calc(26px * var(--viewport-koeff));
+    padding: calc(24px * var(--viewport-koeff));
+    margin-bottom: calc(24px * var(--viewport-koeff));
+    border-radius: calc(8px * var(--viewport-koeff));
   }
 
 
   .loc_rekviz {
-    .loc_image {
-      height: 318px;
+    .loc_right {
+      padding-top: calc(8px * var(--viewport-koeff));
+
+      .loc_item {
+        font-size: calc(22px * var(--viewport-koeff));
+
+        &:first-child {
+
+          margin-bottom: calc(16px * var(--viewport-koeff));
+        }
+
+
+        .loc_sber, .loc_docs {
+          padding: 0 0 0 calc(24px * var(--viewport-koeff)) !important;
+
+
+          gap: calc(4px * var(--viewport-koeff));
+
+          img {
+            width: calc(32px * var(--viewport-koeff)) !important;
+            height: calc(32px * var(--viewport-koeff)) !important;;
+            margin-right: calc(4px * var(--viewport-koeff));
+          }
+
+
+          .loc_desc {
+
+
+            span {
+              margin-right: calc(8px * var(--viewport-koeff));
+            }
+          }
+        }
+      }
     }
 
-    .loc_item {
-      font-size: 22px;
+    .loc_image {
+      height: calc(318px * var(--viewport-koeff));
     }
+
+
   }
 
   .loc_item_other {
-    padding: 0px 0px;
-margin-bottom: 24px;
+    padding: 0;
+    margin-bottom: calc(24px * var(--viewport-koeff));
+    margin-top: calc(16px * var(--viewport-koeff));
+
     .loc_title {
-      font-size: 22px;
+      font-size: calc(22px * var(--viewport-koeff));
+      margin-bottom: calc(4px * var(--viewport-koeff));
     }
+
+
     .loc_item {
-      font-size: 22px;
+      font-size: calc(22px * var(--viewport-koeff));
+      margin-top: calc(4px * var(--viewport-koeff));
+
+      .loc_name {
+        margin-right: calc(4px * var(--viewport-koeff));
+      }
     }
   }
 
 
-  .loc_sber, .loc_docs {
-    padding: 0 0 0 24px !important;
-    img {
-      width: 32px !important;
-      height: 32px !important;;
-    }
-  }
-  
-  
-  
-  
 }
 

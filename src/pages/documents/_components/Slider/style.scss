@@ -29,15 +29,18 @@
 }
 
 .layout.loc--isMobile .page-documents_photoSlider {
-  margin: 0 -24px;
+  margin: 0 calc(-24px * var(--viewport-koeff));
 
   .swiper-slide {
     height: 1200px;
     max-height: 80vh;
     img {
-      max-height: calc(100% - 116px - 24px - 24px);
+      max-height: calc(100% - calc((116px + 24px + 24px) * var(--viewport-koeff)));
       max-width: 100%;
-      margin-top: -112px;
+      margin-top: calc(-112px * var(--viewport-koeff));
+    }
+    .loc_openButton {
+      bottom: calc(36px * var(--viewport-koeff));
     }
   }
 }

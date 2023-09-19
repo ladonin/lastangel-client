@@ -75,7 +75,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   };
 
   return (
-    <div className="page-administration_mainphotoalbum_form_component">
+    <div className="page-administration_documents_form_component">
       <div className="loc_photos">
         <h2>Фото</h2>
         <div className="loc_left">

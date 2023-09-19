@@ -113,11 +113,11 @@
 
 
 .layout.loc--isMobile .page-home_collections {
-  margin-bottom: 32px;
+  margin-bottom: calc(32px * var(--viewport-koeff));
 
   .loc_title {
-    font-size: 36px;
-    margin-bottom: 16px;
+    font-size: calc(36px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
   }
 
   .loc_block {
@@ -129,20 +129,28 @@
       width: 100%;
 
       .loc_content {
-        width: calc(100% - 200px);
-        padding-right: 24px;
+        width: calc(100% - calc(200px * var(--viewport-koeff)));
+        padding-right: calc(24px * var(--viewport-koeff));
+
+        padding-left: calc(16px * var(--viewport-koeff));
 
         .loc_data {
-          font-size: 24px;
+          font-size: calc(24px * var(--viewport-koeff));
+
+          .loc_collected, .loc_need {
+            margin-top: calc(4px * var(--viewport-koeff));
+
+          }
 
           .loc_name {
-            font-size: 32px;
+            font-size: calc(32px * var(--viewport-koeff));
           }
 
           .loc_description {
-            font-size: 22px;
-            line-height: 34px;
+            font-size: calc(22px * var(--viewport-koeff));
+            line-height: calc(34px * var(--viewport-koeff));
             -webkit-line-clamp: 2;
+            margin-top: calc(8px * var(--viewport-koeff));
           }
         }
       }
@@ -151,8 +159,8 @@
         width: auto;
 
         img {
-          height: 200px;
-          width: 200px;
+          height: calc(200px * var(--viewport-koeff));
+          width: calc(200px * var(--viewport-koeff));
         }
       }
     }
@@ -160,17 +168,17 @@
   }
 
   .loc_wrapper {
-    margin-bottom: 24px;
+    margin-bottom: calc(24px * var(--viewport-koeff));
   }
 
   .loc_seeAll {
 
-    gap: 16px;
-    font-size: 24px;
-    margin-top: 8px;
+    gap: calc(16px * var(--viewport-koeff));
+    font-size: calc(24px * var(--viewport-koeff));
+    margin-top: calc(8px * var(--viewport-koeff));
 
     svg {
-      height: 20px;
+      height: calc(20px * var(--viewport-koeff));
     }
   }
 }

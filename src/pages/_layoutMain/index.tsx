@@ -54,7 +54,7 @@ const LayoutMain: React.FC = () => {
   }, []);
 
   // тут сделать проверку авторизации на защищенные страницы с применением location.pathname
-  return (
+  return isMobileState === null ? null : (
     <div className={cn("layout-main layout", { "loc--isMobile": isMobileState })}>
       <Header />
 

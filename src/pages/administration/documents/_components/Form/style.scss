@@ -1,4 +1,4 @@
-.page-administration_mainphotoalbum_form_component {
+.page-administration_documents_form_component {
   .loc_form,
   .loc_photos {
     display: flex;
@@ -25,8 +25,6 @@
 
 .layout.loc--isMobile .page-administration_mainphotoalbum_form_component {
   .loc_photos {
-    margin-top: calc(24px * var(--viewport-koeff));
-
     .loc_images .loc_image {
       width: 100% !important;
 

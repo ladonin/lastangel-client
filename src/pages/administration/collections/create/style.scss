@@ -52,20 +52,20 @@
   .loc_form {
     flex-direction: column;
     .loc_left, .loc_right {
-      padding: 0;
+      padding: 0 !important;
       width: 100%;
       .loc_formInputItem, .loc_formCheckboxItem, .loc_formDateItem, .loc_formSelectItem, .loc_formTextareaItem, .loc_formVideoItem {
         margin-bottom: calc(48px * var(--viewport-koeff));
       }
       .loc__shortdescription {
         textarea {
-          height: calc(250px * var(--viewport-koeff));
+          height: 30vh;
         }
       }
 
       .loc__fulldescription {
         textarea {
-          height: calc(500px * var(--viewport-koeff));
+          height: 50vh;
         }
       }
     }
@@ -74,13 +74,11 @@
   .loc_photos {
     flex-direction: column;
 
-    h2 {
-      font-size: calc(32px * var(--viewport-koeff));
-    }
+
 
     .loc_left, .loc_right {
       width: 100%;
-      padding: 0;
+      padding: 0 !important;
       margin-top: calc(48px * var(--viewport-koeff));
 
       .loc_labelTitle {
@@ -99,17 +97,7 @@
         gap: calc(24px * var(--viewport-koeff));
       }
 
-      .loc_image, .loc_image img {
-        width: 100%;
 
-        .loc_delete, .loc_restore {
-          .component-button svg {
-            width: calc(100px * var(--viewport-koeff));
-            height: calc(100px * var(--viewport-koeff));
-          }
-
-        }
-      }
 
       .component-inputFileImage {
         margin: 0;
@@ -127,8 +115,7 @@
   }
 
   .loc_error {
-    padding-bottom: calc(16px * var(--viewport-koeff));
-    padding-top: calc(32px * var(--viewport-koeff));
+    padding: calc(32px * var(--viewport-koeff)) 0;
     font-size: calc(32px * var(--viewport-koeff));
   }
 

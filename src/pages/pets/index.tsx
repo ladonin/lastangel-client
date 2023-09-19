@@ -38,6 +38,7 @@ const Pets: React.FC = () => {
   const petsFilterRef = useRef<TPetsFilterParams>(
     loadItem("pets_filter") || { statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED] }
   );
+  console.log(loadItem("pets_filter"))
   useEffect(() => {
     setIsMobileState(isMobile);
   }, [isMobile]);

@@ -28,7 +28,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   };
 
   return (
-    <div className="page-administration_donations_form_component">
+    <div className="page-administration_donators_form_component">
       <div className="loc_form">
         <div className="loc_left">
           <InputText

@@ -21,8 +21,8 @@
 }
 
 .layout.loc--isMobile .page-home_photoSlider {
-  margin: 0 -24px;
-  height: 900px;
+  margin: 0 calc(-24px * var(--viewport-koeff));
+  height: calc(900px * var(--viewport-koeff));
   max-height: 80vh;
   .swiper-slide img {
     max-height: 100%;

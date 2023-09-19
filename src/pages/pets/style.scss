@@ -229,50 +229,82 @@
 
   .loc_list, .loc_myPet {
     padding: 0;
-
+    gap: calc(16px * var(--viewport-koeff));
+    min-height: 300px;
+    .component-loaderIcon {
+      width: calc(50px * var(--viewport-koeff));
+      margin-top: calc(-25px * var(--viewport-koeff));
+      margin-left: calc(-25px * var(--viewport-koeff));
+    }
     .loc_wrapper {
-      width: calc(50% - 8px);
-      padding: 24px 24px 32px 24px;
+      width: calc(50% - calc(8px * var(--viewport-koeff)));
+      padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
       position: relative;
 
 
       .loc_item {
-
-        .loc_status {
-          font-size: 24px;
-          padding: 16px 24px;
+        .loc_collected {
+          margin-top: calc(8px * var(--viewport-koeff));
         }
 
+        .loc_status {
+          border-radius: 0 calc(8px * var(--viewport-koeff)) 0 0;
+          font-size: calc(24px * var(--viewport-koeff));
+          padding: calc(16px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
+          &_6 {
+
+            .loc_image {
+              border: calc(5px * var(--viewport-koeff)) solid $c_greyDark;
+            }
+          }
+        }
+
+
+        .loc_image {
+
+
+          .loc_status {
+            border-radius: 0 calc(8px * var(--viewport-koeff)) 0 0;
+            font-size: calc(24px * var(--viewport-koeff));
+            padding: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff));
+          }
+
+
+        }
+        
+        
+        
         .loc_atHome {
-          border-radius: 64px;
-          font-size: 28px;
-          height: 80px;
-          gap: 16px;
-          padding: 0 24px;
+          border-radius: calc(64px * var(--viewport-koeff));
+          font-size: calc(28px * var(--viewport-koeff));
+          height: calc(80px * var(--viewport-koeff));
+          gap: calc(16px * var(--viewport-koeff));
+          padding: 0 calc(24px * var(--viewport-koeff));
           width: fit-content;
 
-          bottom: 16px;
+          bottom: calc(16px * var(--viewport-koeff));
 
           > img {
-            width: 40px;
-            height: 40px;
+            width: calc(40px * var(--viewport-koeff));
+            height: calc(40px * var(--viewport-koeff));
           }
         }
 
         .loc_content {
-          margin-top: 32px;
+          margin-top: calc(32px * var(--viewport-koeff));
 
           .loc_data {
-            font-size: 26px;
-            margin-top: 32px;
+            font-size: calc(26px * var(--viewport-koeff));
+            margin-top: calc(32px * var(--viewport-koeff));
 
             .loc_name {
-              font-size: 32px;
+              font-size: calc(32px * var(--viewport-koeff));
               font-weight: 600;
             }
 
             .loc_description {
-              margin-top: 24px;
+              padding-top: calc(16px * var(--viewport-koeff));
+              margin-top: calc(24px * var(--viewport-koeff));
             }
           }
         }
@@ -283,17 +315,20 @@
   }
 
   .loc_forCurator {
-    margin-bottom: 32px;
-    font-size: 32px;
-    padding: 24px;
-
+    margin-bottom: calc(32px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
+    padding: calc(24px * var(--viewport-koeff));
+    border-radius: calc(8px * var(--viewport-koeff));
     .loc_myPet {
-      margin-top: 24px;
+      margin-top: calc(24px * var(--viewport-koeff));
+      .loc_title {
+        margin-top: calc(16px * var(--viewport-koeff));
+      }
     }
 
     .loc_buttonWrapper {
       .loc_buttonSelectPet {
-        margin-top: 24px;
+        margin-top: calc(24px * var(--viewport-koeff));
       }
     }
   }

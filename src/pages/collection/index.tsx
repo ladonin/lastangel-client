@@ -132,12 +132,12 @@ const Collection: React.FC = () => {
         <div className="loc_targetSum">
           Необходимо {isMobileState === false && <>собрать</>}: <span>{numberFriendly(dataState.target_sum)}</span> руб.
         </div>
+        {isMobileState === true && renderDonation(dataState)}
         {dataState.status === COLLECTIONS_STATUS.CLOSED && (
           <div className="loc_closed">
             Сбор закрыт <img alt="nophoto" src={flowerSrc} />
           </div>
         )}
-        {isMobileState === true && renderDonation(dataState)}
       </div>
     );
 

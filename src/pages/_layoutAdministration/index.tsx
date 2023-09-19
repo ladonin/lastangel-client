@@ -75,116 +75,114 @@ const LayoutAdministration: React.FC = () => {
     };
   }, []);
 
-  return (
-    showPageState && (
-      <div className={cn("layout-administration layout", { "loc--isMobile": isMobileState })}>
-        <Header />
+  return isMobileState !== null && showPageState ? (
+    <div className={cn("layout-administration layout", { "loc--isMobile": isMobileState })}>
+      <Header />
 
-        <div className="page">
-          <div className="page_administrationMenu">
-            <div
-              className="loc_emails"
-              onClick={() => {
-                navigate(PAGES.ADMINISTRATION_FEEDBACKS);
-              }}
-            >
-              {!!newFeedbacksState && <div className="loc_count">{newFeedbacksState}</div>}
-              <img alt="nophoto" className="loc_emailButton" src={EmailImage} />
-            </div>
-
-            <h2
-              className="loc_title"
-              onClick={() => {
-                const tabValue = pathname.split("/")[2];
-
-                navigate(tabValue ? `${PAGES.ADMINISTRATION}?tab=${tabValue}` : PAGES.ADMINISTRATION);
-              }}
-            >
-              Администрирование
-            </h2>
-
-            <Button
-              className="loc_exitButton"
-              theme={ButtonThemes.PRIMARY}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
-              onClick={() => {
-                quit();
-              }}
-            >
-              Выход
-            </Button>
-            {showAddButton() && (
-              <div className="loc_buttons">
-                <Button
-                  theme={ButtonThemes.SUCCESS}
-                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
-                  className="loc_addPetButton"
-                  onClick={() => {
-                    navigate(PAGES.ADMINISTRATION_PET_CREATE);
-                  }}
-                >
-                  Добавить питомца
-                </Button>
-                <Button
-                  theme={ButtonThemes.SUCCESS}
-                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
-                  className="loc_addCollectionButton"
-                  onClick={() => {
-                    navigate(PAGES.ADMINISTRATION_COLLECTION_CREATE);
-                  }}
-                >
-                  Добавить сбор
-                </Button>
-                <Button
-                  theme={ButtonThemes.SUCCESS}
-                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
-                  className="loc_addDonationButton"
-                  onClick={() => {
-                    navigate(PAGES.ADMINISTRATION_DONATION_CREATE);
-                  }}
-                >
-                  Зарегистрировать донат
-                </Button>
-                <Button
-                  theme={ButtonThemes.SUCCESS}
-                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
-                  className="loc_addDonatorButton"
-                  onClick={() => {
-                    navigate(PAGES.ADMINISTRATION_DONATOR_CREATE);
-                  }}
-                >
-                  Зарегистрировать Донатора
-                </Button>
-                <Button
-                  theme={ButtonThemes.SUCCESS}
-                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
-                  className="loc_addNewsButton"
-                  onClick={() => {
-                    navigate(PAGES.ADMINISTRATION_NEWS_CREATE);
-                  }}
-                >
-                  Добавить новость
-                </Button>
-                <Button
-                  theme={ButtonThemes.SUCCESS}
-                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
-                  className="loc_addStoryButton"
-                  onClick={() => {
-                    navigate(PAGES.ADMINISTRATION_STORY_CREATE);
-                  }}
-                >
-                  Добавить историю
-                </Button>
-              </div>
-            )}
+      <div className="page">
+        <div className="page_administrationMenu">
+          <div
+            className="loc_emails"
+            onClick={() => {
+              navigate(PAGES.ADMINISTRATION_FEEDBACKS);
+            }}
+          >
+            {!!newFeedbacksState && <div className="loc_count">{newFeedbacksState}</div>}
+            <img alt="nophoto" className="loc_emailButton" src={EmailImage} />
           </div>
 
-          <Outlet context={[checkMail]} />
+          <h2
+            className="loc_title"
+            onClick={() => {
+              const tabValue = pathname.split("/")[2];
+
+              navigate(tabValue ? `${PAGES.ADMINISTRATION}?tab=${tabValue}` : PAGES.ADMINISTRATION);
+            }}
+          >
+            Администрирование
+          </h2>
+
+          <Button
+            className="loc_exitButton"
+            theme={ButtonThemes.PRIMARY}
+            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+            onClick={() => {
+              quit();
+            }}
+          >
+            Выход
+          </Button>
+          {showAddButton() && (
+            <div className="loc_buttons">
+              <Button
+                theme={ButtonThemes.SUCCESS}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                className="loc_addPetButton"
+                onClick={() => {
+                  navigate(PAGES.ADMINISTRATION_PET_CREATE);
+                }}
+              >
+                Добавить питомца
+              </Button>
+              <Button
+                theme={ButtonThemes.SUCCESS}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                className="loc_addCollectionButton"
+                onClick={() => {
+                  navigate(PAGES.ADMINISTRATION_COLLECTION_CREATE);
+                }}
+              >
+                Добавить сбор
+              </Button>
+              <Button
+                theme={ButtonThemes.SUCCESS}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                className="loc_addDonationButton"
+                onClick={() => {
+                  navigate(PAGES.ADMINISTRATION_DONATION_CREATE);
+                }}
+              >
+                Зарегистрировать донат
+              </Button>
+              <Button
+                theme={ButtonThemes.SUCCESS}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                className="loc_addDonatorButton"
+                onClick={() => {
+                  navigate(PAGES.ADMINISTRATION_DONATOR_CREATE);
+                }}
+              >
+                Зарегистрировать Донатора
+              </Button>
+              <Button
+                theme={ButtonThemes.SUCCESS}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                className="loc_addNewsButton"
+                onClick={() => {
+                  navigate(PAGES.ADMINISTRATION_NEWS_CREATE);
+                }}
+              >
+                Добавить новость
+              </Button>
+              <Button
+                theme={ButtonThemes.SUCCESS}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                className="loc_addStoryButton"
+                onClick={() => {
+                  navigate(PAGES.ADMINISTRATION_STORY_CREATE);
+                }}
+              >
+                Добавить историю
+              </Button>
+            </div>
+          )}
         </div>
-        <Footer />
+
+        <Outlet context={[checkMail]} />
       </div>
-    )
-  );
+      <Footer />
+    </div>
+  ) : null;
 };
 
 export default LayoutAdministration;

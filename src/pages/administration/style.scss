@@ -387,56 +387,61 @@
 
   .loc_buttons {
     flex-wrap: wrap;
-    gap: 24px;
-    margin-bottom: 48px;
+    gap: calc(24px * var(--viewport-koeff));
+    margin-bottom: calc(48px * var(--viewport-koeff));
 
     .loc_mainPagePhotoalbumButton, .loc_documentsButton {
       width: 100%;
-      margin: 0px;
+      margin: 0;
     }
   }
 
   .react-tabs__tab {
-    line-height: 64px;
-    font-size: 32px;
-    padding: 32px;
+    line-height: calc(64px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
+    padding: calc(32px * var(--viewport-koeff));
     width: 100%;
     border-radius: 0;
   }
 
   .loc_list {
     padding: 0;
-
+    gap: calc(16px * var(--viewport-koeff));
+    .component-loaderIcon {
+      margin: calc(50px * var(--viewport-koeff)) auto;
+    }
     .loc_itemWrapper {
-      width: calc(50% - 8px);
-      padding: 24px 24px 80px 24px;
+      width: calc(50% - calc(8px * var(--viewport-koeff)));
+      padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(80px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
       position: relative;
-
+      border-radius: calc(8px * var(--viewport-koeff));
       .loc_link {
-        font-size: 26px;
-        bottom: 24px;
-        width: calc(100% - 48px);
+        font-size: calc(26px * var(--viewport-koeff));
+        bottom: calc(24px * var(--viewport-koeff));
+        width: calc(100% - calc(48px * var(--viewport-koeff)));
         @extend %hoverable;
       }
 
       .loc_item {
 
-
+        .loc_collected, .loc_target_sum {
+          margin-top: calc(8px * var(--viewport-koeff));
+        }
         .loc_content {
-          margin-top: 32px;
+          margin-top: calc(32px * var(--viewport-koeff));
 
           .loc_data {
-            font-size: 28px;
-            margin-top: 32px;
+            font-size: calc(28px * var(--viewport-koeff));
+            margin-top: calc(32px * var(--viewport-koeff));
 
             .loc_description {
-              margin-top: 32px;
+              margin-top: calc(32px * var(--viewport-koeff));
             }
           }
         }
 
         .loc_redactNewBlank {
-          margin-top: 32px;
+          margin-top: calc(32px * var(--viewport-koeff));
         }
         .loc_donatorItem {
           .loc_content, .loc_data {
@@ -445,53 +450,102 @@
           }
 
           .loc_name {
-            font-size: 32px;
-
+            font-size: calc(32px * var(--viewport-koeff));
+            margin-bottom: calc(24px * var(--viewport-koeff));
+            margin-top: calc(16px * var(--viewport-koeff));
           }
 
           .loc_button {
-            margin-top: 32px !important;
-            margin-bottom: 32px !important;
+            margin-top: calc(32px * var(--viewport-koeff)) !important;
+            margin-bottom: calc(32px * var(--viewport-koeff)) !important;
           }
         }
 
         .loc_donationItem {
           .loc_sum {
-            font-size: 40px;
+            margin-top: calc(16px * var(--viewport-koeff));
+            margin-bottom: calc(24px * var(--viewport-koeff));
+            font-size: calc(40px * var(--viewport-koeff));
           }
 
           .loc_targetName {
-            margin-bottom: 24px;
-
+            margin-bottom: calc(24px * var(--viewport-koeff));
+            line-height: calc(36px * var(--viewport-koeff));
             &.loc--type {
 
               &_1 {
-                font-size: 32px;
+                font-size: calc(32px * var(--viewport-koeff));
               }
 
               &_2 {
-
-                font-size: 32px;
+                font-size: calc(32px * var(--viewport-koeff));
               }
 
               &_3 {
-                font-size: 28px;
+                font-size: calc(28px * var(--viewport-koeff));
               }
             }
 
           }
-
+          .loc_card {
+            margin-top: calc(4px * var(--viewport-koeff));
+          }
+          .loc_donator {
+            margin-top: calc(16px * var(--viewport-koeff));
+          }
+          .loc_targetation {
+            gap: calc(4px * var(--viewport-koeff));
+            margin-bottom: calc(16px * var(--viewport-koeff));
+          }
+          .loc_created {
+            margin-top: calc(16px * var(--viewport-koeff));
+          }
+          .loc_updated {
+            margin-top: calc(4px * var(--viewport-koeff));
+          }
           .loc_button {
-            margin-top: 32px !important;
-            margin-bottom: 32px !important;
+            margin-top: calc(32px * var(--viewport-koeff)) !important;
+            margin-bottom: calc(32px * var(--viewport-koeff)) !important;
+          }
+        }
+        .loc_newsItem, .loc_storyItem {
+          .loc_content {
+            .loc_data {
+              .loc_button {
+                margin-top: calc(16px * var(--viewport-koeff)) !important;
+              }
+            }
           }
         }
 
+        .loc_collectionItem {
 
+          .loc_type {
+            margin-top: calc(8px * var(--viewport-koeff));
+          }
+
+        }
+        
+        
+        
+        
+        
+        .loc_petItem {
+          .loc_not_published {
+            margin: calc(24px * var(--viewport-koeff)) auto;
+          }
+        }
+
+        .loc_created {
+          margin-top: calc(16px * var(--viewport-koeff));
+        }
+        .loc_updated {
+          margin-top: calc(4px * var(--viewport-koeff));
+        }
       }
 
       &.loc--donation {
-        padding-bottom: 32px;
+        padding-bottom: calc(32px * var(--viewport-koeff));
       }
     }
   }

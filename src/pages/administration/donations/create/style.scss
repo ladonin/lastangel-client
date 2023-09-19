@@ -51,7 +51,7 @@
   }
 
   .loc_error {
-    padding: calc(16px * var(--viewport-koeff)) 0px;
+    padding: calc(32px * var(--viewport-koeff)) 0;
 
   }
 
@@ -60,7 +60,7 @@
     flex-direction: column;
 
     .loc_left, .loc_right {
-      padding: 0;
+      padding: 0 !important;
       width: 100%;
 
       .loc_formInputItem, .loc_formSelectItem, .loc_formCheckboxItem {
@@ -75,7 +75,7 @@
   }
 
   .loc_error {
-    padding-top: calc(32px * var(--viewport-koeff));
+    padding: calc(32px * var(--viewport-koeff)) 0;
     font-size: calc(32px * var(--viewport-koeff));
   }
 

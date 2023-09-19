@@ -29,15 +29,14 @@
 
 .layout.loc--isMobile .page-home {
   .loc_textMain {
-    padding: 24px 0;
-    letter-spacing: 0.5px;
-    font-size: 26px;
+    padding: calc(24px * var(--viewport-koeff)) 0;
+    letter-spacing: calc(99999999px * var(--viewport-koeff)) 0.5px;
+    font-size: calc(26px * var(--viewport-koeff));
   }
 
   .loc_left, .loc_right {
     width: 100%;
   }
-
 
 
   .loc_right {

@@ -31,11 +31,6 @@
   input {
     width: 100%;
     margin-bottom: 16px;
-    border: 1px solid $c_greyMedium;
-    border-radius: 99px;
-    padding: 0 16px;
-    font-size: 16px;
-    height: 40px;
   }
 
   .component-textarea {
@@ -64,26 +59,41 @@
   width: 100%;
 
   .loc_title {
-    font-size: 32px;
-    margin-top: 40px;
-
-    margin-bottom: 32px;
+    font-size: calc(32px * var(--viewport-koeff));
+    margin-top: calc(40px * var(--viewport-koeff));
+    margin-bottom: calc(32px * var(--viewport-koeff));
+  }
+  .component-button {
+    margin-top: calc(16px * var(--viewport-koeff));
   }
   .loc_error {
-font-size: 26px;
-margin-bottom: 32px;
+    font-size: calc(26px * var(--viewport-koeff));
+    margin-bottom: calc(32px * var(--viewport-koeff));
   }
+
   .loc_success {
-    font-size: 26px;
+    gap: calc(8px * var(--viewport-koeff));
+    height: calc(40px * var(--viewport-koeff));
+    font-size: calc(26px * var(--viewport-koeff));
     justify-content: center;
-    margin-top: 48px;
-    margin-bottom: 32px;
-  }
-    
+    margin-top: calc(48px * var(--viewport-koeff));
+    margin-bottom: calc(32px * var(--viewport-koeff));
     img {
-      height: 50px;
+      height: calc(30px * var(--viewport-koeff));
     }
+  }
+
+  img {
+    height: calc(50px * var(--viewport-koeff));
+  }
+  .component-textarea {
+    textarea {
+      width: 100%;
+      height: 40vh;
+    }
+    margin-bottom: calc(16px * var(--viewport-koeff));
+  }
   input {
-    margin-bottom: 32px;
+    margin-bottom: calc(32px * var(--viewport-koeff));
   }
 }

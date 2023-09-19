@@ -8,68 +8,91 @@
     margin-left: -25px;
   }
 
-    .loc_item {
-      display: flex;
-      flex-wrap: wrap; 
-      justify-content: space-around;
-      margin-bottom: 16px;
-      background-color: $c_lagunaLightMiddle;
-      padding: 16px;
-      border-radius: 8px;
-      font-size: 14px;
-      .loc_name {
+  .loc_item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 16px;
+    background-color: $c_lagunaLightMiddle;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 14px;
 
-        &.loc--hasLink {
-          color: $c_blue;
-          @extend %hoverable;
-        }
-      }
-      .loc_created {
-        margin-right: 16px;
-        font-style: italic; 
-      }
-      .loc_sum {
-        margin-left: auto;
+    .loc_name {
 
-        span {
+      &.loc--hasLink {
+        color: $c_blue;
+        @extend %hoverable;
+      }
+    }
+
+    .loc_created {
+      margin-right: 16px;
+      font-style: italic;
+    }
+
+    .loc_sum {
+      margin-left: auto;
+
+      span {
+        font-weight: 600;
+
+      }
+    }
+
+    .loc_target {
+      margin-top: 8px;
+      width: 100%;
+
+      .loc--type {
+        &_1, &_2 {
           font-weight: 600;
-          
+          @extend %hoverable;
+          color: $c_lagunaDark;
+          display: inline-block;
         }
-      }
-      .loc_target {
-        margin-top: 8px;
-        width: 100%;
-        .loc--type {
-          &_1,&_2 {
-            font-weight: 600;
-            @extend %hoverable;
-            color: $c_lagunaDark;
-            display: inline-block;
-          }
-          &_3 {
-            color: $c_greenMedium;
-          }
+
+        &_3 {
+          color: $c_greenMedium;
         }
       }
     }
+  }
 
 
 }
 
 
 .layout.loc--isMobile .page-finreport_list {
+  .component-loaderIcon {
+    width: calc(50px * var(--viewport-koeff));
+    margin-top: calc(-25px * var(--viewport-koeff));
+    margin-left: calc(-25px * var(--viewport-koeff));
+  }
+
   .loc_item {
-    padding: 24px;
-    font-size: 26px;
+    padding: calc(24px * var(--viewport-koeff));
+    font-size: calc(26px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
+    border-radius: calc(8px * var(--viewport-koeff));
+
+    .loc_created {
+      margin-right: calc(16px * var(--viewport-koeff));
+    }
+
+    .loc_target {
+      margin-top: calc(8px * var(--viewport-koeff));
+
+    }
+
     .loc_name {
       &.loc--hasLink {
         color: $c_blue;
         @extend %hoverable;
       }
     }
-    
-    
-    
+
+
   }
 
 }

@@ -53,10 +53,13 @@
 
     .loc_image {
       .loc_delete, .loc_restore {
-        top: calc(24px * var(--viewport-koeff));
-        right: calc(24px * var(--viewport-koeff));
-        width: calc(60px * var(--viewport-koeff));
-        height: calc(60px * var(--viewport-koeff));
+        top: calc(32px * var(--viewport-koeff));
+        right: calc(32px * var(--viewport-koeff));
+        .component-button, svg {
+          padding: 0 !important;
+          width: calc(60px * var(--viewport-koeff));
+          height: calc(60px * var(--viewport-koeff));
+        }
       }
     }
   }

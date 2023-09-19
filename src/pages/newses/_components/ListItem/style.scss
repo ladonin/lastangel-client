@@ -8,12 +8,13 @@
   //background-color: $c_greyF5;
   border: 1px solid $c_lagunaGrey;
   padding: 24px 24px 0 24px;
+
   &.loc--non_published {
 
     background-color: $c_yellowLight;
 
   }
-  
+
   .loc_created {
     font-size: 14px;
     color: $c_lagunaGrey;
@@ -26,36 +27,43 @@
     color: $c_lagunaGrey;
     @extend %hoverable;
   }
+
   .loc_redactButton {
     margin: 24px 0 10px 0;
   }
+
   .loc_short_description {
     color: $c_greyDark;
     font-size: 18px;
     line-height: 26px;
     padding-top: 18px;
-    
-    
-    
+
+
   }
+
   .loc_nonpublished {
     margin-bottom: 16px;
   }
+
   .loc_description {
     color: $c_greyDark;
     font-size: 18px;
     line-height: 26px;
+
     .loc_content {
       padding-bottom: 4px;
     }
+
     //padding: 0 16px;
     //background-color: $c_pistachioLighter;
     //padding-bottom: 16px;
     //border: 1px solid $c_pistachio;
     cursor: default;
+
     .loc_slider {
-      
+
       margin-bottom: 24px;
+
       .swiper-slide {
         display: flex;
         background-color: $c_greyDark;
@@ -63,12 +71,14 @@
         justify-content: center;
         height: 600px;
         max-height: 80vh;
+
         img {
           max-height: 100%;
           max-width: 100%;
         }
       }
     }
+
     .loc_video {
       display: flex;
       width: 100%;
@@ -76,14 +86,17 @@
       max-height: 600px;
       background-color: $c_greyDark;
     }
+
     .component-copyLinkToPage {
       width: 100%;
       padding-bottom: 24px;
+
       .loc_copyLinkButton {
         margin-top: 0;
         margin-left: auto;
         margin-right: auto;
       }
+
       .loc_copyToBufferStatus {
         padding: 0;
         margin-left: auto;
@@ -111,39 +124,56 @@
 
 .layout.loc--isMobile .page-news_listItem {
 
-  padding: 24px 24px 0 24px;
-
+  padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff));
+  margin-bottom: calc(24px * var(--viewport-koeff));
 
   .loc_created {
-    font-size: 24px;
+    font-size: calc(24px * var(--viewport-koeff));
   }
+
   .loc_name {
-    font-size: 38px;
-    margin: 8px 0 0 0;
+    font-size: calc(38px * var(--viewport-koeff));
+    margin: calc(8px * var(--viewport-koeff)) 0 0 0;
   }
 
   .loc_short_description {
-    font-size: 28px;
-    line-height: 38px;
-    padding-top: 28px;
+    font-size: calc(28px * var(--viewport-koeff));
+    line-height: calc(38px * var(--viewport-koeff));
+    padding-top: calc(28px * var(--viewport-koeff));
   }
 
   .loc_nonpublished {
-    font-size: 26px;
-    margin-bottom: 16px;
+    font-size: calc(26px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
   }
 
   .loc_description {
     .loc_content {
-      padding-bottom: 8px;
+      p {
+        font-size: calc(28px * var(--viewport-koeff));
+        line-height: calc(38px * var(--viewport-koeff));
+      }
+      padding-bottom: calc(8px * var(--viewport-koeff));
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
     }
-    font-size: 28px;
-    line-height: 38px;
-    .loc_slider {
-      margin-bottom: 24px;
-      .swiper-slide {
-        height: 900px;
 
+    font-size: calc(28px * var(--viewport-koeff));
+    line-height: calc(38px * var(--viewport-koeff));
+
+    .loc_slider {
+      margin-top: calc(24px * var(--viewport-koeff));
+      margin-bottom: calc(24px * var(--viewport-koeff));
+
+      .swiper-slide {
+        max-height: 80vh;
+        img {
+          height: 900px;
+          max-height: 100%;
+          max-width: 100%;
+        }
       }
     }
   }
@@ -152,20 +182,29 @@
     margin-left: auto;
     margin-right: auto;
   }
+
   .loc_moreButton {
-    margin-top: 16px;
-    font-size: 26px;
-    margin-bottom: 24px;
+    margin-top: calc(16px * var(--viewport-koeff));
+    font-size: calc(26px * var(--viewport-koeff));
+    margin-bottom: calc(24px * var(--viewport-koeff));
+    padding: 0;
   }
 
   .loc_video {
+    margin-bottom: calc(24px * var(--viewport-koeff));
     display: flex;
     width: 100%;
-    max-height: 1190px;
+    height: 1200px;
+    max-height: 80vh;
   }
+
   .component-copyLinkToPage {
-    padding-top: 16px;
-    padding-bottom: 56px;
+    padding-top: calc(16px * var(--viewport-koeff));
+    padding-bottom: calc(56px * var(--viewport-koeff));
+  }
+
+  .loc_redactButton {
+    margin: calc(24px * var(--viewport-koeff)) 0 calc(10px * var(--viewport-koeff)) 0;
   }
 }
 

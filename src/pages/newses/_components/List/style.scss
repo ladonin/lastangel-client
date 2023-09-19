@@ -11,7 +11,13 @@
 
 
 .layout.loc--isMobile .page-news_list {
-
-
+  .component-loaderIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    margin-top: calc(-25px * var(--viewport-koeff));
+    margin-left: calc(-25px * var(--viewport-koeff));
+  }
 }
 
