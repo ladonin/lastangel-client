@@ -52,7 +52,7 @@ const StoryCreate: React.FC = () => {
         .then(() => {
           setIsLoadingState(false);
           setIsAddedState(true);
-          paramsRef.current = {};
+          setTimeout(()=>paramsRef.current = {}, 0);
         })
         .catch(() => {
           setIsLoadingState(false);
@@ -93,7 +93,7 @@ const StoryCreate: React.FC = () => {
       )}
       {isAddedState && (
         <div className="loc_wrapper_addedSuccess">
-          История успешно добавлена
+          История успешно добавлена ({paramsRef.current?.name})
           <Button
             className="loc_addElseButton"
             theme={ButtonThemes.PRIMARY}

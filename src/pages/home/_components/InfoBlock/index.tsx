@@ -12,8 +12,9 @@ import PetsAtHomeIcon from "icons/petsAtHome.png";
 import { AnimalsApi } from "api/animals";
 import { TGetCountOutput } from "api/types/animals";
 import { loadItem, saveItem } from "utils/localStorage";
-import { ANIMALS_STATUS } from "constants/animals";
+import { ANIMALS_CATEGORY, ANIMALS_KIND, ANIMALS_STATUS } from "constants/animals";
 import "./style.scss";
+import { ValuesOf } from "../../../../types/common";
 
 const InfoBlock = () => {
   const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
@@ -45,7 +46,7 @@ const InfoBlock = () => {
       <div
         className="loc_atHome"
         onClick={() => {
-          saveItem("pets_filter", { ...loadItem("pets_filter"), status: ANIMALS_STATUS.AT_HOME });
+          saveItem("pets_filter", { status: ANIMALS_STATUS.AT_HOME });
           navigate(PAGES.PETS);
         }}
       >

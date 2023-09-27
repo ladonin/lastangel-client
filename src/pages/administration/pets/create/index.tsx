@@ -80,14 +80,17 @@ const PetCreate: React.FC = () => {
         .then(() => {
           setIsLoadingState(false);
           setIsAddedState(true);
-          paramsRef.current = {};
+          // Для отображения клички в итоге и сброса уже потом
+          setTimeout(() => {
+            paramsRef.current = {};
+          }, 0);
         })
         .catch(() => {
           setIsLoadingState(false);
         });
     }
   };
-
+  console.log(paramsRef.current);
   return (
     <div className="page-administration_pets_create">
       <h1>Добавление питомца</h1>
@@ -123,7 +126,7 @@ const PetCreate: React.FC = () => {
       )}
       {isAddedState && (
         <div className="loc_wrapper_addedSuccess">
-          Животное успешно добавлено
+          Животное успешно добавлено ({paramsRef.current?.name})
           <Button
             className="loc_addElseButton"
             theme={ButtonThemes.PRIMARY}

@@ -192,7 +192,7 @@ export const prepareKind = (code: number, sex: number) => {
     return "средняя собака";
   }
   if (code === ANIMALS_KIND.BIG_DOG) {
-    return "большая собака";
+    return "крупная собака";
   }
   if (code === ANIMALS_KIND.CAT) {
     if (sex === ANIMALS_SEX.MALE) {

@@ -198,7 +198,7 @@ const Pet: React.FC = () => {
 
                 {isMobileState === true && <div className="loc_description">{dataState.description}</div>}
                 {isMobileState === true && renderCollections()}
-                {!isHere(dataState.status) && renderRedactButton(dataState)}
+                {!isHere(dataState.status) && <div className="margin_t24">{renderRedactButton(dataState)}</div>}
                 {isHere(dataState.status) && (
                   <>
                     <div className="loc_donation">

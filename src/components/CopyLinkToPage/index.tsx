@@ -44,7 +44,7 @@ const CopyLinkToPage: React.FC<Props> = ({ url, text }) => {
       </Button>
       {copyToBufferStatusState === true && (
         <div className="loc_copyToBufferStatus">
-          Ссылка успешно скопирована в буфер обмена вашего {isMobile ? "мобильного устройства" : "компьютера"}.
+          Ссылка на данную страницу успешно скопирована в буфер обмена вашего {isMobile ? "мобильного устройства" : "компьютера"}.
         </div>
       )}
       {copyToBufferStatusState === false && (

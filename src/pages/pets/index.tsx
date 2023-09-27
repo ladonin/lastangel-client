@@ -38,7 +38,7 @@ const Pets: React.FC = () => {
   const petsFilterRef = useRef<TPetsFilterParams>(
     loadItem("pets_filter") || { statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED] }
   );
-  console.log(loadItem("pets_filter"))
+
   useEffect(() => {
     setIsMobileState(isMobile);
   }, [isMobile]);
@@ -50,6 +50,11 @@ const Pets: React.FC = () => {
   const query = useQueryHook();
 
   const [isCuratoryState, setIsCuratoryState] = useState<boolean>(true);
+  useEffect(() => {
+    if (loadItem("myPet") && loadItem("myPet").created > getTimestamp(new Date()) - 3600 * 1000) {
+      setMyPetState(loadItem("myPet").data);
+    }
+  }, []);
   useEffect(() => {
     query.get("curator") !== null && typeof query.get("curator") !== "undefined" && setIsCuratoryState(true);
   }, [query]);
@@ -155,20 +160,16 @@ const Pets: React.FC = () => {
   const onReachPetsBottomHandler = () => {
     !petsLoadingStatusRef.current.isOff && !petsLoadingStatusRef.current.isLoading && setPetsPageState((prev) => prev + 1);
   };
+
   // продолжить с шапки
   const getMyAnimalHandler = () => {
-    const myPet = loadItem("myPet");
-    if (!myPet?.created || myPet.created < getTimestamp(new Date()) - 3600 * 1000) {
-      setMyPetIsLoadingState(true);
-      // "Мой питомец" устарел - обновляем его
-      AnimalsApi.getMyAnimal().then((res) => {
-        saveItem("myPet", { created: getTimestamp(new Date()), data: res });
-        setMyPetState(res);
-        setMyPetIsLoadingState(false);
-      });
-    } else {
-      setMyPetState(myPet.data);
-    }
+    setMyPetIsLoadingState(true);
+    // "Мой питомец" устарел - обновляем его
+    AnimalsApi.getMyAnimal().then((res) => {
+      saveItem("myPet", { created: getTimestamp(new Date()), data: res });
+      setMyPetState(res);
+      setMyPetIsLoadingState(false);
+    });
   };
 
   return (
@@ -193,7 +194,7 @@ const Pets: React.FC = () => {
           <div style={{ marginTop: "16px" }}>
             Если желаете выбрать питомца для кураторства/разовой помощи, то мы можем сделать этот выбор за Вас.
           </div>
-          {isMobileState !== null && (
+          {myPetState === null && isMobileState !== null && (
             <div className="loc_buttonWrapper">
               <Button
                 className="loc_buttonSelectPet"

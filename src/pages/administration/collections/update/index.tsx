@@ -184,7 +184,7 @@ const CollectionUpdate: React.FC = () => {
             </div>
           </div>
         )}
-        {isChangedState && <div className="loc_wrapper_updatedSuccess">Запись успешно обновлена</div>}
+        {isChangedState && <div className="loc_wrapper_updatedSuccess">Запись успешно обновлена ({paramsRef.current?.name})</div>}
         {isDeletedState && <div className="loc_wrapper_removedSuccess">Запись удалена</div>}
 
         <Modal

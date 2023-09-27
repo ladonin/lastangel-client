@@ -47,7 +47,7 @@ const DonationCreate: React.FC = () => {
         .then(() => {
           setIsLoadingState(false);
           setIsAddedState(true);
-          paramsRef.current = {};
+          setTimeout(() => paramsRef.current = {}, 0);
         })
         .catch(() => {
           setIsLoadingState(false);
@@ -88,7 +88,7 @@ const DonationCreate: React.FC = () => {
       )}
       {isAddedState && (
         <div className="loc_wrapper_addedSuccess">
-          Донат успешно добавлен
+          Донат успешно добавлен ({paramsRef.current?.donator_firstname || paramsRef.current?.donator_middlename || paramsRef.current?.donator_lastname || 'Аноним'})
           <Button
             className="loc_addElseButton"
             theme={ButtonThemes.PRIMARY}
