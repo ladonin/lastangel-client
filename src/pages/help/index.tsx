@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BreadCrumbs from "components/BreadCrumbs";
 import { AnimalsApi } from "api/animals";
 import { CollectionsApi } from "api/collections";
@@ -8,6 +8,7 @@ import { useQueryHook } from "hooks/useQueryHook";
 import Image from "icons/help.jpg";
 import SberIcon from "icons/sber.png";
 import DocsIcon from "icons/docs.png";
+import PrayIcon from "icons/pray.png";
 import PAGES from "routing/routes";
 import { MAIN_CARD, MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "../../constants/donations";
 // const OtherComponent = React.lazy(() => import('components/header'));
@@ -57,21 +58,26 @@ const Help: React.FC = () => {
                 navigate(`${targetTypeState === "pet" ? PAGES.PET : PAGES.COLLECTION}/${targetState}`);
               }}
             >
-              {targetDataState.name} (Код {`${targetTypeState === "pet" ? "П" : "С"}${targetDataState.id}`})
+              {targetDataState.name} ({/* Код${targetTypeState === "pet" ? "Питомец" : "Сбор" */}№{targetDataState.id})
             </span>
           </div>
 
           <div className="loc_description">
-            Желательно также сообщить нам идентификатор питомца/сбора и саму сумму.
-            <div className="loc_smsComment">Эта информация нужна нам для регистрации её на сайте.</div>
+            <div className="loc_smsComment">Уважаемые посетители, чтобы мы зарегистрировали Ваш донат на выбранного Вами питомца или сбора, то, просьба, сообщить нам об этом <img alt="nophoto" src={PrayIcon} height="16" style={{ display: "inline-block" }} />.
+            </div>
             <br /> Это можно сделать с помощью отправки смс на номер{" "}
             <span className="loc_contact" style={{ whiteSpace: "nowrap" }}>
               {MAIN_PHONE} ({MAIN_CARD_OWNER})
             </span>
-            , либо при переводе средств через приложение (сбербанк онлайн и т.п.) указать сообщение получателю. Данное сообщение
-            (смс) должно быть следующего вида:
+            , либо при переводе средств через приложение (сбербанк онлайн и т.п.) указать сообщение получателю.
             <br />
-            <div className="loc_smsExample">100 П1</div>
+            Данное сообщение
+            (смс) может быть произвольного вида, главное, чтобы нам было понятно, кому Вы жертвуете средства. Желательно, чтобы в сообщении
+            была указана сумма и кому или на что они должны пойти. Это может быть кличка животного или его номер (либо номер или название сбора, если это сбор). Если Вы не
+            укажете эту информацию, то средства пойдут на тех животных, кому они наиболее необходимы в данный момент. Это инвалиды
+            и те, кому требуется срочное лечение. В нашем приюте они всегда есть (((.
+            <br />
+            {/* <div className="loc_smsExample">100 П1</div>
             <div className="loc_smsDescription">Где 100 - сумма, П1 - № питомца (П - питомец, 1 - его номер)</div>
             <br />
             <div className="loc_smsExample">100 С1</div>
@@ -81,13 +87,17 @@ const Help: React.FC = () => {
               пожертвование.
             </div>
             <div className="loc_smsComment">
-              Если вы не сообщите нам эту информацию, то мы сами определим куда направить Ваш донат. Это может быть сбор на
+              Если Вы не сообщите нам эту информацию, то мы сами определим куда направить Ваш донат. Это может быть сбор на
               срочную операцию, постройку, либо на питомца, на которого меньше всего собрано средств за последнее время. Если Вам
               будет интересно, Вы можете связаться с нами и узнать, куда мы направили Ваши средства.
-            </div>
+            </div> */}
             <div className="loc_smsComment">
               Информацию по собранным средствам за последние 30 дней Вы можете узнать, нажав на кнопку "Подробнее" на странице
-              питомца/сбора.
+              питомца/сбора или на странице{" "}
+              <Link to={PAGES.FINREPORT} className="link_2">
+                Фин. отчет
+              </Link>
+              {" "}<i>(в ней отображается полный список всех донатов приюта)</i>.
             </div>
           </div>
         </div>
@@ -102,7 +112,7 @@ const Help: React.FC = () => {
         >
           обратную связь
         </span>{" "}
-        (форма обращения свободная) , либо связаться с нами по номеру телефона{" "}
+        (форма обращения свободная), либо связаться с нами по номеру телефона{" "}
         <span style={{ whiteSpace: "nowrap" }}>
           {MAIN_PHONE} ({MAIN_CARD_OWNER})
         </span>
@@ -148,6 +158,7 @@ const Help: React.FC = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };

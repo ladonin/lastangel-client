@@ -49,14 +49,14 @@ const PetsList = ({ currentId = null }: TProps) => {
   const renderContent = (data: TItem, index: number) => (
     <div className="loc_wrapper">
       <div className="loc_image">
-        {/*        <div
+        <div
           className={`loc_name ${data.sex === 1 ? "loc--male" : "loc--female"}`}
           onClick={() => {
             navigate(`${PAGES.PET}/${data.id}`);
           }}
         >
           {data.name}
-        </div> */}
+        </div>
         <div className={`loc_status loc--status_${prepareStatusCode(data.status, data.need_medicine)}`}>
           {prepareStatus(data.status, data.need_medicine, data.sex)}
         </div>
