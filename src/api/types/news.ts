@@ -33,7 +33,7 @@ export type TGetListOutput = TGetResponseItem[];
 export type TGetOutput = TGetResponseItem;
 
 export type TGetListRequest = {
-  name?: string;
+  title?: string;
   excludeId?: number;
   excludeStatus?: number;
   offset?: number;

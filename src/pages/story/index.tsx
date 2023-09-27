@@ -102,7 +102,7 @@ const Story: React.FC = () => {
               <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)} />
             </video>
           )}
-          <CopyLinkToPage text="Поделиться этой историей с друзьями" url={`${window.location.origin + PAGES.STORY}/${dataState.id}`} />
+          <CopyLinkToPage targetText="на историю" text="Поделиться этой историей с друзьями" url={`${window.location.origin + PAGES.STORY}/${dataState.id}`} />
         </div>
       )}
       <div className="loc_anotherTitle">Другие истории:</div>

@@ -101,7 +101,7 @@ const News: React.FC = () => {
               <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)} />
             </video>
           )}
-          <CopyLinkToPage text="Поделиться этой новостью с друзьями" url={`${window.location.origin + PAGES.NEWS}/${dataState.id}`} />
+          <CopyLinkToPage targetText="на новость" text="Поделиться этой новостью с друзьями" url={`${window.location.origin + PAGES.NEWS}/${dataState.id}`} />
         </div>
       )}
       <div className="loc_anotherTitle">Другие новости:</div>

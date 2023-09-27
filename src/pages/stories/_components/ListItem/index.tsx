@@ -90,7 +90,7 @@ const ListItem = ({ data }: TProps) => {
               <source src={getVideoUrl(data, data.video3)} type={getVideoType(data.video3)} />
             </video>
           )}
-          <CopyLinkToPage text="Поделиться этой историей с друзьями" url={`${window.location.origin + PAGES.STORY}/${data.id}`} />
+          <CopyLinkToPage targetText="на историю" text="Поделиться этой историей с друзьями" url={`${window.location.origin + PAGES.STORY}/${data.id}`} />
         </div>
       )}
 

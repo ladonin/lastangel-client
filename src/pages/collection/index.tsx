@@ -107,7 +107,7 @@ const Collection: React.FC = () => {
 
         {isMobileState === false && renderDonateButton()}
         {isMobileState === false && renderRedactButton()}
-        {isMobileState === false && <CopyLinkToPage text="Рассказать о сборе друзьям" url={window.location.href} />}
+        {isMobileState === false && <CopyLinkToPage targetText="на сбор" text="Рассказать о сборе друзьям" url={window.location.href} />}
       </div>
     );
   const renderData = () =>
@@ -160,7 +160,7 @@ const Collection: React.FC = () => {
               {isMobileState === false && renderDonation(dataState)}
               {isMobileState === true && <div className="loc_buttonWrapper">{renderDonateButton()}</div>}
               {isMobileState === true && renderRedactButton()}
-              {isMobileState === true && <CopyLinkToPage text="Рассказать о сборе друзьям" url={window.location.href} />}
+              {isMobileState === true && <CopyLinkToPage targetText="на сбор" text="Рассказать о сборе друзьям" url={window.location.href} />}
 
               {isMobileState === false && <div className="loc_description">{dataState.description}</div>}
             </div>

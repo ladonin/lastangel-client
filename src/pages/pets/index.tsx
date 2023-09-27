@@ -160,8 +160,7 @@ const Pets: React.FC = () => {
   const onReachPetsBottomHandler = () => {
     !petsLoadingStatusRef.current.isOff && !petsLoadingStatusRef.current.isLoading && setPetsPageState((prev) => prev + 1);
   };
-
-  // продолжить с шапки
+  
   const getMyAnimalHandler = () => {
     setMyPetIsLoadingState(true);
     // "Мой питомец" устарел - обновляем его

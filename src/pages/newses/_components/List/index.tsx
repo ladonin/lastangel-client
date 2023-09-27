@@ -4,7 +4,10 @@ import { NewsApi } from "api/news";
 import { TGetListRequest, TItem } from "api/types/news";
 import InfiniteScroll from "components/InfiniteScroll";
 import { isAdmin } from "utils/user";
+import NotFound from "components/NotFound";
+import { loadItem, saveItem } from "utils/localStorage";
 import ListItem from "../ListItem";
+import Filter, { TFilterParams } from "../Filter";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
@@ -13,41 +16,57 @@ type TProps = {
 };
 const PAGESIZE = 20;
 const List = ({ excludeId }: TProps) => {
-  const [newsPageState, setNewsPageState] = useState<number>(1);
-  const [listNewsState, setListNewsState] = useState<TItem[] | null>(null);
+  const [pageState, setPageState] = useState<number>(1);
+  const [listState, setListState] = useState<TItem[] | null>(null);
 
-  const newsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
-  const newsFilterRef = useRef<TGetListRequest>({
+  const loadingStatusRef = useRef({ isLoading: false, isOff: false });
+  const filterRef = useRef<TGetListRequest>({
     excludeId: excludeId || undefined,
     excludeStatus: isAdmin() ? undefined : 2,
+    ...loadItem("news_filter"),
   });
-  const onReachNewsBottomHandler = () => {
-    !newsLoadingStatusRef.current.isOff && !newsLoadingStatusRef.current.isLoading && setNewsPageState((prev) => prev + 1);
+  const onReachBottomHandler = () => {
+    !loadingStatusRef.current.isOff && !loadingStatusRef.current.isLoading && setPageState((prev) => prev + 1);
   };
 
   const getData = (params?: TGetListRequest) => {
-    newsLoadingStatusRef.current.isLoading = true;
-    NewsApi.getList({ ...newsFilterRef.current, ...params, order: "DESC" }).then((res) => {
-      setListNewsState((prev) => (!prev || newsPageState === 1 ? res : [...prev, ...res]));
-      newsLoadingStatusRef.current.isLoading = false;
+    loadingStatusRef.current.isLoading = true;
+    NewsApi.getList({ ...filterRef.current, ...params }).then((res) => {
+      setListState((prev) => (!prev || pageState === 1 ? res : [...prev, ...res]));
+      loadingStatusRef.current.isLoading = false;
       if (!res.length) {
-        newsLoadingStatusRef.current.isOff = true;
+        loadingStatusRef.current.isOff = true;
       }
     });
   };
 
   useEffect(() => {
-    getData({ offset: (newsPageState - 1) * PAGESIZE, limit: PAGESIZE });
-  }, [newsPageState]);
+    getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
+  }, [pageState]);
 
   useEffect(() => {
-    getData({ order: "desc" });
+    getData({ offset: 0, limit: PAGESIZE });
   }, []);
+
+  const changeFilter = (filter: TFilterParams) => {
+    loadingStatusRef.current.isOff = false;
+    filterRef.current = filter;
+    saveItem("news_filter", filterRef.current);
+    if (pageState === 1) {
+      getData({ offset: 0, limit: PAGESIZE });
+    } else {
+      setPageState(1);
+    }
+  };
+
   return (
     <div className="page-news_list">
-      {listNewsState && listNewsState.map((item, index) => <ListItem key={index} data={item} />)}
-      {listNewsState === null && <LoaderIcon />}
-      <InfiniteScroll onReachBottom={onReachNewsBottomHandler} amendment={100} />
+      <Filter filter={filterRef.current} onChange={changeFilter} />
+
+      {listState && listState.map((item, index) => <ListItem key={index} data={item} />)}
+      {listState === null && <LoaderIcon />}
+      {listState && !listState.length && <NotFound />}
+      <InfiniteScroll onReachBottom={onReachBottomHandler} amendment={100} />
     </div>
   );
 };

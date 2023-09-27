@@ -12,8 +12,9 @@ import { copyToBuffer } from "helpers/common";
 type Props = {
   url: string;
   text?: string;
+  targetText?: string;
 };
-const CopyLinkToPage: React.FC<Props> = ({ url, text }) => {
+const CopyLinkToPage: React.FC<Props> = ({ url, text, targetText }) => {
   const [copyToBufferStatusState, setCopyToBufferStatusState] = useState<boolean | null>(null);
   const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
 
@@ -44,7 +45,7 @@ const CopyLinkToPage: React.FC<Props> = ({ url, text }) => {
       </Button>
       {copyToBufferStatusState === true && (
         <div className="loc_copyToBufferStatus">
-          Ссылка на данную страницу успешно скопирована в буфер обмена вашего {isMobile ? "мобильного устройства" : "компьютера"}.
+          Ссылка {targetText || 'на данную страницу'} успешно скопирована в буфер обмена вашего {isMobile ? "мобильного устройства" : "компьютера"}.
         </div>
       )}
       {copyToBufferStatusState === false && (
