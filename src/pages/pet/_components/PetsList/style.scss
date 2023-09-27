@@ -85,18 +85,20 @@
   margin-bottom: calc(24px * var(--viewport-koeff));
 
   .loc_slider {
+    .loc_name {
+      font-size: calc(28px * var(--viewport-koeff)) !important;
+      padding: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff));
+      line-height: calc(40px * var(--viewport-koeff));
+    }
     .loc_status {
-      font-size: calc(22px * var(--viewport-koeff)) !important;
-      padding: calc(16px * var(--viewport-koeff));
-
       &.loc--status {
         &_2,
         &_3,
         &_4 {
           border-radius: 0 calc(16px * var(--viewport-koeff)) 0 0;
-          padding: calc(4px * var(--viewport-koeff)) calc(8px * var(--viewport-koeff));
-          font-size: calc(12px * var(--viewport-koeff));
-          line-height: calc(24px * var(--viewport-koeff));
+          padding: calc(6px * var(--viewport-koeff)) calc(10px * var(--viewport-koeff));
+          font-size: calc(20px * var(--viewport-koeff));
+          line-height: calc(28px * var(--viewport-koeff));
         }
       }
     }

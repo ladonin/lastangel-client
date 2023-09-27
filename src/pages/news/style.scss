@@ -133,8 +133,8 @@
     .loc_description {
       .loc_content {
         p {
-          font-size: calc(28px * var(--viewport-koeff));
-          line-height: calc(38px * var(--viewport-koeff));
+          font-size: calc(32px * var(--viewport-koeff));
+          line-height: calc(42px * var(--viewport-koeff));
         }
         padding-bottom: calc(8px * var(--viewport-koeff));
         img {
@@ -143,8 +143,8 @@
         }
       }
 
-      font-size: calc(28px * var(--viewport-koeff));
-      line-height: calc(38px * var(--viewport-koeff));
+      font-size: calc(32px * var(--viewport-koeff));
+      line-height: calc(42px * var(--viewport-koeff));
 
       .loc_slider {
         margin-top: calc(24px * var(--viewport-koeff));
@@ -153,7 +153,6 @@
         .swiper-slide {
           max-height: 80vh;
           img {
-            height: 900px;
             max-height: 100%;
             max-width: 100%;
           }

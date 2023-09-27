@@ -131,7 +131,7 @@
 
   .loc_content {
     .loc_image {
-      height: calc(332px * var(--viewport-koeff));
+      height: calc(362px * var(--viewport-koeff));
     }
 
     .loc_item {
@@ -143,14 +143,14 @@
     padding: calc(16px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
 
     .loc_title {
-      font-size: calc(22px * var(--viewport-koeff));
+      font-size: calc(26px * var(--viewport-koeff));
 
       margin-bottom: calc(4px * var(--viewport-koeff));
 
     }
 
     .loc_item {
-      font-size: calc(22px * var(--viewport-koeff));
+      font-size: calc(26px * var(--viewport-koeff));
       margin-top: calc(4px * var(--viewport-koeff));
 
       .loc_name {
@@ -165,18 +165,22 @@
     .loc_item {
 
       margin-top: calc(16px * var(--viewport-koeff));
-      font-size: calc(15px * var(--viewport-koeff));
+      font-size: calc(23px * var(--viewport-koeff));
+      line-height: calc(32px * var(--viewport-koeff));
 
       .loc_sber, .loc_docs {
         padding: 0 calc(24px * var(--viewport-koeff)) 0 calc(16px * var(--viewport-koeff));
         gap: calc(4px * var(--viewport-koeff));
 
         img {
-          width: calc(32px * var(--viewport-koeff));
-          height: calc(32px * var(--viewport-koeff));
-          margin-right: calc(4px * var(--viewport-koeff));
+          width: calc(40px * var(--viewport-koeff));
+          height: calc(40px * var(--viewport-koeff));
+          margin-right: calc(8px * var(--viewport-koeff));
         }
-
+        .loc_title {
+          font-size: calc(24px * var(--viewport-koeff));
+          line-height: calc(40px * var(--viewport-koeff));
+        }
         .loc_desc {
 
           span {

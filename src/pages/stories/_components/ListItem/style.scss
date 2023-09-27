@@ -129,9 +129,9 @@
   }
 
   .loc_short_description {
-    font-size: calc(28px * var(--viewport-koeff));
-    line-height: calc(38px * var(--viewport-koeff));
-    padding-top: calc(28px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
+    line-height: calc(42px * var(--viewport-koeff));
+    padding-top: calc(32px * var(--viewport-koeff));
   }
 
   .loc_nonpublished {
@@ -142,8 +142,8 @@
   .loc_description {
     .loc_content {
       p {
-        font-size: calc(28px * var(--viewport-koeff));
-        line-height: calc(38px * var(--viewport-koeff));
+        font-size: calc(32px * var(--viewport-koeff));
+        line-height: calc(42px * var(--viewport-koeff));
       }
       padding-bottom: 0px;
       img {
@@ -152,15 +152,14 @@
       }
     }
 
-    font-size: calc(28px * var(--viewport-koeff));
-    line-height: calc(38px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
+    line-height: calc(42px * var(--viewport-koeff));
 
     .loc_slider {
       margin-top: calc(24px * var(--viewport-koeff));
       margin-bottom: calc(24px * var(--viewport-koeff));
 
       .swiper-slide {
-        height: 900px;
         max-height: 80vh;
         img {
 
