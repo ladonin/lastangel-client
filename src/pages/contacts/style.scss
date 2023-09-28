@@ -120,4 +120,11 @@
       font-size: calc(28px * var(--viewport-koeff));
     }
   }
+
+
+  .loc_phone, .loc_vk, .loc_ok, .loc_inst {
+    img {
+      height: calc(60px * var(--viewport-koeff));
+    }
+  }
 }

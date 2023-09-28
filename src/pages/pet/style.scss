@@ -15,12 +15,26 @@
       gap: 32px;
 
       .loc_avatar {
+        height: fit-content;
+        position: relative;
         img {
           width: 450px;
           height: 450px;
 
           &.loc--died {
             border: 10px solid $c_greyDark;
+          }
+        }
+        .component-petDonationIcon {
+          position: absolute;
+          bottom: 16px;
+          right: 16px;
+          width: 80px;
+          height: 80px;
+          img {
+            width: 80px;
+            height: 80px;
+
           }
         }
       }
@@ -439,6 +453,17 @@
 
           .loc_buttonWrapper {
             width: 100%;
+
+            .component-petDonationIcon {
+              margin: calc(48px * var(--viewport-koeff)) auto 0 auto;
+
+              width: 100px;
+              height: 100px;
+              img {
+                width: 100px;
+                height: 100px;
+              }
+            }
           }
 
           .loc_donateButton {
@@ -506,6 +531,8 @@
       display: flex;
       flex-wrap: wrap;
 
+
+      
       .loc_fakephotoalbum {
         height: 1200px;
         max-height: 80vh;

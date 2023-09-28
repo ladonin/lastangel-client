@@ -1,3 +1,5 @@
+import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
+import { ANIMALS_STATUS } from "constants/animals";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
@@ -12,6 +14,7 @@ import LoaderIcon from "components/LoaderIcon";
 import { TItem as TCollectionItem } from "api/types/collections";
 import { AnimalsApi } from "api/animals";
 import CopyLinkToPage from "components/CopyLinkToPage";
+import PetDonationIcon from "components/PetDonationIcon";
 import {
   getMainImageUrl,
   prepareAge,
@@ -23,12 +26,10 @@ import {
   getAnotherImagesUrl,
   getVideoUrl,
 } from "helpers/animals";
-import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
 import PAGES from "routing/routes";
 import BreadCrumbs from "components/BreadCrumbs";
-import { ANIMALS_STATUS } from "constants/animals";
 import { getVideoType, numberFriendly } from "helpers/common";
 import flowerSrc from "icons/flower1.png";
 import PetsList from "./_components/PetsList";
@@ -181,7 +182,6 @@ const Pet: React.FC = () => {
           <BreadCrumbs breadCrumbs={[{ name: "Наши питомцы", link: PAGES.PETS }]} title={dataState.name} />
           <PetsList currentId={Number(id)} />
 
-          
           <div className="loc_contentWrapper">
             {isLoadingState && <div className="loc_loader" />}
             <div className="loc_topWrapper">
@@ -191,6 +191,8 @@ const Pet: React.FC = () => {
                   className={dataState.status === ANIMALS_STATUS.DIED ? "loc--died" : ""}
                   src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)}
                 />
+
+                {!isMobile && <div className="loc_donationIcon"><PetDonationIcon pet={dataState}/></div>}
               </div>
               {isMobileState === true && renderData()}
               <div className="loc_right">
@@ -220,6 +222,7 @@ const Pet: React.FC = () => {
                         </div>
                       )}
                       <div className="loc_buttonWrapper">
+                        {isMobile && <div className="loc_donationIcon"><PetDonationIcon pet={dataState}/></div>}
                         <Button
                           className="loc_donateButton"
                           theme={ButtonThemes.SUCCESS}
