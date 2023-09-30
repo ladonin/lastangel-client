@@ -92,7 +92,15 @@
       }
     ],
     "react/prefer-stateless-function": 1,
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      },
+      {
+        "usePrettierrc": true
+      }
+    ],
     "import/prefer-default-export": 0,
     "array-element-newline": [
       "error",

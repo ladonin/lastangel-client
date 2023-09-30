@@ -231,7 +231,7 @@ const Pet: React.FC = () => {
                             navigate(`${PAGES.HELP}?target=${id}`);
                           }}
                         >
-                          Пожертвовать
+                          Покормить
                         </Button>
                         <CopyLinkToPage targetText="на новость" text="Рассказать о питомце друзьям" url={window.location.href} />
                       </div>

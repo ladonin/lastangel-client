@@ -50,7 +50,7 @@ const PetsList = ({ currentId = null }: TProps) => {
     <div className="loc_wrapper">
       <div className="loc_image">
         <div
-          className={`loc_name ${data.sex === 1 ? "loc--male" : "loc--female"}`}
+          className={cn("loc_name", { "loc--selected": data.id === currentId })}
           onClick={() => {
             navigate(`${PAGES.PET}/${data.id}`);
           }}

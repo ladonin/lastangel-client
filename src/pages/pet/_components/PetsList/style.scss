@@ -23,6 +23,7 @@
         width: 100%;
         max-width: 100%;
       }
+
       .loc_name {
         position: absolute;
         top: 0px;
@@ -33,7 +34,13 @@
         line-height: 24px;
         font-weight: 600;
         border-radius: 0 0 0 4px;
+
+        &.loc--selected {
+          background-color: $c_green;
+          color: $c_white;
+        }
       }
+
       .loc_status {
         &.loc--status {
           &_1 {
@@ -90,6 +97,7 @@
       padding: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff));
       line-height: calc(40px * var(--viewport-koeff));
     }
+
     .loc_status {
       &.loc--status {
         &_2,
