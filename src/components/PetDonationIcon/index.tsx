@@ -59,6 +59,11 @@ import d1_4Icon from "./icons/dogs/1/4.png";
 import d1_5Icon from "./icons/dogs/1/5.png";
 import d1_6Icon from "./icons/dogs/1/6.png";
 import d1_7Icon from "./icons/dogs/1/7.png";
+import d1_8Icon from "./icons/dogs/1/8.png";
+import d1_9Icon from "./icons/dogs/1/9.png";
+import d1_10Icon from "./icons/dogs/1/10.png";
+import d1_11Icon from "./icons/dogs/1/11.png";
+import d1_12Icon from "./icons/dogs/1/12.png";
 
 import d2_1Icon from "./icons/dogs/2/1.png";
 import d2_2Icon from "./icons/dogs/2/2.png";
@@ -133,7 +138,20 @@ const ICONS = {
     9: [c9_1Icon, c9_2Icon, c9_3Icon, c9_4Icon, c9_5Icon, c9_6Icon],
   },
   dogs: {
-    1: [d1_1Icon, d1_2Icon, d1_3Icon, d1_4Icon, d1_5Icon, d1_6Icon, d1_7Icon],
+    1: [
+      d1_1Icon,
+      d1_2Icon,
+      d1_3Icon,
+      d1_4Icon,
+      d1_5Icon,
+      d1_6Icon,
+      d1_7Icon,
+      d1_8Icon,
+      d1_9Icon,
+      d1_10Icon,
+      d1_11Icon,
+      d1_12Icon
+    ],
     2: [d2_1Icon, d2_2Icon, d2_3Icon, d2_4Icon],
     3: [d3_1Icon, d3_2Icon, d3_3Icon, d3_4Icon],
     4: [d4_1Icon, d4_2Icon, d4_3Icon, d4_4Icon],

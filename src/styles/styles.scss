@@ -84,7 +84,7 @@ textarea {
   color: $c_white;
   text-decoration: none;
   transition: $transition;
-
+  cursor: pointer;
   &:hover {
     color: $c_lagunaLight;
   }
@@ -93,12 +93,20 @@ textarea {
   color: $c_lagunaBlue;
   text-decoration: none;
   transition: $transition;
-
+  cursor: pointer;
   &:hover {
     color: $c_lagunaBlueLight;
   }
 }
-
+.link_3 {
+  color: $c_lagunaDark;
+  text-decoration: none;
+  transition: $transition;
+  cursor: pointer;
+  &:hover {
+    color: $c_lagunaGrey;
+  }
+}
 h1, h2 {
   margin: 0;
 }

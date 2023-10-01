@@ -5,6 +5,7 @@
 import { AxiosResponse } from "axios";
 import { TGetListOutput, TGetListRequest, TGetOutput, TCommonDataRequest } from "api/types/collections";
 import { apiService } from "./axios";
+import { saveFile } from "../helpers/common";
 
 // const paramsSerializer = (params: any): string => qs.stringify(params, { arrayFormat: "repeat" });
 
@@ -50,4 +51,6 @@ export const CollectionsApi = {
       })
       .then((response: AxiosResponse<boolean>) => response.data),
   remove: (id: number) => apiService.post(`remove_collection?id=${id}`).then((response: AxiosResponse<boolean>) => response.data),
+  downloadData: (type: string) =>
+    apiService.get(`download_collections`, { params: { type } }).then(saveFile),
 };

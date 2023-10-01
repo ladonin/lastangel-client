@@ -15,6 +15,7 @@ import albumImg1 from "./images/mainAlbum-1.jpg";
 import albumImg2 from "./images/mainAlbum-2.jpg";
 import albumImg15 from "./images/mainAlbum-15.jpg";
 import "./style.scss";
+import MediaOriginalLinks from "../../../../components/MediaOriginalLinks";
 
 const Slider = () => {
   const [dataState, setDataState] = useState<(TGetResponseItem & { data: number[] }) | null>(null);
@@ -26,63 +27,69 @@ const Slider = () => {
   }, []);
 
   return (
-    <Swiper
-      spaceBetween={30}
-      loop
-      centeredSlides
-      initialSlide={0}
-      lazy={{
-        enabled: true,
-        loadPrevNext: true,
-      }}
-      autoplay={{
-        delay: 5000,
-        disableOnInteraction: false,
-      }}
-      pagination={{
-        clickable: true,
-      }}
-      navigation
-      modules={[Lazy, Autoplay, Pagination, Navigation]}
-      className="page-home_photoSlider"
-    >
-      {dataState === null && (
-        <SwiperSlide>
-          <div className="loc_wait" />
-        </SwiperSlide>
-      )}
-      {dataState &&
-        !!dataState.data.length &&
-        [...dataState.data]
-          .reverse()
-          .map((number, index) => (
-            <SwiperSlide key={index}>
-              {index < 3 ? (
-                <img alt="nophoto" src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)} />
-              ) : (
-                <img
-                  alt="nophoto"
-                  data-src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)}
-                  className="swiper-lazy"
-                  loading="lazy"
-                />
-              )}
+    <div className="page-home_photoSlider">
+      <Swiper
+        spaceBetween={30}
+        loop
+        centeredSlides
+        initialSlide={0}
+        lazy={{
+          enabled: true,
+          loadPrevNext: true,
+        }}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation
+        modules={[Lazy, Autoplay, Pagination, Navigation]}
+        className="loc_slider"
+      >
+        {dataState === null && (
+          <SwiperSlide>
+            <div className="loc_wait" />
+          </SwiperSlide>
+        )}
+        {dataState &&
+          !!dataState.data.length &&
+          [...dataState.data]
+            .reverse()
+            .map((number, index) => (
+              <SwiperSlide key={index}>
+                {index < 3 ? (
+                  <img
+                    alt="nophoto"
+                    src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)}
+                  />
+                ) : (
+                  <img
+                    alt="nophoto"
+                    data-src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)}
+                    className="swiper-lazy"
+                    loading="lazy"
+                  />
+                )}
+              </SwiperSlide>
+            ))}
+        {dataState && !dataState.data.length && (
+          <>
+            <SwiperSlide>
+              <img alt="nophoto" src={albumImg2} />
             </SwiperSlide>
-          ))}
-      {dataState && !dataState.data.length && (
-        <>
-          <SwiperSlide>
-            <img alt="nophoto" src={albumImg2} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img alt="nophoto" src={albumImg15} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img alt="nophoto" src={albumImg1} />
-          </SwiperSlide>
-        </>
-      )}
-    </Swiper>
+            <SwiperSlide>
+              <img alt="nophoto" src={albumImg15} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img alt="nophoto" src={albumImg1} />
+            </SwiperSlide>
+          </>
+        )}
+      </Swiper>
+      <MediaOriginalLinks type="mainphotoalbum" data={dataState as any} />
+    </div>
   );
 };
 export default Slider;

@@ -1,9 +1,9 @@
-.page-administration_news_filter {
+.page-newses_filter {
   .loc_wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     background-color: $c_lagunaBlue;
     padding: 8px 16px;
     border-radius: 8px;
@@ -46,11 +46,11 @@
 }
 
 
-.layout.loc--isMobile .page-administration_news_filter {
+.layout.loc--isMobile .page-newses_filter {
   .loc_wrapper {
     padding: calc(24px * var(--viewport-koeff));
     gap: calc(24px * var(--viewport-koeff));
-    margin-bottom: calc(16px * var(--viewport-koeff));
+    margin-bottom: calc(24px * var(--viewport-koeff));
     border-radius: calc(8px * var(--viewport-koeff));
 
     .loc_formSelectItem, .loc_formInputItem {

@@ -19,6 +19,7 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 import CopyLinkToPage from "components/CopyLinkToPage";
+import MediaOriginalLinks from "../../components/MediaOriginalLinks";
 
 const News: React.FC = () => {
   const navigate = useNavigate();
@@ -57,8 +58,14 @@ const News: React.FC = () => {
       <BreadCrumbs title="Новости" />
 
       {dataState && (
-        <div className={cn("loc_item", { "loc--non_published": dataState.status === NEWS_STATUS.NON_PUBLISHED })}>
-          {dataState.status === NEWS_STATUS.NON_PUBLISHED && <div className="loc_nonpublished">Не опубликован</div>}
+        <div
+          className={cn("loc_item", {
+            "loc--non_published": dataState.status === NEWS_STATUS.NON_PUBLISHED,
+          })}
+        >
+          {dataState.status === NEWS_STATUS.NON_PUBLISHED && (
+            <div className="loc_nonpublished">Не опубликован</div>
+          )}
           <div className="loc_created">{getDateString(dataState.created)}</div>
           <div className="loc_name">{dataState.name}</div>
           {isAdmin() && (
@@ -74,13 +81,25 @@ const News: React.FC = () => {
             </Button>
           )}
           <div className="loc_description">
-            <div className="loc_content" dangerouslySetInnerHTML={{ __html: dataState.description }} />
+            <div
+              className="loc_content"
+              dangerouslySetInnerHTML={{ __html: dataState.description }}
+            />
 
             {!dataState.hide_album && !!anotherImagesState && !!anotherImagesState.length && (
-              <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
+              <Swiper
+                slidesPerView={1}
+                navigation
+                modules={[Autoplay, Pagination, Navigation]}
+                className="loc_slider"
+              >
                 {anotherImagesState.map((item, index) => (
                   <SwiperSlide key={index}>
-                    <img alt="_" className="loc_image" src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)} />
+                    <img
+                      alt="_"
+                      className="loc_image"
+                      src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
+                    />
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -88,20 +107,34 @@ const News: React.FC = () => {
           </div>
           {dataState.video1 && (
             <video className="loc_video" controls>
-              <source src={getVideoUrl(dataState, dataState.video1)} type={getVideoType(dataState.video1)} />
+              <source
+                src={getVideoUrl(dataState, dataState.video1)}
+                type={getVideoType(dataState.video1)}
+              />
             </video>
           )}
           {dataState.video2 && (
             <video className="loc_video" controls>
-              <source src={getVideoUrl(dataState, dataState.video2)} type={getVideoType(dataState.video2)} />
+              <source
+                src={getVideoUrl(dataState, dataState.video2)}
+                type={getVideoType(dataState.video2)}
+              />
             </video>
           )}
           {dataState.video3 && (
             <video className="loc_video" controls>
-              <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)} />
+              <source
+                src={getVideoUrl(dataState, dataState.video3)}
+                type={getVideoType(dataState.video3)}
+              />
             </video>
           )}
-          <CopyLinkToPage targetText="на новость" text="Поделиться этой новостью с друзьями" url={`${window.location.origin + PAGES.NEWS}/${dataState.id}`} />
+          <MediaOriginalLinks type="news" data={dataState} />
+          <CopyLinkToPage
+            targetText="на новость"
+            text="Поделиться этой новостью с друзьями"
+            url={`${window.location.origin + PAGES.NEWS}/${dataState.id}`}
+          />
         </div>
       )}
       <div className="loc_anotherTitle">Другие новости:</div>

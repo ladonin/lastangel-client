@@ -53,7 +53,7 @@ const InfoBlock = () => {
         <img alt="nophoto" src={PetsAtHomeIcon} />{" "}
         <div className="loc_right">
           <div className="loc_text">
-            Нашли {!isMobileState && <br />}
+            Обрели {!isMobileState && <br />}
             свой дом
           </div>
           <div className="loc_value">{dataState.at_home}</div>

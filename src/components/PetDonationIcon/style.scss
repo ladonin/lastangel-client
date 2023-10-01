@@ -1,11 +1,13 @@
 .component-petDonationIcon {
 
-
+  background-color: rgba(255,255,255,0.85);
+  border-radius: 99px;
+  padding: 8px;
 }
 
 
 .layout.loc--isMobile .component-petDonationIcon {
 
-    //calc(32px * var(--viewport-koeff));
+  padding: calc(16px * var(--viewport-koeff));
 
 }

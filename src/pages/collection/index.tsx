@@ -23,6 +23,7 @@ import { COLLECTIONS_STATUS } from "constants/collections";
 import flowerSrc from "icons/flower1.png";
 import BreadCrumbs from "components/BreadCrumbs";
 import CopyLinkToPage from "components/CopyLinkToPage";
+import MediaOriginalLinks from "../../components/MediaOriginalLinks";
 
 // Ленивая загрузка модуля
 // const OtherComponent = React.lazy(() => import('components/header'));
@@ -52,13 +53,23 @@ const Collection: React.FC = () => {
 
   const getDonationsList = () => {
     if (donationsListState === null) {
-      DonationsApi.getTargetList({ type: 2, target_id: Number(id) }).then((res) => setDonationsListState(res));
+      DonationsApi.getTargetList({ type: 2, target_id: Number(id) }).then((res) =>
+        setDonationsListState(res)
+      );
     }
   };
   const isAnonym = (item: TDonationItem) =>
-    !(item.donator_fullname || item.donator_firstname || item.donator_middlename || item.donator_lastname);
+    !(
+      item.donator_fullname ||
+      item.donator_firstname ||
+      item.donator_middlename ||
+      item.donator_lastname
+    );
   const getDonatorName = (item: TDonationItem) =>
-    (item.donator_fullname || `${item.donator_firstname} ${item.donator_middlename} ${item.donator_lastname}`).toUpperCase();
+    (
+      item.donator_fullname ||
+      `${item.donator_firstname} ${item.donator_middlename} ${item.donator_lastname}`
+    ).toUpperCase();
 
   const renderDonateButton = () => (
     <Button
@@ -107,14 +118,22 @@ const Collection: React.FC = () => {
 
         {isMobileState === false && renderDonateButton()}
         {isMobileState === false && renderRedactButton()}
-        {isMobileState === false && <CopyLinkToPage targetText="на сбор" text="Рассказать о сборе друзьям" url={window.location.href} />}
+        {isMobileState === false && (
+          <CopyLinkToPage
+            targetText="на сбор"
+            text="Рассказать о сборе друзьям"
+            url={window.location.href}
+          />
+        )}
       </div>
     );
   const renderData = () =>
     dataState && (
       <div className="loc_data">
         <div className="loc_name">{dataState.name}</div>
-        {dataState.status === COLLECTIONS_STATUS.NON_PUBLISHED && <div className="loc_not_published">Не опубликован</div>}
+        {dataState.status === COLLECTIONS_STATUS.NON_PUBLISHED && (
+          <div className="loc_not_published">Не опубликован</div>
+        )}
 
         {!!dataState.animal_name && !!dataState.animal_id && (
           <div className="loc_target_animal">
@@ -130,7 +149,8 @@ const Collection: React.FC = () => {
         )}
         <div className="loc_id">ID: С{dataState.id} </div>
         <div className="loc_targetSum">
-          Необходимо {isMobileState === false && <>собрать</>}: <span>{numberFriendly(dataState.target_sum)}</span> руб.
+          Необходимо {isMobileState === false && <>собрать</>}:{" "}
+          <span>{numberFriendly(dataState.target_sum)}</span> руб.
         </div>
         {isMobileState === true && renderDonation(dataState)}
         {dataState.status === COLLECTIONS_STATUS.CLOSED && (
@@ -144,63 +164,99 @@ const Collection: React.FC = () => {
   return (
     <div className="page-collection">
       {!!dataState && (
-        <div className="loc_contentWrapper">
-          <BreadCrumbs breadCrumbs={[{ name: "Сборы", link: PAGES.COLLECTIONS }]} title={dataState.name} />
-          <div className="loc_topWrapper">
-            <div className="loc_avatar">
-              <img alt="not found" src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
+        <>
+          <div className="loc_contentWrapper">
+            <BreadCrumbs
+              breadCrumbs={[{ name: "Сборы", link: PAGES.COLLECTIONS }]}
+              title={dataState.name}
+            />
+            <div className="loc_topWrapper">
+              <div className="loc_avatar">
+                <img alt="not found" src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
+              </div>
+              {isMobileState === true && renderData()}
+
+              <div className="loc_right">
+                {isMobileState === false && renderData()}
+
+                {isMobileState === true && (
+                  <div className="loc_description">{dataState.description}</div>
+                )}
+
+                {isMobileState === false && renderDonation(dataState)}
+                {isMobileState === true && (
+                  <div className="loc_buttonWrapper">{renderDonateButton()}</div>
+                )}
+                {isMobileState === true && renderRedactButton()}
+                {isMobileState === true && (
+                  <CopyLinkToPage
+                    targetText="на сбор"
+                    text="Рассказать о сборе друзьям"
+                    url={window.location.href}
+                  />
+                )}
+
+                {isMobileState === false && (
+                  <div className="loc_description">{dataState.description}</div>
+                )}
+              </div>
             </div>
-            {isMobileState === true && renderData()}
 
-            <div className="loc_right">
-              {isMobileState === false && renderData()}
-
-              {isMobileState === true && <div className="loc_description">{dataState.description}</div>}
-
-              {isMobileState === false && renderDonation(dataState)}
-              {isMobileState === true && <div className="loc_buttonWrapper">{renderDonateButton()}</div>}
-              {isMobileState === true && renderRedactButton()}
-              {isMobileState === true && <CopyLinkToPage targetText="на сбор" text="Рассказать о сборе друзьям" url={window.location.href} />}
-
-              {isMobileState === false && <div className="loc_description">{dataState.description}</div>}
-            </div>
-          </div>
-
-          <div className="loc_bottomWrapper">
-            {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
-              <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
-                {[...anotherImagesState].reverse().map((item, index) => (
-                  <SwiperSlide key={index}>
+            <div className="loc_bottomWrapper">
+              {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
+                <Swiper
+                  slidesPerView={1}
+                  navigation
+                  modules={[Autoplay, Pagination, Navigation]}
+                  className="loc_slider"
+                >
+                  {[...anotherImagesState].reverse().map((item, index) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        alt="nophoto"
+                        className="loc_image"
+                        src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
+                      />
+                    </SwiperSlide>
+                  ))}
+                  <SwiperSlide>
                     <img
                       alt="nophoto"
                       className="loc_image"
-                      src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
+                      src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)}
                     />
                   </SwiperSlide>
-                ))}
-                <SwiperSlide>
-                  <img alt="nophoto" className="loc_image" src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)} />
-                </SwiperSlide>
-              </Swiper>
-            )}
+                </Swiper>
+              )}
 
-            {dataState.video1 && (
-              <video className="loc_video" controls>
-                <source src={getVideoUrl(dataState, dataState.video1)} type={getVideoType(dataState.video1)} />
-              </video>
-            )}
-            {dataState.video2 && (
-              <video className="loc_video" controls>
-                <source src={getVideoUrl(dataState, dataState.video2)} type={getVideoType(dataState.video2)} />
-              </video>
-            )}
-            {dataState.video3 && (
-              <video className="loc_video" controls>
-                <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)} />
-              </video>
-            )}
+              {dataState.video1 && (
+                <video className="loc_video" controls>
+                  <source
+                    src={getVideoUrl(dataState, dataState.video1)}
+                    type={getVideoType(dataState.video1)}
+                  />
+                </video>
+              )}
+              {dataState.video2 && (
+                <video className="loc_video" controls>
+                  <source
+                    src={getVideoUrl(dataState, dataState.video2)}
+                    type={getVideoType(dataState.video2)}
+                  />
+                </video>
+              )}
+              {dataState.video3 && (
+                <video className="loc_video" controls>
+                  <source
+                    src={getVideoUrl(dataState, dataState.video3)}
+                    type={getVideoType(dataState.video3)}
+                  />
+                </video>
+              )}
+            </div>
           </div>
-        </div>
+          <MediaOriginalLinks type="collections" data={dataState} />
+        </>
       )}
 
       <Modal

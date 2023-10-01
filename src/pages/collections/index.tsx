@@ -16,6 +16,7 @@ import { COLLECTIONS_STATUS } from "constants/collections";
 import { numberFriendly } from "helpers/common";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import "./style.scss";
+import { SIZES_MAIN } from "../../constants/photos";
 
 const Collections: React.FC = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Collections: React.FC = () => {
       <div className="loc_image">
         <img
           alt="nophoto"
-          src={getMainImageUrl(data)}
+          src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
           onClick={() => {
             navigate(`${PAGES.COLLECTION}/${data.id}`);
           }}

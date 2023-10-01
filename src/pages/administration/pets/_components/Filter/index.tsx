@@ -1,7 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
 
 import { isMobile } from "react-device-detect";
-import { ANIMALS_CATEGORY, ANIMALS_KIND, ANIMALS_STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS_FILTER } from "constants/animals";
+import {
+  ANIMALS_CATEGORY,
+  ANIMALS_KIND,
+  ANIMALS_STATUS,
+  CATEGORY_OPTIONS,
+  STATUS_OPTIONS_FILTER,
+} from "constants/animals";
 import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
 import { AnimalsApi } from "api/animals";
@@ -18,6 +24,7 @@ type TProps = {
 export type TFilterParams = {
   status?: ValuesOf<typeof ANIMALS_STATUS>;
   notPublished?: 1 | 0;
+  isMajor?: 1 | 0;
   statusExclude?: ValuesOf<typeof ANIMALS_STATUS>[];
   category?: ValuesOf<typeof ANIMALS_CATEGORY>;
   id?: number;
@@ -50,7 +57,9 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
     selectIdRef.current?.clearValue();
   };
 
-  const [animalsOptionsState, setAnimalsOptionsState] = useState<{ value: string; label: string }[]>([]);
+  const [animalsOptionsState, setAnimalsOptionsState] = useState<
+    { value: string; label: string }[]
+  >([]);
   useEffect(() => {
     AnimalsApi.getList({
       offset: 0,
@@ -60,13 +69,22 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
       statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
       withUnpublished: 1,
     }).then((res) => {
-      setAnimalsOptionsState(res.map((animal) => ({ value: String(animal.id), label: `${animal.name} (№${animal.id})` })));
+      setAnimalsOptionsState(
+        res.map((animal) => ({ value: String(animal.id), label: `${animal.name} (№${animal.id})` }))
+      );
     });
   }, []);
 
   const getInputStatusValue = () =>
-    filterState?.status ? String(filterState?.status) : filterState?.notPublished === 1 ? "not_published" : undefined;
-  const getInputCategoryValue = () => (filterState?.category ? String(filterState?.category) : undefined);
+    filterState?.status
+      ? String(filterState?.status)
+      : filterState?.notPublished === 1
+      ? "not_published"
+      : filterState?.isMajor === 1
+      ? "is_major"
+      : undefined;
+  const getInputCategoryValue = () =>
+    filterState?.category ? String(filterState?.category) : undefined;
   const getInputIdValue = () => (filterState?.id ? String(filterState?.id) : undefined);
 
   return (
@@ -82,12 +100,21 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
                 ...state,
                 notPublished: 1,
                 status: undefined,
+                isMajor: undefined,
+              }));
+            } else if (val?.value === "is_major") {
+              setFilterState((state) => ({
+                ...state,
+                isMajor: 1,
+                notPublished: undefined,
+                status: undefined,
               }));
             } else {
               setFilterState((state) => ({
                 ...state,
                 status: val ? (Number(val.value) as ValuesOf<typeof ANIMALS_STATUS>) : undefined,
                 notPublished: undefined,
+                isMajor: undefined,
               }));
             }
             !isLightClear && selectIdRef.current?.lightClear();
@@ -99,6 +126,10 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
               value: "not_published",
               label: "Не опубликован",
             },
+            {
+              value: "is_major",
+              label: "Важно",
+            },
           ]}
           innerRef={selectStatusRef}
         />
@@ -107,7 +138,9 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           placeholder="Категория"
           isClearable
           onChange={(val, isLightClear = false) => {
-            const category = val ? (Number(val.value) as ValuesOf<typeof ANIMALS_CATEGORY>) : undefined;
+            const category = val
+              ? (Number(val.value) as ValuesOf<typeof ANIMALS_CATEGORY>)
+              : undefined;
             setFilterState((state) => ({
               ...state,
               category,

@@ -29,6 +29,8 @@ import { TFilterParams as TPetsFilterParams } from "../administration/pets/_comp
 import Filter from "./_components/Filter";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
+import PetDonationIcon from "../../components/PetDonationIcon";
+import { SIZES_MAIN } from "../../constants/photos";
 
 const PETS_PAGESIZE = 20;
 const Pets: React.FC = () => {
@@ -56,7 +58,9 @@ const Pets: React.FC = () => {
     }
   }, []);
   useEffect(() => {
-    query.get("curator") !== null && typeof query.get("curator") !== "undefined" && setIsCuratoryState(true);
+    query.get("curator") !== null &&
+      typeof query.get("curator") !== "undefined" &&
+      setIsCuratoryState(true);
   }, [query]);
 
   useEffect(
@@ -99,23 +103,34 @@ const Pets: React.FC = () => {
       setPetsPageState(1);
     }
   };
-
+  const isHere = (status: number) =>
+    status !== ANIMALS_STATUS.AT_HOME && status !== ANIMALS_STATUS.DIED;
   const renderPetsContent = (data: TItemPet) => (
     <>
       <div className="loc_image">
         <img
           alt="nophoto"
-          src={getMainImageUrl(data)}
+          src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
           onClick={() => {
             navigate(`${PAGES.PET}/${data.id}`);
           }}
         />
+        {isHere(data.status) && (
+          <div className="loc_donationIcon">
+            <PetDonationIcon pet={data} />
+          </div>
+        )}
         {data.status === ANIMALS_STATUS.AT_HOME ? (
           <div className="loc_atHome">
             {prepareStatus(data.status, null, data.sex)} <img alt="nophoto" src={flowerSrc} />
           </div>
         ) : (
-          <div className={`loc_status loc--status_${prepareStatusCode(data.status, data.need_medicine)}`}>
+          <div
+            className={`loc_status loc--status_${prepareStatusCode(
+              data.status,
+              data.need_medicine
+            )}`}
+          >
             {prepareStatus(data.status, data.need_medicine, data.sex)}
           </div>
         )}
@@ -135,20 +150,30 @@ const Pets: React.FC = () => {
 
         <div className="loc_data">
           <div className="loc_name">{data.name}</div>,{" "}
-          <div className={`loc_sex ${data.sex === 1 ? "loc--male" : "loc--female"}`}>{prepareSex(data.sex)}</div>,{" "}
-          <div className="loc_age">{prepareAge(data.birthdate)}</div>
+          <div className={`loc_sex ${data.sex === 1 ? "loc--male" : "loc--female"}`}>
+            {prepareSex(data.sex)}
+          </div>
+          , <div className="loc_age">{prepareAge(data.birthdate)}</div>
           <div className="loc_parameters">
             {data.status !== ANIMALS_STATUS.AT_HOME && data.status !== ANIMALS_STATUS.DIED && (
               <>
-                №{data.id}, <span style={{ display: "inline-block" }}>{prepareGraft(data.grafted, data.sex)}</span>,{" "}
-                <span style={{ display: "inline-block" }}>{prepareSterilized(data.sterilized, data.sex)}</span>,{" "}
+                №{data.id},{" "}
+                <span style={{ display: "inline-block" }}>
+                  {prepareGraft(data.grafted, data.sex)}
+                </span>
+                ,{" "}
+                <span style={{ display: "inline-block" }}>
+                  {prepareSterilized(data.sterilized, data.sex)}
+                </span>
+                ,{" "}
               </>
             )}
             {data.breed || "порода неизвестна"}
           </div>
           {data.status !== ANIMALS_STATUS.AT_HOME && data.status !== ANIMALS_STATUS.DIED && (
             <div className="loc_collected">
-              Собрано за 30 дней: <span className="loc_val">{numberFriendly(data.collected)}</span> руб.
+              Собрано за 30 дней: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
+              руб.
             </div>
           )}
           <div className="loc_description">{data.short_description}</div>
@@ -158,9 +183,11 @@ const Pets: React.FC = () => {
   );
 
   const onReachPetsBottomHandler = () => {
-    !petsLoadingStatusRef.current.isOff && !petsLoadingStatusRef.current.isLoading && setPetsPageState((prev) => prev + 1);
+    !petsLoadingStatusRef.current.isOff &&
+      !petsLoadingStatusRef.current.isLoading &&
+      setPetsPageState((prev) => prev + 1);
   };
-  
+
   const getMyAnimalHandler = () => {
     setMyPetIsLoadingState(true);
     // "Мой питомец" устарел - обновляем его
@@ -176,8 +203,9 @@ const Pets: React.FC = () => {
       <BreadCrumbs title="Наши питомцы" />
       {isCuratoryState && (
         <div className="loc_forCurator">
-          Вы можете сделать разовое пожертвование на питомца или жертвовать на его содержание ежемесячно любую сумму. Для этого
-          Вам нужно выбрать питомца из списка и на его странице нажать кнопку "Помочь"
+          Вы можете сделать разовое пожертвование на питомца или жертвовать на его содержание
+          ежемесячно любую сумму. Для этого Вам нужно выбрать питомца из списка и на его странице
+          нажать кнопку "Помочь"
           <div style={{ marginTop: "16px" }}>
             Также вы можете{" "}
             <span
@@ -191,7 +219,8 @@ const Pets: React.FC = () => {
             с нами с целью <strong>забрать питомца из приюта</strong>.
           </div>
           <div style={{ marginTop: "16px" }}>
-            Если желаете выбрать питомца для кураторства/разовой помощи, то мы можем сделать этот выбор за Вас.
+            Если желаете выбрать питомца для кураторства/разовой помощи, то мы можем сделать этот
+            выбор за Вас.
           </div>
           {myPetState === null && isMobileState !== null && (
             <div className="loc_buttonWrapper">

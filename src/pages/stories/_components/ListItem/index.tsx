@@ -16,6 +16,7 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 import CopyLinkToPage from "components/CopyLinkToPage";
+import MediaOriginalLinks from "../../../../components/MediaOriginalLinks";
 
 type TProps = {
   data: TItem;
@@ -43,7 +44,9 @@ const ListItem = ({ data }: TProps) => {
       })}
       onClick={() => !isShowedState && setIsShowedState(true)}
     >
-      {data.status === STORIES_STATUS.NON_PUBLISHED && <div className="loc_nonpublished">Не опубликован</div>}
+      {data.status === STORIES_STATUS.NON_PUBLISHED && (
+        <div className="loc_nonpublished">Не опубликован</div>
+      )}
       <div className="loc_created" onClick={() => isShowedState && setIsShowedState(false)}>
         {getDateString(data.created)}
       </div>
@@ -67,10 +70,19 @@ const ListItem = ({ data }: TProps) => {
           <div className="loc_content" dangerouslySetInnerHTML={{ __html: data.description }} />
 
           {!data.hide_album && !!anotherImagesState && !!anotherImagesState.length && (
-            <Swiper slidesPerView={1} navigation modules={[Autoplay, Pagination, Navigation]} className="loc_slider">
+            <Swiper
+              slidesPerView={1}
+              navigation
+              modules={[Autoplay, Pagination, Navigation]}
+              className="loc_slider"
+            >
               {[...anotherImagesState].reverse().map((item, index) => (
                 <SwiperSlide key={index}>
-                  <img alt="nophoto" className="loc_image" src={getAnotherImagesUrl(data, item, SIZES_ANOTHER.SIZE_1200)} />
+                  <img
+                    alt="nophoto"
+                    className="loc_image"
+                    src={getAnotherImagesUrl(data, item, SIZES_ANOTHER.SIZE_1200)}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -90,7 +102,12 @@ const ListItem = ({ data }: TProps) => {
               <source src={getVideoUrl(data, data.video3)} type={getVideoType(data.video3)} />
             </video>
           )}
-          <CopyLinkToPage targetText="на историю" text="Поделиться этой историей с друзьями" url={`${window.location.origin + PAGES.STORY}/${data.id}`} />
+          <MediaOriginalLinks type="stories" data={data} />
+          <CopyLinkToPage
+            targetText="на историю"
+            text="Поделиться этой историей с друзьями"
+            url={`${window.location.origin + PAGES.STORY}/${data.id}`}
+          />
         </div>
       )}
 

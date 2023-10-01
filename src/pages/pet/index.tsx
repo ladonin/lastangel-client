@@ -1,11 +1,11 @@
-import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
-import { ANIMALS_STATUS } from "constants/animals";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
 import { isMobile } from "react-device-detect";
+import { ANIMALS_STATUS } from "constants/animals";
+import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 import Modal from "components/Modal";
 import { DonationsApi } from "api/donations";
 import { TItem } from "api/types/animals";
@@ -15,6 +15,7 @@ import { TItem as TCollectionItem } from "api/types/collections";
 import { AnimalsApi } from "api/animals";
 import CopyLinkToPage from "components/CopyLinkToPage";
 import PetDonationIcon from "components/PetDonationIcon";
+import MediaOriginalLinks from "components/MediaOriginalLinks";
 import {
   getMainImageUrl,
   prepareAge,
@@ -72,7 +73,9 @@ const Pet: React.FC = () => {
 
   const getDonationsList = () => {
     if (donationsListState === null) {
-      DonationsApi.getTargetList({ type: 1, target_id: Number(id) }).then((res) => setDonationsListState(res));
+      DonationsApi.getTargetList({ type: 1, target_id: Number(id) }).then((res) =>
+        setDonationsListState(res)
+      );
     }
   };
   const renderRedactButton = (data: TItem) =>
@@ -88,11 +91,20 @@ const Pet: React.FC = () => {
         Редактировать
       </Button>
     ) : null;
-  const isHere = (status: number) => status !== ANIMALS_STATUS.AT_HOME && status !== ANIMALS_STATUS.DIED;
+  const isHere = (status: number) =>
+    status !== ANIMALS_STATUS.AT_HOME && status !== ANIMALS_STATUS.DIED;
   const isAnonym = (item: TDonationItem) =>
-    !(item.donator_fullname || item.donator_firstname || item.donator_middlename || item.donator_lastname);
+    !(
+      item.donator_fullname ||
+      item.donator_firstname ||
+      item.donator_middlename ||
+      item.donator_lastname
+    );
   const getDonatorName = (item: TDonationItem) =>
-    (item.donator_fullname || `${item.donator_firstname} ${item.donator_middlename} ${item.donator_lastname}`).toUpperCase();
+    (
+      item.donator_fullname ||
+      `${item.donator_firstname} ${item.donator_middlename} ${item.donator_lastname}`
+    ).toUpperCase();
   const renderCollections = () =>
     collectionsState &&
     !!collectionsState.length && (
@@ -112,12 +124,17 @@ const Pet: React.FC = () => {
     );
   const renderData = () =>
     dataState && (
-      <div className="loc_data" style={isMobileState === false && !isHere(dataState.status) ? { width: "100%" } : {}}>
+      <div
+        className="loc_data"
+        style={isMobileState === false && !isHere(dataState.status) ? { width: "100%" } : {}}
+      >
         <div className="loc_name">{dataState.name}</div>
         {dataState.is_published === 0 && <div className="loc_not_published">Не опубликовано</div>}
-        {(dataState.status !== ANIMALS_STATUS.MEMBERS || (dataState.need_medicine !== null && dataState.need_medicine > 0)) && (
+        {(dataState.status !== ANIMALS_STATUS.MEMBERS ||
+          (dataState.need_medicine !== null && dataState.need_medicine > 0)) && (
           <>
-            {(dataState.status === ANIMALS_STATUS.INVALID || dataState.status === ANIMALS_STATUS.SPINAL) &&
+            {(dataState.status === ANIMALS_STATUS.INVALID ||
+              dataState.status === ANIMALS_STATUS.SPINAL) &&
               !!dataState.need_medicine && (
                 <div
                   className={`loc_status loc--status_${prepareStatusCode(dataState.status, null)}`}
@@ -127,7 +144,12 @@ const Pet: React.FC = () => {
                 </div>
               )}
 
-            <div className={`loc_status loc--status_${prepareStatusCode(dataState.status, dataState.need_medicine)}`}>
+            <div
+              className={`loc_status loc--status_${prepareStatusCode(
+                dataState.status,
+                dataState.need_medicine
+              )}`}
+            >
               {dataState.status === ANIMALS_STATUS.AT_HOME && <img alt="nophoto" src={flowerSrc} />}
               {prepareStatus(dataState.status, dataState.need_medicine, dataState.sex)}
             </div>
@@ -156,22 +178,27 @@ const Pet: React.FC = () => {
             </div>
 
             <div className="loc_grafted">{prepareGraft(dataState.grafted, dataState.sex)},</div>
-            <div className="loc_sterilized">{prepareSterilized(dataState.sterilized, dataState.sex)}</div>
+            <div className="loc_sterilized">
+              {prepareSterilized(dataState.sterilized, dataState.sex)}
+            </div>
           </div>
         )}
 
-        {!isHere(dataState.status) && isMobileState === false && <div className="loc_description">{dataState.description}</div>}
+        {!isHere(dataState.status) && isMobileState === false && (
+          <div className="loc_description">{dataState.description}</div>
+        )}
       </div>
     );
 
   const renderDisclaimer = () => (
     <div className="disclaimer">
-      <span className="orange">*</span> - собранные средства идут на кормление (покупка специальных сухих кормов, готовка еды -
-      каши, супы и т.д.), уход (регулярная мойка, особенно это касается "спинальников", расчесывание, стрижка когтей и пр
-      процедуры; иногда данные процедуры многократно усложняются при работе с "дикими" животными приюта, которые ранее получили
-      психическую травму, либо никогда не жили с человеком), уборку за питомцем, содержание в вольере либо в доме (в зависимости
-      от возраста и состояния здоровья), транспорт, регулярный медицинский осмотр, оплату электричества, отопления (в холодное
-      время), воды и пр. расходы.
+      <span className="orange">*</span> - собранные средства идут на кормление (покупка специальных
+      сухих кормов, готовка еды - каши, супы и т.д.), уход (регулярная мойка, особенно это касается
+      "спинальников", расчесывание, стрижка когтей и пр процедуры; иногда данные процедуры
+      многократно усложняются при работе с "дикими" животными приюта, которые ранее получили
+      психическую травму, либо никогда не жили с человеком), уборку за питомцем, содержание в
+      вольере либо в доме (в зависимости от возраста и состояния здоровья), транспорт, регулярный
+      медицинский осмотр, оплату электричества, отопления (в холодное время), воды и пр. расходы.
     </div>
   );
 
@@ -179,7 +206,10 @@ const Pet: React.FC = () => {
     <div className="page-pet">
       {!!dataState && (
         <>
-          <BreadCrumbs breadCrumbs={[{ name: "Наши питомцы", link: PAGES.PETS }]} title={dataState.name} />
+          <BreadCrumbs
+            breadCrumbs={[{ name: "Наши питомцы", link: PAGES.PETS }]}
+            title={dataState.name}
+          />
           <PetsList currentId={Number(id)} />
 
           <div className="loc_contentWrapper">
@@ -192,15 +222,26 @@ const Pet: React.FC = () => {
                   src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)}
                 />
 
-                {!isMobile && <div className="loc_donationIcon"><PetDonationIcon pet={dataState}/></div>}
+                {!isMobile && isHere(dataState.status) && (
+                  <div className="loc_donationIcon">
+                    <PetDonationIcon pet={dataState} />
+                  </div>
+                )}
               </div>
               {isMobileState === true && renderData()}
               <div className="loc_right">
                 {isMobileState === false && renderData()}
 
-                {isMobileState === true && <div className="loc_description">{dataState.description}</div>}
+                {isMobileState === true && (
+                  <div className="loc_description">{dataState.description}</div>
+                )}
                 {isMobileState === true && renderCollections()}
-                {!isHere(dataState.status) && <div className="margin_t24">{renderRedactButton(dataState)}</div>}
+                {isMobileState === false && !isHere(dataState.status) && (
+                  <div className="margin_t24">{renderRedactButton(dataState)}</div>
+                )}
+                {isMobileState === true &&
+                  !isHere(dataState.status) &&
+                  renderRedactButton(dataState)}
                 {isHere(dataState.status) && (
                   <>
                     <div className="loc_donation">
@@ -222,7 +263,11 @@ const Pet: React.FC = () => {
                         </div>
                       )}
                       <div className="loc_buttonWrapper">
-                        {isMobile && <div className="loc_donationIcon"><PetDonationIcon pet={dataState}/></div>}
+                        {isMobile && isHere(dataState.status) && (
+                          <div className="loc_donationIcon">
+                            <PetDonationIcon pet={dataState} />
+                          </div>
+                        )}
                         <Button
                           className="loc_donateButton"
                           theme={ButtonThemes.SUCCESS}
@@ -233,12 +278,18 @@ const Pet: React.FC = () => {
                         >
                           Покормить
                         </Button>
-                        <CopyLinkToPage targetText="на новость" text="Рассказать о питомце друзьям" url={window.location.href} />
+                        <CopyLinkToPage
+                          targetText="на новость"
+                          text="Рассказать о питомце друзьям"
+                          url={window.location.href}
+                        />
                       </div>
                       {renderRedactButton(dataState)}
                     </div>
                     {isMobileState === false && renderCollections()}
-                    {isMobileState === false && <div className="loc_description">{dataState.description}</div>}
+                    {isMobileState === false && (
+                      <div className="loc_description">{dataState.description}</div>
+                    )}
                     {isMobileState === false && renderDisclaimer()}
                   </>
                 )}
@@ -274,7 +325,11 @@ const Pet: React.FC = () => {
                           ) : (
                             <img
                               alt="nophoto"
-                              data-src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
+                              data-src={getAnotherImagesUrl(
+                                dataState,
+                                item,
+                                SIZES_ANOTHER.SIZE_1200
+                              )}
                               className="loc_image swiper-lazy"
                               loading="lazy"
                             />
@@ -282,7 +337,11 @@ const Pet: React.FC = () => {
                         </SwiperSlide>
                       ))}
                       <SwiperSlide>
-                        <img alt="nophoto" className="loc_image" src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)} />
+                        <img
+                          alt="nophoto"
+                          className="loc_image"
+                          src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)}
+                        />
                       </SwiperSlide>
                     </Swiper>
                   )}
@@ -291,21 +350,31 @@ const Pet: React.FC = () => {
 
               {dataState.video1 && (
                 <video className="loc_video" controls>
-                  <source src={getVideoUrl(dataState, dataState.video1)} type={getVideoType(dataState.video1)} />
+                  <source
+                    src={getVideoUrl(dataState, dataState.video1)}
+                    type={getVideoType(dataState.video1)}
+                  />
                 </video>
               )}
               {dataState.video2 && (
                 <video className="loc_video" controls>
-                  <source src={getVideoUrl(dataState, dataState.video2)} type={getVideoType(dataState.video2)} />
+                  <source
+                    src={getVideoUrl(dataState, dataState.video2)}
+                    type={getVideoType(dataState.video2)}
+                  />
                 </video>
               )}
               {dataState.video3 && (
                 <video className="loc_video" controls>
-                  <source src={getVideoUrl(dataState, dataState.video3)} type={getVideoType(dataState.video3)} />
+                  <source
+                    src={getVideoUrl(dataState, dataState.video3)}
+                    type={getVideoType(dataState.video3)}
+                  />
                 </video>
               )}
             </div>
           </div>
+          <MediaOriginalLinks type="animals" data={dataState} />
         </>
       )}
 

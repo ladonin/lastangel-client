@@ -9,6 +9,11 @@ import "./style.scss";
 import PAGES from "routing/routes";
 import Header from "pages/_commonComponents/header";
 import { FeedbacksApi } from "api/feedbacks";
+import { AnimalsApi } from "api/animals";
+import { CollectionsApi } from "api/collections";
+import { DonationsApi } from "api/donations";
+import { NewsApi } from "api/news";
+import { StoriesApi } from "api/stories";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { quit } from "utils/user";
 import { UserApi } from "api/user";
@@ -174,6 +179,146 @@ const LayoutAdministration: React.FC = () => {
               >
                 Добавить историю
               </Button>
+              <Button
+                className="loc_mainPagePhotoalbumButton"
+                theme={ButtonThemes.PRIMARY}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                onClick={() => navigate(PAGES.ADMINISTRATION_MAIN_PAGE_PHOTOALBUM_UPDATE)}
+              >
+                Фотоальбом главной страницы
+              </Button>
+              <Button
+                className="loc_documentsButton"
+                theme={ButtonThemes.PRIMARY}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                onClick={() => navigate(PAGES.ADMINISTRATION_DOCUMENTS_UPDATE)}
+              >
+                Фото документов приюта
+              </Button>
+              <div className="loc_block_1">
+                <div className="loc_block_1_title">Скачать данные о питомцах в</div>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => AnimalsApi.downloadData("txt")}
+                >
+                  txt
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => AnimalsApi.downloadData("html")}
+                >
+                  html
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => AnimalsApi.downloadData("csv")}
+                >
+                  csv
+                </Button>
+              </div>
+
+              <div className="loc_block_1">
+                <div className="loc_block_1_title">Скачать данные о сборах в</div>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => CollectionsApi.downloadData("txt")}
+                >
+                  txt
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => CollectionsApi.downloadData("html")}
+                >
+                  html
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => CollectionsApi.downloadData("csv")}
+                >
+                  csv
+                </Button>
+              </div>
+
+              <div className="loc_block_1">
+                <div className="loc_block_1_title">Скачать данные о донатах в</div>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => DonationsApi.downloadData("txt")}
+                >
+                  txt
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => DonationsApi.downloadData("html")}
+                >
+                  html
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => DonationsApi.downloadData("csv")}
+                >
+                  csv
+                </Button>
+              </div>
+
+              <div className="loc_block_1">
+                <div className="loc_block_1_title">Скачать новости в</div>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => NewsApi.downloadData("txt")}
+                >
+                  txt
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => NewsApi.downloadData("html")}
+                >
+                  html
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => NewsApi.downloadData("csv")}
+                >
+                  csv
+                </Button>
+              </div>
+
+              <div className="loc_block_1">
+                <div className="loc_block_1_title">Скачать истории в</div>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => StoriesApi.downloadData("txt")}
+                >
+                  txt
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => StoriesApi.downloadData("html")}
+                >
+                  html
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => StoriesApi.downloadData("csv")}
+                >
+                  csv
+                </Button>
+              </div>
             </div>
           )}
         </div>

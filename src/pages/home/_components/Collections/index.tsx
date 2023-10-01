@@ -15,6 +15,7 @@ import ArrowRight from "icons/arrowRight.svg";
 import PAGES from "routing/routes";
 import { numberFriendly } from "helpers/common";
 import "./style.scss";
+import { SIZES_MAIN } from "../../../../constants/photos";
 
 const Collections = () => {
   const [listState, setListState] = useState<TGetListOutput>([]);
@@ -33,7 +34,7 @@ const Collections = () => {
       }}
     >
       <div className="loc_image">
-        <img alt="nophoto" src={getMainImageUrl(data)} />
+        <img alt="nophoto" src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
       </div>
       <div className="loc_content">
         <div className="loc_data">

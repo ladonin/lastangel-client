@@ -5,6 +5,7 @@
 import { AxiosResponse } from "axios";
 import { TGetListOutput, TGetListRequest, TGetOutput, TCommonDataRequest, TGetTargetListRequest } from "api/types/donations";
 import { apiService } from "./axios";
+import { saveFile } from "../helpers/common";
 
 // const paramsSerializer = (params: any): string => qs.stringify(params, { arrayFormat: "repeat" });
 
@@ -20,4 +21,6 @@ export const DonationsApi = {
   update: (id: number, data: TCommonDataRequest) =>
     apiService.post(`update_donation?id=${id}`, data).then((response: AxiosResponse<boolean>) => response.data),
   remove: (id: number) => apiService.post(`remove_donation?id=${id}`).then((response: AxiosResponse<boolean>) => response.data),
+  downloadData: (type: string) =>
+    apiService.get(`download_donations`, { params: { type } }).then(saveFile),
 };

@@ -60,7 +60,7 @@ const NewsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
     immediateRef.current = true;
   };
   return (
-    <div className="page-administration_news_filter">
+    <div className="page-newses_filter">
       <div className="loc_wrapper">
         <Select
           value={filterState?.order ? String(filterState?.order) : undefined}

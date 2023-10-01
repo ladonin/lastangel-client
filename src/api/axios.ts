@@ -10,6 +10,7 @@ const TIMEOUT = 100000;
 export const apiService = axios.create();
 
 const onResponseSuccess = (response: AxiosResponse) => response;
+
 const onResponseError = (error: AxiosError<string>) => {
   error.response &&
     toast.error(error.response.data, {

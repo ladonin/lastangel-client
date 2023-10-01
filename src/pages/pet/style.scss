@@ -32,9 +32,8 @@
           width: 80px;
           height: 80px;
           img {
-            width: 80px;
-            height: 80px;
-
+            width: 100%;
+            height: 100%;
           }
         }
       }
@@ -459,9 +458,12 @@
 
               width: 100px;
               height: 100px;
+              .component-petDonationIcon {
+                padding: 0;
+              }
               img {
-                width: 100px;
-                height: 100px;
+                width: 100%;
+                height: 100%;
               }
             }
           }

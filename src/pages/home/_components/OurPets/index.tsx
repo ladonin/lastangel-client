@@ -28,6 +28,7 @@ import OldDogImg from "./images/old_dog.jpg";
 import OldCatImg from "./images/old_cat.jpg";
 
 import "./style.scss";
+import { SIZES_MAIN } from "../../../../constants/photos";
 
 const OurPets = () => {
   const [tabsListState, setTabsListState] = useState<TTabs[]>([]);
@@ -56,7 +57,7 @@ const OurPets = () => {
 
         {index <= itemsNumber ? (
           <img
-            src={getMainImageUrl(data)}
+            src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
             onClick={() => {
               navigate(`${PAGES.PET}/${data.id}`);
             }}
@@ -64,7 +65,7 @@ const OurPets = () => {
         ) : (
           <img
             alt="nophoto"
-            data-src={getMainImageUrl(data)}
+            data-src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
             onClick={() => {
               navigate(`${PAGES.PET}/${data.id}`);
             }}
@@ -138,7 +139,7 @@ const OurPets = () => {
       statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
       offset: 0,
       limit: 200,
-      order: "id",
+      order: "ismajor, id",
       order_type: "asc",
     }).then((res) => {
       const puppies = res.filter(({ kind, birthdate }) => getCategoryCode(kind, birthdate) === ANIMALS_CATEGORY.PUPPY);

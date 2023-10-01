@@ -300,6 +300,7 @@ const Administration: React.FC = () => {
   const renderPetsContent = (data: TItemPet) => (
     <div className="loc_petItem">
       <img alt="nophoto" src={getPetMainImageUrl(data)} />
+      {data.ismajor === 1 && <div className="loc_isImportant">важно</div>}
       <div className="loc_content">
         <Button
           className="loc_button"
@@ -699,24 +700,6 @@ const Administration: React.FC = () => {
 
   return initTabState !== undefined ? (
     <div className="page-administration">
-      <div className="loc_buttons">
-        <Button
-          className="loc_mainPagePhotoalbumButton"
-          theme={ButtonThemes.PRIMARY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
-          onClick={() => navigate(PAGES.ADMINISTRATION_MAIN_PAGE_PHOTOALBUM_UPDATE)}
-        >
-          Фотоальбом главной страницы
-        </Button>
-        <Button
-          className="loc_documentsButton"
-          theme={ButtonThemes.PRIMARY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
-          onClick={() => navigate(PAGES.ADMINISTRATION_DOCUMENTS_UPDATE)}
-        >
-          Фото документов приюта
-        </Button>
-      </div>
       <Tabs selectedTab={initTabState} onSelect={onSelectTabHandler} tabsList={tabs} panelsList={panels} />
     </div>
   ) : null;

@@ -63,6 +63,18 @@
         }
 
         .loc_petItem {
+          position: relative; 
+          .loc_isImportant {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            color: $c_red;
+            background: $c_white;
+            font-weight: 600;
+            padding: 8px;
+            width: fit-content;
+            border-radius: 0 0 0 8px;
+          }
           .loc_collected {
             .loc_val {
               color: $c_orange;
@@ -531,6 +543,11 @@
         
         
         .loc_petItem {
+          .loc_isImportant {
+            padding: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff));
+            border-radius: 0 0 0 calc(8px * var(--viewport-koeff));
+            font-size: calc(32px * var(--viewport-koeff));
+          }
           .loc_not_published {
             margin: calc(24px * var(--viewport-koeff)) auto;
           }

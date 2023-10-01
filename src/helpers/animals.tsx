@@ -111,7 +111,11 @@ export const transformCategoryToParams = (category?: ValuesOf<typeof ANIMALS_CAT
 
   if (category === ANIMALS_CATEGORY.PUPPY) {
     kind = [ANIMALS_KIND.LITTLE_DOG, ANIMALS_KIND.MEDIUM_DOG, ANIMALS_KIND.BIG_DOG];
-    minbirthdate = [getTimestamp(PUPPY_MAXTIMESTAMP), getTimestamp(PUPPY_MAXTIMESTAMP), getTimestamp(PUPPY_MAXTIMESTAMP)];
+    minbirthdate = [
+      getTimestamp(PUPPY_MAXTIMESTAMP),
+      getTimestamp(PUPPY_MAXTIMESTAMP),
+      getTimestamp(PUPPY_MAXTIMESTAMP),
+    ];
     maxbirthdate = [getTimestamp(0), getTimestamp(0), getTimestamp(0)];
   } else if (category === ANIMALS_CATEGORY.DOG) {
     kind = [ANIMALS_KIND.LITTLE_DOG, ANIMALS_KIND.MEDIUM_DOG, ANIMALS_KIND.BIG_DOG];
@@ -157,7 +161,11 @@ export const transformCategoryToParams = (category?: ValuesOf<typeof ANIMALS_CAT
 export const getCategoryCode = (kind: ValuesOf<typeof ANIMALS_KIND>, birthdate: number) => {
   const ageInSecs = new Date().getTime() / 1000 - birthdate;
 
-  if (kind === ANIMALS_KIND.LITTLE_DOG || kind === ANIMALS_KIND.MEDIUM_DOG || kind === ANIMALS_KIND.BIG_DOG) {
+  if (
+    kind === ANIMALS_KIND.LITTLE_DOG ||
+    kind === ANIMALS_KIND.MEDIUM_DOG ||
+    kind === ANIMALS_KIND.BIG_DOG
+  ) {
     if (ageInSecs <= PUPPY_MAXTIMESTAMP) {
       return ANIMALS_CATEGORY.PUPPY;
     }
@@ -233,19 +241,27 @@ export const prepareAge = (bdate: number) => {
   }`;
 };
 
-export const getMainImageUrl = (data: TGetResponseItem, size: ValuesOf<typeof SIZES_MAIN> = SIZES_MAIN.SQUARE) =>
+export const getMainImageUrl = (data: TGetResponseItem, size?: ValuesOf<typeof SIZES_MAIN>) =>
   data.id
     ? `${process.env.OUTER_STORAGE_URL}media/pets/${data.id}/main${size ? `_${size}` : ""}.jpeg${
         data.updated ? `?${data.updated}` : ""
       }`
     : "";
 
-export const getAnotherImagesUrl = (data: TGetResponseItem, number: number, size?: ValuesOf<typeof SIZES_ANOTHER>) =>
+export const getAnotherImagesUrl = (
+  data: TGetResponseItem,
+  number: number,
+  size?: ValuesOf<typeof SIZES_ANOTHER>
+) =>
   data.id
-    ? `${process.env.OUTER_STORAGE_URL}media/pets/${data.id}/another_${number}${size ? `_${size}` : ""}.jpeg${
-        data.updated ? `?${data.updated}` : ""
-      }`
+    ? `${process.env.OUTER_STORAGE_URL}media/pets/${data.id}/another_${number}${
+        size ? `_${size}` : ""
+      }.jpeg${data.updated ? `?${data.updated}` : ""}`
     : "";
 
 export const getVideoUrl = (data: TGetResponseItem, name: string) =>
-  data.id ? `${process.env.OUTER_STORAGE_URL}media/pets/${data.id}/${name}${data.updated ? `?${data.updated}` : ""}` : "";
+  data.id
+    ? `${process.env.OUTER_STORAGE_URL}media/pets/${data.id}/${name}${
+        data.updated ? `?${data.updated}` : ""
+      }`
+    : "";

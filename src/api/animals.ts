@@ -4,8 +4,15 @@
  */
 import { AxiosResponse } from "axios";
 // import qs from "qs";
-import { TGetListOutput, TGetListRequest, TGetOutput, TCommonDataRequest, TGetCountOutput } from "api/types/animals";
+import {
+  TGetListOutput,
+  TGetListRequest,
+  TGetOutput,
+  TCommonDataRequest,
+  TGetCountOutput,
+} from "api/types/animals";
 import { TItem as TCollectionItem } from "api/types/collections";
+import { saveFile } from "helpers/common";
 import { apiService } from "./axios";
 
 // const paramsSerializer = (params: any): string => qs.stringify(params, { arrayFormat: "repeat" });
@@ -31,9 +38,13 @@ const prepareData = (data: TCommonDataRequest) => {
 
 export const AnimalsApi = {
   getList: (params?: TGetListRequest) =>
-    apiService.get(`get_animals_list`, { params }).then((response: AxiosResponse<TGetListOutput>) => response.data),
+    apiService
+      .get(`get_animals_list`, { params })
+      .then((response: AxiosResponse<TGetListOutput>) => response.data),
   get: (id: number) =>
-    apiService.get(`get_animal`, { params: { id } }).then((response: AxiosResponse<TGetOutput>) => response.data),
+    apiService
+      .get(`get_animal`, { params: { id } })
+      .then((response: AxiosResponse<TGetOutput>) => response.data),
   add: (data: TCommonDataRequest) =>
     apiService
       .post(`add_animal`, prepareData(data), {
@@ -51,14 +62,23 @@ export const AnimalsApi = {
         },
       })
       .then((response: AxiosResponse<boolean>) => response.data),
-  remove: (id: number) => apiService.post(`remove_animal?id=${id}`).then((response: AxiosResponse<boolean>) => response.data),
+  remove: (id: number) =>
+    apiService
+      .post(`remove_animal?id=${id}`)
+      .then((response: AxiosResponse<boolean>) => response.data),
 
   getCollections: (id: number) =>
     apiService
       .get(`get_animal_collections`, { params: { id } })
       .then((response: AxiosResponse<TCollectionItem[]>) => response.data),
 
-  getCount: () => apiService.get(`get_animals_count`).then((response: AxiosResponse<TGetCountOutput>) => response.data),
+  getCount: () =>
+    apiService
+      .get(`get_animals_count`)
+      .then((response: AxiosResponse<TGetCountOutput>) => response.data),
 
-  getMyAnimal: () => apiService.get(`get_my_animal`).then((response: AxiosResponse<TGetOutput>) => response.data),
+  getMyAnimal: () =>
+    apiService.get(`get_my_animal`).then((response: AxiosResponse<TGetOutput>) => response.data),
+  downloadData: (type: string) =>
+    apiService.get(`download_animals`, { params: { type } }).then(saveFile),
 };

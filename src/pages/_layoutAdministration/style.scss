@@ -48,7 +48,16 @@
         display: flex;
         justify-content: flex-start;
         gap: 16px;
-
+        .loc_block_1 {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          gap: 16px;
+          .loc_block_1_title {
+            font-size: 16px;
+            font-weight: 600;
+          }
+        }
       }
 
       .loc_addPetButton {
@@ -67,7 +76,12 @@
         margin-left: 0;
       }
 
-
+      .loc_mainPagePhotoalbumButton {
+        margin-left: 0;
+      }
+      .loc_documentsButton {
+        margin-left: 0;
+      }
       .loc_emails {
         position: relative;
         cursor: pointer;
@@ -121,7 +135,22 @@
     .loc_buttons {
       width: 100%;
       gap: calc(24px * var(--viewport-koeff));
-      .loc_addPetButton, .loc_addCollectionButton, .loc_addDonationButton, .loc_addDonatorButton, .loc_addNewsButton,.loc_addStoryButton {
+
+      .loc_block_1 {
+        gap: calc(16px * var(--viewport-koeff));
+        flex-wrap: wrap;
+        margin-top: calc(24px * var(--viewport-koeff));
+        .loc_block_1_title {
+          width: 100%;
+          font-size: calc(32px * var(--viewport-koeff));
+          
+        }
+      }
+      
+      
+      
+      
+      .loc_addPetButton, .loc_addCollectionButton, .loc_addDonationButton, .loc_addDonatorButton, .loc_addNewsButton,.loc_addStoryButton, .loc_mainPagePhotoalbumButton, .loc_documentsButton {
         width: 100%;
       }
     }
