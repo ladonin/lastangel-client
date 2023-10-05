@@ -195,6 +195,16 @@ const LayoutAdministration: React.FC = () => {
               >
                 Фото документов приюта
               </Button>
+
+              <Button
+                className="loc_documentsButton"
+                theme={ButtonThemes.PRIMARY}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                onClick={() => navigate(PAGES.ADMINISTRATION_CLINIC_PHOTOS_UPDATE)}
+              >
+                Фото клиники
+              </Button>
+              
               <div className="loc_block_1">
                 <div className="loc_block_1_title">Скачать данные о питомцах в</div>
                 <Button

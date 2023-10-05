@@ -44,7 +44,7 @@ const News = () => {
 
   useEffect(() => {
     if (isMobileState === null) return;
-    NewsApi.getList({ offset: 0, limit: 3, order: "desc", excludeStatus: 2 /* isAdmin() ? undefined : 2 */ }).then((res) => {
+    NewsApi.getList({ offset: 0, limit: 5, order: "desc", excludeStatus: 2 /* isAdmin() ? undefined : 2 */ }).then((res) => {
       setListState(res);
     });
   }, [isMobileState]);

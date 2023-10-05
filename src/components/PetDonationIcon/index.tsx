@@ -150,7 +150,7 @@ const ICONS = {
       d1_9Icon,
       d1_10Icon,
       d1_11Icon,
-      d1_12Icon
+      d1_12Icon,
     ],
     2: [d2_1Icon, d2_2Icon, d2_3Icon, d2_4Icon],
     3: [d3_1Icon, d3_2Icon, d3_3Icon, d3_4Icon],
@@ -190,16 +190,15 @@ const calcDonationRate = (collected: number) => {
 const PetDonationIcon: React.FC<TProps> = (props) => {
   const { pet } = props;
   const [iconState, setIconState] = useState<string | undefined>(undefined);
-  const petDonationIcons: {
-    [key: number]: { collected: number; icon: number };
-  } = loadItem("pet_donation_icons");
 
   useEffect(() => {
+    const petDonationIcons: {
+      [key: number]: { collected: number; icon: number };
+    } = loadItem("pet_donation_icons");
     if (pet) {
       const collected = pet.collected || 0;
       const kind = pet.kind === ANIMALS_KIND.CAT ? "cats" : "dogs";
       const icons = ICONS[kind][calcDonationRate(collected || 0)];
-
       if (
         petDonationIcons[pet.id] &&
         petDonationIcons[pet.id].icon &&
@@ -208,7 +207,7 @@ const PetDonationIcon: React.FC<TProps> = (props) => {
         setIconState(icons[petDonationIcons[pet.id].icon]);
       } else {
         const count: number = icons.length;
-        const number = Math.floor(Math.random() * (count - 1) + 1);
+        const number = Math.floor(Math.random() * count);
 
         saveItem("pet_donation_icons", {
           ...petDonationIcons,

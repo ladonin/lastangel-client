@@ -205,11 +205,11 @@ const Pets: React.FC = () => {
         <div className="loc_forCurator">
           Вы можете сделать разовое пожертвование на питомца или жертвовать на его содержание
           ежемесячно любую сумму. Для этого Вам нужно выбрать питомца из списка и на его странице
-          нажать кнопку "Помочь"
+          нажать кнопку <b>"Покормить"</b>
           <div style={{ marginTop: "16px" }}>
             Также вы можете{" "}
             <span
-              className="loc_linkToContacts"
+              className="loc_linkToContacts link_3"
               onClick={() => {
                 navigate(PAGES.CONTACTS);
               }}

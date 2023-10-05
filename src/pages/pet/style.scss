@@ -456,8 +456,8 @@
             .loc_donationIcon {
               margin: calc(48px * var(--viewport-koeff)) auto 0 auto;
 
-              width: 100px;
-              height: 100px;
+              width: 100px; // Так надо
+              height: 100px; // Так надо
               .component-petDonationIcon {
                 padding: 0;
               }

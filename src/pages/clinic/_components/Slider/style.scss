@@ -1,4 +1,4 @@
-.page-documents_photoSlider {
+.page-clinic_photoSlider {
 
 
   .swiper-slide {
@@ -15,12 +15,6 @@
       max-width: 100%;
     }
 
-    .loc_openButton {
-
-      position: absolute; 
-      top: 12px;
-      right: 24px;
-    }
   }
 
   .loc_wait {
@@ -28,7 +22,7 @@
   }
 }
 
-.layout.loc--isMobile .page-documents_photoSlider {
+.layout.loc--isMobile .page-clinic_photoSlider {
   margin: 0 calc(-24px * var(--viewport-koeff));
 
   .swiper-slide {
@@ -37,10 +31,6 @@
     img {
       max-height: calc(100% - calc(48px* var(--viewport-koeff)));
       max-width: calc(100% - calc(48px* var(--viewport-koeff)));
-    }
-    .loc_openButton {
-      top: calc(32px* var(--viewport-koeff));
-      right: calc(32px* var(--viewport-koeff));
     }
   }
 }

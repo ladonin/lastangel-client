@@ -7,9 +7,7 @@
     border: 1px solid $c_yellowLight;
 
     .loc_linkToContacts {
-      color: $c_lagunaGrey;
       font-weight: 600;
-      @extend %hoverable;
     }
 
     .loc_buttonWrapper {

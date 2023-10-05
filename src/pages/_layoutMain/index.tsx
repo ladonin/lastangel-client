@@ -35,7 +35,10 @@ const LayoutMain: React.FC = () => {
   }, [isMobile]);
 
   useEffect(() => {
-    if (prevPathnameState.indexOf(`${PAGES.PET}/`) === 0 && pathname.indexOf(`${PAGES.PET}/`) === 0) {
+    if (
+      prevPathnameState.indexOf(`${PAGES.PET}/`) === 0 &&
+      pathname.indexOf(`${PAGES.PET}/`) === 0
+    ) {
       /* empty */
     } else {
       window.scrollTo(0, 0);
@@ -59,11 +62,11 @@ const LayoutMain: React.FC = () => {
       <Header />
 
       <div className="page">
-        <div className="loc_warningMessage">
+        {/* <div className="loc_warningMessage">
           <img alt="nophoto" src={dogAttentionImage} />
           Уважаемые пользователи, в настоящее время сайт находится в финальной стадии разработки. Полная информация о приюте и его
           питомцах появится уже в ближайшем будущем.
-        </div>
+        </div> */}
 
         {isAdmin() && (
           <div className="page_administrationMenu">

@@ -39,6 +39,7 @@ const PAGES = {
   ADMINISTRATION_MAIN_PAGE_PHOTOALBUM_UPDATE: "/administration/mainPagePhotoalbum/update",
 
   ADMINISTRATION_DOCUMENTS_UPDATE: "/administration/documents/update",
+  ADMINISTRATION_CLINIC_PHOTOS_UPDATE: "/administration/clinic_photos/update",
 
   ADMINISTRATION_FEEDBACKS: "/administration/feedbacks",
 };

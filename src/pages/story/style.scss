@@ -35,15 +35,7 @@
 
     .loc_description {
       .loc_content {
-        p {
-          font-size: calc(32px * var(--viewport-koeff));
-          line-height: calc(42px * var(--viewport-koeff));
-        }
         padding-bottom: 4px;
-        img {
-          max-height: 100%;
-          max-width: 100%;
-        }
       }
 
       color: $c_greyDark;
@@ -63,9 +55,8 @@
           align-items: center;
           justify-content: center;
           max-height: 80vh;
-
+          height: 600px;
           img {
-            height: 600px;
             max-height: 100%;
             max-width: 100%;
           }
@@ -139,7 +130,15 @@
 
     .loc_description {
       .loc_content {
+        p {
+          font-size: calc(32px * var(--viewport-koeff));
+          line-height: calc(42px * var(--viewport-koeff));
+        }
         padding-bottom: calc(8px * var(--viewport-koeff));
+        img {
+          max-height: 100%;
+          max-width: 100%;
+        }
       }
 
       font-size: calc(32px * var(--viewport-koeff));
