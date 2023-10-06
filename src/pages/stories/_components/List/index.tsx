@@ -21,9 +21,9 @@ const List = ({ excludeId }: TProps) => {
 
   const loadingStatusRef = useRef({ isLoading: false, isOff: false });
   const filterRef = useRef<TGetListRequest>({
+    ...loadItem("stories_filter"),
     excludeId: excludeId || undefined,
     excludeStatus: isAdmin() ? undefined : 2,
-    ...loadItem("stories_filter"),
   });
   const onReachBottomHandler = () => {
     !loadingStatusRef.current.isOff && !loadingStatusRef.current.isLoading && setPageState((prev) => prev + 1);
