@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
@@ -46,8 +46,8 @@ const Collection: React.FC = () => {
   useEffect(() => {
     id &&
       CollectionsApi.get(Number(id)).then((res) => {
-        setDataState(res);
-        res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
+        res && setDataState(res);
+        res && res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
       });
   }, [id]);
 
@@ -138,13 +138,9 @@ const Collection: React.FC = () => {
         {!!dataState.animal_name && !!dataState.animal_id && (
           <div className="loc_target_animal">
             Кому:{" "}
-            <span
-              onClick={() => {
-                navigate(`${PAGES.PET}/${dataState.animal_id}`);
-              }}
-            >
+            <Link to={`${PAGES.PET}/${dataState.animal_id}`} className="link_3">
               {dataState.animal_name}
-            </span>
+            </Link>
           </div>
         )}
         <div className="loc_id">ID: С{dataState.id} </div>

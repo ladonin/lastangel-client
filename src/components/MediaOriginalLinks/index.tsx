@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import "./style.scss";
 import { isMobile } from "react-device-detect";
 
+import { Link } from "react-router-dom";
 import {
   getAnotherImagesUrl as getAnotherImagesUrlAnimals,
   getMainImageUrl as getMainImageUrlAnimals,
@@ -34,6 +35,7 @@ import {
 import { getAnotherImagesUrl as getAnotherImagesUrlMainphotoalbum } from "helpers/mainphotoalbum";
 
 import { isAdmin } from "utils/user";
+import PAGES from "../../routing/routes";
 
 type TData = {
   id: number;
@@ -104,68 +106,63 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
       {!!dataState.main_image && (
         <div className="loc_block">
           Главное фото:{" "}
-          <a
+          <Link
             target="_blank"
+            to={getMainImageUrl()(dataState as any) || "/"}
             className="link_3"
-            href={getMainImageUrl()(dataState as any)}
-            rel="noreferrer"
           >
             Скачать
-          </a>
+          </Link>
         </div>
       )}
       {!!anotherImagesState && !!anotherImagesState.length && (
         <div className="loc_block">
           {typeState !== "mainphotoalbum" ? "Прочие фото: " : ""}
           {anotherImagesState?.map((item, index) => (
-            <a
+            <Link
               target="_blank"
+              to={getAnotherImagesUrl()(dataState as any, item) || "/"}
               className="link_3"
-              href={getAnotherImagesUrl()(dataState as any, item)}
-              rel="noreferrer"
             >
               {index + 1}
-            </a>
+            </Link>
           ))}
         </div>
       )}
       {!!dataState.video1 && (
         <div className="loc_block">
           Видео 1:{" "}
-          <a
+          <Link
             target="_blank"
+            to={getVideoUrl()(dataState as any, dataState.video1) || "/"}
             className="link_3"
-            href={getVideoUrl()(dataState as any, dataState.video1)}
-            rel="noreferrer"
           >
             Скачать
-          </a>
+          </Link>
         </div>
       )}
       {!!dataState.video2 && (
         <div className="loc_block">
           Видео 2:{" "}
-          <a
+          <Link
             target="_blank"
+            to={getVideoUrl()(dataState as any, dataState.video2) || "/"}
             className="link_3"
-            href={getVideoUrl()(dataState as any, dataState.video2)}
-            rel="noreferrer"
           >
             Скачать
-          </a>
+          </Link>
         </div>
       )}
       {!!dataState.video3 && (
         <div className="loc_block">
           Видео 3:{" "}
-          <a
+          <Link
             target="_blank"
+            to={getVideoUrl()(dataState as any, dataState.video3) || "/"}
             className="link_3"
-            href={getVideoUrl()(dataState as any, dataState.video3)}
-            rel="noreferrer"
           >
             Скачать
-          </a>
+          </Link>
         </div>
       )}
     </div>

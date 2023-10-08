@@ -24,7 +24,7 @@
     height: calc(100% - 40px);
 
     .loc_logoText {
-      width: calc(350px + 16px);
+      width: calc(400px + 16px);
       display: flex;
       flex-wrap: wrap;
       padding-top: 4px;
@@ -158,13 +158,15 @@
     .loc_name {
       font-weight: 600;
       color: $c_white;
-      font-size: calc(50px * var(--viewport-koeff));
+      font-size: calc(54px * var(--viewport-koeff));
+      margin-bottom: calc(12px * var(--viewport-koeff));
     }
 
     .loc_description {
-      font-weight: 600;
+      font-weight: 500;
       color: $c_white;
       font-size: calc(32px * var(--viewport-koeff));
+      line-height: calc(48px * var(--viewport-koeff));
     }
   }
 

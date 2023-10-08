@@ -58,6 +58,13 @@ img {
   }
 }
 
+a {
+  text-decoration: none;
+}
+
+strong {
+  font-weight: 600;
+}
 
 textarea, input {
   border: 1px solid $c_greyMedium;
@@ -107,7 +114,21 @@ textarea {
     color: $c_lagunaGrey;
   }
 }
-h1, h2 {
+.link_img {
+  text-decoration: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.link_text {
+  text-decoration: none;
+  border: none;
+  color: inherit;
+  &:hover {
+    color: $c_lagunaGrey;
+  }
+}
+h1, h2, h3 {
   margin: 0;
 }
 h1 {
@@ -116,7 +137,9 @@ h1 {
 h2 {
   line-height: 40px;
 }
-
+h3 {
+  line-height: 32px;
+}
 .margin_t24 {
   margin-top: 24px;
 }

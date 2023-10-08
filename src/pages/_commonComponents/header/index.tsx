@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, Link } from "react-router-dom";
 import cn from "classnames";
 import logo from "icons/logo.png";
 import VkLogo from "icons/vk_logo.png";
@@ -8,9 +8,9 @@ import OkLogo from "icons/ok_logo.png";
 import InstLogo from "icons/inst_logo.png";
 import CaretIcon from "icons/triangle16.svg";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import PAGES from "routing/routes";
 
 import "./styles.scss";
-import PAGES from "../../../routing/routes";
 
 const MENU_ITEMS = [
   { title: "Главная", link: PAGES.MAIN, inMobileSubMenu: false },
@@ -35,15 +35,9 @@ export default function Index() {
   const [openSubmenuState, setOpenSubmenuState] = useState(false);
 
   const renderMenuItem = (item: TMenuItem, index: number) => (
-    <div
-      className="loc_item"
-      onClick={() => {
-        navigate(item.link);
-      }}
-      key={index}
-    >
+    <Link to={item.link} className="loc_item" key={index}>
       {item.title}
-    </div>
+    </Link>
   );
   const renderMenu = (mobile: boolean) => (
     <>
@@ -51,7 +45,9 @@ export default function Index() {
 
       {mobile && (
         <>
-          {MENU_ITEMS.filter(({ inMobileSubMenu }) => !inMobileSubMenu).map((item, index) => renderMenuItem(item, index))}
+          {MENU_ITEMS.filter(({ inMobileSubMenu }) => !inMobileSubMenu).map((item, index) =>
+            renderMenuItem(item, index)
+          )}
 
           <div
             className={cn("loc_else", { "loc--opened": openSubmenuState })}
@@ -63,7 +59,9 @@ export default function Index() {
           </div>
           {openSubmenuState && (
             <div className="loc_subMenu">
-              {MENU_ITEMS.filter(({ inMobileSubMenu }) => inMobileSubMenu).map((item, index) => renderMenuItem(item, index))}
+              {MENU_ITEMS.filter(({ inMobileSubMenu }) => inMobileSubMenu).map((item, index) =>
+                renderMenuItem(item, index)
+              )}
             </div>
           )}
         </>
@@ -74,10 +72,10 @@ export default function Index() {
   const renderButtons = (size: ButtonSizes) => (
     <div className="loc_buttons">
       <Button theme={ButtonThemes.PRIMARY} size={size} onClick={() => navigate(PAGES.CURATORY)}>
-        стать куратором
+        <strong>стать куратором</strong>
       </Button>
       <Button theme={ButtonThemes.SUCCESS} size={size} onClick={() => navigate(PAGES.HELP)}>
-        помочь приюту
+        <strong>помочь приюту</strong>
       </Button>
     </div>
   );
@@ -113,8 +111,8 @@ export default function Index() {
             <div className="loc_rightPart">
               <div className="loc_topPart">
                 <div className="loc_logoText">
-                  <div className="loc_1">Последний ангел</div>
-                  <div className="loc_2">приют для бездомных животных</div>
+                  <h1 className="loc_1">Последний ангел</h1>
+                  <h2 className="loc_2">приют для бездомных животных в г. Александров</h2>
                 </div>
 
                 {renderButtons(ButtonSizes.MEDIUM)}
@@ -140,12 +138,11 @@ export default function Index() {
               />
             </div>
             <div className="loc_rightPart">
-              <div className="loc_name">
-                Последний
-                <br />
-                ангел
-              </div>
-              <div className="loc_description">приют для бездомных животных</div>
+              <h1 className="loc_name">Последний ангел</h1>
+              <h2 className="loc_description">
+                Приют для бездомных животных
+                <br />в г. Александров
+              </h2>
             </div>
           </div>
           <div className="loc_bottom">

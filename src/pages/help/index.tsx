@@ -17,6 +17,7 @@ import PAGES from "routing/routes";
 import { MAIN_CARD, MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "../../constants/donations";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
+import ArrowRight from "../../icons/arrowRight.svg";
 
 const Help: React.FC = () => {
   const query = useQueryHook();
@@ -72,18 +73,13 @@ const Help: React.FC = () => {
           <div className="loc_description">
             <div className="loc_smsComment">
               Уважаемые посетители, чтобы мы зарегистрировали Ваш донат на выбранного Вами питомца
-              или сбора, то, просьба, сообщить нам об этом{" "}
+              или сбора, просьба, сообщить нам об этом{" "}
               <img alt="nophoto" src={PrayIcon} height="16" style={{ display: "inline-block" }} />.
             </div>
             <br /> Это можно сделать с помощью{" "}
-            <span
-              className="link_3"
-              onClick={() => {
-                navigate(PAGES.CONTACTS);
-              }}
-            >
+            <Link to={PAGES.CONTACTS} className="link_3">
               обратной связи
-            </span>
+            </Link>
             , отправки смс на номер{" "}
             <span className="loc_contact" style={{ whiteSpace: "nowrap" }}>
               {MAIN_PHONE} ({MAIN_CARD_OWNER})

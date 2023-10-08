@@ -7,6 +7,7 @@ export type TGetResponseItem = {
   type: number;
   status: ValuesOf<typeof COLLECTIONS_STATUS>;
   animal_id: number;
+  is_corrupted: number;
   short_description: string;
   description: string;
   ismajor: number;

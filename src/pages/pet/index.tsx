@@ -60,9 +60,9 @@ const Pet: React.FC = () => {
     if (id) {
       setIsLoadingState(true);
       AnimalsApi.get(Number(id)).then((res) => {
-        setIsLoadingState(false);
-        setDataState(res);
-        res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
+        res && setIsLoadingState(false);
+        res && setDataState(res);
+        res && res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
       });
 
       AnimalsApi.getCollections(Number(id)).then((res) => {

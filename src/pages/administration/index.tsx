@@ -4,10 +4,19 @@ import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router";
-import { TGetListRequest as TGetCollectionsListRequest, TItem as TItemCollection } from "api/types/collections";
+import {
+  TGetListRequest as TGetCollectionsListRequest,
+  TItem as TItemCollection,
+} from "api/types/collections";
 import { TGetListRequest as TGetPetsListRequest, TItem as TItemPet } from "api/types/animals";
-import { TGetListRequest as TGetDonationsListRequest, TItem as TItemDonation } from "api/types/donations";
-import { TGetListRequest as TGetDonatorsListRequest, TItem as TItemDonator } from "api/types/donators";
+import {
+  TGetListRequest as TGetDonationsListRequest,
+  TItem as TItemDonation,
+} from "api/types/donations";
+import {
+  TGetListRequest as TGetDonatorsListRequest,
+  TItem as TItemDonator,
+} from "api/types/donators";
 import { TGetListRequest as TGetNewsListRequest, TItem as TItemNews } from "api/types/news";
 import { TGetListRequest as TGetStoriesListRequest, TItem as TItemStory } from "api/types/stories";
 import PAGES from "routing/routes";
@@ -26,7 +35,8 @@ import {
   prepareGraft,
   prepareSex,
   prepareSterilized,
-  prepareStatusCode as preparePetStatusCode, prepareKind
+  prepareStatusCode as preparePetStatusCode,
+  prepareKind,
 } from "helpers/animals";
 import { prepareType as prepareDonationType } from "helpers/donations";
 import {
@@ -42,13 +52,20 @@ import NotFound from "../../components/NotFound";
 import { loadItem, saveItem } from "../../utils/localStorage";
 import { Button, ButtonSizes, ButtonThemes } from "../../components/Button";
 import PetsFilter, { TFilterParams as TPetsFilterParams } from "./pets/_components/Filter";
-import CollectionsFilter, { TFilterParams as TCollectionsFilterParams } from "./collections/_components/Filter";
-import NewsFilter, { DEFAULT_SORT as NEWS_DEFAULT_SORT, TFilterParams as TNewsFilterParams } from "./news/_components/Filter";
+import CollectionsFilter, {
+  TFilterParams as TCollectionsFilterParams,
+} from "./collections/_components/Filter";
+import NewsFilter, {
+  DEFAULT_SORT as NEWS_DEFAULT_SORT,
+  TFilterParams as TNewsFilterParams,
+} from "./news/_components/Filter";
 import StoriesFilter, {
   DEFAULT_SORT as STORIES_DEFAULT_SORT,
   TFilterParams as TStoriesFilterParams,
 } from "./stories/_components/Filter";
-import DonatorsFilter, { TFilterParams as TDonatorsFilterParams } from "./donators/_components/Filter";
+import DonatorsFilter, {
+  TFilterParams as TDonatorsFilterParams,
+} from "./donators/_components/Filter";
 import DonationsFilter, {
   DEFAULT_SORT as DONATION_DEFAULT_SORT,
   ORDER_VALUES as DONATION_ORDER_VALUES,
@@ -106,9 +123,11 @@ const Administration: React.FC = () => {
     setSelectedTabIndexState(index);
   };
   const getCollectionsData = (filter?: TGetCollectionsListRequest) => {
-    CollectionsApi.getList({ ...filter, order: "id", order_type: "DESC" }).then((res) => {
-      setListCollectionsState(res);
-    });
+    CollectionsApi.getList({ ...filter, order: "id", order_type: "DESC", with_corrupted: 1 }).then(
+      (res) => {
+        setListCollectionsState(res);
+      }
+    );
   };
   useEffect(() => {
     if (initTabState !== undefined) {
@@ -122,10 +141,16 @@ const Administration: React.FC = () => {
   const [donatorsPageState, setDonatorsPageState] = useState<number>(1);
 
   const petsFilterRef = useRef<TPetsFilterParams>(
-    loadItem("admin_pets_filter") || { statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED] }
+    loadItem("admin_pets_filter") || {
+      statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
+    }
   );
-  const collectionsFilterRef = useRef<TCollectionsFilterParams>(loadItem("admin_collections_filter") || {});
-  const donationsFilterRef = useRef<TDonationsFilterParams>(loadItem("admin_donations_filter") || {});
+  const collectionsFilterRef = useRef<TCollectionsFilterParams>(
+    loadItem("admin_collections_filter") || {}
+  );
+  const donationsFilterRef = useRef<TDonationsFilterParams>(
+    loadItem("admin_donations_filter") || {}
+  );
   const newsFilterRef = useRef<TNewsFilterParams>(loadItem("admin_news_filter") || {});
   const storiesFilterRef = useRef<TStoriesFilterParams>(loadItem("admin_stories_filter") || {});
   const donatorsFilterRef = useRef<TDonatorsFilterParams>(
@@ -152,19 +177,29 @@ const Administration: React.FC = () => {
   const getStoriesData = (params?: TGetStoriesListRequest) => {
     storiesLoadingStatusRef.current.isLoading = true;
     const { order, ...filter } = storiesFilterRef.current;
-    StoriesApi.getList({ ...filter, ...params, order: order || STORIES_DEFAULT_SORT }).then((res) => {
-      setListStoriesState((prev) => (prev === null || storiesPageState === 1 ? res : [...prev, ...res]));
-      storiesLoadingStatusRef.current.isLoading = false;
-      if (!res.length) {
-        storiesLoadingStatusRef.current.isOff = true;
+    StoriesApi.getList({ ...filter, ...params, order: order || STORIES_DEFAULT_SORT }).then(
+      (res) => {
+        setListStoriesState((prev) =>
+          prev === null || storiesPageState === 1 ? res : [...prev, ...res]
+        );
+        storiesLoadingStatusRef.current.isLoading = false;
+        if (!res.length) {
+          storiesLoadingStatusRef.current.isOff = true;
+        }
       }
-    });
+    );
   };
   const getPetsData = (params?: TGetPetsListRequest) => {
     petsLoadingStatusRef.current.isLoading = true;
-    
+
     const { category, ...filter } = petsFilterRef.current;
-    AnimalsApi.getList({ ...filter, ...params, withUnpublished: 1, order: "id", order_type: "DESC" }).then((res) => {
+    AnimalsApi.getList({
+      ...filter,
+      ...params,
+      withUnpublished: 1,
+      order: "id",
+      order_type: "DESC",
+    }).then((res) => {
       setListPetsState((prev) => (prev === null || petsPageState === 1 ? res : [...prev, ...res]));
       petsLoadingStatusRef.current.isLoading = false;
       if (!res.length) {
@@ -185,7 +220,9 @@ const Administration: React.FC = () => {
       order: orderPrepared?.field || DONATION_ORDER_VALUES[DONATION_DEFAULT_SORT].field,
       order_type: orderPrepared?.type || DONATION_ORDER_VALUES[DONATION_DEFAULT_SORT].type,
     }).then((res) => {
-      setListDonationsState((prev) => (prev === null || donationsPageState === 1 ? res : [...prev, ...res]));
+      setListDonationsState((prev) =>
+        prev === null || donationsPageState === 1 ? res : [...prev, ...res]
+      );
       donationsLoadingStatusRef.current.isLoading = false;
       if (!res.length) {
         donationsLoadingStatusRef.current.isOff = true;
@@ -196,7 +233,9 @@ const Administration: React.FC = () => {
   const getDonatorsData = (params?: TGetDonatorsListRequest) => {
     donatorsLoadingStatusRef.current.isLoading = true;
     DonatorsApi.getList({ ...donatorsFilterRef.current, ...params }).then((res) => {
-      setListDonatorsState((prev) => (prev === null || donatorsPageState === 1 ? res : [...prev, ...res]));
+      setListDonatorsState((prev) =>
+        prev === null || donatorsPageState === 1 ? res : [...prev, ...res]
+      );
       donatorsLoadingStatusRef.current.isLoading = false;
       if (!res.length) {
         donatorsLoadingStatusRef.current.isOff = true;
@@ -221,11 +260,17 @@ const Administration: React.FC = () => {
   }, [storiesPageState]);
 
   useEffect(() => {
-    getDonationsData({ offset: (donationsPageState - 1) * DONATIONS_PAGESIZE, limit: DONATIONS_PAGESIZE });
+    getDonationsData({
+      offset: (donationsPageState - 1) * DONATIONS_PAGESIZE,
+      limit: DONATIONS_PAGESIZE,
+    });
   }, [donationsPageState]);
 
   useEffect(() => {
-    getDonatorsData({ offset: (donatorsPageState - 1) * DONATORS_PAGESIZE, limit: DONATORS_PAGESIZE });
+    getDonatorsData({
+      offset: (donatorsPageState - 1) * DONATORS_PAGESIZE,
+      limit: DONATORS_PAGESIZE,
+    });
   }, [donatorsPageState]);
 
   const changePetsFilter = (filter: TPetsFilterParams) => {
@@ -317,7 +362,7 @@ const Administration: React.FC = () => {
           theme={ButtonThemes.GHOST_BORDER}
           size={isMobileState ? ButtonSizes.HUGE : ButtonSizes.SMALL}
           onClick={() => {
-            window.open(`${PAGES.ADMINISTRATION_PET_UPDATE}/${data.id}`, '_blank');
+            window.open(`${PAGES.ADMINISTRATION_PET_UPDATE}/${data.id}`, "_blank");
           }}
         >
           ...в новой вкладке
@@ -327,22 +372,33 @@ const Administration: React.FC = () => {
           <div className="loc_name">
             №{data.id} {data.name}
           </div>
-          , <div className={`loc_sex ${data.sex === 1 ? "loc--male" : "loc--female"}`}>{prepareSex(data.sex)}</div>,{" "}
-          <div className="loc_age">{prepareAge(data.birthdate)}</div>
+          ,{" "}
+          <div className={`loc_sex ${data.sex === 1 ? "loc--male" : "loc--female"}`}>
+            {prepareSex(data.sex)}
+          </div>
+          , <div className="loc_age">{prepareAge(data.birthdate)}</div>
           <div className="loc_parameters">
             {prepareGraft(data.grafted, data.sex)}, {prepareSterilized(data.sterilized, data.sex)},{" "}
             {data.breed || "порода неизвестна"}, {prepareKind(data.kind, data.sex)}
           </div>
-          <div className={`loc_status loc--status_${preparePetStatusCode(data.status, data.need_medicine)}`}>
+          <div
+            className={`loc_status loc--status_${preparePetStatusCode(
+              data.status,
+              data.need_medicine
+            )}`}
+          >
             {preparePetStatus(data.status, data.need_medicine)}
           </div>
           {data.need_medicine !== null && <span>({preparePetStatus(data.status, null)})</span>}
           <div className="loc_collected">
-            Собрано за 30 дней: <span className="loc_val">{numberFriendly(data.collected)}</span> руб.
+            Собрано за 30 дней: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
+            руб.
           </div>
           <div className="loc_description">{data.short_description}</div>
           <div className="loc_created">Создано: {getDateString(data.created)}</div>
-          {!!data.updated && <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>}
+          {!!data.updated && (
+            <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>
+          )}
         </div>
       </div>
     </div>
@@ -364,21 +420,35 @@ const Administration: React.FC = () => {
         </Button>
 
         <div className="loc_data">
+          {data.is_corrupted && <div className='loc_error'>
+            Ошибка (питомец удален)
+          </div>}
           <div className="loc_name">{data.name}</div>
-
-          <div className={`loc_type loc--type_${data.type}`}>{prepareCollectionType(data.type)}</div>
-
-          <div className={`loc_status loc--status_${data.status}`}>{prepareCollectionStatus(data.status)}</div>
-          <div className="loc_target_sum">
-            Нужно: <span className="loc_val">{Number(data.target_sum)?.toLocaleString() || 0}</span> руб.
+ 
+          <div className={`loc_type loc--type_${data.type}`}>
+            {prepareCollectionType(data.type)}
           </div>
-          <div className={`loc_collected ${Number(data.target_sum) <= Number(data.collected) ? "loc--completed" : ""}`}>
+
+          <div className={`loc_status loc--status_${data.status}`}>
+            {prepareCollectionStatus(data.status)}
+          </div>
+          <div className="loc_target_sum">
+            Нужно: <span className="loc_val">{Number(data.target_sum)?.toLocaleString() || 0}</span>{" "}
+            руб.
+          </div>
+          <div
+            className={`loc_collected ${
+              Number(data.target_sum) <= Number(data.collected) ? "loc--completed" : ""
+            }`}
+          >
             Собрано: <span className="loc_val">{numberFriendly(data.collected)}</span> руб.
           </div>
 
           <div className="loc_description">{data.short_description}</div>
           <div className="loc_created">Создано: {getDateString(data.created)}</div>
-          {!!data.updated && <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>}
+          {!!data.updated && (
+            <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>
+          )}
         </div>
       </div>
     </div>
@@ -401,7 +471,9 @@ const Administration: React.FC = () => {
             Редактировать
           </Button>
           <div className="loc_created">Создано: {getDateString(data.created)}</div>
-          {!!data.updated && <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>}
+          {!!data.updated && (
+            <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>
+          )}
         </div>
       </div>
     </div>
@@ -424,16 +496,26 @@ const Administration: React.FC = () => {
             Редактировать
           </Button>
           <div className="loc_created">Создано: {getDateString(data.created)}</div>
-          {!!data.updated && <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>}
+          {!!data.updated && (
+            <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>
+          )}
         </div>
       </div>
     </div>
   );
 
   const isAnonymDonator = (item: TItemDonation) =>
-    !(item.donator_fullname || item.donator_firstname || item.donator_middlename || item.donator_lastname);
+    !(
+      item.donator_fullname ||
+      item.donator_firstname ||
+      item.donator_middlename ||
+      item.donator_lastname
+    );
   const getDonatorName = (item: TItemDonation) =>
-    (item.donator_fullname || `${item.donator_lastname} ${item.donator_firstname} ${item.donator_middlename}`).toUpperCase();
+    (
+      item.donator_fullname ||
+      `${item.donator_lastname} ${item.donator_firstname} ${item.donator_middlename}`
+    ).toUpperCase();
 
   const renderDonationsContent = (data: TItemDonation) => (
     <div className="loc_donationItem">
@@ -442,19 +524,30 @@ const Administration: React.FC = () => {
         <div className="loc_data">
           <div className="loc_targetation">
             {/* <div className="loc_type">{prepareDonationType(data.type)}</div> */}
-            {!!data.target_name && !!data.target_id && (
+            {!!data.target_name && !!data.target_id ? (
               <div
                 className={`loc_targetName loc--type_${data.type}`}
-                onClick={() => navigate(`${data.type === 1 ? PAGES.PET : PAGES.COLLECTIONS}/${data.target_id}`)}
+                onClick={() =>
+                  navigate(`${data.type === 1 ? PAGES.PET : PAGES.COLLECTIONS}/${data.target_id}`)
+                }
               >
                 {data.target_name}
               </div>
+            ) : (
+              <div className="loc_deletedTarget">{data.target_print_name}</div>
             )}
-            {!data.target_id && <div className={`loc_targetName loc--type_${data.type}`}>{prepareDonationType(data.type)}</div>}
+
+            {!data.target_id && (
+              <div className={`loc_targetName loc--type_${data.type}`}>
+                {prepareDonationType(data.type)}
+              </div>
+            )}
           </div>
 
           <div className="loc_donator">
-            <div className="loc_name">{isAnonymDonator(data) ? "Аноним" : getDonatorName(data)}</div>
+            <div className="loc_name">
+              {isAnonymDonator(data) ? "Аноним" : getDonatorName(data)}
+            </div>
 
             {data.donator_card && <div className="loc_card">Карта: {data.donator_card}</div>}
 
@@ -470,7 +563,9 @@ const Administration: React.FC = () => {
             </Button>
 
             <div className="loc_created">Создано: {getDateString(data.created)}</div>
-            {!!data.updated && <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>}
+            {!!data.updated && (
+              <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>
+            )}
           </div>
         </div>
       </div>
@@ -495,14 +590,18 @@ const Administration: React.FC = () => {
           </Button>
 
           <div className="loc_created">Создан: {getDateString(data.created)}</div>
-          {!!data.updated && <div className="loc_updated">Изменен: {getDateString(data.updated)}</div>}
+          {!!data.updated && (
+            <div className="loc_updated">Изменен: {getDateString(data.updated)}</div>
+          )}
         </div>
       </div>
     </div>
   );
 
   const onReachNewsBottomHandler = () => {
-    !newsLoadingStatusRef.current.isOff && !newsLoadingStatusRef.current.isLoading && setNewsPageState((prev) => prev + 1);
+    !newsLoadingStatusRef.current.isOff &&
+      !newsLoadingStatusRef.current.isLoading &&
+      setNewsPageState((prev) => prev + 1);
   };
 
   const onReachStoriesBottomHandler = () => {
@@ -512,7 +611,9 @@ const Administration: React.FC = () => {
   };
 
   const onReachPetsBottomHandler = () => {
-    !petsLoadingStatusRef.current.isOff && !petsLoadingStatusRef.current.isLoading && setPetsPageState((prev) => prev + 1);
+    !petsLoadingStatusRef.current.isOff &&
+      !petsLoadingStatusRef.current.isLoading &&
+      setPetsPageState((prev) => prev + 1);
   };
 
   const onReachDonationsBottomHandler = () => {
@@ -581,17 +682,27 @@ const Administration: React.FC = () => {
                 </div>
               </div>
             ))}
-          {selectedTabIndexState === 0 && <InfiniteScroll onReachBottom={onReachPetsBottomHandler} amendment={100} />}
+          {selectedTabIndexState === 0 && (
+            <InfiniteScroll onReachBottom={onReachPetsBottomHandler} amendment={100} />
+          )}
           {listPetState && !listPetState.length && <NotFound />}
         </div>
       </>,
       <>
-        <CollectionsFilter filter={collectionsFilterRef.current} onChange={changeCollectionsFilter} />
+        <CollectionsFilter
+          filter={collectionsFilterRef.current}
+          onChange={changeCollectionsFilter}
+        />
         <div className="loc_list">
           {listCollectionState === null && <LoaderIcon />}
           {listCollectionState &&
             listCollectionState.map((item, index) => (
-              <div key={index} className={cn("loc_itemWrapper loc--collection", `loc--status_${item.status}`)}>
+              <div
+                key={index}
+                className={cn("loc_itemWrapper loc--collection", `loc--status_${item.status}`, {
+                  "loc--isCorrupted": item.is_corrupted,
+                })}
+              >
                 <div className="loc_item">{renderCollectionsContent(item)}</div>
                 <div
                   className="loc_link"
@@ -611,11 +722,16 @@ const Administration: React.FC = () => {
         {listDonationsState === null && <LoaderIcon />}
         {listDonationsState &&
           listDonationsState.map((item, index) => (
-            <div key={index} className={cn("loc_itemWrapper loc--donation", `loc--type_${item.type}`)}>
+            <div
+              key={index}
+              className={cn("loc_itemWrapper loc--donation", `loc--type_${item.type}`)}
+            >
               <div className="loc_item">{renderDonationsContent(item)}</div>
             </div>
           ))}
-        {selectedTabIndexState === 2 && <InfiniteScroll onReachBottom={onReachDonationsBottomHandler} amendment={100} />}
+        {selectedTabIndexState === 2 && (
+          <InfiniteScroll onReachBottom={onReachDonationsBottomHandler} amendment={100} />
+        )}
         {listDonationsState && !listDonationsState.length && <NotFound />}
       </div>,
       <div className="loc_list">
@@ -635,7 +751,9 @@ const Administration: React.FC = () => {
               </div>
             </div>
           ))}
-        {selectedTabIndexState === 3 && <InfiniteScroll onReachBottom={onReachDonatorsBottomHandler} amendment={100} />}
+        {selectedTabIndexState === 3 && (
+          <InfiniteScroll onReachBottom={onReachDonatorsBottomHandler} amendment={100} />
+        )}
         {listDonatorsState && !listDonatorsState.length && <NotFound />}
       </div>,
 
@@ -658,7 +776,9 @@ const Administration: React.FC = () => {
                 </div>
               </div>
             ))}
-          {selectedTabIndexState === 4 && <InfiniteScroll onReachBottom={onReachNewsBottomHandler} amendment={100} />}
+          {selectedTabIndexState === 4 && (
+            <InfiniteScroll onReachBottom={onReachNewsBottomHandler} amendment={100} />
+          )}
           {listNewsState && !listNewsState.length && <NotFound />}
         </div>
       </>,
@@ -682,7 +802,9 @@ const Administration: React.FC = () => {
                 </div>
               </div>
             ))}
-          {selectedTabIndexState === 5 && <InfiniteScroll onReachBottom={onReachStoriesBottomHandler} amendment={100} />}
+          {selectedTabIndexState === 5 && (
+            <InfiniteScroll onReachBottom={onReachStoriesBottomHandler} amendment={100} />
+          )}
           {listStoriesState && !listStoriesState.length && <NotFound />}
         </div>
       </>,
@@ -700,7 +822,12 @@ const Administration: React.FC = () => {
 
   return initTabState !== undefined ? (
     <div className="page-administration">
-      <Tabs selectedTab={initTabState} onSelect={onSelectTabHandler} tabsList={tabs} panelsList={panels} />
+      <Tabs
+        selectedTab={initTabState}
+        onSelect={onSelectTabHandler}
+        tabsList={tabs}
+        panelsList={panels}
+      />
     </div>
   ) : null;
 };

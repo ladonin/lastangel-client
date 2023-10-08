@@ -51,15 +51,26 @@
           color: $c_lagunaDark;
           display: inline-block;
         }
-
+        &_1 {
+          color: $c_lagunaDark;
+        }
+        &_2 {
+          color: $c_orange;
+          &:hover {
+            color: $c_orangeLight;
+          }
+        }
         &_3 {
           color: $c_greenMedium;
         }
       }
+      
+      .loc_deletedTarget {
+        color: $c_greyMedium;
+        font-weight: 600;
+      }
     }
   }
-
-
 }
 
 

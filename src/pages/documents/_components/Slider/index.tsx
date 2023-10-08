@@ -20,7 +20,7 @@ const Slider = () => {
 
   useEffect(() => {
     DocumentsApi.get().then((res) => {
-      setDataState({ ...res, data: JSON.parse(res.another_images) });
+      res && setDataState({ ...res, data: JSON.parse(res.another_images) });
     });
   }, []);
   const [isMobileState, setIsMobileState] = useState<boolean | null>(null);

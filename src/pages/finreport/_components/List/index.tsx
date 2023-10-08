@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
 import PAGES from "routing/routes";
 import { DonationsApi } from "api/donations";
@@ -20,7 +20,9 @@ const List = () => {
   const loadingStatusRef = useRef({ isLoading: false, isOff: false });
 
   const onReachBottomHandler = () => {
-    !loadingStatusRef.current.isOff && !loadingStatusRef.current.isLoading && setPageState((prev) => prev + 1);
+    !loadingStatusRef.current.isOff &&
+      !loadingStatusRef.current.isLoading &&
+      setPageState((prev) => prev + 1);
   };
 
   const getData = (params?: TGetListRequest) => {
@@ -41,16 +43,28 @@ const List = () => {
   const navigate = useNavigate();
 
   const isAnonym = (item: TDonationItem) =>
-    !(item.donator_fullname || item.donator_firstname || item.donator_middlename || item.donator_lastname);
+    !(
+      item.donator_fullname ||
+      item.donator_firstname ||
+      item.donator_middlename ||
+      item.donator_lastname
+    );
   const getDonatorName = (item: TDonationItem) =>
-    (item.donator_fullname || `${item.donator_firstname} ${item.donator_middlename} ${item.donator_lastname}`).toUpperCase();
+    (
+      item.donator_fullname ||
+      `${item.donator_firstname} ${item.donator_middlename} ${item.donator_lastname}`
+    ).toUpperCase();
 
   return (
     <div className="page-finreport_list">
       {listState &&
         listState.map((item, index) => (
           <div key={index} className="loc_item">
-            <Tooltip text="Дата регистрации доната" className="loc_created" content={getDateString(item.created)} />
+            <Tooltip
+              text="Дата регистрации доната"
+              className="loc_created"
+              content={getDateString(item.created)}
+            />
 
             <div className={cn("loc_name", { "loc--hasLink": !!item.donator_outer_link })}>
               {isAnonym(item) ? (
@@ -70,15 +84,21 @@ const List = () => {
             </div>
 
             <div className="loc_target">
-              {!!item.target_name && !!item.target_id && (
-                <div
-                  className={`loc_targetName loc--type_${item.type}`}
-                  onClick={() => navigate(`${item.type === 1 ? PAGES.PET : PAGES.COLLECTION}/${item.target_id}`)}
+              {!!item.target_name && !!item.target_id ? (
+                <Link
+                  to={`${item.type === 1 ? PAGES.PET : PAGES.COLLECTION}/${item.target_id}`}
+                  className={`loc_targetName loc--type_${item.type} link_text`}
                 >
                   {item.target_name}
+                </Link>
+              ) : (
+                <div className="loc_deletedTarget">{item.target_print_name}</div>
+              )}
+              {!item.target_id && (
+                <div className={`loc_targetName loc--type_${item.type}`}>
+                  {prepareDonationType(item.type)}
                 </div>
               )}
-              {!item.target_id && <div className={`loc_targetName loc--type_${item.type}`}>{prepareDonationType(item.type)}</div>}
             </div>
           </div>
         ))}

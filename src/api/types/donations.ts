@@ -11,7 +11,8 @@ export type TGetResponseItem = {
   donator_card: string;
   sum: number;
   target_id: number;
-  target_name?: string;
+  target_name: string;
+  target_print_name: string;
   type: ValuesOf<typeof DONATIONS_TYPES>;
   updated: number;
   created: number;

@@ -22,7 +22,7 @@ const Slider = () => {
 
   useEffect(() => {
     MainPhotoalbumApi.get().then((res) => {
-      setDataState({ ...res, data: JSON.parse(res.another_images) });
+      res && setDataState({ ...res, data: JSON.parse(res.another_images) });
     });
   }, []);
 

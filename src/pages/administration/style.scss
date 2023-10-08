@@ -155,7 +155,14 @@
             }
 
           }
-
+          .loc_deletedTarget {
+            color: $c_greyMedium;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 30px;
+            text-align: center;
+            width: 100%;
+          }
           .loc_targetation {
             display: flex;
             flex-wrap: wrap;
@@ -186,7 +193,10 @@
         }
 
         .loc_collectionItem {
-
+          .loc_error {
+            color: $c_red;
+            margin-bottom: 16px;
+          }
           .loc_type {
             margin-top: 8px;
             font-weight: 600;
@@ -376,7 +386,10 @@
           }
 
         }
-
+        &.loc--isCorrupted {
+          background-color: $c_greyF5;
+          border: 1px solid $c_red;
+        }
       }
 
 
@@ -531,7 +544,10 @@
         }
 
         .loc_collectionItem {
-
+          .loc_error {
+            color: $c_red;
+            margin-bottom: calc(24px * var(--viewport-koeff));
+          }
           .loc_type {
             margin-top: calc(8px * var(--viewport-koeff));
           }

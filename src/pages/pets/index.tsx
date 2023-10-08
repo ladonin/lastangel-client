@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import { TGetListRequest as TGetPetsListRequest, TItem as TItemPet } from "api/types/animals";
@@ -108,13 +108,20 @@ const Pets: React.FC = () => {
   const renderPetsContent = (data: TItemPet) => (
     <>
       <div className="loc_image">
-        <img
-          alt="nophoto"
-          src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
-          onClick={() => {
-            navigate(`${PAGES.PET}/${data.id}`);
-          }}
-        />
+
+
+        <Link to={`${PAGES.PET}/${data.id}`} className="link_img">
+          <img
+            alt="nophoto"
+            src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
+          />
+        </Link>
+        
+        
+        
+        
+        
+        
         {isHere(data.status) && (
           <div className="loc_donationIcon">
             <PetDonationIcon pet={data} />
@@ -149,7 +156,14 @@ const Pets: React.FC = () => {
         </Button>
 
         <div className="loc_data">
-          <div className="loc_name">{data.name}</div>,{" "}
+
+          <Link
+            to={`${PAGES.PET}/${data.id}`}
+            className="loc_name link_text"
+          >
+            {data.name}
+          </Link>
+          ,{" "}
           <div className={`loc_sex ${data.sex === 1 ? "loc--male" : "loc--female"}`}>
             {prepareSex(data.sex)}
           </div>

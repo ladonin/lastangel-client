@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 // const OtherComponent = React.lazy(() => import('components/header'));
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import LoaderIcon from "components/LoaderIcon";
@@ -34,20 +34,20 @@ const Collections: React.FC = () => {
   };
 
   useEffect(() => {
-    getData({ status: COLLECTIONS_STATUS.PUBLISHED, withClosedCollections: true });
+    getData({
+      status: COLLECTIONS_STATUS.PUBLISHED,
+      withClosedCollections: true,
+      order: "status",
+      order_type: "asc",
+    });
   }, []);
 
   const renderCollectionsContent = (data: TItemCollection) => (
     <>
       <div className="loc_image">
-        <img
-          alt="nophoto"
-          src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
-          onClick={() => {
-            navigate(`${PAGES.COLLECTION}/${data.id}`);
-          }}
-        />
-
+        <Link to={`${PAGES.COLLECTION}/${data.id}`} className="link_img">
+          <img alt="nophoto" src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
+        </Link>
         {data.status === COLLECTIONS_STATUS.CLOSED && (
           <div className="loc_closed">
             Сбор закрыт <img alt="nophoto" src={flowerSrc} />
@@ -67,10 +67,13 @@ const Collections: React.FC = () => {
         </Button>
 
         <div className="loc_data">
-          <div className="loc_name">{data.name}</div>
+          <Link to={`${PAGES.COLLECTION}/${data.id}`} className="loc_name link_text">
+            {data.name}
+          </Link>
           {/* <div className={`loc_type loc--type_${data.type}`}>{prepareType(data.type)}</div> */}
           <div className="loc_target_sum">
-            Нужно: <span className="loc_val">{Number(data.target_sum)?.toLocaleString() || 0}</span> руб.
+            Нужно: <span className="loc_val">{Number(data.target_sum)?.toLocaleString() || 0}</span>{" "}
+            руб.
           </div>
 
           <div className="loc_collected">

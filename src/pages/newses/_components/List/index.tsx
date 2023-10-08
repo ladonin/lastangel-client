@@ -26,7 +26,9 @@ const List = ({ excludeId }: TProps) => {
     excludeStatus: isAdmin() ? undefined : 2,
   });
   const onReachBottomHandler = () => {
-    !loadingStatusRef.current.isOff && !loadingStatusRef.current.isLoading && setPageState((prev) => prev + 1);
+    !loadingStatusRef.current.isOff &&
+      !loadingStatusRef.current.isLoading &&
+      setPageState((prev) => prev + 1);
   };
 
   const getData = (params?: TGetListRequest) => {

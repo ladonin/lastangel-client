@@ -1,12 +1,28 @@
 .page-clinic {
+  .loc_content {
 
+  }
 
+  .loc_vkGroup {
+    margin-top: 8px;
+
+    * {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      img {
+        display: inline-block;
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
 
 }
 
 
 .layout.loc--isMobile .page-clinic {
-
 
 
 }

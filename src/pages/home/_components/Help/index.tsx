@@ -3,7 +3,7 @@
  */
 import React from "react";
 import "react-tabs/style/react-tabs.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Image from "icons/help.jpg";
 import SberIcon from "icons/sber.png";
 import DocsIcon from "icons/docs.png";
@@ -13,20 +13,13 @@ import { MAIN_CARD, MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "constants/don
 import "./style.scss";
 
 const Help = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="page-home_help">
       <div className="loc_title">
-        Помочь приюту
-        <div
-          className="loc_go"
-          onClick={() => {
-            navigate(PAGES.HELP);
-          }}
-        >
+        <strong>Помочь приюту</strong>
+        <Link to={PAGES.HELP} className="loc_go">
           перейти <ArrowRight />
-        </div>
+        </Link>
       </div>
       <div className="loc_content">
         <div className="loc_top">
@@ -62,8 +55,8 @@ const Help = () => {
           <div className="loc_item">
             <span className="loc_name">Рекламой:</span>
             <span>
-              расскажите о нас в социальных сетях. поделитесь любой нашей записью или дайте ссылку на сайт, расскажите о нас
-              знакомым и друзьям.
+              расскажите о нас в социальных сетях. поделитесь любой нашей записью или дайте ссылку
+              на сайт, расскажите о нас знакомым и друзьям.
             </span>
           </div>
         </div>
