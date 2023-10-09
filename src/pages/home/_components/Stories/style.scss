@@ -90,7 +90,7 @@
 
   .loc_item {
     margin-bottom: calc(32px * var(--viewport-koeff));
-    padding: calc(32px * var(--viewport-koeff));
+    padding: calc(24px * var(--viewport-koeff));
 
     .loc_nonpublished {
       font-size: calc(22px * var(--viewport-koeff));
@@ -98,8 +98,8 @@
     }
     .loc_pin {
 
-      top: calc(32px * var(--viewport-koeff));
-      right: calc(32px * var(--viewport-koeff));
+      top: calc(24px * var(--viewport-koeff));
+      right: calc(24px * var(--viewport-koeff));
       img {
         height: calc(32px * var(--viewport-koeff));
         width: calc(32px * var(--viewport-koeff));
