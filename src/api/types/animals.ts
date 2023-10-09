@@ -64,6 +64,7 @@ export type TGetListRequest = {
   withUnpublished?: 1 | 0;
   statusExclude?: ValuesOf<typeof ANIMALS_STATUS>[];
   order?: string;
+  orderComplex?: string;
   order_type?: string;
   offset?: number;
   limit?: number;

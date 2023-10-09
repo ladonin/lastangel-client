@@ -37,8 +37,7 @@ const Collections: React.FC = () => {
     getData({
       status: COLLECTIONS_STATUS.PUBLISHED,
       withClosedCollections: true,
-      order: "status",
-      order_type: "asc",
+      orderComplex: "ismajor desc, status asc",
     });
   }, []);
 

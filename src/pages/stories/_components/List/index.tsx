@@ -31,7 +31,7 @@ const List = ({ excludeId }: TProps) => {
 
   const getData = (params?: TGetListRequest) => {
     loadingStatusRef.current.isLoading = true;
-    StoriesApi.getList({ ...filterRef.current, ...params }).then((res) => {
+    StoriesApi.getList({ ...filterRef.current, ...params, orderComplex: "ismajor desc, id desc" }).then((res) => {
       setListState((prev) => (!prev || pageState === 1 ? res : [...prev, ...res]));
       loadingStatusRef.current.isLoading = false;
       if (!res.length) {

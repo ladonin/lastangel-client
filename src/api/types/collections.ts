@@ -1,5 +1,6 @@
 import { ValuesOf } from "types/common";
 import { COLLECTIONS_STATUS } from "constants/collections";
+import { ANIMALS_CATEGORY, ANIMALS_STATUS } from "../../constants/animals";
 
 export type TGetResponseItem = {
   id: number;
@@ -45,4 +46,8 @@ export type TCommonDataRequest = {
 export type TGetListOutput = TGetResponseItem[];
 export type TGetOutput = TGetResponseItem;
 
-export type TGetListRequest = {};
+export type TGetListRequest = {
+  status?: ValuesOf<typeof COLLECTIONS_STATUS>;
+  withClosedCollections?: boolean;
+  orderComplex?: string;
+};

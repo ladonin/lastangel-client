@@ -233,6 +233,7 @@
             }
 
             .loc_description {
+              font-size: calc(32px * var(--viewport-koeff));
               margin-top: calc(32px * var(--viewport-koeff));
               padding-top: calc(16px * var(--viewport-koeff));
             }

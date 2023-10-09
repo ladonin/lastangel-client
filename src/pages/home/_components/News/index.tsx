@@ -14,6 +14,8 @@ import ArrowRight from "icons/arrowRight.svg";
 import PAGES from "routing/routes";
 import { NEWS_STATUS } from "constants/news";
 import "./style.scss";
+import Tooltip from "../../../../components/Tooltip";
+import PinIcon from "../../../../icons/pin.png";
 
 const News = () => {
   const [listState, setListState] = useState<TGetListOutput>([]);
@@ -34,6 +36,14 @@ const News = () => {
       <div className="loc_content">
         <div className="loc_data">
           {data.status === NEWS_STATUS.NON_PUBLISHED && <div className="loc_nonpublished">Не опубликован</div>}
+
+          {!!data.ismajor && (
+            <div className="loc_pin">
+              {" "}
+              <Tooltip text="Закреплено" content={<img alt="." src={PinIcon} />} />
+            </div>
+          )}
+
           <div className="loc_created">{getDateString(data.created)}</div>
           <div className="loc_name">{data.name}</div>
           <div className="loc_short_description">{data.short_description}</div>
@@ -44,7 +54,7 @@ const News = () => {
 
   useEffect(() => {
     if (isMobileState === null) return;
-    NewsApi.getList({ offset: 0, limit: 5, order: "desc", excludeStatus: 2 /* isAdmin() ? undefined : 2 */ }).then((res) => {
+    NewsApi.getList({ offset: 0, limit: 5, orderComplex: "ismajor desc, id desc", excludeStatus: 2 /* isAdmin() ? undefined : 2 */ }).then((res) => {
       setListState(res);
     });
   }, [isMobileState]);

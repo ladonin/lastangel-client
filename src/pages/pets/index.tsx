@@ -74,13 +74,15 @@ const Pets: React.FC = () => {
     petsLoadingStatusRef.current.isLoading = true;
     const { category, ...filter } = petsFilterRef.current;
 
-    AnimalsApi.getList({ ...filter, ...params, order: "id", order_type: "DESC" }).then((res) => {
-      setListPetsState((prev) => (!prev || petsPageState === 1 ? res : [...prev, ...res]));
-      petsLoadingStatusRef.current.isLoading = false;
-      if (!res.length) {
-        petsLoadingStatusRef.current.isOff = true;
+    AnimalsApi.getList({ ...filter, ...params, orderComplex: "ismajor desc, id desc" }).then(
+      (res) => {
+        setListPetsState((prev) => (!prev || petsPageState === 1 ? res : [...prev, ...res]));
+        petsLoadingStatusRef.current.isLoading = false;
+        if (!res.length) {
+          petsLoadingStatusRef.current.isOff = true;
+        }
       }
-    });
+    );
   };
 
   useEffect(() => {
@@ -108,20 +110,10 @@ const Pets: React.FC = () => {
   const renderPetsContent = (data: TItemPet) => (
     <>
       <div className="loc_image">
-
-
         <Link to={`${PAGES.PET}/${data.id}`} className="link_img">
-          <img
-            alt="nophoto"
-            src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
-          />
+          <img alt="nophoto" src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
         </Link>
-        
-        
-        
-        
-        
-        
+
         {isHere(data.status) && (
           <div className="loc_donationIcon">
             <PetDonationIcon pet={data} />
@@ -156,11 +148,7 @@ const Pets: React.FC = () => {
         </Button>
 
         <div className="loc_data">
-
-          <Link
-            to={`${PAGES.PET}/${data.id}`}
-            className="loc_name link_text"
-          >
+          <Link to={`${PAGES.PET}/${data.id}`} className="loc_name link_text">
             {data.name}
           </Link>
           ,{" "}

@@ -55,7 +55,7 @@ const Collections = () => {
   useEffect(() => {
     if (isMobileState === null) return;
 
-    CollectionsApi.getList({ status: COLLECTIONS_STATUS.PUBLISHED, offset: 0, limit: isMobileState ? 4 : 3 }).then((res) => {
+    CollectionsApi.getList({ status: COLLECTIONS_STATUS.PUBLISHED, offset: 0, limit: isMobileState ? 4 : 3, order: 'ismajor', order_type: 'desc' }).then((res) => {
       setListState(res);
     });
   }, [isMobileState]);

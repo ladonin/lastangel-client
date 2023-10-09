@@ -13,10 +13,12 @@ import { SIZES_ANOTHER } from "constants/photos";
 import { STORIES_STATUS } from "constants/stories";
 import { isAdmin } from "utils/user";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import PinIcon from 'icons/pin.png';
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 import CopyLinkToPage from "components/CopyLinkToPage";
 import MediaOriginalLinks from "../../../../components/MediaOriginalLinks";
+import Tooltip from "../../../../components/Tooltip";
 
 type TProps = {
   data: TItem;
@@ -46,6 +48,12 @@ const ListItem = ({ data }: TProps) => {
     >
       {data.status === STORIES_STATUS.NON_PUBLISHED && (
         <div className="loc_nonpublished">Не опубликован</div>
+      )}
+      {!!data.ismajor && (
+        <div className="loc_pin">
+          {" "}
+          <Tooltip text="Закреплено" content={<img alt="." src={PinIcon} />} />
+        </div>
       )}
       <div className="loc_created" onClick={() => isShowedState && setIsShowedState(false)}>
         {getDateString(data.created)}

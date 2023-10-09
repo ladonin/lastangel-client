@@ -14,6 +14,8 @@ import ArrowRight from "icons/arrowRight.svg";
 import PAGES from "routing/routes";
 import { STORIES_STATUS } from "constants/stories";
 import "./style.scss";
+import Tooltip from "../../../../components/Tooltip";
+import PinIcon from "../../../../icons/pin.png";
 
 const Stories = () => {
   const [listState, setListState] = useState<TGetListOutput>([]);
@@ -34,6 +36,12 @@ const Stories = () => {
       <div className="loc_content">
         <div className="loc_data">
           {data.status === STORIES_STATUS.NON_PUBLISHED && <div className="loc_nonpublished">Не опубликован</div>}
+          {!!data.ismajor && (
+            <div className="loc_pin">
+              {" "}
+              <Tooltip text="Закреплено" content={<img alt="." src={PinIcon} />} />
+            </div>
+          )}
           <div className="loc_created">{getDateString(data.created)}</div>
           <div className="loc_name">{data.name}</div>
           <div className="loc_short_description">{data.short_description}</div>
@@ -44,7 +52,7 @@ const Stories = () => {
 
   useEffect(() => {
     if (isMobileState === null) return;
-    StoriesApi.getList({ offset: 0, limit: 3, order: "desc", excludeStatus: 2 /* isAdmin() ? undefined : 2 */ }).then((res) => {
+    StoriesApi.getList({ offset: 0, limit: 3, orderComplex: "ismajor desc, id desc", excludeStatus: 2 /* isAdmin() ? undefined : 2 */ }).then((res) => {
       setListState(res);
     });
   }, [isMobileState]);

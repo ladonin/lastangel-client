@@ -40,4 +40,5 @@ export type TGetListRequest = {
   limit?: number;
   ismajor?: boolean;
   order?: string;
+  orderComplex?: string;
 };

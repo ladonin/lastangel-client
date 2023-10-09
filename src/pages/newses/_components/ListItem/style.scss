@@ -2,7 +2,7 @@
   width: 100%;
   margin-bottom: 24px;
   display: flex;
-
+  position: relative;
   flex-direction: column;
   cursor: pointer;
   //background-color: $c_greyF5;
@@ -44,7 +44,16 @@
   .loc_nonpublished {
     margin-bottom: 16px;
   }
-
+  .loc_pin {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: default;
+    img {
+      height: 32px;
+      width: 32px;
+    }
+  }
   .loc_description {
     color: $c_greyDark;
     font-size: 18px;
@@ -146,7 +155,15 @@
     font-size: calc(26px * var(--viewport-koeff));
     margin-bottom: calc(16px * var(--viewport-koeff));
   }
+  .loc_pin {
 
+    top: calc(24px * var(--viewport-koeff));
+    right: calc(24px * var(--viewport-koeff));
+    img {
+      height: calc(40px * var(--viewport-koeff));
+      width: calc(40px * var(--viewport-koeff));
+    }
+  }
   .loc_description {
     .loc_content {
       p {
