@@ -1,4 +1,7 @@
 .page-finreport_list {
+  width: 50%;
+  margin: 0 auto;
+
   .component-loaderIcon {
     position: absolute;
     top: 50%;
@@ -17,7 +20,9 @@
     padding: 16px;
     border-radius: 8px;
     font-size: 14px;
-
+    &:hover {
+      background-color: $c_lagunaLight
+    }
     .loc_name {
 
       &.loc--hasLink {
@@ -75,6 +80,7 @@
 
 
 .layout.loc--isMobile .page-finreport_list {
+  width: 100%;
   .component-loaderIcon {
     width: calc(50px * var(--viewport-koeff));
     margin-top: calc(-25px * var(--viewport-koeff));

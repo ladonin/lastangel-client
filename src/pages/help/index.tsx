@@ -9,12 +9,12 @@ import Image from "icons/help.jpg";
 import SberIcon from "icons/sber.png";
 import DocsIcon from "icons/docs.png";
 import PrayIcon from "icons/pray.png";
+import PAGES from "routing/routes";
+import { MAIN_CARD, MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "../../constants/donations";
 import InvalidIcon2 from "./icons/2.png";
 import InvalidIcon4 from "./icons/4.png";
 import InvalidIcon7 from "./icons/7.png";
- import InvalidIcon8 from "./icons/8.png";
-import PAGES from "routing/routes";
-import { MAIN_CARD, MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "../../constants/donations";
+import InvalidIcon8 from "./icons/8.png";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 import ArrowRight from "../../icons/arrowRight.svg";
@@ -53,56 +53,52 @@ const Help: React.FC = () => {
   return (
     <div className="page-help">
       <BreadCrumbs title="Помощь" />
-      
-        <div className="loc_target">
-          {targetDataState && (<div className="loc_selected">
+
+      <div className="loc_target">
+        {targetDataState && (
+          <div className="loc_selected">
             Вы выбрали:{" "}
-            <span
+            <Link
+              to={`${targetTypeState === "pet" ? PAGES.PET : PAGES.COLLECTION}/${targetState}`}
               className="loc_targetName link_3"
-              onClick={() => {
-                navigate(
-                  `${targetTypeState === "pet" ? PAGES.PET : PAGES.COLLECTION}/${targetState}`
-                );
-              }}
             >
               {targetDataState.name} ({/* Код${targetTypeState === "pet" ? "Питомец" : "Сбор" */}№
               {targetDataState.id})
-            </span>
-          </div>)}
-
-          <div className="loc_description">
-            <div className="loc_smsComment">
-              Уважаемые посетители, чтобы мы зарегистрировали Ваш донат на выбранного Вами питомца
-              или сбора, просьба, сообщить нам об этом{" "}
-              <img alt="nophoto" src={PrayIcon} height="16" style={{ display: "inline-block" }} />.
-            </div>
-            <br /> Это можно сделать с помощью{" "}
-            <Link to={PAGES.CONTACTS} className="link_3">
-              обратной связи
             </Link>
-            , отправки смс на номер{" "}
-            <span className="loc_contact" style={{ whiteSpace: "nowrap" }}>
-              {MAIN_PHONE} ({MAIN_CARD_OWNER})
-            </span>
-            , либо через сообщение получателю, когда переводите средства через приложение (сбербанк
-            онлайн и т.п.) .
-            <br /><br />
-            Данное сообщение (смс) может быть произвольного вида, главное, чтобы нам было понятно,
-            кому Вы жертвуете средства. Желательно, чтобы в сообщении была указана сумма и кому или
-            на что они должны пойти. Это может быть кличка животного или его номер (либо номер или
-            название сбора, если это сбор). Если Вы не укажете эту информацию, то средства пойдут на
-            тех животных, кому они наиболее необходимы в данный момент. <br/>
-            Это инвалиды <img className="loc_invalidIcon" src={InvalidIcon7}/> и те, кому
-            требуется срочное лечение <img className="loc_invalidIcon" src={InvalidIcon4}/> <img className="loc_invalidIcon" src={InvalidIcon2}/>. В нашем приюте они всегда есть 
+          </div>
+        )}
 
-            <img className="loc_invalidIcon" src={InvalidIcon8}/>
-            
-            
-            
-            .
-            <br />
-            <br />
-            {/* <div className="loc_smsExample">100 П1</div>
+        <div className="loc_description">
+          <div className="loc_smsComment">
+            Уважаемые посетители, чтобы мы зарегистрировали Ваш донат на выбранного Вами питомца или
+            сбора, просьба, сообщить нам об этом{" "}
+            <img alt="nophoto" src={PrayIcon} height="16" style={{ display: "inline-block" }} />.
+          </div>
+          <br /> Это можно сделать с помощью{" "}
+          <Link to={PAGES.CONTACTS} className="link_3">
+            обратной связи
+          </Link>
+          , отправки смс на номер{" "}
+          <span className="loc_contact" style={{ whiteSpace: "nowrap" }}>
+            {MAIN_PHONE} ({MAIN_CARD_OWNER})
+          </span>
+          , либо через сообщение получателю, когда переводите средства через приложение (сбербанк
+          онлайн и т.п.) .
+          <br />
+          <br />
+          Данное сообщение (смс) может быть произвольного вида, главное, чтобы нам было понятно,
+          кому Вы жертвуете средства. Желательно, чтобы в сообщении была указана сумма и кому или на
+          что они должны пойти. Это может быть кличка животного или его номер (либо номер или
+          название сбора, если это сбор). Если Вы не укажете эту информацию, то средства пойдут на
+          тех животных, кому они наиболее необходимы в данный момент. <br />
+          Это инвалиды <img className="loc_invalidIcon" src={InvalidIcon7} /> и те, кому требуется
+          срочное лечение <img className="loc_invalidIcon" src={InvalidIcon4} />{" "}
+          <img className="loc_invalidIcon" src={InvalidIcon2} />. В нашем приюте они всегда есть
+          <img className="loc_invalidIcon" src={InvalidIcon8} />
+          .
+          <br />
+          <br />
+          {/* <div className="loc_smsExample">100 П1</div>
             <div className="loc_smsDescription">Где 100 - сумма, П1 - № питомца (П - питомец, 1 - его номер)</div>
             <br />
             <div className="loc_smsExample">100 С1</div>
@@ -116,17 +112,17 @@ const Help: React.FC = () => {
               срочную операцию, постройку, либо на питомца, на которого меньше всего собрано средств за последнее время. Если Вам
               будет интересно, Вы можете связаться с нами и узнать, куда мы направили Ваши средства.
             </div> */}
-            <div className="loc_smsComment">
-              Информацию по собранным средствам за последние 30 дней Вы можете узнать, нажав на
-              кнопку "Подробнее" на странице питомца/сбора или на странице{" "}
-              <Link to={PAGES.FINREPORT} className="link_3">
-                Фин. отчет
-              </Link>{" "}
-              <i>(в ней отображается полный список всех донатов приюта)</i>.
-            </div>
+          <div className="loc_smsComment">
+            Информацию по собранным средствам за последние 30 дней Вы можете узнать, нажав на кнопку
+            "Подробнее" на странице питомца/сбора или на странице{" "}
+            <Link to={PAGES.FINREPORT} className="link_3">
+              Фин. отчет
+            </Link>{" "}
+            <i>(в ней отображается полный список всех донатов приюта)</i>.
           </div>
         </div>
-      
+      </div>
+
       <div className="loc_addDonator">
         Если Вы хотите зарегистрировать себя как Донатор с подробной информацией о Вас, то Вам нужно
         сделать запрос через{" "}
