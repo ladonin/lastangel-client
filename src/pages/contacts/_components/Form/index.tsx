@@ -56,7 +56,7 @@ const Form: React.FC = () => {
     <div className="page-contacts_form">
       {isSentState && (
         <div className="loc_success">
-          <img alt="nophoto" src={FlowerImage} />
+          <img alt="." src={FlowerImage} />
           Ваше сообщение успешно отправлено.
         </div>
       )}

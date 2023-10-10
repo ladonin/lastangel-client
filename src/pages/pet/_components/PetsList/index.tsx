@@ -8,7 +8,7 @@ import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Lazy } from "swiper";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AnimalsApi } from "api/animals";
 import { getMainImageUrl, prepareStatus, prepareStatusCode } from "helpers/animals";
 
@@ -23,7 +23,6 @@ type TProps = { currentId?: number | null };
 const PetsList = ({ currentId = null }: TProps) => {
   const [listState, setListState] = useState<TGetListOutput>([]);
   const [initialSlideState, setInitialSlideState] = useState<number | null>(null);
-  const navigate = useNavigate();
   const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
 
   const itemsNumber = useMemo(() => (isMobileState ? 3 : 7), [isMobileState]);
@@ -49,36 +48,31 @@ const PetsList = ({ currentId = null }: TProps) => {
   const renderContent = (data: TItem, index: number) => (
     <div className="loc_wrapper">
       <div className="loc_image">
-        <div
-          className={cn("loc_name", { "loc--selected": data.id === currentId })}
-          onClick={() => {
-            navigate(`${PAGES.PET}/${data.id}`);
-          }}
+        <Link
+          to={`${PAGES.PET}/${data.id}`}
+          className={cn("loc_name", "link_text", { "loc--selected": data.id === currentId })}
         >
           {data.name}
-        </div>
-        <div className={`loc_status loc--status_${prepareStatusCode(data.status, data.need_medicine)}`}>
+        </Link>
+        <div
+          className={`loc_status loc--status_${prepareStatusCode(data.status, data.need_medicine)}`}
+        >
           {prepareStatus(data.status, data.need_medicine, data.sex)}
         </div>
 
         {index <= itemsNumber ? (
-          <img
-            alt="nophoto"
-            src={getMainImageUrl(data, SIZES_MAIN.SQUARE2)}
-            onClick={() => {
-              navigate(`${PAGES.PET}/${data.id}`);
-            }}
-          />
+          <Link to={`${PAGES.PET}/${data.id}`} className="link_img">
+            <img alt="." src={getMainImageUrl(data, SIZES_MAIN.SQUARE2)} />
+          </Link>
         ) : (
-          <img
-            alt="nophoto"
-            data-src={getMainImageUrl(data, SIZES_MAIN.SQUARE2)}
-            onClick={() => {
-              navigate(`${PAGES.PET}/${data.id}`);
-            }}
-            className="swiper-lazy"
-            loading="lazy"
-          />
+          <Link to={`${PAGES.PET}/${data.id}`} className="link_img">
+            <img
+              alt="."
+              data-src={getMainImageUrl(data, SIZES_MAIN.SQUARE2)}
+              className="swiper-lazy"
+              loading="lazy"
+            />
+          </Link>
         )}
       </div>
     </div>

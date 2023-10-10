@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
@@ -31,7 +31,7 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
 import PAGES from "routing/routes";
 import BreadCrumbs from "components/BreadCrumbs";
-import { getVideoType, numberFriendly } from "helpers/common";
+import { getVideoType, numberFriendly, textToClient } from "helpers/common";
 import flowerSrc from "icons/flower1.png";
 import PetsList from "./_components/PetsList";
 // Ленивая загрузка модуля
@@ -112,13 +112,13 @@ const Pet: React.FC = () => {
         <div className="loc_title">Открытые сборы:</div>
 
         {collectionsState.map((item, index) => (
-          <div
+          <Link
             key={index}
-            className={cn("loc_item", `loc--type_${item.type}`)}
-            onClick={() => navigate(`${PAGES.COLLECTION}/${item.id}`)}
+            to={`${PAGES.COLLECTION}/${item.id}`}
+            className={cn("loc_item", "link_text", `loc--type_${item.type}`)}
           >
             {item.name}
-          </div>
+          </Link>
         ))}
       </div>
     );
@@ -150,7 +150,7 @@ const Pet: React.FC = () => {
                 dataState.need_medicine
               )}`}
             >
-              {dataState.status === ANIMALS_STATUS.AT_HOME && <img alt="nophoto" src={flowerSrc} />}
+              {dataState.status === ANIMALS_STATUS.AT_HOME && <img alt="." src={flowerSrc} />}
               {prepareStatus(dataState.status, dataState.need_medicine, dataState.sex)}
             </div>
           </>
@@ -185,7 +185,10 @@ const Pet: React.FC = () => {
         )}
 
         {!isHere(dataState.status) && isMobileState === false && (
-          <div className="loc_description">{dataState.description}</div>
+          <div
+            className="loc_description"
+            dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
+          />
         )}
       </div>
     );
@@ -318,13 +321,13 @@ const Pet: React.FC = () => {
                         <SwiperSlide key={index}>
                           {index === 1 ? (
                             <img
-                              alt="nophoto"
+                              alt="."
                               className="loc_image"
                               src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
                             />
                           ) : (
                             <img
-                              alt="nophoto"
+                              alt="."
                               data-src={getAnotherImagesUrl(
                                 dataState,
                                 item,
@@ -338,7 +341,7 @@ const Pet: React.FC = () => {
                       ))}
                       <SwiperSlide>
                         <img
-                          alt="nophoto"
+                          alt="."
                           className="loc_image"
                           src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)}
                         />

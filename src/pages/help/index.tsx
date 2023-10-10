@@ -17,11 +17,10 @@ import InvalidIcon7 from "./icons/7.png";
 import InvalidIcon8 from "./icons/8.png";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
-import ArrowRight from "../../icons/arrowRight.svg";
 
 const Help: React.FC = () => {
   const query = useQueryHook();
-  const navigate = useNavigate();
+
   const [targetState, setTargetState] = useState("");
   const [targetTypeState, setTargetTypeState] = useState("");
   useEffect(() => {
@@ -72,7 +71,7 @@ const Help: React.FC = () => {
           <div className="loc_smsComment">
             Уважаемые посетители, чтобы мы зарегистрировали Ваш донат на выбранного Вами питомца или
             сбора, просьба, сообщить нам об этом{" "}
-            <img alt="nophoto" src={PrayIcon} height="16" style={{ display: "inline-block" }} />.
+            <img alt="." src={PrayIcon} height="16" style={{ display: "inline-block" }} />.
           </div>
           <br /> Это можно сделать с помощью{" "}
           <Link to={PAGES.CONTACTS} className="link_3">
@@ -126,14 +125,9 @@ const Help: React.FC = () => {
       <div className="loc_addDonator">
         Если Вы хотите зарегистрировать себя как Донатор с подробной информацией о Вас, то Вам нужно
         сделать запрос через{" "}
-        <span
-          className="loc_contact link_3"
-          onClick={() => {
-            navigate(PAGES.CONTACTS);
-          }}
-        >
+        <Link to={PAGES.CONTACTS} className="loc_contact link_3">
           обратную связь
-        </span>{" "}
+        </Link>{" "}
         (форма обращения свободная), либо связаться с нами по номеру телефона{" "}
         <span style={{ whiteSpace: "nowrap" }}>
           {MAIN_PHONE} ({MAIN_CARD_OWNER})
@@ -142,7 +136,7 @@ const Help: React.FC = () => {
       </div>
       <div className="loc_rekviz">
         <div className="loc_top">
-          <img alt="nophoto" src={Image} className="loc_image" />
+          <img alt="." src={Image} className="loc_image" />
           <div className="loc_right">
             <div className="loc_item">
               <div className="loc_sber">

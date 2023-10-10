@@ -11,7 +11,7 @@
     align-items: center;
     gap: 16px;
     width: calc(50% - 8px);
-    padding: 8px 0 8px 8px;
+    padding: 16px;
     cursor: pointer;
 
     &:hover {
@@ -30,10 +30,12 @@
       font-weight: 500;
       color: $c_greyDark;
       line-height: 18px;
+
     }
 
     img {
       height: 60px;
+      width: 55px;
       display: inline-block;
     }
 
@@ -45,7 +47,8 @@
 .layout.loc--isMobile .page-home_infoBlock {
   margin-bottom: calc(24px * var(--viewport-koeff));
   gap: calc(24px * var(--viewport-koeff));
-
+  height: calc(148px * var(--viewport-koeff));
+  overflow: hidden;
   .loc_ourPets, .loc_atHome {
     width: 50%;
     padding: calc(24px * var(--viewport-koeff));
@@ -55,6 +58,7 @@
 
     img {
       height: calc(100px * var(--viewport-koeff));
+      width: calc(110px * var(--viewport-koeff));
     }
 
     .loc_right {

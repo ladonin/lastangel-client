@@ -7,7 +7,7 @@ import React, { useEffect, useState, ReactElement, useMemo } from "react";
 import "react-tabs/style/react-tabs.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import {
@@ -50,14 +50,13 @@ const OurPets = () => {
   const renderContent = (data: TItem, index: number) => (
     <div className="loc_wrapper">
       <div className="loc_image">
-        <div
-          className={`loc_name ${data.sex === 1 ? "loc--male" : "loc--female"}`}
-          onClick={() => {
-            navigate(`${PAGES.PET}/${data.id}`);
-          }}
+        <Link
+          to={`${PAGES.PET}/${data.id}`}
+          className={`loc_name link_text ${data.sex === 1 ? "loc--male" : "loc--female"}`}
         >
           {data.name}
-        </div>
+        </Link>
+
         <div
           className={`loc_status loc--status_${prepareStatusCode(data.status, data.need_medicine)}`}
         >
@@ -65,22 +64,18 @@ const OurPets = () => {
         </div>
 
         {index <= itemsNumber ? (
-          <img
-            src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
-            onClick={() => {
-              navigate(`${PAGES.PET}/${data.id}`);
-            }}
-          />
+          <Link to={`${PAGES.PET}/${data.id}`} className="link_img">
+            <img src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
+          </Link>
         ) : (
-          <img
-            alt="nophoto"
-            data-src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
-            onClick={() => {
-              navigate(`${PAGES.PET}/${data.id}`);
-            }}
-            className="swiper-lazy"
-            loading="lazy"
-          />
+          <Link to={`${PAGES.PET}/${data.id}`} className="link_img">
+            <img
+              alt="."
+              data-src={getMainImageUrl(data, SIZES_MAIN.SQUARE)}
+              className="swiper-lazy"
+              loading="lazy"
+            />
+          </Link>
         )}
       </div>
       <div className="loc_content">
@@ -128,14 +123,9 @@ const OurPets = () => {
           <SwiperSlide key={index}>{renderContent(item, index)}</SwiperSlide>
         ))}
         <SwiperSlide>
-          <div
-            className="loc_seeAll"
-            onClick={() => {
-              navigate(`${PAGES.PETS}`);
-            }}
-          >
+          <Link to={`${PAGES.PETS}`} className="loc_seeAll link_text">
             Смотреть все
-          </div>
+          </Link>
         </SwiperSlide>
       </Swiper>
     </div>
@@ -160,7 +150,7 @@ const OurPets = () => {
           position: "left",
           render: (
             <>
-              <img alt="nophoto" src={PuppyImg} height={50} />
+              <img alt="." src={PuppyImg} height={50} />
               <div className="loc_categoryName">Щенки</div>
             </>
           ),
@@ -177,7 +167,7 @@ const OurPets = () => {
           position: "left",
           render: (
             <>
-              <img alt="nophoto" src={DogImg} height={50} />
+              <img alt="." src={DogImg} height={50} />
               <div className="loc_categoryName">Собаки</div>
             </>
           ),
@@ -194,7 +184,7 @@ const OurPets = () => {
           position: "left",
           render: (
             <>
-              <img alt="nophoto" src={OldDogImg} height={50} />
+              <img alt="." src={OldDogImg} height={50} />
               <div className="loc_categoryName">Пожилые собаки</div>
             </>
           ),
@@ -211,7 +201,7 @@ const OurPets = () => {
           position: "right",
           render: (
             <>
-              <img alt="nophoto" src={OldCatImg} height={50} />
+              <img alt="." src={OldCatImg} height={50} />
               <div className="loc_categoryName">Пожилые кошки</div>
             </>
           ),
@@ -228,7 +218,7 @@ const OurPets = () => {
           position: "right",
           render: (
             <>
-              <img alt="nophoto" src={CatImg} height={50} />
+              <img alt="." src={CatImg} height={50} />
               <div className="loc_categoryName">Кошки</div>
             </>
           ),
@@ -245,7 +235,7 @@ const OurPets = () => {
           position: "right",
           render: (
             <>
-              <img alt="nophoto" src={KittenImg} height={50} />
+              <img alt="." src={KittenImg} height={50} />
               <div className="loc_categoryName">Котята</div>
             </>
           ),
@@ -260,21 +250,13 @@ const OurPets = () => {
   return (
     <div className={cn("page-home_ourPets", { "loc--isMobile": isMobileState })}>
       <div className="loc_title">
-        <span
-          onClick={() => {
-            navigate(`${PAGES.PETS}`);
-          }}
-        >
+        <Link to={PAGES.PETS} className="loc_link">
           Наши питомцы
-        </span>
-        <div
-          className="loc_seeAll"
-          onClick={() => {
-            navigate(`${PAGES.PETS}`);
-          }}
-        >
-          Смотреть все <ArrowRight />
-        </div>
+        </Link>
+        <Link to={PAGES.PETS} className="link_text loc_seeAll">
+          Смотреть все
+          <ArrowRight />
+        </Link>
       </div>
       <Tabs tabsList={tabsListState} panelsList={panelsListState} />
     </div>

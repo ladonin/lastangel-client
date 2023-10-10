@@ -61,12 +61,12 @@ const Slider = () => {
               <SwiperSlide key={index}>
                 {index < 3 ? (
                   <img
-                    alt="nophoto"
+                    alt="."
                     src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)}
                   />
                 ) : (
                   <img
-                    alt="nophoto"
+                    alt="."
                     data-src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)}
                     className="swiper-lazy"
                     loading="lazy"
@@ -77,13 +77,13 @@ const Slider = () => {
         {dataState && !dataState.data.length && (
           <>
             <SwiperSlide>
-              <img alt="nophoto" src={albumImg2} />
+              <img alt="." src={albumImg2} />
             </SwiperSlide>
             <SwiperSlide>
-              <img alt="nophoto" src={albumImg15} />
+              <img alt="." src={albumImg15} />
             </SwiperSlide>
             <SwiperSlide>
-              <img alt="nophoto" src={albumImg1} />
+              <img alt="." src={albumImg1} />
             </SwiperSlide>
           </>
         )}

@@ -45,11 +45,11 @@ const Collections: React.FC = () => {
     <>
       <div className="loc_image">
         <Link to={`${PAGES.COLLECTION}/${data.id}`} className="link_img">
-          <img alt="nophoto" src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
+          <img alt="." src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
         </Link>
         {data.status === COLLECTIONS_STATUS.CLOSED && (
           <div className="loc_closed">
-            Сбор закрыт <img alt="nophoto" src={flowerSrc} />
+            Сбор закрыт <img alt="." src={flowerSrc} />
           </div>
         )}
       </div>

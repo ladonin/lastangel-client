@@ -86,7 +86,7 @@ const ListItem = ({ data }: TProps) => {
               {[...anotherImagesState].reverse().map((item, index) => (
                 <SwiperSlide key={index}>
                   <img
-                    alt="nophoto"
+                    alt="."
                     className="loc_image"
                     src={getAnotherImagesUrl(data, item, SIZES_ANOTHER.SIZE_1200)}
                   />

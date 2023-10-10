@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CollectionsApi } from "api/collections";
 import { getMainImageUrl } from "helpers/collections";
 import { COLLECTIONS_STATUS } from "constants/collections";
@@ -34,11 +34,15 @@ const Collections = () => {
       }}
     >
       <div className="loc_image">
-        <img alt="nophoto" src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
+        <Link to={`${PAGES.COLLECTION}/${data.id}`} className="link_img">
+          <img alt="." src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
+        </Link>
       </div>
       <div className="loc_content">
         <div className="loc_data">
-          <div className="loc_name">{data.name}</div>
+          <Link to={`${PAGES.COLLECTION}/${data.id}`} className="link_text loc_name">
+            {data.name}
+          </Link>
 
           <div className="loc_need">
             Необходимо: <span className="loc_val">{numberFriendly(data.target_sum)}</span> р.
@@ -55,20 +59,22 @@ const Collections = () => {
   useEffect(() => {
     if (isMobileState === null) return;
 
-    CollectionsApi.getList({ status: COLLECTIONS_STATUS.PUBLISHED, offset: 0, limit: isMobileState ? 4 : 3, order: 'ismajor', order_type: 'desc' }).then((res) => {
+    CollectionsApi.getList({
+      status: COLLECTIONS_STATUS.PUBLISHED,
+      offset: 0,
+      limit: isMobileState ? 4 : 3,
+      order: "ismajor",
+      order_type: "desc",
+    }).then((res) => {
       setListState(res);
     });
   }, [isMobileState]);
   return listState.length ? (
     <div className={cn("page-home_collections", { "loc--isMobile": isMobileState })}>
-      <div
-        className="loc_title"
-        onClick={() => {
-          navigate(PAGES.COLLECTIONS);
-        }}
-      >
+      <Link to={PAGES.COLLECTIONS} className="link_text loc_title">
         Сборы
-      </div>
+      </Link>
+
       <div className="loc_block">
         {listState.map((item, index) => (
           <div className="loc_item" key={index}>
@@ -76,14 +82,9 @@ const Collections = () => {
           </div>
         ))}
       </div>
-      <div
-        className="loc_seeAll"
-        onClick={() => {
-          navigate(`${PAGES.COLLECTIONS}`);
-        }}
-      >
+      <Link to={PAGES.COLLECTIONS} className="link_text loc_seeAll">
         Смотреть все <ArrowRight />
-      </div>
+      </Link>
     </div>
   ) : null;
 };

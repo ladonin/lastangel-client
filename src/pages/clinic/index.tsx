@@ -29,7 +29,7 @@ const Clinic: React.FC = () => (
       </div>
       <div className="loc_content loc_vkGroup">
         <Link to='https://vk.com/vetclinicdoberman' className="link_3">
-          <img alt="nophoto" src={VkLogo} /> Адрес клиники вконтакте
+          <img alt="." src={VkLogo} /> Адрес клиники вконтакте
         </Link>
       </div> 
 <br/>

@@ -23,7 +23,7 @@ const Help = () => {
       </div>
       <div className="loc_content">
         <div className="loc_top">
-          <img alt="nophoto" src={Image} className="loc_image" />
+          <img alt="." src={Image} className="loc_image" />
           <div className="loc_right">
             <div className="loc_item">
               <div className="loc_sber">

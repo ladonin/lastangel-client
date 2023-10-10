@@ -72,13 +72,13 @@ const Slider = () => {
           <SwiperSlide>
             {index < 3 ? (
               <>
-                <img alt="nophoto" src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)} />
+                <img alt="." src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)} />
                 {renderButton(getAnotherImagesUrl(dataState, number))}
               </>
             ) : (
               <>
                 <img
-                  alt="nophoto"
+                  alt="."
                   data-src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)}
                   className="swiper-lazy"
                   loading="lazy"

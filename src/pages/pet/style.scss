@@ -214,20 +214,20 @@
 
           &.loc--type {
             &_1 {
-              background-color: $c_red;
+              background-color: $c_orangeLight;
               color: $c_white;
 
               &:hover {
-                background-color: $c_redLight;
+                background-color: $c_orangeLighter;
               }
             }
 
             &_2 {
-              background-color: $c_green;
+              background-color: $c_orangeLight;
               color: $c_white;
 
               &:hover {
-                background-color: $c_greenLight;
+                background-color: $c_orangeLighter;
               }
             }
           }
@@ -534,7 +534,7 @@
       flex-wrap: wrap;
 
 
-      
+
       .loc_fakephotoalbum {
         height: 1200px;
         max-height: 80vh;

@@ -44,7 +44,7 @@ const InfiniteScroll: React.FC<TProps> = (props) => {
 
       {showUpState && (
         <img
-          alt="nophoto"
+          alt="."
           onClick={() => {
             window.scrollTo({ top: 0 });
           }}

@@ -224,7 +224,7 @@ const PetDonationIcon: React.FC<TProps> = (props) => {
 
   return iconState ? (
     <div className="component-petDonationIcon">
-      <img alt="nophoto" src={iconState} />
+      <img alt="." src={iconState} />
     </div>
   ) : null;
 };

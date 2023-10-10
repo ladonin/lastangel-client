@@ -344,7 +344,7 @@ const Administration: React.FC = () => {
 
   const renderPetsContent = (data: TItemPet) => (
     <div className="loc_petItem">
-      <img alt="nophoto" src={getPetMainImageUrl(data)} />
+      <img alt="." src={getPetMainImageUrl(data)} />
       {data.ismajor === 1 && <div className="loc_isImportant">важно</div>}
       <div className="loc_content">
         <Button
@@ -406,7 +406,7 @@ const Administration: React.FC = () => {
 
   const renderCollectionsContent = (data: TItemCollection) => (
     <div className="loc_collectionItem">
-      <img alt="nophoto" src={getCollectionMainImageUrl(data)} />
+      <img alt="." src={getCollectionMainImageUrl(data)} />
       <div className="loc_content">
         <Button
           className="loc_button"

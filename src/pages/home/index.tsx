@@ -22,7 +22,7 @@ const Home: React.FC = () => {
     <div className="page-home">
       <div className="loc_top">
         <div className="loc_left">
-          {isMobileState && <InfoBlock />}
+          {(isMobileState === null || isMobileState === true) && <InfoBlock />}
           <Slider />
           <div className="loc_textMain">
             У животных есть Душа. Её можно увидеть в их глазах.

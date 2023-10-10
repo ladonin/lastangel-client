@@ -89,6 +89,7 @@
 
 .layout.loc--isMobile .page-pet_petsList {
   height: auto;
+  min-height: calc((100vw - calc(48px*var(--viewport-koeff)) - 24px)/3);
   margin-bottom: calc(24px * var(--viewport-koeff));
 
   .loc_slider {

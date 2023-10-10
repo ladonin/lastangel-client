@@ -2,7 +2,6 @@
   import { saveFile, getCountWord, getTimestamp, getDateString, isObjectOptionsIsEmpty } from 'helpers/common';
  */
 
-import { isMobile } from "react-device-detect";
 import { AxiosResponse } from "axios";
 
 export const getCountWord = (single: string, few: string, many: string) => (value: number) => {
@@ -155,4 +154,10 @@ export const saveFile = (response: AxiosResponse, format = "", addDownload = tru
   }
 
   createLinkAndClick(blob, fileName, addDownload);
+};
+
+export const textToClient = (text: string) => {
+  let result = text;
+  result = result.replace(/\n|\r|\n\r/g, "<br/>");
+  return result;
 };

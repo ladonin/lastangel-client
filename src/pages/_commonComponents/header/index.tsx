@@ -100,7 +100,7 @@ export default function Index() {
           <div className="loc_wrapper">
             <div className="loc_leftPart">
               <img
-                alt="nophoto"
+                alt="."
                 src={logo}
                 className="loc_logo"
                 onClick={() => {
@@ -129,7 +129,7 @@ export default function Index() {
           <div className="loc_wrapper">
             <div className="loc_leftPart">
               <img
-                alt="nophoto"
+                alt="."
                 src={logo}
                 className="loc_logo"
                 onClick={() => {

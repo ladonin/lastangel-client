@@ -63,7 +63,7 @@ const LayoutMain: React.FC = () => {
 
       <div className="page">
         {/* <div className="loc_warningMessage">
-          <img alt="nophoto" src={dogAttentionImage} />
+          <img alt="." src={dogAttentionImage} />
           Уважаемые пользователи, в настоящее время сайт находится в финальной стадии разработки. Полная информация о приюте и его
           питомцах появится уже в ближайшем будущем.
         </div> */}

@@ -48,6 +48,12 @@ export type TGetOutput = TGetResponseItem;
 
 export type TGetListRequest = {
   status?: ValuesOf<typeof COLLECTIONS_STATUS>;
+  offset?: number;
+  limit?: number;
+  statusExclude?: number;
+  with_corrupted?: number;
+  order?: string;
+  order_type?: string;
   withClosedCollections?: boolean;
   orderComplex?: string;
 };

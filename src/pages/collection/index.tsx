@@ -12,7 +12,7 @@ import { TGetListOutput as TListDonations, TItem as TDonationItem } from "api/ty
 import LoaderIcon from "components/LoaderIcon";
 import { CollectionsApi } from "api/collections";
 import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/collections";
-import { getVideoType, numberFriendly } from "helpers/common";
+import { getVideoType, numberFriendly, textToClient } from "helpers/common";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 import "./style.scss";
 
@@ -151,7 +151,7 @@ const Collection: React.FC = () => {
         {isMobileState === true && renderDonation(dataState)}
         {dataState.status === COLLECTIONS_STATUS.CLOSED && (
           <div className="loc_closed">
-            Сбор закрыт <img alt="nophoto" src={flowerSrc} />
+            Сбор закрыт <img alt="." src={flowerSrc} />
           </div>
         )}
       </div>
@@ -176,7 +176,10 @@ const Collection: React.FC = () => {
                 {isMobileState === false && renderData()}
 
                 {isMobileState === true && (
-                  <div className="loc_description">{dataState.description}</div>
+                  <div
+                    className="loc_description"
+                    dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
+                  />
                 )}
 
                 {isMobileState === false && renderDonation(dataState)}
@@ -209,7 +212,7 @@ const Collection: React.FC = () => {
                   {[...anotherImagesState].reverse().map((item, index) => (
                     <SwiperSlide key={index}>
                       <img
-                        alt="nophoto"
+                        alt="."
                         className="loc_image"
                         src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
                       />
@@ -217,7 +220,7 @@ const Collection: React.FC = () => {
                   ))}
                   <SwiperSlide>
                     <img
-                      alt="nophoto"
+                      alt="."
                       className="loc_image"
                       src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)}
                     />

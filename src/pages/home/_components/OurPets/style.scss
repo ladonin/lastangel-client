@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
 
-    span {
+    .loc_link {
       color: $c_lagunaGrey;
       font-size: 20px;
       font-weight: 700;
@@ -34,7 +34,7 @@
   }
 
   .loc_slider {
-    height: 530px;
+    height: 495px;
   }
 
   .swiper-slide {
@@ -45,7 +45,7 @@
     .loc_image {
       position: relative;
       cursor: pointer;
-      > img {
+      > a > img {
         min-height: 280px;
         width: 100%;
         margin-bottom: 24px;
@@ -151,6 +151,8 @@
 
         .loc_description {
           margin-top: 16px;
+          max-height: 58px;
+          overflow: auto;
         }
 
         .loc_collected {
@@ -241,13 +243,13 @@
   }
 
   .loc_slider {
-    height: calc(860px * var(--viewport-koeff));
+    height: calc(779px * var(--viewport-koeff));
 
 
     .loc_image {
       position: relative;
 
-      img {
+      > a > img {
         margin-bottom: calc(32px * var(--viewport-koeff));
         min-height: calc(280px * var(--viewport-koeff));
       }
@@ -291,6 +293,8 @@
       }
       .loc_description {
         margin-top: calc(16px * var(--viewport-koeff));
+        max-height: calc(128px * var(--viewport-koeff));
+        overflow: auto;
       }
 
       .loc_collected {

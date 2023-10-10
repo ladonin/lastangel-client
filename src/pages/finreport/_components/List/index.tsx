@@ -40,8 +40,6 @@ const List = () => {
     getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
   }, [pageState]);
 
-  const navigate = useNavigate();
-
   const isAnonym = (item: TDonationItem) =>
     !(
       item.donator_fullname ||

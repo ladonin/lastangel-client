@@ -111,7 +111,7 @@ const Pets: React.FC = () => {
     <>
       <div className="loc_image">
         <Link to={`${PAGES.PET}/${data.id}`} className="link_img">
-          <img alt="nophoto" src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
+          <img alt="." src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
         </Link>
 
         {isHere(data.status) && (
@@ -121,7 +121,7 @@ const Pets: React.FC = () => {
         )}
         {data.status === ANIMALS_STATUS.AT_HOME ? (
           <div className="loc_atHome">
-            {prepareStatus(data.status, null, data.sex)} <img alt="nophoto" src={flowerSrc} />
+            {prepareStatus(data.status, null, data.sex)} <img alt="." src={flowerSrc} />
           </div>
         ) : (
           <div
@@ -210,14 +210,9 @@ const Pets: React.FC = () => {
           нажать кнопку <b>"Покормить"</b>
           <div style={{ marginTop: "16px" }}>
             Также вы можете{" "}
-            <span
-              className="loc_linkToContacts link_3"
-              onClick={() => {
-                navigate(PAGES.CONTACTS);
-              }}
-            >
+            <Link to={PAGES.CONTACTS} className="loc_linkToContacts link_3">
               связаться
-            </span>{" "}
+            </Link>{" "}
             с нами с целью <strong>забрать питомца из приюта</strong>.
           </div>
           <div style={{ marginTop: "16px" }}>

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StoriesApi } from "api/stories";
 import { getDateString } from "helpers/common";
 import { TGetListOutput, TItem } from "api/types/stories";
@@ -35,7 +35,9 @@ const Stories = () => {
     >
       <div className="loc_content">
         <div className="loc_data">
-          {data.status === STORIES_STATUS.NON_PUBLISHED && <div className="loc_nonpublished">Не опубликован</div>}
+          {data.status === STORIES_STATUS.NON_PUBLISHED && (
+            <div className="loc_nonpublished">Не опубликован</div>
+          )}
           {!!data.ismajor && (
             <div className="loc_pin">
               {" "}
@@ -43,7 +45,10 @@ const Stories = () => {
             </div>
           )}
           <div className="loc_created">{getDateString(data.created)}</div>
-          <div className="loc_name">{data.name}</div>
+
+          <Link to={`${PAGES.STORY}/${data.id}`} className="link_text loc_name">
+            {data.name}
+          </Link>
           <div className="loc_short_description">{data.short_description}</div>
         </div>
       </div>
@@ -52,35 +57,36 @@ const Stories = () => {
 
   useEffect(() => {
     if (isMobileState === null) return;
-    StoriesApi.getList({ offset: 0, limit: 3, orderComplex: "ismajor desc, id desc", excludeStatus: 2 /* isAdmin() ? undefined : 2 */ }).then((res) => {
+    StoriesApi.getList({
+      offset: 0,
+      limit: 3,
+      orderComplex: "ismajor desc, id desc",
+      excludeStatus: 2 /* isAdmin() ? undefined : 2 */,
+    }).then((res) => {
       setListState(res);
     });
   }, [isMobileState]);
   return listState.length ? (
     <div className="page-home_stories">
-      <div
-        className="loc_title"
-        onClick={() => {
-          navigate(`${PAGES.STORIES}`);
-        }}
-      >
+      <Link to={`${PAGES.STORIES}`} className="link_text loc_title">
         Истории
-      </div>
+      </Link>
       <div className="loc_block">
         {listState.map((item, index) => (
-          <div className={cn("loc_item", { "loc--non_published": item.status === STORIES_STATUS.NON_PUBLISHED })} key={index}>
+          <div
+            className={cn("loc_item", {
+              "loc--non_published": item.status === STORIES_STATUS.NON_PUBLISHED,
+            })}
+            key={index}
+          >
             {renderContent(item)}
           </div>
         ))}
       </div>
-      <div
-        className="loc_seeAll"
-        onClick={() => {
-          navigate(`${PAGES.STORIES}`);
-        }}
-      >
+
+      <Link to={`${PAGES.STORIES}`} className="loc_seeAll link_text">
         Смотреть все <ArrowRight />
-      </div>
+      </Link>
     </div>
   ) : null;
 };
