@@ -236,7 +236,10 @@ const Pet: React.FC = () => {
                 {isMobileState === false && renderData()}
 
                 {isMobileState === true && (
-                  <div className="loc_description">{dataState.description}</div>
+                  <div
+                    className="loc_description"
+                    dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
+                  />
                 )}
                 {isMobileState === true && renderCollections()}
                 {isMobileState === false && !isHere(dataState.status) && (
@@ -291,7 +294,10 @@ const Pet: React.FC = () => {
                     </div>
                     {isMobileState === false && renderCollections()}
                     {isMobileState === false && (
-                      <div className="loc_description">{dataState.description}</div>
+                      <div
+                        className="loc_description"
+                        dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
+                      />
                     )}
                     {isMobileState === false && renderDisclaimer()}
                   </>

@@ -124,6 +124,8 @@
         }
 
         .loc_description {
+          font-size: 18px;
+          line-height: 28px;
           margin-top: 24px;
           align-content: flex-start;
         }
@@ -507,8 +509,8 @@
         margin-bottom: calc(16px * var(--viewport-koeff));
       }
     }
-    
-    
-    
+
+
+
   }
 }

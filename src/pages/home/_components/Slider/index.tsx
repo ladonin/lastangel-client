@@ -28,6 +28,7 @@ const Slider = () => {
 
   return (
     <div className="page-home_photoSlider">
+      <div className="loc_wrapper">
       <Swiper
         spaceBetween={30}
         loop
@@ -88,6 +89,7 @@ const Slider = () => {
           </>
         )}
       </Swiper>
+      </div>
       <MediaOriginalLinks type="mainphotoalbum" data={dataState as any} />
     </div>
   );
