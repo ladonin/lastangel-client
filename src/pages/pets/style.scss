@@ -27,7 +27,6 @@
   
   .loc_buttonOpenCuratory {
     margin-left: auto;
-    margin-bottom: 8px;
     position: absolute;
     top: 0;
     right: 0;
@@ -382,6 +381,9 @@
         margin-top: calc(24px * var(--viewport-koeff));
       }
     }
+  }
+  .loc_buttonOpenCuratory {
+    margin-top: calc(-4px * var(--viewport-koeff));;
   }
 }
 
