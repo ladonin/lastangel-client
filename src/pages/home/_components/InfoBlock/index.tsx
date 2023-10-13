@@ -2,9 +2,8 @@
   import InfoBlock from 'pages/home/_components/InfoBlock'
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "react-tabs/style/react-tabs.css";
-import { isMobile } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import PAGES from "routing/routes";
 import OurPetsIcon from "icons/ourPetsIcon.png";
@@ -16,11 +15,9 @@ import { ANIMALS_STATUS } from "constants/animals";
 import "./style.scss";
 
 const InfoBlock = () => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const navigate = useNavigate();
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+
   const [dataState, setDataState] = useState<TGetCountOutput | null>(null);
   useEffect(() => {
     AnimalsApi.getCount().then((res) => {
@@ -38,7 +35,7 @@ const InfoBlock = () => {
       >
         <img src={OurPetsIcon} />{" "}
         <div className="loc_right">
-          <div className="loc_text">Сейчас {isMobileState === false && <br />}в приюте</div>
+          <div className="loc_text">Сейчас {isMobile === false && <br />}в приюте</div>
           <div className="loc_value">{dataState?.at_shelter ? dataState.at_shelter : "-"}</div>
         </div>
       </div>
@@ -52,7 +49,7 @@ const InfoBlock = () => {
         <img src={PetsAtHomeIcon} />{" "}
         <div className="loc_right">
           <div className="loc_text">
-            Обрели {isMobileState === false && <br />}
+            Обрели {isMobile === false && <br />}
             свой дом
           </div>
           <div className="loc_value">{dataState?.at_home ? dataState.at_home : "-"}</div>

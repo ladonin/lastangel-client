@@ -24,7 +24,7 @@
     height: calc(100% - 40px);
 
     .loc_logoText {
-      width: calc(400px + 16px);
+      width: calc(440px + 16px);
       display: flex;
       flex-wrap: wrap;
       padding-top: 4px;
@@ -38,7 +38,7 @@
 
       .loc_2 {
         width: 100%;
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 400;
         color: $c_white;
         padding-bottom: 32px;
@@ -89,14 +89,17 @@
     justify-content: space-between;
 
     .loc_item {
-      font-size: 14px;
+      font-size: 15px;
       text-transform: uppercase;
-      font-weight: $font_bold;
+      font-weight: $font_semi_bold;
       transition: $transition;
       display: flex;
       align-items: center;
       color: $c_white;
-      @extend %hoverable;
+      @extend %hoverableLagunaMiddle;
+      &.loc--active {
+        color: $c_lagunaMiddle;
+      }
     }
   }
 
@@ -206,12 +209,15 @@
     gap: calc(40px * var(--viewport-koeff));
     justify-content: space-between;
     padding: calc(40px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
-
+    box-shadow: $boxShadowMobile;
     .loc_item, .loc_else {
       color: $c_main;
       font-size: calc(36px * var(--viewport-koeff));
       font-weight: 600;
-      @extend %hoverable;
+      @extend %hoverableLagunaBlueDark;
+      &.loc--active {
+        color: $c_lagunaBlueDark;
+      }
     }
 
     .loc_else {
@@ -242,7 +248,7 @@
 
     .loc_item {
       color: $c_main;
-      font-size: calc(26px * var(--viewport-koeff));
+      font-size: calc(29px * var(--viewport-koeff));
       font-weight: 500;
     }
   }

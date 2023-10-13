@@ -27,6 +27,35 @@
   }
 }
 
+%hoverableLagunaMiddle {
+  cursor: pointer;
+
+  &:hover, &:hover * {
+    transition: $transition;
+    color: $c_lagunaMiddle;
+  }
+
+  &:active, &:active * {
+    color: $c_lagunaMiddle;
+  }
+}
+
+%hoverableLagunaBlueDark {
+  cursor: pointer;
+
+  &:hover, &:hover * {
+    transition: $transition;
+    color: $c_lagunaBlueDark;
+  }
+
+  &:active, &:active * {
+    color: $c_lagunaBlueDark;
+  }
+}
+
+
+
+
 %active {
   color: $c_lagunaBlue;
 }

@@ -1,10 +1,10 @@
-import React, { PropsWithChildren, useEffect, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState, useMemo } from "react";
 import cn from "classnames";
 import { Button, ButtonThemes } from "components/Button";
 import { DIMENTIONS } from "constants/photos";
 import { useGetImageDataHook, TData as TImageData } from "hooks/useGetImageDataHook";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 type TProps = {
   className?: string;
   label?: string;

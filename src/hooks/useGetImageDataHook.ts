@@ -2,7 +2,7 @@
   import { useGetImageDataHook, TData } from 'hooks/useGetImageDataHook';
  */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { DIMENTIONS } from "../constants/photos";
 
 export type TData = { file: File; width: string; height: string };

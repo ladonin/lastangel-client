@@ -2,11 +2,11 @@
   import InputNumber from 'components/Form/InputNumber'
  */
 
-import React, { ChangeEvent, useMemo, useState, useEffect } from "react";
+import React, { ChangeEvent, useMemo, useState, useEffect, useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import cn from "classnames";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 type TProps = {
   label?: string;
   className?: string;

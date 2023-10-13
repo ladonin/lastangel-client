@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 import InputText from "components/Form/InputText";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
 import InputFileImage from "components/Form/InputFileImage";

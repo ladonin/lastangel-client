@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
-
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
 import { TItem } from "api/types/stories";
 import PAGES from "routing/routes";
 import { getVideoUrl, getAnotherImagesUrl } from "helpers/stories";
@@ -13,19 +11,21 @@ import { SIZES_ANOTHER } from "constants/photos";
 import { STORIES_STATUS } from "constants/stories";
 import { isAdmin } from "utils/user";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import PinIcon from 'icons/pin.png';
+import PinIcon from "icons/pin.png";
 // const OtherComponent = React.lazy(() => import('components/header'));
-import "./style.scss";
+import { loadItem } from "utils/localStorage";
+
 import CopyLinkToPage from "components/CopyLinkToPage";
-import MediaOriginalLinks from "../../../../components/MediaOriginalLinks";
-import Tooltip from "../../../../components/Tooltip";
+import MediaOriginalLinks from "components/MediaOriginalLinks";
+import Tooltip from "components/Tooltip";
+import "./style.scss";
 
 type TProps = {
   data: TItem;
 };
 
 const ListItem = ({ data }: TProps) => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [isShowedState, setIsShowedState] = useState(false);
   const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
   const navigate = useNavigate();
@@ -34,9 +34,6 @@ const ListItem = ({ data }: TProps) => {
       setAnotherImagesState(JSON.parse(data.another_images));
     }
   }, [data]);
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
 
   return (
     <div
@@ -65,7 +62,7 @@ const ListItem = ({ data }: TProps) => {
         <Button
           className="loc_redactButton"
           theme={ButtonThemes.PRIMARY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={() => {
             navigate(`${PAGES.ADMINISTRATION_STORY_UPDATE}/${data.id}`);
           }}
@@ -127,7 +124,7 @@ const ListItem = ({ data }: TProps) => {
           <Button
             className="loc_moreButton"
             theme={ButtonThemes.GHOST}
-            size={isMobileState ? ButtonSizes.LARGE : ButtonSizes.SMALL}
+            size={isMobile ? ButtonSizes.LARGE : ButtonSizes.SMALL}
             onClick={() => setIsShowedState(true)}
           >
             Подробнее

@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
 import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
+
 import {
   getMainImageUrl,
   prepareSex,
@@ -24,29 +24,25 @@ import { ANIMALS_CATEGORY, ANIMALS_STATUS } from "constants/animals";
 import { TItem } from "api/types/animals";
 import PAGES from "routing/routes";
 import ArrowRight from "icons/arrowRight.svg";
-import { capitalizeFirtsLetter, numberFriendly } from "helpers/common";
+import { capitalizeFirtsLetter, getViewportKoeff, numberFriendly } from "helpers/common";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Tabs, { TTabs } from "components/Tabs";
+import { SIZES_MAIN } from "constants/photos";
+import { loadItem } from "utils/localStorage";
 import PuppyImg from "./images/puppy.jpg";
 import KittenImg from "./images/kitten.jpg";
 import DogImg from "./images/dog.jpg";
 import CatImg from "./images/cat.jpg";
 import OldDogImg from "./images/old_dog.jpg";
 import OldCatImg from "./images/old_cat.jpg";
-
 import "./style.scss";
-import { SIZES_MAIN } from "../../../../constants/photos";
 
 const OurPets = () => {
   const [tabsListState, setTabsListState] = useState<TTabs[]>([]);
   const [panelsListState, setPanelsListState] = useState<ReactElement[]>([]);
   const navigate = useNavigate();
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
-  const itemsNumber = useMemo(() => (isMobileState ? 2 : 4), [isMobileState]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const itemsNumber = isMobile ? 2 : 4;
   const renderContent = (data: TItem, index: number) => (
     <div className="loc_wrapper">
       <div className="loc_image">
@@ -65,7 +61,7 @@ const OurPets = () => {
 
         {index <= itemsNumber ? (
           <Link to={`${PAGES.PET}/${data.id}`} className="link_img">
-            <img src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
+            <img alt="." src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
           </Link>
         ) : (
           <Link to={`${PAGES.PET}/${data.id}`} className="link_img">
@@ -82,7 +78,7 @@ const OurPets = () => {
         <Button
           className="loc_button"
           theme={ButtonThemes.PRIMARY}
-          size={isMobileState ? ButtonSizes.HUGE : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.HUGE : ButtonSizes.MEDIUM}
           onClick={() => {
             navigate(`${PAGES.PET}/${data.id}`);
           }}
@@ -96,8 +92,8 @@ const OurPets = () => {
           </div>
           , <div className="loc_age">{prepareAge(data.birthdate)}</div>
           <div className="loc_collected">
-            Собрано за 30 дней: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
-            руб.
+            Собрано за месяц: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
+            р.
           </div>
           <div className="loc_description">{data.short_description}</div>
         </div>
@@ -108,7 +104,7 @@ const OurPets = () => {
   const renderPanel = (list: TItem[]) => (
     <div>
       <Swiper
-        spaceBetween={16}
+        spaceBetween={isMobile ? (getViewportKoeff() * 24) : 16}
         initialSlide={0}
         lazy={{
           enabled: true,
@@ -131,7 +127,7 @@ const OurPets = () => {
     </div>
   );
   useEffect(() => {
-    if (isMobileState === null) return;
+    if (isMobile === null) return;
     const tabsList: TTabs[] = [];
     const panelsList: ReactElement[] = [];
 
@@ -246,9 +242,9 @@ const OurPets = () => {
       setTabsListState(tabsList);
       setPanelsListState(panelsList);
     });
-  }, [isMobileState]);
+  }, []);
   return (
-    <div className={cn("page-home_ourPets", { "loc--isMobile": isMobileState })}>
+    <div className={cn("page-home_ourPets", { "loc--isMobile": isMobile })}>
       <div className="loc_title">
         <Link to={PAGES.PETS} className="loc_link">
           Наши питомцы

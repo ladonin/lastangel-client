@@ -1,20 +1,18 @@
 /*
   import Slider from 'pages/clinic/components/Slider'
  */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination, Lazy } from "swiper";
-import { isMobile } from "react-device-detect";
 import { getAnotherImagesUrl } from "helpers/clinicPhotos";
 import { SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/clinicPhotos";
 import { ClinicPhotosApi } from "api/clinicPhotos";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 const Slider = () => {
   const [dataState, setDataState] = useState<(TGetResponseItem & { data: number[] }) | null>(null);
 
@@ -23,12 +21,10 @@ const Slider = () => {
       setDataState({ ...res, data: JSON.parse(res.another_images) });
     });
   }, []);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+
 
   return (
     <Swiper

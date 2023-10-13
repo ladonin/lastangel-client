@@ -4,15 +4,25 @@
 
   }
 
+  .react-tabs__tab-panel {
+    padding-bottom: 0;
+    .swiper {
+      padding-bottom: 16px;
+      .swiper-slide {
+        box-shadow: $boxShadowEnabled;
+      }
+    }
+  }
+
   .loc_title {
     font-weight: 600;
-    padding: 0 0 8px 0px;
+    padding: 0 0 12px 0px;
     display: flex;
     align-items: center;
 
     .loc_link {
       color: $c_lagunaGrey;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 700;
       @extend %hoverable;
     }
@@ -34,7 +44,7 @@
   }
 
   .loc_slider {
-    height: 495px;
+    height: 524px;
   }
 
   .swiper-slide {
@@ -45,6 +55,7 @@
     .loc_image {
       position: relative;
       cursor: pointer;
+
       > a > img {
         min-height: 280px;
         width: 100%;
@@ -88,7 +99,7 @@
             position: absolute;
             bottom: 16px;
             left: 0;
-            background-color: rgba(255,255,255,0.95);
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 0 24px;
             font-size: 16px;
             line-height: 40px;
@@ -116,7 +127,7 @@
       .loc_data {
         margin: 16px;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 16px;
 
 
         .loc_age {
@@ -151,12 +162,12 @@
 
         .loc_description {
           margin-top: 16px;
-          max-height: 58px;
+          max-height: 86px;
           overflow: auto;
         }
 
         .loc_collected {
-          margin-top: 8px;
+          margin-top: 4px;
           font-style: Italic;
 
           .loc_val {
@@ -208,9 +219,23 @@
 
 
 .layout.loc--isMobile .page-home_ourPets {
-
+  .react-tabs__tab-panel {
+    padding-bottom: 0;
+    .swiper {
+      padding-bottom: calc(24px * var(--viewport-koeff));
+      .swiper-slide {
+        box-shadow: $boxShadowMobileImportant;
+      }
+    }
+  }
   .loc_title {
     padding: 0;
+
+    .loc_link {
+
+      font-size: calc(42px * var(--viewport-koeff));
+
+    }
 
     span {
       font-size: calc(36px * var(--viewport-koeff));
@@ -221,10 +246,10 @@
     .loc_seeAll {
 
       gap: calc(16px * var(--viewport-koeff));
-      font-size: calc(24px * var(--viewport-koeff));
+      font-size: calc(32px * var(--viewport-koeff));
 
       svg {
-        height: calc(20px * var(--viewport-koeff));
+        height: calc(26px * var(--viewport-koeff));
       }
     }
 
@@ -243,7 +268,7 @@
   }
 
   .loc_slider {
-    height: calc(779px * var(--viewport-koeff));
+    height: calc(930px * var(--viewport-koeff));
 
 
     .loc_image {
@@ -262,7 +287,7 @@
             bottom: calc(16px * var(--viewport-koeff));
             border-radius: 0 calc(8px * var(--viewport-koeff)) calc(8px * var(--viewport-koeff)) 0;
             padding: 0 calc(24px * var(--viewport-koeff));
-            font-size: calc(24px * var(--viewport-koeff));
+            font-size: calc(26px * var(--viewport-koeff));
             line-height: calc(60px * var(--viewport-koeff));
             font-weight: 600;
           }
@@ -274,7 +299,7 @@
       .loc_name {
         border-radius: calc(25px * var(--viewport-koeff));
         padding: 0 calc(24px * var(--viewport-koeff));
-        font-size: calc(24px * var(--viewport-koeff));
+        font-size: calc(26px * var(--viewport-koeff));
         line-height: calc(50px * var(--viewport-koeff));
         top: calc(16px * var(--viewport-koeff));
         right: calc(16px * var(--viewport-koeff));
@@ -285,16 +310,18 @@
     .swiper-slide .loc_content .loc_data {
       margin: calc(24px * var(--viewport-koeff));
       font-weight: 400;
-      font-size: calc(24px * var(--viewport-koeff));
+      font-size: calc(26px * var(--viewport-koeff));
 
       .loc_age .loc--undefined {
-        font-size: calc(18px * var(--viewport-koeff));
+        font-size: calc(20px * var(--viewport-koeff));
 
       }
+
       .loc_description {
         margin-top: calc(16px * var(--viewport-koeff));
-        max-height: calc(128px * var(--viewport-koeff));
-        overflow: auto;
+        max-height: 100%; //calc(128px * var(--viewport-koeff));
+        line-height: calc(38px * var(--viewport-koeff));
+        //overflow: auto;
       }
 
       .loc_collected {
@@ -304,7 +331,7 @@
     }
 
     .loc_seeAll {
-      font-size: calc(26px * var(--viewport-koeff));
+      font-size: calc(32px * var(--viewport-koeff));
     }
   }
 

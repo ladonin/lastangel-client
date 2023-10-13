@@ -29,8 +29,8 @@
           position: absolute;
           bottom: 16px;
           right: 16px;
-          width: 80px;
-          height: 80px;
+          width: 100px;
+          height: 100px;
           img {
             width: 100%;
             height: 100%;
@@ -39,7 +39,7 @@
       }
 
       .loc_data {
-        width: 61%;
+        width: 58%;
         align-self: flex-start;
 
         .loc_id {
@@ -141,13 +141,13 @@
         width: 100%;
 
         .loc_donation {
-          width: 39%;
+          width: 42%;
           align-self: flex-start;
 
           .loc_title {
             height: 55px;
             text-align: right;
-            font-size: 16px;
+            font-size: 18px;
             display: flex;
             align-items: flex-end;
             justify-content: flex-end;
@@ -159,7 +159,7 @@
           .loc_value {
             text-align: right;
             font-weight: 600;
-
+            font-size: 18px;
             span {
               color: $c_orange;
               font-size: 26px;
@@ -241,18 +241,19 @@
         line-height: 28px;
       }
 
-      .disclaimer {
-        width: 100%;
-        font-style: Italic;
-        font-size: 14px;
-        margin-top: 24px;
-        align-self: flex-start;
-      }
+
     }
 
     .loc_bottomWrapper {
       margin-top: 24px;
-
+      .disclaimer {
+        width: 100%;
+        font-style: Italic;
+        font-size: 18px;
+        color: $c_greyDark;
+        margin: 24px 0;
+        align-self: flex-start;
+      }
       .loc_fakephotoalbum {
         height: 800px;
       }
@@ -399,7 +400,7 @@
     }
 
     .disclaimer {
-      font-size: calc(24px * var(--viewport-koeff));
+      font-size: calc(28px * var(--viewport-koeff));
       margin: 0 calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
     }
 
@@ -427,21 +428,21 @@
           display: flex;
           align-items: flex-start;
           flex-wrap: wrap;
-          margin-top: 0px;
+          margin-top: 0;
 
           .loc_title {
             justify-content: flex-start;
-            font-size: calc(28px * var(--viewport-koeff));
+            font-size: calc(32px * var(--viewport-koeff));
             height: auto;
             padding-bottom: calc(8px * var(--viewport-koeff));
           }
 
           .loc_value {
             margin-left: calc(16px * var(--viewport-koeff));
-            font-size: calc(28px * var(--viewport-koeff));
-
+            font-size: calc(32px * var(--viewport-koeff));
+            line-height: calc(40px * var(--viewport-koeff));
             span {
-              font-size: calc(28px * var(--viewport-koeff));
+              font-size: calc(40px * var(--viewport-koeff));
             }
           }
 
@@ -449,7 +450,7 @@
             margin-left: auto;
             margin-top: 0px;
             font-weight: 600;
-            font-size: calc(28px * var(--viewport-koeff));
+            font-size: calc(32px * var(--viewport-koeff));
           }
 
           .loc_buttonWrapper {
@@ -498,14 +499,12 @@
           margin: calc(24px * var(--viewport-koeff)) auto 0px auto;
         }
 
-        .disclaimer {
-          font-size: calc(24px * var(--viewport-koeff));
-        }
 
         .loc_description {
           margin-top: 0;
           margin-bottom: calc(24px * var(--viewport-koeff));
-          font-size: calc(28px * var(--viewport-koeff));
+          font-size: calc(32px * var(--viewport-koeff));
+          line-height: calc(54px * var(--viewport-koeff));
           width: 100%;
         }
 
@@ -516,12 +515,12 @@
           margin-bottom: calc(24px * var(--viewport-koeff));
 
           .loc_title {
-            font-size: calc(28px * var(--viewport-koeff));
+            font-size: calc(32px * var(--viewport-koeff));
             line-height: calc(32px * var(--viewport-koeff));
           }
 
           .loc_item {
-            font-size: calc(24px * var(--viewport-koeff));
+            font-size: calc(28px * var(--viewport-koeff));
             padding: calc(8px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
             border-radius: 99px;
           }

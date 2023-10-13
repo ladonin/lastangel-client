@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 // const OtherComponent = React.lazy(() => import('components/header'));
-import "./style.scss";
-import InputText from "components/Form/InputText";
+import { loadItem } from "utils/localStorage";
+import "./style.scss";import InputText from "components/Form/InputText";
 import { TGetResponseItem } from "api/types/donators";
 
 export type TParams = { [key: string]: any };

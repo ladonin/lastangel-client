@@ -6,9 +6,12 @@
   flex-direction: column;
   cursor: pointer;
   //background-color: $c_greyF5;
-  border: 1px solid $c_lagunaGrey;
+  border: 1px solid $c_lagunaGreyLight;
+  border-radius: 8px;
   padding: 24px 24px 0 24px;
-
+  &:hover:not(.loc--isShowed) {
+    background-color: $c_lagunaWhite;
+  }
   &.loc--non_published {
     background-color: $c_yellowLight;
   }
@@ -117,14 +120,16 @@
   }
 
   &.loc--isShowed {
+    box-shadow: $boxShadowImportant;
     .loc_name {
-      text-decoration: underline;
+      //text-decoration: underline;
       //color: $c_lagunaBlue;
     }
   }
 }
 
 .layout.loc--isMobile .page-stories_listItem {
+  border-radius: calc(16px * var(--viewport-koeff));
   padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff));
   margin-bottom: calc(24px * var(--viewport-koeff));
 
@@ -209,5 +214,8 @@
   .component-copyLinkToPage {
     padding-top: calc(16px * var(--viewport-koeff));
     padding-bottom: calc(56px * var(--viewport-koeff));
+  }
+  &.loc--isShowed {
+    box-shadow: $boxShadowMobileImportant;
   }
 }

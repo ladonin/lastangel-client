@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet";
-import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router";
 import { useNavigate, useParams } from "react-router-dom";
 import { DonationsApi } from "api/donations";
 import PAGES from "routing/routes";
 import Modal from "components/Modal";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import Form, { TResponse, TParams } from "../_components/Form";
 import { TCommonDataRequest } from "api/types/donations";
 import { DONATIONS_TYPES } from "constants/donations";
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { loadItem } from "utils/localStorage";
+import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const DonationUpdate: React.FC = () => {
@@ -30,11 +30,8 @@ const DonationUpdate: React.FC = () => {
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   useEffect(() => {
     id &&
       DonationsApi.get(Number(id)).then((res) => {
@@ -74,7 +71,11 @@ const DonationUpdate: React.FC = () => {
 
     const { sum, target_id, type } = paramsRef.current;
 
-    if (!sum || !type || (!target_id && (type === DONATIONS_TYPES.PET || type === DONATIONS_TYPES.COLLECTION))) {
+    if (
+      !sum ||
+      !type ||
+      (!target_id && (type === DONATIONS_TYPES.PET || type === DONATIONS_TYPES.COLLECTION))
+    ) {
       setErrorState("Пожалуйста, заполните все обязательные поля");
     } else {
       setErrorState("");
@@ -116,7 +117,7 @@ const DonationUpdate: React.FC = () => {
                 theme={ButtonThemes.SUCCESS}
                 isLoading={isUpdatingState}
                 disabled={!paramsRef.current || isDeletedState || isDeletingState}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 onClick={updateHandler}
               >
                 Обновить
@@ -125,7 +126,7 @@ const DonationUpdate: React.FC = () => {
               <Button
                 className="loc_deleteButton"
                 theme={ButtonThemes.DANGER}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 disabled={isUpdatingState || isDeletedState}
                 isLoading={isDeletingState}
                 onClick={() => openModalDelete()}
@@ -135,7 +136,7 @@ const DonationUpdate: React.FC = () => {
               <Button
                 className="loc_cancelButton"
                 theme={ButtonThemes.PRIMARY}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 disabled={isUpdatingState || isDeletingState || isDeletedState}
                 onClick={() => navigate(`${PAGES.ADMINISTRATION}?tab=${pathname.split("/")[2]}`)}
               >
@@ -144,7 +145,16 @@ const DonationUpdate: React.FC = () => {
             </div>
           </div>
         )}
-        {isChangedState && <div className="loc_wrapper_updatedSuccess">Запись успешно обновлена ({paramsRef.current?.donator_firstname || paramsRef.current?.donator_middlename || paramsRef.current?.donator_lastname || 'Аноним'})</div>}
+        {isChangedState && (
+          <div className="loc_wrapper_updatedSuccess">
+            Запись успешно обновлена (
+            {paramsRef.current?.donator_firstname ||
+              paramsRef.current?.donator_middlename ||
+              paramsRef.current?.donator_lastname ||
+              "Аноним"}
+            )
+          </div>
+        )}
         {isDeletedState && <div className="loc_wrapper_removedSuccess">Запись удалена</div>}
 
         <Modal
@@ -158,7 +168,7 @@ const DonationUpdate: React.FC = () => {
             <Button
               className="loc_cancelButton"
               theme={ButtonThemes.DANGER}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               onClick={removeHandler}
             >
               Удалить
@@ -166,7 +176,7 @@ const DonationUpdate: React.FC = () => {
             <Button
               className="loc_cancelButton"
               theme={ButtonThemes.PRIMARY}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               onClick={closeModalDelete}
             >
               Отмена

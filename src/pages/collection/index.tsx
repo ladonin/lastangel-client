@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
-import { isMobile } from "react-device-detect";
-
 import Modal from "components/Modal";
 import { DonationsApi } from "api/donations";
 import { TItem } from "api/types/collections";
@@ -15,7 +13,7 @@ import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/colle
 import { getVideoType, numberFriendly, textToClient } from "helpers/common";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 import "./style.scss";
-
+import { loadItem } from "utils/localStorage";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
 import PAGES from "routing/routes";
@@ -37,11 +35,7 @@ const Collection: React.FC = () => {
   const [anotherImagesState, setAnotherImagesState] = useState<number[] | null>(null);
   const [donationsListModalOpenedState, setDonationsListModalOpenedState] = useState(false);
   const [donationsListState, setDonationsListState] = useState<TListDonations | null>(null);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     id &&
@@ -75,7 +69,7 @@ const Collection: React.FC = () => {
     <Button
       className="loc_donateButton"
       theme={ButtonThemes.PRIMARY}
-      size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+      size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
       onClick={() => {
         navigate(`${PAGES.HELP}?target=c${id}`);
       }}
@@ -89,7 +83,7 @@ const Collection: React.FC = () => {
       <Button
         className="loc_redactButton"
         theme={ButtonThemes.PRIMARY}
-        size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+        size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
         onClick={() => {
           navigate(`${PAGES.ADMINISTRATION_COLLECTION_UPDATE}/${id}`);
         }}
@@ -116,9 +110,9 @@ const Collection: React.FC = () => {
           </div>
         )}
 
-        {isMobileState === false && renderDonateButton()}
-        {isMobileState === false && renderRedactButton()}
-        {isMobileState === false && (
+        {isMobile === false && renderDonateButton()}
+        {isMobile === false && renderRedactButton()}
+        {isMobile === false && (
           <CopyLinkToPage
             targetText="на сбор"
             text="Рассказать о сборе друзьям"
@@ -145,10 +139,10 @@ const Collection: React.FC = () => {
         )}
         <div className="loc_id">ID: С{dataState.id} </div>
         <div className="loc_targetSum">
-          Необходимо {isMobileState === false && <>собрать</>}:{" "}
-          <span>{numberFriendly(dataState.target_sum)}</span> руб.
+          Надо{isMobile === false && <> собрать</>}:{" "}
+          <div className="loc_value"><span>{numberFriendly(dataState.target_sum)}</span> руб.</div>
         </div>
-        {isMobileState === true && renderDonation(dataState)}
+        {isMobile === true && renderDonation(dataState)}
         {dataState.status === COLLECTIONS_STATUS.CLOSED && (
           <div className="loc_closed">
             Сбор закрыт <img alt="." src={flowerSrc} />
@@ -168,26 +162,26 @@ const Collection: React.FC = () => {
             />
             <div className="loc_topWrapper">
               <div className="loc_avatar">
-                <img alt="not found" src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
+                <img alt="." src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
               </div>
-              {isMobileState === true && renderData()}
+              {isMobile === true && renderData()}
 
               <div className="loc_right">
-                {isMobileState === false && renderData()}
+                {isMobile === false && renderData()}
 
-                {isMobileState === true && (
+                {isMobile === true && (
                   <div
                     className="loc_description"
                     dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
                   />
                 )}
 
-                {isMobileState === false && renderDonation(dataState)}
-                {isMobileState === true && (
+                {isMobile === false && renderDonation(dataState)}
+                {isMobile === true && (
                   <div className="loc_buttonWrapper">{renderDonateButton()}</div>
                 )}
-                {isMobileState === true && renderRedactButton()}
-                {isMobileState === true && (
+                {isMobile === true && renderRedactButton()}
+                {isMobile === true && (
                   <CopyLinkToPage
                     targetText="на сбор"
                     text="Рассказать о сборе друзьям"
@@ -195,7 +189,7 @@ const Collection: React.FC = () => {
                   />
                 )}
 
-                {isMobileState === false && (
+                {isMobile === false && (
                   <div className="loc_description">{dataState.description}</div>
                 )}
               </div>
@@ -300,7 +294,7 @@ const Collection: React.FC = () => {
           <Button
             className="loc_cancelButton"
             theme={ButtonThemes.SUCCESS}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
             onClick={() => {
               setDonationsListModalOpenedState(false);
             }}

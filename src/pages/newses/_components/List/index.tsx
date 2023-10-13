@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import LoaderIcon from "components/LoaderIcon";
 import { NewsApi } from "api/news";
 import { TGetListRequest, TItem } from "api/types/news";
@@ -9,8 +9,8 @@ import { loadItem, saveItem } from "utils/localStorage";
 import ListItem from "../ListItem";
 import Filter, { TFilterParams } from "../Filter";
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 type TProps = {
   excludeId?: number;
 };

@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import BreadCrumbs from "components/BreadCrumbs";
 import { AnimalsApi } from "api/animals";
 import { CollectionsApi } from "api/collections";
 import { useQueryHook } from "hooks/useQueryHook";
 import Image from "icons/help.jpg";
+import ImageMobile from "icons/helpMobile.jpg";
 import SberIcon from "icons/sber.png";
 import DocsIcon from "icons/docs.png";
 import PrayIcon from "icons/pray.png";
 import PAGES from "routing/routes";
+import { loadItem } from "utils/localStorage";
 import { MAIN_CARD, MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "../../constants/donations";
 import InvalidIcon2 from "./icons/2.png";
 import InvalidIcon4 from "./icons/4.png";
@@ -20,7 +22,7 @@ import "./style.scss";
 
 const Help: React.FC = () => {
   const query = useQueryHook();
-
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [targetState, setTargetState] = useState("");
   const [targetTypeState, setTargetTypeState] = useState("");
   useEffect(() => {
@@ -90,10 +92,11 @@ const Help: React.FC = () => {
           что они должны пойти. Это может быть кличка животного или его номер (либо номер или
           название сбора, если это сбор). Если Вы не укажете эту информацию, то средства пойдут на
           тех животных, кому они наиболее необходимы в данный момент. <br />
-          Это инвалиды <img className="loc_invalidIcon" src={InvalidIcon7} /> и те, кому требуется
-          срочное лечение <img className="loc_invalidIcon" src={InvalidIcon4} />{" "}
-          <img className="loc_invalidIcon" src={InvalidIcon2} />. В нашем приюте они всегда есть
-          <img className="loc_invalidIcon" src={InvalidIcon8} />
+          Это инвалиды <img alt="." className="loc_invalidIcon" src={InvalidIcon7} /> и те, кому
+          требуется срочное лечение <img alt="." className="loc_invalidIcon" src={InvalidIcon4} />{" "}
+          <img alt="." className="loc_invalidIcon" src={InvalidIcon2} />. В нашем приюте они всегда
+          есть
+          <img alt="." className="loc_invalidIcon" src={InvalidIcon8} />
           .
           <br />
           <br />
@@ -136,7 +139,7 @@ const Help: React.FC = () => {
       </div>
       <div className="loc_rekviz">
         <div className="loc_top">
-          <img alt="." src={Image} className="loc_image" />
+          <img alt="." src={isMobile ? ImageMobile : Image} className="loc_image" />
           <div className="loc_right">
             <div className="loc_item">
               <div className="loc_sber">

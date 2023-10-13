@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet";
-import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router";
 import { useNavigate, useParams } from "react-router-dom";
 import { AnimalsApi } from "api/animals";
@@ -8,6 +7,7 @@ import PAGES from "routing/routes";
 import Modal from "components/Modal";
 import { TCommonDataRequest } from "api/types/animals";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { loadItem } from "utils/localStorage";
 import Form, { TResponse, TParams } from "../_components/Form";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
@@ -29,11 +29,8 @@ const PetUpdate: React.FC = () => {
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   useEffect(() => {
     id &&
       AnimalsApi.get(Number(id)).then((res) => {
@@ -151,7 +148,7 @@ const PetUpdate: React.FC = () => {
             <Button
               className="loc_gotopageButton"
               theme={ButtonThemes.PRIMARY}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
               onClick={() => {
                 navigate(`${PAGES.PET}/${id}`);
               }}
@@ -171,7 +168,7 @@ const PetUpdate: React.FC = () => {
                 theme={ButtonThemes.SUCCESS}
                 isLoading={isUpdatingState}
                 disabled={!paramsRef.current || isDeletedState || isDeletingState}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 onClick={updateHandler}
               >
                 Обновить
@@ -180,7 +177,7 @@ const PetUpdate: React.FC = () => {
               <Button
                 className="loc_deleteButton"
                 theme={ButtonThemes.DANGER}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 disabled={isUpdatingState || isDeletedState}
                 isLoading={isDeletingState}
                 onClick={() => openModalDelete()}
@@ -190,7 +187,7 @@ const PetUpdate: React.FC = () => {
               <Button
                 className="loc_cancelButton"
                 theme={ButtonThemes.PRIMARY}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 disabled={isUpdatingState || isDeletingState || isDeletedState}
                 onClick={() => navigate(`${PAGES.ADMINISTRATION}?tab=${pathname.split("/")[2]}`)}
               >
@@ -199,7 +196,11 @@ const PetUpdate: React.FC = () => {
             </div>
           </div>
         )}
-        {isChangedState && <div className="loc_wrapper_updatedSuccess">Запись успешно обновлена ({paramsRef.current?.name})</div>}
+        {isChangedState && (
+          <div className="loc_wrapper_updatedSuccess">
+            Запись успешно обновлена ({paramsRef.current?.name})
+          </div>
+        )}
         {isDeletedState && <div className="loc_wrapper_removedSuccess">Запись удалена</div>}
 
         <Modal
@@ -213,7 +214,7 @@ const PetUpdate: React.FC = () => {
             <Button
               className="loc_cancelButton"
               theme={ButtonThemes.DANGER}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               onClick={removeHandler}
             >
               Удалить
@@ -221,7 +222,7 @@ const PetUpdate: React.FC = () => {
             <Button
               className="loc_cancelButton"
               theme={ButtonThemes.SUCCESS}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               onClick={closeModalDelete}
             >
               Отмена

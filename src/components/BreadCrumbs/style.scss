@@ -7,12 +7,14 @@
 
   .loc_breadCrumb, .loc_toMain, .loc_delimiter {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 22px;
     color: $c_lagunaBlueDark;
     @extend %hoverable;
 
   }
-
+  .loc_title {
+    font-size: 22px;
+  }
   .loc_title, .loc_breadCrumb, .loc_delimiter, .loc_toMain {
 
     line-height: 32px;
@@ -32,10 +34,12 @@
   
   
   .loc_breadCrumb, .loc_toMain, .loc_delimiter {
-    font-size: calc(32px * var(--viewport-koeff));
+    font-size: calc(36px * var(--viewport-koeff));
     margin-bottom: calc(24px * var(--viewport-koeff));
   }
-
+  .loc_title {
+    font-size: calc(36px * var(--viewport-koeff));
+  }
   .loc_title, .loc_breadCrumb, .loc_delimiter, .loc_toMain {
 
     line-height: calc(32px * var(--viewport-koeff));

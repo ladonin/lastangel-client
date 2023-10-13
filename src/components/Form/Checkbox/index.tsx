@@ -1,8 +1,8 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useMemo } from "react";
 import cn from "classnames";
 import CheckIcon from "./icons/checkIcon.svg";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 type TProps = {
   checked?: boolean;
   disabled?: boolean;

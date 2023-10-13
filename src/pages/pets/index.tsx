@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
@@ -25,9 +25,9 @@ import { ANIMALS_STATUS } from "constants/animals";
 import { loadItem, saveItem } from "utils/localStorage";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import LoaderIcon from "components/LoaderIcon";
-import { TFilterParams as TPetsFilterParams } from "../administration/pets/_components/Filter";
 import Filter from "./_components/Filter";
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { TFilterParams as TPetsFilterParams } from "../administration/pets/_components/Filter";
 import "./style.scss";
 import PetDonationIcon from "../../components/PetDonationIcon";
 import { SIZES_MAIN } from "../../constants/photos";
@@ -35,23 +35,22 @@ import { SIZES_MAIN } from "../../constants/photos";
 const PETS_PAGESIZE = 20;
 const Pets: React.FC = () => {
   const navigate = useNavigate();
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const petsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const petsFilterRef = useRef<TPetsFilterParams>(
     loadItem("pets_filter") || { statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED] }
   );
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   const [listPetsState, setListPetsState] = useState<TItemPet[] | null>(null);
   const [myPetState, setMyPetState] = useState<TItemPet | null>(null);
   const [myPetIsLoadingState, setMyPetIsLoadingState] = useState<boolean>(false);
   const [petsPageState, setPetsPageState] = useState<number>(1);
 
   const query = useQueryHook();
+  const [compactCuratoryState, setCompactCuratoryState] = useState<boolean>(
+    loadItem("compactForCurator") || false
+  );
 
-  const [isCuratoryState, setIsCuratoryState] = useState<boolean>(true);
   useEffect(() => {
     if (loadItem("myPet") && loadItem("myPet").created > getTimestamp(new Date()) - 3600 * 1000) {
       setMyPetState(loadItem("myPet").data);
@@ -60,7 +59,7 @@ const Pets: React.FC = () => {
   useEffect(() => {
     query.get("curator") !== null &&
       typeof query.get("curator") !== "undefined" &&
-      setIsCuratoryState(true);
+      setCompactCuratoryState(false);
   }, [query]);
 
   useEffect(
@@ -105,6 +104,7 @@ const Pets: React.FC = () => {
       setPetsPageState(1);
     }
   };
+
   const isHere = (status: number) =>
     status !== ANIMALS_STATUS.AT_HOME && status !== ANIMALS_STATUS.DIED;
   const renderPetsContent = (data: TItemPet) => (
@@ -139,7 +139,7 @@ const Pets: React.FC = () => {
         <Button
           className="loc_button"
           theme={ButtonThemes.PRIMARY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={() => {
             navigate(`${PAGES.PET}/${data.id}`);
           }}
@@ -174,7 +174,7 @@ const Pets: React.FC = () => {
           </div>
           {data.status !== ANIMALS_STATUS.AT_HOME && data.status !== ANIMALS_STATUS.DIED && (
             <div className="loc_collected">
-              Собрано за 30 дней: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
+              Собрано за месяц: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
               руб.
             </div>
           )}
@@ -200,10 +200,21 @@ const Pets: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    saveItem("compactForCurator", compactCuratoryState);
+    
+    if (compactCuratoryState === true) {
+      navigate(PAGES.PETS);
+
+    }
+    
+    
+  }, [compactCuratoryState]);
+
   return (
     <div className="page-pets">
       <BreadCrumbs title="Наши питомцы" />
-      {isCuratoryState && (
+      {!compactCuratoryState && (
         <div className="loc_forCurator">
           Вы можете сделать разовое пожертвование на питомца или жертвовать на его содержание
           ежемесячно любую сумму. Для этого Вам нужно выбрать питомца из списка и на его странице
@@ -219,16 +230,24 @@ const Pets: React.FC = () => {
             Если желаете выбрать питомца для кураторства/разовой помощи, то мы можем сделать этот
             выбор за Вас.
           </div>
-          {myPetState === null && isMobileState !== null && (
+          {myPetState === null && (
             <div className="loc_buttonWrapper">
               <Button
                 className="loc_buttonSelectPet"
                 isLoading={myPetIsLoadingState}
                 theme={ButtonThemes.SUCCESS}
-                size={isMobileState ? ButtonSizes.HUGE : ButtonSizes.MEDIUM}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 onClick={getMyAnimalHandler}
               >
                 Выбрать своего питомца
+              </Button>
+              <Button
+                className="loc_buttonCompact"
+                theme={ButtonThemes.GHOST_BORDER}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                onClick={() => setCompactCuratoryState(!compactCuratoryState)}
+              >
+                Закрыть
               </Button>
             </div>
           )}
@@ -239,10 +258,26 @@ const Pets: React.FC = () => {
               <div className={cn("loc_wrapper ", `loc--status_${myPetState.status}`)}>
                 <div className="loc_item">{renderPetsContent(myPetState)}</div>
               </div>
+              <Button
+                className="loc_buttonCompact"
+                theme={ButtonThemes.GHOST_BORDER}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                onClick={() => setCompactCuratoryState(!compactCuratoryState)}
+              >
+                Закрыть
+              </Button>
             </div>
           )}
         </div>
       )}
+      {compactCuratoryState &&               <Button
+        className="loc_buttonOpenCuratory"
+        theme={ButtonThemes.GHOST_BORDER}
+        size={isMobile ? ButtonSizes.LARGE : ButtonSizes.SMALL}
+        onClick={() => setCompactCuratoryState(false)}
+      >
+        Кураторство
+      </Button>}
       <Filter filter={petsFilterRef.current} onChange={changeFilter} />
 
       <div className="loc_list">

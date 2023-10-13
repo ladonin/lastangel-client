@@ -3,12 +3,11 @@ import Cropper from "react-easy-crop";
 import cn from "classnames";
 import { Area } from "react-easy-crop/types";
 import Slider from "rc-slider";
-import { isMobile } from "react-device-detect";
 import Modal from "components/Modal";
 import { DIMENTIONS } from "constants/photos";
 import "rc-slider/assets/index.css";
 import "./style.scss";
-
+import { loadItem } from "utils/localStorage";
 import { Button, ButtonSizes, ButtonThemes } from "../../Button";
 import { useGetImageDataHook, TData as TImageData } from "../../../hooks/useGetImageDataHook";
 import getCroppedImg from "./utils";
@@ -46,11 +45,7 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
   const setImageHandler = (photo: File) => {
     loadImg([photo]);
   };
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   // потом добавить возможность вращения
   // потом сделать преобразование выбранной области в mainImage файл  передавать его, вместо параметров обрезки и исходника
@@ -66,7 +61,9 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
     if (!availableExtensions.includes(extension)) {
       error = {
         ...data,
-        error: `Текущее расширение файла не поддерживается. Должно быть ${availableExtensions.join(", ")}`,
+        error: `Текущее расширение файла не поддерживается. Должно быть ${availableExtensions.join(
+          ", "
+        )}`,
       };
     } else if (
       Number(data.width) < DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH ||
@@ -82,8 +79,10 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
       setImageState(data.file);
 
       // Вычисляем максимальный зум
-      const widthZoom = (Number(data.width) * cropAspect) / Number(DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH);
-      const heightZoom = Number(data.height) / cropAspect / Number(DIMENTIONS.IMAGES_UPLOAD_MIN_HEIGHT);
+      const widthZoom =
+        (Number(data.width) * cropAspect) / Number(DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH);
+      const heightZoom =
+        Number(data.height) / cropAspect / Number(DIMENTIONS.IMAGES_UPLOAD_MIN_HEIGHT);
       const maxZoom = Math.min(widthZoom, heightZoom);
       setCropMaxZoomState(maxZoom < 1 ? 1 : maxZoom);
     }
@@ -109,7 +108,10 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
     [imageState]
   );
 
-  const urlForCrop = useMemo(() => (imageState ? URL.createObjectURL(imageState) : ""), [imageState]);
+  const urlForCrop = useMemo(
+    () => (imageState ? URL.createObjectURL(imageState) : ""),
+    [imageState]
+  );
 
   const createCroppedImage = useCallback(async () => {
     if (!imageState || !cropResultState) return;
@@ -147,7 +149,9 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
         isOpen={needRenderCropModal() && (!imageWasCroppedState || openCropModalState)}
         title="Подготовка фото"
         onClose={saveCrop}
-        portalClassName={cn("component-inputFileImageWithCrop_cropModal", { "loc--isMobile": isMobileState })}
+        portalClassName={cn("component-inputFileImageWithCrop_cropModal", {
+          "loc--isMobile": isMobile,
+        })}
       >
         <div className="loc_wrapper">
           <div className="loc_zoom">
@@ -195,7 +199,7 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
           <Button
             className="loc_okButton"
             theme={ButtonThemes.PRIMARY}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
             onClick={saveCrop}
           >
             Готово
@@ -229,7 +233,8 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
 
       {!!wrongImageState && (
         <div className="loc_error">
-          {wrongImageState.error} - <span className="loc_errorFileName">{wrongImageState.file.name}</span>
+          {wrongImageState.error} -{" "}
+          <span className="loc_errorFileName">{wrongImageState.file.name}</span>
         </div>
       )}
     </div>

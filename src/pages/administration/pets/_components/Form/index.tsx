@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 // const OtherComponent = React.lazy(() => import('components/header'));
-import "./style.scss";
-import { getVideoUrl, getAnotherImagesUrl, getMainImageUrl } from "helpers/animals";
+import { loadItem } from "utils/localStorage";
+import "./style.scss";import { getVideoUrl, getAnotherImagesUrl, getMainImageUrl } from "helpers/animals";
 import {
   SEX_OPTIONS,
   GRAFTED_OPTIONS,

@@ -4,10 +4,10 @@
     margin-bottom: 32px;
     display: flex;
     flex-direction: column;
-    //background-color: $c_greyF5;
-    border: 1px solid $c_lagunaGrey;
+    border: 1px solid $c_lagunaGreyLight;
+    border-radius: 8px;
     padding: 24px 24px 0 24px;
-
+    box-shadow: $boxShadowImportant;
     &.loc--non_published {
       background-color: $c_yellowLight;
     }
@@ -110,7 +110,8 @@
   .loc_item {
     margin-bottom: calc(32px * var(--viewport-koeff));
     padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff));
-
+    border-radius: calc(16px * var(--viewport-koeff));
+    box-shadow: $boxShadowMobileImportant;
     .loc_created {
       font-size: calc(24px * var(--viewport-koeff));
     }

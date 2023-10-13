@@ -13,7 +13,7 @@
     width: calc(50% - 8px);
     padding: 16px;
     cursor: pointer;
-
+    box-shadow: $boxShadow;
     &:hover {
       background-color: $c_lagunaLight;
     }
@@ -27,7 +27,7 @@
 
     .loc_text {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       color: $c_greyDark;
       line-height: 18px;
 
@@ -47,13 +47,13 @@
 .layout.loc--isMobile .page-home_infoBlock {
   margin-bottom: calc(24px * var(--viewport-koeff));
   gap: calc(24px * var(--viewport-koeff));
-  height: calc(148px * var(--viewport-koeff));
-  overflow: hidden;
+
   .loc_ourPets, .loc_atHome {
     width: 50%;
     padding: calc(24px * var(--viewport-koeff));
     border-radius: calc(8px * var(--viewport-koeff));
     gap: calc(24px * var(--viewport-koeff));
+    box-shadow: $boxShadowMobile;
 
 
     img {
@@ -63,6 +63,7 @@
 
     .loc_right {
       .loc_text {
+        font-weight: 500;
         font-size: calc(32px * var(--viewport-koeff));
         line-height: calc(44px * var(--viewport-koeff));
       }

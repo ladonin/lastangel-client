@@ -1,12 +1,19 @@
-import React, { useRef, useEffect, useState } from "react";
-import { isMobile } from "react-device-detect";
-import { ANIMALS_CATEGORY, ANIMALS_KIND, ANIMALS_STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS_FILTER } from "constants/animals";
+import React, { useRef, useEffect, useState, useMemo } from "react";
+
+import {
+  ANIMALS_CATEGORY,
+  ANIMALS_KIND,
+  ANIMALS_STATUS,
+  CATEGORY_OPTIONS,
+  STATUS_OPTIONS_FILTER,
+} from "constants/animals";
 import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
 import { AnimalsApi } from "api/animals";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import { transformCategoryToParams } from "helpers/animals";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {
@@ -27,10 +34,8 @@ type TSelectRefProps = {
   lightClear: () => void;
 };
 const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
+
   const selectCategoryRef = useRef<TSelectRefProps>();
   const selectIdRef = useRef<TSelectRefProps>();
   const selectStatusRef = useRef<TSelectRefProps>();
@@ -68,7 +73,8 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   }, []);
 
   const getInputStatusValue = () => (filterState?.status ? String(filterState?.status) : undefined);
-  const getInputCategoryValue = () => (filterState?.category ? String(filterState?.category) : undefined);
+  const getInputCategoryValue = () =>
+    filterState?.category ? String(filterState?.category) : undefined;
   const getInputIdValue = () => (filterState?.id ? String(filterState?.id) : undefined);
 
   return (
@@ -94,7 +100,9 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           placeholder="Категория"
           isClearable
           onChange={(val, isLightClear = false) => {
-            const category = val ? (Number(val.value) as ValuesOf<typeof ANIMALS_CATEGORY>) : undefined;
+            const category = val
+              ? (Number(val.value) as ValuesOf<typeof ANIMALS_CATEGORY>)
+              : undefined;
             setFilterState((state) => ({
               ...state,
               category,
@@ -127,7 +135,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           disabled={!getInputStatusValue() && !getInputCategoryValue() && !getInputIdValue()}
           className="loc_resetButton"
           theme={ButtonThemes.GREY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={reset}
         >
           Сбросить

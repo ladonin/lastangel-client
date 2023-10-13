@@ -3,8 +3,8 @@
  */
 import React from "react";
 
-import "./style.scss";
-import LoaderIcon from "../../icons/loader.svg";
+import { loadItem } from "utils/localStorage";
+import "./style.scss";import LoaderIcon from "../../icons/loader.svg";
 
 const LoaderIconComponent = () => <LoaderIcon className="component-loaderIcon" />;
 

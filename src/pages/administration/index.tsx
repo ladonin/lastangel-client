@@ -1,8 +1,7 @@
-import React, { useMemo, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router";
 import {
   TGetListRequest as TGetCollectionsListRequest,
@@ -45,12 +44,12 @@ import {
   prepareType as prepareCollectionType,
 } from "helpers/collections";
 import { getDateString, numberFriendly } from "helpers/common";
-import Tabs from "../../components/Tabs";
-import { ANIMALS_STATUS } from "../../constants/animals";
-import { COLLECTIONS_STATUS } from "../../constants/collections";
-import NotFound from "../../components/NotFound";
-import { loadItem, saveItem } from "../../utils/localStorage";
-import { Button, ButtonSizes, ButtonThemes } from "../../components/Button";
+import { loadItem, saveItem } from "utils/localStorage";
+import Tabs from "components/Tabs";
+import { ANIMALS_STATUS } from "constants/animals";
+import { COLLECTIONS_STATUS } from "constants/collections";
+import NotFound from "components/NotFound";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import PetsFilter, { TFilterParams as TPetsFilterParams } from "./pets/_components/Filter";
 import CollectionsFilter, {
   TFilterParams as TCollectionsFilterParams,
@@ -91,7 +90,7 @@ const TABS_MAP: { [key: string]: number } = {
 
 const Administration: React.FC = () => {
   const navigate = useNavigate();
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const { search } = useLocation();
   const [initTabState, setInitTabState] = useState<number | undefined>(undefined);
 
@@ -109,9 +108,6 @@ const Administration: React.FC = () => {
     setInitTabState(0);
   }, [search]);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   const [listPetState, setListPetsState] = useState<TItemPet[] | null>(null);
   const [listCollectionState, setListCollectionsState] = useState<TItemCollection[] | null>(null);
   const [listDonationsState, setListDonationsState] = useState<TItemDonation[] | null>(null);
@@ -350,7 +346,7 @@ const Administration: React.FC = () => {
         <Button
           className="loc_button"
           theme={ButtonThemes.PRIMARY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={() => {
             navigate(`${PAGES.ADMINISTRATION_PET_UPDATE}/${data.id}`);
           }}
@@ -360,7 +356,7 @@ const Administration: React.FC = () => {
         <Button
           className="loc_button loc_redactNewBlank"
           theme={ButtonThemes.GHOST_BORDER}
-          size={isMobileState ? ButtonSizes.HUGE : ButtonSizes.SMALL}
+          size={isMobile ? ButtonSizes.HUGE : ButtonSizes.SMALL}
           onClick={() => {
             window.open(`${PAGES.ADMINISTRATION_PET_UPDATE}/${data.id}`, "_blank");
           }}
@@ -391,7 +387,7 @@ const Administration: React.FC = () => {
           </div>
           {data.need_medicine !== null && <span>({preparePetStatus(data.status, null)})</span>}
           <div className="loc_collected">
-            Собрано за 30 дней: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
+            Собрано за месяц: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
             руб.
           </div>
           <div className="loc_description">{data.short_description}</div>
@@ -411,7 +407,7 @@ const Administration: React.FC = () => {
         <Button
           className="loc_button"
           theme={ButtonThemes.PRIMARY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={() => {
             navigate(`${PAGES.ADMINISTRATION_COLLECTION_UPDATE}/${data.id}`);
           }}
@@ -461,7 +457,7 @@ const Administration: React.FC = () => {
           <Button
             className="loc_button"
             theme={ButtonThemes.PRIMARY}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
             onClick={() => {
               navigate(`${PAGES.ADMINISTRATION_NEWS_UPDATE}/${data.id}`);
             }}
@@ -486,7 +482,7 @@ const Administration: React.FC = () => {
           <Button
             className="loc_button"
             theme={ButtonThemes.PRIMARY}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
             onClick={() => {
               navigate(`${PAGES.ADMINISTRATION_STORY_UPDATE}/${data.id}`);
             }}
@@ -552,7 +548,7 @@ const Administration: React.FC = () => {
             <Button
               className="loc_button"
               theme={ButtonThemes.PRIMARY}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
               onClick={() => {
                 navigate(`${PAGES.ADMINISTRATION_DONATION_UPDATE}/${data.id}`);
               }}
@@ -579,7 +575,7 @@ const Administration: React.FC = () => {
           <Button
             className="loc_button"
             theme={ButtonThemes.PRIMARY}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
             onClick={() => {
               navigate(`${PAGES.ADMINISTRATION_DONATOR_UPDATE}/${data.id}`);
             }}

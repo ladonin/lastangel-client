@@ -5,10 +5,9 @@
 import React, { useEffect, useState, useMemo } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Lazy } from "swiper";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AnimalsApi } from "api/animals";
 import { getMainImageUrl, prepareStatus, prepareStatusCode } from "helpers/animals";
 
@@ -16,20 +15,18 @@ import { ANIMALS_STATUS } from "constants/animals";
 import { TGetListOutput, TItem } from "api/types/animals";
 import PAGES from "routing/routes";
 
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
 import { SIZES_MAIN } from "constants/photos";
+
 
 type TProps = { currentId?: number | null };
 const PetsList = ({ currentId = null }: TProps) => {
   const [listState, setListState] = useState<TGetListOutput>([]);
   const [initialSlideState, setInitialSlideState] = useState<number | null>(null);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  const itemsNumber = useMemo(() => (isMobileState ? 3 : 7), [isMobileState]);
-
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const itemsNumber = isMobile ? 3 : 7;
 
   useEffect(() => {
     let initialSlide = 0;
@@ -79,7 +76,6 @@ const PetsList = ({ currentId = null }: TProps) => {
   );
 
   useEffect(() => {
-    if (isMobileState === null) return;
     AnimalsApi.getList({
       statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
       offset: 0,
@@ -90,11 +86,11 @@ const PetsList = ({ currentId = null }: TProps) => {
     }).then((res) => {
       setListState(res);
     });
-  }, [isMobileState]);
+  }, []);
 
   return (
-    <div className={cn("page-pet_petsList", { "loc--isMobile": isMobileState })}>
-      {isMobileState !== null && initialSlideState !== null && (
+    <div className={cn("page-pet_petsList", { "loc--isMobile": isMobile })}>
+      {isMobile !== null && initialSlideState !== null && (
         <Swiper
           spaceBetween={12}
           initialSlide={initialSlideState}

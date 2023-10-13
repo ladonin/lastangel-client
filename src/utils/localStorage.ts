@@ -12,7 +12,7 @@ export const loadItem = (key: any): any => {
 
     return JSON.parse(serializedState);
   } catch {
-    return "";
+    return undefined;
   }
 };
 

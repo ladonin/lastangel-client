@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 
-import { isMobile } from "react-device-detect";
 import VkGroup from "pages/home/_components/VkGroup";
 import InfoBlock from "pages/home/_components/InfoBlock";
+import { loadItem } from "utils/localStorage";
 import Slider from "./_components/Slider";
 import OurPets from "./_components/OurPets";
 import Collections from "./_components/Collections";
@@ -12,17 +12,13 @@ import Help from "./_components/Help";
 import "./style.scss";
 
 const Home: React.FC = () => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   return (
     <div className="page-home">
       <div className="loc_top">
         <div className="loc_left">
-          {(isMobileState === null || isMobileState === true) && <InfoBlock />}
+          {isMobile === true && <InfoBlock />}
           <Slider />
           <div className="loc_textMain">
             У животных есть Душа. Её можно увидеть в их глазах.
@@ -60,7 +56,7 @@ const Home: React.FC = () => {
         </div>
 
         <div className="loc_right">
-          {!isMobileState && <InfoBlock />}
+          {!isMobile && <InfoBlock />}
           <Collections />
 
           <News />

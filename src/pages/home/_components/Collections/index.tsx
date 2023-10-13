@@ -2,10 +2,9 @@
   import Collections from 'pages/home/components/Collections'
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState, useMemo } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
 import { Link, useNavigate } from "react-router-dom";
 import { CollectionsApi } from "api/collections";
 import { getMainImageUrl } from "helpers/collections";
@@ -14,17 +13,15 @@ import { TGetListOutput, TItem } from "api/types/collections";
 import ArrowRight from "icons/arrowRight.svg";
 import PAGES from "routing/routes";
 import { numberFriendly } from "helpers/common";
-import "./style.scss";
-import { SIZES_MAIN } from "../../../../constants/photos";
+import "./style.scss";import { loadItem } from "utils/localStorage";import { SIZES_MAIN } from "../../../../constants/photos";
+import { loadItem } from "utils/localStorage";
 
 const Collections = () => {
   const [listState, setListState] = useState<TGetListOutput>([]);
   const navigate = useNavigate();
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+
 
   const renderContent = (data: TItem) => (
     <div
@@ -45,7 +42,7 @@ const Collections = () => {
           </Link>
 
           <div className="loc_need">
-            Необходимо: <span className="loc_val">{numberFriendly(data.target_sum)}</span> р.
+            Надо: <span className="loc_val">{numberFriendly(data.target_sum)}</span> р.
           </div>
           <div className="loc_collected">
             Собрано: <span className="loc_val">{numberFriendly(data.collected)}</span> р.
@@ -57,20 +54,18 @@ const Collections = () => {
   );
 
   useEffect(() => {
-    if (isMobileState === null) return;
-
     CollectionsApi.getList({
       status: COLLECTIONS_STATUS.PUBLISHED,
       offset: 0,
-      limit: isMobileState ? 4 : 3,
+      limit: isMobile ? 4 : 3,
       order: "ismajor",
       order_type: "desc",
     }).then((res) => {
       setListState(res);
     });
-  }, [isMobileState]);
+  }, []);
   return listState.length ? (
-    <div className={cn("page-home_collections", { "loc--isMobile": isMobileState })}>
+    <div className={cn("page-home_collections", { "loc--isMobile": isMobile })}>
       <Link to={PAGES.COLLECTIONS} className="link_text loc_title">
         Сборы
       </Link>

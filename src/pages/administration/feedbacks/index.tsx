@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useOutletContext } from "react-router-dom";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
 import { getDateString } from "helpers/common";
 import LoaderIcon from "components/LoaderIcon";
 import { FeedbacksApi } from "api/feedbacks";
@@ -10,10 +9,10 @@ import { TGetListRequest, TItem } from "api/types/feedbacks";
 import NotFound from "components/NotFound";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Modal from "components/Modal";
+import { loadItem } from "utils/localStorage";
 import Filter, { TFilterParams } from "./_components/Filter";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
-
 // TODO
 // сделать цветовую дифференциацию по статусам (фон)
 // сделать фильтр по статусам и пр
@@ -21,11 +20,9 @@ import "./style.scss";
 const PAGESIZE = 20;
 
 const Feedbacks: React.FC = () => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [pageState, setPageState] = useState<number>(1);
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+
   const [listState, setListState] = useState<TItem[] | null>(null);
   const filterRef = useRef<TFilterParams>({});
 
@@ -62,13 +59,17 @@ const Feedbacks: React.FC = () => {
 
   const markAsViewedHandler = (id: number) => {
     FeedbacksApi.setIsViewed(id).then(() => {
-      setListState((curr) => (curr ? curr.map((item) => (item.id === id ? { ...item, is_new: 0 } : item)) : curr));
+      setListState((curr) =>
+        curr ? curr.map((item) => (item.id === id ? { ...item, is_new: 0 } : item)) : curr
+      );
       checkMail();
     });
   };
   const markAsNewHandler = (id: number) => {
     FeedbacksApi.setIsNew(id).then(() => {
-      setListState((curr) => (curr ? curr.map((item) => (item.id === id ? { ...item, is_new: 1 } : item)) : curr));
+      setListState((curr) =>
+        curr ? curr.map((item) => (item.id === id ? { ...item, is_new: 1 } : item)) : curr
+      );
       checkMail();
     });
   };
@@ -111,7 +112,7 @@ const Feedbacks: React.FC = () => {
           <Button
             className="loc_button"
             theme={ButtonThemes.SUCCESS}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.SMALL}
             onClick={() => {
               markAsViewedHandler(data.id);
             }}
@@ -123,7 +124,7 @@ const Feedbacks: React.FC = () => {
           <Button
             className="loc_button"
             theme={ButtonThemes.PRIMARY}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.SMALL}
             onClick={() => {
               markAsNewHandler(data.id);
             }}
@@ -136,7 +137,7 @@ const Feedbacks: React.FC = () => {
           className="loc_deleteButton"
           theme={ButtonThemes.DELETE_ICON}
           tooltip="Удалить"
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.SMALL}
           onClick={() => {
             openModalDelete(data.id);
           }}
@@ -146,7 +147,9 @@ const Feedbacks: React.FC = () => {
   );
 
   const onReachBottomHandler = () => {
-    !loadingStatusRef.current.isOff && !loadingStatusRef.current.isLoading && setPageState((prev) => prev + 1);
+    !loadingStatusRef.current.isOff &&
+      !loadingStatusRef.current.isLoading &&
+      setPageState((prev) => prev + 1);
   };
 
   return (
@@ -157,7 +160,10 @@ const Feedbacks: React.FC = () => {
         {listState === null && <LoaderIcon />}
         {listState &&
           listState.map((item, index) => (
-            <div key={index} className={cn("loc_item", `loc--status_${item.is_new ? "new" : "viewed"}`)}>
+            <div
+              key={index}
+              className={cn("loc_item", `loc--status_${item.is_new ? "new" : "viewed"}`)}
+            >
               {renderContent(item)}
             </div>
           ))}
@@ -176,7 +182,7 @@ const Feedbacks: React.FC = () => {
           <Button
             className="loc_deleteButton"
             theme={ButtonThemes.DANGER}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
             onClick={removeHandler}
           >
             Удалить
@@ -184,7 +190,7 @@ const Feedbacks: React.FC = () => {
           <Button
             className="loc_cancelButton"
             theme={ButtonThemes.PRIMARY}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
             onClick={closeModalDelete}
           >
             Отмена

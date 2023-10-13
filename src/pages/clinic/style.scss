@@ -24,6 +24,7 @@
 
 .layout.loc--isMobile .page-clinic {
 
-
+  font-size: calc(34px * var(--viewport-koeff));
+  line-height: calc(56px * var(--viewport-koeff));
 }
 

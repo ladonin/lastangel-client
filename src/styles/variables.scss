@@ -60,11 +60,13 @@ $c_yellowLight: #efd862;
 $c_sand: #f8f7e2;
 $c_sandLight: #fffaef;
 
+$c_lagunaWhite: #f7fafb;
 $c_lagunaGreyLighter: #eaf4f4;
 $c_lagunaGreyLight: #e2ecec;
 $c_lagunaLighter: #f7fdff;
 $c_lagunaLightMiddle: #e7f0fc;
 $c_lagunaLight: #C8EAFFFF;
+$c_lagunaMiddle: #93d4ff;
 $c_lagunaBlueDark: #4574af;
 $c_lagunaBlue: #5580B7;
 $c_lagunaBlueLight: #7096c7;
@@ -77,3 +79,9 @@ $c_red: #FF0000;
 $c_redLight: #ff5e5e;
 
 $transition: all .2s linear;
+$boxShadow: none;//4px 4px 12px $c_greyDF;
+$boxShadowEnabled: 4px 4px 12px $c_greyDF;
+$boxShadowImportant: 6px 6px 18px $c_greyDF;
+$boxShadowMobile: none;//calc(6px * var(--viewport-koeff)) calc(6px * var(--viewport-koeff)) calc(18px * var(--viewport-koeff)) $c_greyEF;
+$boxShadowMobileEnabled: calc(6px * var(--viewport-koeff)) calc(6px * var(--viewport-koeff)) calc(18px * var(--viewport-koeff)) $c_greyEF;
+$boxShadowMobileImportant: calc(8px * var(--viewport-koeff)) calc(8px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) $c_greyDF;

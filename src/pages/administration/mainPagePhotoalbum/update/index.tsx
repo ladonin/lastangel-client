@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet";
-import { isMobile } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import { MainPhotoalbumApi } from "api/mainphotoalbum";
 import PAGES from "routing/routes";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { loadItem } from "utils/localStorage";
 import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
@@ -23,11 +23,8 @@ const MainPagePhotoalbumUpdate: React.FC = () => {
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   useEffect(() => {
     MainPhotoalbumApi.get().then((res) => {
       setDataLoadedState(res);
@@ -80,7 +77,7 @@ const MainPagePhotoalbumUpdate: React.FC = () => {
                 theme={ButtonThemes.SUCCESS}
                 isLoading={isUpdatingState}
                 disabled={!paramsRef.current}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 onClick={updateHandler}
               >
                 Обновить
@@ -88,7 +85,7 @@ const MainPagePhotoalbumUpdate: React.FC = () => {
               <Button
                 className="loc_cancelButton"
                 theme={ButtonThemes.PRIMARY}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 disabled={isUpdatingState}
                 onClick={() => navigate(PAGES.ADMINISTRATION)}
               >
@@ -97,7 +94,9 @@ const MainPagePhotoalbumUpdate: React.FC = () => {
             </div>
           </div>
         )}
-        {isChangedState && <div className="loc_wrapper_updatedSuccess">Фотоальбом успешно обновлен</div>}
+        {isChangedState && (
+          <div className="loc_wrapper_updatedSuccess">Фотоальбом успешно обновлен</div>
+        )}
       </div>
     </>
   );

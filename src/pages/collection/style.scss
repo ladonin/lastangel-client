@@ -20,7 +20,7 @@
         .loc_title {
           height: 55px;
           text-align: right;
-          font-size: 16px;
+          font-size: 18px;
           display: flex;
           align-items: flex-end;
           justify-content: flex-end;
@@ -32,6 +32,7 @@
         .loc_value {
           text-align: right;
           font-weight: 600;
+          font-size: 18px;
 
           span {
             color: $c_orange;
@@ -51,21 +52,25 @@
           margin-top: 24px;
           margin-left: auto;
         }
+
         .component-copyLinkToPage {
           .loc_copyLinkButton {
             margin-left: auto;
           }
+
           .loc_copyToBufferStatus {
             width: 224px;
             margin-left: auto;
           }
         }
       }
+
       .loc_not_published {
         background-color: $c_yellowLight;
         padding: 16px;
         margin: 24px 0;
       }
+
       .loc_right {
         display: flex;
         flex-wrap: wrap;
@@ -91,7 +96,7 @@
           .loc_target_animal {
             font-weight: 600;
             font-size: 18px;
-            margin: 0px 0 8px 0;
+            margin: 8px 0;
 
             a {
               color: $c_lagunaBlueDark;
@@ -137,16 +142,13 @@
         font-size: 18px;
         color: $c_lagunaGrey;
 
-        span {
-          color: $c_orange;
+        .loc_value {
+          display: inline-block;
+          color: $c_main;
+          span {
+            color: $c_orange;
+          }
         }
-      }
-
-      .disclaimer {
-        width: 100%;
-        font-style: Italic;
-        font-size: 14px;
-        margin-top: 24px;
       }
     }
 
@@ -155,6 +157,7 @@
 
       .loc_slider {
         margin-bottom: 24px;
+
         .swiper-slide {
           display: flex;
           align-items: center;
@@ -257,21 +260,28 @@
 
     .loc_topWrapper .loc_data {
       width: calc(100% - calc(429px * var(--viewport-koeff)));
+
       .loc_target_animal {
         font-weight: 600;
         font-size: calc(28px * var(--viewport-koeff));
         margin: 0 0 calc(8px * var(--viewport-koeff)) 0;
+
         span {
           color: $c_lagunaBlueDark;
 
           @extend %hoverable;
         }
       }
+
       .loc_id, .loc_targetSum, .loc_parameters {
         margin-top: 0;
         margin-bottom: calc(8px * var(--viewport-koeff));
+      }
+
+      .loc_id, .loc_parameters, .loc_targetSum, .loc_donation, .loc_donation .loc_title {
         font-size: calc(28px * var(--viewport-koeff));
       }
+
 
       .loc_id {
 
@@ -279,12 +289,8 @@
         margin-bottom: calc(24px * var(--viewport-koeff));
       }
 
-      .loc_targetSum, .loc_donation .loc_title {
-        color: $c_main;
 
-      }
-
-      .loc_targetSum span {
+      .loc_targetSum .loc_value span {
         color: $c_lagunaDark;
 
       }
@@ -301,6 +307,7 @@
           }
         }
       }
+
       .loc_closed {
         margin-top: calc(24px * var(--viewport-koeff));
         background-color: $c_greenLight;
@@ -338,15 +345,18 @@
       .loc_redactButton {
         margin: calc(24px * var(--viewport-koeff)) auto 0 auto;
       }
+
       .component-copyLinkToPage {
         width: 100%;
         padding-bottom: calc(16px * var(--viewport-koeff));
         padding-left: 0;
         padding-right: 0;
+
         .loc_copyLinkButton {
           margin-left: auto;
           margin-right: auto;
         }
+
         .loc_copyToBufferStatus {
           width: 100%;
           margin-left: 0;
@@ -356,10 +366,6 @@
       }
     }
 
-    .disclaimer {
-      font-size: calc(24px * var(--viewport-koeff));
-      margin: 0 calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
-    }
 
     .loc_topWrapper {
       flex-wrap: wrap;
@@ -376,13 +382,10 @@
         width: 100%;
 
 
-        .disclaimer {
-          font-size: calc(24px * var(--viewport-koeff));
-        }
-
         .loc_description {
           margin-top: 0;
-          font-size: calc(28px * var(--viewport-koeff));
+          font-size: calc(32px * var(--viewport-koeff));
+          line-height: calc(54px * var(--viewport-koeff));
           width: 100%;
         }
 
@@ -415,7 +418,6 @@
 
       .loc_title {
         justify-content: flex-start;
-        font-size: calc(28px * var(--viewport-koeff));
         height: auto;
         padding-bottom: 0;
         align-items: flex-start;
@@ -426,8 +428,9 @@
         font-size: calc(28px * var(--viewport-koeff));
 
         align-items: flex-start;
+
         span {
-          font-size: calc(26px * var(--viewport-koeff));
+          font-size: calc(28px * var(--viewport-koeff));
         }
       }
 
@@ -485,7 +488,7 @@
 }
 
 
-.page-collection_donationsListModal .component-modal--isMobile{
+.page-collection_donationsListModal .component-modal--isMobile {
   .loc_title {
     padding-bottom: calc(24px * var(--viewport-koeff));
   }
@@ -496,6 +499,7 @@
     margin-right: calc(-8px * var(--viewport-koeff));
     margin-bottom: calc(32px * var(--viewport-koeff));
     margin-top: calc(16px * var(--viewport-koeff));
+
     .component-loaderIcon {
       width: calc(50px * var(--viewport-koeff));
       margin-top: calc(-25px * var(--viewport-koeff));
@@ -503,13 +507,11 @@
     }
 
 
-
     .loc_list {
       .loc_item {
         margin-bottom: calc(16px * var(--viewport-koeff));
       }
     }
-
 
 
   }

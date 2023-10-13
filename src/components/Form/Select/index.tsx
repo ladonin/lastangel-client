@@ -2,11 +2,11 @@
   import Select from 'components/Form/Select'
  */
 
-import React, { Ref, useEffect, useRef } from "react";
+import React, { Ref, useEffect, useRef, useMemo } from "react";
 import cn from "classnames";
 import SelectComponent, { Props } from "react-select";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 type TValue = { value: string; label: string };
 type TProps = Props & {
   label?: string;

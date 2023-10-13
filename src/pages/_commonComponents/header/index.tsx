@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { useNavigate, NavLink, Link } from "react-router-dom";
 import cn from "classnames";
@@ -32,12 +32,16 @@ type TMenuItem = { title: string; link: string; inMobileSubMenu: boolean };
 // иконок контактов
 export default function Index() {
   const navigate = useNavigate();
-  const [openSubmenuState, setOpenSubmenuState] = useState(false);
+  const [openSubmenuState, setOpenSubmenuState] = useState(true);
 
   const renderMenuItem = (item: TMenuItem, index: number) => (
-    <Link to={item.link} className="loc_item" key={index}>
+    <NavLink
+      to={item.link}
+      className={({ isActive }) => `loc_item${isActive ? " loc--active" : ""}`}
+      key={index}
+    >
       {item.title}
-    </Link>
+    </NavLink>
   );
   const renderMenu = (mobile: boolean) => (
     <>

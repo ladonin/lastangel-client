@@ -2,15 +2,15 @@
   import WYSIWYGEditor from 'components/Form/WYSIWYGEditor'
  */
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
 import cn from "classnames";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 type TProps = {
   label?: string;
   className?: string;

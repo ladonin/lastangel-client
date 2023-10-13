@@ -1,6 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
-
-import { isMobile } from "react-device-detect";
+import React, { useState, useRef, useMemo } from "react";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { DonationsApi } from "api/donations";
@@ -8,6 +6,7 @@ import PAGES from "routing/routes";
 import { TCommonDataRequest } from "api/types/donations";
 import { DONATIONS_TYPES } from "constants/donations";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { loadItem } from "utils/localStorage";
 import Form, { TParams } from "../_components/Form";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
@@ -19,11 +18,8 @@ const DonationCreate: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const paramsRef = useRef<TParams>({});
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   const onChange = (data: TParams) => {
     setErrorState("");
     paramsRef.current = data;
@@ -37,7 +33,11 @@ const DonationCreate: React.FC = () => {
   const saveHandler = () => {
     const { sum, target_id, type } = paramsRef.current;
 
-    if (!sum || !type || (!target_id && (type === DONATIONS_TYPES.PET || type === DONATIONS_TYPES.COLLECTION))) {
+    if (
+      !sum ||
+      !type ||
+      (!target_id && (type === DONATIONS_TYPES.PET || type === DONATIONS_TYPES.COLLECTION))
+    ) {
       setErrorState("Пожалуйста, заполните все обязательные поля");
     } else {
       setErrorState("");
@@ -47,7 +47,9 @@ const DonationCreate: React.FC = () => {
         .then(() => {
           setIsLoadingState(false);
           setIsAddedState(true);
-          setTimeout(() => paramsRef.current = {}, 0);
+          setTimeout(() => {
+            paramsRef.current = {};
+          }, 0);
         })
         .catch(() => {
           setIsLoadingState(false);
@@ -68,7 +70,7 @@ const DonationCreate: React.FC = () => {
               className="loc_saveButton"
               theme={ButtonThemes.SUCCESS}
               isLoading={isLoadingState}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               onClick={saveHandler}
             >
               Сохранить
@@ -77,7 +79,7 @@ const DonationCreate: React.FC = () => {
             <Button
               className="loc_cancelButton"
               theme={ButtonThemes.PRIMARY}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               disabled={isLoadingState}
               onClick={() => navigate(`${PAGES.ADMINISTRATION}?tab=${pathname.split("/")[2]}`)}
             >
@@ -88,11 +90,16 @@ const DonationCreate: React.FC = () => {
       )}
       {isAddedState && (
         <div className="loc_wrapper_addedSuccess">
-          Донат успешно добавлен ({paramsRef.current?.donator_firstname || paramsRef.current?.donator_middlename || paramsRef.current?.donator_lastname || 'Аноним'})
+          Донат успешно добавлен (
+          {paramsRef.current?.donator_firstname ||
+            paramsRef.current?.donator_middlename ||
+            paramsRef.current?.donator_lastname ||
+            "Аноним"}
+          )
           <Button
             className="loc_addElseButton"
             theme={ButtonThemes.PRIMARY}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
             onClick={newHandler}
           >
             Добавить еще

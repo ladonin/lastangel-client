@@ -1,12 +1,12 @@
-import React, { ChangeEventHandler, useEffect, useState } from "react";
+import React, { ChangeEventHandler, useState, useMemo } from "react";
 
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 import PAGES from "routing/routes";
 import { saveUserData, isAuthorized } from "utils/user";
 import { UserApi } from "api/user";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 const Signin: React.FC = () => {
@@ -17,11 +17,9 @@ const Signin: React.FC = () => {
   // import("components/foo").then(math => {
   //     console.log(math.add(16, 26));
   // });
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [checkMail] = useOutletContext<any>();
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+
   const setLogin: ChangeEventHandler<HTMLInputElement> = (e) => {
     setLoginState(e.target.value);
   };
@@ -54,7 +52,7 @@ const Signin: React.FC = () => {
           {errorTextState && <div className="loc_errorText">{errorTextState}</div>}
           <Button
             theme={ButtonThemes.PRIMARY}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
             disabled={!loginState || !passwordState}
             onClick={sendHandler}
           >

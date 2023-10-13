@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import cn from "classnames";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 import { Button, ButtonThemes } from "../../Button";
 
 type TPrevImagesProps = {

@@ -7,9 +7,9 @@
   }
 
   .loc_title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
-    margin: 0 0 8px 0;
+    margin: 0 0 12px 0;
     color: $c_lagunaGrey;
     display: inline-block;
     @extend %hoverable;
@@ -21,9 +21,15 @@
     position: relative;
     flex-direction: column;
     cursor: pointer;
-    background-color: $c_greyF5;
-    padding: 16px;
 
+    padding: 16px;
+    //background-color: $c_greyF5;
+    border: 1px solid $c_lagunaGreyLight;
+    border-radius: 4px;
+    box-shadow: $boxShadow;
+    &:hover {
+      background-color: $c_lagunaWhite;
+    }
     &.loc--non_published {
       background-color: $c_yellowLight;
     }
@@ -37,18 +43,18 @@
       right: 16px;
       cursor: default;
       img {
-        height: 16px;
-        width: 16px;
+        height: 18px;
+        width: 18px;
       }
     }
     .loc_created {
-      font-size: 11px;
+      font-size: 14px;
       color: $c_lagunaGrey;
     }
 
     .loc_name {
       display: block;
-      font-size: 16px;
+      font-size: 18px;
       padding: 4px 0;
       font-weight: 600;
       color: $c_lagunaGrey;
@@ -56,9 +62,9 @@
     }
 
     .loc_short_description {
-      color: $c_grey;
-      font-size: 13px;
-      line-height: 18px;
+      color: $c_greyDark;
+      font-size: 14px;
+      line-height: 22px;
     }
   }
 
@@ -86,14 +92,14 @@
   margin-bottom: calc(32px * var(--viewport-koeff));
 
   .loc_title {
-    font-size: calc(36px * var(--viewport-koeff));
+    font-size: calc(42px * var(--viewport-koeff));
     margin-bottom: calc(16px * var(--viewport-koeff));
   }
 
   .loc_item {
     margin-bottom: calc(32px * var(--viewport-koeff));
-    padding: calc(24px * var(--viewport-koeff));
-
+    padding: calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
+    box-shadow: $boxShadowMobile;
     .loc_nonpublished {
       font-size: calc(22px * var(--viewport-koeff));
       margin-bottom: calc(16px * var(--viewport-koeff));
@@ -113,14 +119,14 @@
     }
 
     .loc_name {
-      font-size: calc(34px * var(--viewport-koeff));
-      padding: calc(8px * var(--viewport-koeff)) 0;
+      font-size: calc(38px * var(--viewport-koeff));
+      padding: calc(12px * var(--viewport-koeff)) 0;
 
     }
 
     .loc_short_description {
-      font-size: calc(26px * var(--viewport-koeff));
-      line-height: calc(40px * var(--viewport-koeff));
+      font-size: calc(30px * var(--viewport-koeff));
+      line-height: calc(44px * var(--viewport-koeff));
       color: $c_main;
     }
   }
@@ -128,11 +134,11 @@
   .loc_seeAll {
 
     gap: calc(16px * var(--viewport-koeff));
-    font-size: calc(24px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
     margin-top: calc(8px * var(--viewport-koeff));
 
     svg {
-      height: calc(20px * var(--viewport-koeff));
+      height: calc(26px * var(--viewport-koeff));
     }
   }
 }

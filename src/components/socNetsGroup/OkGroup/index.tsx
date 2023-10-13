@@ -2,25 +2,21 @@
   import OkGroup from 'components/socNetsGroup/OkGroup'
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
+import { loadItem } from "utils/localStorage";
 import "react-tabs/style/react-tabs.css";
-import { isMobile } from "react-device-detect";
 
 type TProps = {
   height?: string;
   width?: string;
 };
 const OkGroup = ({ height = "auto", width = "auto" }: TProps) => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     // @ts-ignore
     // eslint-disable-next-line no-undef
-    isMobileState === false &&
+    isMobile === false &&
       setTimeout(() => {
         // @ts-ignore
         function go(d, id, did, st) {
@@ -28,7 +24,11 @@ const OkGroup = ({ height = "auto", width = "auto" }: TProps) => {
           js.src = "https://connect.ok.ru/connect.js";
           // eslint-disable-next-line no-multi-assign
           js.onload = js.onreadystatechange = function () {
-            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+            if (
+              !this.readyState ||
+              this.readyState === "loaded" ||
+              this.readyState === "complete"
+            ) {
               if (!this.executed) {
                 this.executed = true;
                 setTimeout(() => {
@@ -43,8 +43,8 @@ const OkGroup = ({ height = "auto", width = "auto" }: TProps) => {
         }
         go(document, "ok_group_widget", "565776551254", `{"width":${width},"height":${height}}`);
       });
-  }, [isMobileState]);
-  return isMobileState === false ? <div id="ok_group_widget" /> : null;
+  }, []);
+  return isMobile === false ? <div id="ok_group_widget" /> : null;
 };
 
 export default OkGroup;

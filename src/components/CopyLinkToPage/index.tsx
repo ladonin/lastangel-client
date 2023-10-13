@@ -2,10 +2,10 @@
   import CopyLinkToPage from 'components/CopyLinkToPage'
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 import "./style.scss";
-import { isMobile } from "react-device-detect";
+import { loadItem } from "utils/localStorage";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { copyToBuffer } from "helpers/common";
 
@@ -16,11 +16,8 @@ type Props = {
 };
 const CopyLinkToPage: React.FC<Props> = ({ url, text, targetText }) => {
   const [copyToBufferStatusState, setCopyToBufferStatusState] = useState<boolean | null>(null);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   useEffect(() => {
     if (copyToBufferStatusState !== null) {
       setTimeout(() => {
@@ -34,7 +31,7 @@ const CopyLinkToPage: React.FC<Props> = ({ url, text, targetText }) => {
       <Button
         className="loc_copyLinkButton"
         theme={ButtonThemes.GHOST_BORDER}
-        size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+        size={isMobile ? ButtonSizes.GIANT : ButtonSizes.SMALL}
         onClick={() => {
           copyToBuffer(url)
             .then(() => setCopyToBufferStatusState(true))
@@ -45,11 +42,14 @@ const CopyLinkToPage: React.FC<Props> = ({ url, text, targetText }) => {
       </Button>
       {copyToBufferStatusState === true && (
         <div className="loc_copyToBufferStatus">
-          Ссылка {targetText || 'на данную страницу'} успешно скопирована в буфер обмена вашего {isMobile ? "мобильного устройства" : "компьютера"}.
+          Ссылка {targetText || "на данную страницу"} успешно скопирована в буфер обмена вашего{" "}
+          {isMobile ? "мобильного устройства" : "компьютера"}.
         </div>
       )}
       {copyToBufferStatusState === false && (
-        <div className="loc_copyToBufferStatus red">Ошибка. Пожалуйста, обратитесь к администратору.</div>
+        <div className="loc_copyToBufferStatus red">
+          Ошибка. Пожалуйста, обратитесь к администратору.
+        </div>
       )}
     </div>
   );

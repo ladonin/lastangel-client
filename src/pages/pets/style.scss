@@ -1,10 +1,13 @@
 .page-pets {
+  position: relative;
   .loc_forCurator {
     margin-bottom: 16px;
     padding: 16px;
     background-color: $c_sandLight;
     border-radius: 8px;
     border: 1px solid $c_yellowLight;
+    font-size: 18px;
+    line-height: 28px;
 
     .loc_linkToContacts {
       font-weight: 600;
@@ -12,15 +15,26 @@
 
     .loc_buttonWrapper {
       display: flex;
-      justify-content: center;
+      align-items: center;
       flex-wrap: wrap;
-
+      flex-direction: column;
       .loc_buttonSelectPet {
         margin-top: 16px;
       }
+
     }
   }
-
+  
+  .loc_buttonOpenCuratory {
+    margin-left: auto;
+    margin-bottom: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .loc_buttonCompact {
+    margin-top: 16px;
+  }
   .loc_list, .loc_myPet {
     display: flex;
     flex-wrap: wrap;
@@ -63,6 +77,7 @@
 
       .loc_item {
 
+        line-height: normal;
 
         .loc_image {
           position: relative;
@@ -81,8 +96,8 @@
           }
 
           > a > img {
-            width: 256px;
-            height: 256px;
+            width: 100%;
+            height: auto;
             cursor: pointer;
           }
 
@@ -123,21 +138,16 @@
         }
 
         .loc_collected {
-          margin-top: 8px;
+          margin-top: 16px;
           font-style: Italic;
-
+          font-weight: 600;
           .loc_val {
             font-weight: 600;
             font-style: normal;
-          }
-        }
-
-
-        .loc_collected {
-          .loc_val {
             color: $c_orange;
           }
         }
+
 
         .loc_status {
           font-weight: 600;
@@ -225,9 +235,9 @@
 
     flex-direction: column;
     align-items: center;
-
+    gap: 0;
     .loc_title {
-      margin-top: 16px;
+      margin: 16px 0;
       font-weight: 600;
     }
   }
@@ -258,8 +268,10 @@
 
 
       .loc_item {
+        line-height: normal;
+
         .loc_collected {
-          margin-top: calc(8px * var(--viewport-koeff));
+          margin-top: calc(16px * var(--viewport-koeff));
         }
 
         .loc_status {
@@ -289,7 +301,8 @@
               height: 100%;
             }
           }
-          img {
+
+          > a > img {
             width: 100%;
             height: auto;
           }
@@ -305,8 +318,8 @@
 
 
         .loc_atHome {
-          border-radius: calc(64px * var(--viewport-koeff));
-          font-size: calc(28px * var(--viewport-koeff));
+          border-radius: calc(40px * var(--viewport-koeff));
+          font-size: calc(32px * var(--viewport-koeff));
           height: calc(80px * var(--viewport-koeff));
           gap: calc(16px * var(--viewport-koeff));
           padding: 0 calc(24px * var(--viewport-koeff));
@@ -315,8 +328,8 @@
           bottom: calc(16px * var(--viewport-koeff));
 
           > img {
-            width: calc(40px * var(--viewport-koeff));
-            height: calc(40px * var(--viewport-koeff));
+            width: calc(50px * var(--viewport-koeff));
+            height: calc(50px * var(--viewport-koeff));
           }
         }
 
@@ -324,7 +337,7 @@
           margin-top: calc(32px * var(--viewport-koeff));
 
           .loc_data {
-            font-size: calc(26px * var(--viewport-koeff));
+            font-size: calc(28px * var(--viewport-koeff));
             margin-top: calc(32px * var(--viewport-koeff));
 
             .loc_name {
@@ -350,13 +363,18 @@
     font-size: calc(32px * var(--viewport-koeff));
     padding: calc(24px * var(--viewport-koeff));
     border-radius: calc(8px * var(--viewport-koeff));
-
+    line-height: calc(52px * var(--viewport-koeff));
+    .loc_buttonCompact {
+      margin-top: calc(24px * var(--viewport-koeff));
+    }
     .loc_myPet {
       margin-top: calc(24px * var(--viewport-koeff));
-
+      gap: 0;
       .loc_title {
-        margin-top: calc(16px * var(--viewport-koeff));
+        margin-top: 0;
+        margin-bottom: calc(16px * var(--viewport-koeff));
       }
+
     }
 
     .loc_buttonWrapper {

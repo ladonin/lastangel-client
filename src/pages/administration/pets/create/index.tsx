@@ -1,14 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router";
 import { AnimalsApi } from "api/animals";
 import PAGES from "routing/routes";
 import { TCommonDataRequest } from "api/types/animals";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { loadItem } from "utils/localStorage";
 import Form, { TParams } from "../_components/Form";
 // const OtherComponent = React.lazy(() => import('components/header'));
+
 import "./style.scss";
 
 const PetCreate: React.FC = () => {
@@ -19,11 +20,8 @@ const PetCreate: React.FC = () => {
   const navigate = useNavigate();
 
   const paramsRef = useRef<TParams>({});
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   const onChange = (data: TParams) => {
     setErrorState("");
     paramsRef.current = data;
@@ -104,7 +102,7 @@ const PetCreate: React.FC = () => {
               className="loc_saveButton"
               theme={ButtonThemes.SUCCESS}
               isLoading={isLoadingState}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               onClick={saveHandler}
             >
               Сохранить
@@ -113,7 +111,7 @@ const PetCreate: React.FC = () => {
             <Button
               className="loc_cancelButton"
               theme={ButtonThemes.PRIMARY}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               disabled={isLoadingState}
               onClick={() => {
                 navigate(`${PAGES.ADMINISTRATION}?tab=${pathname.split("/")[2]}`);
@@ -130,7 +128,7 @@ const PetCreate: React.FC = () => {
           <Button
             className="loc_addElseButton"
             theme={ButtonThemes.PRIMARY}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
             onClick={newHandler}
           >
             Добавить еще

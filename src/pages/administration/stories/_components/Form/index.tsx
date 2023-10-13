@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 import InputText from "components/Form/InputText";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
@@ -13,8 +13,8 @@ import { SIZES_ANOTHER } from "constants/photos";
 import Select from "components/Form/Select";
 import InputFileVideo from "components/Form/InputFileVideo";
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 export type TParams = { [key: string]: any };
 
 export type TResponse = TGetResponseItem;

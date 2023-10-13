@@ -1,10 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
-import { isMobile } from "react-device-detect";
+import React, { useRef, useEffect, useState, useMemo } from "react";
+
 import { isObjectOptionsIsEmpty } from "helpers/common";
 import Select from "components/Form/Select";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import InputText from "components/Form/InputText";
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {
@@ -30,10 +31,8 @@ export const ORDER_OPTIONS = [
 export const DEFAULT_SORT = "desc";
 
 const NewsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
+
   const selectOrderRef = useRef<TSelectRefProps>();
   const inputTitleRef = useRef<TInputRefProps>();
   const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
@@ -92,7 +91,7 @@ const NewsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           disabled={filterState === null || isObjectOptionsIsEmpty(filterState)}
           className="loc_resetButton"
           theme={ButtonThemes.GREY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={reset}
         >
           Сбросить

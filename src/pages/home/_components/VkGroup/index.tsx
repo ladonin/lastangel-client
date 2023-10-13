@@ -2,29 +2,30 @@
   import VkGroup from 'pages/home/_components/VkGroup'
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import "react-tabs/style/react-tabs.css";
-import { isMobile } from "react-device-detect";
 
 import "./style.scss";
+import { loadItem } from "utils/localStorage";
 
 const VkGroup = () => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
-  useEffect(() => {
-    if (isMobileState === false) {
+    if (isMobile === false) {
       setTimeout(() => {
         // @ts-ignore
         // eslint-disable-next-line no-undef
-        VK.Widgets.Group("vk_groups", { mode: 0, width: "auto", height: isMobileState ? "300" : "400" }, 190912136);
+        VK.Widgets.Group(
+          "vk_groups",
+          { mode: 0, width: "auto", height: isMobile ? "300" : "400" },
+          190912136
+        );
       }, 0);
     }
-  }, [isMobileState]);
-  return isMobileState ? null : (
+  }, []);
+  return isMobile ? null : (
     <div className="page-home_vkGroup">
       <div className="loc_title">Наша группа Вконтакте</div>
       <div id="vk_groups" />

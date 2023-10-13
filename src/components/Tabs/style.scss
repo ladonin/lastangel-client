@@ -68,7 +68,7 @@
 
   .react-tabs {
     &__tab {
-      padding: calc(12px * var(--viewport-koeff));
+      padding: calc(24px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff));
    
       margin-right: calc(8px * var(--viewport-koeff));
 
@@ -86,8 +86,8 @@
 
       &--selected {
 
-        padding-bottom: calc(8px * var(--viewport-koeff));
-        border-bottom: calc(4px * var(--viewport-koeff)) solid $c_greenMedium;
+        padding-bottom: calc(16px * var(--viewport-koeff));
+        border-bottom: calc(8px * var(--viewport-koeff)) solid $c_greenMedium;
       }
 
       &-list {
@@ -103,7 +103,7 @@
       }
 
       &-panel--selected {
-        padding: calc(16px * var(--viewport-koeff));
+        padding: calc(24px * var(--viewport-koeff));
 
         border-radius: 0 calc(8px * var(--viewport-koeff)) calc(4px * var(--viewport-koeff)) calc(4px * var(--viewport-koeff));
       }

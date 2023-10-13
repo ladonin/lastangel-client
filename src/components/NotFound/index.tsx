@@ -4,8 +4,8 @@
 import React from "react";
 import "react-tooltip/dist/react-tooltip.css";
 import icon from "./icon.png";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 const NotFound = () => (
   <div className="component-notFound">
     <img src={icon} alt="Ничего не найдено" />

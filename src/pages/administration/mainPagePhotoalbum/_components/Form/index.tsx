@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
 import InputFileImage from "components/Form/InputFileImage";
 import { TGetResponseItem } from "api/types/mainphotoalbum";
 import { getAnotherImagesUrl } from "helpers/mainphotoalbum";
 import { SIZES_ANOTHER } from "constants/photos";
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 // TODO
 // сделать цветовую дифференциацию по статусам (фон)
 // сделать фильтр по статусам и пр

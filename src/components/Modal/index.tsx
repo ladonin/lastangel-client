@@ -1,11 +1,11 @@
 /* 
   import Modal from 'components/Modal'
  */
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useMemo } from "react";
 import cn from "classnames";
 import Modal from "react-modal";
-import { isMobile } from "react-device-detect";
 import CloseIcon from "icons/close12.svg";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {
@@ -17,30 +17,26 @@ type TProps = {
 };
 
 const ModalComponent = ({ isOpen, onClose, title, children, portalClassName }: TProps) => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
-
-  return isMobileState === null ? null : (
+  return (
     <Modal
       isOpen={isOpen}
       portalClassName={portalClassName}
       ariaHideApp={false}
       style={{
         content: {
-          top: isMobileState ? "0" : "50%",
-          left: isMobileState ? "0" : "50%",
+          top: isMobile ? "0" : "50%",
+          left: isMobile ? "0" : "50%",
           right: "auto",
           bottom: "auto",
-          marginRight: isMobileState ? "0" : "-50%",
-          transform: isMobileState ? "translate(0, 0)" : "translate(-50%, -50%)",
+          marginRight: isMobile ? "0" : "-50%",
+          transform: isMobile ? "translate(0, 0)" : "translate(-50%, -50%)",
           padding: 0,
           borderRadius: "8px",
           border: "1px solid #ade0aa",
-          width: isMobileState ? "calc(100% - 16px)" : "auto",
-          margin: isMobileState ? "8px" : undefined,
+          width: isMobile ? "calc(100% - 16px)" : "auto",
+          margin: isMobile ? "8px" : undefined,
         },
         overlay: {
           backgroundColor: "rgba(128, 128, 128, 0.5)",
@@ -51,7 +47,7 @@ const ModalComponent = ({ isOpen, onClose, title, children, portalClassName }: T
       shouldCloseOnEsc
       onRequestClose={onClose}
     >
-      <div className={cn("component-modal", { "component-modal--isMobile": isMobileState })}>
+      <div className={cn("component-modal", { "component-modal--isMobile": isMobile })}>
         <div className="component-modal_header">
           <h2>{title}</h2>
           <CloseIcon className="component-modal_header_closeIcon" onClick={onClose} />

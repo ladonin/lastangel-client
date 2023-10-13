@@ -2,10 +2,10 @@
   import PetDonationIcon from 'components/PetDonationIcon'
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
-import "./style.scss";
-import { ANIMALS_KIND } from "constants/animals";
+import { loadItem } from "utils/localStorage";
+import "./style.scss";import { ANIMALS_KIND } from "constants/animals";
 import { TItem } from "api/types/animals";
 import { loadItem, saveItem } from "utils/localStorage";
 
@@ -194,7 +194,7 @@ const PetDonationIcon: React.FC<TProps> = (props) => {
   useEffect(() => {
     const petDonationIcons: {
       [key: number]: { collected: number; icon: number };
-    } = loadItem("pet_donation_icons");
+    } = loadItem("pet_donation_icons") || {};
     if (pet) {
       const collected = pet.collected || 0;
       const kind = pet.kind === ANIMALS_KIND.CAT ? "cats" : "dogs";

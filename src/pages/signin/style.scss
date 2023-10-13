@@ -4,11 +4,13 @@
   align-content: flex-start;
   width: 300px;
   flex-wrap: wrap;
+
   .loc_errorText {
     color: $c_red;
     width: 100%;
     text-align: center;
   }
+
   .loc_title {
     width: 100%;
     font-size: 24px;
@@ -17,6 +19,7 @@
     margin-top: 32px;
     text-align: center;
   }
+
   input {
     width: 100%;
     margin-bottom: 16px;
@@ -26,6 +29,7 @@
     font-size: 16px;
     height: 40px;
   }
+
   .component-button {
     margin-top: 16px;
   }
@@ -33,23 +37,30 @@
 }
 
 
-
-.layout.loc--isMobile .page-signin{
+.layout.loc--isMobile .page-signin {
   width: 60%;
+
   .loc_title {
     font-size: calc(40px * var(--viewport-koeff));
     margin: calc(56px * var(--viewport-koeff)) 0;
 
   }
+
   input {
-    margin-bottom: calc(80px * var(--viewport-koeff));
+    margin-bottom: calc(40px * var(--viewport-koeff));
     border: 1px solid $c_greyMedium;
     padding: 0 calc(32px * var(--viewport-koeff));
     font-size: calc(40px * var(--viewport-koeff));
     height: calc(80px * var(--viewport-koeff));
     border-radius: calc(99px * var(--viewport-koeff));
   }
+
   .component-button {
     margin-top: 0;
+  }
+
+  .loc_errorText {
+    font-size: calc(40px * var(--viewport-koeff));
+    margin-bottom: calc(24px * var(--viewport-koeff));
   }
 }

@@ -2,14 +2,14 @@
   import DatePicker from 'components/Form/DatePicker'
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import cn from "classnames";
 import ru from "date-fns/locale/ru";
 import { getTimestamp } from "helpers/common";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-
 registerLocale("ru", ru);
 
 type TProps = {

@@ -2,10 +2,9 @@
   import News from 'pages/home/_components/News'
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState, useMemo } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
 import { Link, useNavigate } from "react-router-dom";
 import { NewsApi } from "api/news";
 import { getDateString } from "helpers/common";
@@ -13,18 +12,14 @@ import { TGetListOutput, TItem } from "api/types/news";
 import ArrowRight from "icons/arrowRight.svg";
 import PAGES from "routing/routes";
 import { NEWS_STATUS } from "constants/news";
-import "./style.scss";
-import Tooltip from "../../../../components/Tooltip";
+import { loadItem } from "utils/localStorage";
+import "./style.scss";import Tooltip from "../../../../components/Tooltip";
 import PinIcon from "../../../../icons/pin.png";
+import { loadItem } from "utils/localStorage";
 
 const News = () => {
   const [listState, setListState] = useState<TGetListOutput>([]);
   const navigate = useNavigate();
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
 
   const renderContent = (data: TItem) => (
     <div
@@ -35,7 +30,9 @@ const News = () => {
     >
       <div className="loc_content">
         <div className="loc_data">
-          {data.status === NEWS_STATUS.NON_PUBLISHED && <div className="loc_nonpublished">Не опубликован</div>}
+          {data.status === NEWS_STATUS.NON_PUBLISHED && (
+            <div className="loc_nonpublished">Не опубликован</div>
+          )}
 
           {!!data.ismajor && (
             <div className="loc_pin">
@@ -55,11 +52,15 @@ const News = () => {
   );
 
   useEffect(() => {
-    if (isMobileState === null) return;
-    NewsApi.getList({ offset: 0, limit: 5, orderComplex: "ismajor desc, id desc", excludeStatus: 2 /* isAdmin() ? undefined : 2 */ }).then((res) => {
+    NewsApi.getList({
+      offset: 0,
+      limit: 5,
+      orderComplex: "ismajor desc, id desc",
+      excludeStatus: 2 /* isAdmin() ? undefined : 2 */,
+    }).then((res) => {
       setListState(res);
     });
-  }, [isMobileState]);
+  }, []);
   return listState.length ? (
     <div className="page-home_news">
       <Link to={`${PAGES.NEWS}`} className="link_text loc_title">
@@ -67,7 +68,12 @@ const News = () => {
       </Link>
       <div className="loc_block">
         {listState.map((item, index) => (
-          <div className={cn("loc_item", { "loc--non_published": item.status === NEWS_STATUS.NON_PUBLISHED })} key={index}>
+          <div
+            className={cn("loc_item", {
+              "loc--non_published": item.status === NEWS_STATUS.NON_PUBLISHED,
+            })}
+            key={index}
+          >
             {renderContent(item)}
           </div>
         ))}

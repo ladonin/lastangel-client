@@ -19,7 +19,7 @@
     background-color: $c_lagunaLightMiddle;
     padding: 16px;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 16px;
     &:hover {
       background-color: $c_lagunaLight
     }
@@ -30,9 +30,12 @@
         @extend %hoverable;
       }
     }
-
+    .loc_delimiter {
+      margin-top: 8px;
+      width: 100%;
+    }
     .loc_created {
-      margin-right: 16px;
+      margin-left: auto;
       font-style: italic;
     }
 
@@ -46,8 +49,7 @@
     }
 
     .loc_target {
-      margin-top: 8px;
-      width: 100%;
+      
 
       .loc--type {
         &_1, &_2 {
@@ -89,18 +91,16 @@
 
   .loc_item {
     padding: calc(24px * var(--viewport-koeff));
-    font-size: calc(26px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
+    line-height: calc(48px * var(--viewport-koeff));
     margin-bottom: calc(16px * var(--viewport-koeff));
     border-radius: calc(8px * var(--viewport-koeff));
 
-    .loc_created {
-      margin-right: calc(16px * var(--viewport-koeff));
-    }
 
-    .loc_target {
+    .loc_delimiter {
       margin-top: calc(8px * var(--viewport-koeff));
-
     }
+
 
     .loc_name {
       &.loc--hasLink {

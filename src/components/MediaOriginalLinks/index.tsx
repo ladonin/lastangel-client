@@ -4,9 +4,6 @@
 
 import React, { useEffect, useState } from "react";
 
-import "./style.scss";
-import { isMobile } from "react-device-detect";
-
 import { Link } from "react-router-dom";
 import {
   getAnotherImagesUrl as getAnotherImagesUrlAnimals,
@@ -35,7 +32,7 @@ import {
 import { getAnotherImagesUrl as getAnotherImagesUrlMainphotoalbum } from "helpers/mainphotoalbum";
 
 import { isAdmin } from "utils/user";
-import PAGES from "../../routing/routes";
+import "./style.scss";
 
 type TData = {
   id: number;
@@ -53,10 +50,6 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
   const [dataState, setDataState] = useState<null | TData>(null);
   const [typeState, setTypeState] = useState<null | string>(null);
   const [anotherImagesState, setAnotherImagesState] = useState<null | number[]>(null);
-
-  useEffect(() => {
-    // setIsMobileState(isMobile);
-  }, [isMobile]);
 
   const getMainImageUrl = () => {
     if (typeState === "animals") return getMainImageUrlAnimals;
@@ -106,11 +99,7 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
       {!!dataState.main_image && (
         <div className="loc_block">
           Главное фото:{" "}
-          <Link
-            target="_blank"
-            to={getMainImageUrl()(dataState as any) || "/"}
-            className="link_3"
-          >
+          <Link target="_blank" to={getMainImageUrl()(dataState as any) || "/"} className="link_3">
             Скачать
           </Link>
         </div>

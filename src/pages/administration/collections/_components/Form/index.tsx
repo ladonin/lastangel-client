@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import "./style.scss";
-import { AnimalsApi } from "api/animals";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import { loadItem } from "utils/localStorage";
+import "./style.scss";import { AnimalsApi } from "api/animals";
 import { COLLECTIONS_TYPE, TYPES_OPTIONS, STATUSES_OPTIONS } from "constants/collections";
 import InputText from "components/Form/InputText";
 import InputNumber from "components/Form/InputNumber";

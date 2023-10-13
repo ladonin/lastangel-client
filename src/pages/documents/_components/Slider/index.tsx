@@ -1,18 +1,18 @@
 /*
   import Slider from 'pages/documents/components/Slider'
  */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination, Lazy } from "swiper";
-import { isMobile } from "react-device-detect";
 import { getAnotherImagesUrl } from "helpers/documents";
 import { SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/documents";
 import { DocumentsApi } from "api/documents";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 const Slider = () => {
@@ -23,12 +23,12 @@ const Slider = () => {
       res && setDataState({ ...res, data: JSON.parse(res.another_images) });
     });
   }, []);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const renderButton = (link: string) => (
     <Button
       className="loc_openButton"
       theme={ButtonThemes.SUCCESS}
-      size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+      size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
       onClick={() => {
         window.open(link, "_blank");
       }}
@@ -37,9 +37,6 @@ const Slider = () => {
     </Button>
   );
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   return (
     <Swiper
       spaceBetween={30}
@@ -72,7 +69,10 @@ const Slider = () => {
           <SwiperSlide>
             {index < 3 ? (
               <>
-                <img alt="." src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)} />
+                <img
+                  alt="."
+                  src={getAnotherImagesUrl(dataState, number, SIZES_ANOTHER.SIZE_1200)}
+                />
                 {renderButton(getAnotherImagesUrl(dataState, number))}
               </>
             ) : (

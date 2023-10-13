@@ -1,6 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
-
-import { isMobile } from "react-device-detect";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import {
   ANIMALS_CATEGORY,
   ANIMALS_KIND,
@@ -13,8 +11,10 @@ import { ValuesOf } from "types/common";
 import { AnimalsApi } from "api/animals";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
-import "./style.scss";
+
+import { loadItem } from "utils/localStorage";
 import { transformCategoryToParams } from "helpers/animals";
+import "./style.scss";
 
 type TProps = {
   onChange: (filter: TFilterParams) => void;
@@ -38,10 +38,8 @@ type TSelectRefProps = {
 };
 
 const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
+
   const selectCategoryRef = useRef<TSelectRefProps>();
   const selectIdRef = useRef<TSelectRefProps>();
   const selectStatusRef = useRef<TSelectRefProps>();
@@ -174,7 +172,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           disabled={!getInputStatusValue() && !getInputCategoryValue() && !getInputIdValue()}
           className="loc_resetButton"
           theme={ButtonThemes.GREY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={reset}
         >
           Сбросить

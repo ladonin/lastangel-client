@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
-import { isMobile } from "react-device-detect";
 import { ANIMALS_STATUS } from "constants/animals";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 import Modal from "components/Modal";
@@ -33,6 +32,7 @@ import PAGES from "routing/routes";
 import BreadCrumbs from "components/BreadCrumbs";
 import { getVideoType, numberFriendly, textToClient } from "helpers/common";
 import flowerSrc from "icons/flower1.png";
+import { loadItem } from "utils/localStorage";
 import PetsList from "./_components/PetsList";
 // Ленивая загрузка модуля
 // const OtherComponent = React.lazy(() => import('components/header'));
@@ -49,12 +49,8 @@ const Pet: React.FC = () => {
   const [anotherImagesState, setAnotherImagesState] = useState<number[] | null>(null);
   const [donationsListModalOpenedState, setDonationsListModalOpenedState] = useState(false);
   const [donationsListState, setDonationsListState] = useState<TListDonations | null>(null);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
 
   useEffect(() => {
     if (id) {
@@ -83,7 +79,7 @@ const Pet: React.FC = () => {
       <Button
         className="loc_redactButton"
         theme={ButtonThemes.PRIMARY}
-        size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+        size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
         onClick={() => {
           navigate(`${PAGES.ADMINISTRATION_PET_UPDATE}/${data.id}`);
         }}
@@ -126,7 +122,7 @@ const Pet: React.FC = () => {
     dataState && (
       <div
         className="loc_data"
-        style={isMobileState === false && !isHere(dataState.status) ? { width: "100%" } : {}}
+        style={isMobile === false && !isHere(dataState.status) ? { width: "100%" } : {}}
       >
         <div className="loc_name">{dataState.name}</div>
         {dataState.is_published === 0 && <div className="loc_not_published">Не опубликовано</div>}
@@ -184,7 +180,7 @@ const Pet: React.FC = () => {
           </div>
         )}
 
-        {!isHere(dataState.status) && isMobileState === false && (
+        {!isHere(dataState.status) && isMobile === false && (
           <div
             className="loc_description"
             dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
@@ -231,28 +227,26 @@ const Pet: React.FC = () => {
                   </div>
                 )}
               </div>
-              {isMobileState === true && renderData()}
+              {isMobile === true && renderData()}
               <div className="loc_right">
-                {isMobileState === false && renderData()}
+                {isMobile === false && renderData()}
 
-                {isMobileState === true && (
+                {isMobile === true && (
                   <div
                     className="loc_description"
                     dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
                   />
                 )}
-                {isMobileState === true && renderCollections()}
-                {isMobileState === false && !isHere(dataState.status) && (
+                {isMobile === true && renderCollections()}
+                {isMobile === false && !isHere(dataState.status) && (
                   <div className="margin_t24">{renderRedactButton(dataState)}</div>
                 )}
-                {isMobileState === true &&
-                  !isHere(dataState.status) &&
-                  renderRedactButton(dataState)}
+                {isMobile === true && !isHere(dataState.status) && renderRedactButton(dataState)}
                 {isHere(dataState.status) && (
                   <>
                     <div className="loc_donation">
                       <div className="loc_title">
-                        Собрано за последние 30 дней <span className="orange">*</span>:
+                        Собрано за месяц<span className="orange">*</span>:
                       </div>
                       <div className="loc_value">
                         <span>{numberFriendly(dataState.collected)}</span> руб.
@@ -277,7 +271,7 @@ const Pet: React.FC = () => {
                         <Button
                           className="loc_donateButton"
                           theme={ButtonThemes.SUCCESS}
-                          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+                          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
                           onClick={() => {
                             navigate(`${PAGES.HELP}?target=${id}`);
                           }}
@@ -292,21 +286,22 @@ const Pet: React.FC = () => {
                       </div>
                       {renderRedactButton(dataState)}
                     </div>
-                    {isMobileState === false && renderCollections()}
-                    {isMobileState === false && (
+                    {isMobile === false && renderCollections()}
+                    {isMobile === false && (
                       <div
                         className="loc_description"
                         dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
                       />
                     )}
-                    {isMobileState === false && renderDisclaimer()}
+                    
                   </>
                 )}
               </div>
             </div>
 
             <div className="loc_bottomWrapper">
-              {isMobileState === true && renderDisclaimer()}
+              
+              {renderDisclaimer()}
               {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
                 <>
                   {isLoadingState ? (
@@ -429,7 +424,7 @@ const Pet: React.FC = () => {
           <Button
             className="loc_cancelButton"
             theme={ButtonThemes.SUCCESS}
-            size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
             onClick={() => {
               setDonationsListModalOpenedState(false);
             }}

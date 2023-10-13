@@ -1,18 +1,22 @@
 /*
   import Help from 'pages/home/components/Help'
  */
-import React from "react";
+import React, { useMemo } from "react";
 import "react-tabs/style/react-tabs.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Image from "icons/help.jpg";
+import ImageMobile from "icons/helpMobile.jpg";
 import SberIcon from "icons/sber.png";
 import DocsIcon from "icons/docs.png";
 import ArrowRight from "icons/arrowRight.svg";
 import PAGES from "routing/routes";
 import { MAIN_CARD, MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "constants/donations";
 import "./style.scss";
-
+import { loadItem } from "../../../../utils/localStorage";
 const Help = () => {
+
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  
   return (
     <div className="page-home_help">
       <div className="loc_title">
@@ -23,7 +27,7 @@ const Help = () => {
       </div>
       <div className="loc_content">
         <div className="loc_top">
-          <img alt="." src={Image} className="loc_image" />
+          <img alt="." src={isMobile ? ImageMobile : Image} className="loc_image" />
           <div className="loc_right">
             <div className="loc_item">
               <div className="loc_sber">

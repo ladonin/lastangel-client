@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
-import { isMobile } from "react-device-detect";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import InputText from "components/Form/InputText";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {
@@ -24,10 +24,8 @@ type TInputRefProps = {
 };
 
 const DonatorsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
+
   const inputCardRef = useRef<TInputRefProps>();
   const inputNameRef = useRef<TInputRefProps>();
   const selectOrderRef = useRef<TSelectRefProps>();
@@ -88,7 +86,7 @@ const DonatorsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           disabled={!getInputCardValue() && !getInputFioValue()}
           className="loc_resetButton"
           theme={ButtonThemes.GREY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={reset}
         >
           Сбросить

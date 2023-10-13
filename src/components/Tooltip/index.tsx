@@ -5,7 +5,6 @@ import React, { ReactNode, useMemo } from "react";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "./style.scss";
-
 type TProps = {
   content: ReactNode;
   text: string;

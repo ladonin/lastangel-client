@@ -7,16 +7,16 @@ import Header from "pages/_commonComponents/header";
 import Footer from "pages/_commonComponents/footer";
 import EmailImage from "icons/email.png";
 import PAGES from "routing/routes";
-import dogAttentionImage from "icons/dog_attention.png";
 import { isAdmin, quit } from "utils/user";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { FeedbacksApi } from "api/feedbacks";
+import { loadItem, saveItem } from "utils/localStorage";
 import "./style.scss";
 
 const LayoutMain: React.FC = () => {
   // const location = useLocation();
   // console.log(location);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const [isMobileState, setIsMobileState] = useState<boolean | undefined>(loadItem("isMobile"));
   const { pathname } = useLocation();
   const [prevPathnameState, setPrevPathnameState] = useState<string>("");
   const navigate = useNavigate();
@@ -31,8 +31,11 @@ const LayoutMain: React.FC = () => {
   };
 
   useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+    if ((isMobile === true || isMobile === false) && isMobileState === undefined) {
+      saveItem("isMobile", isMobile);
+      setIsMobileState(isMobile);
+    }
+  }, [isMobile, isMobileState]);
 
   useEffect(() => {
     if (
@@ -57,14 +60,15 @@ const LayoutMain: React.FC = () => {
   }, []);
 
   // тут сделать проверку авторизации на защищенные страницы с применением location.pathname
-  return isMobileState === null ? null : (
+  return isMobileState === undefined ? null : (
     <div className={cn("layout-main layout", { "loc--isMobile": isMobileState })}>
       <Header />
 
       <div className="page">
         {/* <div className="loc_warningMessage">
           <img alt="." src={dogAttentionImage} />
-          Уважаемые пользователи, в настоящее время сайт находится в финальной стадии разработки. Полная информация о приюте и его
+          Уважаемые пользователи, в настоящее время сайт находится 
+          в финальной стадии разработки. Полная информация о приюте и его
           питомцах появится уже в ближайшем будущем.
         </div> */}
 
@@ -87,7 +91,7 @@ const LayoutMain: React.FC = () => {
               }}
             >
               {!!newFeedbacksState && <div className="loc_count">{newFeedbacksState}</div>}
-              <img className="loc_emailButton" src={EmailImage} />
+              <img alt="." className="loc_emailButton" src={EmailImage} />
             </div>
 
             <Button

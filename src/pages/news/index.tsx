@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import List from "pages/newses/_components/List";
@@ -17,19 +16,18 @@ import { getDateString, getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
-import "./style.scss";
-import CopyLinkToPage from "components/CopyLinkToPage";
+import { loadItem } from "utils/localStorage";
+import "./style.scss";import CopyLinkToPage from "components/CopyLinkToPage";
 import MediaOriginalLinks from "../../components/MediaOriginalLinks";
+import { loadItem } from "../../utils/localStorage";
 
 const News: React.FC = () => {
   const navigate = useNavigate();
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [idState, setIdState] = useState<number | null>(null);
   const [dataState, setDataState] = useState<TItem | null>(null);
   const { id } = useParams();
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+
 
   const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
 
@@ -38,9 +36,7 @@ const News: React.FC = () => {
       setAnotherImagesState(JSON.parse(dataState.another_images));
     }
   }, [dataState]);
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+
 
   useEffect(() => {
     id && setIdState(Number(id));
@@ -72,7 +68,7 @@ const News: React.FC = () => {
             <Button
               className="loc_redactButton"
               theme={ButtonThemes.PRIMARY}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
               onClick={() => {
                 navigate(`${PAGES.ADMINISTRATION_NEWS_UPDATE}/${dataState.id}`);
               }}

@@ -7,9 +7,6 @@
     width: 70%;
     padding-right: 24px;
 
-    .loc_title {
-      margin-bottom: 24px;
-    }
 
     .loc_phone {
 
@@ -31,8 +28,8 @@
 
     .loc_content_1 {
       margin-top: 16px;
-      font-size: 14px;
-      line-height: 22px;
+      font-size: 16px;
+      line-height: 28px;
     }
 
     .loc_vk {
@@ -65,7 +62,14 @@
         font-size: 18px;
         font-weight: 600;
         @extend %hoverable;
+        img {
+          width: 40px;
+          height: 40px;
+        }
       }
+    }
+    .loc_vk .loc_link {
+      margin-bottom: 24px;
     }
   }
 
@@ -91,42 +95,42 @@
     gap: calc(16px * var(--viewport-koeff));
 
     .loc_value {
-      font-size: calc(30px * var(--viewport-koeff));
-      line-height: calc(36px * var(--viewport-koeff));
+      font-size: calc(32px * var(--viewport-koeff));
+      line-height: calc(40px * var(--viewport-koeff));
     }
 
     .loc_fio {
-      font-size: calc(28px * var(--viewport-koeff));
-      line-height: calc(36px * var(--viewport-koeff));
+      font-size: calc(30px * var(--viewport-koeff));
+      line-height: calc(40px * var(--viewport-koeff));
     }
 
   }
 
-  .loc_title {
-    margin-bottom: calc(24px * var(--viewport-koeff));
-  }
-
   .loc_left .loc_content_1 {
-    font-size: calc(28px * var(--viewport-koeff));
-    line-height: calc(46px * var(--viewport-koeff));
-    margin-top: calc(16px * var(--viewport-koeff));
+    font-size: calc(34px * var(--viewport-koeff));
+    line-height: calc(50px * var(--viewport-koeff));
+    margin-top: calc(24px * var(--viewport-koeff));
   }
 
   .loc_vk, .loc_ok, .loc_inst {
     width: 100%;
-    padding: 0 0 calc(16px * var(--viewport-koeff)) 0;
+    padding: 0 0 0 0;
     margin-top: calc(24px * var(--viewport-koeff));
-    gap: calc(16px * var(--viewport-koeff));
+
 
     .loc_link {
-      font-size: calc(28px * var(--viewport-koeff));
+      font-size: calc(36px * var(--viewport-koeff));
+      gap: calc(32px * var(--viewport-koeff));
     }
   }
 
-
+  .loc_vk .loc_link {
+    margin-bottom: 0;
+  }
   .loc_phone, .loc_vk, .loc_ok, .loc_inst {
     img {
-      height: calc(60px * var(--viewport-koeff));
+      height: calc(80px * var(--viewport-koeff));
+      width: calc(80px * var(--viewport-koeff));
     }
   }
 }

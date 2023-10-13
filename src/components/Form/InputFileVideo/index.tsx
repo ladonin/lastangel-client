@@ -1,9 +1,9 @@
-import React, { PropsWithChildren, useEffect, useState } from "react";
+import React, { PropsWithChildren, useState, useMemo } from "react";
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Modal from "components/Modal";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {
@@ -20,16 +20,22 @@ type TProps = {
 type TWrongVideoData = { file: File; error: string };
 
 const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
-  const { className, data, getVideoUrl, label, required, disabled = false, setVideo, value = "" } = props;
+  const {
+    className,
+    data,
+    getVideoUrl,
+    label,
+    required,
+    disabled = false,
+    setVideo,
+    value = "",
+  } = props;
   const [videoState, setVideoState] = useState<File | null | string>(value || null);
   const [wrongVideoState, setWrongVideoState] = useState<TWrongVideoData | null>(null);
   const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState<boolean>(false);
   // const { className, setVideo, label, required, disabled = false, multiple = false, noSizeRevision = false } = props;
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   const setVideoHandler = (file: File) => {
     const parts = file.name.split(".");
     if (parts.length > 1) {
@@ -89,7 +95,7 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
             <Button
               className="loc_cancelButton"
               theme={ButtonThemes.DANGER}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               onClick={deleteHandler}
             >
               Удалить
@@ -97,7 +103,7 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
             <Button
               className="loc_cancelButton"
               theme={ButtonThemes.PRIMARY}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               onClick={() => setModalDeleteIsOpenState(false)}
             >
               Отмена
@@ -130,7 +136,8 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
       {videoState && <div className="loc_video">{renderVideo()}</div>}
       {!!wrongVideoState && (
         <div className="loc_error">
-          {wrongVideoState.error} - <span className="loc_errorFileName">{wrongVideoState.file.name}</span>
+          {wrongVideoState.error} -{" "}
+          <span className="loc_errorFileName">{wrongVideoState.file.name}</span>
         </div>
       )}
     </div>

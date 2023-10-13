@@ -1,15 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
 import PAGES from "routing/routes";
 import { DonationsApi } from "api/donations";
-import { getDateString, numberFriendly } from "helpers/common";
+import { getDateString, getDateYMD, numberFriendly } from "helpers/common";
 import { TGetListRequest, TItem, TItem as TDonationItem } from "api/types/donations";
 import InfiniteScroll from "components/InfiniteScroll";
 import Tooltip from "components/Tooltip";
 import { prepareType as prepareDonationType } from "helpers/donations";
 import LoaderIcon from "components/LoaderIcon";
 // const OtherComponent = React.lazy(() => import('components/header'));
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 const PAGESIZE = 20;
@@ -58,12 +59,6 @@ const List = () => {
       {listState &&
         listState.map((item, index) => (
           <div key={index} className="loc_item">
-            <Tooltip
-              text="Дата регистрации доната"
-              className="loc_created"
-              content={getDateString(item.created)}
-            />
-
             <div className={cn("loc_name", { "loc--hasLink": !!item.donator_outer_link })}>
               {isAnonym(item) ? (
                 "Добрый помощник приюта"
@@ -80,7 +75,7 @@ const List = () => {
             <div className="loc_sum">
               <span>{numberFriendly(item.sum)}</span> руб.
             </div>
-
+            <div className="loc_delimiter" />
             <div className="loc_target">
               {!!item.target_name && !!item.target_id ? (
                 <Link
@@ -98,6 +93,11 @@ const List = () => {
                 </div>
               )}
             </div>
+            <Tooltip
+              text="Дата регистрации доната"
+              className="loc_created"
+              content={getDateYMD(item.created)}
+            />
           </div>
         ))}
       {listState === null && <LoaderIcon />}

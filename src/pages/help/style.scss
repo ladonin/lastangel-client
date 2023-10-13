@@ -1,6 +1,7 @@
 .page-help {
   .loc_target {
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 26px;
     padding: 16px;
     width: 100%;
     background-color: $c_lagunaLighter;
@@ -13,7 +14,7 @@
     }
 
     .loc_selected {
-
+      font-weight: 600;
       margin-bottom: 16px;
     }
 
@@ -47,13 +48,13 @@
   }
 
   .loc_addDonator {
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 24px;
     border-radius: 8px;
     background-color: $c_sandLight;
     padding: 16px;
     border: 1px solid $c_yellowLight;
-
+    line-height: 26px;
     span {
       font-weight: 600;
     }
@@ -63,7 +64,7 @@
 
 
     .loc_image {
-      height: 208px;
+      height: 228px;
 
     }
 
@@ -80,7 +81,7 @@
           margin-bottom: 16px;
         }
 
-        font-size: 15px;
+        font-size: 17px;
 
         .loc_sber, .loc_docs {
           padding: 0 16px;
@@ -120,12 +121,14 @@
 
     .loc_title {
       font-weight: 600;
-      font-size: 16px;
+      font-size: 18px;
+      line-height: 26px;
       margin-bottom: 4px;
     }
 
     .loc_item {
-      font-size: 14px;
+      font-size: 16px;
+      line-height: 26px;
       margin-top: 4px;
 
       .loc_name {
@@ -142,8 +145,8 @@
 
 
   .loc_target {
-    font-size: calc(26px * var(--viewport-koeff));
-    line-height: calc(40px * var(--viewport-koeff));
+    font-size: calc(36px * var(--viewport-koeff));
+    line-height: calc(54px * var(--viewport-koeff));
     padding: calc(24px * var(--viewport-koeff));
     margin-bottom: calc(24px * var(--viewport-koeff));
     border-radius: calc(8px * var(--viewport-koeff));
@@ -172,7 +175,8 @@
 
 
   .loc_addDonator {
-    font-size: calc(26px * var(--viewport-koeff));
+    font-size: calc(36px * var(--viewport-koeff));
+    line-height: calc(54px * var(--viewport-koeff));
     padding: calc(24px * var(--viewport-koeff));
     margin-bottom: calc(24px * var(--viewport-koeff));
     border-radius: calc(8px * var(--viewport-koeff));
@@ -181,66 +185,56 @@
 
   .loc_rekviz {
     .loc_right {
-      padding-top: calc(8px * var(--viewport-koeff));
+      padding-top: 0;
 
       .loc_item {
-        font-size: calc(22px * var(--viewport-koeff));
-
-        &:first-child {
-
-          margin-bottom: calc(16px * var(--viewport-koeff));
-        }
-
+        margin-top: calc(24px * var(--viewport-koeff));
+        margin-bottom: 0;
+        font-size: calc(28px * var(--viewport-koeff));
+        line-height: calc(40px * var(--viewport-koeff));
 
         .loc_sber, .loc_docs {
-          padding: 0 0 0 calc(24px * var(--viewport-koeff)) !important;
-
-
+          padding: 0 calc(24px * var(--viewport-koeff)) 0 calc(16px * var(--viewport-koeff));
           gap: calc(4px * var(--viewport-koeff));
 
           img {
-            width: calc(32px * var(--viewport-koeff)) !important;
-            height: calc(32px * var(--viewport-koeff)) !important;;
-            margin-right: calc(4px * var(--viewport-koeff));
+            width: calc(40px * var(--viewport-koeff));
+            height: calc(40px * var(--viewport-koeff));
+            margin-right: calc(8px * var(--viewport-koeff));
           }
-
-
-          .loc_desc {
-
-
-            span {
-              margin-right: calc(8px * var(--viewport-koeff));
-            }
+          .loc_title {
+            font-size: calc(32px * var(--viewport-koeff));
+            line-height: calc(44px * var(--viewport-koeff));
           }
         }
       }
     }
 
     .loc_image {
-      height: calc(318px * var(--viewport-koeff));
+      height: calc(444px * var(--viewport-koeff));
     }
 
 
   }
 
   .loc_item_other {
-    padding: 0;
-    margin-bottom: calc(24px * var(--viewport-koeff));
-    margin-top: calc(16px * var(--viewport-koeff));
-
+    padding: calc(32px * var(--viewport-koeff)) 0;
+    margin-top: 0;
     .loc_title {
-      font-size: calc(22px * var(--viewport-koeff));
-      margin-bottom: calc(4px * var(--viewport-koeff));
+      font-size: calc(32px * var(--viewport-koeff));
+      line-height: calc(44px * var(--viewport-koeff));
+      margin-bottom: calc(16px * var(--viewport-koeff));
+
     }
 
-
     .loc_item {
-      font-size: calc(22px * var(--viewport-koeff));
-      margin-top: calc(4px * var(--viewport-koeff));
-
+      font-size: calc(32px * var(--viewport-koeff));
+      margin-top: calc(16px * var(--viewport-koeff));
+      line-height: calc(44px * var(--viewport-koeff));
       .loc_name {
-        margin-right: calc(4px * var(--viewport-koeff));
+        margin-right: calc(8px * var(--viewport-koeff));
       }
+
     }
   }
 

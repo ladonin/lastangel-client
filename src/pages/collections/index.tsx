@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 // const OtherComponent = React.lazy(() => import('components/header'));
 
 import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
 import LoaderIcon from "components/LoaderIcon";
 import { TGetListRequest, TItem as TItemCollection } from "api/types/collections";
 import PAGES from "routing/routes";
@@ -16,15 +15,13 @@ import { COLLECTIONS_STATUS } from "constants/collections";
 import { numberFriendly } from "helpers/common";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import "./style.scss";
+import { loadItem } from "utils/localStorage";
 import { SIZES_MAIN } from "../../constants/photos";
 
 const Collections: React.FC = () => {
   const navigate = useNavigate();
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   const [listCollectionState, setListCollectionsState] = useState<TItemCollection[] | null>(null);
 
   const getData = (filter: TGetListRequest) => {
@@ -57,7 +54,7 @@ const Collections: React.FC = () => {
         <Button
           className="loc_button"
           theme={ButtonThemes.PRIMARY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={() => {
             navigate(`${PAGES.COLLECTION}/${data.id}`);
           }}

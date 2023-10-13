@@ -161,3 +161,6 @@ export const textToClient = (text: string) => {
   result = result.replace(/\n|\r|\n\r/g, "<br/>");
   return result;
 };
+
+
+export const getViewportKoeff = () => window.innerWidth / 980;

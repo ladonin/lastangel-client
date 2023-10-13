@@ -2,10 +2,9 @@
   import Stories from 'pages/home/_components/Stories'
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
 import { Link, useNavigate } from "react-router-dom";
 import { StoriesApi } from "api/stories";
 import { getDateString } from "helpers/common";
@@ -13,18 +12,15 @@ import { TGetListOutput, TItem } from "api/types/stories";
 import ArrowRight from "icons/arrowRight.svg";
 import PAGES from "routing/routes";
 import { STORIES_STATUS } from "constants/stories";
+import { loadItem } from "utils/localStorage";
+import Tooltip from "components/Tooltip";
+import PinIcon from "icons/pin.png";
 import "./style.scss";
-import Tooltip from "../../../../components/Tooltip";
-import PinIcon from "../../../../icons/pin.png";
 
 const Stories = () => {
   const [listState, setListState] = useState<TGetListOutput>([]);
   const navigate = useNavigate();
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   const renderContent = (data: TItem) => (
     <div
@@ -56,16 +52,16 @@ const Stories = () => {
   );
 
   useEffect(() => {
-    if (isMobileState === null) return;
+    if (isMobile === null) return;
     StoriesApi.getList({
       offset: 0,
-      limit: 3,
+      limit: 5,
       orderComplex: "ismajor desc, id desc",
       excludeStatus: 2 /* isAdmin() ? undefined : 2 */,
     }).then((res) => {
       setListState(res);
     });
-  }, [isMobileState]);
+  }, []);
   return listState.length ? (
     <div className="page-home_stories">
       <Link to={`${PAGES.STORIES}`} className="link_text loc_title">

@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet";
-import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router";
 import { useNavigate, useParams } from "react-router-dom";
 import { CollectionsApi } from "api/collections";
@@ -9,6 +8,7 @@ import Modal from "components/Modal";
 import { TCommonDataRequest } from "api/types/collections";
 import { COLLECTIONS_TYPE } from "constants/collections";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { loadItem } from "utils/localStorage";
 import Form, { TResponse, TParams } from "../_components/Form";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
@@ -31,11 +31,8 @@ const CollectionUpdate: React.FC = () => {
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
   useEffect(() => {
     id &&
       CollectionsApi.get(Number(id)).then((res) => {
@@ -73,14 +70,24 @@ const CollectionUpdate: React.FC = () => {
   const updateHandler = () => {
     if (!paramsRef.current) return;
 
-    const { name, type, status, animal_id, short_description, description, target_sum, main_image, main_image_is_deleted } =
-      paramsRef.current;
+    const {
+      name,
+      type,
+      status,
+      animal_id,
+      short_description,
+      description,
+      target_sum,
+      main_image,
+      main_image_is_deleted,
+    } = paramsRef.current;
 
     if (
       !name ||
       !type ||
       !status ||
-      ((type === COLLECTIONS_TYPE.MEDICINE || type === COLLECTIONS_TYPE.BUY_FOR_PET) && !animal_id) ||
+      ((type === COLLECTIONS_TYPE.MEDICINE || type === COLLECTIONS_TYPE.BUY_FOR_PET) &&
+        !animal_id) ||
       !target_sum ||
       !short_description ||
       !description
@@ -136,7 +143,7 @@ const CollectionUpdate: React.FC = () => {
             <Button
               className="loc_gotopageButton"
               theme={ButtonThemes.PRIMARY}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
               onClick={() => {
                 navigate(`${PAGES.COLLECTION}/${id}`);
               }}
@@ -156,7 +163,7 @@ const CollectionUpdate: React.FC = () => {
                 theme={ButtonThemes.SUCCESS}
                 isLoading={isUpdatingState}
                 disabled={!paramsRef.current || isDeletedState || isDeletingState}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 onClick={updateHandler}
               >
                 Обновить
@@ -165,7 +172,7 @@ const CollectionUpdate: React.FC = () => {
               <Button
                 className="loc_deleteButton"
                 theme={ButtonThemes.DANGER}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 disabled={isUpdatingState || isDeletedState}
                 isLoading={isDeletingState}
                 onClick={() => openModalDelete()}
@@ -175,7 +182,7 @@ const CollectionUpdate: React.FC = () => {
               <Button
                 className="loc_cancelButton"
                 theme={ButtonThemes.PRIMARY}
-                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 disabled={isUpdatingState || isDeletingState || isDeletedState}
                 onClick={() => navigate(`${PAGES.ADMINISTRATION}?tab=${pathname.split("/")[2]}`)}
               >
@@ -184,7 +191,11 @@ const CollectionUpdate: React.FC = () => {
             </div>
           </div>
         )}
-        {isChangedState && <div className="loc_wrapper_updatedSuccess">Запись успешно обновлена ({paramsRef.current?.name})</div>}
+        {isChangedState && (
+          <div className="loc_wrapper_updatedSuccess">
+            Запись успешно обновлена ({paramsRef.current?.name})
+          </div>
+        )}
         {isDeletedState && <div className="loc_wrapper_removedSuccess">Запись удалена</div>}
 
         <Modal
@@ -198,7 +209,7 @@ const CollectionUpdate: React.FC = () => {
             <Button
               className="loc_cancelButton"
               theme={ButtonThemes.DANGER}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               onClick={removeHandler}
             >
               Удалить
@@ -206,7 +217,7 @@ const CollectionUpdate: React.FC = () => {
             <Button
               className="loc_cancelButton"
               theme={ButtonThemes.PRIMARY}
-              size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
               onClick={closeModalDelete}
             >
               Отмена

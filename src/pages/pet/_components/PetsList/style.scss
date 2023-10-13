@@ -30,7 +30,7 @@
         right: 0;
         background-color: rgba(255, 255, 255, 0.9);
         padding: 4px 8px;
-        font-size: 12px;
+        font-size: 16px;
         line-height: 24px;
         font-weight: 600;
         border-radius: 0 0 0 4px;
@@ -54,8 +54,8 @@
             bottom: 0px;
             left: 0;
             background-color: rgba(255, 255, 255, 0.9);
-            padding: 4px 8px;
-            font-size: 12px;
+            padding: 4px 4px;
+            font-size: 13px;
             line-height: 24px;
             font-weight: 600;
             border-radius: 0 4px 0 0;
@@ -74,11 +74,7 @@
     }
   }
 
-  .loc_categoryName {
-    max-width: 70px;
-    font-size: 14px;
-    margin-left: 8px;
-  }
+
 
   .react-tabs__tab {
     &-panel {
@@ -94,8 +90,8 @@
 
   .loc_slider {
     .loc_name {
-      font-size: calc(28px * var(--viewport-koeff)) !important;
-      padding: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff));
+      font-size: calc(32px * var(--viewport-koeff)) !important;
+      padding: calc(12px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff));
       line-height: calc(40px * var(--viewport-koeff));
     }
 
@@ -104,9 +100,9 @@
         &_2,
         &_3,
         &_4 {
-          border-radius: 0 calc(16px * var(--viewport-koeff)) 0 0;
-          padding: calc(6px * var(--viewport-koeff)) calc(10px * var(--viewport-koeff));
-          font-size: calc(20px * var(--viewport-koeff));
+          border-radius: 0 calc(8px * var(--viewport-koeff)) 0 0;
+          padding: calc(8px * var(--viewport-koeff)) calc(12px * var(--viewport-koeff));
+          font-size: calc(22px * var(--viewport-koeff));
           line-height: calc(28px * var(--viewport-koeff));
         }
       }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import { AnimalsApi } from "api/animals";
 import { CollectionsApi } from "api/collections";
@@ -8,8 +8,8 @@ import InputNumber from "components/Form/InputNumber";
 import Select from "components/Form/Select";
 import { Checkbox } from "components/Form/Checkbox";
 import { TGetResponseItem } from "api/types/donations";
-import "./style.scss";
-import { ANIMALS_STATUS } from "../../../../../constants/animals";
+import { loadItem } from "utils/localStorage";
+import "./style.scss";import { ANIMALS_STATUS } from "../../../../../constants/animals";
 
 const TYPES_OPTIONS = [
   { value: String(DONATIONS_TYPES.PET), label: "Содержание животного" },

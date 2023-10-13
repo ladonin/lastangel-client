@@ -6,6 +6,7 @@ import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import Footer from "pages/_commonComponents/footer";
 import "./style.scss";
+import { loadItem, saveItem } from "utils/localStorage";
 import PAGES from "routing/routes";
 import Header from "pages/_commonComponents/header";
 import { FeedbacksApi } from "api/feedbacks";
@@ -22,13 +23,16 @@ import EmailImage from "icons/email.png";
 const LayoutAdministration: React.FC = () => {
   const { pathname } = useLocation();
 
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
+  const [isMobileState, setIsMobileState] = useState<boolean | undefined>(loadItem("isMobile"));
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
   useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+    if ((isMobile === true || isMobile === false) && isMobileState === undefined) {
+      saveItem("isMobile", isMobile);
+      setIsMobileState(isMobile);
+    }
+  }, [isMobile, isMobileState]);
   const navigate = useNavigate();
   const [showPageState, setShowPageState] = useState(false);
 
@@ -80,7 +84,7 @@ const LayoutAdministration: React.FC = () => {
     };
   }, []);
 
-  return isMobileState !== null && showPageState ? (
+  return isMobileState !== undefined && showPageState ? (
     <div className={cn("layout-administration layout", { "loc--isMobile": isMobileState })}>
       <Header />
 
@@ -204,7 +208,7 @@ const LayoutAdministration: React.FC = () => {
               >
                 Фото клиники
               </Button>
-              
+
               <div className="loc_block_1">
                 <div className="loc_block_1_title">Скачать данные о питомцах в</div>
                 <Button

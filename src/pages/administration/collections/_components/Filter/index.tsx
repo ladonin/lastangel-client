@@ -1,15 +1,18 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
-import "./style.scss";
-
-import { isMobile } from "react-device-detect";
-
-import { COLLECTIONS_TYPE, COLLECTIONS_STATUS, TYPES_OPTIONS, STATUSES_OPTIONS } from "constants/collections";
+import { loadItem } from "utils/localStorage";
+import {
+  COLLECTIONS_TYPE,
+  COLLECTIONS_STATUS,
+  TYPES_OPTIONS,
+  STATUSES_OPTIONS,
+} from "constants/collections";
 
 import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
-import { isObjectOptionsIsEmpty } from "../../../../../helpers/common";
+import { isObjectOptionsIsEmpty } from "helpers/common";
+import "./style.scss";
 
 type TProps = {
   onChange: (filter: TFilterParams) => void;
@@ -24,10 +27,8 @@ type TSelectRefProps = {
   clearValue: () => void;
 };
 const CollectionsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const [isMobileState, setIsMobileState] = useState<boolean | null>(null);
-  useEffect(() => {
-    setIsMobileState(isMobile);
-  }, [isMobile]);
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
+
   const selectCategoryRef = useRef<TSelectRefProps>();
   const selectStatusRef = useRef<TSelectRefProps>();
   const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
@@ -75,7 +76,7 @@ const CollectionsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           disabled={filterState === null || isObjectOptionsIsEmpty(filterState)}
           className="loc_resetButton"
           theme={ButtonThemes.GREY}
-          size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={reset}
         >
           Сбросить
