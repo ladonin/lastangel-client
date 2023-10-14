@@ -36,7 +36,8 @@ const PETS_PAGESIZE = 20;
 const Pets: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-  const needUsePrint = useRef<any>(useMemo(() => loadItem("usePrintInPets"), []));
+  const needUsePrint = useRef<boolean>(useMemo(() => loadItem("usePrintInPets"), []));
+  const initRef = useRef<boolean>(true);
   const petsPrint = useMemo(() => loadItem("petsPrint"), []);
 
   const petsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
@@ -121,6 +122,7 @@ const Pets: React.FC = () => {
   );
 
   const getData = (params?: TGetPetsListRequest) => {
+    initRef.current = false;
     petsLoadingStatusRef.current.isLoading = true;
     const { category, ...filter } = petsFilterRef.current;
 
@@ -136,6 +138,8 @@ const Pets: React.FC = () => {
   };
 
   useEffect(() => {
+    if (initRef.current === true && needUsePrint.current === true) return;
+
     getData({ offset: (petsPageState - 1) * PETS_PAGESIZE, limit: PETS_PAGESIZE });
   }, [petsPageState]);
 
@@ -143,6 +147,7 @@ const Pets: React.FC = () => {
     // При работе фильтра необходимость применения принта сбрасываем
     needUsePrint.current = false;
     saveItem("usePrintInPets", false);
+    initRef.current = false;
 
     petsLoadingStatusRef.current.isOff = false;
     petsFilterRef.current = filter;
@@ -242,6 +247,7 @@ const Pets: React.FC = () => {
   const onReachPetsBottomHandler = () => {
     if (!petsLoadingStatusRef.current.isOff && !petsLoadingStatusRef.current.isLoading) {
       petsLoadingStatusRef.current.isLoading = true;
+      initRef.current = false;
       setPetsPageState((prev) => prev + 1);
     }
   };

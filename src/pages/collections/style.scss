@@ -179,6 +179,7 @@
 
     .loc_noCollections {
       margin: calc(32px * var(--viewport-koeff)) auto;
+      font-size: calc(32px * var(--viewport-koeff));
     }
 
     .component-loaderIcon {
