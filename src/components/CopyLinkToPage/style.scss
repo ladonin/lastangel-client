@@ -4,7 +4,7 @@
   }
 
   .loc_copyToBufferStatus {
-    font-size: 12px;
+    font-size: 14px;
     font-style: Italic;
     margin-top: 4px;
     padding: 0 12px;
@@ -22,7 +22,7 @@
   }
 
   .loc_copyToBufferStatus {
-    font-size: calc(26px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
     font-style: Italic;
     margin-top: calc(24px * var(--viewport-koeff));
     padding: 0 calc(24px * var(--viewport-koeff));

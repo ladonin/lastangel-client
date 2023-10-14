@@ -605,9 +605,10 @@ const Administration: React.FC = () => {
   };
 
   const onReachPetsBottomHandler = () => {
-    !petsLoadingStatusRef.current.isOff &&
-      !petsLoadingStatusRef.current.isLoading &&
+    if (!petsLoadingStatusRef.current.isOff && !petsLoadingStatusRef.current.isLoading) {
+      petsLoadingStatusRef.current.isLoading = true;
       setPetsPageState((prev) => prev + 1);
+    }
   };
 
   const onReachDonationsBottomHandler = () => {

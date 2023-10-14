@@ -40,11 +40,14 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   const selectIdRef = useRef<TSelectRefProps>();
   const selectStatusRef = useRef<TSelectRefProps>();
   const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
+  const filterUsed = useRef(false);
 
   useEffect(() => {
+    if (!filterUsed.current) return;
     filterState !== null && onChange(filterState);
   }, [filterState]);
   const reset = () => {
+    filterUsed.current = true;
     selectCategoryRef.current?.clearValue();
     selectStatusRef.current?.clearValue();
     selectIdRef.current?.clearValue();
@@ -85,6 +88,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           placeholder="Статус"
           isClearable
           onChange={(val, isLightClear = false) => {
+            filterUsed.current = true;
             setFilterState((state) => ({
               ...state,
               status: val ? (Number(val.value) as ValuesOf<typeof ANIMALS_STATUS>) : undefined,
@@ -100,6 +104,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           placeholder="Категория"
           isClearable
           onChange={(val, isLightClear = false) => {
+            filterUsed.current = true;
             const category = val
               ? (Number(val.value) as ValuesOf<typeof ANIMALS_CATEGORY>)
               : undefined;
@@ -120,6 +125,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           placeholder="Номер/Имя животного"
           isClearable
           onChange={(val, isLightClear = false) => {
+            filterUsed.current = true;
             setFilterState((state) => ({
               ...state,
               id: val ? Number(val.value) : undefined,

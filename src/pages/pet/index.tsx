@@ -32,7 +32,7 @@ import PAGES from "routing/routes";
 import BreadCrumbs from "components/BreadCrumbs";
 import { getVideoType, numberFriendly, textToClient } from "helpers/common";
 import flowerSrc from "icons/flower1.png";
-import { loadItem } from "utils/localStorage";
+import { loadItem, saveItem, removeItem } from "utils/localStorage";
 import PetsList from "./_components/PetsList";
 // Ленивая загрузка модуля
 // const OtherComponent = React.lazy(() => import('components/header'));
@@ -51,6 +51,7 @@ const Pet: React.FC = () => {
   const [donationsListState, setDonationsListState] = useState<TListDonations | null>(null);
   const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
+  const hasBack = useMemo(() => loadItem("backFromPet"), []);
 
   useEffect(() => {
     if (id) {
@@ -66,6 +67,19 @@ const Pet: React.FC = () => {
       });
     }
   }, [id]);
+
+  const destroyBack = () => {
+    removeItem("backFromPet");
+  };
+  const createNeedUsePrint = () => {
+    saveItem("usePrintInPets", true);
+  };
+  useEffect(
+    () => () => {
+      destroyBack();
+    },
+    []
+  );
 
   const getDonationsList = () => {
     if (donationsListState === null) {
@@ -206,8 +220,22 @@ const Pet: React.FC = () => {
       {!!dataState && (
         <>
           <BreadCrumbs
-            breadCrumbs={[{ name: "Наши питомцы", link: PAGES.PETS }]}
+            breadCrumbs={[
+              {
+                name: "Наши питомцы",
+                link: PAGES.PETS,
+                onClick: hasBack ? createNeedUsePrint : undefined,
+              },
+            ]}
             title={dataState.name}
+            back={
+              hasBack
+                ? {
+                    link: PAGES.PETS,
+                    onClick: createNeedUsePrint,
+                  }
+                : undefined
+            }
           />
           <PetsList currentId={Number(id)} />
 
@@ -293,14 +321,12 @@ const Pet: React.FC = () => {
                         dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
                       />
                     )}
-                    
                   </>
                 )}
               </div>
             </div>
 
             <div className="loc_bottomWrapper">
-              
               {renderDisclaimer()}
               {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
                 <>

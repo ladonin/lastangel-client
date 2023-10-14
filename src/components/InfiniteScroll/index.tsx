@@ -6,6 +6,7 @@ import React, { useRef, useEffect, useState, useMemo } from "react";
 import pageUpImage from "icons/pageUp.png";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
+
 type TProps = {
   amendment?: number;
   onReachBottom: () => void;
@@ -19,10 +20,16 @@ const InfiniteScroll: React.FC<TProps> = (props) => {
     const { body } = document;
     const html = document.documentElement;
 
-    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    const docHeight = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight
+    );
     const windowHeight = window.innerHeight;
     const footerHeight = document.getElementsByClassName("component-footer")[0].clientHeight;
-    if (showUpState === false && scrollTop > 500) {
+    if (!showUpState && scrollTop > 500) {
       setShowUpState(true);
     } else {
       setShowUpState(false);

@@ -2,7 +2,7 @@
   import News from 'pages/home/_components/News'
  */
 
-import React, { useEffect, useMemo, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,10 +12,9 @@ import { TGetListOutput, TItem } from "api/types/news";
 import ArrowRight from "icons/arrowRight.svg";
 import PAGES from "routing/routes";
 import { NEWS_STATUS } from "constants/news";
-import { loadItem } from "utils/localStorage";
-import "./style.scss";import Tooltip from "../../../../components/Tooltip";
-import PinIcon from "../../../../icons/pin.png";
-import { loadItem } from "utils/localStorage";
+import Tooltip from "components/Tooltip";
+import PinIcon from "icons/pin.png";
+import "./style.scss";
 
 const News = () => {
   const [listState, setListState] = useState<TGetListOutput>([]);

@@ -5,16 +5,18 @@
   display: flex;
   width: 100%;
 
-  .loc_breadCrumb, .loc_toMain, .loc_delimiter {
+  .loc_breadCrumb, .loc_toMain, .loc_delimiter, .loc_back {
     font-weight: 600;
     font-size: 22px;
     color: $c_lagunaBlueDark;
     @extend %hoverable;
 
   }
+
   .loc_title {
     font-size: 22px;
   }
+
   .loc_title, .loc_breadCrumb, .loc_delimiter, .loc_toMain {
 
     line-height: 32px;
@@ -25,30 +27,57 @@
     margin: 0 8px;
   }
 
+  .loc_back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    svg {
+      height: 16px;
+      transform: rotate(180deg);
+    }
+  }
+
 }
 
 
 .layout.loc--isMobile .component-breadCrumbs {
 
   margin-bottom: calc(16px * var(--viewport-koeff));
-  
-  
-  .loc_breadCrumb, .loc_toMain, .loc_delimiter {
+
+
+  .loc_breadCrumb, .loc_toMain, .loc_delimiter,.loc_back {
     font-size: calc(36px * var(--viewport-koeff));
     margin-bottom: calc(24px * var(--viewport-koeff));
   }
+
   .loc_title {
     font-size: calc(36px * var(--viewport-koeff));
   }
-  .loc_title, .loc_breadCrumb, .loc_delimiter, .loc_toMain {
+
+  .loc_title, .loc_breadCrumb, .loc_delimiter, .loc_toMain,.loc_back {
 
     line-height: calc(32px * var(--viewport-koeff));
   }
+
   .loc_delimiter {
 
     margin: 0 calc(8px * var(--viewport-koeff));
   }
+
   h3 {
     font-size: calc(32px * var(--viewport-koeff));
+  }
+
+
+  .loc_back {
+    display: flex;
+    align-items: center;
+    gap: calc(8px * var(--viewport-koeff));
+    margin-left: auto;
+    svg {
+      height: calc(24px * var(--viewport-koeff));
+      transform: rotate(180deg);
+    }
   }
 }

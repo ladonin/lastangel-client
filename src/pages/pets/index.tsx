@@ -36,26 +36,77 @@ const PETS_PAGESIZE = 20;
 const Pets: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const needUsePrint = useRef<any>(useMemo(() => loadItem("usePrintInPets"), []));
+  const petsPrint = useMemo(() => loadItem("petsPrint"), []);
+
   const petsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const petsFilterRef = useRef<TPetsFilterParams>(
     loadItem("pets_filter") || { statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED] }
   );
 
-  const [listPetsState, setListPetsState] = useState<TItemPet[] | null>(null);
   const [myPetState, setMyPetState] = useState<TItemPet | null>(null);
   const [myPetIsLoadingState, setMyPetIsLoadingState] = useState<boolean>(false);
-  const [petsPageState, setPetsPageState] = useState<number>(1);
+
+  const [listPetsState, setListPetsState] = useState<TItemPet[] | null>(
+    needUsePrint.current && petsPrint ? petsPrint.list : null
+  );
+  const [petsPageState, setPetsPageState] = useState<number>(
+    needUsePrint.current && petsPrint ? petsPrint.page : 1
+  );
+  const scrollTop = useRef<number>(0);
+  const onScroll = () => {
+    scrollTop.current = document.documentElement.scrollTop || document.body.scrollTop;
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+  const printRef = useRef<{
+    list: TItemPet[] | null;
+    page: number;
+  } | null>(null);
 
   const query = useQueryHook();
   const [compactCuratoryState, setCompactCuratoryState] = useState<boolean>(
     loadItem("compactForCurator") || false
   );
 
+  const createPrint = () => {
+    saveItem("petsPrint", { ...printRef.current, scroll: scrollTop.current });
+  };
+
+  const createBack = () => {
+    saveItem("backFromPet", true);
+  };
+
+  useEffect(() => {
+    printRef.current = {
+      list: listPetsState,
+      page: petsPageState,
+    };
+  }, [listPetsState, petsPageState]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (needUsePrint.current && printRef.current) {
+        window.scrollTo(0, petsPrint.scroll);
+      }
+    }, 0);
+
+    return () => {
+      createPrint();
+      saveItem("usePrintInPets", false);
+    };
+  }, []);
+
   useEffect(() => {
     if (loadItem("myPet") && loadItem("myPet").created > getTimestamp(new Date()) - 3600 * 1000) {
       setMyPetState(loadItem("myPet").data);
     }
   }, []);
+
   useEffect(() => {
     query.get("curator") !== null &&
       typeof query.get("curator") !== "undefined" &&
@@ -89,9 +140,12 @@ const Pets: React.FC = () => {
   }, [petsPageState]);
 
   const changeFilter = (filter: TPetsFilterParams) => {
+    // При работе фильтра необходимость применения принта сбрасываем
+    needUsePrint.current = false;
+    saveItem("usePrintInPets", false);
+
     petsLoadingStatusRef.current.isOff = false;
     petsFilterRef.current = filter;
-
     if (filter.status) {
       petsFilterRef.current.statusExclude = undefined;
     } else {
@@ -110,7 +164,7 @@ const Pets: React.FC = () => {
   const renderPetsContent = (data: TItemPet) => (
     <>
       <div className="loc_image">
-        <Link to={`${PAGES.PET}/${data.id}`} className="link_img">
+        <Link onClick={createBack} to={`${PAGES.PET}/${data.id}`} className="link_img">
           <img alt="." src={getMainImageUrl(data, SIZES_MAIN.SQUARE)} />
         </Link>
 
@@ -142,13 +196,14 @@ const Pets: React.FC = () => {
           size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
           onClick={() => {
             navigate(`${PAGES.PET}/${data.id}`);
+            createBack();
           }}
         >
           Подробнее
         </Button>
 
         <div className="loc_data">
-          <Link to={`${PAGES.PET}/${data.id}`} className="loc_name link_text">
+          <Link onClick={createBack} to={`${PAGES.PET}/${data.id}`} className="loc_name link_text">
             {data.name}
           </Link>
           ,{" "}
@@ -185,9 +240,10 @@ const Pets: React.FC = () => {
   );
 
   const onReachPetsBottomHandler = () => {
-    !petsLoadingStatusRef.current.isOff &&
-      !petsLoadingStatusRef.current.isLoading &&
+    if (!petsLoadingStatusRef.current.isOff && !petsLoadingStatusRef.current.isLoading) {
+      petsLoadingStatusRef.current.isLoading = true;
       setPetsPageState((prev) => prev + 1);
+    }
   };
 
   const getMyAnimalHandler = () => {
@@ -202,13 +258,9 @@ const Pets: React.FC = () => {
 
   useEffect(() => {
     saveItem("compactForCurator", compactCuratoryState);
-    
-    if (compactCuratoryState === true) {
+    if (compactCuratoryState) {
       navigate(PAGES.PETS);
-
     }
-    
-    
   }, [compactCuratoryState]);
 
   return (
@@ -270,14 +322,16 @@ const Pets: React.FC = () => {
           )}
         </div>
       )}
-      {compactCuratoryState &&               <Button
-        className="loc_buttonOpenCuratory"
-        theme={ButtonThemes.GHOST_BORDER}
-        size={isMobile ? ButtonSizes.LARGE : ButtonSizes.SMALL}
-        onClick={() => setCompactCuratoryState(false)}
-      >
-        Кураторство
-      </Button>}
+      {compactCuratoryState && (
+        <Button
+          className="loc_buttonOpenCuratory"
+          theme={ButtonThemes.GHOST_BORDER}
+          size={isMobile ? ButtonSizes.LARGE : ButtonSizes.SMALL}
+          onClick={() => setCompactCuratoryState(false)}
+        >
+          Кураторство
+        </Button>
+      )}
       <Filter filter={petsFilterRef.current} onChange={changeFilter} />
 
       <div className="loc_list">

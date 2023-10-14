@@ -109,6 +109,7 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
           {typeState !== "mainphotoalbum" ? "Прочие фото: " : ""}
           {anotherImagesState?.map((item, index) => (
             <Link
+              key={index}
               target="_blank"
               to={getAnotherImagesUrl()(dataState as any, item) || "/"}
               className="link_3"
