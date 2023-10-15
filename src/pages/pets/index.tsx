@@ -36,23 +36,36 @@ const PETS_PAGESIZE = 20;
 const Pets: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-  const needUsePrint = useRef<boolean>(useMemo(() => loadItem("usePrintInPets"), []));
-  const initRef = useRef<boolean>(true);
-  const petsPrint = useMemo(() => loadItem("petsPrint"), []);
 
   const petsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const petsFilterRef = useRef<TPetsFilterParams>(
     loadItem("pets_filter") || { statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED] }
   );
 
+  // --> Сохранение состояния страницы
+  const printRef = useRef<{
+    list: TItemPet[] | null;
+    page: number;
+  } | null>(null);
+  const needUsePrint = useRef<boolean>(useMemo(() => loadItem("usePrintInPets"), []));
+  const petsPrint = useMemo(() => loadItem("petsPrint"), []);
+  const [listPetsState, setListPetsState] = useState<TItemPet[] | null>(
+    needUsePrint.current && petsPrint.list ? petsPrint.list : null
+  );
+  // <-- Сохранение состояния страницы
+  
   const [myPetState, setMyPetState] = useState<TItemPet | null>(null);
   const [myPetIsLoadingState, setMyPetIsLoadingState] = useState<boolean>(false);
-
-  const [listPetsState, setListPetsState] = useState<TItemPet[] | null>(
-    needUsePrint.current && petsPrint ? petsPrint.list : null
-  );
   const [petsPageState, setPetsPageState] = useState<number>(
     needUsePrint.current && petsPrint ? petsPrint.page : 1
+  );
+
+  // --> Сохранение состояния страницы
+  const initRef = useRef<boolean>(true);
+
+  const [isBlankState, setIsBlankState] = useState<boolean>(needUsePrint.current);
+  const [listHeightState, setListHeightState] = useState<number | undefined>(
+    (needUsePrint.current && petsPrint?.listHeight) || 0
   );
   const scrollTop = useRef<number>(0);
   const onScroll = () => {
@@ -64,24 +77,18 @@ const Pets: React.FC = () => {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
-  const printRef = useRef<{
-    list: TItemPet[] | null;
-    page: number;
-  } | null>(null);
-
-  const query = useQueryHook();
-  const [compactCuratoryState, setCompactCuratoryState] = useState<boolean>(
-    loadItem("compactForCurator") || false
-  );
 
   const createPrint = () => {
-    saveItem("petsPrint", { ...printRef.current, scroll: scrollTop.current });
+    saveItem("petsPrint", {
+      ...printRef.current,
+      scroll: scrollTop.current,
+      listHeight: document.getElementById("pets_list")?.offsetHeight || undefined,
+    });
   };
-
   const createBack = () => {
     saveItem("backFromPet", true);
+    createPrint();
   };
-
   useEffect(() => {
     printRef.current = {
       list: listPetsState,
@@ -92,15 +99,27 @@ const Pets: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       if (needUsePrint.current && printRef.current) {
+        //
+        setTimeout(() => {
+          setIsBlankState(false);
+        }, 0);
+
+        setListHeightState(petsPrint.listHeight);
+
         window.scrollTo(0, petsPrint.scroll);
       }
     }, 0);
 
     return () => {
-      createPrint();
       saveItem("usePrintInPets", false);
     };
   }, []);
+  // <-- Сохранение состояния страницы
+
+  const query = useQueryHook();
+  const [compactCuratoryState, setCompactCuratoryState] = useState<boolean>(
+    loadItem("compactForCurator") || false
+  );
 
   useEffect(() => {
     if (loadItem("myPet") && loadItem("myPet").created > getTimestamp(new Date()) - 3600 * 1000) {
@@ -122,7 +141,10 @@ const Pets: React.FC = () => {
   );
 
   const getData = (params?: TGetPetsListRequest) => {
+    // --> Сохранение состояния страницы
     initRef.current = false;
+    // <-- Сохранение состояния страницы
+
     petsLoadingStatusRef.current.isLoading = true;
     const { category, ...filter } = petsFilterRef.current;
 
@@ -138,16 +160,21 @@ const Pets: React.FC = () => {
   };
 
   useEffect(() => {
-    if (initRef.current === true && needUsePrint.current === true) return;
+    // --> Сохранение состояния страницы
+    if (initRef.current && needUsePrint.current) return;
+    // <-- Сохранение состояния страницы
 
     getData({ offset: (petsPageState - 1) * PETS_PAGESIZE, limit: PETS_PAGESIZE });
   }, [petsPageState]);
 
   const changeFilter = (filter: TPetsFilterParams) => {
+    // --> Сохранение состояния страницы
     // При работе фильтра необходимость применения принта сбрасываем
     needUsePrint.current = false;
     saveItem("usePrintInPets", false);
     initRef.current = false;
+    setListHeightState(0);
+    // <-- Сохранение состояния страницы
 
     petsLoadingStatusRef.current.isOff = false;
     petsFilterRef.current = filter;
@@ -247,7 +274,10 @@ const Pets: React.FC = () => {
   const onReachPetsBottomHandler = () => {
     if (!petsLoadingStatusRef.current.isOff && !petsLoadingStatusRef.current.isLoading) {
       petsLoadingStatusRef.current.isLoading = true;
+      // --> Сохранение состояния страницы
       initRef.current = false;
+      // <-- Сохранение состояния страницы
+
       setPetsPageState((prev) => prev + 1);
     }
   };
@@ -271,6 +301,7 @@ const Pets: React.FC = () => {
 
   return (
     <div className="page-pets">
+      {isBlankState && <div className="loc_blank" />}
       <BreadCrumbs title="Наши питомцы" />
       {!compactCuratoryState && (
         <div className="loc_forCurator">
@@ -340,7 +371,11 @@ const Pets: React.FC = () => {
       )}
       <Filter filter={petsFilterRef.current} onChange={changeFilter} />
 
-      <div className="loc_list">
+      <div
+        className="loc_list"
+        id="pets_list"
+        style={{ minHeight: listHeightState ? `${listHeightState}px` : 0 }}
+      >
         {listPetsState &&
           listPetsState.map((item, index) => (
             <div key={index} className={cn("loc_wrapper ", `loc--status_${item.status}`)}>

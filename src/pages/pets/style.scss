@@ -1,5 +1,14 @@
 .page-pets {
   position: relative;
+  .loc_blank {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    z-index: 999999;
+  }
   .loc_forCurator {
     margin-bottom: 16px;
     padding: 16px;
@@ -386,4 +395,5 @@
     margin-top: calc(-4px * var(--viewport-koeff));;
   }
 }
+
 
