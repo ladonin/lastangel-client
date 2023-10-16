@@ -19,7 +19,6 @@ import { loadItem } from "utils/localStorage";
 import "./style.scss";
 import { SIZES_MAIN } from "constants/photos";
 
-
 type TProps = { currentId?: number | null };
 const PetsList = ({ currentId = null }: TProps) => {
   const [listState, setListState] = useState<TGetListOutput>([]);
@@ -80,9 +79,7 @@ const PetsList = ({ currentId = null }: TProps) => {
       statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
       offset: 0,
       limit: 999,
-
-      order: "id",
-      order_type: "DESC",
+      orderComplex: "ismajor desc, id desc",
     }).then((res) => {
       setListState(res);
     });

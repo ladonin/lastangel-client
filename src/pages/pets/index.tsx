@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
-import { isMobile } from "react-device-detect";
 import { TGetListRequest as TGetPetsListRequest, TItem as TItemPet } from "api/types/animals";
 import PAGES from "routing/routes";
 import { AnimalsApi } from "api/animals";

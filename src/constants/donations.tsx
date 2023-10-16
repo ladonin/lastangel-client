@@ -3,6 +3,7 @@
   Донаты и их параметры
  */
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const DONATIONS_TYPES = {
   PET: 1,
@@ -12,7 +13,11 @@ export const DONATIONS_TYPES = {
 
 export const MAIN_CARD = "4276100013474736";
 export const MAIN_PHONE = "8 (996) 442-24-16";
-export const MAIN_CARD_OWNER = "Мария Павловна В.";
+export const MAIN_CARD_OWNER = (
+  <Link target="_blank" to="https://vk.com/id512018972" className="link_3">
+    Мария Павловна В.
+  </Link>
+);
 
 export const REKVIZITS = (
   <>
