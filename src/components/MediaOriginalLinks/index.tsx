@@ -83,7 +83,7 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
     if (data && type) {
       setDataState(data);
       setTypeState(type);
-      setAnotherImagesState(JSON.parse(data.another_images));
+      setAnotherImagesState(JSON.parse(data.another_images).reverse());
     }
   }, [data]);
   return !!dataState &&
