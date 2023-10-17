@@ -142,19 +142,6 @@ const Help: React.FC = () => {
           <img alt="." src={isMobile ? ImageMobile : Image} className="loc_image" />
           <div className="loc_right">
             <div className="loc_item">
-              <div className="loc_sber">
-                <img src={SberIcon} alt="Карты СБ приюта" />
-                <span className="loc_title">Карты СБ приюта</span>
-                <div className="loc_desc">
-                  <div>
-                    {MAIN_CARD} или т. {MAIN_PHONE}
-                  </div>
-                  Держатель карты <b>{MAIN_CARD_OWNER}</b>
-                </div>
-              </div>
-            </div>
-
-            <div className="loc_item">
               <div className="loc_docs">
                 <img src={DocsIcon} alt="Реквизиты приюта" />
                 {REKVIZITS}

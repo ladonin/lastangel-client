@@ -21,7 +21,8 @@ module.exports = [
     chunkFilename: CONSTANTS.BUILD_CSS_FOLDER + "/[name]-[contenthash].css"
   }),
   new HtmlWebpackPlugin({
-    template: "index.html"
+    template: "index.html",
+    favicon: "./icons/favicon.ico"
   }),
   new CleanWebpackPlugin()
 ]

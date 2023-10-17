@@ -83,7 +83,7 @@
 
         font-size: 17px;
 
-        .loc_sber, .loc_docs {
+        .loc_docs {
           padding: 0 16px;
 
           display: flex;
@@ -193,7 +193,7 @@
         font-size: calc(28px * var(--viewport-koeff));
         line-height: calc(40px * var(--viewport-koeff));
 
-        .loc_sber, .loc_docs {
+        .loc_docs {
           padding: 0 calc(24px * var(--viewport-koeff)) 0 calc(16px * var(--viewport-koeff));
           gap: calc(4px * var(--viewport-koeff));
 

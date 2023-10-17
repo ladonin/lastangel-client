@@ -378,25 +378,28 @@ const Pet: React.FC = () => {
                 </>
               )}
 
-              {dataState.video1 && (
-                <video className="loc_video" controls>
+              {dataState.video1 && !isLoadingState && (
+                <video key={`video1${id}`} className="loc_video" controls>
                   <source
+                    key={`video1${id}`}
                     src={getVideoUrl(dataState, dataState.video1)}
                     type={getVideoType(dataState.video1)}
                   />
                 </video>
               )}
-              {dataState.video2 && (
-                <video className="loc_video" controls>
+              {dataState.video2 && !isLoadingState && (
+                <video key={`video2${id}`} className="loc_video" controls>
                   <source
+                    key={`video2${id}`}
                     src={getVideoUrl(dataState, dataState.video2)}
                     type={getVideoType(dataState.video2)}
                   />
                 </video>
               )}
-              {dataState.video3 && (
-                <video className="loc_video" controls>
+              {dataState.video3 && !isLoadingState && (
+                <video key={`video3${id}`} className="loc_video" controls>
                   <source
+                    key={`video3${id}`}
                     src={getVideoUrl(dataState, dataState.video3)}
                     type={getVideoType(dataState.video3)}
                   />
