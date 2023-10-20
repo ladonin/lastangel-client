@@ -3,9 +3,14 @@
   Работа со сборами
  */
 import { AxiosResponse } from "axios";
-import { TGetListOutput, TGetListRequest, TGetOutput, TCommonDataRequest } from "api/types/collections";
-import { apiService } from "./axios";
+import {
+  TGetListOutput,
+  TGetListRequest,
+  TGetOutput,
+  TCommonDataRequest,
+} from "api/types/collections";
 import { saveFile } from "../helpers/common";
+import { apiService } from "./axios";
 
 // const paramsSerializer = (params: any): string => qs.stringify(params, { arrayFormat: "repeat" });
 
@@ -16,7 +21,10 @@ const prepareData = (data: TCommonDataRequest) => {
 
   formData.append("data", json);
 
-  main_image && formData.append("main_image", main_image);
+  if (main_image) {
+    formData.append("main_image_cropped", main_image.cropped);
+    formData.append("main_image_original", main_image.original);
+  }
   if (another_images) {
     for (let i = 0; i < another_images.length; i++) {
       formData.append("another_images[]", another_images[i]);
@@ -30,9 +38,13 @@ const prepareData = (data: TCommonDataRequest) => {
 
 export const CollectionsApi = {
   getList: (params?: TGetListRequest) =>
-    apiService.get(`get_collections_list`, { params }).then((response: AxiosResponse<TGetListOutput>) => response.data),
+    apiService
+      .get(`get_collections_list`, { params })
+      .then((response: AxiosResponse<TGetListOutput>) => response.data),
   get: (id: number) =>
-    apiService.get(`get_collection`, { params: { id } }).then((response: AxiosResponse<TGetOutput>) => response.data),
+    apiService
+      .get(`get_collection`, { params: { id } })
+      .then((response: AxiosResponse<TGetOutput>) => response.data),
   add: (data: TCommonDataRequest) =>
     apiService
       .post(`add_collection`, prepareData(data), {
@@ -50,7 +62,10 @@ export const CollectionsApi = {
         },
       })
       .then((response: AxiosResponse<boolean>) => response.data),
-  remove: (id: number) => apiService.post(`remove_collection?id=${id}`).then((response: AxiosResponse<boolean>) => response.data),
+  remove: (id: number) =>
+    apiService
+      .post(`remove_collection?id=${id}`)
+      .then((response: AxiosResponse<boolean>) => response.data),
   downloadData: (type: string) =>
     apiService.get(`download_collections`, { params: { type } }).then(saveFile),
 };

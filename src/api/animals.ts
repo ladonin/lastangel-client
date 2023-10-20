@@ -24,7 +24,11 @@ const prepareData = (data: TCommonDataRequest) => {
 
   formData.append("data", json);
 
-  main_image && formData.append("main_image", main_image);
+  if (main_image) {
+    formData.append("main_image_cropped", main_image.cropped);
+    formData.append("main_image_original", main_image.original);
+  }
+
   if (another_images) {
     for (let i = 0; i < another_images.length; i++) {
       formData.append("another_images[]", another_images[i]);

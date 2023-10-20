@@ -50,7 +50,7 @@ export type TCommonDataRequest = {
   category: ValuesOf<typeof ANIMALS_CATEGORY>;
   status: ValuesOf<typeof ANIMALS_STATUS>;
   ismajor?: number;
-  main_image: Blob;
+  main_image: { cropped: Blob; original: Blob };
   another_images: File[];
   another_images_for_delete?: number[];
 };

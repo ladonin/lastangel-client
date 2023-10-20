@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { useLocation } from "react-router";
+import { SIZES_MAIN } from "constants/photos";
 import {
   TGetListRequest as TGetCollectionsListRequest,
   TItem as TItemCollection,
@@ -340,7 +341,7 @@ const Administration: React.FC = () => {
 
   const renderPetsContent = (data: TItemPet) => (
     <div className="loc_petItem">
-      <img alt="." src={getPetMainImageUrl(data)} />
+      <img alt="." src={getPetMainImageUrl(data, SIZES_MAIN.SQUARE)} />
       {data.ismajor === 1 && <div className="loc_isImportant">важно</div>}
       <div className="loc_content">
         <Button
@@ -402,7 +403,7 @@ const Administration: React.FC = () => {
 
   const renderCollectionsContent = (data: TItemCollection) => (
     <div className="loc_collectionItem">
-      <img alt="." src={getCollectionMainImageUrl(data)} />
+      <img alt="." src={getCollectionMainImageUrl(data, SIZES_MAIN.SQUARE)} />
       <div className="loc_content">
         <Button
           className="loc_button"

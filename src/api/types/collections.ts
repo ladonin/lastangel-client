@@ -34,7 +34,7 @@ export type TCommonDataRequest = {
   short_description: string;
   description: string;
   ismajor?: number;
-  main_image: Blob;
+  main_image: { cropped: Blob; original: Blob };
   another_images: File[];
   another_images_for_delete?: number[];
   video1?: string;

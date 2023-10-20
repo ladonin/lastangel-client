@@ -18,14 +18,21 @@ type TProps = {
   required?: boolean;
   disabled?: boolean;
   cropAspect: number;
-  setImage: (file: Blob) => void;
+  setImage: (cropped: Blob, original: Blob) => void;
 };
 
 type TWrongImageData = TImageData & { error: string };
 type TCrop = { x: number; y: number };
 const CROP_DEFAULT: TCrop = { x: 0, y: 0 };
 const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
-  const { className, setImage, label, required, disabled = false, cropAspect } = props;
+  const {
+    className,
+    setImage,
+    label,
+    required,
+    disabled = false,
+    cropAspect
+  } = props;
 
   const { loadImgs: loadImg, imgsResult: imgResult } = useGetImageDataHook();
   const [imageState, setImageState] = useState<File | null>(null);
@@ -46,10 +53,6 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
     loadImg([photo]);
   };
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-
-  // потом добавить возможность вращения
-  // потом сделать преобразование выбранной области в mainImage файл  передавать его, вместо параметров обрезки и исходника
-  // потом доделать поведения с учетом кропа, чтобы все взаимодействовало корректно
 
   useEffect(() => {
     if (imgResult === null) return;
@@ -91,8 +94,8 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
   }, [imgResult]);
 
   useEffect(() => {
-    if (croppedImageBlobState !== null) {
-      setImage(croppedImageBlobState);
+    if (croppedImageBlobState !== null && imageState !== null) {
+      setImage(croppedImageBlobState, imageState);
     }
   }, [croppedImageBlobState]);
 
