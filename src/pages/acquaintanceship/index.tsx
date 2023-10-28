@@ -4,13 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
-import List from "pages/newses/_components/List";
-import { TItem } from "api/types/news";
+import { TItem } from "api/types/acquaintanceship";
 import PAGES from "routing/routes";
-import { NewsApi } from "api/news";
-import { getVideoUrl, getAnotherImagesUrl } from "helpers/news";
+import { AcquaintanceshipApi } from "api/acquaintanceship";
+import { getVideoUrl, getAnotherImagesUrl } from "helpers/acquaintanceship";
 import BreadCrumbs from "components/BreadCrumbs";
-import { NEWS_STATUS } from "constants/news";
 import { isAdmin } from "utils/user";
 import { getDateString, getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
@@ -20,59 +18,40 @@ import { loadItem } from "utils/localStorage";
 import CopyLinkToPage from "components/CopyLinkToPage";
 import MediaOriginalLinks from "../../components/MediaOriginalLinks";
 import "./style.scss";
+import { ACQUAINTANCESHIP_STATUS } from "../../constants/acquaintanceship";
 
-
-
-const News: React.FC = () => {
+const Acquaintanceship: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-  const [idState, setIdState] = useState<number | null>(null);
   const [dataState, setDataState] = useState<TItem | null>(null);
-  const { id } = useParams();
-
 
   const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
-
+  useEffect(() => {
+    AcquaintanceshipApi.get().then((res) => {
+      setDataState(res);
+    });
+  }, []);
   useEffect(() => {
     if (dataState && dataState.another_images) {
       setAnotherImagesState(JSON.parse(dataState.another_images));
     }
   }, [dataState]);
 
-
-  useEffect(() => {
-    id && setIdState(Number(id));
-  }, [id]);
-
-  useEffect(() => {
-    idState &&
-      NewsApi.get(idState).then((res) => {
-        setDataState(res);
-      });
-  }, [idState]);
-
-  return idState ? (
-    <div className="page-news">
-      <BreadCrumbs title="Новости" />
-
-      {dataState && (
-        <div
-          className={cn("loc_item", {
-            "loc--non_published": dataState.status === NEWS_STATUS.NON_PUBLISHED,
-          })}
-        >
-          {dataState.status === NEWS_STATUS.NON_PUBLISHED && (
-            <div className="loc_nonpublished">Не опубликован</div>
-          )}
-          <div className="loc_created">{getDateString(dataState.created)}</div>
-          <div className="loc_name">{dataState.name}</div>
+  return (
+    <div className="page-acquaintanceship">
+      <BreadCrumbs title="О приюте" />
+      {dataState && dataState.status === ACQUAINTANCESHIP_STATUS.NON_PUBLISHED &&
+        <div className="loc_inredact">Текст находится в редактировании ((</div>}
+      
+        {dataState && dataState.status === ACQUAINTANCESHIP_STATUS.PUBLISHED && (
+        <div className={cn("loc_item")}>
           {isAdmin() && (
             <Button
               className="loc_redactButton"
               theme={ButtonThemes.PRIMARY}
               size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
               onClick={() => {
-                navigate(`${PAGES.ADMINISTRATION_NEWS_UPDATE}/${dataState.id}`);
+                navigate(`${PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE}`);
               }}
             >
               Редактировать
@@ -126,21 +105,17 @@ const News: React.FC = () => {
                 type={getVideoType(dataState.video3)}
               />
             </video>
-          )}
-          <MediaOriginalLinks type="news" data={dataState} />
+          )} 
+          <MediaOriginalLinks type="acquaintanceship" data={dataState} />
           <CopyLinkToPage
-            targetText="на новость"
-            text="Поделиться этой новостью с друзьями"
-            url={`${window.location.origin + PAGES.NEWS}/${dataState.id}`}
+            targetText="на историю"
+            text="Поделиться этой историей с друзьями"
+            url={`${window.location.origin + PAGES.ACQUAINTANCESHIP}/${dataState.id}`}
           />
         </div>
       )}
-      <div className="loc_anotherTitle">Другие новости:</div>
-      <div className="loc_list">
-        <List excludeId={idState} />
-      </div>
     </div>
-  ) : null;
+  );
 };
 
-export default News;
+export default Acquaintanceship;

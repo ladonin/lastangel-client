@@ -9,6 +9,7 @@ const PAGES = {
   STORY: "/story",
   STORIES: "/stories",
   DOCUMENTS: "/documents",
+  ACQUAINTANCESHIP: "/o_priyte",
   MAIN: "/",
   CLINIC: "/clinic",
   CONTACTS: "/contacts",
@@ -40,6 +41,7 @@ const PAGES = {
 
   ADMINISTRATION_DOCUMENTS_UPDATE: "/administration/documents/update",
   ADMINISTRATION_CLINIC_PHOTOS_UPDATE: "/administration/clinic_photos/update",
+  ADMINISTRATION_ACQUAINTANCESHIP_UPDATE: "/administration/acquaintanceship/update",
 
   ADMINISTRATION_FEEDBACKS: "/administration/feedbacks",
 };

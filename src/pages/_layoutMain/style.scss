@@ -75,6 +75,60 @@
 
 
   }
+
+
+
+
+
+
+.wysiwyg_description {
+  table {
+    margin-bottom: 16px;
+    width: 100%;
+    td {
+      vertical-align: top;
+    }
+  }
+  p {
+    display: block;
+    margin: 0 0 16px !important;
+  }
+
+
+
+
+  .se-component.se-image-container.__se__float {
+    &-left figure {
+      float: left;
+      margin: 0 16px 0 0;
+    }
+
+    &-right figure {
+      float: right;
+      margin: 0 0 0 16px;
+    }
+
+    &-center {
+      display: flex;
+      justify-content: center;
+
+      figure {
+        margin: 0 0 0 0;
+      }
+    }
+
+    &-none {
+      figure {
+        margin: 0 16px 0 0;
+      }
+    }
+  }
+
+
+}
+  
+  
+  
 }
 
 

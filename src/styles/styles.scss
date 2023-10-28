@@ -95,54 +95,67 @@ textarea {
   text-decoration: none;
   transition: $transition;
   cursor: pointer;
+
   &:hover {
     color: $c_lagunaLight;
   }
 }
+
 .link_2 {
   color: $c_lagunaBlue;
   text-decoration: none;
   transition: $transition;
   cursor: pointer;
+
   &:hover {
     color: $c_lagunaBlueLight;
   }
 }
+
 .link_3 {
   color: $c_lagunaDark;
   text-decoration: none;
   transition: $transition;
   cursor: pointer;
+
   &:hover {
     color: $c_lagunaGrey;
   }
 }
+
 .link_img {
   text-decoration: none;
   border: none;
   padding: 0;
   margin: 0;
 }
+
 .link_text {
   text-decoration: none;
   border: none;
   color: inherit;
+
   &:hover {
     color: $c_lagunaGrey;
   }
 }
+
 h1, h2, h3 {
   margin: 0;
 }
+
 h1 {
   font-size: 32px;
 }
+
 h2 {
   line-height: 40px;
 }
+
 h3 {
   line-height: 32px;
 }
+
 .margin_t24 {
   margin-top: 24px;
 }

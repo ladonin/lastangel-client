@@ -26,6 +26,8 @@ import FinReport from "pages/finreport";
 
 import Help from "pages/help";
 
+import Acquaintanceship from "pages/acquaintanceship";
+
 import Signin from "pages/signin";
 import Administration from "pages/administration";
 
@@ -52,6 +54,7 @@ import AdministrationMainPagePhotoalbumUpdate from "pages/administration/mainPag
 import AdministrationDocumentsUpdate from "pages/administration/documents/update";
 
 import AdministrationClinicPhotosUpdate from "pages/administration/clinicPhotos/update";
+import AdministrationAcquaintanceshipUpdate from "pages/administration/acquaintanceship/update";
 
 import AdministrationFeedbacks from "pages/administration/feedbacks";
 
@@ -87,6 +90,7 @@ const App: React.FC = () => (
 
       <Route path={`${PAGES.ADMINISTRATION_DOCUMENTS_UPDATE}`} element={<AdministrationDocumentsUpdate />} />
       <Route path={`${PAGES.ADMINISTRATION_CLINIC_PHOTOS_UPDATE}`} element={<AdministrationClinicPhotosUpdate />} />
+      <Route path={`${PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE}`} element={<AdministrationAcquaintanceshipUpdate />} />
 
       <Route path={`${PAGES.ADMINISTRATION_FEEDBACKS}`} element={<AdministrationFeedbacks />} />
     </Route>
@@ -113,6 +117,7 @@ const App: React.FC = () => (
       <Route path={`${PAGES.CLINIC}`} element={<Clinic />} />
       <Route path={`${PAGES.HELP}`} element={<Help />} />
       <Route path={`${PAGES.FINREPORT}`} element={<FinReport />} />
+      <Route path={`${PAGES.ACQUAINTANCESHIP}`} element={<Acquaintanceship />} />
       <Route path="*" element={<Home />} />
     </Route>
   </Routes>

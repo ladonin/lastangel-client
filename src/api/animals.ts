@@ -29,7 +29,7 @@ const prepareData = (data: TCommonDataRequest) => {
     formData.append("main_image_original", main_image.original);
   }
 
-  if (another_images) {
+  if (Array.isArray(another_images)) {
     for (let i = 0; i < another_images.length; i++) {
       formData.append("another_images[]", another_images[i]);
     }

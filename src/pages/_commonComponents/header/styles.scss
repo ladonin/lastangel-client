@@ -17,6 +17,52 @@
     padding: 16px 0;
   }
 
+  .loc_acquaintanceship {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    //width: 100%;
+    top: calc(67px + 24px);
+    right: 0;
+    .loc_button {
+      font-size: 16px;
+      line-height: 36px;
+      color: $c_greyDark;
+      background-color: $c_yellowWhite;
+      padding: 0 8px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 99px;
+      //border: 1px solid $c_greyDark;
+      //box-shadow: 2px 2px 6px #5b5a56;
+      cursor: pointer;
+      &:hover {
+        background-color: $c_yellowSuperLite;
+      }
+      img {
+        width: 22px;
+        height: 22px;
+      }
+
+      //&::after {
+      //  content: '';
+      //  position: absolute;
+      //  right: -36px;
+      //  border: 18px solid transparent;
+      //  border-left: 18px solid $c_white;
+      //}
+      //
+      //&::before {
+      //  content: '';
+      //  position: absolute;
+      //  left: -36px;
+      //  border: 18px solid transparent;
+      //  border-right: 18px solid $c_white;
+      //}
+    }
+  }
 
   .loc_topPart {
     width: 100%;
@@ -39,9 +85,10 @@
       .loc_2 {
         width: 100%;
         font-size: 18px;
+        line-height: 26px;
         font-weight: 400;
         color: $c_white;
-        padding-bottom: 32px;
+        padding-bottom: 8px;
       }
     }
 
@@ -69,16 +116,13 @@
       margin-top: 10px;
       background-color: $c_white;
       padding: 0 4px;
-
       border-radius: 20px;
-
       img {
         display: block;
         width: 32px;
         height: 32px;
       }
     }
-
   }
 
   .loc_bottomPart {
@@ -97,6 +141,7 @@
       align-items: center;
       color: $c_white;
       @extend %hoverableLagunaMiddle;
+
       &.loc--active {
         color: $c_lagunaMiddle;
       }
@@ -210,11 +255,13 @@
     justify-content: space-between;
     padding: calc(40px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
     box-shadow: $boxShadowMobile;
+
     .loc_item, .loc_else {
       color: $c_main;
       font-size: calc(36px * var(--viewport-koeff));
       font-weight: 600;
       @extend %hoverableLagunaBlueDark;
+
       &.loc--active {
         color: $c_lagunaBlueDark;
       }
@@ -250,6 +297,54 @@
       color: $c_main;
       font-size: calc(29px * var(--viewport-koeff));
       font-weight: 500;
+    }
+  }
+
+
+  .loc_acquaintanceship {
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .loc_button {
+      font-size: calc(34px * var(--viewport-koeff));
+      line-height: calc(80px * var(--viewport-koeff));
+      color: $c_greyDark;
+      background-color: $c_yellowWhite;
+      padding: 0 calc(14px * var(--viewport-koeff));;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      border-radius: calc(99px * var(--viewport-koeff));;
+      border: 1px solid $c_greyMedium;
+      //box-shadow: 2px 2px 6px #5b5a56;
+      cursor: pointer;
+      &:hover {
+        background-color: $c_yellowSuperLite;
+      }
+      img {
+        width: calc(50px * var(--viewport-koeff));;
+        height: calc(50px * var(--viewport-koeff));;
+      }
+
+      //&::after {
+      //  content: '';
+      //  position: absolute;
+      //  right: -36px;
+      //  border: 18px solid transparent;
+      //  border-left: 18px solid $c_white;
+      //}
+      //
+      //&::before {
+      //  content: '';
+      //  position: absolute;
+      //  left: -36px;
+      //  border: 18px solid transparent;
+      //  border-right: 18px solid $c_white;
+      //}
     }
   }
 }

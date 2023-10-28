@@ -11,6 +11,7 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import PAGES from "routing/routes";
 
 import "./styles.scss";
+import flowerSrc from "../../../icons/flower1.png";
 
 const MENU_ITEMS = [
   { title: "Главная", link: PAGES.MAIN, inMobileSubMenu: false },
@@ -103,20 +104,17 @@ export default function Index() {
         <div className="component-header">
           <div className="loc_wrapper">
             <div className="loc_leftPart">
-              <img
-                alt="."
-                src={logo}
-                className="loc_logo"
-                onClick={() => {
-                  navigate(PAGES.MAIN);
-                }}
-              />
+              <NavLink to={PAGES.MAIN} className="link_img">
+                <img alt="." src={logo} className="loc_logo" />
+              </NavLink>
             </div>
             <div className="loc_rightPart">
               <div className="loc_topPart">
                 <div className="loc_logoText">
                   <h1 className="loc_1">Последний ангел</h1>
-                  <h2 className="loc_2">приют для бездомных животных в г. Александров</h2>
+                  <h2 className="loc_2">
+                    приют для бездомных животных и инвалидов <br /> в г. Александров
+                  </h2>
                 </div>
 
                 {renderButtons(ButtonSizes.MEDIUM)}
@@ -125,6 +123,13 @@ export default function Index() {
 
               <div className="loc_bottomPart">{renderMenu(false)}</div>
             </div>
+            <div className="loc_acquaintanceship">
+              <NavLink to={PAGES.ACQUAINTANCESHIP} className="link_img">
+                <div className="loc_button">
+                  <img alt="." src={flowerSrc} /> Знакомство с приютом <img alt="." src={flowerSrc} />
+                </div>
+              </NavLink>
+            </div>
           </div>
         </div>
       </BrowserView>
@@ -132,14 +137,9 @@ export default function Index() {
         <div className="component-headerMobile">
           <div className="loc_wrapper">
             <div className="loc_leftPart">
-              <img
-                alt="."
-                src={logo}
-                className="loc_logo"
-                onClick={() => {
-                  navigate(PAGES.MAIN);
-                }}
-              />
+              <NavLink to={PAGES.MAIN} className="link_img">
+                <img alt="." src={logo} className="loc_logo" />
+              </NavLink>
             </div>
             <div className="loc_rightPart">
               <h1 className="loc_name">Последний ангел</h1>
@@ -154,7 +154,17 @@ export default function Index() {
             {renderContacts()}
           </div>
 
-          <div className="loc_menu">{renderMenu(true)}</div>
+          <div className="loc_menu">
+            {renderMenu(true)}
+
+            <div className="loc_acquaintanceship">
+              <NavLink to={PAGES.ACQUAINTANCESHIP} className="link_img">
+                <div className="loc_button">
+                  <img alt="." src={flowerSrc} /> Знакомство с приютом <img alt="." src={flowerSrc} />
+                </div>
+              </NavLink>
+            </div>
+          </div>
         </div>
       </MobileView>
     </>

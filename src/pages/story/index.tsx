@@ -77,7 +77,7 @@ const Story: React.FC = () => {
           )}
           <div className="loc_description">
             <div
-              className="loc_content"
+              className="loc_content wysiwyg_description"
               dangerouslySetInnerHTML={{ __html: dataState.description }}
             />
 

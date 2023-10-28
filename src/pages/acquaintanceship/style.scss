@@ -1,4 +1,8 @@
-.page-news {
+.page-acquaintanceship {
+  .loc_inredact {
+    text-align: center;
+    margin: 48px auto;
+  }
   .loc_item {
     width: 100%;
     margin-bottom: 32px;
@@ -8,30 +12,11 @@
     border-radius: 8px;
     padding: 24px 24px 0 24px;
     box-shadow: $boxShadowImportant;
-    &.loc--non_published {
-      background-color: $c_yellowLight;
-    }
-
-    .loc_created {
-      font-size: 14px;
-      color: $c_lagunaGrey;
-    }
-
-    .loc_name {
-      font-size: 24px;
-      margin: 4px 0 0 0;
-      font-weight: 600;
-      color: $c_lagunaGrey;
-      @extend %hoverable;
-    }
 
     .loc_redactButton {
-      margin: 24px 0 10px 0;
+      margin: 0 0 16px 0;
     }
     .component-mediaOriginalLinks {
-      margin-bottom: 16px;
-    }
-    .loc_nonpublished {
       margin-bottom: 16px;
     }
 
@@ -93,44 +78,30 @@
       }
     }
   }
-
-  .loc_anotherTitle {
-    font-size: 18px;
-    margin: 4px 0;
-    font-weight: 600;
-    color: $c_greyDark;
-    margin-bottom: 16px;
-  }
 }
 
-.layout.loc--isMobile .page-news {
-  .loc_anotherTitle {
-    font-size: calc(32px * var(--viewport-koeff));
-    margin: 0 0 calc(24px * var(--viewport-koeff)) 0;
-  }
 
+
+
+
+
+
+
+.layout.loc--isMobile .page-acquaintanceship {
+  .loc_inredact {
+    margin: calc(80px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
+  }
   .loc_item {
     margin-bottom: calc(32px * var(--viewport-koeff));
     padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff));
     border-radius: calc(16px * var(--viewport-koeff));
     box-shadow: $boxShadowMobileImportant;
-    .loc_created {
-      font-size: calc(24px * var(--viewport-koeff));
-    }
 
     .loc_redactButton {
       margin: calc(24px * var(--viewport-koeff)) 0 calc(10px * var(--viewport-koeff)) 0;
     }
 
-    .loc_name {
-      font-size: calc(38px * var(--viewport-koeff));
-      margin: calc(8px * var(--viewport-koeff)) 0 0 0;
-    }
-
-    .loc_nonpublished {
-      font-size: calc(26px * var(--viewport-koeff));
-      margin-bottom: calc(16px * var(--viewport-koeff));
-    }
 
     .loc_description {
       .loc_content {
@@ -162,12 +133,6 @@
       }
     }
 
-    .loc_moreButton {
-      margin-top: calc(16px * var(--viewport-koeff));
-      margin-bottom: calc(24px * var(--viewport-koeff));
-      font-size: calc(26px * var(--viewport-koeff));
-      padding: 0;
-    }
 
     .loc_video {
       margin-bottom: calc(24px * var(--viewport-koeff));

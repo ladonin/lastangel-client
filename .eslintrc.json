@@ -59,9 +59,6 @@
     "jsx-a11y/control-has-associated-label": "off",
     "no-shadow": "off",
     "require-yield": "off",
-    "@typescript-eslint/no-shadow": [
-      "error"
-    ],
     "react/jsx-props-no-spreading": "off",
     "react/destructuring-assignment": "off",
     "react/no-array-index-key": "off",
@@ -145,12 +142,7 @@
     "no-empty-function": 0,
     "@typescript-eslint/no-shadow": 0,
     "jsx-a11y/no-noninteractive-element-interactions": 0,
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": true
-      }
-    ],
+    "import/no-extraneous-dependencies": 0,
     "import/order": [
       "error",
       {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 // const OtherComponent = React.lazy(() => import('components/header'));
 
@@ -6,15 +6,17 @@ import "./style.scss";
 import InputText from "components/Form/InputText";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
 import InputFileImage from "components/Form/InputFileImage";
-import { NEWS_STATUS } from "constants/news";
+
 import Textarea from "components/Form/Textarea";
 import { Checkbox } from "components/Form/Checkbox";
-import { TGetResponseItem } from "api/types/news";
-import { getAnotherImagesUrl, getVideoUrl } from "helpers/news";
+import { TGetResponseItem } from "api/types/acquaintanceship";
+import { getAnotherImagesUrl, getVideoUrl } from "helpers/acquaintanceship";
 import InputFileVideo from "components/Form/InputFileVideo";
 import WYSIWYGEditor from "components/Form/WYSIWYGEditor";
 import { SIZES_ANOTHER } from "constants/photos";
 import Select from "components/Form/Select";
+
+import { ACQUAINTANCESHIP_STATUS } from "../../../../../constants/acquaintanceship";
 
 export type TParams = { [key: string]: any };
 
@@ -24,12 +26,11 @@ type TProps = {
   onChange: (data: TParams) => void;
   data?: TGetResponseItem;
 };
-export const NEWS_OPTIONS = [
-  { value: String(NEWS_STATUS.PUBLISHED), label: "Опубликован" },
-  { value: String(NEWS_STATUS.NON_PUBLISHED), label: "Не опубликован" },
+export const ACQUAINTANCESHIP_OPTIONS = [
+  { value: String(ACQUAINTANCESHIP_STATUS.PUBLISHED), label: "Опубликован" },
+  { value: String(ACQUAINTANCESHIP_STATUS.NON_PUBLISHED), label: "Не опубликован" },
 ];
 const Form: React.FC<TProps> = ({ onChange, data }) => {
-  const [isMajorState, setIsMajorState] = useState(!!data?.ismajor);
   const [isAlbumHiddenState, setIsAlbumHiddenState] = useState(!!data?.hide_album);
   const [anotherImagesState, setAnotherImagesState] = useState<File[] | null>(null);
 
@@ -43,8 +44,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   useEffect(() => {
     if (data) {
       data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
-      setIsMajorState(!!data.ismajor);
-
       paramsRef.current = data;
     }
   }, [data]);
@@ -91,17 +90,18 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   };
 
   return (
-    <div className="page-administration_news_form_component">
+    <div className="page-administration_acquaintanceship_form_component">
       <div className="loc_form">
         <div className="loc_left">
-          <InputText
+          <Select
+            label="Статус"
             required
-            label="Название"
-            initValue={data ? data.name : undefined}
+            value={data ? String(data.status) : undefined}
             onChange={(val) => {
-              onChangeHandler("name", val);
+              onChangeHandler("status", val);
             }}
-            className="loc_formInputItem"
+            className="loc_formSelectItem loc--status"
+            options={ACQUAINTANCESHIP_OPTIONS}
           />
           <InputFileVideo
             data={data}
@@ -127,16 +127,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             label="Видео 3"
             className="loc_formVideoItem"
           />
-          <Checkbox
-            onChange={() => {
-              const value = !isMajorState;
-              setIsMajorState(value);
-              onChangeHandler("ismajor", value);
-            }}
-            className="loc_formCheckboxItem loc--isMajor"
-            checked={isMajorState}
-            label="Важно"
-          />
+
           <Checkbox
             onChange={() => {
               const value = !isAlbumHiddenState;
@@ -149,31 +140,9 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           />
         </div>
 
-        <div className="loc_right">
-          <Textarea
-            value={data ? data.short_description : undefined}
-            maxWords={512}
-            onChange={(val) => {
-              onChangeHandler("short_description", val);
-            }}
-            label="Краткое описание"
-            required
-            className="loc_formTextareaItem loc__shortdescription"
-          />
 
-          <Select
-            label="Статус"
-            required
-            value={data ? String(data.status) : undefined}
-            onChange={(val) => {
-              onChangeHandler("status", val);
-            }}
-            className="loc_formSelectItem loc--status"
-            options={NEWS_OPTIONS}
-          />
-        </div>
-        <WYSIWYGEditor
-          id="news_editor"
+          <WYSIWYGEditor
+            id="opriyte_editor"
           className="loc_formTextareaItem loc__fulldescription"
           required
           value={data ? data.description : undefined}
@@ -182,6 +151,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           }}
           label="Текст"
         />
+    
       </div>
 
       <div className="loc_photos">

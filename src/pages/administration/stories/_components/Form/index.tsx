@@ -168,6 +168,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           />
         </div>
         <WYSIWYGEditor
+          id="stories_editor"
           className="loc_formTextareaItem loc__fulldescription"
           required
           value={data ? data.description : undefined}

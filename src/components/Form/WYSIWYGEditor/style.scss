@@ -25,6 +25,34 @@
         margin: 0px;
       }
     }
+
+    figure {
+      z-index: 1;
+      position: relative;
+
+      .rdw-image-alignment {
+        span {
+          display: flex;
+        }
+        &.rdw-image {
+
+
+          &-left {
+            float: left;
+          }
+
+          &-center span {
+            justify-content: center;
+            width: 100%;
+          }
+
+          &-right {
+            float: right;
+          }
+        }
+
+      }
+    }
   }
 }
 

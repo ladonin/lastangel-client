@@ -2,7 +2,7 @@
   import Collections from 'pages/home/components/Collections'
  */
 
-import React, { useEffect, useMemo, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,15 +13,14 @@ import { TGetListOutput, TItem } from "api/types/collections";
 import ArrowRight from "icons/arrowRight.svg";
 import PAGES from "routing/routes";
 import { numberFriendly } from "helpers/common";
-import "./style.scss";import { loadItem } from "utils/localStorage";import { SIZES_MAIN } from "../../../../constants/photos";
 import { loadItem } from "utils/localStorage";
+import { SIZES_MAIN } from "constants/photos";
+import "./style.scss";
 
 const Collections = () => {
   const [listState, setListState] = useState<TGetListOutput>([]);
   const navigate = useNavigate();
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-
-
 
   const renderContent = (data: TItem) => (
     <div

@@ -31,6 +31,11 @@ import {
 
 import { getAnotherImagesUrl as getAnotherImagesUrlMainphotoalbum } from "helpers/mainphotoalbum";
 
+import {
+  getAnotherImagesUrl as getAnotherImagesUrlAcquaintanceship,
+  getVideoUrl as getVideoUrlAcquaintanceship,
+} from "helpers/acquaintanceship";
+
 import { isAdmin } from "utils/user";
 import "./style.scss";
 
@@ -58,6 +63,7 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
     if (typeState === "news") return () => undefined;
     if (typeState === "stories") return () => undefined;
     if (typeState === "mainphotoalbum") return () => undefined;
+    if (typeState === "acquaintanceship") return () => undefined;
     return () => undefined;
   };
   const getAnotherImagesUrl = () => {
@@ -67,6 +73,7 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
     if (typeState === "news") return getAnotherImagesUrlNews;
     if (typeState === "stories") return getAnotherImagesUrlStories;
     if (typeState === "mainphotoalbum") return getAnotherImagesUrlMainphotoalbum;
+    if (typeState === "acquaintanceship") return getAnotherImagesUrlAcquaintanceship;
     return () => undefined;
   };
   const getVideoUrl = () => {
@@ -76,6 +83,7 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
     if (typeState === "news") return getVideoUrlNews;
     if (typeState === "stories") return getVideoUrlStories;
     if (typeState === "mainphotoalbum") return () => undefined;
+    if (typeState === "mainphotoalbum") return getVideoUrlAcquaintanceship;
     return () => undefined;
   };
 

@@ -22,7 +22,6 @@
     "@types/react": "^18.2.6",
     "@types/react-datepicker": "^4.11.2",
     "@types/react-dom": "^18.2.4",
-    "@types/react-draft-wysiwyg": "^1.13.4",
     "@types/react-google-recaptcha": "^2.1.5",
     "@types/react-helmet": "^6.1.6",
     "@types/react-modal": "^3.16.0",
@@ -81,7 +80,6 @@
     "react-datepicker": "^4.11.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
-    "react-draft-wysiwyg": "^1.15.0",
     "react-easy-crop": "^4.7.4",
     "react-google-recaptcha": "^3.1.0",
     "react-helmet": "^6.1.0",
@@ -94,6 +92,8 @@
     "redux": "^4.2.1",
     "redux-first-history": "^5.1.1",
     "redux-saga": "^1.2.3",
+    "suneditor": "^2.45.1",
+    "suneditor-react": "^3.6.1",
     "swiper": "8",
     "uuid": "^9.0.0"
   }

@@ -19,6 +19,7 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { quit } from "utils/user";
 import { UserApi } from "api/user";
 import EmailImage from "icons/email.png";
+import { AcquaintanceshipApi } from "../../api/acquaintanceship";
 
 const LayoutAdministration: React.FC = () => {
   const { pathname } = useLocation();
@@ -61,7 +62,9 @@ const LayoutAdministration: React.FC = () => {
     pathname.indexOf(PAGES.ADMINISTRATION_STORY_UPDATE) === -1 &&
     pathname !== PAGES.ADMINISTRATION_MAIN_PAGE_PHOTOALBUM_UPDATE &&
     pathname !== PAGES.ADMINISTRATION_FEEDBACKS &&
-    pathname !== PAGES.ADMINISTRATION_DOCUMENTS_UPDATE;
+    pathname !== PAGES.ADMINISTRATION_DOCUMENTS_UPDATE &&
+    pathname !== PAGES.ADMINISTRATION_CLINIC_PHOTOS_UPDATE &&
+    pathname !== PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE;
 
   // тут сделать проверку авторизации на защищенные страницы с применением location.pathname
   const [newFeedbacksState, setNewFeedbacksState] = useState<number>(0);
@@ -201,14 +204,21 @@ const LayoutAdministration: React.FC = () => {
               </Button>
 
               <Button
-                className="loc_documentsButton"
+                className="loc_clinicButton"
                 theme={ButtonThemes.PRIMARY}
                 size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
                 onClick={() => navigate(PAGES.ADMINISTRATION_CLINIC_PHOTOS_UPDATE)}
               >
                 Фото клиники
               </Button>
-
+              <Button
+                className="loc_acquaintanceshipButton"
+                theme={ButtonThemes.PRIMARY}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                onClick={() => navigate(PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE)}
+              >
+                Страница о приюте
+              </Button>
               <div className="loc_block_1">
                 <div className="loc_block_1_title">Скачать данные о питомцах в</div>
                 <Button
@@ -300,13 +310,13 @@ const LayoutAdministration: React.FC = () => {
                 >
                   html
                 </Button>
-                <Button
+{/*                 <Button
                   theme={ButtonThemes.GHOST_BORDER}
                   size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
                   onClick={() => NewsApi.downloadData("csv")}
                 >
                   csv
-                </Button>
+                </Button> */}
               </div>
 
               <div className="loc_block_1">
@@ -325,12 +335,30 @@ const LayoutAdministration: React.FC = () => {
                 >
                   html
                 </Button>
-                <Button
+{/*                 <Button
                   theme={ButtonThemes.GHOST_BORDER}
                   size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
                   onClick={() => StoriesApi.downloadData("csv")}
                 >
                   csv
+                </Button> */}
+              </div>
+
+              <div className="loc_block_1">
+                <div className="loc_block_1_title">Скачать текст о приюте в</div>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => AcquaintanceshipApi.downloadData("txt")}
+                >
+                  txt
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => AcquaintanceshipApi.downloadData("html")}
+                >
+                  html
                 </Button>
               </div>
             </div>

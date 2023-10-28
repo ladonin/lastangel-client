@@ -82,6 +82,14 @@
       .loc_documentsButton {
         margin-left: 0;
       }
+      .loc_clinicButton {
+        margin-left: 0;
+      }
+      .loc_acquaintanceshipButton {
+        margin-left: 0;
+      }
+      
+      
       .loc_emails {
         position: relative;
         cursor: pointer;
@@ -106,6 +114,27 @@
     }
 
 
+  }
+
+  .sun-editor {
+    p {
+      display: block;
+      margin: 0 0 16px !important;
+      padding: 0;
+    }
+
+
+    .se-table-size-100 {
+      width: 100%;
+    }
+
+    table {
+      margin-bottom: 16px;
+
+      td {
+        vertical-align: top;
+      }
+    }
   }
 }
 
@@ -143,14 +172,19 @@
         .loc_block_1_title {
           width: 100%;
           font-size: calc(32px * var(--viewport-koeff));
-          
         }
       }
-      
-      
-      
-      
-      .loc_addPetButton, .loc_addCollectionButton, .loc_addDonationButton, .loc_addDonatorButton, .loc_addNewsButton,.loc_addStoryButton, .loc_mainPagePhotoalbumButton, .loc_documentsButton {
+
+      .loc_addPetButton, 
+      .loc_addCollectionButton, 
+      .loc_addDonationButton, 
+      .loc_addDonatorButton, 
+      .loc_addNewsButton,
+      .loc_addStoryButton, 
+      .loc_mainPagePhotoalbumButton, 
+      .loc_documentsButton,
+      .loc_clinicButton,
+      .loc_acquaintanceshipButton {
         width: 100%;
       }
     }
@@ -167,6 +201,11 @@
         height: calc(80px * var(--viewport-koeff));
       }
     }
+  }
+
+  .rdw-emoji-modal, .rdw-embedded-modal,.rdw-link-modal {
+    right: 0 !important;
+    left: auto !important;;
   }
 }
 

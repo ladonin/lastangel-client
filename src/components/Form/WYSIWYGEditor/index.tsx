@@ -2,82 +2,75 @@
   import WYSIWYGEditor from 'components/Form/WYSIWYGEditor'
  */
 
-import React, { useRef, useState, useEffect, useMemo } from "react";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState, ContentState, convertToRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
+import React, { useRef, useState, useMemo, useEffect } from "react";
+import SunEditor from "suneditor-react";
+import SunEditorCore from "suneditor/src/lib/core";
+// Не грузит стили из папки suneditor - мешают настройки package.json библиотеки
+import "./suneditor.min.css";
+import plugins from "suneditor/src/plugins";
 import cn from "classnames";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
+
 type TProps = {
+  id: string;
   label?: string;
   className?: string;
   value?: string;
   required?: boolean;
   onChange: (val: string) => void;
 };
-const Textarea: React.FC<TProps> = ({ label, className, value, required, onChange }) => {
-  const [editorState, setEditorState] = useState<any>(EditorState.createEmpty());
-  const valueInited = useRef(false);
-
-  useEffect(() => {
-    if (value && !valueInited.current) {
-      valueInited.current = true;
-      const contentBlock = htmlToDraft(value);
-      if (contentBlock) {
-        const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-        setEditorState(EditorState.createWithContent(contentState));
-      }
-    }
-  }, [value]);
-
-  const onEditorStateChange = (editorVal: any) => {
-    setEditorState(editorVal);
-
-    onChange(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+const WYSIWYGEditor: React.FC<TProps> = ({ id, label, className, value, required, onChange }) => {
+ 
+  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  
+  const editor = useRef<SunEditorCore>();
+  const getSunEditorInstance = (sunEditor: SunEditorCore) => {
+    editor.current = sunEditor;
   };
-
+  const handleChange = (content: string) => {
+    onChange(content);
+  };
   return (
-    <div className={cn("component-WYSIWYGEditor", className)}>
+    <div id={id} className={cn("component-WYSIWYGEditor", className)}>
       <div className="loc_wrapper">
         {label && (
-          <label>
-            {label} {required && <span className="red">*</span>}
-          </label>
+          <a className="link_text" href={`#${id}`}>
+            <label>
+              {label} {required && <span className="red">*</span>}
+            </label>
+          </a>
         )}
+        <SunEditor
+          onChange={handleChange}
+          defaultValue={value}
+          setOptions={{
+            height: isMobile ? "70vh" : "60vh",
 
-        <Editor
-          editorState={editorState}
-          wrapperClassName="loc_wrapper"
-          editorClassName="loc_editor"
-          onEditorStateChange={onEditorStateChange}
-          handlePastedText={(
-            text: string,
-            html: string,
-            editorState: EditorState,
-            onChange: (editorState: EditorState) => void
-          ) => {
-            const contentBlock = htmlToDraft(text);
-            if (contentBlock) {
-              const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-              setEditorState(EditorState.createWithContent(contentState));
-            }
-            return false;
+            plugins,
+            buttonList: [
+              ["undo", "redo"],
+              ["font", "fontSize", "formatBlock"],
+              ["paragraphStyle", "blockquote"],
+              ["bold", "underline", "italic", "strike", "subscript", "superscript"],
+              ["fontColor", "hiliteColor", "textStyle"],
+              ["removeFormat"],
+              "/", // Line break
+              ["outdent", "indent"],
+              ["align", "horizontalRule", "list", "lineHeight"],
+              ["table", "link", "image", "video", "audio" /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
+              /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
+              ["fullScreen", "showBlocks", "codeView"],
+              ["preview", "print"],
+              ["save"/* , "template" */],
+              /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
+            ],
           }}
-          toolbar={{
-            fontSize: {
-              className: "hidden",
-            },
-            fontFamily: {
-              className: "hidden",
-            },
-          }}
+          getSunEditorInstance={getSunEditorInstance}
         />
       </div>
     </div>
   );
 };
 
-export default Textarea;
+export default WYSIWYGEditor;

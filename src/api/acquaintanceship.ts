@@ -1,9 +1,12 @@
 /**
-  import { StoriesApi } from 'api/stories';
-  Работа с историями
+  import { AcquaintanceshipApi } from 'api/acquaintanceship';
+  Работа со страницей знакомства с приютом
  */
 import { AxiosResponse } from "axios";
-import { TGetListOutput, TGetListRequest, TGetOutput, TCommonDataRequest } from "api/types/stories";
+import {
+  TGetOutput,
+  TCommonDataRequest,
+} from "api/types/acquaintanceship";
 import { saveFile } from "../helpers/common";
 import { apiService } from "./axios";
 
@@ -24,39 +27,23 @@ const prepareData = (data: TCommonDataRequest) => {
   formData.append("video1", video1 || "");
   formData.append("video2", video2 || "");
   formData.append("video3", video3 || "");
+
   return formData;
 };
 
-export const StoriesApi = {
-  getList: (params?: TGetListRequest) =>
+export const AcquaintanceshipApi = {
+  get: () =>
     apiService
-      .get(`get_stories_list`, { params })
-      .then((response: AxiosResponse<TGetListOutput>) => response.data),
-  get: (id: number) =>
-    apiService
-      .get(`get_story`, { params: { id } })
+      .get("get_acquaintanceship")
       .then((response: AxiosResponse<TGetOutput>) => response.data),
-  add: (data: TCommonDataRequest) =>
+  update: (data: TCommonDataRequest) =>
     apiService
-      .post(`add_story`, prepareData(data), {
+      .post("update_acquaintanceship", prepareData(data), {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((response: AxiosResponse<boolean>) => response.data),
-
-  update: (id: number, data: TCommonDataRequest) =>
-    apiService
-      .post(`update_story?id=${id}`, prepareData(data), {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response: AxiosResponse<boolean>) => response.data),
-  remove: (id: number) =>
-    apiService
-      .post(`remove_story?id=${id}`)
       .then((response: AxiosResponse<boolean>) => response.data),
   downloadData: (type: string) =>
-    apiService.get(`download_stories`, { params: { type } }).then(saveFile),
+    apiService.get("download_acquaintanceship", { params: { type } }).then(saveFile),
 };
