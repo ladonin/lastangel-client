@@ -92,8 +92,8 @@
     }
   }
   .se-component {
-    figure {
-      margin: 0;
+    figure, figure img {
+      margin: 0 !important;
     }
   }
 

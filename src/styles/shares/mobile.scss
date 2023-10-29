@@ -79,25 +79,21 @@
   }
 
   .wysiwyg_description {
-
     table {
-      margin-bottom: calc(24px * var(--viewport-koeff));
+      margin-bottom: calc(24px * var(--viewport-koeff)) !important;
     }
-
     p {
       margin: 0 0 calc(24px * var(--viewport-koeff)) !important;
     }
-
-
     .se-component.se-image-container.__se__float {
       &-left figure {
         float: left;
-        margin: 0 16px 0 0;
+        margin: 0 calc(24px * var(--viewport-koeff)) 0 0 !important;
       }
 
       &-right figure {
         float: right;
-        margin: 0 0 0 16px;
+        margin: 0 0 0 calc(24px * var(--viewport-koeff)) !important;
       }
 
       &-center {
@@ -105,18 +101,16 @@
         justify-content: center;
 
         figure {
-          margin: 0 0 0 0;
+          margin: 0 0 0 0 !important;
         }
       }
 
       &-none {
         figure {
-          margin: 0 16px 0 0;
+          margin: 0 calc(24px * var(--viewport-koeff)) 0 0 !important;
         }
       }
     }
-
-
     @extend %wysiwyg_persentages;
   }
 }
