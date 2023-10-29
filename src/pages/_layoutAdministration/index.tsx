@@ -13,6 +13,7 @@ import { FeedbacksApi } from "api/feedbacks";
 import { AnimalsApi } from "api/animals";
 import { CollectionsApi } from "api/collections";
 import { DonationsApi } from "api/donations";
+import { DonatorsApi } from "api/donators";
 import { NewsApi } from "api/news";
 import { StoriesApi } from "api/stories";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
@@ -293,7 +294,23 @@ const LayoutAdministration: React.FC = () => {
                   csv
                 </Button>
               </div>
-
+              <div className="loc_block_1">
+                <div className="loc_block_1_title">Скачать данные о донаторах в</div>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => DonatorsApi.downloadData("txt")}
+                >
+                  txt
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => DonatorsApi.downloadData("html")}
+                >
+                  html
+                </Button>
+              </div>
               <div className="loc_block_1">
                 <div className="loc_block_1_title">Скачать новости в</div>
                 <Button
