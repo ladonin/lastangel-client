@@ -48,6 +48,36 @@
   }
 
 
+
+
+
+  .wysiwyg_description,.sun-editor {
+      table {
+        border-spacing: unset;
+        tr {
+          &:first-child {
+            & > td {
+              padding-top: 0px !important;
+            }
+          }
+          &:last-child {
+            & > td {
+              padding-bottom: 0px !important;
+            }
+          }
+          td {
+            padding: calc(12px * var(--viewport-koeff)) !important;
+          }
+          td:first-child {
+            padding-left: 0px !important;
+          }
+          td:last-child {
+            padding-right: 0px !important;
+          }
+        }
+      }
+  }
+
   .wysiwyg_description {
 
     table {
