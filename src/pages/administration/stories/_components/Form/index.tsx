@@ -13,8 +13,8 @@ import { SIZES_ANOTHER } from "constants/photos";
 import Select from "components/Form/Select";
 import InputFileVideo from "components/Form/InputFileVideo";
 // const OtherComponent = React.lazy(() => import('components/header'));
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
+
 export type TParams = { [key: string]: any };
 
 export type TResponse = TGetResponseItem;
@@ -30,12 +30,17 @@ export const STORIES_OPTIONS = [
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [isMajorState, setIsMajorState] = useState(!!data?.ismajor);
   const [isAlbumHiddenState, setIsAlbumHiddenState] = useState(!!data?.hide_album);
+  const [useMobileDescriptionState, setUseMobileDescriptionState] = useState(
+    !!data?.use_mobile_description
+  );
   const [anotherImagesState, setAnotherImagesState] = useState<File[] | null>(null);
 
   const paramsRef = useRef<TParams>({});
 
   const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
-  const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(null);
+  const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(
+    null
+  );
 
   useEffect(() => {
     if (data) {
@@ -56,7 +61,8 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   }, [anotherImagesState]);
 
   useEffect(() => {
-    anotherImagesForDeleteState !== null && onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
+    anotherImagesForDeleteState !== null &&
+      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
   }, [anotherImagesForDeleteState]);
 
   const setVideo1Handler = (val: null | File) => {
@@ -74,25 +80,31 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   };
 
   const removeAnotherImageHandler = (val: number) => {
-    setAnotherImagesForDeleteState(anotherImagesForDeleteState === null ? [val] : anotherImagesForDeleteState.concat(val));
+    setAnotherImagesForDeleteState(
+      anotherImagesForDeleteState === null ? [val] : anotherImagesForDeleteState.concat(val)
+    );
   };
 
   const restoreAnotherImageHandler = (val: number) => {
-    anotherImagesForDeleteState && setAnotherImagesForDeleteState(anotherImagesForDeleteState.filter((id: number) => id !== val));
+    anotherImagesForDeleteState &&
+      setAnotherImagesForDeleteState(
+        anotherImagesForDeleteState.filter((id: number) => id !== val)
+      );
   };
 
   return (
     <div className="page-administration_stories_form_component">
       <div className="loc_form">
         <div className="loc_left">
-          <InputText
-            required
-            label="Название"
-            initValue={data ? data.name : undefined}
+          <Textarea
+            value={data ? data.name : undefined}
+            maxWords={256}
             onChange={(val) => {
               onChangeHandler("name", val);
             }}
-            className="loc_formInputItem"
+            label="Название"
+            required
+            className="loc_formTextareaItem loc__shortdescription"
           />
 
           <InputFileVideo
@@ -142,6 +154,16 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             checked={isAlbumHiddenState}
             label="Не показывать фотоальбом"
           />
+          <Checkbox
+            onChange={() => {
+              const value = !useMobileDescriptionState;
+              setUseMobileDescriptionState(value);
+              onChangeHandler("use_mobile_description", value);
+            }}
+            className="loc_formCheckboxItem loc--useMobileDescription"
+            checked={useMobileDescriptionState}
+            label="Будет мобильная версия текста"
+          />
         </div>
 
         <div className="loc_right">
@@ -177,6 +199,19 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           }}
           label="Текст"
         />
+        {useMobileDescriptionState && (
+          <WYSIWYGEditor
+            mobileVersion
+            id="stories_editor_mobi"
+            className="loc_formTextareaItem loc__fulldescription"
+            required
+            value={data ? data.mobile_description : undefined}
+            onChange={(val) => {
+              onChangeHandler("mobile_description", val);
+            }}
+            label="Мобильная версия текста"
+          />
+        )}
       </div>
 
       <div className="loc_photos">
@@ -191,7 +226,9 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
               label="Ранее загруженные фото"
               removeImage={removeAnotherImageHandler}
               restoreImage={restoreAnotherImageHandler}
-              prepareUrlFunc={(img: number) => (data ? getAnotherImagesUrl(data, img, SIZES_ANOTHER.SIZE_450) : "")}
+              prepareUrlFunc={(img: number) =>
+                data ? getAnotherImagesUrl(data, img, SIZES_ANOTHER.SIZE_450) : ""
+              }
             />
           )}
         </div>

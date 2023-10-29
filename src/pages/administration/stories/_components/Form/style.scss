@@ -45,12 +45,14 @@
   .loc_formTextareaItem {
     margin-bottom: 24px;
 
-    textarea {
-      width: 70%;
-    }
+    .loc_wrapper {
+      textarea {
+        width: 70%;
+      }
 
-    label {
-      width: 30%;
+      label {
+        width: 30%;
+      }
     }
 
     &.loc__shortdescription textarea {
@@ -61,14 +63,6 @@
       width: 100%;
       margin-top: 24px;
 
-      label {
-        width: 152px;
-      }
-
-      textarea {
-        width: calc(100% - 152px);
-        height: 340px;
-      }
     }
   }
 

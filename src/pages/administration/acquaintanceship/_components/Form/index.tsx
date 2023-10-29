@@ -32,6 +32,9 @@ export const ACQUAINTANCESHIP_OPTIONS = [
 ];
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [isAlbumHiddenState, setIsAlbumHiddenState] = useState(!!data?.hide_album);
+  const [useMobileDescriptionState, setUseMobileDescriptionState] = useState(
+    !!data?.use_mobile_description
+  );
   const [anotherImagesState, setAnotherImagesState] = useState<File[] | null>(null);
 
   const paramsRef = useRef<TParams>({});
@@ -138,11 +141,20 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             checked={isAlbumHiddenState}
             label="Не показывать фотоальбом"
           />
+          <Checkbox
+            onChange={() => {
+              const value = !useMobileDescriptionState;
+              setUseMobileDescriptionState(value);
+              onChangeHandler("use_mobile_description", value);
+            }}
+            className="loc_formCheckboxItem loc--useMobileDescription"
+            checked={useMobileDescriptionState}
+            label="Будет мобильная версия текста"
+          />
         </div>
 
-
-          <WYSIWYGEditor
-            id="opriyte_editor"
+        <WYSIWYGEditor
+          id="opriyte_editor"
           className="loc_formTextareaItem loc__fulldescription"
           required
           value={data ? data.description : undefined}
@@ -151,7 +163,20 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           }}
           label="Текст"
         />
-    
+
+        {useMobileDescriptionState && (
+          <WYSIWYGEditor
+            mobileVersion
+            id="opriyte_editor_mobi"
+            className="loc_formTextareaItem loc__fulldescription"
+            required
+            value={data ? data.mobile_description : undefined}
+            onChange={(val) => {
+              onChangeHandler("mobile_description", val);
+            }}
+            label="Мобильная версия текста"
+          />
+        )}
       </div>
 
       <div className="loc_photos">

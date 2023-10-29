@@ -1,4 +1,5 @@
 .layout-main {
+  @extend %desctopCommon;
   display: flex;
   flex-direction: column;
   //align-items: center;
@@ -77,79 +78,29 @@
   }
 
 
-
-
-
-
-.wysiwyg_description {
-  table {
-    margin-bottom: 16px;
-    width: 100%;
-    td {
-      vertical-align: top;
-    }
-  }
-  p {
-    display: block;
-    margin: 0 0 16px !important;
-  }
-
-
-
-
-  .se-component.se-image-container.__se__float {
-    &-left figure {
-      float: left;
-      margin: 0 16px 0 0;
-    }
-
-    &-right figure {
-      float: right;
-      margin: 0 0 0 16px;
-    }
-
-    &-center {
-      display: flex;
-      justify-content: center;
-
-      figure {
-        margin: 0 0 0 0;
-      }
-    }
-
-    &-none {
-      figure {
-        margin: 0 16px 0 0;
-      }
-    }
-  }
-
-
 }
-  
-  
-  
-}
-
 
 
 .layout-main.loc--isMobile {
 
   @extend %mobileCommon;
-    
+
   .page {
     width: 100%;
     padding: calc(24px * var(--viewport-koeff));
     min-height: calc((100vh - (#{$layout_1_header_height} + #{$layout_1_footer_height} + #{$layout_1_height_addition_mobile}) * var(--viewport-koeff)));
+
     & > div[class^='page-'] {
       max-width: 100%;
     }
+
     .loc_warningMessage {
       font-size: calc(32px * var(--viewport-koeff));
- 
+
       padding: calc(24px * var(--viewport-koeff));
       margin: calc(160px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff)) 0;
       border-radius: calc(8px * var(--viewport-koeff));
+
       img {
         width: calc(200px * var(--viewport-koeff));
         height: calc(185px * var(--viewport-koeff));
@@ -164,7 +115,7 @@
     padding: 0 0 calc(48px * var(--viewport-koeff)) 0;
     gap: calc(40px * var(--viewport-koeff));
 
-    
+
     .loc_title {
       line-height: calc(80px * var(--viewport-koeff));
       font-size: calc(32px * var(--viewport-koeff));
@@ -185,6 +136,8 @@
 
     }
   }
+
+
 }
 
 

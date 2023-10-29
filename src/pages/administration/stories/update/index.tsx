@@ -132,6 +132,16 @@ const StoryUpdate: React.FC = () => {
 
         {!isChangedState && !isDeletedState && (
           <div className="loc_wrapper_textForm">
+            <Button
+              className="loc_saveButton margin_b24"
+              theme={ButtonThemes.SUCCESS}
+              isLoading={isUpdatingState}
+              disabled={!paramsRef.current}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+              onClick={updateHandler}
+            >
+              Обновить
+            </Button>
             <Form onChange={onChange} data={responseRef.current} />
             {errorState && <div className="loc_error">{errorState}</div>}
             <div className="loc_buttons">
@@ -171,6 +181,14 @@ const StoryUpdate: React.FC = () => {
         {isChangedState && (
           <div className="loc_wrapper_updatedSuccess">
             Запись успешно обновлена ({paramsRef.current?.name})
+            <Button
+              className="margin_t24"
+              theme={ButtonThemes.GHOST_BORDER}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+              onClick={() => setIsChangedState(false)}
+            >
+              Продолжить редактирование
+            </Button>
           </div>
         )}
         {isDeletedState && <div className="loc_wrapper_removedSuccess">Запись удалена</div>}

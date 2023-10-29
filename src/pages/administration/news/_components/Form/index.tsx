@@ -31,6 +31,9 @@ export const NEWS_OPTIONS = [
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [isMajorState, setIsMajorState] = useState(!!data?.ismajor);
   const [isAlbumHiddenState, setIsAlbumHiddenState] = useState(!!data?.hide_album);
+  const [useMobileDescriptionState, setUseMobileDescriptionState] = useState(
+    !!data?.use_mobile_description
+  );
   const [anotherImagesState, setAnotherImagesState] = useState<File[] | null>(null);
 
   const paramsRef = useRef<TParams>({});
@@ -94,14 +97,15 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     <div className="page-administration_news_form_component">
       <div className="loc_form">
         <div className="loc_left">
-          <InputText
-            required
-            label="Название"
-            initValue={data ? data.name : undefined}
+          <Textarea
+            value={data ? data.name : undefined}
+            maxWords={256}
             onChange={(val) => {
               onChangeHandler("name", val);
             }}
-            className="loc_formInputItem"
+            label="Название"
+            required
+            className="loc_formTextareaItem loc__shortdescription"
           />
           <InputFileVideo
             data={data}
@@ -147,6 +151,16 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             checked={isAlbumHiddenState}
             label="Не показывать фотоальбом"
           />
+          <Checkbox
+            onChange={() => {
+              const value = !useMobileDescriptionState;
+              setUseMobileDescriptionState(value);
+              onChangeHandler("use_mobile_description", value);
+            }}
+            className="loc_formCheckboxItem loc--useMobileDescription"
+            checked={useMobileDescriptionState}
+            label="Будет мобильная версия текста"
+          />
         </div>
 
         <div className="loc_right">
@@ -182,6 +196,19 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           }}
           label="Текст"
         />
+        {useMobileDescriptionState && (
+          <WYSIWYGEditor
+            mobileVersion
+            id="news_editor_mobi"
+            className="loc_formTextareaItem loc__fulldescription"
+            required
+            value={data ? data.mobile_description : undefined}
+            onChange={(val) => {
+              onChangeHandler("mobile_description", val);
+            }}
+            label="Мобильная версия текста"
+          />
+        )}
       </div>
 
       <div className="loc_photos">

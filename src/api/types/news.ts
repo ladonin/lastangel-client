@@ -3,9 +3,11 @@ export type TGetResponseItem = {
   name: string;
   short_description: string;
   description: string;
+  mobile_description: string;
   another_images: string;
   ismajor: boolean;
   hide_album: boolean;
+  use_mobile_description: boolean;
   status: number;
   video1: string;
   video2: string;

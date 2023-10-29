@@ -146,6 +146,7 @@ h1, h2, h3 {
 
 h1 {
   font-size: 32px;
+  line-height: 40px;
 }
 
 h2 {
@@ -160,6 +161,9 @@ h3 {
   margin-top: 24px;
 }
 
+.margin_b24 {
+  margin-bottom: 24px;
+}
 .red {
   color: $c_red;
 }

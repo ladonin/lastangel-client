@@ -78,7 +78,12 @@ const Story: React.FC = () => {
           <div className="loc_description">
             <div
               className="loc_content wysiwyg_description"
-              dangerouslySetInnerHTML={{ __html: dataState.description }}
+              dangerouslySetInnerHTML={{
+                __html:
+                  isMobile && !!dataState.use_mobile_description
+                    ? dataState.mobile_description
+                    : dataState.description,
+              }}
             />
 
             {!dataState.hide_album && !!anotherImagesState && !!anotherImagesState.length && (

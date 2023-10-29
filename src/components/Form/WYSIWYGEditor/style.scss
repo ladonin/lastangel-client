@@ -1,4 +1,7 @@
 .component-WYSIWYGEditor {
+  &.loc--isMobileVersion .sun-editor {
+    border: 2px solid #df00ff;
+  }
 
   label {
     line-height: 20px;
@@ -11,47 +14,16 @@
 
   }
 
-  .loc_editor {
-    border: 1px solid $c_greyMedium;
-    width: 100%;
-    font-size: 22px;
-    padding: 16px;
-    height: 800px;
-
-    .DraftEditor-root {
-      height: 100%;
-
-      .public-DraftStyleDefault-block {
-        margin: 0px;
-      }
-    }
+  .se-component.se-video-container.__se__float-none,
+  .se-component.se-video-container.__se__float-left,
+  .se-component.se-video-container.__se__float-center,
+  .se-component.se-video-container.__se__float-right {
+    width: 100% !important;
 
     figure {
-      z-index: 1;
-      position: relative;
-
-      .rdw-image-alignment {
-        span {
-          display: flex;
-        }
-        &.rdw-image {
-
-
-          &-left {
-            float: left;
-          }
-
-          &-center span {
-            justify-content: center;
-            width: 100%;
-          }
-
-          &-right {
-            float: right;
-          }
-        }
-
-      }
+      padding-bottom: 0 !important;
+      margin: 0 !important;
+      min-height: 400px !important;
     }
   }
 }
@@ -63,53 +35,5 @@
     padding-bottom: calc(16px * var(--viewport-koeff));
   }
 
-  .rdw-block-wrapper {
-    align-items: flex-start;
-  }
-
-  .rdw-option-wrapper {
-
-    min-width: calc(80px * var(--viewport-koeff));
-    height: calc(80px * var(--viewport-koeff));
-    margin: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff)) calc(8px * var(--viewport-koeff));
-
-    img {
-      width: calc(40px * var(--viewport-koeff));
-    }
-  }
-
-  .rdw-dropdown-wrapper {
-    margin: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff)) calc(8px * var(--viewport-koeff));
-    padding: calc(10px * var(--viewport-koeff));
-    height: calc(80px * var(--viewport-koeff));
-    font-size: calc(28px * var(--viewport-koeff));
-    width: calc(288px * var(--viewport-koeff));
-    font-weight: 600;
-
-    .rdw-dropdown-carettoclose,
-    .rdw-dropdown-carettoopen {
-      top: 45%;
-    }
-
-    .rdw-dropdown-optionwrapper {
-      width: 100%;
-      max-height: calc(650px * var(--viewport-koeff));
-
-      .rdw-dropdownoption-default {
-        padding: calc(16px * var(--viewport-koeff));
-      }
-    }
-  }
-
-  .loc_editor {
-    font-size: calc(32px * var(--viewport-koeff));
-    height: 70vh;
-    padding: calc(16px * var(--viewport-koeff));
-  }
-
-  textarea {
-    font-size: calc(30px * var(--viewport-koeff));
-    padding: calc(24px * var(--viewport-koeff));
-  }
 
 }

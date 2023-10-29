@@ -40,10 +40,11 @@ const Acquaintanceship: React.FC = () => {
   return (
     <div className="page-acquaintanceship">
       <BreadCrumbs title="О приюте" />
-      {dataState && dataState.status === ACQUAINTANCESHIP_STATUS.NON_PUBLISHED &&
-        <div className="loc_inredact">Текст находится в редактировании ((</div>}
-      
-        {dataState && dataState.status === ACQUAINTANCESHIP_STATUS.PUBLISHED && (
+      {dataState && dataState.status === ACQUAINTANCESHIP_STATUS.NON_PUBLISHED && (
+        <div className="loc_inredact">Текст находится в редактировании ((</div>
+      )}
+
+      {dataState && dataState.status === ACQUAINTANCESHIP_STATUS.PUBLISHED && (
         <div className={cn("loc_item")}>
           {isAdmin() && (
             <Button
@@ -60,7 +61,12 @@ const Acquaintanceship: React.FC = () => {
           <div className="loc_description">
             <div
               className="loc_content wysiwyg_description"
-              dangerouslySetInnerHTML={{ __html: dataState.description }}
+              dangerouslySetInnerHTML={{
+                __html:
+                  isMobile && !!dataState.use_mobile_description
+                    ? dataState.mobile_description
+                    : dataState.description,
+              }}
             />
 
             {!dataState.hide_album && !!anotherImagesState && !!anotherImagesState.length && (
@@ -105,7 +111,7 @@ const Acquaintanceship: React.FC = () => {
                 type={getVideoType(dataState.video3)}
               />
             </video>
-          )} 
+          )}
           <MediaOriginalLinks type="acquaintanceship" data={dataState} />
           <CopyLinkToPage
             targetText="на историю"

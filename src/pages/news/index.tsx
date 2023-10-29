@@ -21,15 +21,12 @@ import CopyLinkToPage from "components/CopyLinkToPage";
 import MediaOriginalLinks from "../../components/MediaOriginalLinks";
 import "./style.scss";
 
-
-
 const News: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [idState, setIdState] = useState<number | null>(null);
   const [dataState, setDataState] = useState<TItem | null>(null);
   const { id } = useParams();
-
 
   const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
 
@@ -38,7 +35,6 @@ const News: React.FC = () => {
       setAnotherImagesState(JSON.parse(dataState.another_images));
     }
   }, [dataState]);
-
 
   useEffect(() => {
     id && setIdState(Number(id));
@@ -81,7 +77,12 @@ const News: React.FC = () => {
           <div className="loc_description">
             <div
               className="loc_content wysiwyg_description"
-              dangerouslySetInnerHTML={{ __html: dataState.description }}
+              dangerouslySetInnerHTML={{
+                __html:
+                  isMobile && !!dataState.use_mobile_description
+                    ? dataState.mobile_description
+                    : dataState.description,
+              }}
             />
 
             {!dataState.hide_album && !!anotherImagesState && !!anotherImagesState.length && (

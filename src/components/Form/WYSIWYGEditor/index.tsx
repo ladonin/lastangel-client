@@ -18,12 +18,20 @@ type TProps = {
   className?: string;
   value?: string;
   required?: boolean;
+  mobileVersion?: boolean;
   onChange: (val: string) => void;
 };
-const WYSIWYGEditor: React.FC<TProps> = ({ id, label, className, value, required, onChange }) => {
- 
+const WYSIWYGEditor: React.FC<TProps> = ({
+  id,
+  label,
+  mobileVersion,
+  className,
+  value,
+  required,
+  onChange,
+}) => {
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-  
+
   const editor = useRef<SunEditorCore>();
   const getSunEditorInstance = (sunEditor: SunEditorCore) => {
     editor.current = sunEditor;
@@ -32,7 +40,12 @@ const WYSIWYGEditor: React.FC<TProps> = ({ id, label, className, value, required
     onChange(content);
   };
   return (
-    <div id={id} className={cn("component-WYSIWYGEditor", className)}>
+    <div
+      id={id}
+      className={cn("component-WYSIWYGEditor", className, {
+        "loc--isMobileVersion": !!mobileVersion,
+      })}
+    >
       <div className="loc_wrapper">
         {label && (
           <a className="link_text" href={`#${id}`}>
@@ -50,7 +63,7 @@ const WYSIWYGEditor: React.FC<TProps> = ({ id, label, className, value, required
             plugins,
             buttonList: [
               ["undo", "redo"],
-              ["font", "fontSize", "formatBlock"],
+              ["fontSize", "formatBlock"],
               ["paragraphStyle", "blockquote"],
               ["bold", "underline", "italic", "strike", "subscript", "superscript"],
               ["fontColor", "hiliteColor", "textStyle"],
@@ -62,7 +75,7 @@ const WYSIWYGEditor: React.FC<TProps> = ({ id, label, className, value, required
               /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
               ["fullScreen", "showBlocks", "codeView"],
               ["preview", "print"],
-              ["save"/* , "template" */],
+              ["save" /* , "template" */],
               /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
             ],
           }}
