@@ -417,7 +417,7 @@ const Administration: React.FC = () => {
         </Button>
 
         <div className="loc_data">
-          {data.is_corrupted && <div className="loc_error">Ошибка (питомец удален)</div>}
+          {!!data.is_corrupted && <div className="loc_error">Ошибка (питомец удален)</div>}
           <div className="loc_name">{data.name}</div>
 
           <div className={`loc_type loc--type_${data.type}`}>
@@ -544,7 +544,7 @@ const Administration: React.FC = () => {
               {isAnonymDonator(data) ? "Аноним" : getDonatorName(data)}
             </div>
 
-            {data.donator_card && <div className="loc_card">Карта: {data.donator_card}</div>}
+            {!!data.donator_card && <div className="loc_card">Карта: {data.donator_card}</div>}
 
             <Button
               className="loc_button"

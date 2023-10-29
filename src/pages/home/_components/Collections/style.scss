@@ -16,7 +16,7 @@
   .loc_title {
     margin: 0 0 8px 0px;
     display: inline-block;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
     color: $c_lagunaGrey;
     @extend %hoverable;
@@ -117,7 +117,7 @@
   margin-bottom: calc(16px * var(--viewport-koeff));
 
   .loc_title {
-    font-size: calc(36px * var(--viewport-koeff));
+    font-size: calc(42px * var(--viewport-koeff));
     margin-bottom: calc(16px * var(--viewport-koeff));
   }
 

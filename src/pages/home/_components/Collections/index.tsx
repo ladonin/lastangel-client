@@ -51,12 +51,12 @@ const Collections = () => {
       </div>
     </div>
   );
-
+  const maxCollections = isMobile ? 4 : 3;
   useEffect(() => {
     CollectionsApi.getList({
       status: COLLECTIONS_STATUS.PUBLISHED,
       offset: 0,
-      limit: isMobile ? 4 : 3,
+      limit: maxCollections,
       order: "ismajor",
       order_type: "desc",
     }).then((res) => {
@@ -76,9 +76,11 @@ const Collections = () => {
           </div>
         ))}
       </div>
-      <Link to={PAGES.COLLECTIONS} className="link_text loc_seeAll">
-        Смотреть все <ArrowRight />
-      </Link>
+      {listState.length > maxCollections && (
+        <Link to={PAGES.COLLECTIONS} className="link_text loc_seeAll">
+          Смотреть все <ArrowRight />
+        </Link>
+      )}
     </div>
   ) : null;
 };
