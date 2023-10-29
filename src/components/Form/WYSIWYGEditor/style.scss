@@ -13,19 +13,6 @@
     width: 100%;
 
   }
-
-  .se-component.se-video-container.__se__float-none,
-  .se-component.se-video-container.__se__float-left,
-  .se-component.se-video-container.__se__float-center,
-  .se-component.se-video-container.__se__float-right {
-    width: 100% !important;
-
-    figure {
-      padding-bottom: 0 !important;
-      margin: 0 !important;
-      min-height: 400px !important;
-    }
-  }
 }
 
 .layout.loc--isMobile .component-WYSIWYGEditor {
