@@ -58,7 +58,7 @@ const WYSIWYGEditor: React.FC<TProps> = ({
           onChange={handleChange}
           defaultValue={value}
           setOptions={{
-            height: isMobile ? "80vh" : "80vh",
+            height: isMobile ? "85vh" : "85vh",
 
             plugins,
             buttonList: [

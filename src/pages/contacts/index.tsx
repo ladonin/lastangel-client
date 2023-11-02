@@ -10,6 +10,7 @@ import VkGroup from "components/socNetsGroup/VkGroup";
 import BreadCrumbs from "components/BreadCrumbs";
 import Form from "./_components/Form";
 import "./style.scss";
+import { MAIN_CARD_OWNER, MAIN_PHONE } from "../../constants/donations";
 
 const Contacts: React.FC = () => (
   <div className="page-contacts">
@@ -17,11 +18,9 @@ const Contacts: React.FC = () => (
       <BreadCrumbs title="Контакты" />
       <div className="loc_phone">
         <img alt="." src={PhoneImage} />
-        <div className="loc_value">8 (996) 442-24-16</div>
+        <div className="loc_value">{MAIN_PHONE}</div>
         <div className="loc_fio">
-          <Link target="_blank" to="https://vk.com/id512018972" className="link_3">
-            Варенова Мария Павловна
-          </Link>
+          {MAIN_CARD_OWNER}
         </div>
       </div>
       <div className="loc_content_1">

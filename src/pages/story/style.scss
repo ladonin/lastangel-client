@@ -57,7 +57,7 @@
           background-color: $c_greyDark;
           align-items: center;
           justify-content: center;
-          max-height: 80vh;
+          max-height: 85vh;
           height: 600px;
           img {
             max-height: 100%;
@@ -154,7 +154,7 @@
         margin-bottom: calc(24px * var(--viewport-koeff));
 
         .swiper-slide {
-          max-height: 80vh;
+          max-height: 85vh;
           img {
             max-height: 100%;
             max-width: 100%;
@@ -174,7 +174,7 @@
       display: flex;
       width: 100%;
       height: 1200px;
-      max-height: 80vh;
+      max-height: 85vh;
       margin-bottom: calc(24px * var(--viewport-koeff));
     }
 

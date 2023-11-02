@@ -53,7 +53,7 @@ const News = () => {
   useEffect(() => {
     NewsApi.getList({
       offset: 0,
-      limit: 5,
+      limit: 4,
       orderComplex: "ismajor desc, id desc",
       excludeStatus: 2 /* isAdmin() ? undefined : 2 */,
     }).then((res) => {

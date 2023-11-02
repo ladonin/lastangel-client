@@ -1,7 +1,7 @@
 .page-home_photoSlider {
   .loc_wrapper {
-    height: 749px;
-    max-height: 80vh;
+    height: 771px;
+    max-height: 85vh;
 
     .loc_slider {
       height: 100%;
@@ -11,7 +11,7 @@
         background-color: $c_greyDark;
         align-items: center;
         justify-content: center;
-        max-height: 80vh;
+        max-height: 85vh;
 
         img {
           max-height: 100%;
@@ -38,7 +38,7 @@
 .layout.loc--isMobile .page-home_photoSlider {
   .loc_wrapper {
     height: calc(900px * var(--viewport-koeff));
-    max-height: 80vh;
+    max-height: 85vh;
 
     .loc_slider {
       margin: 0 calc(-24px * var(--viewport-koeff));

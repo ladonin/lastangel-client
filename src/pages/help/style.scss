@@ -64,7 +64,7 @@
 
 
     .loc_image {
-      height: 228px;
+      height: 206px; // 228 #REKVIZITS
 
     }
 
@@ -211,7 +211,7 @@
     }
 
     .loc_image {
-      height: calc(444px * var(--viewport-koeff));
+      height: calc(414px * var(--viewport-koeff)); //444 #REKVIZITS
     }
 
 

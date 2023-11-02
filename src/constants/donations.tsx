@@ -20,7 +20,31 @@ export const MAIN_CARD_OWNER = (
   </Link>
 );
 
+// #REKVIZITS
 export const REKVIZITS = (
+  <>
+    <span className="loc_title">Pеквизиты <span style={{color: 'rgb(13, 174, 0)'}}>Сбербанк</span> </span>
+    <div className="loc_desc">
+      <span> т. {MAIN_PHONE}
+                  </span>
+      <b>{MAIN_CARD_OWNER}</b>
+      <br />№ карты: {MAIN_CARD}
+      <br />
+      <br />
+      р/с 40703810510000143
+      <br />
+      ИНН/КИО 3300001667
+      <br />
+      КПП 330001001,
+
+      ОГРН 1233300004068
+      <br />
+      Автономная некомерческая организация Приют для животных "Последний ангел"
+    </div>
+  </>
+);
+
+/* export const REKVIZITS = (
   <>
     <span className="loc_title">Pеквизиты <span style={{color: 'rgb(13, 174, 0)'}}>Сбербанк</span> </span>
     <div className="loc_desc">
@@ -40,4 +64,4 @@ export const REKVIZITS = (
       Автономная некомерческая организация Приют для животных "Последний ангел"
     </div>
   </>
-);
+); */

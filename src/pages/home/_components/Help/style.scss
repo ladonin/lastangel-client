@@ -36,7 +36,7 @@
     background-color: $c_lagunaLighter;
 
     .loc_image {
-      height: 272px;
+      height: 252px;//252 #REKVIZITS
 
     }
 
@@ -153,7 +153,7 @@
   }
   .loc_content {
     .loc_image {
-      height: calc(444px * var(--viewport-koeff));
+      height: calc(414px * var(--viewport-koeff));//444 #REKVIZITS
     }
     
   }

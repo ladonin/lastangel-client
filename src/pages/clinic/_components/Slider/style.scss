@@ -6,7 +6,7 @@
     height: 900px;
     display: flex;
     background-color: $c_greyDark;
-    max-height: 80vh;
+    max-height: 85vh;
     align-items: center;
     justify-content: center;
 
@@ -27,7 +27,7 @@
 
   .swiper-slide {
     height: 1200px;
-    max-height: 80vh;
+    max-height: 85vh;
     img {
       max-height: calc(100% - calc(48px* var(--viewport-koeff)));
       max-width: calc(100% - calc(48px* var(--viewport-koeff)));
