@@ -20,12 +20,15 @@ export const prepareType = (code: number) => {
   if (code === COLLECTIONS_TYPE.COMMON) {
     return "Общие нужды";
   }
+  if (code === COLLECTIONS_TYPE.CREDIT) {
+    return "Погасить долг приюта";
+  }
   return "";
 };
 
 export const prepareStatus = (code: number) => {
   if (code === COLLECTIONS_STATUS.PUBLISHED) {
-    return "Опубликован (активен)";
+    return "Опубликован";
   }
   if (code === COLLECTIONS_STATUS.NON_PUBLISHED) {
     return "Не опубликован";

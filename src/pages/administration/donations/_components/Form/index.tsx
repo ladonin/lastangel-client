@@ -8,8 +8,9 @@ import InputNumber from "components/Form/InputNumber";
 import Select from "components/Form/Select";
 import { Checkbox } from "components/Form/Checkbox";
 import { TGetResponseItem } from "api/types/donations";
-import { loadItem } from "utils/localStorage";
-import "./style.scss";import { ANIMALS_STATUS } from "../../../../../constants/animals";
+import { ANIMALS_STATUS } from "constants/animals";
+import "./style.scss";
+
 
 const TYPES_OPTIONS = [
   { value: String(DONATIONS_TYPES.PET), label: "Содержание животного" },
@@ -27,9 +28,15 @@ type TProps = {
 };
 
 const Form: React.FC<TProps> = ({ onChange, data }) => {
-  const [animalsOptionsState, setAnimalsOptionsState] = useState<{ value: string; label: string }[]>([]);
-  const [collectionsOptionsState, setCollectionsOptionsState] = useState<{ value: string; label: string }[]>([]);
-  const [targetOptionsState, setTargetOptionsState] = useState<{ value: string; label: string }[]>([]);
+  const [animalsOptionsState, setAnimalsOptionsState] = useState<
+    { value: string; label: string }[]
+  >([]);
+  const [collectionsOptionsState, setCollectionsOptionsState] = useState<
+    { value: string; label: string }[]
+  >([]);
+  const [targetOptionsState, setTargetOptionsState] = useState<{ value: string; label: string }[]>(
+    []
+  );
   const [isAnonymState, setIsAnonymState] = useState(false);
 
   const paramsRef = useRef<TParams>({});
@@ -53,10 +60,14 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       order_type: "asc",
       statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
     }).then((res) => {
-      setAnimalsOptionsState(res.map((animal) => ({ value: String(animal.id), label: `${animal.name} (№${animal.id})` })));
+      setAnimalsOptionsState(
+        res.map((animal) => ({ value: String(animal.id), label: `${animal.name} (№${animal.id})` }))
+      );
     });
     CollectionsApi.getList().then((res) => {
-      setCollectionsOptionsState(res.map((animal) => ({ value: String(animal.id), label: `${animal.name} (№${animal.id})` })));
+      setCollectionsOptionsState(
+        res.map((animal) => ({ value: String(animal.id), label: `${animal.name} (№${animal.id})` }))
+      );
     });
   }, []);
 
@@ -122,6 +133,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
         </div>
         <div className="loc_right">
           <InputNumber
+            float={2}
             label="Сумма, руб"
             required
             initValue={data ? data.sum : undefined}

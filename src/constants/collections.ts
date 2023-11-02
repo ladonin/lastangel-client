@@ -7,7 +7,8 @@ export const COLLECTIONS_TYPE = {
   MEDICINE: 1,
   BUY_FOR_PET: 2,
   BUILD: 3,
-  COMMON: 4
+  COMMON: 4,
+  CREDIT: 5,
 } as const;
 
 export const COLLECTIONS_STATUS = {
@@ -21,6 +22,7 @@ export const TYPES_OPTIONS = [
   { value: String(COLLECTIONS_TYPE.BUY_FOR_PET), label: "Покупка вещи для питомца" },
   { value: String(COLLECTIONS_TYPE.BUILD), label: "Постройка" },
   { value: String(COLLECTIONS_TYPE.COMMON), label: "Общие нужды" },
+  { value: String(COLLECTIONS_TYPE.CREDIT), label: "Погасить долг" },
 ];
 
 export const STATUSES_OPTIONS = [

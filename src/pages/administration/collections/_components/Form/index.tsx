@@ -18,7 +18,7 @@ import { TGetResponseItem } from "api/types/collections";
 import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/collections";
 import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
 import InputFileVideo from "components/Form/InputFileVideo";
-import { ANIMALS_STATUS } from "../../../../../constants/animals";
+import { ANIMALS_STATUS } from "constants/animals";
 
 export type TParams = { [key: string]: any };
 
@@ -164,6 +164,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             options={STATUSES_OPTIONS}
           />
           <InputNumber
+            float={2}
             label="Сумма сбора, руб"
             required
             initValue={data ? data.target_sum : undefined}

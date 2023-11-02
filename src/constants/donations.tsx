@@ -4,12 +4,12 @@
  */
 import React from "react";
 import { Link } from "react-router-dom";
-import SberIcon from "../icons/sber.png";
 
 export const DONATIONS_TYPES = {
   PET: 1,
   COLLECTION: 2,
   COMMON: 3,
+  CREDIT: 4,
 } as const;
 
 export const MAIN_CARD = "4276100013474736";
