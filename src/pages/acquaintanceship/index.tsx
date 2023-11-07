@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
+import { Helmet } from "react-helmet";
 import { TItem } from "api/types/acquaintanceship";
 import PAGES from "routing/routes";
 import { AcquaintanceshipApi } from "api/acquaintanceship";
@@ -24,7 +25,14 @@ const Acquaintanceship: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [dataState, setDataState] = useState<TItem | null>(null);
-
+  const { getMetatags } = useOutletContext<any>();
+  const metatags = useMemo(() => {
+    const data = getMetatags();
+    return {
+      title: data.acquaintanceship_title || "",
+      description: data.acquaintanceship_description || "",
+    };
+  }, []);
   const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
   useEffect(() => {
     AcquaintanceshipApi.get().then((res) => {
@@ -38,89 +46,95 @@ const Acquaintanceship: React.FC = () => {
   }, [dataState]);
 
   return (
-    <div className="page-acquaintanceship">
-      <BreadCrumbs title="О приюте" />
-      {dataState && dataState.status === ACQUAINTANCESHIP_STATUS.NON_PUBLISHED && (
-        <div className="loc_inredact">Текст находится в редактировании ((</div>
-      )}
+    <>
+      <Helmet>
+        <title>{metatags.title}</title>
+        <meta name="description" content={metatags.description} />
+      </Helmet>
+      <div className="page-acquaintanceship">
+        <BreadCrumbs title="О приюте" />
+        {dataState && dataState.status === ACQUAINTANCESHIP_STATUS.NON_PUBLISHED && (
+          <div className="loc_inredact">Текст находится в редактировании ((</div>
+        )}
 
-      {dataState && dataState.status === ACQUAINTANCESHIP_STATUS.PUBLISHED && (
-        <div className={cn("loc_item")}>
-          {isAdmin() && (
-            <Button
-              className="loc_redactButton"
-              theme={ButtonThemes.PRIMARY}
-              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
-              onClick={() => {
-                navigate(`${PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE}`);
-              }}
-            >
-              Редактировать
-            </Button>
-          )}
-          <div className="loc_description">
-            <div
-              className="loc_content wysiwyg_description"
-              dangerouslySetInnerHTML={{
-                __html:
-                  isMobile && !!dataState.use_mobile_description
-                    ? dataState.mobile_description
-                    : dataState.description,
-              }}
-            />
-
-            {!dataState.hide_album && !!anotherImagesState && !!anotherImagesState.length && (
-              <Swiper
-                slidesPerView={1}
-                navigation
-                modules={[Autoplay, Pagination, Navigation]}
-                className="loc_slider"
+        {dataState && dataState.status === ACQUAINTANCESHIP_STATUS.PUBLISHED && (
+          <div className={cn("loc_item")}>
+            {isAdmin() && (
+              <Button
+                className="loc_redactButton"
+                theme={ButtonThemes.PRIMARY}
+                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+                onClick={() => {
+                  navigate(`${PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE}`);
+                }}
               >
-                {anotherImagesState.map((item, index) => (
-                  <SwiperSlide key={index}>
-                    <img
-                      alt="_"
-                      className="loc_image"
-                      src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+                Редактировать
+              </Button>
             )}
+            <div className="loc_description">
+              <div
+                className="loc_content wysiwyg_description"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    isMobile && !!dataState.use_mobile_description
+                      ? dataState.mobile_description
+                      : dataState.description,
+                }}
+              />
+
+              {!dataState.hide_album && !!anotherImagesState && !!anotherImagesState.length && (
+                <Swiper
+                  slidesPerView={1}
+                  navigation
+                  modules={[Autoplay, Pagination, Navigation]}
+                  className="loc_slider"
+                >
+                  {anotherImagesState.map((item, index) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        alt="_"
+                        className="loc_image"
+                        src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
+            {dataState.video1 && (
+              <video className="loc_video" controls>
+                <source
+                  src={getVideoUrl(dataState, dataState.video1)}
+                  type={getVideoType(dataState.video1)}
+                />
+              </video>
+            )}
+            {dataState.video2 && (
+              <video className="loc_video" controls>
+                <source
+                  src={getVideoUrl(dataState, dataState.video2)}
+                  type={getVideoType(dataState.video2)}
+                />
+              </video>
+            )}
+            {dataState.video3 && (
+              <video className="loc_video" controls>
+                <source
+                  src={getVideoUrl(dataState, dataState.video3)}
+                  type={getVideoType(dataState.video3)}
+                />
+              </video>
+            )}
+            <MediaOriginalLinks type="acquaintanceship" data={dataState} />
+            <CopyLinkToPage
+              targetText="на историю"
+              text="Поделиться этой историей с друзьями"
+              url={`${window.location.origin + PAGES.ACQUAINTANCESHIP}/${dataState.id}`}
+            />
           </div>
-          {dataState.video1 && (
-            <video className="loc_video" controls>
-              <source
-                src={getVideoUrl(dataState, dataState.video1)}
-                type={getVideoType(dataState.video1)}
-              />
-            </video>
-          )}
-          {dataState.video2 && (
-            <video className="loc_video" controls>
-              <source
-                src={getVideoUrl(dataState, dataState.video2)}
-                type={getVideoType(dataState.video2)}
-              />
-            </video>
-          )}
-          {dataState.video3 && (
-            <video className="loc_video" controls>
-              <source
-                src={getVideoUrl(dataState, dataState.video3)}
-                type={getVideoType(dataState.video3)}
-              />
-            </video>
-          )}
-          <MediaOriginalLinks type="acquaintanceship" data={dataState} />
-          <CopyLinkToPage
-            targetText="на историю"
-            text="Поделиться этой историей с друзьями"
-            url={`${window.location.origin + PAGES.ACQUAINTANCESHIP}/${dataState.id}`}
-          />
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

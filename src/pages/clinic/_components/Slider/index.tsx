@@ -13,6 +13,7 @@ import { TGetResponseItem } from "api/types/clinicPhotos";
 import { ClinicPhotosApi } from "api/clinicPhotos";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
+
 const Slider = () => {
   const [dataState, setDataState] = useState<(TGetResponseItem & { data: number[] }) | null>(null);
 
@@ -22,9 +23,6 @@ const Slider = () => {
     });
   }, []);
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-
-
-
 
   return (
     <Swiper
@@ -55,7 +53,7 @@ const Slider = () => {
       {dataState &&
         !!dataState.data.length &&
         [...dataState.data].reverse().map((number, index) => (
-          <SwiperSlide>
+          <SwiperSlide key={index}>
             {index < 3 ? (
               <>
                 <img

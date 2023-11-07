@@ -55,7 +55,7 @@ const Feedbacks: React.FC = () => {
       setPageState(1);
     }
   };
-  const [checkMail] = useOutletContext<any>();
+  const { checkMail } = useOutletContext<any>();
 
   const markAsViewedHandler = (id: number) => {
     FeedbacksApi.setIsViewed(id).then(() => {

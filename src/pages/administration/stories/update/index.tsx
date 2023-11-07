@@ -29,14 +29,14 @@ const StoryUpdate: React.FC = () => {
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     id &&
       StoriesApi.get(Number(id)).then((res) => {
         if (res !== null) {
-          setDataLoadedState(res);
+          setDataIsLoadedState(true);
           responseRef.current = res;
           forceUpdate();
         }
@@ -46,7 +46,7 @@ const StoryUpdate: React.FC = () => {
       });
   }, [id]);
 
-  useEffect(() => {}, [dataLoadedState]);
+  useEffect(() => {}, [dataIsLoadedState]);
   const onChange = (data: TParams) => {
     setErrorState("");
     paramsRef.current = data;
@@ -107,7 +107,7 @@ const StoryUpdate: React.FC = () => {
     setModalDeleteIsOpenState(true);
   };
 
-  return dataLoadedState !== null ? (
+  return dataIsLoadedState !== null ? (
     <>
       <Helmet>
         <title>Обновление истории</title>

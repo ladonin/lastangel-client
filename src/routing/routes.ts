@@ -42,6 +42,7 @@ const PAGES = {
   ADMINISTRATION_DOCUMENTS_UPDATE: "/administration/documents/update",
   ADMINISTRATION_CLINIC_PHOTOS_UPDATE: "/administration/clinic_photos/update",
   ADMINISTRATION_ACQUAINTANCESHIP_UPDATE: "/administration/acquaintanceship/update",
+  ADMINISTRATION_METATAGS_UPDATE: "/administration/metatags/update",
 
   ADMINISTRATION_FEEDBACKS: "/administration/feedbacks",
 };

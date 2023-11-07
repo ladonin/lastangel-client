@@ -28,13 +28,13 @@ const DonatorUpdate: React.FC = () => {
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     id &&
       DonatorsApi.get(Number(id)).then((res) => {
-        setDataLoadedState(res);
+        setDataIsLoadedState(true);
         responseRef.current = res;
         forceUpdate();
         // setIsUpdatingState(false);
@@ -43,7 +43,7 @@ const DonatorUpdate: React.FC = () => {
       });
   }, [id]);
 
-  useEffect(() => {}, [dataLoadedState]);
+  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -93,7 +93,7 @@ const DonatorUpdate: React.FC = () => {
     setModalDeleteIsOpenState(true);
   };
 
-  return dataLoadedState !== null ? (
+  return dataIsLoadedState !== null ? (
     <>
       <Helmet>
         <title>Обновление данных о донаторе</title>

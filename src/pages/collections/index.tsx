@@ -2,8 +2,9 @@ import React, { useEffect, useState, useMemo } from "react";
 
 // const OtherComponent = React.lazy(() => import('components/header'));
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import cn from "classnames";
+import { Helmet } from "react-helmet";
 import LoaderIcon from "components/LoaderIcon";
 import { TGetListRequest, TItem as TItemCollection } from "api/types/collections";
 import PAGES from "routing/routes";
@@ -21,7 +22,14 @@ import { SIZES_MAIN } from "../../constants/photos";
 const Collections: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-
+  const { getMetatags } = useOutletContext<any>();
+  const metatags = useMemo(() => {
+    const data = getMetatags();
+    return {
+      title: data.collections_title || "",
+      description: data.collections_description || "",
+    };
+  }, []);
   const [listCollectionState, setListCollectionsState] = useState<TItemCollection[] | null>(null);
 
   const getData = (filter: TGetListRequest) => {
@@ -83,22 +91,28 @@ const Collections: React.FC = () => {
   );
 
   return (
-    <div className="page-collections">
-      <BreadCrumbs title="Сборы" />
+    <>
+      <Helmet>
+        <title>{metatags.title}</title>
+        <meta name="description" content={metatags.description} />
+      </Helmet>
+      <div className="page-collections">
+        <BreadCrumbs title="Сборы" />
 
-      <div className="loc_list">
-        {listCollectionState &&
-          listCollectionState.map((item, index) => (
-            <div key={index} className={cn("loc_wrapper ", `loc--status_${item.status}`)}>
-              <div className="loc_item">{renderCollectionsContent(item)}</div>
-            </div>
-          ))}
-        {listCollectionState && !listCollectionState.length && (
-          <div className="loc_noCollections">На данный момент сборов нет</div>
-        )}
-        {listCollectionState === null && <LoaderIcon />}
+        <div className="loc_list">
+          {listCollectionState &&
+            listCollectionState.map((item, index) => (
+              <div key={index} className={cn("loc_wrapper ", `loc--status_${item.status}`)}>
+                <div className="loc_item">{renderCollectionsContent(item)}</div>
+              </div>
+            ))}
+          {listCollectionState && !listCollectionState.length && (
+            <div className="loc_noCollections">На данный момент сборов нет</div>
+          )}
+          {listCollectionState === null && <LoaderIcon />}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

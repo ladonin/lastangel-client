@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
+import { MetatagsApi } from "api/metatags";
 import Header from "pages/_commonComponents/header";
 import Footer from "pages/_commonComponents/footer";
 import EmailImage from "icons/email.png";
@@ -21,14 +22,18 @@ const LayoutMain: React.FC = () => {
   const [prevPathnameState, setPrevPathnameState] = useState<string>("");
   const navigate = useNavigate();
   const [newFeedbacksState, setNewFeedbacksState] = useState<number>(0);
+  const [metatagsState, setMetatagsState] = useState<any>(false);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const checkMail = () => {
+    console.log("checkMail");
     isAdmin() &&
       FeedbacksApi.getNewCount().then((res) => {
         setNewFeedbacksState(Number(res));
       });
   };
+
+  const getMetatags = () => metatagsState;
 
   useEffect(() => {
     if ((isMobile === true || isMobile === false) && isMobileState === undefined) {
@@ -51,6 +56,9 @@ const LayoutMain: React.FC = () => {
 
   useEffect(() => {
     checkMail();
+    MetatagsApi.get().then((res) => {
+      res && setMetatagsState(JSON.parse(res));
+    });
     timerRef.current = setInterval(() => {
       checkMail();
     }, 60000);
@@ -106,7 +114,7 @@ const LayoutMain: React.FC = () => {
           </div>
         )}
 
-        <Outlet context={[checkMail]} />
+        {metatagsState && <Outlet context={{ checkMail, getMetatags }} />}
       </div>
       <Footer />
     </div>

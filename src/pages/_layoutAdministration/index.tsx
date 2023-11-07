@@ -12,6 +12,7 @@ import Header from "pages/_commonComponents/header";
 import { FeedbacksApi } from "api/feedbacks";
 import { AnimalsApi } from "api/animals";
 import { CollectionsApi } from "api/collections";
+import { MetatagsApi } from "api/metatags";
 import { DonationsApi } from "api/donations";
 import { DonatorsApi } from "api/donators";
 import { NewsApi } from "api/news";
@@ -65,7 +66,8 @@ const LayoutAdministration: React.FC = () => {
     pathname !== PAGES.ADMINISTRATION_FEEDBACKS &&
     pathname !== PAGES.ADMINISTRATION_DOCUMENTS_UPDATE &&
     pathname !== PAGES.ADMINISTRATION_CLINIC_PHOTOS_UPDATE &&
-    pathname !== PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE;
+    pathname !== PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE &&
+    pathname !== PAGES.ADMINISTRATION_METATAGS_UPDATE;
 
   // тут сделать проверку авторизации на защищенные страницы с применением location.pathname
   const [newFeedbacksState, setNewFeedbacksState] = useState<number>(0);
@@ -127,6 +129,16 @@ const LayoutAdministration: React.FC = () => {
           </Button>
           {showAddButton() && (
             <div className="loc_buttons">
+              <Button
+                theme={ButtonThemes.GHOST_BORDER}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                className="loc_redactMetatagsButton"
+                onClick={() => {
+                  navigate(PAGES.ADMINISTRATION_METATAGS_UPDATE);
+                }}
+              >
+                Метатеги
+              </Button>
               <Button
                 theme={ButtonThemes.SUCCESS}
                 size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
@@ -378,11 +390,23 @@ const LayoutAdministration: React.FC = () => {
                   html
                 </Button>
               </div>
+
+
+              <div className="loc_block_1">
+                <div className="loc_block_1_title">Скачать метатеги в</div>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => MetatagsApi.downloadData("txt")}
+                >
+                  txt
+                </Button>
+              </div>
             </div>
           )}
         </div>
 
-        <Outlet context={[checkMail]} />
+        <Outlet context={{checkMail}} />
       </div>
       <Footer />
     </div>

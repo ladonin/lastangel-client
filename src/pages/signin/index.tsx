@@ -8,6 +8,7 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
+import { Helmet } from "react-helmet";
 
 const Signin: React.FC = () => {
   const [loginState, setLoginState] = useState("");
@@ -18,7 +19,7 @@ const Signin: React.FC = () => {
   //     console.log(math.add(16, 26));
   // });
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-  const [checkMail] = useOutletContext<any>();
+  const { checkMail } = useOutletContext<any>();
 
   const setLogin: ChangeEventHandler<HTMLInputElement> = (e) => {
     setLoginState(e.target.value);
@@ -42,25 +43,30 @@ const Signin: React.FC = () => {
   };
 
   return (
-    <div className="page-signin">
-      {isAuthorized() && <div className="loc_title">Вы уже вошли</div>}
-      {!isAuthorized() && (
-        <>
-          <div className="loc_title">Вход</div>
-          <input type="text" onChange={setLogin} placeholder="Логин" />
-          <input type="password" onChange={setPassword} placeholder="Пароль" />
-          {errorTextState && <div className="loc_errorText">{errorTextState}</div>}
-          <Button
-            theme={ButtonThemes.PRIMARY}
-            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
-            disabled={!loginState || !passwordState}
-            onClick={sendHandler}
-          >
-            Войти
-          </Button>
-        </>
-      )}
-    </div>
+    <>
+      <Helmet>
+        <title>Вход</title>
+      </Helmet>
+      <div className="page-signin">
+        {isAuthorized() && <div className="loc_title">Вы уже вошли</div>}
+        {!isAuthorized() && (
+          <>
+            <div className="loc_title">Вход</div>
+            <input type="text" onChange={setLogin} placeholder="Логин" />
+            <input type="password" onChange={setPassword} placeholder="Пароль" />
+            {errorTextState && <div className="loc_errorText">{errorTextState}</div>}
+            <Button
+              theme={ButtonThemes.PRIMARY}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              disabled={!loginState || !passwordState}
+              onClick={sendHandler}
+            >
+              Войти
+            </Button>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

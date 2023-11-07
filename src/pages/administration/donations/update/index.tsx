@@ -29,13 +29,13 @@ const DonationUpdate: React.FC = () => {
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     id &&
       DonationsApi.get(Number(id)).then((res) => {
-        setDataLoadedState(res);
+        setDataIsLoadedState(true);
         responseRef.current = res;
         forceUpdate();
         // setIsUpdatingState(false);
@@ -44,7 +44,7 @@ const DonationUpdate: React.FC = () => {
       });
   }, [id]);
 
-  useEffect(() => {}, [dataLoadedState]);
+  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -98,7 +98,7 @@ const DonationUpdate: React.FC = () => {
     setModalDeleteIsOpenState(true);
   };
 
-  return dataLoadedState !== null ? (
+  return dataIsLoadedState !== null ? (
     <>
       <Helmet>
         <title>Обновление доната</title>

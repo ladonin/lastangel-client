@@ -1,22 +1,21 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
-import { ClinicPhotosApi } from "api/clinicPhotos";
+import { useNavigate, useParams } from "react-router-dom";
+import { MetatagsApi } from "api/metatags";
 import PAGES from "routing/routes";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
-import Form, { TResponse, TParams } from "../_components/Form";
+import Form from "../_components/Form";
 import "./style.scss";
 
-const ClinicPhotosUpdate: React.FC = () => {
+const MetatagsUpdate: React.FC = () => {
+  const { id } = useParams();
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
-
   const [isChangedState, setIsChangedState] = useState(false);
-
-  const paramsRef = useRef<TParams | null>(null);
-  const responseRef = useRef<TResponse | undefined>(undefined);
-
+  const paramsRef = useRef<{ [key: string]: any } | null>(null);
+  const responseRef = useRef<string>("{}");
   const navigate = useNavigate();
 
   const [, updateState] = useState<{}>();
@@ -26,16 +25,17 @@ const ClinicPhotosUpdate: React.FC = () => {
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
-    ClinicPhotosApi.get().then((res) => {
+    MetatagsApi.get().then((res) => {
       setDataIsLoadedState(true);
       responseRef.current = res;
       forceUpdate();
+      // setIsUpdatingState(false);
+      // setIsChangedState(true);
+      // requestRef.current = EMPTY_REQUEST;
     });
   }, []);
 
-  useEffect(() => {}, [dataIsLoadedState]);
-
-  const onChange = (data: TParams) => {
+  const onChange = (data: { [key: string]: any }) => {
     setErrorState("");
     paramsRef.current = data;
     forceUpdate();
@@ -44,11 +44,9 @@ const ClinicPhotosUpdate: React.FC = () => {
   const updateHandler = () => {
     if (!paramsRef.current) return;
     setErrorState("");
+    const data = paramsRef.current;
     setIsUpdatingState(true);
-    ClinicPhotosApi.update({
-      another_images_for_delete: paramsRef.current.another_images_for_delete,
-      another_images: paramsRef.current.another_images || [],
-    })
+    MetatagsApi.update(JSON.stringify(data))
       .then(() => {
         setIsUpdatingState(false);
         setIsChangedState(true);
@@ -58,14 +56,14 @@ const ClinicPhotosUpdate: React.FC = () => {
       });
   };
 
-  return (
+  return dataIsLoadedState !== null ? (
     <>
       <Helmet>
-        <title>Обновление фотографий клиники приюта</title>
-        <meta name="description" content="Обновление фотографий клиники приюта" />
+        <title>Обновление метатегов</title>
+        <meta name="description" content="Обновление метатегов" />
       </Helmet>
-      <div className="page-administration_clinic-photos_update">
-        <h1>Обновление фотографий клиники приюта</h1>
+      <div className="page-administration_metatags_update">
+        <h1>Обновление метатегов</h1>
 
         {!isChangedState && (
           <div className="loc_wrapper_textForm">
@@ -87,7 +85,7 @@ const ClinicPhotosUpdate: React.FC = () => {
                 theme={ButtonThemes.PRIMARY}
                 size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
                 disabled={isUpdatingState}
-                onClick={() => navigate(PAGES.ADMINISTRATION)}
+                onClick={() => navigate(`${PAGES.ADMINISTRATION}`)}
               >
                 Отмена
               </Button>
@@ -95,11 +93,11 @@ const ClinicPhotosUpdate: React.FC = () => {
           </div>
         )}
         {isChangedState && (
-          <div className="loc_wrapper_updatedSuccess">Фото клиники успешно обновлены</div>
+          <div className="loc_wrapper_updatedSuccess">Метатеги успешно обновлены</div>
         )}
       </div>
     </>
-  );
+  ) : null;
 };
 
-export default ClinicPhotosUpdate;
+export default MetatagsUpdate;

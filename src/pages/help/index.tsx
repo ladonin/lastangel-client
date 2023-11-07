@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import BreadCrumbs from "components/BreadCrumbs";
 import { AnimalsApi } from "api/animals";
 import { CollectionsApi } from "api/collections";
@@ -34,7 +35,14 @@ const Help: React.FC = () => {
       }
     }
   }, [query]);
-
+  const { getMetatags } = useOutletContext<any>();
+  const metatags = useMemo(() => {
+    const data = getMetatags();
+    return {
+      title: data.help_title || "",
+      description: data.help_description || "",
+    };
+  }, []);
   const [targetDataState, setTargetDataState] = useState<{ name: string; id: number } | null>(null);
 
   useEffect(() => {
@@ -52,55 +60,60 @@ const Help: React.FC = () => {
   }, [targetState, targetTypeState]);
 
   return (
-    <div className="page-help">
-      <BreadCrumbs title="Помощь" />
+    <>
+      <Helmet>
+        <title>{metatags.title}</title>
+        <meta name="description" content={metatags.description} />
+      </Helmet>
+      <div className="page-help">
+        <BreadCrumbs title="Помощь" />
 
-      <div className="loc_target">
-        {targetDataState && (
-          <div className="loc_selected">
-            Вы выбрали:{" "}
-            <Link
-              to={`${targetTypeState === "pet" ? PAGES.PET : PAGES.COLLECTION}/${targetState}`}
-              className="loc_targetName link_3"
-            >
-              {targetDataState.name} ({/* Код${targetTypeState === "pet" ? "Питомец" : "Сбор" */}№
-              {targetDataState.id})
+        <div className="loc_target">
+          {targetDataState && (
+            <div className="loc_selected">
+              Вы выбрали:{" "}
+              <Link
+                to={`${targetTypeState === "pet" ? PAGES.PET : PAGES.COLLECTION}/${targetState}`}
+                className="loc_targetName link_3"
+              >
+                {targetDataState.name} ({/* Код${targetTypeState === "pet" ? "Питомец" : "Сбор" */}№
+                {targetDataState.id})
+              </Link>
+            </div>
+          )}
+
+          <div className="loc_description">
+            <div className="loc_smsComment">
+              Уважаемые посетители, чтобы мы зарегистрировали Ваш донат на выбранного Вами питомца
+              или сбора, просьба, сообщить нам об этом{" "}
+              <img alt="." src={PrayIcon} height="16" style={{ display: "inline-block" }} />.
+            </div>
+            <br /> Это можно сделать с помощью{" "}
+            <Link to={PAGES.CONTACTS} className="link_3">
+              обратной связи
             </Link>
-          </div>
-        )}
-
-        <div className="loc_description">
-          <div className="loc_smsComment">
-            Уважаемые посетители, чтобы мы зарегистрировали Ваш донат на выбранного Вами питомца или
-            сбора, просьба, сообщить нам об этом{" "}
-            <img alt="." src={PrayIcon} height="16" style={{ display: "inline-block" }} />.
-          </div>
-          <br /> Это можно сделать с помощью{" "}
-          <Link to={PAGES.CONTACTS} className="link_3">
-            обратной связи
-          </Link>
-          , отправки смс на номер{" "}
-          <span className="loc_contact" style={{ whiteSpace: "nowrap" }}>
-            {MAIN_PHONE} ({MAIN_CARD_OWNER})
-          </span>
-          , либо через сообщение получателю, когда переводите средства через приложение (сбербанк
-          онлайн и т.п.) .
-          <br />
-          <br />
-          Данное сообщение (смс) может быть произвольного вида, главное, чтобы нам было понятно,
-          кому Вы жертвуете средства. Желательно, чтобы в сообщении была указана сумма и кому или на
-          что они должны пойти. Это может быть кличка животного или его номер (либо номер или
-          название сбора, если это сбор). Если Вы не укажете эту информацию, то средства пойдут на
-          тех животных, кому они наиболее необходимы в данный момент. <br />
-          Это инвалиды <img alt="." className="loc_invalidIcon" src={InvalidIcon7} /> и те, кому
-          требуется срочное лечение <img alt="." className="loc_invalidIcon" src={InvalidIcon4} />{" "}
-          <img alt="." className="loc_invalidIcon" src={InvalidIcon2} />. В нашем приюте они всегда
-          есть
-          <img alt="." className="loc_invalidIcon" src={InvalidIcon8} />
-          .
-          <br />
-          <br />
-          {/* <div className="loc_smsExample">100 П1</div>
+            , отправки смс на номер{" "}
+            <span className="loc_contact" style={{ whiteSpace: "nowrap" }}>
+              {MAIN_PHONE} ({MAIN_CARD_OWNER})
+            </span>
+            , либо через сообщение получателю, когда переводите средства через приложение (сбербанк
+            онлайн и т.п.) .
+            <br />
+            <br />
+            Данное сообщение (смс) может быть произвольного вида, главное, чтобы нам было понятно,
+            кому Вы жертвуете средства. Желательно, чтобы в сообщении была указана сумма и кому или
+            на что они должны пойти. Это может быть кличка животного или его номер (либо номер или
+            название сбора, если это сбор). Если Вы не укажете эту информацию, то средства пойдут на
+            тех животных, кому они наиболее необходимы в данный момент. <br />
+            Это инвалиды <img alt="." className="loc_invalidIcon" src={InvalidIcon7} /> и те, кому
+            требуется срочное лечение <img alt="." className="loc_invalidIcon" src={InvalidIcon4} />{" "}
+            <img alt="." className="loc_invalidIcon" src={InvalidIcon2} />. В нашем приюте они
+            всегда есть
+            <img alt="." className="loc_invalidIcon" src={InvalidIcon8} />
+            .
+            <br />
+            <br />
+            {/* <div className="loc_smsExample">100 П1</div>
             <div className="loc_smsDescription">Где 100 - сумма, П1 - № питомца (П - питомец, 1 - его номер)</div>
             <br />
             <div className="loc_smsExample">100 С1</div>
@@ -114,57 +127,58 @@ const Help: React.FC = () => {
               срочную операцию, постройку, либо на питомца, на которого меньше всего собрано средств за последнее время. Если Вам
               будет интересно, Вы можете связаться с нами и узнать, куда мы направили Ваши средства.
             </div> */}
-          <div className="loc_smsComment">
-            Информацию по собранным средствам за последние 30 дней Вы можете узнать, нажав на кнопку
-            "Подробнее" на странице питомца/сбора или на странице{" "}
-            <Link to={PAGES.FINREPORT} className="link_3">
-              Фин. отчет
-            </Link>{" "}
-            <i>(в ней отображается полный список всех донатов приюта)</i>.
-          </div>
-        </div>
-      </div>
-
-      <div className="loc_addDonator">
-        Если Вы хотите зарегистрировать себя как Донатор с подробной информацией о Вас, то Вам нужно
-        сделать запрос через{" "}
-        <Link to={PAGES.CONTACTS} className="loc_contact link_3">
-          обратную связь
-        </Link>{" "}
-        (форма обращения свободная), либо связаться с нами по номеру телефона{" "}
-        <span style={{ whiteSpace: "nowrap" }}>
-          {MAIN_PHONE} ({MAIN_CARD_OWNER})
-        </span>
-        .
-      </div>
-      <div className="loc_rekviz">
-        <div className="loc_top">
-          <img alt="." src={isMobile ? ImageMobile : Image} className="loc_image" />
-          <div className="loc_right">
-            <div className="loc_item">
-              <div className="loc_docs">
-                <img src={DocsIcon} alt="Реквизиты приюта" />
-                {REKVIZITS}
-              </div>
+            <div className="loc_smsComment">
+              Информацию по собранным средствам за последние 30 дней Вы можете узнать, нажав на
+              кнопку "Подробнее" на странице питомца/сбора или на странице{" "}
+              <Link to={PAGES.FINREPORT} className="link_3">
+                Фин. отчет
+              </Link>{" "}
+              <i>(в ней отображается полный список всех донатов приюта)</i>.
             </div>
           </div>
         </div>
-        <div className="loc_item_other">
-          <div className="loc_title">Также можно помочь:</div>
-          <div className="loc_item">
-            <span className="loc_name">Вещами:</span>
-            <span>кормами, лекарствами, предметами быта и т.д.</span>
+
+        <div className="loc_addDonator">
+          Если Вы хотите зарегистрировать себя как Донатор с подробной информацией о Вас, то Вам
+          нужно сделать запрос через{" "}
+          <Link to={PAGES.CONTACTS} className="loc_contact link_3">
+            обратную связь
+          </Link>{" "}
+          (форма обращения свободная), либо связаться с нами по номеру телефона{" "}
+          <span style={{ whiteSpace: "nowrap" }}>
+            {MAIN_PHONE} ({MAIN_CARD_OWNER})
+          </span>
+          .
+        </div>
+        <div className="loc_rekviz">
+          <div className="loc_top">
+            <img alt="." src={isMobile ? ImageMobile : Image} className="loc_image" />
+            <div className="loc_right">
+              <div className="loc_item">
+                <div className="loc_docs">
+                  <img src={DocsIcon} alt="Реквизиты приюта" />
+                  {REKVIZITS}
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="loc_item">
-            <span className="loc_name">Рекламой:</span>
-            <span>
-              расскажите о нас в социальных сетях. поделитесь любой нашей записью или дайте ссылку
-              на сайт, расскажите о нас знакомым и друзьям.
-            </span>
+          <div className="loc_item_other">
+            <div className="loc_title">Также можно помочь:</div>
+            <div className="loc_item">
+              <span className="loc_name">Вещами:</span>
+              <span>кормами, лекарствами, предметами быта и т.д.</span>
+            </div>
+            <div className="loc_item">
+              <span className="loc_name">Рекламой:</span>
+              <span>
+                расскажите о нас в социальных сетях. поделитесь любой нашей записью или дайте ссылку
+                на сайт, расскажите о нас знакомым и друзьям.
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

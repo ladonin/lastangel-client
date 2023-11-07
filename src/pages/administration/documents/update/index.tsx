@@ -22,18 +22,18 @@ const DocumentsUpdate: React.FC = () => {
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     DocumentsApi.get().then((res) => {
-      setDataLoadedState(res);
+      setDataIsLoadedState(true);
       responseRef.current = res;
       forceUpdate();
     });
   }, []);
 
-  useEffect(() => {}, [dataLoadedState]);
+  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");

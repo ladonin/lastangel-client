@@ -28,14 +28,14 @@ const NewsUpdate: React.FC = () => {
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     id &&
       NewsApi.get(Number(id)).then((res) => {
         if (res !== null) {
-          setDataLoadedState(res);
+          setDataIsLoadedState(true);
           responseRef.current = res;
           forceUpdate();
         }
@@ -45,7 +45,7 @@ const NewsUpdate: React.FC = () => {
       });
   }, [id]);
 
-  useEffect(() => {}, [dataLoadedState]);
+  useEffect(() => {}, [dataIsLoadedState]);
 
   //
   // продолжить с фото
@@ -114,7 +114,7 @@ const NewsUpdate: React.FC = () => {
     setModalDeleteIsOpenState(true);
   };
 
-  return dataLoadedState !== null ? (
+  return dataIsLoadedState !== null ? (
     <>
       <Helmet>
         <title>Обновление новости</title>

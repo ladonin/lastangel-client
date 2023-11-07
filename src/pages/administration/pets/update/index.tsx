@@ -28,13 +28,13 @@ const PetUpdate: React.FC = () => {
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     id &&
       AnimalsApi.get(Number(id)).then((res) => {
-        setDataLoadedState(res);
+        setDataIsLoadedState(true);
         responseRef.current = res;
         forceUpdate();
         // setIsUpdatingState(false);
@@ -43,7 +43,7 @@ const PetUpdate: React.FC = () => {
       });
   }, [id]);
 
-  useEffect(() => {}, [dataLoadedState]);
+  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -135,7 +135,7 @@ const PetUpdate: React.FC = () => {
     setModalDeleteIsOpenState(true);
   };
 
-  return dataLoadedState !== null ? (
+  return dataIsLoadedState !== null ? (
     <>
       <Helmet>
         <title>Обновление записи о питомце</title>

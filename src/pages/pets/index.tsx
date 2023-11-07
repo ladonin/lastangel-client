@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import cn from "classnames";
+import { Helmet } from "react-helmet";
 import { TGetListRequest as TGetPetsListRequest, TItem as TItemPet } from "api/types/animals";
 import PAGES from "routing/routes";
 import { AnimalsApi } from "api/animals";
@@ -35,7 +36,14 @@ const PETS_PAGESIZE = 20;
 const Pets: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-
+  const { getMetatags } = useOutletContext<any>();
+  const metatags = useMemo(() => {
+    const data = getMetatags();
+    return {
+      title: data.pets_title || "",
+      description: data.pets_description || "",
+    };
+  }, []);
   const petsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const petsFilterRef = useRef<TPetsFilterParams>(
     loadItem("pets_filter") || { statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED] }
@@ -52,7 +60,7 @@ const Pets: React.FC = () => {
     needUsePrint.current && petsPrint.list ? petsPrint.list : null
   );
   // <-- Сохранение состояния страницы
-  
+
   const [myPetState, setMyPetState] = useState<TItemPet | null>(null);
   const [myPetIsLoadingState, setMyPetIsLoadingState] = useState<boolean>(false);
   const [petsPageState, setPetsPageState] = useState<number>(
@@ -299,93 +307,99 @@ const Pets: React.FC = () => {
   }, [compactCuratoryState]);
 
   return (
-    <div className="page-pets">
-      {isBlankState && <div className="loc_blank" />}
-      <BreadCrumbs title="Наши питомцы" />
-      {!compactCuratoryState && (
-        <div className="loc_forCurator">
-          Вы можете сделать разовое пожертвование на питомца или жертвовать на его содержание
-          ежемесячно любую сумму. Для этого Вам нужно выбрать питомца из списка и на его странице
-          нажать кнопку <b>"Покормить"</b>
-          <div style={{ marginTop: "16px" }}>
-            Также вы можете{" "}
-            <Link to={PAGES.CONTACTS} className="loc_linkToContacts link_3">
-              связаться
-            </Link>{" "}
-            с нами с целью <strong>забрать питомца из приюта</strong>.
-          </div>
-          <div style={{ marginTop: "16px" }}>
-            Если желаете выбрать питомца для кураторства/разовой помощи, то мы можем сделать этот
-            выбор за Вас.
-          </div>
-          {myPetState === null && (
-            <div className="loc_buttonWrapper">
-              <Button
-                className="loc_buttonSelectPet"
-                isLoading={myPetIsLoadingState}
-                theme={ButtonThemes.SUCCESS}
-                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
-                onClick={getMyAnimalHandler}
-              >
-                Выбрать своего питомца
-              </Button>
-              <Button
-                className="loc_buttonCompact"
-                theme={ButtonThemes.GHOST_BORDER}
-                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
-                onClick={() => setCompactCuratoryState(!compactCuratoryState)}
-              >
-                Закрыть
-              </Button>
+    <>
+      <Helmet>
+        <title>{metatags.title}</title>
+        <meta name="description" content={metatags.description} />
+      </Helmet>
+      <div className="page-pets">
+        {isBlankState && <div className="loc_blank" />}
+        <BreadCrumbs title="Наши питомцы" />
+        {!compactCuratoryState && (
+          <div className="loc_forCurator">
+            Вы можете сделать разовое пожертвование на питомца или жертвовать на его содержание
+            ежемесячно любую сумму. Для этого Вам нужно выбрать питомца из списка и на его странице
+            нажать кнопку <b>"Покормить"</b>
+            <div style={{ marginTop: "16px" }}>
+              Также вы можете{" "}
+              <Link to={PAGES.CONTACTS} className="loc_linkToContacts link_3">
+                связаться
+              </Link>{" "}
+              с нами с целью <strong>забрать питомца из приюта</strong>.
             </div>
-          )}
-          {myPetState !== null && (
-            <div className="loc_myPet">
-              <h2 className="loc_title">Ваш питомец</h2>
-
-              <div className={cn("loc_wrapper ", `loc--status_${myPetState.status}`)}>
-                <div className="loc_item">{renderPetsContent(myPetState)}</div>
+            <div style={{ marginTop: "16px" }}>
+              Если желаете выбрать питомца для кураторства/разовой помощи, то мы можем сделать этот
+              выбор за Вас.
+            </div>
+            {myPetState === null && (
+              <div className="loc_buttonWrapper">
+                <Button
+                  className="loc_buttonSelectPet"
+                  isLoading={myPetIsLoadingState}
+                  theme={ButtonThemes.SUCCESS}
+                  size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                  onClick={getMyAnimalHandler}
+                >
+                  Выбрать своего питомца
+                </Button>
+                <Button
+                  className="loc_buttonCompact"
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                  onClick={() => setCompactCuratoryState(!compactCuratoryState)}
+                >
+                  Закрыть
+                </Button>
               </div>
-              <Button
-                className="loc_buttonCompact"
-                theme={ButtonThemes.GHOST_BORDER}
-                size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
-                onClick={() => setCompactCuratoryState(!compactCuratoryState)}
-              >
-                Закрыть
-              </Button>
-            </div>
-          )}
-        </div>
-      )}
-      {compactCuratoryState && (
-        <Button
-          className="loc_buttonOpenCuratory"
-          theme={ButtonThemes.GHOST_BORDER}
-          size={isMobile ? ButtonSizes.LARGE : ButtonSizes.SMALL}
-          onClick={() => setCompactCuratoryState(false)}
-        >
-          Кураторство
-        </Button>
-      )}
-      <Filter filter={petsFilterRef.current} onChange={changeFilter} />
+            )}
+            {myPetState !== null && (
+              <div className="loc_myPet">
+                <h2 className="loc_title">Ваш питомец</h2>
 
-      <div
-        className="loc_list"
-        id="pets_list"
-        style={{ minHeight: listHeightState ? `${listHeightState}px` : 0 }}
-      >
-        {listPetsState &&
-          listPetsState.map((item, index) => (
-            <div key={index} className={cn("loc_wrapper ", `loc--status_${item.status}`)}>
-              <div className="loc_item">{renderPetsContent(item)}</div>
-            </div>
-          ))}
-        <InfiniteScroll onReachBottom={onReachPetsBottomHandler} amendment={100} />
-        {listPetsState && !listPetsState.length && <NotFound />}
-        {listPetsState === null && <LoaderIcon />}
+                <div className={cn("loc_wrapper ", `loc--status_${myPetState.status}`)}>
+                  <div className="loc_item">{renderPetsContent(myPetState)}</div>
+                </div>
+                <Button
+                  className="loc_buttonCompact"
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+                  onClick={() => setCompactCuratoryState(!compactCuratoryState)}
+                >
+                  Закрыть
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
+        {compactCuratoryState && (
+          <Button
+            className="loc_buttonOpenCuratory"
+            theme={ButtonThemes.GHOST_BORDER}
+            size={isMobile ? ButtonSizes.LARGE : ButtonSizes.SMALL}
+            onClick={() => setCompactCuratoryState(false)}
+          >
+            Кураторство
+          </Button>
+        )}
+        <Filter filter={petsFilterRef.current} onChange={changeFilter} />
+
+        <div
+          className="loc_list"
+          id="pets_list"
+          style={{ minHeight: listHeightState ? `${listHeightState}px` : 0 }}
+        >
+          {listPetsState &&
+            listPetsState.map((item, index) => (
+              <div key={index} className={cn("loc_wrapper ", `loc--status_${item.status}`)}>
+                <div className="loc_item">{renderPetsContent(item)}</div>
+              </div>
+            ))}
+          <InfiniteScroll onReachBottom={onReachPetsBottomHandler} amendment={100} />
+          {listPetsState && !listPetsState.length && <NotFound />}
+          {listPetsState === null && <LoaderIcon />}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

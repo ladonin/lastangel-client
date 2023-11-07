@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
+import { Helmet } from "react-helmet";
 import { ANIMALS_STATUS } from "constants/animals";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 import Modal from "components/Modal";
@@ -52,7 +53,15 @@ const Pet: React.FC = () => {
   const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
   const hasBack = useMemo(() => loadItem("backFromPet"), []);
-
+  const { getMetatags } = useOutletContext<any>();
+  const metatags = useMemo(() => {
+    if (!dataState) return false;
+    const data = getMetatags();
+    return {
+      title: data.pet_title ? `${data.pet_title}. ${dataState.name}` : dataState.name,
+      description: data.pet_description || "",
+    };
+  }, [dataState]);
   useEffect(() => {
     if (id) {
       setIsLoadingState(true);
@@ -216,253 +225,262 @@ const Pet: React.FC = () => {
   );
 
   return (
-    <div className="page-pet">
-      {!!dataState && (
-        <>
-          <BreadCrumbs
-            breadCrumbs={[
-              {
-                name: "Наши питомцы",
-                link: PAGES.PETS,
-                onClick: hasBack ? createNeedUsePrint : undefined,
-              },
-            ]}
-            title={dataState.name}
-            back={
-              hasBack
-                ? {
-                    link: PAGES.PETS,
-                    onClick: createNeedUsePrint,
-                  }
-                : undefined
-            }
-          />
-          <PetsList currentId={Number(id)} />
+    <>
+      {metatags && (
+        <Helmet>
+          <title>{metatags.title}</title>
+          <meta name="description" content={metatags.description} />
+        </Helmet>
+      )}
+      <div className="page-pet">
+        {!!dataState && (
+          <>
+            <BreadCrumbs
+              breadCrumbs={[
+                {
+                  name: "Наши питомцы",
+                  link: PAGES.PETS,
+                  onClick: hasBack ? createNeedUsePrint : undefined,
+                },
+              ]}
+              title={dataState.name}
+              back={
+                hasBack
+                  ? {
+                      link: PAGES.PETS,
+                      onClick: createNeedUsePrint,
+                    }
+                  : undefined
+              }
+            />
+            <PetsList currentId={Number(id)} />
 
-          <div className="loc_contentWrapper">
-            {isLoadingState && <div className="loc_loader" />}
-            <div className="loc_topWrapper">
-              <div className="loc_avatar">
-                <img
-                  alt="not found"
-                  className={dataState.status === ANIMALS_STATUS.DIED ? "loc--died" : ""}
-                  src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)}
-                />
-
-                {!isMobile && isHere(dataState.status) && (
-                  <div className="loc_donationIcon">
-                    <PetDonationIcon pet={dataState} />
-                  </div>
-                )}
-              </div>
-              {isMobile === true && renderData()}
-              <div className="loc_right">
-                {isMobile === false && renderData()}
-
-                {isMobile === true && (
-                  <div
-                    className="loc_description"
-                    dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
+            <div className="loc_contentWrapper">
+              {isLoadingState && <div className="loc_loader" />}
+              <div className="loc_topWrapper">
+                <div className="loc_avatar">
+                  <img
+                    alt="not found"
+                    className={dataState.status === ANIMALS_STATUS.DIED ? "loc--died" : ""}
+                    src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)}
                   />
-                )}
-                {isMobile === true && renderCollections()}
-                {isMobile === false && !isHere(dataState.status) && (
-                  <div className="margin_t24">{renderRedactButton(dataState)}</div>
-                )}
-                {isMobile === true && !isHere(dataState.status) && renderRedactButton(dataState)}
-                {isHere(dataState.status) && (
-                  <>
-                    <div className="loc_donation">
-                      <div className="loc_title">
-                        Собрано за месяц<span className="orange">*</span>:
-                      </div>
-                      <div className="loc_value">
-                        <span>{numberFriendly(dataState.collected)}</span> руб.
-                      </div>
-                      {dataState.collected && (
-                        <div
-                          className="loc_additionally"
-                          onClick={() => {
-                            getDonationsList();
-                            setDonationsListModalOpenedState(true);
-                          }}
-                        >
-                          Подробнее
+
+                  {!isMobile && isHere(dataState.status) && (
+                    <div className="loc_donationIcon">
+                      <PetDonationIcon pet={dataState} />
+                    </div>
+                  )}
+                </div>
+                {isMobile === true && renderData()}
+                <div className="loc_right">
+                  {isMobile === false && renderData()}
+
+                  {isMobile === true && (
+                    <div
+                      className="loc_description"
+                      dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
+                    />
+                  )}
+                  {isMobile === true && renderCollections()}
+                  {isMobile === false && !isHere(dataState.status) && (
+                    <div className="margin_t24">{renderRedactButton(dataState)}</div>
+                  )}
+                  {isMobile === true && !isHere(dataState.status) && renderRedactButton(dataState)}
+                  {isHere(dataState.status) && (
+                    <>
+                      <div className="loc_donation">
+                        <div className="loc_title">
+                          Собрано за месяц<span className="orange">*</span>:
                         </div>
-                      )}
-                      <div className="loc_buttonWrapper">
-                        {isMobile && isHere(dataState.status) && (
-                          <div className="loc_donationIcon">
-                            <PetDonationIcon pet={dataState} />
+                        <div className="loc_value">
+                          <span>{numberFriendly(dataState.collected)}</span> руб.
+                        </div>
+                        {dataState.collected && (
+                          <div
+                            className="loc_additionally"
+                            onClick={() => {
+                              getDonationsList();
+                              setDonationsListModalOpenedState(true);
+                            }}
+                          >
+                            Подробнее
                           </div>
                         )}
-                        <Button
-                          className="loc_donateButton"
-                          theme={ButtonThemes.SUCCESS}
-                          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
-                          onClick={() => {
-                            navigate(`${PAGES.HELP}?target=${id}`);
-                          }}
-                        >
-                          Покормить
-                        </Button>
-                        <CopyLinkToPage
-                          targetText="на новость"
-                          text="Рассказать о питомце друзьям"
-                          url={window.location.href}
-                        />
+                        <div className="loc_buttonWrapper">
+                          {isMobile && isHere(dataState.status) && (
+                            <div className="loc_donationIcon">
+                              <PetDonationIcon pet={dataState} />
+                            </div>
+                          )}
+                          <Button
+                            className="loc_donateButton"
+                            theme={ButtonThemes.SUCCESS}
+                            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+                            onClick={() => {
+                              navigate(`${PAGES.HELP}?target=${id}`);
+                            }}
+                          >
+                            Покормить
+                          </Button>
+                          <CopyLinkToPage
+                            targetText="на новость"
+                            text="Рассказать о питомце друзьям"
+                            url={window.location.href}
+                          />
+                        </div>
+                        {renderRedactButton(dataState)}
                       </div>
-                      {renderRedactButton(dataState)}
-                    </div>
-                    {isMobile === false && renderCollections()}
-                    {isMobile === false && (
-                      <div
-                        className="loc_description"
-                        dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
-                      />
+                      {isMobile === false && renderCollections()}
+                      {isMobile === false && (
+                        <div
+                          className="loc_description"
+                          dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
+                        />
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+
+              <div className="loc_bottomWrapper">
+                {renderDisclaimer()}
+                {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
+                  <>
+                    {isLoadingState ? (
+                      <div className="loc_fakephotoalbum" />
+                    ) : (
+                      <Swiper
+                        slidesPerView={1}
+                        navigation
+                        modules={[Lazy, Autoplay, Pagination, Navigation]}
+                        initialSlide={0}
+                        lazy={{
+                          enabled: true,
+                          loadPrevNext: true,
+                        }}
+                        className="loc_slider"
+                      >
+                        {[...anotherImagesState].reverse().map((item, index) => (
+                          <SwiperSlide key={index}>
+                            {index === 1 ? (
+                              <img
+                                alt="."
+                                className="loc_image"
+                                src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
+                              />
+                            ) : (
+                              <img
+                                alt="."
+                                data-src={getAnotherImagesUrl(
+                                  dataState,
+                                  item,
+                                  SIZES_ANOTHER.SIZE_1200
+                                )}
+                                className="loc_image swiper-lazy"
+                                loading="lazy"
+                              />
+                            )}
+                          </SwiperSlide>
+                        ))}
+                        <SwiperSlide>
+                          <img
+                            alt="."
+                            className="loc_image"
+                            src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)}
+                          />
+                        </SwiperSlide>
+                      </Swiper>
                     )}
                   </>
                 )}
+
+                {dataState.video1 && !isLoadingState && (
+                  <video key={`video1${id}`} className="loc_video" controls>
+                    <source
+                      key={`video1${id}`}
+                      src={getVideoUrl(dataState, dataState.video1)}
+                      type={getVideoType(dataState.video1)}
+                    />
+                  </video>
+                )}
+                {dataState.video2 && !isLoadingState && (
+                  <video key={`video2${id}`} className="loc_video" controls>
+                    <source
+                      key={`video2${id}`}
+                      src={getVideoUrl(dataState, dataState.video2)}
+                      type={getVideoType(dataState.video2)}
+                    />
+                  </video>
+                )}
+                {dataState.video3 && !isLoadingState && (
+                  <video key={`video3${id}`} className="loc_video" controls>
+                    <source
+                      key={`video3${id}`}
+                      src={getVideoUrl(dataState, dataState.video3)}
+                      type={getVideoType(dataState.video3)}
+                    />
+                  </video>
+                )}
               </div>
             </div>
+            <MediaOriginalLinks type="animals" data={dataState} />
+          </>
+        )}
 
-            <div className="loc_bottomWrapper">
-              {renderDisclaimer()}
-              {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
-                <>
-                  {isLoadingState ? (
-                    <div className="loc_fakephotoalbum" />
-                  ) : (
-                    <Swiper
-                      slidesPerView={1}
-                      navigation
-                      modules={[Lazy, Autoplay, Pagination, Navigation]}
-                      initialSlide={0}
-                      lazy={{
-                        enabled: true,
-                        loadPrevNext: true,
-                      }}
-                      className="loc_slider"
-                    >
-                      {[...anotherImagesState].reverse().map((item, index) => (
-                        <SwiperSlide key={index}>
-                          {index === 1 ? (
-                            <img
-                              alt="."
-                              className="loc_image"
-                              src={getAnotherImagesUrl(dataState, item, SIZES_ANOTHER.SIZE_1200)}
-                            />
-                          ) : (
-                            <img
-                              alt="."
-                              data-src={getAnotherImagesUrl(
-                                dataState,
-                                item,
-                                SIZES_ANOTHER.SIZE_1200
-                              )}
-                              className="loc_image swiper-lazy"
-                              loading="lazy"
-                            />
-                          )}
-                        </SwiperSlide>
-                      ))}
-                      <SwiperSlide>
-                        <img
-                          alt="."
-                          className="loc_image"
-                          src={getMainImageUrl(dataState, SIZES_MAIN.SIZE_1200)}
-                        />
-                      </SwiperSlide>
-                    </Swiper>
-                  )}
-                </>
-              )}
+        <Modal
+          isOpen={donationsListModalOpenedState}
+          title="Подробности"
+          onClose={() => {
+            setDonationsListModalOpenedState(false);
+          }}
+          portalClassName="page-pet_donationsListModal"
+        >
+          <div className="loc_title">Список пожертвований за последние 30 дней, руб.:</div>
 
-              {dataState.video1 && !isLoadingState && (
-                <video key={`video1${id}`} className="loc_video" controls>
-                  <source
-                    key={`video1${id}`}
-                    src={getVideoUrl(dataState, dataState.video1)}
-                    type={getVideoType(dataState.video1)}
-                  />
-                </video>
-              )}
-              {dataState.video2 && !isLoadingState && (
-                <video key={`video2${id}`} className="loc_video" controls>
-                  <source
-                    key={`video2${id}`}
-                    src={getVideoUrl(dataState, dataState.video2)}
-                    type={getVideoType(dataState.video2)}
-                  />
-                </video>
-              )}
-              {dataState.video3 && !isLoadingState && (
-                <video key={`video3${id}`} className="loc_video" controls>
-                  <source
-                    key={`video3${id}`}
-                    src={getVideoUrl(dataState, dataState.video3)}
-                    type={getVideoType(dataState.video3)}
-                  />
-                </video>
-              )}
-            </div>
+          <div className="loc_content">
+            {donationsListState === null ? (
+              <LoaderIcon />
+            ) : (
+              <div className="loc_list">
+                {donationsListState.map((item) => (
+                  <div className="loc_item">
+                    <div className={cn("loc_name", { "loc--hasLink": !!item.donator_outer_link })}>
+                      {isAnonym(item) ? (
+                        "Добрый помощник приюта"
+                      ) : (
+                        <div
+                          onClick={() => {
+                            item.donator_outer_link &&
+                              window.open(item.donator_outer_link, "_blank");
+                          }}
+                        >
+                          {getDonatorName(item)}
+                        </div>
+                      )}
+                    </div>
+                    <div className="loc_sum">
+                      <span>{numberFriendly(item.sum)}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-          <MediaOriginalLinks type="animals" data={dataState} />
-        </>
-      )}
-
-      <Modal
-        isOpen={donationsListModalOpenedState}
-        title="Подробности"
-        onClose={() => {
-          setDonationsListModalOpenedState(false);
-        }}
-        portalClassName="page-pet_donationsListModal"
-      >
-        <div className="loc_title">Список пожертвований за последние 30 дней, руб.:</div>
-
-        <div className="loc_content">
-          {donationsListState === null ? (
-            <LoaderIcon />
-          ) : (
-            <div className="loc_list">
-              {donationsListState.map((item) => (
-                <div className="loc_item">
-                  <div className={cn("loc_name", { "loc--hasLink": !!item.donator_outer_link })}>
-                    {isAnonym(item) ? (
-                      "Добрый помощник приюта"
-                    ) : (
-                      <div
-                        onClick={() => {
-                          item.donator_outer_link && window.open(item.donator_outer_link, "_blank");
-                        }}
-                      >
-                        {getDonatorName(item)}
-                      </div>
-                    )}
-                  </div>
-                  <div className="loc_sum">
-                    <span>{numberFriendly(item.sum)}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        <div className="loc_buttons">
-          <Button
-            className="loc_cancelButton"
-            theme={ButtonThemes.SUCCESS}
-            size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
-            onClick={() => {
-              setDonationsListModalOpenedState(false);
-            }}
-          >
-            Закрыть
-          </Button>
-        </div>
-      </Modal>
-    </div>
+          <div className="loc_buttons">
+            <Button
+              className="loc_cancelButton"
+              theme={ButtonThemes.SUCCESS}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
+              onClick={() => {
+                setDonationsListModalOpenedState(false);
+              }}
+            >
+              Закрыть
+            </Button>
+          </div>
+        </Modal>
+      </div>
+    </>
   );
 };
 

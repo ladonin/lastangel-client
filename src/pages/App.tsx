@@ -57,6 +57,7 @@ import AdministrationClinicPhotosUpdate from "pages/administration/clinicPhotos/
 import AdministrationAcquaintanceshipUpdate from "pages/administration/acquaintanceship/update";
 
 import AdministrationFeedbacks from "pages/administration/feedbacks";
+import AdministrationMetatagsUpdate from "pages/administration/metatags/update";
 
 import LayoutMain from "pages/_layoutMain";
 import LayoutAdministration from "pages/_layoutAdministration";
@@ -93,6 +94,7 @@ const App: React.FC = () => (
       <Route path={`${PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE}`} element={<AdministrationAcquaintanceshipUpdate />} />
 
       <Route path={`${PAGES.ADMINISTRATION_FEEDBACKS}`} element={<AdministrationFeedbacks />} />
+      <Route path={`${PAGES.ADMINISTRATION_METATAGS_UPDATE}`} element={<AdministrationMetatagsUpdate />} />
     </Route>
 
     <Route path="/" element={<LayoutMain />}>

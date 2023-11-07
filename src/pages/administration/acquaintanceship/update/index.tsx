@@ -24,13 +24,13 @@ const AcquaintanceshipUpdate: React.FC = () => {
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  const [dataLoadedState, setDataLoadedState] = useState<TResponse | null>(null);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     AcquaintanceshipApi.get().then((res) => {
       if (res !== null) {
-        setDataLoadedState(res);
+        setDataIsLoadedState(true);
         responseRef.current = res;
         forceUpdate();
       }
@@ -40,7 +40,7 @@ const AcquaintanceshipUpdate: React.FC = () => {
     });
   }, []);
 
-  useEffect(() => {}, [dataLoadedState]);
+  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -84,7 +84,7 @@ const AcquaintanceshipUpdate: React.FC = () => {
     }
   };
 
-  return dataLoadedState !== null ? (
+  return dataIsLoadedState !== null ? (
     <>
       <Helmet>
         <title>Обновление страницы о приюте</title>
