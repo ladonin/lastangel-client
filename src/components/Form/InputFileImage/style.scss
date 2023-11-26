@@ -17,12 +17,6 @@
     }
   }
 
-  .loc_description {
-    font-size: 14px;
-    margin-bottom: 16px;
-    font-style: italic;
-  }
-
   .loc_label {
     input[type=file] {
       position: absolute;
@@ -110,8 +104,17 @@
 
   .loc_labelTitle {
     margin-bottom: calc(16px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
+    line-height: calc(56px * var(--viewport-koeff));
   }
 
+
+  
+  
+  
+  
+  
+  
   .loc_error {
     font-size: calc(14px * var(--viewport-koeff));
   }
@@ -123,11 +126,11 @@
 
   .loc_label {
     .loc_selectFile {
-      margin-bottom: calc(16px * var(--viewport-koeff));
-      font-size: calc(14px * var(--viewport-koeff));
+      margin-bottom: calc(32px * var(--viewport-koeff));
+      font-size: calc(32px * var(--viewport-koeff));
       border-radius: calc(4px * var(--viewport-koeff));
-      line-height: calc(24px * var(--viewport-koeff));
-      padding: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff));
+      line-height: calc(56px * var(--viewport-koeff));
+      padding: calc(16px * var(--viewport-koeff)) calc(48px * var(--viewport-koeff));
     }
   }
   

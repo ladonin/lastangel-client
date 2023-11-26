@@ -306,10 +306,12 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           )}
         </div>
         <div className="loc_right">
-          <InputFileImage label="Дополнительные фото" multiple setImage={setAnotherImagesHandler} />
+          <InputFileImage
+                           label="Дополнительные фото" multiple setImage={setAnotherImagesHandler} />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages
+
               images={anotherImagesPrevState}
               deletedImages={anotherImagesForDeleteState}
               label="Ранее загруженные фото"

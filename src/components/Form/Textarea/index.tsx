@@ -6,6 +6,7 @@ import React, { ChangeEvent, useState, useEffect, useMemo } from "react";
 import cn from "classnames";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
+
 type TProps = {
   label?: string;
   className?: string;
@@ -15,8 +16,19 @@ type TProps = {
   maxWords?: number;
   required?: boolean;
   onChange: (val: string) => void;
+  description?: string;
 };
-const Textarea: React.FC<TProps> = ({ label, className, value, placeholder, rows, maxWords, required, onChange }) => {
+const Textarea: React.FC<TProps> = ({
+  label,
+  className,
+  value,
+  placeholder,
+  rows,
+  maxWords,
+  required,
+  onChange,
+  description,
+}) => {
   const [valueState, setValueState] = useState(value || "");
 
   useEffect(() => {
@@ -43,10 +55,22 @@ const Textarea: React.FC<TProps> = ({ label, className, value, placeholder, rows
             {label} {required && <span className="red">*</span>}
           </label>
         )}
-        <textarea value={valueState} onChange={onChangeHandler} placeholder={placeholder} rows={rows} />
-        {!label && required && <span className="red loc_input_star">*</span>}
+
+       
+          <textarea
+            value={valueState}
+            onChange={onChangeHandler}
+            placeholder={placeholder}
+            rows={rows}
+          />
+          {!label && required && <span className="red loc_input_star">*</span>}
+
+          {description && <div className="form-element-description">{description}</div>}
+       
       </div>
-      {maxWords && <div className="loc_wordsRest">Осталось символов: {maxWords - valueState.length}</div>}
+      {maxWords && (
+        <div className="loc_wordsRest">Осталось символов: {maxWords - valueState.length}</div>
+      )}
     </div>
   );
 };

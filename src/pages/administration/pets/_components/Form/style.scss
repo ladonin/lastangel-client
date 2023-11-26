@@ -1,3 +1,5 @@
+$labelWidth: 33%;
+$formElWidth: 67%;
 .page-administration_pets_form_component {
   .loc_form,
   .loc_photos {
@@ -12,7 +14,7 @@
 
     .loc_right {
       width: 60%;
-      padding-left: 32px;
+      padding-left: 0px;
     }
   }
 
@@ -41,11 +43,11 @@
     margin-bottom: 24px;
 
     input {
-      width: 70%;
+      width: $formElWidth;
     }
 
     label {
-      width: 30%;
+      width: $labelWidth;
     }
   }
 
@@ -53,11 +55,11 @@
     margin-bottom: 24px;
 
     .loc_datepicker {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_label {
-      width: 30%;
+      width: $labelWidth;
     }
   }
 
@@ -65,11 +67,11 @@
     margin-bottom: 24px;
 
     textarea {
-      width: 70%;
+      width: $formElWidth;
     }
 
     label {
-      width: 30%;
+      width: $labelWidth;
     }
 
     &.loc__shortdescription textarea {
@@ -85,11 +87,11 @@
     margin-bottom: 24px;
 
     .loc_select {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_label {
-      width: 30%;
+      width: $labelWidth;
     }
 
     &.loc--sex .loc_container,
@@ -103,11 +105,11 @@
 
   .loc_formCheckboxItem {
     .loc--checkbox {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_label {
-      width: 30%;
+      width: $labelWidth;
     }
 
   }
@@ -117,11 +119,11 @@
     margin-bottom: 24px;
 
     .loc_label, .loc_error, .loc_video {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_labelTitle {
-      width: 30%;
+      width: $labelWidth;
     }
   }
 }

@@ -9,6 +9,7 @@ import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 import Modal from "components/Modal";
 import { DonationsApi } from "api/donations";
 import { TItem } from "api/types/animals";
+import { isAnonym, getDonatorName } from "helpers/donations";
 import { TGetListOutput as TListDonations, TItem as TDonationItem } from "api/types/donations";
 import LoaderIcon from "components/LoaderIcon";
 import { TItem as TCollectionItem } from "api/types/collections";
@@ -112,18 +113,7 @@ const Pet: React.FC = () => {
     ) : null;
   const isHere = (status: number) =>
     status !== ANIMALS_STATUS.AT_HOME && status !== ANIMALS_STATUS.DIED;
-  const isAnonym = (item: TDonationItem) =>
-    !(
-      item.donator_fullname ||
-      item.donator_firstname ||
-      item.donator_middlename ||
-      item.donator_lastname
-    );
-  const getDonatorName = (item: TDonationItem) =>
-    (
-      item.donator_fullname ||
-      `${item.donator_firstname} ${item.donator_middlename} ${item.donator_lastname}`
-    ).toUpperCase();
+
   const renderCollections = () =>
     collectionsState &&
     !!collectionsState.length && (

@@ -7,6 +7,7 @@ import cn from "classnames";
 import SelectComponent, { Props } from "react-select";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
+
 type TValue = { value: string; label: string };
 type TProps = Props & {
   label?: string;
@@ -17,7 +18,7 @@ type TProps = Props & {
   value?: string;
   options: TValue[];
   onChange: (newValue: any, isLightClear?: boolean) => void;
-
+  description?: string;
   innerRef?: Ref<any>;
 };
 
@@ -31,10 +32,13 @@ const Select: React.FC<TProps> = ({
   disabled,
   value,
   innerRef,
+  description,
   ...rest
 }) => {
   const val = value ? options.filter(({ value: v }) => v === value)[0] : undefined;
   const lightClearRef = useRef<string | null>(null);
+  // Если изначально передали значение - храним тут состояние, что значение value инициировано
+  const valueIsInitedRef = useRef(false);
 
   const lightClear = () => {
     // console.log('lightClear')
@@ -42,11 +46,10 @@ const Select: React.FC<TProps> = ({
     (innerRef as any).current.clearValue();
     if (innerRef) {
       lightClearRef.current = "on";
-      console.log(3131);
-      console.log(options);
       (innerRef as any).current.clearValue();
     }
   };
+
   useEffect(() => {
     if (innerRef) {
       (innerRef as any).current.lightClear = lightClear;
@@ -54,8 +57,6 @@ const Select: React.FC<TProps> = ({
   }, [innerRef]);
 
   const onChangeHandler = (val: any) => {
-    // console.log(options)
-    //   console.log('onChangeHandler')
     if (lightClearRef.current === "on") {
       // При легком сбрасывании мы просто сбрасываем значения в селекте
       // и не вызываем событие onChange
@@ -65,6 +66,15 @@ const Select: React.FC<TProps> = ({
       onChange(val);
     }
   };
+
+  useEffect(() => {
+    // Если заранее передали значение, то дергаем onChangeHandler, что значение установлено
+    if (val !== undefined && !valueIsInitedRef.current) {
+      valueIsInitedRef.current = true;
+      onChangeHandler(val);
+    }
+  }, [value, options]);
+
   return (
     <div className={cn("component-select", className)}>
       {label && (
@@ -90,7 +100,9 @@ const Select: React.FC<TProps> = ({
           ref={innerRef}
           {...rest}
         />
+        
       </div>
+      {description && <div className="form-element-description">{description}</div>}
     </div>
   );
 };

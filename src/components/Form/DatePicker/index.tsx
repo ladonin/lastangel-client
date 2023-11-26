@@ -18,8 +18,16 @@ type TProps = {
   value?: Date;
   required?: boolean;
   onChange: (val: number) => void;
+  description?: string;
 };
-const DatePicker: React.FC<TProps> = ({ label, className, required, onChange, value }) => {
+const DatePicker: React.FC<TProps> = ({
+  label,
+  className,
+  required,
+  onChange,
+  description,
+  value,
+}) => {
   const [valueState, setValueState] = useState<Date | null>(value || null);
 
   useEffect(() => {
@@ -50,7 +58,9 @@ const DatePicker: React.FC<TProps> = ({ label, className, required, onChange, va
           maxDate={new Date()}
           onChange={onChangeHandler}
         />
+        
       </div>
+      {description && <div className="form-element-description">{description}</div>}
     </div>
   );
 };

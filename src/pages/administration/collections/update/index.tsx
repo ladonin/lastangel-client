@@ -155,6 +155,16 @@ const CollectionUpdate: React.FC = () => {
 
         {!isChangedState && !isDeletedState && (
           <div className="loc_wrapper_textForm">
+            <Button
+              className="loc_saveButton margin_b24"
+              theme={ButtonThemes.SUCCESS}
+              isLoading={isUpdatingState}
+              disabled={!paramsRef.current}
+              size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+              onClick={updateHandler}
+            >
+              Обновить
+            </Button>
             <Form onChange={onChange} data={responseRef.current} />
             {errorState && <div className="loc_error">{errorState}</div>}
             <div className="loc_buttons">
@@ -196,7 +206,7 @@ const CollectionUpdate: React.FC = () => {
             Запись успешно обновлена ({paramsRef.current?.name})
           </div>
         )}
-        {isDeletedState && <div className="loc_wrapper_removedSuccess">Запись удалена</div>}
+        {isDeletedState && <div className="loc_wrapper_removedSuccess">Сбор удален</div>}
 
         <Modal
           isOpen={modalDeleteIsOpenState}

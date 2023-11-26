@@ -8,6 +8,7 @@ import Modal from "components/Modal";
 import { DonationsApi } from "api/donations";
 import { TItem } from "api/types/collections";
 import { TGetListOutput as TListDonations, TItem as TDonationItem } from "api/types/donations";
+import { isAnonym, getDonatorName } from "helpers/donations";
 import LoaderIcon from "components/LoaderIcon";
 import { CollectionsApi } from "api/collections";
 import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/collections";
@@ -62,18 +63,6 @@ const Collection: React.FC = () => {
       );
     }
   };
-  const isAnonym = (item: TDonationItem) =>
-    !(
-      item.donator_fullname ||
-      item.donator_firstname ||
-      item.donator_middlename ||
-      item.donator_lastname
-    );
-  const getDonatorName = (item: TDonationItem) =>
-    (
-      item.donator_fullname ||
-      `${item.donator_firstname} ${item.donator_middlename} ${item.donator_lastname}`
-    ).toUpperCase();
 
   const renderDonateButton = () => (
     <Button

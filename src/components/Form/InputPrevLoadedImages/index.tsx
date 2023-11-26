@@ -12,6 +12,7 @@ type TPrevImagesProps = {
   removeImage: (img: number) => void;
   restoreImage: (img: number) => void;
   prepareUrlFunc: (img: number) => string;
+  description?: string;
 };
 
 const InputPrevLoadedImages = ({
@@ -22,6 +23,7 @@ const InputPrevLoadedImages = ({
   removeImage,
   restoreImage,
   prepareUrlFunc,
+                                 description
 }: TPrevImagesProps) => {
   const [imagesState, setImagesState] = useState<number[]>([]);
 
@@ -64,6 +66,7 @@ const InputPrevLoadedImages = ({
   return (
     <div className={cn("component-inputPrevLoadedImages", className)}>
       {label && <div className="loc_labelTitle">{label}</div>}
+      {description && <div className="form-element-description loc--photo">{description}</div>}
       <div className="loc_images">{renderImages()}</div>
     </div>
   );

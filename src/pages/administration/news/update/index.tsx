@@ -198,7 +198,7 @@ const NewsUpdate: React.FC = () => {
             </Button>
           </div>
         )}
-        {isDeletedState && <div className="loc_wrapper_removedSuccess">Запись удалена</div>}
+        {isDeletedState && <div className="loc_wrapper_removedSuccess">Новость удалена</div>}
 
         <Modal
           isOpen={modalDeleteIsOpenState}

@@ -4,10 +4,11 @@
   .loc_wrapper {
     display: flex;
     justify-content: space-between;
-
+    flex-wrap: wrap;
     label {
       line-height: 20px;
       padding-right: 20px;
+      padding-top: 8px;
     }
   }
 
@@ -23,9 +24,12 @@
     top: -4px;
   }
 
-  textarea {
-    border-radius: 20px;
-  }
+    textarea {
+      width: 100%;
+      border-radius: 20px;
+    }
+    
+
 }
 
 .layout.loc--isMobile .component-textarea {
@@ -33,6 +37,7 @@
     line-height: calc(44px * var(--viewport-koeff));
     font-size: calc(30px * var(--viewport-koeff));
     padding-right: calc(20px * var(--viewport-koeff));
+    padding-top: 0;
   }
 
   textarea {

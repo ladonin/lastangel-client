@@ -145,7 +145,7 @@ const DonatorUpdate: React.FC = () => {
             Запись успешно обновлена ({paramsRef.current?.fullname})
           </div>
         )}
-        {isDeletedState && <div className="loc_wrapper_removedSuccess">Запись удалена</div>}
+        {isDeletedState && <div className="loc_wrapper_removedSuccess">Донатор удален</div>}
 
         <Modal
           isOpen={modalDeleteIsOpenState}

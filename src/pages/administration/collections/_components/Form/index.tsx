@@ -139,10 +139,32 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   const setVideo3Handler = (val: null | File) => {
     onChangeHandler("video3", val);
   };
-
+продолжить с отправки данных на сервер
   return (
     <div className="page-administration_collections_form_component">
       <div className="loc_form">
+        <div className="loc_spending">
+          <div className="loc_new_value">
+            <InputNumber
+              required
+              floatNumbers={2}
+              min={-9999999}
+              label="Добавить расход"
+              onChange={(val) => {
+                onChangeHandler("current_spending", val);
+              }}
+              description="(можно добавить отрицательную сумму, если нужно убавить)"
+              className="loc_formInputItem"
+            />
+          </div>
+          <div className="loc_total_spent">
+            Всего израсходовано: {data ? data.spent : undefined} .руб
+          </div>
+          <div className="loc_last_spening">
+            Последняя операция: {data ? data.last_spending : undefined} .руб
+          </div>
+        </div>
+
         <div className="loc_left">
           <InputText
             required
@@ -164,13 +186,14 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             options={STATUSES_OPTIONS}
           />
           <InputNumber
-            float={2}
+            floatNumbers={2}
             label="Сумма сбора, руб"
             required
             initValue={data ? data.target_sum : undefined}
             onChange={(val) => {
               onChangeHandler("target_sum", val);
             }}
+            min={data?.collected ? parseFloat(data?.collected) : undefined}
             className="loc_formInputItem"
           />
           <Select

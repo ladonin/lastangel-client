@@ -18,7 +18,9 @@ export type TGetResponseItem = {
   video2: string;
   video3: string;
   target_sum: number;
-  collected?: number;
+  last_spending: string;
+  spent: number;
+  collected?: string;
   animal_name?: string;
   updated: number;
   created: number;
@@ -41,6 +43,7 @@ export type TCommonDataRequest = {
   video2?: string;
   video3?: string;
   target_sum: number;
+  current_spending: number;
 };
 
 export type TGetListOutput = TGetResponseItem[];

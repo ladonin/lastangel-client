@@ -7,10 +7,10 @@ import { getDateString, getDateYMD, numberFriendly } from "helpers/common";
 import { TGetListRequest, TItem, TItem as TDonationItem } from "api/types/donations";
 import InfiniteScroll from "components/InfiniteScroll";
 import Tooltip from "components/Tooltip";
-import { prepareType as prepareDonationType } from "helpers/donations";
+import { prepareType as prepareDonationType, isAnonym, getDonatorName } from "helpers/donations";
 import LoaderIcon from "components/LoaderIcon";
 // const OtherComponent = React.lazy(() => import('components/header'));
-import { loadItem } from "utils/localStorage";
+
 import "./style.scss";
 
 const PAGESIZE = 20;
@@ -40,19 +40,6 @@ const List = () => {
   useEffect(() => {
     getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
   }, [pageState]);
-
-  const isAnonym = (item: TDonationItem) =>
-    !(
-      item.donator_fullname ||
-      item.donator_firstname ||
-      item.donator_middlename ||
-      item.donator_lastname
-    );
-  const getDonatorName = (item: TDonationItem) =>
-    (
-      item.donator_fullname ||
-      `${item.donator_firstname} ${item.donator_middlename} ${item.donator_lastname}`
-    ).toUpperCase();
 
   return (
     <div className="page-finreport_list">

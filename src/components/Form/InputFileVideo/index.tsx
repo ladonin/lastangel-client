@@ -15,6 +15,7 @@ type TProps = {
   getVideoUrl: (data: any, name: string) => string;
   value?: string;
   data: any | { updated: number; id: number };
+  description?: string;
 };
 
 type TWrongVideoData = { file: File; error: string };
@@ -29,6 +30,7 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
     disabled = false,
     setVideo,
     value = "",
+    description,
   } = props;
   const [videoState, setVideoState] = useState<File | null | string>(value || null);
   const [wrongVideoState, setWrongVideoState] = useState<TWrongVideoData | null>(null);
@@ -86,7 +88,7 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
 
         <Modal
           isOpen={modalDeleteIsOpenState}
-          title="Удаление доната"
+          title="Удаление видео"
           onClose={() => setModalDeleteIsOpenState(false)}
           portalClassName="page-administration_donations_update_deleteModal"
         >
@@ -132,7 +134,9 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
           }}
         />
         <span className="loc_selectFile">Выберите файл</span>
+        
       </label>
+      {description && <div className="form-element-description">{description}</div>}
       {videoState && <div className="loc_video">{renderVideo()}</div>}
       {!!wrongVideoState && (
         <div className="loc_error">

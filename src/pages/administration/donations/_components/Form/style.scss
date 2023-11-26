@@ -1,3 +1,5 @@
+$labelWidth: 30%;
+$formElWidth: 70%;
 .page-administration_donations_form_component {
   .loc_form {
     display: flex;
@@ -9,19 +11,19 @@
 
     .loc_right {
       width: 45%;
-      padding-left: 32px;
+      padding-left: 0px;
     }
   }
 
   .loc_formInputItem, .loc_formCheckboxItem {
     margin-bottom: 24px;
 
-    input, .loc_checkbox {
-      width: 70%;
+    input, input, .loc_checkbox {
+      width: $formElWidth;
     }
 
     label, .loc_label {
-      width: 30%;
+      width: $labelWidth;
     }
   }
 
@@ -30,11 +32,11 @@
     margin-bottom: 24px;
 
     .loc_select {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_label {
-      width: 30%;
+      width: $labelWidth;
     }
   }
 

@@ -2,6 +2,7 @@
   import { prepareType } from 'helpers/donations';
  */
 import { DONATIONS_TYPES } from "../constants/donations";
+import { TItem as TDonationItem } from "../api/types/donations";
 
 export const prepareType = (code: number) => {
   if (code === DONATIONS_TYPES.PET) {
@@ -15,3 +16,17 @@ export const prepareType = (code: number) => {
   }
   return "";
 };
+
+export const isAnonym = (item: TDonationItem) =>
+  !(
+    item.donator_fullname ||
+    item.donator_firstname ||
+    item.donator_middlename ||
+    item.donator_lastname
+  );
+
+export const getDonatorName = (item: TDonationItem) =>
+  (
+    item.donator_fullname ||
+    `${item.donator_firstname} ${item.donator_middlename} ${item.donator_lastname}`
+  ).toUpperCase();

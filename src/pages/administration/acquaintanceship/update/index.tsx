@@ -90,7 +90,7 @@ const AcquaintanceshipUpdate: React.FC = () => {
         <title>Обновление страницы о приюте</title>
         <meta name="description" content="Обновление новости" />
       </Helmet>
-      <div className="page-administration_pets_update">
+      <div className="page-administration_acquaintanceship_update">
         <h1>
           Обновление страницы о приюте{" "}
           <Button

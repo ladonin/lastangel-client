@@ -1,3 +1,5 @@
+$labelWidth: 32%;
+$formElWidth: 68%;
 .page-administration_news_form_component {
   .loc_form,
   .loc_photos {
@@ -13,7 +15,7 @@
 
     .loc_right {
       width: 55%;
-      padding-left: 32px;
+      padding-left: 0px;
     }
   }
 
@@ -33,11 +35,11 @@
     margin-bottom: 24px;
 
     input {
-      width: 70%;
+      width: $formElWidth;
     }
 
     label {
-      width: 30%;
+      width: $labelWidth;
     }
   }
 
@@ -46,11 +48,11 @@
 
     .loc_wrapper {
       textarea {
-        width: 70%;
+        width: $formElWidth;
       }
 
       label {
-        width: 30%;
+        width: $labelWidth;
       }
     }
 
@@ -68,11 +70,11 @@
     margin-bottom: 24px;
 
     .loc_select {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_label {
-      width: 30%;
+      width: $labelWidth;
     }
 
     &.loc--sex .loc_container,
@@ -89,11 +91,11 @@
     margin-bottom: 24px;
 
     .loc--checkbox {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_label {
-      width: 30%;
+      width: $labelWidth;
     }
   }
 
@@ -102,11 +104,11 @@
     margin-bottom: 24px;
 
     .loc_label, .loc_error, .loc_video {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_labelTitle {
-      width: 30%;
+      width: $labelWidth;
     }
   }
 }

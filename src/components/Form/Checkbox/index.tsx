@@ -1,8 +1,9 @@
 import React, { PropsWithChildren, useMemo } from "react";
 import cn from "classnames";
-import CheckIcon from "./icons/checkIcon.svg";
 import { loadItem } from "utils/localStorage";
+import CheckIcon from "./icons/checkIcon.svg";
 import "./style.scss";
+
 type TProps = {
   checked?: boolean;
   disabled?: boolean;
@@ -13,10 +14,21 @@ type TProps = {
   value?: string;
   label?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  description?: string;
 };
 
 export const Checkbox: React.FC<PropsWithChildren<TProps>> = (props) => {
-  const { className, value = 1, checked, onChange, label, disabled, required, ...rest } = props;
+  const {
+    className,
+    value = 1,
+    checked,
+    onChange,
+    label,
+    disabled,
+    required,
+    description,
+    ...rest
+  } = props;
 
   return (
     <div className={cn("component-checkbox", className)}>
@@ -46,8 +58,11 @@ export const Checkbox: React.FC<PropsWithChildren<TProps>> = (props) => {
               })}
             />
           </div>
+          
         </div>
+        
       </label>
+      {description && <div className="form-element-description">{description}</div>}
     </div>
   );
 };

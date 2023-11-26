@@ -99,26 +99,16 @@
   .loc_photos {
     flex-direction: column;
 
-    h2 {
-      font-size: calc(32px * var(--viewport-koeff));
-    }
+
 
     .loc_left, .loc_right {
       width: 100%;
       padding: 0 !important;
       margin-top: calc(48px * var(--viewport-koeff));
 
-      .loc_labelTitle {
-        font-size: calc(32px * var(--viewport-koeff));
-        margin-bottom: calc(32px * var(--viewport-koeff));
-      }
 
-      .loc_selectFile {
-        font-size: calc(32px * var(--viewport-koeff));
-        line-height: calc(56px * var(--viewport-koeff));
-        padding: calc(16px * var(--viewport-koeff)) calc(48px * var(--viewport-koeff));
-        margin-bottom: calc(24px * var(--viewport-koeff));
-      }
+
+
 
       .loc_images {
         gap: calc(24px * var(--viewport-koeff));

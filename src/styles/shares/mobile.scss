@@ -86,4 +86,14 @@
   }
 
   // <-- wysiwyg
+
+  .form-element-description {
+    font-size: calc(24px * var(--viewport-koeff));
+    margin-top: calc(8px * var(--viewport-koeff));
+    &.loc--photo {
+      text-align: left !important;
+      margin-top: calc(-24px * var(--viewport-koeff)) !important;
+      margin-bottom: calc(32px * var(--viewport-koeff)) !important;
+    }
+  }
 }

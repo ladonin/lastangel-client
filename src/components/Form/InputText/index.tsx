@@ -2,17 +2,26 @@
   import InputText from 'components/Form/InputText'
  */
 
-import React, { ChangeEvent, RefObject, useMemo, useEffect, useRef, useState, useMemo } from "react";
+import React, {
+  ChangeEvent,
+  RefObject,
+  useMemo,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { v4 as uuidv4 } from "uuid";
 import cn from "classnames";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
+
 type TProps = {
   label?: string;
   className?: string;
   initValue?: string;
   type?: string;
   placeholder?: string;
+  description?: string;
   required?: boolean;
   disabled?: boolean;
   onChange: (val: string) => void;
@@ -33,6 +42,7 @@ const InputText: React.FC<TProps> = ({
   disabled,
   innerRef,
   placeholder,
+  description,
   type,
 }) => {
   const [validState, setValidState] = useState<boolean>(true);
@@ -53,8 +63,6 @@ const InputText: React.FC<TProps> = ({
   };
 
   useEffect(() => {
-    console.log("useEffect");
-
     // Валидация, когда значение помечено красным
     // Чтобы попытаться проверить на "корректность" и вернуть на Valid
     if (!validState && needValidate(type)) {
@@ -92,6 +100,7 @@ const InputText: React.FC<TProps> = ({
           {label} {required && <span className="red">*</span>}
         </label>
       )}
+    
       <input
         placeholder={placeholder}
         ref={innerRef}
@@ -103,6 +112,7 @@ const InputText: React.FC<TProps> = ({
       />
 
       {!label && required && <span className="red loc_input_star">*</span>}
+      {description && <div className="form-element-description">{description}</div>}
     </div>
   );
 };

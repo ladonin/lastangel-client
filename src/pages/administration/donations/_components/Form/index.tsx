@@ -9,8 +9,8 @@ import Select from "components/Form/Select";
 import { Checkbox } from "components/Form/Checkbox";
 import { TGetResponseItem } from "api/types/donations";
 import { ANIMALS_STATUS } from "constants/animals";
+import { isAnonym } from "helpers/donations";
 import "./style.scss";
-
 
 const TYPES_OPTIONS = [
   { value: String(DONATIONS_TYPES.PET), label: "Содержание животного" },
@@ -44,6 +44,9 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   useEffect(() => {
     if (data) {
       paramsRef.current = data;
+      if (isAnonym(data)) {
+        setIsAnonymState(true);
+      }
     }
   }, [data]);
 
@@ -133,7 +136,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
         </div>
         <div className="loc_right">
           <InputNumber
-            float={2}
+            floatNumbers={2}
             label="Сумма, руб"
             required
             initValue={data ? data.sum : undefined}

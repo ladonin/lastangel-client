@@ -191,7 +191,7 @@ const StoryUpdate: React.FC = () => {
             </Button>
           </div>
         )}
-        {isDeletedState && <div className="loc_wrapper_removedSuccess">Запись удалена</div>}
+        {isDeletedState && <div className="loc_wrapper_removedSuccess">История удалена</div>}
 
         <Modal
           isOpen={modalDeleteIsOpenState}

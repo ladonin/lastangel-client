@@ -5,6 +5,7 @@ import { DIMENTIONS } from "constants/photos";
 import { useGetImageDataHook, TData as TImageData } from "hooks/useGetImageDataHook";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
+
 type TProps = {
   className?: string;
   label?: string;
@@ -13,12 +14,22 @@ type TProps = {
   multiple?: boolean;
   noSizeRevision?: boolean;
   setImage: (files: File[] | File) => void;
+  description?: string;
 };
 
 type TWrongImageData = TImageData & { error: string };
 
 const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
-  const { className, setImage, label, required, disabled = false, multiple = false, noSizeRevision = false } = props;
+  const {
+    className,
+    setImage,
+    label,
+    required,
+    disabled = false,
+    multiple = false,
+    noSizeRevision = false,
+    description,
+  } = props;
 
   const { loadImgs, imgsResult } = useGetImageDataHook();
   const [imagesState, setImagesState] = useState<File[] | null>(null);
@@ -39,17 +50,21 @@ const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
       if (!availableExtensions.includes(extension)) {
         wrongImages.push({
           ...data,
-          error: `Текущее расширение файла не поддерживается. Должно быть ${availableExtensions.join(", ")}`,
+          error: `Текущее расширение файла не поддерживается. Должно быть ${availableExtensions.join(
+            ", "
+          )}`,
         });
       } else if (
-        (noSizeRevision === false && Number(data.width) < DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH) ||
-        (noSizeRevision === false && Number(data.height) < DIMENTIONS.IMAGES_UPLOAD_MIN_HEIGHT)
+        (!noSizeRevision && Number(data.width) < DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH) ||
+        (!noSizeRevision && Number(data.height) < DIMENTIONS.IMAGES_UPLOAD_MIN_HEIGHT)
       ) {
         wrongImages.push({
           ...data,
-          error: `Фото слишком мелкое: ${Number(data.width)}x${Number(data.height)}. Нужно как минимум ${
-            DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH
-          }x${DIMENTIONS.IMAGES_UPLOAD_MIN_HEIGHT}`,
+          error: `Фото слишком мелкое: ${Number(data.width)}x${Number(
+            data.height
+          )}. Нужно как минимум ${DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH}x${
+            DIMENTIONS.IMAGES_UPLOAD_MIN_HEIGHT
+          }`,
         });
       } else if (
         Number(data.width) > DIMENTIONS.IMAGES_UPLOAD_MAX_WIDTH ||
@@ -77,7 +92,8 @@ const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
               theme={ButtonThemes.DELETE_ICON}
               className={cn("loc_delete")}
               onClick={() => {
-                imagesState && setImagesState(imagesState.filter((val: File, ind: number) => ind !== index));
+                imagesState &&
+                  setImagesState(imagesState.filter((val: File, ind: number) => ind !== index));
               }}
               tooltip="Удалить"
             />
@@ -92,7 +108,7 @@ const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
           {label} {required && <span className="red">*</span>}
         </div>
       )}
-
+      
       <label className="loc_label">
         <input
           type="file"
@@ -104,7 +120,9 @@ const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
           }}
         />
         <span className="loc_selectFile">Выберите файл</span>
+        {description && <div className="form-element-description loc--photo">{description}</div>}
       </label>
+      
       {imagesState && <div className="loc_images">{renderImages(imagesState as File[])}</div>}
       {!!wrongImagesState.length && (
         <>

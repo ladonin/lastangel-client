@@ -1,10 +1,17 @@
+$labelWidth: 34%;
+$formElWidth: 66%;
+
+
+
 .page-administration_collections_form_component {
   .loc_form,
   .loc_photos {
     display: flex;
+    flex-wrap: wrap;
   }
 
   .loc_form {
+
     .loc_left {
       width: 45%;
       padding-right: 32px;
@@ -12,10 +19,9 @@
 
     .loc_right {
       width: 55%;
-      padding-left: 32px;
+      padding-left: 0px;
     }
   }
-
 
   .loc_photos {
     flex-wrap: wrap;
@@ -36,16 +42,15 @@
     }
   }
 
-
   .loc_formInputItem {
     margin-bottom: 24px;
 
     input {
-      width: 70%;
+      width: $formElWidth;
     }
 
     label {
-      width: 30%;
+      width: $labelWidth;
     }
   }
 
@@ -53,11 +58,11 @@
     margin-bottom: 24px;
 
     textarea {
-      width: 70%;
+      width: $formElWidth;
     }
 
     label {
-      width: 30%;
+      width: $labelWidth;
     }
 
     &.loc__shortdescription textarea {
@@ -73,21 +78,21 @@
     margin-bottom: 24px;
 
     .loc_select {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_label {
-      width: 30%;
+      width: $labelWidth;
     }
   }
 
   .loc_formCheckboxItem {
     .loc--checkbox {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_label {
-      width: 30%;
+      width: $labelWidth;
     }
 
   }
@@ -97,12 +102,48 @@
     margin-bottom: 24px;
 
     .loc_label, .loc_error, .loc_video {
-      width: 70%;
+      width: $formElWidth;
     }
 
     .loc_labelTitle {
-      width: 30%;
+      width: $labelWidth;
     }
+  }
+
+
+  .loc_spending {
+    width: 100%;
+    padding: 16px;
+    background-color: $c_lagunaLightMiddle;
+    border: 1px solid $c_greyMediumLight;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 24px;
+    .loc_new_value {
+      width: 48%;
+      .form-element-description {
+        text-align: left;
+      }
+    }
+    .loc_total_spent,.loc_last_spening {
+      line-height: 40px;
+      width: 26%;
+      font-size: 15px;
+    }
+
+    .loc_formInputItem {
+      margin-bottom: 0px;
+
+      input, .loc_description {
+        width: calc(100% - 200px);
+      }
+
+      label {
+        width: 200px;
+      }
+    }
+
   }
 }
 

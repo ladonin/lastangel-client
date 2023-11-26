@@ -186,5 +186,17 @@
     }
   }
 
+  
   // <-- wysiwyg
+
+  .form-element-description {
+    @extend %formElementDescription;
+    &.loc--photo {
+      text-align: left !important;
+      margin-top: -12px !important;
+      margin-bottom: 16px !important;
+    }
+  }
+  
 }
+

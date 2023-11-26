@@ -1,7 +1,7 @@
 .component-select {
   display: flex;
   justify-content: space-between;
-
+  flex-wrap: wrap;
   .loc_label {
     display: flex;
     align-items: center;

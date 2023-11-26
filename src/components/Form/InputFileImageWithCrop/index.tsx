@@ -19,6 +19,7 @@ type TProps = {
   disabled?: boolean;
   cropAspect: number;
   setImage: (cropped: Blob, original: Blob) => void;
+  description?: string;
 };
 
 type TWrongImageData = TImageData & { error: string };
@@ -31,7 +32,8 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
     label,
     required,
     disabled = false,
-    cropAspect
+    cropAspect,
+    description,
   } = props;
 
   const { loadImgs: loadImg, imgsResult: imgResult } = useGetImageDataHook();
@@ -220,8 +222,10 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
           }}
         />
         <span className="loc_selectFile">Выберите файл</span>
-      </label>
 
+        {description && <div className="form-element-description loc--photo">{description}</div>}
+      </label>
+      
       {/* imageState !== null && cropAspect === 1 && (
         <div className="loc_description">
           Внимание. Фото должно быть строго квадратным.

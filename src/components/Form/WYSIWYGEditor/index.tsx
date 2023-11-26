@@ -20,6 +20,7 @@ type TProps = {
   required?: boolean;
   mobileVersion?: boolean;
   onChange: (val: string) => void;
+  description?: string;
 };
 const WYSIWYGEditor: React.FC<TProps> = ({
   id,
@@ -29,6 +30,7 @@ const WYSIWYGEditor: React.FC<TProps> = ({
   value,
   required,
   onChange,
+  description,
 }) => {
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
@@ -54,6 +56,7 @@ const WYSIWYGEditor: React.FC<TProps> = ({
             </label>
           </a>
         )}
+        {description && <div className="form-element-description">{description}</div>}
         <SunEditor
           onChange={handleChange}
           defaultValue={value}
@@ -81,6 +84,7 @@ const WYSIWYGEditor: React.FC<TProps> = ({
           }}
           getSunEditorInstance={getSunEditorInstance}
         />
+        
       </div>
     </div>
   );

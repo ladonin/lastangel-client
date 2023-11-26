@@ -3,21 +3,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   label {
     line-height: 20px;
     padding-right: 20px;
   }
-  input {
-    border-radius: 99px;
-    padding: 0 16px;
-    font-size: 16px;
-    height: 40px;
-    &:disabled {
-      cursor: default;
-      color: $c_greyLight;
-      background-color: $c_greyLight;
-      border-color: $c_greyMedium;
-    }
+
+    input {
+      width: 100%;
+      border-radius: 99px;
+      padding: 0 16px;
+      font-size: 16px;
+      height: 40px;
+
+      &:disabled {
+        cursor: default;
+        color: $c_greyLight;
+        background-color: $c_greyLight;
+        border-color: $c_greyMedium;
+      }
+  
   }
 }
 
