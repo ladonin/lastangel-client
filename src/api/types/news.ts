@@ -5,9 +5,9 @@ export type TGetResponseItem = {
   description: string;
   mobile_description: string;
   another_images: string;
-  ismajor: boolean;
-  hide_album: boolean;
-  use_mobile_description: boolean;
+  ismajor: number;
+  hide_album: number;
+  use_mobile_description: number;
   status: number;
   video1: string;
   video2: string;

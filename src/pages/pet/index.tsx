@@ -67,6 +67,9 @@ const Pet: React.FC = () => {
     if (id) {
       setIsLoadingState(true);
       AnimalsApi.get(Number(id)).then((res) => {
+        if (res === null) {
+          navigate(PAGES.PAGE_404);
+        }
         res && setIsLoadingState(false);
         res && setDataState(res);
         res && res.another_images && setAnotherImagesState(JSON.parse(res.another_images));

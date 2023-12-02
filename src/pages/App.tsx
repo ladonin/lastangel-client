@@ -29,6 +29,7 @@ import Help from "pages/help";
 import Acquaintanceship from "pages/acquaintanceship";
 
 import Signin from "pages/signin";
+import Page404 from "pages/404";
 import Administration from "pages/administration";
 
 import AdministrationPetCreate from "pages/administration/pets/create";
@@ -114,13 +115,14 @@ const App: React.FC = () => (
 
       <Route path={PAGES.DONATORS} element={<Donators />} />
       <Route path={`${PAGES.DONATOR}/:id`} element={<Donator />} />
-      <Route path={`${PAGES.CONTACTS}`} element={<Contacts />} />
-      <Route path={`${PAGES.DOCUMENTS}`} element={<Documents />} />
-      <Route path={`${PAGES.CLINIC}`} element={<Clinic />} />
-      <Route path={`${PAGES.HELP}`} element={<Help />} />
-      <Route path={`${PAGES.FINREPORT}`} element={<FinReport />} />
-      <Route path={`${PAGES.ACQUAINTANCESHIP}`} element={<Acquaintanceship />} />
-      <Route path="*" element={<Home />} />
+      <Route path={PAGES.CONTACTS} element={<Contacts />} />
+      <Route path={PAGES.DOCUMENTS} element={<Documents />} />
+      <Route path={PAGES.CLINIC} element={<Clinic />} />
+      <Route path={PAGES.HELP} element={<Help />} />
+      <Route path={PAGES.FINREPORT} element={<FinReport />} />
+      <Route path={PAGES.ACQUAINTANCESHIP} element={<Acquaintanceship />} />
+      <Route path={PAGES.PAGE_404} element={<Page404 />} />
+      <Route path="*" element={<Page404 />} />
     </Route>
   </Routes>
 );

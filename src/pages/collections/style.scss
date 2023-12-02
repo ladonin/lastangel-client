@@ -69,19 +69,26 @@
           }
         }
 
-        .loc_collected, .loc_target_sum {
+        .loc_collected, .loc_target_sum, .loc_spent {
           margin-top: 8px;
           font-style: Italic;
           font-size: 18px;
           .loc_val {
             font-weight: 600;
             font-style: normal;
-            color: $c_orange;
           }
         }
-
-
-
+        
+        
+        .loc_collected .loc_val {
+          color: $c_red;
+        }
+        .loc_target_sum .loc_val {
+          color: $c_red;
+        }
+        .loc_spent .loc_val {
+          color: $c_main;
+        }
 
         .loc_status {
           font-weight: 600;
@@ -224,7 +231,7 @@
           }
         }
 
-        .loc_collected, .loc_target_sum {
+        .loc_collected, .loc_target_sum, .loc_spent {
           margin-top: calc(8px * var(--viewport-koeff));
           font-size: calc(32px * var(--viewport-koeff));
         }

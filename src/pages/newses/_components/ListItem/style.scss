@@ -23,7 +23,7 @@
 
   .loc_name {
     font-size: 24px;
-    margin: 4px 0 0 0;
+    margin: 4px 0 16px 0;
     font-weight: 600;
     color: $c_lagunaGrey;
     @extend %hoverable;
@@ -39,7 +39,6 @@
     color: $c_greyDark;
     font-size: 18px;
     line-height: 26px;
-    padding-top: 18px;
 
 
   }
@@ -146,13 +145,12 @@
 
   .loc_name {
     font-size: calc(38px * var(--viewport-koeff));
-    margin: calc(8px * var(--viewport-koeff)) 0 0 0;
+    margin: calc(8px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff)) 0;
   }
 
   .loc_short_description {
     font-size: calc(32px * var(--viewport-koeff));
     line-height: calc(42px * var(--viewport-koeff));
-    padding-top: calc(32px * var(--viewport-koeff));
   }
 
   .loc_nonpublished {

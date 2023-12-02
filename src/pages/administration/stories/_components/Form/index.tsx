@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 
 import InputText from "components/Form/InputText";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
-import InputFileImage from "components/Form/InputFileImage";
+import InputFileImages from "components/Form/InputFileImages";
 import { STORIES_STATUS } from "constants/stories";
 import Textarea from "components/Form/Textarea";
 import { Checkbox } from "components/Form/Checkbox";
@@ -217,7 +217,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       <div className="loc_photos">
         <h2>Фото</h2>
         <div className="loc_left">
-          <InputFileImage multiple setImage={setAnotherImagesHandler} />
+          <InputFileImages multiple setImage={setAnotherImagesHandler} />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages

@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import cn from "classnames";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 import { Button, ButtonThemes } from "../../Button";
 
@@ -23,7 +22,7 @@ const InputPrevLoadedImages = ({
   removeImage,
   restoreImage,
   prepareUrlFunc,
-                                 description
+  description,
 }: TPrevImagesProps) => {
   const [imagesState, setImagesState] = useState<number[]>([]);
 
@@ -34,33 +33,40 @@ const InputPrevLoadedImages = ({
 
   const renderImages = () =>
     imagesState.length
-      ? imagesState.map((img: number, index) => (
-          <div className="loc_image" key={index}>
-            <img alt="not found" src={prepareUrlFunc(img)} className={isDeleted(img) ? "loc--deleted" : undefined} />
-
-            {!isDeleted(img) && (
-              <Button
-                theme={ButtonThemes.DELETE_ICON}
-                className={cn("loc_delete")}
-                onClick={() => {
-                  removeImage(img);
-                }}
-                tooltip="Удалить"
+      ? imagesState
+          .slice()
+          .reverse()
+          .map((img: number, index) => (
+            <div className="loc_image" key={index}>
+              <img
+                alt="not found"
+                src={prepareUrlFunc(img)}
+                className={isDeleted(img) ? "loc--deleted" : undefined}
               />
-            )}
 
-            {isDeleted(img) && (
-              <Button
-                theme={ButtonThemes.RESTORE_ICON}
-                className={cn("loc_restore")}
-                onClick={() => {
-                  restoreImage(img);
-                }}
-                tooltip="Восстановить"
-              />
-            )}
-          </div>
-        ))
+              {!isDeleted(img) && (
+                <Button
+                  theme={ButtonThemes.DELETE_ICON}
+                  className={cn("loc_delete")}
+                  onClick={() => {
+                    removeImage(img);
+                  }}
+                  tooltip="Удалить"
+                />
+              )}
+
+              {isDeleted(img) && (
+                <Button
+                  theme={ButtonThemes.RESTORE_ICON}
+                  className={cn("loc_restore")}
+                  onClick={() => {
+                    restoreImage(img);
+                  }}
+                  tooltip="Восстановить"
+                />
+              )}
+            </div>
+          ))
       : null;
 
   return (

@@ -70,9 +70,12 @@ const ListItem = ({ data }: TProps) => {
           Редактировать
         </Button>
       )}
-      {isShowedState === true && (
+      {isShowedState && (
         <div className="loc_description">
-          <div className="loc_content" dangerouslySetInnerHTML={{ __html: data.description }} />
+          <div
+            className="loc_content wysiwyg_description"
+            dangerouslySetInnerHTML={{ __html: data.description }}
+          />
 
           {!data.hide_album && !!anotherImagesState && !!anotherImagesState.length && (
             <Swiper

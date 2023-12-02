@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 import Modal from "components/Modal";
 import { DonationsApi } from "api/donations";
 import { TItem } from "api/types/collections";
-import { TGetListOutput as TListDonations, TItem as TDonationItem } from "api/types/donations";
+import { TGetListOutput as TListDonations } from "api/types/donations";
 import { isAnonym, getDonatorName } from "helpers/donations";
 import LoaderIcon from "components/LoaderIcon";
 import { CollectionsApi } from "api/collections";
@@ -51,6 +51,10 @@ const Collection: React.FC = () => {
   useEffect(() => {
     id &&
       CollectionsApi.get(Number(id)).then((res) => {
+        if (res === null) {
+          navigate(PAGES.PAGE_404);
+        }
+
         res && setDataState(res);
         res && res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
       });
@@ -90,13 +94,21 @@ const Collection: React.FC = () => {
         Редактировать
       </Button>
     );
+
   const renderDonation = (data: TItem | null) =>
     data && (
       <div className="loc_donation">
         <div className="loc_title">Собрано:</div>
         <div className="loc_value">
-          <span>{numberFriendly(data.collected)}</span> руб.
+          <span>{numberFriendly(parseFloat(data.collected || "0"))}</span> руб.
         </div>
+
+        {isAdmin() && (
+          <div className="loc_spent">
+            Потрачено: <b>{numberFriendly(parseFloat(data.spent))}</b> руб.
+          </div>
+        )}
+
         {data.collected && (
           <div
             className="loc_additionally"
@@ -140,7 +152,7 @@ const Collection: React.FC = () => {
         <div className="loc_targetSum">
           Надо{isMobile === false && <> собрать</>}:{" "}
           <div className="loc_value">
-            <span>{numberFriendly(dataState.target_sum)}</span> руб.
+            <span>{numberFriendly(parseFloat(dataState.target_sum))}</span> руб.
           </div>
         </div>
         {isMobile === true && renderDonation(dataState)}

@@ -53,8 +53,17 @@
   .loc_control {
     border: 1px solid $c_greyMedium;
     padding: 0 calc(32px * var(--viewport-koeff));
-    min-height: calc(80px * var(--viewport-koeff));
+    min-height: unset !important;
+    height: calc(80px * var(--viewport-koeff));
     font-size: calc(30px * var(--viewport-koeff));
+    
+    >div {
+      padding: 0 !important;
+      >div {
+        margin: 0 !important;
+         
+      }
+    }
   }
 
   .loc_menu {

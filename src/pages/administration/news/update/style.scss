@@ -69,9 +69,15 @@
     margin-top: calc(24px * var(--viewport-koeff));
   }
 
-  .loc_form {
+  .loc_wrapper_textForm {
     flex-direction: column;
 
+
+    .loc_saveButton.loc--top {
+      margin-top: calc(80px * var(--viewport-koeff));
+    }
+    
+    
     .loc_left, .loc_right {
       padding: 0 !important;
       width: 100%;

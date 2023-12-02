@@ -39,7 +39,11 @@
             font-size: 26px;
           }
         }
-
+        .loc_spent {
+          text-align: right;
+          margin-top: 8px;
+          font-style: Italic;
+        }
         .loc_additionally {
           margin-top: 8px;
           text-align: right;
@@ -415,7 +419,11 @@
       align-items: flex-start;
       flex-wrap: wrap;
       margin-top: 0;
-
+      .loc_spent {
+        text-align: left;
+        margin-top: calc(8px * var(--viewport-koeff));
+        width: 100%;
+      }
       .loc_title {
         justify-content: flex-start;
         height: auto;

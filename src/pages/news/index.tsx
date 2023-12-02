@@ -52,6 +52,9 @@ const News: React.FC = () => {
   useEffect(() => {
     idState &&
       NewsApi.get(idState).then((res) => {
+        if (res === null) {
+          navigate(PAGES.PAGE_404);
+        }
         setDataState(res);
       });
   }, [idState]);

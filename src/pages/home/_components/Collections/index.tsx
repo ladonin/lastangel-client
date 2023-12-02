@@ -41,10 +41,10 @@ const Collections = () => {
           </Link>
 
           <div className="loc_need">
-            Надо: <span className="loc_val">{numberFriendly(data.target_sum)}</span> р.
+            Надо: <span className="loc_val">{numberFriendly(parseFloat(data.target_sum))}</span> р.
           </div>
           <div className="loc_collected">
-            Собрано: <span className="loc_val">{numberFriendly(data.collected)}</span> р.
+            Собрано: <span className="loc_val">{numberFriendly(parseFloat(data.collected || '0'))}</span> р.
           </div>
           <div className="loc_description">{data.short_description}</div>
         </div>

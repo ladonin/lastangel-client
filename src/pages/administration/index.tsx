@@ -3,7 +3,6 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { useLocation } from "react-router";
-import { SIZES_MAIN } from "constants/photos";
 import {
   TGetListRequest as TGetCollectionsListRequest,
   TItem as TItemCollection,
@@ -47,10 +46,11 @@ import {
 import { getDateString, numberFriendly } from "helpers/common";
 import { loadItem, saveItem } from "utils/localStorage";
 import Tabs from "components/Tabs";
-import { ANIMALS_STATUS } from "constants/animals";
-import { COLLECTIONS_STATUS } from "constants/collections";
 import NotFound from "components/NotFound";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { SIZES_MAIN } from "constants/photos";
+import { ANIMALS_STATUS } from "constants/animals";
+import { COLLECTIONS_STATUS } from "constants/collections";
 import PetsFilter, { TFilterParams as TPetsFilterParams } from "./pets/_components/Filter";
 import CollectionsFilter, {
   TFilterParams as TCollectionsFilterParams,
@@ -388,8 +388,7 @@ const Administration: React.FC = () => {
           </div>
           {data.need_medicine !== null && <span>({preparePetStatus(data.status, null)})</span>}
           <div className="loc_collected">
-            Собрано за месяц: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
-            руб.
+            Собрано за месяц: <span className="loc_val">{numberFriendly(data.collected)}</span> руб.
           </div>
           <div className="loc_description">{data.short_description}</div>
           <div className="loc_created">Создано: {getDateString(data.created)}</div>
@@ -436,7 +435,16 @@ const Administration: React.FC = () => {
               Number(data.target_sum) <= Number(data.collected) ? "loc--completed" : ""
             }`}
           >
-            Собрано: <span className="loc_val">{numberFriendly(data.collected)}</span> руб.
+            Собрано:{" "}
+            <span className="loc_val">
+              {data.collected ? numberFriendly(parseFloat(data.collected)) : 0}
+            </span>{" "}
+            руб.
+          </div>
+
+          <div className="loc_spent">
+            Потрачено: <span className="loc_val">{Number(data.spent)?.toLocaleString() || 0}</span>{" "}
+            руб.
           </div>
 
           <div className="loc_description">{data.short_description}</div>

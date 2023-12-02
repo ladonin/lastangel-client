@@ -19,7 +19,7 @@ type TProps = {
 
 type TWrongImageData = TImageData & { error: string };
 
-const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
+const InputFileImages: React.FC<PropsWithChildren<TProps>> = (props) => {
   const {
     className,
     setImage,
@@ -85,20 +85,29 @@ const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
 
   const renderImages = (images: File[]) =>
     images.length
-      ? images.map((img: File, index) => (
-          <div className="loc_image" key={index}>
-            <img alt="not found" src={URL.createObjectURL(img)} />
-            <Button
-              theme={ButtonThemes.DELETE_ICON}
-              className={cn("loc_delete")}
-              onClick={() => {
-                imagesState &&
-                  setImagesState(imagesState.filter((val: File, ind: number) => ind !== index));
-              }}
-              tooltip="Удалить"
-            />
-          </div>
-        ))
+      ? images
+          .slice()
+          .reverse()
+          .map((img: File, index) => (
+            <div className="loc_image" key={index}>
+              <img alt="not found" src={URL.createObjectURL(img)} />
+              <Button
+                theme={ButtonThemes.DELETE_ICON}
+                className={cn("loc_delete")}
+                onClick={() => {
+                  imagesState &&
+                    setImagesState(
+                      imagesState
+                        .slice()
+                        .reverse()
+                        .filter((val: File, ind: number) => ind !== index)
+                        .reverse()
+                    );
+                }}
+                tooltip="Удалить"
+              />
+            </div>
+          ))
       : null;
 
   return (
@@ -108,7 +117,7 @@ const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
           {label} {required && <span className="red">*</span>}
         </div>
       )}
-      
+
       <label className="loc_label">
         <input
           type="file"
@@ -122,7 +131,7 @@ const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
         <span className="loc_selectFile">Выберите файл</span>
         {description && <div className="form-element-description loc--photo">{description}</div>}
       </label>
-      
+
       {imagesState && <div className="loc_images">{renderImages(imagesState as File[])}</div>}
       {!!wrongImagesState.length && (
         <>
@@ -137,4 +146,4 @@ const InputFileImage: React.FC<PropsWithChildren<TProps>> = (props) => {
   );
 };
 
-export default InputFileImage;
+export default InputFileImages;

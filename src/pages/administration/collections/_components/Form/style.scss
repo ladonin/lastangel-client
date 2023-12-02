@@ -126,12 +126,14 @@ $formElWidth: 66%;
         text-align: left;
       }
     }
-    .loc_total_spent,.loc_last_spening {
+    .loc_total_spent,.loc_last_spending {
       line-height: 40px;
       width: 26%;
       font-size: 15px;
     }
-
+    .loc_last_spending {
+      font-style: Italic;
+    }
     .loc_formInputItem {
       margin-bottom: 0px;
 
@@ -148,9 +150,39 @@ $formElWidth: 66%;
 }
 
 
-//
-//.layout.loc--isMobile .page-administration_collections_form_component {
-//
+
+
+
+.layout.loc--isMobile .page-administration_collections_form_component {
+  .loc_spending {
+    flex-wrap: wrap;
+    gap: calc(16px * var(--viewport-koeff));
+    padding: calc(24px * var(--viewport-koeff));
+    margin-bottom: calc(48px * var(--viewport-koeff));
+    border-radius: calc(8px * var(--viewport-koeff));
+    .loc_new_value,.loc_total_spent,.loc_last_spending {
+      width: 100%;
+      font-size: calc(32px * var(--viewport-koeff));
+      line-height: calc(60px * var(--viewport-koeff));
+    }
+    .loc_last_spending b{
+color: $c_blue;
+    }
+    .loc_new_value {
+      .loc_formInputItem {
+        label {
+          width: 33%;
+        }
+        input {
+          width: 67%;
+        }
+      }
+
+    }
+  
+  }
+
+}
 //  .loc_form {
 //    .loc_left {
 //      padding-right: calc(32px * var(--viewport-koeff));

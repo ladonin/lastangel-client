@@ -14,7 +14,7 @@ import {
 import InputText from "components/Form/InputText";
 import InputFileImageWithCrop from "components/Form/InputFileImageWithCrop";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
-import InputFileImage from "components/Form/InputFileImage";
+import InputFileImages from "components/Form/InputFileImages";
 import InputFileVideo from "components/Form/InputFileVideo";
 import DatePicker from "components/Form/DatePicker";
 import Select from "components/Form/Select";
@@ -306,7 +306,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           )}
         </div>
         <div className="loc_right">
-          <InputFileImage
+          <InputFileImages
                            label="Дополнительные фото" multiple setImage={setAnotherImagesHandler} />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (

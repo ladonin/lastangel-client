@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
 import PAGES from "routing/routes";
 import { DonationsApi } from "api/donations";
-import { getDateString, getDateYMD, numberFriendly } from "helpers/common";
+import { getDateString, getDateYMD, monthMappings, numberFriendly } from "helpers/common";
 import { TGetListRequest, TItem, TItem as TDonationItem } from "api/types/donations";
 import InfiniteScroll from "components/InfiniteScroll";
 import Tooltip from "components/Tooltip";
@@ -40,53 +40,77 @@ const List = () => {
   useEffect(() => {
     getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
   }, [pageState]);
-
+  const dateRef = useRef<null | number>(null);
+  
+  useEffect(() => {
+    dateRef.current = null;
+  }, [listState]);
+  
   return (
     <div className="page-finreport_list">
       {listState &&
-        listState.map((item, index) => (
-          <div key={index} className="loc_item">
-            <div className={cn("loc_name", { "loc--hasLink": !!item.donator_outer_link })}>
-              {isAnonym(item) ? (
-                "Добрый помощник приюта"
-              ) : (
-                <div
-                  onClick={() => {
-                    item.donator_outer_link && window.open(item.donator_outer_link, "_blank");
-                  }}
-                >
-                  {getDonatorName(item)}
+        listState.map((item, index) => {
+          const date = new Date(item.created * 1000);
+          const month: number = date.getMonth();
+          const year: number = date.getFullYear();
+          let showMonthYear = false;
+          if (dateRef.current === null || dateRef.current !== month) {
+            showMonthYear = true;
+          }
+          dateRef.current = month;
+
+          return (
+            <>
+              {showMonthYear && (
+                <div className="loc_month-year">
+                  {monthMappings[month]} {year}
                 </div>
               )}
-            </div>
-            <div className="loc_sum">
-              <span>{numberFriendly(item.sum)}</span> руб.
-            </div>
-            <div className="loc_delimiter" />
-            <div className="loc_target">
-              {!!item.target_name && !!item.target_id ? (
-                <Link
-                  to={`${item.type === 1 ? PAGES.PET : PAGES.COLLECTION}/${item.target_id}`}
-                  className={`loc_targetName loc--type_${item.type} link_text`}
-                >
-                  {item.target_name}
-                </Link>
-              ) : (
-                <div className="loc_deletedTarget">{item.target_print_name}</div>
-              )}
-              {!item.target_id && (
-                <div className={`loc_targetName loc--type_${item.type}`}>
-                  {prepareDonationType(item.type)}
+
+              <div key={index} className={cn("loc_item", `loc--month_${month}`)}>
+                <div className={cn("loc_name", { "loc--hasLink": !!item.donator_outer_link })}>
+                  {isAnonym(item) ? (
+                    "Добрый помощник приюта"
+                  ) : (
+                    <div
+                      onClick={() => {
+                        item.donator_outer_link && window.open(item.donator_outer_link, "_blank");
+                      }}
+                    >
+                      {getDonatorName(item)}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <Tooltip
-              text="Дата регистрации доната"
-              className="loc_created"
-              content={getDateYMD(item.created)}
-            />
-          </div>
-        ))}
+                <div className="loc_sum">
+                  <span>{numberFriendly(item.sum)}</span> руб.
+                </div>
+                <div className="loc_delimiter" />
+                <div className="loc_target">
+                  {!!item.target_name && !!item.target_id ? (
+                    <Link
+                      to={`${item.type === 1 ? PAGES.PET : PAGES.COLLECTION}/${item.target_id}`}
+                      className={`loc_targetName loc--type_${item.type} link_text`}
+                    >
+                      {item.target_name}
+                    </Link>
+                  ) : (
+                    <div className="loc_deletedTarget">{item.target_print_name}</div>
+                  )}
+                  {!item.target_id && (
+                    <div className={`loc_targetName loc--type_${item.type}`}>
+                      {prepareDonationType(item.type)}
+                    </div>
+                  )}
+                </div>
+                <Tooltip
+                  text="Дата регистрации доната"
+                  className="loc_created"
+                  content={getDateYMD(item.created)}
+                />
+              </div>
+            </>
+          );
+        })}
       {listState === null && <LoaderIcon />}
       <InfiniteScroll onReachBottom={onReachBottomHandler} amendment={100} />
     </div>

@@ -78,7 +78,11 @@ export default function Index() {
             )}
             {renderCounter()}
           </div>
+          <div className="loc_block_4">
+            Сайт создан волонтерами на добровольной основе
+          </div>
         </div>
+
       </BrowserView>
       <MobileView>
         <div className="component-footer_wrapper_1">
@@ -87,7 +91,9 @@ export default function Index() {
             Приют для животных &copy; "Последний ангел"
             <br />с 2010г.
           </div>
-
+          <div className="loc_block_4">
+            Сайт создан волонтерами на добровольной основе
+          </div>
           <div className="loc_block_3">
             {!isAuthorized() && (
               <Link to={PAGES.SIGNIN} className="link_1 loc_link loc_login">

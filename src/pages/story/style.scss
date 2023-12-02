@@ -20,7 +20,7 @@
 
     .loc_name {
       font-size: 24px;
-      margin: 4px 0 0 0;
+      margin: 4px 0 16px 0;
       font-weight: 600;
       color: $c_lagunaGrey;
       @extend %hoverable;
@@ -121,7 +121,7 @@
 
     .loc_name {
       font-size: calc(38px * var(--viewport-koeff));
-      margin: calc(8px * var(--viewport-koeff)) 0 0 0;
+      margin: calc(8px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff)) 0;
     }
 
     .loc_redactButton {

@@ -1,13 +1,11 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 // const OtherComponent = React.lazy(() => import('components/header'));
 
 import "./style.scss";
-import InputText from "components/Form/InputText";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
-import InputFileImage from "components/Form/InputFileImage";
+import InputFileImages from "components/Form/InputFileImages";
 
-import Textarea from "components/Form/Textarea";
 import { Checkbox } from "components/Form/Checkbox";
 import { TGetResponseItem } from "api/types/acquaintanceship";
 import { getAnotherImagesUrl, getVideoUrl } from "helpers/acquaintanceship";
@@ -182,7 +180,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       <div className="loc_photos">
         <h2>Фото</h2>
         <div className="loc_left">
-          <InputFileImage multiple setImage={setAnotherImagesHandler} />
+          <InputFileImages multiple setImage={setAnotherImagesHandler} />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages

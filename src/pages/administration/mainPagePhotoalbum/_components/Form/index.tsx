@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
-import InputFileImage from "components/Form/InputFileImage";
+import InputFileImages from "components/Form/InputFileImages";
 import { TGetResponseItem } from "api/types/mainphotoalbum";
 import { getAnotherImagesUrl } from "helpers/mainphotoalbum";
 import { SIZES_ANOTHER } from "constants/photos";
@@ -75,7 +75,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       <div className="loc_photos">
         <h2>Фото</h2>
         <div className="loc_left">
-          <InputFileImage multiple setImage={setAnotherImagesHandler} />
+          <InputFileImages multiple setImage={setAnotherImagesHandler} />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages

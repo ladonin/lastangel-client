@@ -17,6 +17,7 @@ const PAGES = {
   FINREPORT: "/finreport",
   CURATORY: "/pets?curator",
   SIGNIN: "/signin",
+  PAGE_404: "/404",
   ADMINISTRATION: "/administration",
 
   ADMINISTRATION_PET_CREATE: "/administration/pet/create",

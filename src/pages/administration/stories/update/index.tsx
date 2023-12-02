@@ -113,7 +113,7 @@ const StoryUpdate: React.FC = () => {
         <title>Обновление истории</title>
         <meta name="description" content="Обновление истории" />
       </Helmet>
-      <div className="page-administration_pets_update">
+      <div className="page-administration_story_update">
         <h1>
           Обновление истории{" "}
           {!isDeletedState && (
@@ -133,7 +133,7 @@ const StoryUpdate: React.FC = () => {
         {!isChangedState && !isDeletedState && (
           <div className="loc_wrapper_textForm">
             <Button
-              className="loc_saveButton margin_b24"
+              className="loc_saveButton loc--top margin_b24"
               theme={ButtonThemes.SUCCESS}
               isLoading={isUpdatingState}
               disabled={!paramsRef.current}

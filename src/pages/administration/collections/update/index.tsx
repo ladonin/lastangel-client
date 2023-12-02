@@ -156,7 +156,7 @@ const CollectionUpdate: React.FC = () => {
         {!isChangedState && !isDeletedState && (
           <div className="loc_wrapper_textForm">
             <Button
-              className="loc_saveButton margin_b24"
+              className="loc_saveButton margin_b24 loc--top"
               theme={ButtonThemes.SUCCESS}
               isLoading={isUpdatingState}
               disabled={!paramsRef.current}

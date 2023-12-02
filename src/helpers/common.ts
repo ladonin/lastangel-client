@@ -162,5 +162,19 @@ export const textToClient = (text: string) => {
   return result;
 };
 
-
 export const getViewportKoeff = () => window.innerWidth / 980;
+
+export const monthMappings = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
+];

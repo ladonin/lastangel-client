@@ -31,6 +31,8 @@ const LayoutAdministration: React.FC = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   useEffect(() => {
+    // react-device-detect выбает всякую помойку иногда и не стоит ожидать,
+    // что он отдаст только true или false (еще он отдает null)
     if ((isMobile === true || isMobile === false) && isMobileState === undefined) {
       saveItem("isMobile", isMobile);
       setIsMobileState(isMobile);

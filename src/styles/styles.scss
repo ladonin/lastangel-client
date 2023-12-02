@@ -84,6 +84,10 @@ textarea:focus, input:focus {
   border-color: $c_blueLight;
 }
 
+input::placeholder {
+  color: hsl(0, 0%, 50%);
+}
+
 textarea {
   border-radius: 8px;
   padding: 16px;
@@ -161,9 +165,14 @@ h3 {
   margin-top: 24px;
 }
 
+.margin_t48 {
+  margin-top: 48px;
+}
+
 .margin_b24 {
   margin-bottom: 24px;
 }
+
 .red {
   color: $c_red;
 }

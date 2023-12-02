@@ -26,7 +26,6 @@ const LayoutMain: React.FC = () => {
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const checkMail = () => {
-    console.log("checkMail");
     isAdmin() &&
       FeedbacksApi.getNewCount().then((res) => {
         setNewFeedbacksState(Number(res));
@@ -36,6 +35,8 @@ const LayoutMain: React.FC = () => {
   const getMetatags = () => metatagsState;
 
   useEffect(() => {
+    // react-device-detect выбает всякую помойку иногда и не стоит ожидать,
+    // что он отдаст только true или false (еще он отдает null)
     if ((isMobile === true || isMobile === false) && isMobileState === undefined) {
       saveItem("isMobile", isMobile);
       setIsMobileState(isMobile);

@@ -1,7 +1,7 @@
 %mobileCommon {
-  html {
-    font-size: calc(24px * var(--viewport-koeff));
-  }
+
+  font-size: calc(32px * var(--viewport-koeff));
+
 
   h1 {
     font-size: calc(48px * var(--viewport-koeff));
@@ -38,9 +38,15 @@
     padding: calc(16px * var(--viewport-koeff));
     font-size: calc(16px * var(--viewport-koeff));
   }
-
+  input::placeholder {
+    font-size: calc(30px * var(--viewport-koeff));
+  }
   .margin_t24 {
     margin-top: calc(24px * var(--viewport-koeff));
+  }
+  
+  .margin_t48 {
+    margin-top: calc(48px * var(--viewport-koeff));
   }
 
   .margin_b24 {

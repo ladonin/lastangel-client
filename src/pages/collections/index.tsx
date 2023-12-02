@@ -15,6 +15,7 @@ import BreadCrumbs from "components/BreadCrumbs";
 import { COLLECTIONS_STATUS } from "constants/collections";
 import { numberFriendly } from "helpers/common";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { isAdmin } from "utils/user";
 import "./style.scss";
 import { loadItem } from "utils/localStorage";
 import { SIZES_MAIN } from "../../constants/photos";
@@ -76,14 +77,24 @@ const Collections: React.FC = () => {
           </Link>
           {/* <div className={`loc_type loc--type_${data.type}`}>{prepareType(data.type)}</div> */}
           <div className="loc_target_sum">
-            Нужно: <span className="loc_val">{Number(data.target_sum)?.toLocaleString() || 0}</span>{" "}
+            Нужно:{" "}
+            <span className="loc_val">
+              {numberFriendly(parseFloat(data.target_sum))?.toLocaleString() || 0}
+            </span>{" "}
             руб.
           </div>
 
           <div className="loc_collected">
-            Собрано: <span className="loc_val">{numberFriendly(data.collected)}</span> руб.
+            Собрано: <span className="loc_val">{numberFriendly(parseFloat(data.collected || '0'))}</span>{" "}
+            руб.
           </div>
 
+          {isAdmin() && (
+            <div className="loc_spent">
+              Потрачено: <span className="loc_val">{numberFriendly(parseFloat(data.spent))}</span>{" "}
+              руб.
+            </div>
+          )}
           <div className="loc_description">{data.short_description}</div>
         </div>
       </div>

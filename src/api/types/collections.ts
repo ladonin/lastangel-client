@@ -17,10 +17,10 @@ export type TGetResponseItem = {
   video1: string;
   video2: string;
   video3: string;
-  target_sum: number;
+  target_sum: string;
   last_spending: string;
-  spent: number;
-  collected?: string;
+  spent: string;
+  collected: string | null;
   animal_name?: string;
   updated: number;
   created: number;

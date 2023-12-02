@@ -54,15 +54,14 @@ const InputNumber: React.FC<TProps> = ({
       ) {
         return;
       }
-
+      if (withMinus && min < 0) value = `-${value}`;
       const valFloat = parseFloat(value);
       if (value) {
         value = valFloat > max ? String(max) : value;
         value = valFloat < min ? String(min) : value;
       }
-      if (withMinus && min < 0) value = `-${value}`;
-      // БД понимает запятую для float
-      onChange(value.replace(".", ","));
+
+      onChange(value);
       setValueState(value);
       return;
     }

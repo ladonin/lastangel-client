@@ -53,6 +53,9 @@ const Story: React.FC = () => {
   useEffect(() => {
     idState &&
       StoriesApi.get(idState).then((res) => {
+        if (res === null) {
+          navigate(PAGES.PAGE_404);
+        }
         setDataState(res);
       });
   }, [idState]);

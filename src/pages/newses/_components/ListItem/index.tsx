@@ -14,10 +14,10 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import PinIcon from "icons/pin.png";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
-import "./style.scss";import CopyLinkToPage from "components/CopyLinkToPage";
+import "./style.scss";
+import CopyLinkToPage from "components/CopyLinkToPage";
 import MediaOriginalLinks from "../../../../components/MediaOriginalLinks";
 import Tooltip from "../../../../components/Tooltip";
-import { loadItem } from "utils/localStorage";
 
 type TProps = {
   data: TItem;
@@ -71,7 +71,10 @@ const ListItem = ({ data }: TProps) => {
       )}
       {isShowedState === true && (
         <div className="loc_description">
-          <div className="loc_content" dangerouslySetInnerHTML={{ __html: data.description }} />
+          <div
+            className="loc_content wysiwyg_description"
+            dangerouslySetInnerHTML={{ __html: data.description }}
+          />
 
           {!data.hide_album && !!anotherImagesState && !!anotherImagesState.length && (
             <Swiper

@@ -45,7 +45,7 @@
           width: 100%;
         }
 
-        .loc_collected, .loc_target_sum {
+        .loc_collected, .loc_target_sum, .loc_spent {
           margin-top: 8px;
           font-style: Italic;
 
@@ -55,10 +55,14 @@
           }
         }
 
-
+        .loc_spent {
+          .loc_val {
+            color: $c_blue;
+          }
+        }
         .loc_collected.loc--completed, .loc_target_sum {
           .loc_val {
-            color: $c_orange;
+            color: $c_red;
           }
         }
 
@@ -77,7 +81,7 @@
           }
           .loc_collected {
             .loc_val {
-              color: $c_orange;
+              color: $c_red;
             }
           }
 
@@ -449,7 +453,7 @@
 
       .loc_item {
 
-        .loc_collected, .loc_target_sum {
+        .loc_collected, .loc_target_sum, .loc_spent {
           margin-top: calc(8px * var(--viewport-koeff));
         }
         .loc_content {

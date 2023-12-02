@@ -8,7 +8,7 @@ import InputNumber from "components/Form/InputNumber";
 
 import InputFileImageWithCrop from "components/Form/InputFileImageWithCrop";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
-import InputFileImage from "components/Form/InputFileImage";
+import InputFileImages from "components/Form/InputFileImages";
 import Select from "components/Form/Select";
 import Textarea from "components/Form/Textarea";
 import { Checkbox } from "components/Form/Checkbox";
@@ -139,31 +139,35 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   const setVideo3Handler = (val: null | File) => {
     onChangeHandler("video3", val);
   };
-продолжить с отправки данных на сервер
+  const isCreating = () => data === undefined;
   return (
     <div className="page-administration_collections_form_component">
       <div className="loc_form">
-        <div className="loc_spending">
-          <div className="loc_new_value">
-            <InputNumber
-              required
-              floatNumbers={2}
-              min={-9999999}
-              label="Добавить расход"
-              onChange={(val) => {
-                onChangeHandler("current_spending", val);
-              }}
-              description="(можно добавить отрицательную сумму, если нужно убавить)"
-              className="loc_formInputItem"
-            />
+        {!isCreating() && (
+          <div className="loc_spending">
+            <div className="loc_new_value">
+              <InputNumber
+                required
+                floatNumbers={2}
+                min={data ? parseFloat(`-${data.spent}`) : 0}
+                label="Добавить расход"
+                onChange={(val) => {
+                  onChangeHandler("current_spending", val);
+                }}
+                description="(можно добавить отрицательную сумму, если нужно убавить)"
+                className="loc_formInputItem"
+              />
+            </div>
+            <div className="loc_total_spent">
+              Всего израсходовано: <b>{data ? data.spent : undefined}</b> руб
+            </div>
+            {!!data && !!parseFloat(data.last_spending) && (
+              <div className="loc_last_spending">
+                Последняя операция: <b>{data.last_spending}</b> руб
+              </div>
+            )}
           </div>
-          <div className="loc_total_spent">
-            Всего израсходовано: {data ? data.spent : undefined} .руб
-          </div>
-          <div className="loc_last_spening">
-            Последняя операция: {data ? data.last_spending : undefined} .руб
-          </div>
-        </div>
+        )}
 
         <div className="loc_left">
           <InputText
@@ -189,7 +193,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             floatNumbers={2}
             label="Сумма сбора, руб"
             required
-            initValue={data ? data.target_sum : undefined}
+            initValue={data ? parseFloat(data.target_sum) : undefined}
             onChange={(val) => {
               onChangeHandler("target_sum", val);
             }}
@@ -306,7 +310,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           )}
         </div>
         <div className="loc_right">
-          <InputFileImage label="Дополнительные фото" multiple setImage={setAnotherImagesHandler} />
+          <InputFileImages label="Дополнительные фото" multiple setImage={setAnotherImagesHandler} />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages
