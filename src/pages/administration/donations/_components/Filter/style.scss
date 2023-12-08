@@ -10,32 +10,26 @@
 
 
     .loc_formInputItem, .loc_formSelectItem {
-
       .loc_label,label {
         color: $c_white;
       }
-
-
-     
-
-
     }
     .loc--card {
-      width: 27%;
+      width: 25%;
       input {
         width: 100%;
       }
 
     }
     .loc--name {
-      width: 27%;
+      width: 35%;
       input {
         width: 100%;
       }
 
     }
     .loc--order {
-      width: 27%;
+      width: 24%;
       .loc_select {
         width: 100%;
       }

@@ -24,6 +24,7 @@
     //width: 100%;
     top: calc(67px + 24px);
     right: 0;
+
     .loc_button {
       font-size: 16px;
       line-height: 36px;
@@ -38,9 +39,11 @@
       //border: 1px solid $c_greyDark;
       //box-shadow: 2px 2px 6px #5b5a56;
       cursor: pointer;
+
       &:hover {
         background-color: $c_yellowSuperLite;
       }
+
       img {
         width: 22px;
         height: 22px;
@@ -117,6 +120,7 @@
       background-color: $c_white;
       padding: 0 4px;
       border-radius: 20px;
+
       img {
         display: block;
         width: 32px;
@@ -132,7 +136,7 @@
     height: 40px;
     justify-content: space-between;
 
-    .loc_item {
+    .loc_item, .loc_else {
       font-size: 15px;
       text-transform: uppercase;
       font-weight: $font_semi_bold;
@@ -146,6 +150,58 @@
         color: $c_lagunaMiddle;
       }
     }
+
+    .loc_else {
+      position: relative;
+
+      .loc_caret {
+        margin-left: 4px;
+      }
+
+      &.loc--opened {
+        color: $c_lagunaMiddle;
+
+        .loc_caret {
+          transform: rotate(180deg);
+          transition: $transition;
+        }
+      }
+
+      .loc_subMenu {
+        position: absolute;
+        top: 48px;
+        right: 0;
+        text-align: left;
+        background-color: $c_white;
+        border-radius: 4px;
+        border: 1px solid $c_main;
+
+        a {
+          color: $c_main;
+          padding: 16px;
+
+          &:hover {
+            color: $c_lagunaBlue;
+          }
+
+          &.loc--active {
+            color: $c_lagunaBlue;
+
+          }
+        }
+
+      }
+
+      .loc_overflow {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        cursor: default;
+      }
+    }
+
   }
 
   .loc_leftPart {
@@ -278,7 +334,7 @@
       }
 
       &.loc--opened {
-        @extend %active ;
+        color: $c_lagunaBlue;
 
         .loc_caret {
           transform: rotate(180deg);
@@ -290,13 +346,24 @@
 
   .loc_subMenu {
     display: flex;
-    justify-content: space-between;
+    gap: calc(36px * var(--viewport-koeff));
+    flex-wrap: wrap;
     width: 100%;
-
     .loc_item {
       color: $c_main;
       font-size: calc(29px * var(--viewport-koeff));
       font-weight: 500;
+    }
+    &-1, &-2 {
+      display: flex;
+      width: 100%;
+    }
+    &-1 {
+      justify-content: space-between;
+    }
+    &-2 {
+      justify-content: space-between;
+
     }
   }
 
@@ -322,9 +389,11 @@
       border: 1px solid $c_greyMedium;
       //box-shadow: 2px 2px 6px #5b5a56;
       cursor: pointer;
+
       &:hover {
         background-color: $c_yellowSuperLite;
       }
+
       img {
         width: calc(50px * var(--viewport-koeff));;
         height: calc(50px * var(--viewport-koeff));;

@@ -9,8 +9,8 @@
     border-radius: 8px;
 
 
-    .loc_formInputItem, .loc_formSelectItem {
-      width: calc(31% - 12px);
+    .loc_formSelectItem {
+      width: 28%;
 
       .loc_label {
         color: $c_white;
@@ -23,6 +23,7 @@
 
     }
     .loc--type {
+      width: 35%;
       .loc_select {
         width: 100%;
       }

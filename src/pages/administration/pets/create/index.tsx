@@ -88,7 +88,7 @@ const PetCreate: React.FC = () => {
         });
     }
   };
-  console.log(paramsRef.current);
+
   return (
     <div className="page-administration_pets_create">
       <h1>Добавление питомца</h1>

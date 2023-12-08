@@ -9,6 +9,10 @@ import {
 } from "api/types/collections";
 import { TGetListRequest as TGetPetsListRequest, TItem as TItemPet } from "api/types/animals";
 import {
+  TGetListRequest as TGetVolunteersListRequest,
+  TItem as TItemVolunteer,
+} from "api/types/volunteers";
+import {
   TGetListRequest as TGetDonationsListRequest,
   TItem as TItemDonation,
 } from "api/types/donations";
@@ -21,6 +25,7 @@ import { TGetListRequest as TGetStoriesListRequest, TItem as TItemStory } from "
 import PAGES from "routing/routes";
 import InfiniteScroll from "components/InfiniteScroll";
 import { AnimalsApi } from "api/animals";
+import { VolunteersApi } from "api/volunteers";
 import { CollectionsApi } from "api/collections";
 import { DonationsApi } from "api/donations";
 import { DonatorsApi } from "api/donators";
@@ -35,15 +40,16 @@ import {
   prepareSex,
   prepareSterilized,
   prepareStatusCode as preparePetStatusCode,
-  prepareKind,
+  prepareKind, transformCategoryToParams
 } from "helpers/animals";
+import { getMainImageUrl as getVolunteerMainImageUrl } from "helpers/volunteers";
 import { prepareType as prepareDonationType } from "helpers/donations";
 import {
   getMainImageUrl as getCollectionMainImageUrl,
   prepareStatus as prepareCollectionStatus,
   prepareType as prepareCollectionType,
 } from "helpers/collections";
-import { getDateString, numberFriendly } from "helpers/common";
+import { getDateString, numberFriendly, objectsAreEqual } from "helpers/common";
 import { loadItem, saveItem } from "utils/localStorage";
 import Tabs from "components/Tabs";
 import NotFound from "components/NotFound";
@@ -63,6 +69,10 @@ import StoriesFilter, {
   DEFAULT_SORT as STORIES_DEFAULT_SORT,
   TFilterParams as TStoriesFilterParams,
 } from "./stories/_components/Filter";
+import VolunteersFilter, {
+  DEFAULT_SORT as VOLUNTEERS_DEFAULT_SORT,
+  TFilterParams as TVolunteersFilterParams,
+} from "./volunteers/_components/Filter";
 import DonatorsFilter, {
   TFilterParams as TDonatorsFilterParams,
 } from "./donators/_components/Filter";
@@ -77,6 +87,7 @@ import "./style.scss";
 const STORIES_PAGESIZE = 20;
 const NEWS_PAGESIZE = 20;
 const PETS_PAGESIZE = 20;
+const VOLUNTEERS_PAGESIZE = 20;
 const DONATIONS_PAGESIZE = 20;
 const DONATORS_PAGESIZE = 20;
 
@@ -85,8 +96,18 @@ const TABS_MAP: { [key: string]: number } = {
   collection: 1,
   donation: 2,
   donator: 3,
-  news: 4,
-  story: 5,
+  volunteer: 4,
+  news: 5,
+  story: 6,
+};
+
+const preparePetsSavedFilter = () => {
+  const savedFilter = loadItem("admin_pets_filter");
+  if (!savedFilter) return undefined;
+  return {
+    ...savedFilter,
+    ...(savedFilter.category ? transformCategoryToParams(savedFilter.category) : {}),
+  };
 };
 
 const Administration: React.FC = () => {
@@ -109,7 +130,8 @@ const Administration: React.FC = () => {
     setInitTabState(0);
   }, [search]);
 
-  const [listPetState, setListPetsState] = useState<TItemPet[] | null>(null);
+  const [listPetsState, setListPetsState] = useState<TItemPet[] | null>(null);
+  const [listVolunteersState, setListVolunteersState] = useState<TItemVolunteer[] | null>(null);
   const [listCollectionState, setListCollectionsState] = useState<TItemCollection[] | null>(null);
   const [listDonationsState, setListDonationsState] = useState<TItemDonation[] | null>(null);
   const [listDonatorsState, setListDonatorsState] = useState<TItemDonator[] | null>(null);
@@ -119,13 +141,7 @@ const Administration: React.FC = () => {
   const onSelectTabHandler = (index: number) => {
     setSelectedTabIndexState(index);
   };
-  const getCollectionsData = (filter?: TGetCollectionsListRequest) => {
-    CollectionsApi.getList({ ...filter, order: "id", order_type: "DESC", with_corrupted: 1 }).then(
-      (res) => {
-        setListCollectionsState(res);
-      }
-    );
-  };
+
   useEffect(() => {
     if (initTabState !== undefined) {
       setSelectedTabIndexState(initTabState);
@@ -134,24 +150,29 @@ const Administration: React.FC = () => {
   const [newsPageState, setNewsPageState] = useState<number>(1);
   const [storiesPageState, setStoriesPageState] = useState<number>(1);
   const [petsPageState, setPetsPageState] = useState<number>(1);
+  const [volunteersPageState, setVolunteersPageState] = useState<number>(1);
   const [donationsPageState, setDonationsPageState] = useState<number>(1);
   const [donatorsPageState, setDonatorsPageState] = useState<number>(1);
 
   const petsFilterRef = useRef<TPetsFilterParams>(
-    loadItem("admin_pets_filter") || {
+    preparePetsSavedFilter() || {
       statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
     }
   );
+
   const collectionsFilterRef = useRef<TCollectionsFilterParams>(
-    loadItem("admin_collections_filter") || {}
+    loadItem("admin_collections_filter") || null
   );
   const donationsFilterRef = useRef<TDonationsFilterParams>(
-    loadItem("admin_donations_filter") || {}
+    loadItem("admin_donations_filter") || null
   );
-  const newsFilterRef = useRef<TNewsFilterParams>(loadItem("admin_news_filter") || {});
-  const storiesFilterRef = useRef<TStoriesFilterParams>(loadItem("admin_stories_filter") || {});
+  const newsFilterRef = useRef<TNewsFilterParams>(loadItem("admin_news_filter") || null);
+  const storiesFilterRef = useRef<TStoriesFilterParams>(loadItem("admin_stories_filter") || null);
   const donatorsFilterRef = useRef<TDonatorsFilterParams>(
     loadItem("admin_donators_filter") || { order: "id", order_type: "DESC" }
+  );
+  const volunteersFilterRef = useRef<TVolunteersFilterParams>(
+    loadItem("admin_volunteers_filter") || null
   );
 
   const petsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
@@ -159,10 +180,12 @@ const Administration: React.FC = () => {
   const newsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const storiesLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const donatorsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
+  const volunteersLoadingStatusRef = useRef({ isLoading: false, isOff: false });
 
   const getNewsData = (params?: TGetNewsListRequest) => {
     newsLoadingStatusRef.current.isLoading = true;
-    const { order, ...filter } = newsFilterRef.current;
+    const { order, ...filter } = newsFilterRef.current || {};
+
     NewsApi.getList({ ...filter, ...params, order: order || NEWS_DEFAULT_SORT }).then((res) => {
       setListNewsState((prev) => (prev === null || newsPageState === 1 ? res : [...prev, ...res]));
       newsLoadingStatusRef.current.isLoading = false;
@@ -173,7 +196,7 @@ const Administration: React.FC = () => {
   };
   const getStoriesData = (params?: TGetStoriesListRequest) => {
     storiesLoadingStatusRef.current.isLoading = true;
-    const { order, ...filter } = storiesFilterRef.current;
+    const { order, ...filter } = storiesFilterRef.current || {};
     StoriesApi.getList({ ...filter, ...params, order: order || STORIES_DEFAULT_SORT }).then(
       (res) => {
         setListStoriesState((prev) =>
@@ -186,10 +209,20 @@ const Administration: React.FC = () => {
       }
     );
   };
+  const getCollectionsData = (filter?: TGetCollectionsListRequest) => {
+    CollectionsApi.getList({
+      ...(filter || {}),
+      order: "id",
+      order_type: "DESC",
+      with_corrupted: 1,
+    }).then((res) => {
+      setListCollectionsState(res);
+    });
+  };
   const getPetsData = (params?: TGetPetsListRequest) => {
     petsLoadingStatusRef.current.isLoading = true;
 
-    const { category, ...filter } = petsFilterRef.current;
+    const { category, ...filter } = petsFilterRef.current || {};
     AnimalsApi.getList({
       ...filter,
       ...params,
@@ -204,10 +237,29 @@ const Administration: React.FC = () => {
       }
     });
   };
+  const getVolunteersData = (params?: TGetVolunteersListRequest) => {
+    volunteersLoadingStatusRef.current.isLoading = true;
 
+    const filter = volunteersFilterRef.current || {};
+    VolunteersApi.getList({
+      ...filter,
+      ...params,
+      withUnpublished: 1,
+      order: "id",
+      order_type: "DESC",
+    }).then((res) => {
+      setListVolunteersState((prev) =>
+        prev === null || volunteersPageState === 1 ? res : [...prev, ...res]
+      );
+      volunteersLoadingStatusRef.current.isLoading = false;
+      if (!res.length) {
+        volunteersLoadingStatusRef.current.isOff = true;
+      }
+    });
+  };
   const getDonationsData = (params?: TGetDonationsListRequest) => {
     donationsLoadingStatusRef.current.isLoading = true;
-    const { order, ...filter } = donationsFilterRef.current;
+    const { order, ...filter } = donationsFilterRef.current || {};
 
     const orderPrepared = order ? DONATION_ORDER_VALUES[order] : undefined;
 
@@ -226,10 +278,9 @@ const Administration: React.FC = () => {
       }
     });
   };
-
   const getDonatorsData = (params?: TGetDonatorsListRequest) => {
     donatorsLoadingStatusRef.current.isLoading = true;
-    DonatorsApi.getList({ ...donatorsFilterRef.current, ...params }).then((res) => {
+    DonatorsApi.getList({ ...(donatorsFilterRef.current || {}), ...params }).then((res) => {
       setListDonatorsState((prev) =>
         prev === null || donatorsPageState === 1 ? res : [...prev, ...res]
       );
@@ -243,34 +294,36 @@ const Administration: React.FC = () => {
   useEffect(() => {
     getCollectionsData({ statusExclude: COLLECTIONS_STATUS.CLOSED });
   }, []);
-
   useEffect(() => {
     getPetsData({ offset: (petsPageState - 1) * PETS_PAGESIZE, limit: PETS_PAGESIZE });
   }, [petsPageState]);
-
   useEffect(() => {
     getNewsData({ offset: (newsPageState - 1) * NEWS_PAGESIZE, limit: NEWS_PAGESIZE });
   }, [newsPageState]);
-
   useEffect(() => {
     getStoriesData({ offset: (storiesPageState - 1) * STORIES_PAGESIZE, limit: STORIES_PAGESIZE });
   }, [storiesPageState]);
-
   useEffect(() => {
     getDonationsData({
       offset: (donationsPageState - 1) * DONATIONS_PAGESIZE,
       limit: DONATIONS_PAGESIZE,
     });
   }, [donationsPageState]);
-
   useEffect(() => {
     getDonatorsData({
       offset: (donatorsPageState - 1) * DONATORS_PAGESIZE,
       limit: DONATORS_PAGESIZE,
     });
   }, [donatorsPageState]);
+  useEffect(() => {
+    getVolunteersData({
+      offset: (volunteersPageState - 1) * VOLUNTEERS_PAGESIZE,
+      limit: VOLUNTEERS_PAGESIZE,
+    });
+  }, [volunteersPageState]);
 
   const changePetsFilter = (filter: TPetsFilterParams) => {
+    if (objectsAreEqual(filter, petsFilterRef.current)) return;
     petsLoadingStatusRef.current.isOff = false;
     petsFilterRef.current = filter;
 
@@ -286,8 +339,22 @@ const Administration: React.FC = () => {
       setPetsPageState(1);
     }
   };
+  const changeVolunteersFilter = (filter: TVolunteersFilterParams) => {
+    if (objectsAreEqual(filter, volunteersFilterRef.current)) return;
+
+    volunteersLoadingStatusRef.current.isOff = false;
+    volunteersFilterRef.current = filter;
+
+    saveItem("admin_volunteers_filter", volunteersFilterRef.current);
+    if (volunteersPageState === 1) {
+      getVolunteersData({ offset: 0, limit: VOLUNTEERS_PAGESIZE });
+    } else {
+      setVolunteersPageState(1);
+    }
+  };
 
   const changeNewsFilter = (filter: TNewsFilterParams) => {
+    if (objectsAreEqual(filter, newsFilterRef.current)) return;
     newsLoadingStatusRef.current.isOff = false;
     newsFilterRef.current = filter;
     saveItem("admin_news_filter", newsFilterRef.current);
@@ -297,8 +364,8 @@ const Administration: React.FC = () => {
       setNewsPageState(1);
     }
   };
-
   const changeStoriesFilter = (filter: TStoriesFilterParams) => {
+    if (objectsAreEqual(filter, storiesFilterRef.current)) return;
     storiesLoadingStatusRef.current.isOff = false;
     storiesFilterRef.current = filter;
     saveItem("admin_stories_filter", storiesFilterRef.current);
@@ -309,6 +376,7 @@ const Administration: React.FC = () => {
     }
   };
   const changeCollectionsFilter = (filter: TCollectionsFilterParams) => {
+    if (objectsAreEqual(filter, collectionsFilterRef.current)) return;
     collectionsFilterRef.current = filter;
     saveItem("admin_collections_filter", collectionsFilterRef.current);
     getCollectionsData({
@@ -316,8 +384,9 @@ const Administration: React.FC = () => {
       ...filter,
     });
   };
-
   const changeDonationsFilter = (filter: TDonationsFilterParams) => {
+    if (objectsAreEqual(filter, donationsFilterRef.current)) return;
+
     donationsLoadingStatusRef.current.isOff = false;
     donationsFilterRef.current = filter;
     saveItem("admin_donations_filter", donationsFilterRef.current);
@@ -327,8 +396,8 @@ const Administration: React.FC = () => {
       setDonationsPageState(1);
     }
   };
-
   const changeDonatorsFilter = (filter: TDonatorsFilterParams) => {
+    if (objectsAreEqual(filter, donatorsFilterRef.current)) return;
     donatorsLoadingStatusRef.current.isOff = false;
     donatorsFilterRef.current = filter;
     saveItem("admin_donators_filter", donatorsFilterRef.current);
@@ -339,7 +408,8 @@ const Administration: React.FC = () => {
     }
   };
 
-  const renderPetsContent = (data: TItemPet) => (
+  
+  const renderPetContent = (data: TItemPet) => (
     <div className="loc_petItem">
       <img alt="." src={getPetMainImageUrl(data, SIZES_MAIN.SQUARE)} />
       {data.ismajor === 1 && <div className="loc_isImportant">важно</div>}
@@ -399,8 +469,46 @@ const Administration: React.FC = () => {
       </div>
     </div>
   );
+  const renderVolunteerContent = (data: TItemVolunteer) => (
+    <div className="loc_volunteerItem">
+      <img alt="." src={getVolunteerMainImageUrl(data, SIZES_MAIN.SQUARE)} />
+      <div className="loc_content">
+        <Button
+          className="loc_button"
+          theme={ButtonThemes.PRIMARY}
+          size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
+          onClick={() => {
+            navigate(`${PAGES.ADMINISTRATION_VOLUNTEER_UPDATE}/${data.id}`);
+          }}
+        >
+          Редактировать
+        </Button>
+        <Button
+          className="loc_button loc_redactNewBlank"
+          theme={ButtonThemes.GHOST_BORDER}
+          size={isMobile ? ButtonSizes.HUGE : ButtonSizes.SMALL}
+          onClick={() => {
+            window.open(`${PAGES.ADMINISTRATION_VOLUNTEER_UPDATE}/${data.id}`, "_blank");
+          }}
+        >
+          ...в новой вкладке
+        </Button>
+        <div className="loc_data">
+          {!data.is_published && <div className="loc_not_published">Не опубликовано</div>}
+          <div className="loc_name">
+            №{data.id} {data.fio}
+          </div>
+          , <div className="loc_description">{data.short_description}</div>
+          <div className="loc_created">Создано: {getDateString(data.created)}</div>
+          {!!data.updated && (
+            <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 
-  const renderCollectionsContent = (data: TItemCollection) => (
+  const renderCollectionContent = (data: TItemCollection) => (
     <div className="loc_collectionItem">
       <img alt="." src={getCollectionMainImageUrl(data, SIZES_MAIN.SQUARE)} />
       <div className="loc_content">
@@ -520,7 +628,7 @@ const Administration: React.FC = () => {
       `${item.donator_lastname} ${item.donator_firstname} ${item.donator_middlename}`
     ).toUpperCase();
 
-  const renderDonationsContent = (data: TItemDonation) => (
+  const renderDonationContent = (data: TItemDonation) => (
     <div className="loc_donationItem">
       <div className="loc_sum">{numberFriendly(data.sum)} руб.</div>
       <div className="loc_content">
@@ -575,7 +683,7 @@ const Administration: React.FC = () => {
     </div>
   );
 
-  const renderDonatorsContent = (data: TItemDonator) => (
+  const renderDonatorContent = (data: TItemDonator) => (
     <div className="loc_donatorItem">
       <div className="loc_content">
         <div className="loc_data">
@@ -632,6 +740,12 @@ const Administration: React.FC = () => {
       setDonatorsPageState((prev) => prev + 1);
   };
 
+  const onReachVolunteersBottomHandler = () => {
+    !volunteersLoadingStatusRef.current.isOff &&
+      !volunteersLoadingStatusRef.current.isLoading &&
+      setVolunteersPageState((prev) => prev + 1);
+  };
+
   const tabs = [
     {
       position: "left",
@@ -651,6 +765,10 @@ const Administration: React.FC = () => {
     },
     {
       position: "left",
+      render: <div className="loc_categoryName">Волонтеры</div>,
+    },
+    {
+      position: "left",
       render: <div className="loc_categoryName">Новости</div>,
     },
     {
@@ -664,9 +782,9 @@ const Administration: React.FC = () => {
       <>
         <PetsFilter filter={petsFilterRef.current} onChange={changePetsFilter} />
         <div className="loc_list">
-          {listPetState === null && <LoaderIcon />}
-          {listPetState &&
-            listPetState.map((item, index) => (
+          {listPetsState === null && <LoaderIcon />}
+          {listPetsState &&
+            listPetsState.map((item, index) => (
               <div
                 key={index}
                 className={cn(
@@ -675,7 +793,7 @@ const Administration: React.FC = () => {
                   { "loc--not_published": !item.is_published }
                 )}
               >
-                <div className="loc_item">{renderPetsContent(item)}</div>
+                <div className="loc_item">{renderPetContent(item)}</div>
                 <div
                   className="loc_link"
                   onClick={() => {
@@ -689,7 +807,7 @@ const Administration: React.FC = () => {
           {selectedTabIndexState === 0 && (
             <InfiniteScroll onReachBottom={onReachPetsBottomHandler} amendment={100} />
           )}
-          {listPetState && !listPetState.length && <NotFound />}
+          {listPetsState && !listPetsState.length && <NotFound />}
         </div>
       </>,
       <>
@@ -707,7 +825,7 @@ const Administration: React.FC = () => {
                   "loc--isCorrupted": item.is_corrupted,
                 })}
               >
-                <div className="loc_item">{renderCollectionsContent(item)}</div>
+                <div className="loc_item">{renderCollectionContent(item)}</div>
                 <div
                   className="loc_link"
                   onClick={() => {
@@ -730,7 +848,7 @@ const Administration: React.FC = () => {
               key={index}
               className={cn("loc_itemWrapper loc--donation", `loc--type_${item.type}`)}
             >
-              <div className="loc_item">{renderDonationsContent(item)}</div>
+              <div className="loc_item">{renderDonationContent(item)}</div>
             </div>
           ))}
         {selectedTabIndexState === 2 && (
@@ -744,7 +862,7 @@ const Administration: React.FC = () => {
         {listDonatorsState &&
           listDonatorsState.map((item, index) => (
             <div key={index} className="loc_itemWrapper loc--donator">
-              <div className="loc_item">{renderDonatorsContent(item)}</div>
+              <div className="loc_item">{renderDonatorContent(item)}</div>
               <div
                 className="loc_link"
                 onClick={() => {
@@ -760,7 +878,35 @@ const Administration: React.FC = () => {
         )}
         {listDonatorsState && !listDonatorsState.length && <NotFound />}
       </div>,
-
+      <>
+        <VolunteersFilter filter={volunteersFilterRef.current} onChange={changeVolunteersFilter} />
+        <div className="loc_list">
+          {listVolunteersState === null && <LoaderIcon />}
+          {listVolunteersState &&
+            listVolunteersState.map((item, index) => (
+              <div
+                key={index}
+                className={cn("loc_itemWrapper loc--volunteer", {
+                  "loc--not_published": !item.is_published,
+                })}
+              >
+                <div className="loc_item">{renderVolunteerContent(item)}</div>
+                <div
+                  className="loc_link"
+                  onClick={() => {
+                    navigate(`${PAGES.VOLUNTEER}/${item.id}`);
+                  }}
+                >
+                  Перейти на страницу
+                </div>
+              </div>
+            ))}
+          {selectedTabIndexState === 0 && (
+            <InfiniteScroll onReachBottom={onReachVolunteersBottomHandler} amendment={100} />
+          )}
+          {listVolunteersState && !listVolunteersState.length && <NotFound />}
+        </div>
+      </>,
       <>
         <NewsFilter filter={newsFilterRef.current} onChange={changeNewsFilter} />
 
@@ -814,10 +960,11 @@ const Administration: React.FC = () => {
       </>,
     ],
     [
-      listPetState,
+      listPetsState,
       listCollectionState,
       listDonationsState,
       listDonatorsState,
+      listVolunteersState,
       listNewsState,
       listStoriesState,
       selectedTabIndexState,

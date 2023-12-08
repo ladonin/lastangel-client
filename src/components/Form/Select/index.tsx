@@ -88,6 +88,7 @@ const Select: React.FC<TProps> = ({
           value={val}
           isDisabled={disabled}
           placeholder={placeholder}
+          noOptionsMessage={() => "Ничего не найдено"}
           classNames={{
             control: (state) => (state.isFocused ? "loc_control loc--focused" : "loc_control"),
             container: () => "loc_container",
@@ -100,7 +101,6 @@ const Select: React.FC<TProps> = ({
           ref={innerRef}
           {...rest}
         />
-        
       </div>
       {description && <div className="form-element-description">{description}</div>}
     </div>

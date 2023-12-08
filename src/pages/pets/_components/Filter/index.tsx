@@ -93,7 +93,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
               ...state,
               status: val ? (Number(val.value) as ValuesOf<typeof ANIMALS_STATUS>) : undefined,
             }));
-            !isLightClear && selectIdRef.current?.lightClear();
+            !isLightClear && selectIdRef.current?.lightClear && selectIdRef.current?.lightClear();
           }}
           className="loc_formSelectItem"
           options={STATUS_OPTIONS_FILTER}
@@ -114,7 +114,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
               ...transformCategoryToParams(category),
             }));
 
-            !isLightClear && selectIdRef.current?.lightClear();
+            !isLightClear && selectIdRef.current?.lightClear && selectIdRef.current?.lightClear();
           }}
           className="loc_formSelectItem"
           options={CATEGORY_OPTIONS}
@@ -130,8 +130,8 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
               ...state,
               id: val ? Number(val.value) : undefined,
             }));
-            !isLightClear && selectCategoryRef.current?.lightClear();
-            !isLightClear && selectStatusRef.current?.lightClear();
+            !isLightClear && selectCategoryRef.current?.lightClear && selectCategoryRef.current?.lightClear();
+            !isLightClear && selectStatusRef.current?.lightClear && selectStatusRef.current?.lightClear();
           }}
           className="loc_formSelectItem"
           options={animalsOptionsState}

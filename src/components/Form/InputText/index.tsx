@@ -2,18 +2,12 @@
   import InputText from 'components/Form/InputText'
  */
 
-import React, {
-  ChangeEvent,
-  RefObject,
-  useMemo,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ChangeEvent, RefObject, useMemo, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import cn from "classnames";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
+import { preparePhoneInputVal } from "../../../helpers/common";
 
 type TProps = {
   label?: string;
@@ -25,7 +19,7 @@ type TProps = {
   required?: boolean;
   disabled?: boolean;
   onChange: (val: string) => void;
-  innerRef?: RefObject<any>;
+  innerRef?: RefObject<any>; // Нужен, чтобы, например, применить валидацию
 };
 const EMAIL_REGEXP =
   /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
@@ -76,6 +70,10 @@ const InputText: React.FC<TProps> = ({
     }
   }, []);
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (type === "phone") {
+      e.target.value = preparePhoneInputVal(e.target.value);
+    }
+
     onChange(e.target.value);
     valRef.current = e.target.value;
     needValidate(type) && setValueState(e.target.value);
@@ -100,7 +98,7 @@ const InputText: React.FC<TProps> = ({
           {label} {required && <span className="red">*</span>}
         </label>
       )}
-    
+
       <input
         placeholder={placeholder}
         ref={innerRef}

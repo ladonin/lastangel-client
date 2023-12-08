@@ -44,6 +44,7 @@ export type TCommonDataRequest = {
   short_description: string;
   description: string;
   birthdate?: number;
+  is_published: number;
   sex: ValuesOf<typeof ANIMALS_SEX>;
   grafted: ValuesOf<typeof ANIMALS_GRAFTED>;
   sterilized: ValuesOf<typeof ANIMALS_STERILIZED>;

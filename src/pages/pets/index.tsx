@@ -2,11 +2,12 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import cn from "classnames";
+
 import { Helmet } from "react-helmet";
-import { TGetListRequest as TGetPetsListRequest, TItem as TItemPet } from "api/types/animals";
+import { TGetListRequest, TItem } from "api/types/animals";
 import PAGES from "routing/routes";
 import { AnimalsApi } from "api/animals";
-import { getTimestamp, numberFriendly } from "helpers/common";
+import { getTimestamp, numberFriendly, objectsAreEqual } from "helpers/common";
 import {
   getMainImageUrl,
   prepareStatus,
@@ -15,24 +16,37 @@ import {
   prepareGraft,
   prepareSex,
   prepareSterilized,
+  transformCategoryToParams,
 } from "helpers/animals";
 import NotFound from "components/NotFound";
 import { useQueryHook } from "hooks/useQueryHook";
 import InfiniteScroll from "components/InfiniteScroll";
 import BreadCrumbs from "components/BreadCrumbs";
+
 import flowerSrc from "icons/flower1.png";
 import { ANIMALS_STATUS } from "constants/animals";
 import { loadItem, saveItem } from "utils/localStorage";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import LoaderIcon from "components/LoaderIcon";
-import Filter from "./_components/Filter";
+
 // const OtherComponent = React.lazy(() => import('components/header'));
-import { TFilterParams as TPetsFilterParams } from "../administration/pets/_components/Filter";
+import { TFilterParams } from "../administration/pets/_components/Filter";
 import "./style.scss";
 import PetDonationIcon from "../../components/PetDonationIcon";
 import { SIZES_MAIN } from "../../constants/photos";
+import Filter from "./_components/Filter";
 
-const PETS_PAGESIZE = 20;
+const PAGESIZE = 20;
+
+const preparePetsSavedFilter = () => {
+  const savedFilter = loadItem("pets_filter");
+  if (!savedFilter) return undefined;
+  return {
+    ...savedFilter,
+    ...(savedFilter.category ? transformCategoryToParams(savedFilter.category) : {}),
+  };
+};
+
 const Pets: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMemo(() => loadItem("isMobile"), []);
@@ -44,27 +58,28 @@ const Pets: React.FC = () => {
       description: data.pets_description || "",
     };
   }, []);
-  const petsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
-  const petsFilterRef = useRef<TPetsFilterParams>(
-    loadItem("pets_filter") || { statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED] }
+  const loadingStatusRef = useRef({ isLoading: false, isOff: false });
+
+  const filterRef = useRef<TFilterParams>(
+    preparePetsSavedFilter() || { statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED] }
   );
 
   // --> Сохранение состояния страницы
   const printRef = useRef<{
-    list: TItemPet[] | null;
+    list: TItem[] | null;
     page: number;
   } | null>(null);
   const needUsePrint = useRef<boolean>(useMemo(() => loadItem("usePrintInPets"), []));
-  const petsPrint = useMemo(() => loadItem("petsPrint"), []);
-  const [listPetsState, setListPetsState] = useState<TItemPet[] | null>(
-    needUsePrint.current && petsPrint.list ? petsPrint.list : null
+  const print = useMemo(() => loadItem("print"), []);
+  const [listState, setListState] = useState<TItem[] | null>(
+    needUsePrint.current && print.list ? print.list : null
   );
   // <-- Сохранение состояния страницы
 
-  const [myPetState, setMyPetState] = useState<TItemPet | null>(null);
+  const [myPetState, setMyPetState] = useState<TItem | null>(null);
   const [myPetIsLoadingState, setMyPetIsLoadingState] = useState<boolean>(false);
-  const [petsPageState, setPetsPageState] = useState<number>(
-    needUsePrint.current && petsPrint ? petsPrint.page : 1
+  const [pageState, setPageState] = useState<number>(
+    needUsePrint.current && print ? print.page : 1
   );
 
   // --> Сохранение состояния страницы
@@ -72,7 +87,7 @@ const Pets: React.FC = () => {
 
   const [isBlankState, setIsBlankState] = useState<boolean>(needUsePrint.current);
   const [listHeightState, setListHeightState] = useState<number | undefined>(
-    (needUsePrint.current && petsPrint?.listHeight) || 0
+    (needUsePrint.current && print?.listHeight) || 0
   );
   const scrollTop = useRef<number>(0);
   const onScroll = () => {
@@ -98,22 +113,21 @@ const Pets: React.FC = () => {
   };
   useEffect(() => {
     printRef.current = {
-      list: listPetsState,
-      page: petsPageState,
+      list: listState,
+      page: pageState,
     };
-  }, [listPetsState, petsPageState]);
+  }, [listState, pageState]);
 
   useEffect(() => {
     setTimeout(() => {
       if (needUsePrint.current && printRef.current) {
-        //
         setTimeout(() => {
           setIsBlankState(false);
         }, 0);
 
-        setListHeightState(petsPrint.listHeight);
+        setListHeightState(print.listHeight);
 
-        window.scrollTo(0, petsPrint.scroll);
+        window.scrollTo(0, print.scroll);
       }
     }, 0);
 
@@ -142,25 +156,25 @@ const Pets: React.FC = () => {
 
   useEffect(
     () => () => {
-      saveItem("pets_filter", petsFilterRef.current);
+      saveItem("pets_filter", filterRef.current);
     },
     []
   );
 
-  const getData = (params?: TGetPetsListRequest) => {
+  const getData = (params?: TGetListRequest) => {
     // --> Сохранение состояния страницы
     initRef.current = false;
     // <-- Сохранение состояния страницы
 
-    petsLoadingStatusRef.current.isLoading = true;
-    const { category, ...filter } = petsFilterRef.current;
+    loadingStatusRef.current.isLoading = true;
+    const { category, ...filter } = filterRef.current;
 
     AnimalsApi.getList({ ...filter, ...params, orderComplex: "ismajor desc, id desc" }).then(
       (res) => {
-        setListPetsState((prev) => (!prev || petsPageState === 1 ? res : [...prev, ...res]));
-        petsLoadingStatusRef.current.isLoading = false;
+        setListState((prev) => (!prev || pageState === 1 ? res : [...prev, ...res]));
+        loadingStatusRef.current.isLoading = false;
         if (!res.length) {
-          petsLoadingStatusRef.current.isOff = true;
+          loadingStatusRef.current.isOff = true;
         }
       }
     );
@@ -171,10 +185,12 @@ const Pets: React.FC = () => {
     if (initRef.current && needUsePrint.current) return;
     // <-- Сохранение состояния страницы
 
-    getData({ offset: (petsPageState - 1) * PETS_PAGESIZE, limit: PETS_PAGESIZE });
-  }, [petsPageState]);
+    getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
+  }, [pageState]);
 
-  const changeFilter = (filter: TPetsFilterParams) => {
+  const changeFilter = (filter: TFilterParams) => {
+    if (objectsAreEqual(filter, filterRef.current)) return;
+
     // --> Сохранение состояния страницы
     // При работе фильтра необходимость применения принта сбрасываем
     needUsePrint.current = false;
@@ -183,24 +199,24 @@ const Pets: React.FC = () => {
     setListHeightState(0);
     // <-- Сохранение состояния страницы
 
-    petsLoadingStatusRef.current.isOff = false;
-    petsFilterRef.current = filter;
+    loadingStatusRef.current.isOff = false;
+    filterRef.current = filter;
     if (filter.status) {
-      petsFilterRef.current.statusExclude = undefined;
+      filterRef.current.statusExclude = undefined;
     } else {
-      petsFilterRef.current.statusExclude = [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED];
+      filterRef.current.statusExclude = [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED];
     }
 
-    if (petsPageState === 1) {
-      getData({ offset: 0, limit: PETS_PAGESIZE });
+    if (pageState === 1) {
+      getData({ offset: 0, limit: PAGESIZE });
     } else {
-      setPetsPageState(1);
+      setPageState(1);
     }
   };
 
   const isHere = (status: number) =>
     status !== ANIMALS_STATUS.AT_HOME && status !== ANIMALS_STATUS.DIED;
-  const renderPetsContent = (data: TItemPet) => (
+  const renderContent = (data: TItem) => (
     <>
       <div className="loc_image">
         <Link onClick={createBack} to={`${PAGES.PET}/${data.id}`} className="link_img">
@@ -278,14 +294,14 @@ const Pets: React.FC = () => {
     </>
   );
 
-  const onReachPetsBottomHandler = () => {
-    if (!petsLoadingStatusRef.current.isOff && !petsLoadingStatusRef.current.isLoading) {
-      petsLoadingStatusRef.current.isLoading = true;
+  const onReachBottomHandler = () => {
+    if (!loadingStatusRef.current.isOff && !loadingStatusRef.current.isLoading) {
+      loadingStatusRef.current.isLoading = true;
       // --> Сохранение состояния страницы
       initRef.current = false;
       // <-- Сохранение состояния страницы
 
-      setPetsPageState((prev) => prev + 1);
+      setPageState((prev) => prev + 1);
     }
   };
 
@@ -357,7 +373,7 @@ const Pets: React.FC = () => {
                 <h2 className="loc_title">Ваш питомец</h2>
 
                 <div className={cn("loc_wrapper ", `loc--status_${myPetState.status}`)}>
-                  <div className="loc_item">{renderPetsContent(myPetState)}</div>
+                  <div className="loc_item">{renderContent(myPetState)}</div>
                 </div>
                 <Button
                   className="loc_buttonCompact"
@@ -381,22 +397,22 @@ const Pets: React.FC = () => {
             Кураторство
           </Button>
         )}
-        <Filter filter={petsFilterRef.current} onChange={changeFilter} />
+        <Filter filter={filterRef.current} onChange={changeFilter} />
 
         <div
           className="loc_list"
           id="pets_list"
           style={{ minHeight: listHeightState ? `${listHeightState}px` : 0 }}
         >
-          {listPetsState &&
-            listPetsState.map((item, index) => (
+          {listState &&
+            listState.map((item, index) => (
               <div key={index} className={cn("loc_wrapper ", `loc--status_${item.status}`)}>
-                <div className="loc_item">{renderPetsContent(item)}</div>
+                <div className="loc_item">{renderContent(item)}</div>
               </div>
             ))}
-          <InfiniteScroll onReachBottom={onReachPetsBottomHandler} amendment={100} />
-          {listPetsState && !listPetsState.length && <NotFound />}
-          {listPetsState === null && <LoaderIcon />}
+          <InfiniteScroll onReachBottom={onReachBottomHandler} amendment={100} />
+          {listState && !listState.length && <NotFound />}
+          {listState === null && <LoaderIcon />}
         </div>
       </div>
     </>

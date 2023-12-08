@@ -2,7 +2,8 @@ require("dotenv").config();
 const path = require("path");
 const { basePostCSSPlugins } = require("../../rules/css/postcss");
 const CONSTANTS = require("../../utils/constants");
-const plugins = require("../common/plugins");
+const commonPlugins = require("../common/plugins");
+const plugins = require("./plugins");
 const performance = require("../common/performance");
 const output = require("../common/output");
 const resolve = require("../common/resolve");
@@ -61,5 +62,5 @@ module.exports = {
     ]
   },
   performance,
-  plugins
+  plugins: [...plugins, ...commonPlugins]
 };

@@ -14,7 +14,7 @@ type TProps = {
 };
 
 export type TFilterParams = {
-  order?: string;
+  orderComplex?: string;
   title?: string;
 };
 type TSelectRefProps = {
@@ -24,8 +24,8 @@ type TInputRefProps = {
   clearValue: () => void;
 };
 export const ORDER_OPTIONS = [
-  { value: "desc", label: "Сначала новые" },
-  { value: "asc", label: "Сначала старые" },
+  { value: "id desc", label: "Сначала новые" },
+  { value: "id asc", label: "Сначала старые" },
 ];
 
 export const DEFAULT_SORT = "desc";
@@ -62,13 +62,13 @@ const StoriesFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
     <div className="page-stories_filter">
       <div className="loc_wrapper">
         <Select
-          value={filterState?.order ? String(filterState?.order) : undefined}
+          value={filterState?.orderComplex ? String(filterState?.orderComplex) : undefined}
           isClearable
           placeholder="Сортировка"
           onChange={(val) => {
             setFilterState((state) => ({
               ...state,
-              order: val ? val.value : undefined,
+              orderComplex: val ? val.value : undefined,
             }));
           }}
           className="loc_formSelectItem loc--order"

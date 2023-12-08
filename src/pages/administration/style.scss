@@ -42,7 +42,8 @@
 
 
         img {
-          width: 100%;
+          width: 248px;
+          height: 248px;
         }
 
         .loc_collected, .loc_target_sum, .loc_spent {
@@ -341,7 +342,7 @@
         padding-bottom: 24px;
       }
 
-      &.loc--pet {
+      &.loc--pet,&.loc--volunteer {
         &.loc--status {
           &_1 {
 
@@ -452,7 +453,10 @@
       }
 
       .loc_item {
-
+        img {
+          width: 100%;
+          height: auto;
+        }
         .loc_collected, .loc_target_sum, .loc_spent {
           margin-top: calc(8px * var(--viewport-koeff));
         }

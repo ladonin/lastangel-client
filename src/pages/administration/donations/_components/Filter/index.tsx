@@ -50,7 +50,6 @@ const DonationsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
 
   useEffect(() => {
     timeoutRef.current && clearTimeout(timeoutRef.current);
-
     if (filterState !== null) {
       timeoutRef.current = setTimeout(
         () => {
@@ -70,6 +69,7 @@ const DonationsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   return (
     <div className="page-administration_donations_filter">
       <div className="loc_wrapper">
+       
         <InputText
           initValue={filterState?.card ? String(filterState?.card) : undefined}
           placeholder="№ карты"
@@ -94,6 +94,7 @@ const DonationsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           className="loc_formInputItem loc--name"
           innerRef={inputNameRef}
         />
+
         <Select
           value={filterState?.order ? String(filterState?.order) : undefined}
           placeholder="Порядок"
@@ -109,7 +110,6 @@ const DonationsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           options={ORDER_OPTIONS}
           innerRef={selectOrderRef}
         />
-
         <Button
           disabled={filterState === null || isObjectOptionsIsEmpty(filterState)}
           className="loc_resetButton"

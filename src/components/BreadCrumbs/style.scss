@@ -4,6 +4,13 @@
   margin-bottom: 16px;
   display: flex;
   width: 100%;
+  gap: 24px;
+  align-items: flex-start;
+
+  .loc_links {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
   .loc_breadCrumb, .loc_toMain, .loc_delimiter, .loc_back {
     font-weight: 600;
@@ -32,6 +39,7 @@
     align-items: center;
     gap: 8px;
     margin-left: auto;
+
     svg {
       height: 16px;
       transform: rotate(180deg);
@@ -44,9 +52,10 @@
 .layout.loc--isMobile .component-breadCrumbs {
 
   margin-bottom: calc(16px * var(--viewport-koeff));
+  gap: calc(24px * var(--viewport-koeff));
 
 
-  .loc_breadCrumb, .loc_toMain, .loc_delimiter,.loc_back {
+  .loc_breadCrumb, .loc_toMain, .loc_delimiter, .loc_back {
     font-size: calc(36px * var(--viewport-koeff));
     margin-bottom: calc(24px * var(--viewport-koeff));
   }
@@ -55,7 +64,7 @@
     font-size: calc(36px * var(--viewport-koeff));
   }
 
-  .loc_title, .loc_breadCrumb, .loc_delimiter, .loc_toMain,.loc_back {
+  .loc_title, .loc_breadCrumb, .loc_delimiter, .loc_toMain, .loc_back {
 
     line-height: calc(32px * var(--viewport-koeff));
   }
@@ -75,6 +84,7 @@
     align-items: center;
     gap: calc(8px * var(--viewport-koeff));
     margin-left: auto;
+
     svg {
       height: calc(24px * var(--viewport-koeff));
       transform: rotate(180deg);

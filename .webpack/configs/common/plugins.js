@@ -1,5 +1,4 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { EnvironmentPlugin } = require("webpack");
 const CONSTANTS = require("../../utils/constants");
@@ -19,10 +18,6 @@ module.exports = [
   new MiniCssExtractPlugin({
     filename: CONSTANTS.BUILD_CSS_FOLDER + "/[name]-[contenthash].css",
     chunkFilename: CONSTANTS.BUILD_CSS_FOLDER + "/[name]-[contenthash].css"
-  }),
-  new HtmlWebpackPlugin({
-    template: "index.html",
-    favicon: "./icons/favicon.ico"
   }),
   new CleanWebpackPlugin()
 ]

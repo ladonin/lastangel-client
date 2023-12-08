@@ -119,7 +119,24 @@
       }
     }
 
+    &-orange {
+      background-color: $c_orange;
+      color: $c_white;
 
+      &:hover {
+        background-color: $c_orangeLight;
+      }
+    }
+    
+    &-pink {
+      background-color: $c_pink;
+      color: $c_white;
+
+      &:hover {
+        background-color: $c_pinkLight;
+      }
+    }
+    
     &-grey {
       background-color: $c_greyMediumLight;
       color: $c_white;

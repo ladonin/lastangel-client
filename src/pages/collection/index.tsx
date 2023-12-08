@@ -179,6 +179,7 @@ const Collection: React.FC = () => {
               <BreadCrumbs
                 breadCrumbs={[{ name: "Сборы", link: PAGES.COLLECTIONS }]}
                 title={dataState.name}
+                showTitle = {false}
               />
               <div className="loc_topWrapper">
                 <div className="loc_avatar">

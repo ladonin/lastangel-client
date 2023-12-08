@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState, useMemo } from "react";
+import React, { PropsWithChildren, useState, useMemo, useEffect } from "react";
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
@@ -37,6 +37,10 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
   const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState<boolean>(false);
   // const { className, setVideo, label, required, disabled = false, multiple = false, noSizeRevision = false } = props;
   const isMobile = useMemo(() => loadItem("isMobile"), []);
+
+  useEffect(() => {
+    setVideoState(value);
+  }, [value]);
 
   const setVideoHandler = (file: File) => {
     const parts = file.name.split(".");
@@ -134,7 +138,6 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
           }}
         />
         <span className="loc_selectFile">Выберите файл</span>
-        
       </label>
       {description && <div className="form-element-description">{description}</div>}
       {videoState && <div className="loc_video">{renderVideo()}</div>}

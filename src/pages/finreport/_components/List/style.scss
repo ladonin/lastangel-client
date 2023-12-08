@@ -30,9 +30,9 @@
     padding: 16px;
     border-radius: 0 8px 8px 0;
     font-size: 16px;
-
+    background-color: $c_lagunaWhite;
     &:hover {
-      background-color: $c_lagunaWhite;
+      background-color: $c_lagunaLighter;
     }
 
     &.loc--month {

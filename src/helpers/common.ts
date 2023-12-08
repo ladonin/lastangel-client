@@ -40,7 +40,7 @@ export const getDateHMS = (timestamp: number, noSecs = true) => {
   );
 };
 
-//  => 2023-01-09
+//  => 30-01-2023
 export const getDateYMD = (timestamp: number) => {
   const date = new Date(timestamp * 1000);
   return (
@@ -50,6 +50,43 @@ export const getDateYMD = (timestamp: number) => {
     "-" +
     `${date.getFullYear()}`
   );
+};
+
+export const monthMappings = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
+export const monthMappingsRodit = [
+  "Января",
+  "Февраля",
+  "Марта",
+  "Апреля",
+  "Мая",
+  "Июня",
+  "Июля",
+  "Августа",
+  "Сентября",
+  "Октября",
+  "Ноября",
+  "Декабря",
+];
+export const getDateYMFriendly = (timestamp: number) => {
+  const date = new Date(timestamp * 1000);
+  return `${date.getDate()} ${monthMappingsRodit[date.getMonth()]}`;
+};
+export const getDateYMDFriendly = (timestamp: number) => {
+  const date = new Date(timestamp * 1000);
+  return `${date.getDate()} ${monthMappingsRodit[date.getMonth()]} ${date.getFullYear()} г.`;
 };
 
 export const getDateString = (timestamp: number, noSecs = true) =>
@@ -109,7 +146,7 @@ export const copyToBuffer = (value: string) => {
       document.body.prepend(textArea);
       textArea.select();
 
-      const promise = new Promise((resolve, reject) => {
+      const _promise = new Promise((resolve, reject) => {
         try {
           document.execCommand("copy");
           resolve(true);
@@ -120,7 +157,7 @@ export const copyToBuffer = (value: string) => {
         }
       });
 
-      return promise;
+      return _promise;
     }
     return true;
   }
@@ -164,17 +201,17 @@ export const textToClient = (text: string) => {
 
 export const getViewportKoeff = () => window.innerWidth / 980;
 
-export const monthMappings = [
-  "Январь",
-  "Февраль",
-  "Март",
-  "Апрель",
-  "Май",
-  "Июнь",
-  "Июль",
-  "Август",
-  "Сентябрь",
-  "Октябрь",
-  "Ноябрь",
-  "Декабрь",
-];
+export const preparePhoneInputVal = (val: string) => {
+  const hasPlus = val.indexOf("+") === 0;
+  let newVal = val.replaceAll(/[^\d -]+/gi, "");
+  newVal = newVal.replaceAll(/^[ -]+/gi, "");
+  newVal = newVal.replaceAll(/[ ]{2,}/gi, " ");
+  newVal = newVal.replaceAll(/[-]{2,}/gi, "-");
+  newVal = newVal.replaceAll(/( -)/gi, " ");
+  newVal = newVal.replaceAll(/(- )/gi, "-");
+  return hasPlus ? `+${newVal}` : newVal;
+};
+
+// Не хочу ради этого ставить lodash
+export const objectsAreEqual = (obj1: any, obj2: any) =>
+  JSON.stringify(obj1) === JSON.stringify(obj2);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import LoaderIcon from "components/LoaderIcon";
 import { NewsApi } from "api/news";
 import { TGetListRequest, TItem } from "api/types/news";
@@ -6,11 +6,12 @@ import InfiniteScroll from "components/InfiniteScroll";
 import { isAdmin } from "utils/user";
 import NotFound from "components/NotFound";
 import { loadItem, saveItem } from "utils/localStorage";
+import { objectsAreEqual } from "helpers/common";
 import ListItem from "../ListItem";
 import Filter, { TFilterParams } from "../Filter";
 // const OtherComponent = React.lazy(() => import('components/header'));
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
+
 type TProps = {
   excludeId?: number;
 };
@@ -33,7 +34,11 @@ const List = ({ excludeId }: TProps) => {
 
   const getData = (params?: TGetListRequest) => {
     loadingStatusRef.current.isLoading = true;
-    NewsApi.getList({ ...filterRef.current, ...params, orderComplex: "ismajor desc, id desc" }).then((res) => {
+    NewsApi.getList({
+      ...filterRef.current,
+      ...params,
+      orderComplex: filterRef.current.orderComplex || "ismajor desc, id desc",
+    }).then((res) => {
       setListState((prev) => (!prev || pageState === 1 ? res : [...prev, ...res]));
       loadingStatusRef.current.isLoading = false;
       if (!res.length) {
@@ -46,11 +51,8 @@ const List = ({ excludeId }: TProps) => {
     getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
   }, [pageState]);
 
-  useEffect(() => {
-    getData({ offset: 0, limit: PAGESIZE });
-  }, []);
-
   const changeFilter = (filter: TFilterParams) => {
+    if (objectsAreEqual(filter, filterRef.current)) return;
     loadingStatusRef.current.isOff = false;
     filterRef.current = filter;
     saveItem("news_filter", filterRef.current);

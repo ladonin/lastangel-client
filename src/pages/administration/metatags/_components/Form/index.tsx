@@ -26,7 +26,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   const onChangeHandler = (key: string, value: any) => {
     paramsRef.current[key] = value.value ? Number(value.value) : value;
     onChange(paramsRef.current);
-    console.log(paramsRef.current);
   };
 
   return (
@@ -192,6 +191,42 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
               onChangeHandler("story_description", val);
             }}
             label="Description История"
+            className="loc_formTextareaItem"
+          />
+
+          <InputText
+            label="Title Волонтеры (список)"
+            initValue={dataInitState ? dataInitState.volunteers_title : undefined}
+            onChange={(val) => {
+              onChangeHandler("volunteers_title", val);
+            }}
+            className="loc_formInputItem"
+          />
+          <Textarea
+            value={dataInitState ? dataInitState.volunteers_description : undefined}
+            maxWords={1024}
+            onChange={(val) => {
+              onChangeHandler("volunteers_description", val);
+            }}
+            label="Description Волонтеры (список)"
+            className="loc_formTextareaItem"
+          />
+
+          <InputText
+            label="Title Волонтер"
+            initValue={dataInitState ? dataInitState.volunteer_title : undefined}
+            onChange={(val) => {
+              onChangeHandler("volunteer_title", val);
+            }}
+            className="loc_formInputItem"
+          />
+          <Textarea
+            value={dataInitState ? dataInitState.volunteer_description : undefined}
+            maxWords={1024}
+            onChange={(val) => {
+              onChangeHandler("volunteer_description", val);
+            }}
+            label="Description Волонтер"
             className="loc_formTextareaItem"
           />
 

@@ -8,6 +8,8 @@ const PAGES = {
   NEWS: "/news",
   STORY: "/story",
   STORIES: "/stories",
+  VOLUNTEER: "/volunteer",
+  VOLUNTEERS: "/volunteers",
   DOCUMENTS: "/documents",
   ACQUAINTANCESHIP: "/o_priyte",
   MAIN: "/",
@@ -37,6 +39,9 @@ const PAGES = {
 
   ADMINISTRATION_STORY_CREATE: "/administration/story/create",
   ADMINISTRATION_STORY_UPDATE: "/administration/story/update",
+
+  ADMINISTRATION_VOLUNTEER_CREATE: "/administration/volunteer/create",
+  ADMINISTRATION_VOLUNTEER_UPDATE: "/administration/volunteer/update",
 
   ADMINISTRATION_MAIN_PAGE_PHOTOALBUM_UPDATE: "/administration/mainPagePhotoalbum/update",
 

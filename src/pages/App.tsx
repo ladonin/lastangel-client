@@ -18,6 +18,9 @@ import News from "pages/news";
 import Stories from "pages/stories";
 import Story from "pages/story";
 
+import Volunteers from "pages/volunteers";
+import Volunteer from "pages/volunteer";
+
 import Documents from "pages/documents";
 
 import Clinic from "pages/clinic";
@@ -50,14 +53,19 @@ import AdministrationNewsUpdate from "pages/administration/news/update";
 import AdministrationStoryCreate from "pages/administration/stories/create";
 import AdministrationStoryUpdate from "pages/administration/stories/update";
 
+import AdministrationVolunteerCreate from "pages/administration/volunteers/create";
+import AdministrationVolunteerUpdate from "pages/administration/volunteers/update";
+
 import AdministrationMainPagePhotoalbumUpdate from "pages/administration/mainPagePhotoalbum/update";
 
 import AdministrationDocumentsUpdate from "pages/administration/documents/update";
 
 import AdministrationClinicPhotosUpdate from "pages/administration/clinicPhotos/update";
+
 import AdministrationAcquaintanceshipUpdate from "pages/administration/acquaintanceship/update";
 
 import AdministrationFeedbacks from "pages/administration/feedbacks";
+
 import AdministrationMetatagsUpdate from "pages/administration/metatags/update";
 
 import LayoutMain from "pages/_layoutMain";
@@ -71,31 +79,85 @@ const App: React.FC = () => (
     <Route path={PAGES.ADMINISTRATION} element={<LayoutAdministration />}>
       <Route index element={<Administration />} />
       <Route path={PAGES.ADMINISTRATION_PET_CREATE} element={<AdministrationPetCreate />} />
-      <Route path={`${PAGES.ADMINISTRATION_PET_UPDATE}/:id`} element={<AdministrationPetUpdate />} />
+      <Route
+        path={`${PAGES.ADMINISTRATION_PET_UPDATE}/:id`}
+        element={<AdministrationPetUpdate />}
+      />
 
-      <Route path={PAGES.ADMINISTRATION_COLLECTION_CREATE} element={<AdministrationCollectionCreate />} />
-      <Route path={`${PAGES.ADMINISTRATION_COLLECTION_UPDATE}/:id`} element={<AdministrationCollectionUpdate />} />
+      <Route
+        path={PAGES.ADMINISTRATION_COLLECTION_CREATE}
+        element={<AdministrationCollectionCreate />}
+      />
+      <Route
+        path={`${PAGES.ADMINISTRATION_COLLECTION_UPDATE}/:id`}
+        element={<AdministrationCollectionUpdate />}
+      />
 
-      <Route path={`${PAGES.ADMINISTRATION_DONATION_CREATE}`} element={<AdministrationDonationCreate />} />
-      <Route path={`${PAGES.ADMINISTRATION_DONATION_UPDATE}/:id`} element={<AdministrationDonationUpdate />} />
+      <Route
+        path={`${PAGES.ADMINISTRATION_DONATION_CREATE}`}
+        element={<AdministrationDonationCreate />}
+      />
+      <Route
+        path={`${PAGES.ADMINISTRATION_DONATION_UPDATE}/:id`}
+        element={<AdministrationDonationUpdate />}
+      />
 
-      <Route path={`${PAGES.ADMINISTRATION_DONATOR_CREATE}`} element={<AdministrationDonatorCreate />} />
-      <Route path={`${PAGES.ADMINISTRATION_DONATOR_UPDATE}/:id`} element={<AdministrationDonatorUpdate />} />
+      <Route
+        path={`${PAGES.ADMINISTRATION_DONATOR_CREATE}`}
+        element={<AdministrationDonatorCreate />}
+      />
+      <Route
+        path={`${PAGES.ADMINISTRATION_DONATOR_UPDATE}/:id`}
+        element={<AdministrationDonatorUpdate />}
+      />
 
       <Route path={`${PAGES.ADMINISTRATION_NEWS_CREATE}`} element={<AdministrationNewsCreate />} />
-      <Route path={`${PAGES.ADMINISTRATION_NEWS_UPDATE}/:id`} element={<AdministrationNewsUpdate />} />
+      <Route
+        path={`${PAGES.ADMINISTRATION_NEWS_UPDATE}/:id`}
+        element={<AdministrationNewsUpdate />}
+      />
 
-      <Route path={`${PAGES.ADMINISTRATION_STORY_CREATE}`} element={<AdministrationStoryCreate />} />
-      <Route path={`${PAGES.ADMINISTRATION_STORY_UPDATE}/:id`} element={<AdministrationStoryUpdate />} />
+      <Route
+        path={`${PAGES.ADMINISTRATION_STORY_CREATE}`}
+        element={<AdministrationStoryCreate />}
+      />
+      <Route
+        path={`${PAGES.ADMINISTRATION_STORY_UPDATE}/:id`}
+        element={<AdministrationStoryUpdate />}
+      />
 
-      <Route path={`${PAGES.ADMINISTRATION_MAIN_PAGE_PHOTOALBUM_UPDATE}`} element={<AdministrationMainPagePhotoalbumUpdate />} />
+      <Route
+        path={`${PAGES.ADMINISTRATION_VOLUNTEER_CREATE}`}
+        element={<AdministrationVolunteerCreate />}
+      />
+      <Route
+        path={`${PAGES.ADMINISTRATION_VOLUNTEER_UPDATE}/:id`}
+        element={<AdministrationVolunteerUpdate />}
+      />
 
-      <Route path={`${PAGES.ADMINISTRATION_DOCUMENTS_UPDATE}`} element={<AdministrationDocumentsUpdate />} />
-      <Route path={`${PAGES.ADMINISTRATION_CLINIC_PHOTOS_UPDATE}`} element={<AdministrationClinicPhotosUpdate />} />
-      <Route path={`${PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE}`} element={<AdministrationAcquaintanceshipUpdate />} />
+      <Route
+        path={`${PAGES.ADMINISTRATION_MAIN_PAGE_PHOTOALBUM_UPDATE}`}
+        element={<AdministrationMainPagePhotoalbumUpdate />}
+      />
+
+      <Route
+        path={`${PAGES.ADMINISTRATION_DOCUMENTS_UPDATE}`}
+        element={<AdministrationDocumentsUpdate />}
+      />
+      <Route
+        path={`${PAGES.ADMINISTRATION_CLINIC_PHOTOS_UPDATE}`}
+        element={<AdministrationClinicPhotosUpdate />}
+      />
+      <Route
+        path={`${PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE}`}
+        element={<AdministrationAcquaintanceshipUpdate />}
+      />
 
       <Route path={`${PAGES.ADMINISTRATION_FEEDBACKS}`} element={<AdministrationFeedbacks />} />
-      <Route path={`${PAGES.ADMINISTRATION_METATAGS_UPDATE}`} element={<AdministrationMetatagsUpdate />} />
+      <Route
+        path={`${PAGES.ADMINISTRATION_METATAGS_UPDATE}`}
+        element={<AdministrationMetatagsUpdate />}
+      />
     </Route>
 
     <Route path="/" element={<LayoutMain />}>
@@ -115,6 +177,10 @@ const App: React.FC = () => (
 
       <Route path={PAGES.DONATORS} element={<Donators />} />
       <Route path={`${PAGES.DONATOR}/:id`} element={<Donator />} />
+
+      <Route path={PAGES.VOLUNTEERS} element={<Volunteers />} />
+      <Route path={`${PAGES.VOLUNTEER}/:id`} element={<Volunteer />} />
+
       <Route path={PAGES.CONTACTS} element={<Contacts />} />
       <Route path={PAGES.DOCUMENTS} element={<Documents />} />
       <Route path={PAGES.CLINIC} element={<Clinic />} />

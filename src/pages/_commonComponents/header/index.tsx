@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
-import { useNavigate, NavLink, Link } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import cn from "classnames";
 import logo from "icons/logo.png";
 import VkLogo from "icons/vk_logo.png";
@@ -13,27 +13,35 @@ import PAGES from "routing/routes";
 import "./styles.scss";
 import flowerSrc from "../../../icons/flower1.png";
 
-const MENU_ITEMS = [
-  { title: "Главная", link: PAGES.MAIN, inMobileSubMenu: false },
-  { title: "Питомцы", link: PAGES.PETS, inMobileSubMenu: false },
-  { title: "Сборы", link: PAGES.COLLECTIONS, inMobileSubMenu: false },
-  { title: "Новости", link: PAGES.NEWS, inMobileSubMenu: true },
-  { title: "Истории", link: PAGES.STORIES, inMobileSubMenu: true },
-  { title: "Документы", link: PAGES.DOCUMENTS, inMobileSubMenu: true },
-  { title: "Помощь", link: PAGES.HELP, inMobileSubMenu: true },
-  { title: "Фин. отчет", link: PAGES.FINREPORT, inMobileSubMenu: true },
-  { title: "Клиника", link: PAGES.CLINIC, inMobileSubMenu: true },
-  { title: "Контакты", link: PAGES.CONTACTS, inMobileSubMenu: false },
+type TMenuItem = {
+  title: string;
+  link: string;
+  inMobileSubMenu: false | number;
+  inDesctopSubMenu: boolean;
+};
+
+const MENU_ITEMS: TMenuItem[] = [
+  { title: "Главная", link: PAGES.MAIN, inMobileSubMenu: false, inDesctopSubMenu: false },
+  { title: "Питомцы", link: PAGES.PETS, inMobileSubMenu: false, inDesctopSubMenu: false },
+  { title: "Сборы", link: PAGES.COLLECTIONS, inMobileSubMenu: false, inDesctopSubMenu: false },
+  { title: "Новости", link: PAGES.NEWS, inMobileSubMenu: 1, inDesctopSubMenu: false },
+  { title: "Истории", link: PAGES.STORIES, inMobileSubMenu: 1, inDesctopSubMenu: false },
+  { title: "Документы", link: PAGES.DOCUMENTS, inMobileSubMenu: 1, inDesctopSubMenu: true },
+  { title: "Помощь", link: PAGES.HELP, inMobileSubMenu: 1, inDesctopSubMenu: false },
+  { title: "Фин. отчет", link: PAGES.FINREPORT, inMobileSubMenu: 1, inDesctopSubMenu: false },
+  { title: "Клиника", link: PAGES.CLINIC, inMobileSubMenu: 2, inDesctopSubMenu: true },
+  { title: "Контакты", link: PAGES.CONTACTS, inMobileSubMenu: false, inDesctopSubMenu: false },
+  { title: "Волонтеры", link: PAGES.VOLUNTEERS, inMobileSubMenu: 2, inDesctopSubMenu: false },
 ];
 
-type TMenuItem = { title: string; link: string; inMobileSubMenu: boolean };
 // продолжить с
 // текстом логотипа
 // кнопок
 // иконок контактов
 export default function Index() {
   const navigate = useNavigate();
-  const [openSubmenuState, setOpenSubmenuState] = useState(true);
+  const [openDesctopSubmenuState, setOpenDesctopSubmenuState] = useState(false);
+  const [openMobileSubmenuState, setOpenMobileSubmenuState] = useState(true);
 
   const renderMenuItem = (item: TMenuItem, index: number) => (
     <NavLink
@@ -46,7 +54,31 @@ export default function Index() {
   );
   const renderMenu = (mobile: boolean) => (
     <>
-      {!mobile && MENU_ITEMS.map((item, index) => renderMenuItem(item, index))}
+      {!mobile && (
+        <>
+          {MENU_ITEMS.filter(({ inDesctopSubMenu }) => !inDesctopSubMenu).map((item, index) =>
+            renderMenuItem(item, index)
+          )}
+          <div
+            className={cn("loc_else", { "loc--opened": openDesctopSubmenuState })}
+            onClick={() => {
+              setOpenDesctopSubmenuState(!openDesctopSubmenuState);
+            }}
+          >
+            Еще <CaretIcon className="loc_caret" />
+            {openDesctopSubmenuState && (
+              <>
+                <div className="loc_overflow" />
+                <div className="loc_subMenu">
+                  {MENU_ITEMS.filter(({ inDesctopSubMenu }) => inDesctopSubMenu).map(
+                    (item, index) => renderMenuItem(item, index)
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+        </>
+      )}
 
       {mobile && (
         <>
@@ -55,18 +87,25 @@ export default function Index() {
           )}
 
           <div
-            className={cn("loc_else", { "loc--opened": openSubmenuState })}
+            className={cn("loc_else", { "loc--opened": openMobileSubmenuState })}
             onClick={() => {
-              setOpenSubmenuState(!openSubmenuState);
+              setOpenMobileSubmenuState(!openMobileSubmenuState);
             }}
           >
             Еще <CaretIcon className="loc_caret" />
           </div>
-          {openSubmenuState && (
+          {openMobileSubmenuState && (
             <div className="loc_subMenu">
-              {MENU_ITEMS.filter(({ inMobileSubMenu }) => inMobileSubMenu).map((item, index) =>
-                renderMenuItem(item, index)
-              )}
+              <div className="loc_subMenu-1">
+                {MENU_ITEMS.filter(({ inMobileSubMenu }) => inMobileSubMenu === 1).map(
+                  (item, index) => renderMenuItem(item, index)
+                )}
+              </div>
+              <div className="loc_subMenu-2">
+                {MENU_ITEMS.filter(({ inMobileSubMenu }) => inMobileSubMenu === 2).map(
+                  (item, index) => renderMenuItem(item, index)
+                )}
+              </div>
             </div>
           )}
         </>
@@ -126,7 +165,8 @@ export default function Index() {
             <div className="loc_acquaintanceship">
               <NavLink to={PAGES.ACQUAINTANCESHIP} className="link_img">
                 <div className="loc_button">
-                  <img alt="." src={flowerSrc} /> Знакомство с приютом <img alt="." src={flowerSrc} />
+                  <img alt="." src={flowerSrc} /> Знакомство с приютом{" "}
+                  <img alt="." src={flowerSrc} />
                 </div>
               </NavLink>
             </div>
@@ -160,7 +200,8 @@ export default function Index() {
             <div className="loc_acquaintanceship">
               <NavLink to={PAGES.ACQUAINTANCESHIP} className="link_img">
                 <div className="loc_button">
-                  <img alt="." src={flowerSrc} /> Знакомство с приютом <img alt="." src={flowerSrc} />
+                  <img alt="." src={flowerSrc} /> Знакомство с приютом{" "}
+                  <img alt="." src={flowerSrc} />
                 </div>
               </NavLink>
             </div>

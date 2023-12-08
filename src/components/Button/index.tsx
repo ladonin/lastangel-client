@@ -14,6 +14,8 @@ import Tooltip from "../Tooltip";
 export enum ButtonThemes {
   PRIMARY = "primary",
   DANGER = "danger",
+  ORANGE = "orange",
+  PINK = "pink",
   SUCCESS = "success",
   GREY = "grey",
   GHOST = "ghost",

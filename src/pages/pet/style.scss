@@ -246,7 +246,7 @@
 
     .loc_bottomWrapper {
       margin-top: 24px;
-      .disclaimer {
+      .loc_disclaimer {
         width: 100%;
         font-style: Italic;
         font-size: 18px;
@@ -399,7 +399,7 @@
       }
     }
 
-    .disclaimer {
+    .loc_disclaimer {
       font-size: calc(28px * var(--viewport-koeff));
       margin: 0 calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
     }

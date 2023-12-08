@@ -17,6 +17,7 @@ import { DonationsApi } from "api/donations";
 import { DonatorsApi } from "api/donators";
 import { NewsApi } from "api/news";
 import { StoriesApi } from "api/stories";
+import { VolunteersApi } from "api/volunteers";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { quit } from "utils/user";
 import { UserApi } from "api/user";
@@ -69,7 +70,9 @@ const LayoutAdministration: React.FC = () => {
     pathname !== PAGES.ADMINISTRATION_DOCUMENTS_UPDATE &&
     pathname !== PAGES.ADMINISTRATION_CLINIC_PHOTOS_UPDATE &&
     pathname !== PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE &&
-    pathname !== PAGES.ADMINISTRATION_METATAGS_UPDATE;
+    pathname !== PAGES.ADMINISTRATION_METATAGS_UPDATE &&
+    pathname !== PAGES.ADMINISTRATION_VOLUNTEER_CREATE &&
+    pathname.indexOf(PAGES.ADMINISTRATION_VOLUNTEER_UPDATE) === -1;
 
   // тут сделать проверку авторизации на защищенные страницы с применением location.pathname
   const [newFeedbacksState, setNewFeedbacksState] = useState<number>(0);
@@ -142,7 +145,7 @@ const LayoutAdministration: React.FC = () => {
                 Метатеги
               </Button>
               <Button
-                theme={ButtonThemes.SUCCESS}
+                theme={ButtonThemes.ORANGE}
                 size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
                 className="loc_addPetButton"
                 onClick={() => {
@@ -152,7 +155,7 @@ const LayoutAdministration: React.FC = () => {
                 Добавить питомца
               </Button>
               <Button
-                theme={ButtonThemes.SUCCESS}
+                theme={ButtonThemes.ORANGE}
                 size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
                 className="loc_addCollectionButton"
                 onClick={() => {
@@ -184,6 +187,16 @@ const LayoutAdministration: React.FC = () => {
               <Button
                 theme={ButtonThemes.SUCCESS}
                 size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                className="loc_addVolutneerButton"
+                onClick={() => {
+                  navigate(PAGES.ADMINISTRATION_VOLUNTEER_CREATE);
+                }}
+              >
+                Добавить волонтера
+              </Button>
+              <Button
+                theme={ButtonThemes.PINK}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
                 className="loc_addNewsButton"
                 onClick={() => {
                   navigate(PAGES.ADMINISTRATION_NEWS_CREATE);
@@ -192,7 +205,7 @@ const LayoutAdministration: React.FC = () => {
                 Добавить новость
               </Button>
               <Button
-                theme={ButtonThemes.SUCCESS}
+                theme={ButtonThemes.PINK}
                 size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
                 className="loc_addStoryButton"
                 onClick={() => {
@@ -308,6 +321,25 @@ const LayoutAdministration: React.FC = () => {
                   csv
                 </Button>
               </div>
+
+              <div className="loc_block_1">
+                <div className="loc_block_1_title">Скачать данные о волонтерах в</div>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => VolunteersApi.downloadData("txt")}
+                >
+                  txt
+                </Button>
+                <Button
+                  theme={ButtonThemes.GHOST_BORDER}
+                  size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                  onClick={() => VolunteersApi.downloadData("html")}
+                >
+                  html
+                </Button>
+              </div>
+              
               <div className="loc_block_1">
                 <div className="loc_block_1_title">Скачать данные о донаторах в</div>
                 <Button

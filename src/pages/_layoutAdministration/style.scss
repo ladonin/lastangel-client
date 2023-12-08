@@ -63,35 +63,7 @@
         }
       }
 
-      .loc_addPetButton {
-        margin-left: 0;
-      }
-
-      .loc_addCollectionButton {
-        margin-left: 0;
-      }
-
-      .loc_addDonationButton {
-        margin-left: 0;
-      }
-
-      .loc_addDonatorButton {
-        margin-left: 0;
-      }
-
-      .loc_mainPagePhotoalbumButton {
-        margin-left: 0;
-      }
-
-      .loc_documentsButton {
-        margin-left: 0;
-      }
-
-      .loc_clinicButton {
-        margin-left: 0;
-      }
-
-      .loc_acquaintanceshipButton {
+      .loc_addPetButton, .loc_addCollectionButton, .loc_addDonationButton, .loc_addDonatorButton, .loc_mainPagePhotoalbumButton, .loc_documentsButton, .loc_clinicButton, .loc_acquaintanceshipButton, .loc_addVolutneerButton {
         margin-left: 0;
       }
 
@@ -175,7 +147,8 @@
       .loc_mainPagePhotoalbumButton,
       .loc_documentsButton,
       .loc_clinicButton,
-      .loc_acquaintanceshipButton {
+      .loc_acquaintanceshipButton,
+      .loc_addVolutneerButton {
         width: 100%;
       }
     }

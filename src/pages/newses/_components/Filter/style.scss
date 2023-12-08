@@ -2,10 +2,10 @@
   .loc_wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
+    gap: 16px;
     margin-bottom: 24px;
     background-color: $c_lagunaBlue;
-    padding: 8px 16px;
+    padding: 16px;
     border-radius: 8px;
 
     .loc_formInputItem, .loc_formSelectItem {
@@ -21,7 +21,7 @@
     }
 
     .loc_formSelectItem.loc--order {
-      width: 20%;
+      width: 28%;
     }
 
     .loc_formInputItem.loc--title {

@@ -29,10 +29,11 @@ const Textarea: React.FC<TProps> = ({
   onChange,
   description,
 }) => {
+  
   const [valueState, setValueState] = useState(value || "");
 
   useEffect(() => {
-    if (value !== undefined && value !== valueState) {
+    if (value !== undefined && value !== null && value !== valueState) {
       setValueState(value);
     }
   }, [value]);
