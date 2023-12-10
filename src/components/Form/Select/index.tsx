@@ -2,10 +2,9 @@
   import Select from 'components/Form/Select'
  */
 
-import React, { Ref, useEffect, useRef, useMemo } from "react";
+import React, { Ref, useEffect, useRef } from "react";
 import cn from "classnames";
 import SelectComponent, { Props } from "react-select";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TValue = { value: string; label: string };
@@ -36,6 +35,7 @@ const Select: React.FC<TProps> = ({
   ...rest
 }) => {
   const val = value ? options.filter(({ value: v }) => v === value)[0] : undefined;
+
   const lightClearRef = useRef<string | null>(null);
   // Если изначально передали значение - храним тут состояние, что значение value инициировано
   const valueIsInitedRef = useRef(false);
@@ -73,7 +73,7 @@ const Select: React.FC<TProps> = ({
       valueIsInitedRef.current = true;
       onChangeHandler(val);
     }
-  }, [value, options]);
+  }, [val, value, options]);
 
   return (
     <div className={cn("component-select", className)}>

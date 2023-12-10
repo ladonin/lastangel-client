@@ -49,6 +49,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       setIsMajorState(!!data.ismajor);
 
       paramsRef.current = data;
+      onChange(paramsRef.current);
     }
   }, [data]);
 

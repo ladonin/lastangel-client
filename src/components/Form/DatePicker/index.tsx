@@ -19,6 +19,7 @@ type TProps = {
   required?: boolean;
   onChange: (val: number) => void;
   description?: string;
+  openToDate?: Date;
 };
 const DatePicker: React.FC<TProps> = ({
   label,
@@ -27,6 +28,7 @@ const DatePicker: React.FC<TProps> = ({
   onChange,
   description,
   value,
+  openToDate = undefined,
 }) => {
   const [valueState, setValueState] = useState<Date | null>(value || null);
 
@@ -48,6 +50,8 @@ const DatePicker: React.FC<TProps> = ({
       )}
       <div className="loc_datepicker">
         <ReactDatePicker
+          openToDate={openToDate}
+          showYearDropdown
           locale="ru"
           showMonthYearPicker
           popperClassName="loc_popper"
@@ -58,7 +62,6 @@ const DatePicker: React.FC<TProps> = ({
           maxDate={new Date()}
           onChange={onChangeHandler}
         />
-        
       </div>
       {description && <div className="form-element-description">{description}</div>}
     </div>

@@ -144,6 +144,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           />
           <DatePicker
             label="Дата рождения"
+            openToDate={new Date("Sun Jan 1 1985 00:00:00 GMT+0300")}
             onChange={(val) => {
               onChangeHandler("birthdate", val / 1000);
             }}
@@ -268,9 +269,8 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             setImage={setAnotherImagesHandler}
           />
 
-                    {anotherImagesPrevState && !!anotherImagesPrevState.length && (
+          {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages
-
               images={anotherImagesPrevState}
               deletedImages={anotherImagesForDeleteState}
               label="Ранее загруженные фото"
@@ -280,7 +280,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
                 data ? getAnotherImagesUrl(data, img, SIZES_ANOTHER.SIZE_450) : ""
               }
             />
-          )} 
+          )}
         </div>
       </div>
     </div>

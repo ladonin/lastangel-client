@@ -45,7 +45,9 @@ const renderLinksList = () => (
     <Link to={PAGES.HELP} className="link_1 loc_link">
       Помощь
     </Link>
-
+    <Link to={PAGES.VOLUNTEERS} className="link_1 loc_link">
+      Волонтеры
+    </Link>
     <Link to={PAGES.FINREPORT} className="link_1 loc_link">
       Фин. отчет
     </Link>

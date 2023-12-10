@@ -33,6 +33,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     if (data) {
       data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
       paramsRef.current = data;
+      onChange(paramsRef.current);
     }
   }, [data]);
   // продолжить с удаления фото - главного и дополнительного на бэке - ПРОДОЛЖЕНИЕ

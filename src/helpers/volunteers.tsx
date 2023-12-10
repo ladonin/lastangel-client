@@ -22,12 +22,12 @@ export const getAnotherImagesUrl = (
   data.id
     ? `${process.env.OUTER_STORAGE_URL}media/volunteers/${data.id}/another_${number}${
         size ? `_${size}` : ""
-      }.jpeg${data.updated ? `?${data.updated}` : ""}`
+      }.jpeg${data.updated ? `?${data.updated}` : `?${data.created}`}`
     : "";
 
 export const getVideoUrl = (data: TGetResponseItem, name: string) =>
   data.id
     ? `${process.env.OUTER_STORAGE_URL}media/volunteers/${data.id}/${name}${
-        data.updated ? `?${data.updated}` : ""
+        data.updated ? `?${data.updated}` : `?${data.created}`
       }`
     : "";

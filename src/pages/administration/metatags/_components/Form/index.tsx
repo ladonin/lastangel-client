@@ -20,6 +20,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       const parsedData = JSON.parse(data);
       paramsRef.current = parsedData;
       setDataInitState(parsedData);
+      onChange(paramsRef.current);
     }
   }, [data]);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef } from "react";
 // const OtherComponent = React.lazy(() => import('components/header'));
 import { AnimalsApi } from "api/animals";
 import { CollectionsApi } from "api/collections";
@@ -29,11 +29,11 @@ type TProps = {
 
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [animalsOptionsState, setAnimalsOptionsState] = useState<
-    { value: string; label: string }[]
-  >([]);
+    { value: string; label: string }[] | null
+  >(null);
   const [collectionsOptionsState, setCollectionsOptionsState] = useState<
-    { value: string; label: string }[]
-  >([]);
+    { value: string; label: string }[] | null
+  >(null);
   const [targetOptionsState, setTargetOptionsState] = useState<{ value: string; label: string }[]>(
     []
   );
@@ -44,6 +44,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   useEffect(() => {
     if (data) {
       paramsRef.current = data;
+      onChange(paramsRef.current);
       if (isAnonym(data)) {
         setIsAnonymState(true);
       }
@@ -145,24 +146,26 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             }}
             className="loc_formInputItem"
           />
-          <Select
-            label="Тип доната"
-            required
-            value={data ? String(data.type) : undefined}
-            onChange={(val) => {
-              onChangeHandler("type", val);
+          {!!animalsOptionsState && !!collectionsOptionsState && (
+            <Select
+              label="Тип доната"
+              required
+              value={data ? String(data.type) : undefined}
+              onChange={(val) => {
+                onChangeHandler("type", val);
 
-              if (Number(val.value) === DONATIONS_TYPES.PET) {
-                setTargetOptionsState(animalsOptionsState);
-              } else if (Number(val.value) === DONATIONS_TYPES.COLLECTION) {
-                setTargetOptionsState(collectionsOptionsState);
-              } else {
-                setTargetOptionsState([]);
-              }
-            }}
-            className="loc_formSelectItem"
-            options={TYPES_OPTIONS}
-          />
+                if (Number(val.value) === DONATIONS_TYPES.PET) {
+                  setTargetOptionsState(animalsOptionsState);
+                } else if (Number(val.value) === DONATIONS_TYPES.COLLECTION) {
+                  setTargetOptionsState(collectionsOptionsState);
+                } else {
+                  setTargetOptionsState([]);
+                }
+              }}
+              className="loc_formSelectItem"
+              options={TYPES_OPTIONS}
+            />
+          )}
 
           <Select
             label="Для кого/чего"

@@ -19,6 +19,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   useEffect(() => {
     if (data) {
       paramsRef.current = data;
+      onChange(paramsRef.current);
     }
   }, [data]);
 

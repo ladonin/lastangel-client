@@ -123,3 +123,17 @@
 
 
 }
+
+.react-datepicker__month--selected {
+  color: black !important;;
+  background-color: white !important;
+
+  &:hover {
+    background-color: #f0f0f0 !important;
+  }
+
+  &.react-datepicker__month-text--keyboard-selected {
+    background-color: #bad9f1 !important;
+  }
+}
+
