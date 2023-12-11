@@ -349,7 +349,7 @@
       }
 
       .loc_donateButton {
-        margin: calc(48px * var(--viewport-koeff)) auto calc(16px * var(--viewport-koeff)) auto;
+        margin: calc(48px * var(--viewport-koeff)) auto 0 auto;
       }
 
       .loc_redactButton {
@@ -358,7 +358,7 @@
 
       .component-copyLinkToPage {
         width: 100%;
-        padding-bottom: calc(16px * var(--viewport-koeff));
+        padding-bottom: 0;
         padding-left: 0;
         padding-right: 0;
 

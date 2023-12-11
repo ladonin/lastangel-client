@@ -81,12 +81,22 @@
         .loc_redactButton {
           margin-top: 24px;
         }
+
+        .loc_copyLinkToPageButton {
+          width: 100%;
+
+          .loc_copyToBufferStatus {
+            padding: 0;
+            margin-top: 8px;
+          }
+          
+        }
       }
 
 
       .loc_description {
         align-self: flex-start;
-        margin-top: 24px;
+        margin-top: 16px;
         font-size: 18px;
         line-height: 28px;
         width: 100%;
@@ -159,7 +169,7 @@
         }
 
         .loc_phone, .loc_vkLink a, .loc_okLink a, .loc_instLink a {
-    
+
           gap: calc(16px * var(--viewport-koeff));
 
 
@@ -197,14 +207,9 @@
         flex-wrap: wrap;
 
 
-        .loc_redactButton {
-          margin: calc(24px * var(--viewport-koeff)) auto;
-        }
-
-
         .loc_description {
           margin-top: 0;
-          margin-bottom: calc(24px * var(--viewport-koeff));
+          margin-bottom: 0;
           font-size: calc(32px * var(--viewport-koeff));
           line-height: calc(54px * var(--viewport-koeff));
           width: 100%;
@@ -219,6 +224,26 @@
       display: flex;
       flex-wrap: wrap;
 
+      .loc_redactButton {
+        margin: 0 auto calc(24px * var(--viewport-koeff)) auto;
+      }
+
+      .loc_copyLinkToPageButton {
+        width: 100%;
+
+        .loc_copyLinkButton {
+          font-size: calc(24px * var(--viewport-koeff));
+          height: calc(60px * var(--viewport-koeff));
+          border-radius: calc(30px * var(--viewport-koeff));
+          padding: 0 calc(24px * var(--viewport-koeff));
+          margin: 0 auto calc(40px * var(--viewport-koeff)) auto;
+        }
+
+        .loc_copyToBufferStatus {
+          padding: 0 calc(24px * var(--viewport-koeff));
+          margin: calc(-24px * var(--viewport-koeff)) 0 calc(40px * var(--viewport-koeff)) 0;
+        }
+      }
 
       .loc_fakephotoalbum {
         height: 1200px;

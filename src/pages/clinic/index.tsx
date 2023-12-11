@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 // const OtherComponent = React.lazy(() => import('components/header'));
 
 import "./style.scss";

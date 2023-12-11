@@ -27,6 +27,7 @@ import InstLogo from "../../icons/inst_logo.png";
 import { prepareAge } from "../../helpers/animals";
 import PhoneImage from "../../icons/phone.png";
 import { MAIN_CARD_OWNER, MAIN_PHONE } from "../../constants/donations";
+import CopyLinkToPage from "../../components/CopyLinkToPage";
 
 const Volunteer: React.FC = () => {
   const { id } = useParams();
@@ -132,6 +133,23 @@ const Volunteer: React.FC = () => {
       </div>
     );
 
+  const renderCopyLinkToPageButton = () => (
+    <div className="loc_copyLinkToPageButton">
+      <CopyLinkToPage
+        targetText="на волонтера"
+        text="Скопировать ссылку"
+        url={window.location.href}
+      />
+    </div>
+  );
+
+  const renderAvatar = () =>
+    !!dataState && (
+      <div className="loc_avatar">
+        <img alt="not found" src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
+      </div>
+    );
+
   return (
     <>
       {metatags && (
@@ -167,29 +185,23 @@ const Volunteer: React.FC = () => {
             <div className="loc_contentWrapper">
               {isLoadingState && <div className="loc_loader" />}
               <div className="loc_topWrapper">
-                {isMobile === true && (
-                  <div className="loc_avatar">
-                    <img alt="not found" src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
-                  </div>
-                )}
+                {isMobile === true && renderAvatar()}
                 {isMobile === true && renderData()}
                 <div className="loc_left">
                   {isMobile === false && renderData()}
-                  {renderRedactButton(dataState)}
-
+                  {isMobile === false && renderRedactButton(dataState)}
+                  {isMobile === false && renderCopyLinkToPageButton()}
                   <div
                     className="loc_description"
                     dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
                   />
                 </div>
-                {isMobile === false && (
-                  <div className="loc_avatar">
-                    <img alt="not found" src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
-                  </div>
-                )}
+                {isMobile === false && renderAvatar()}
               </div>
 
               <div className="loc_bottomWrapper">
+                {isMobile === true && renderRedactButton(dataState)}
+                {isMobile === true && renderCopyLinkToPageButton()}
                 {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
                   <>
                     {isLoadingState ? (
