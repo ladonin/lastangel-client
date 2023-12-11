@@ -189,7 +189,7 @@ const Volunteers: React.FC = () => {
           <Link
             onClick={createBack}
             to={`${PAGES.VOLUNTEER}/${data.id}`}
-            className="loc_name link_text"
+            className="loc_fio link_text"
           >
             {data.fio}
           </Link>

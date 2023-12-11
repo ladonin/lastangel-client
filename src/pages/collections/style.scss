@@ -114,7 +114,13 @@
         .loc_content {
           width: 100%;
           margin-top: 16px;
+          .loc_button {
+            background-color: #B75555;
+            &:hover {
+              background-color: #d27575;
 
+            }
+          }
           .loc_data {
             margin-top: 16px;
             font-weight: 400;

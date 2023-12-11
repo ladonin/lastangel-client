@@ -75,13 +75,13 @@ textarea, input {
 }
 
 textarea:hover, input:hover {
-  border: 1px solid $c_greyDark;
+  border: 1px solid $c_greyMedium;//$c_greyDark;
   outline: none;
 }
 
 textarea:focus, input:focus {
   outline: none;
-  border-color: $c_blueLight;
+  border-color: $c_greyMedium;//$c_blueLight;
 }
 
 input::placeholder {

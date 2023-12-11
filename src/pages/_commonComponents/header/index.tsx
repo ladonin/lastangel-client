@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { useNavigate, NavLink } from "react-router-dom";
 import cn from "classnames";
+import { useLocation } from "react-router";
 import logo from "icons/logo.png";
 import VkLogo from "icons/vk_logo.png";
 import OkLogo from "icons/ok_logo.png";
@@ -34,19 +35,45 @@ const MENU_ITEMS: TMenuItem[] = [
   { title: "Волонтеры", link: PAGES.VOLUNTEERS, inMobileSubMenu: 2, inDesctopSubMenu: false },
 ];
 
-// продолжить с
-// текстом логотипа
-// кнопок
-// иконок контактов
+const LINKS_BELONGINGS = {
+  [PAGES.PET]: PAGES.PETS,
+  [PAGES.COLLECTION]: PAGES.COLLECTIONS,
+  [PAGES.DONATOR]: PAGES.DONATORS,
+  [PAGES.NEWS]: PAGES.NEWS,
+  [PAGES.STORY]: PAGES.STORIES,
+  [PAGES.VOLUNTEER]: PAGES.VOLUNTEERS,
+};
+
 export default function Index() {
   const navigate = useNavigate();
   const [openDesctopSubmenuState, setOpenDesctopSubmenuState] = useState(false);
   const [openMobileSubmenuState, setOpenMobileSubmenuState] = useState(true);
 
+  const { pathname } = useLocation();
+
+  const checkActive = (item: TMenuItem, isActive: boolean) => {
+    if (isActive) return true;
+
+    for (const singlePath in LINKS_BELONGINGS) {
+      if (pathname.indexOf(singlePath) === 0 && item.link === LINKS_BELONGINGS[singlePath]) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const checkElseActive = () => {
+    for (const index in MENU_ITEMS) {
+      if (MENU_ITEMS[index].inDesctopSubMenu && MENU_ITEMS[index].link === pathname) {
+        return true;
+      }
+    }
+    return false;
+  };
   const renderMenuItem = (item: TMenuItem, index: number) => (
     <NavLink
       to={item.link}
-      className={({ isActive }) => `loc_item${isActive ? " loc--active" : ""}`}
+      className={({ isActive }) => `loc_item${checkActive(item, isActive) ? " loc--active" : ""}`}
       key={index}
     >
       {item.title}
@@ -60,7 +87,10 @@ export default function Index() {
             renderMenuItem(item, index)
           )}
           <div
-            className={cn("loc_else", { "loc--opened": openDesctopSubmenuState })}
+            className={cn("loc_else", {
+              "loc--opened": openDesctopSubmenuState,
+              "loc--active": checkElseActive(),
+            })}
             onClick={() => {
               setOpenDesctopSubmenuState(!openDesctopSubmenuState);
             }}

@@ -35,8 +35,8 @@ const LayoutMain: React.FC = () => {
   const getMetatags = () => metatagsState;
 
   useEffect(() => {
-    // react-device-detect выбает всякую помойку иногда и не стоит ожидать,
-    // что он отдаст только true или false (еще он отдает null)
+    // react-device-detect выдает всякую помойку иногда и не стоит ожидать,
+    // что он отдаст только true или false
     if ((isMobile === true || isMobile === false) && isMobileState === undefined) {
       saveItem("isMobile", isMobile);
       setIsMobileState(isMobile);
@@ -59,6 +59,7 @@ const LayoutMain: React.FC = () => {
     checkMail();
     MetatagsApi.get().then((res) => {
       res && setMetatagsState(JSON.parse(res));
+      console.log(JSON.parse(res))
     });
     timerRef.current = setInterval(() => {
       checkMail();

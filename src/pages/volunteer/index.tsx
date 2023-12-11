@@ -117,8 +117,7 @@ const Volunteer: React.FC = () => {
           {dataState.ok_link && (
             <div className="loc_okLink">
               <Link target="_blank" to={dataState.ok_link} className="link_3">
-                <img src={OkLogo} alt="." title="Страница в Одноклассниках" /> Страница в
-                OK
+                <img src={OkLogo} alt="." title="Страница в Одноклассниках" /> Страница в OK
               </Link>
             </div>
           )}
@@ -168,11 +167,13 @@ const Volunteer: React.FC = () => {
             <div className="loc_contentWrapper">
               {isLoadingState && <div className="loc_loader" />}
               <div className="loc_topWrapper">
-                <div className="loc_avatar">
-                  <img alt="not found" src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
-                </div>
+                {isMobile === true && (
+                  <div className="loc_avatar">
+                    <img alt="not found" src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
+                  </div>
+                )}
                 {isMobile === true && renderData()}
-                <div className="loc_right">
+                <div className="loc_left">
                   {isMobile === false && renderData()}
                   {renderRedactButton(dataState)}
 
@@ -181,6 +182,11 @@ const Volunteer: React.FC = () => {
                     dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
                   />
                 </div>
+                {isMobile === false && (
+                  <div className="loc_avatar">
+                    <img alt="not found" src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
+                  </div>
+                )}
               </div>
 
               <div className="loc_bottomWrapper">

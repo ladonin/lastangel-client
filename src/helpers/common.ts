@@ -1,5 +1,5 @@
 /*
-  import { saveFile, getCountWord, getTimestamp, getDateString, isObjectOptionsIsEmpty } from 'helpers/common';
+  import { saveFile, getCountWord, getTimestamp, getDateString, isObjectOptionsEmpty } from 'helpers/common';
  */
 
 import { AxiosResponse } from "axios";
@@ -92,7 +92,7 @@ export const getDateYMDFriendly = (timestamp: number) => {
 export const getDateString = (timestamp: number, noSecs = true) =>
   `${getDateYMD(timestamp)} ${getDateHMS(timestamp, noSecs)}`;
 
-export const isObjectOptionsIsEmpty = (obj: any) => {
+export const isObjectOptionsEmpty = (obj: any) => {
   for (const param in obj) {
     if (obj[param] !== undefined) {
       return false;

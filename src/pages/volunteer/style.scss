@@ -71,7 +71,7 @@
 
       }
 
-      .loc_right {
+      .loc_left {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -89,6 +89,7 @@
         margin-top: 24px;
         font-size: 18px;
         line-height: 28px;
+        width: 100%;
       }
 
 
@@ -191,7 +192,7 @@
         }
       }
 
-      .loc_right {
+      .loc_left {
         width: 100%;
         flex-wrap: wrap;
 

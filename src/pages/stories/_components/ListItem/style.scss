@@ -6,35 +6,48 @@
   flex-direction: column;
   cursor: pointer;
   //background-color: $c_greyF5;
-  border: 1px solid $c_lagunaGreyLight;
+  border: 1px solid $c_pistachioMedium;
   border-radius: 8px;
   padding: 24px 24px 0 24px;
+
   &:hover:not(.loc--isShowed) {
-    background-color: $c_lagunaWhite;
+    background-color: $c_pistachioLighter;
   }
+
   &.loc--non_published {
     background-color: $c_yellowLight;
   }
 
   .loc_created {
     font-size: 14px;
-    color: $c_lagunaGrey;
+    color: $c_greyDark;
   }
 
   .loc_name {
     font-size: 24px;
     margin: 4px 0 16px 0;
     font-weight: 600;
-    color: $c_lagunaGrey;
-    @extend %hoverable;
+    color: $c_greyDark;
+    @extend %hoverableGreydark;
+  }
+
+  .loc_copyLinkButton {
+    color: $c_pistachioDarkFresh;
+    border-color: $c_pistachioDarkFresh;
+
+    &:hover {
+      color: $c_pistachioDarkFreshLMedium
+    }
   }
 
   .loc_redactButton {
     margin: 0 0 16px 0;
   }
+
   .component-mediaOriginalLinks {
     margin-bottom: 16px;
   }
+
   .loc_short_description {
     color: $c_greyDark;
     font-size: 18px;
@@ -44,16 +57,19 @@
   .loc_nonpublished {
     margin-bottom: 16px;
   }
+
   .loc_pin {
     position: absolute;
     top: 16px;
     right: 16px;
     cursor: default;
+
     img {
       height: 32px;
       width: 32px;
     }
   }
+
   .loc_description {
     .loc_content {
       padding-bottom: 4px;
@@ -118,10 +134,16 @@
     margin-top: 0px;
     font-size: 16px;
     margin-bottom: 16px;
+    color: $c_pistachioDarkFresh;
+
+    &:hover {
+      color: $c_pistachioDarkFreshLMedium
+    }
   }
 
   &.loc--isShowed {
     box-shadow: $boxShadowImportant;
+
     .loc_name {
       //text-decoration: underline;
       //color: $c_lagunaBlue;
@@ -152,22 +174,27 @@
     font-size: calc(26px * var(--viewport-koeff));
     margin-bottom: calc(16px * var(--viewport-koeff));
   }
+
   .loc_pin {
 
     top: calc(24px * var(--viewport-koeff));
     right: calc(24px * var(--viewport-koeff));
+
     img {
       height: calc(40px * var(--viewport-koeff));
       width: calc(40px * var(--viewport-koeff));
     }
   }
+
   .loc_description {
     .loc_content {
       p {
         font-size: calc(32px * var(--viewport-koeff));
         line-height: calc(42px * var(--viewport-koeff));
       }
+
       padding-bottom: 0px;
+
       img {
         max-height: 100%;
         max-width: 100%;
@@ -183,6 +210,7 @@
 
       .swiper-slide {
         max-height: 85vh;
+
         img {
 
           max-height: 100%;
@@ -215,6 +243,7 @@
     padding-top: calc(16px * var(--viewport-koeff));
     padding-bottom: calc(56px * var(--viewport-koeff));
   }
+
   &.loc--isShowed {
     box-shadow: $boxShadowMobileImportant;
   }

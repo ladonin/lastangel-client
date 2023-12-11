@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
-import { isObjectOptionsIsEmpty } from "helpers/common";
+import { isObjectOptionsEmpty } from "helpers/common";
 import InputText from "components/Form/InputText";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 // const OtherComponent = React.lazy(() => import('components/header'));
@@ -84,7 +84,7 @@ const Filter: React.FC<TProps> = ({ onChange, filter = null }) => {
         />
 
         <Button
-          disabled={filterState === null || isObjectOptionsIsEmpty(filterState)}
+          disabled={filterState === null || isObjectOptionsEmpty(filterState)}
           className="loc_resetButton"
           theme={ButtonThemes.GREY}
           size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}

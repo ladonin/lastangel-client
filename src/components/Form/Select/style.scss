@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+
   .loc_label {
     display: flex;
     align-items: center;
@@ -17,19 +18,21 @@
 
 
     &:hover {
-      border-color: $c_greyDark;
+      border-color: $c_greyMedium;//$c_greyDark;
     }
 
     &.loc--focused {
-      border-color: $c_blueLight;
+      border-color: $c_greyMedium;//$c_blueLight;
 
     }
   }
+
   .loc_menu {
     .loc_menuList {
       max-height: 50vh;
     }
   }
+
   .loc_input_star {
     position: absolute;
     margin-bottom: 33px;
@@ -56,12 +59,13 @@
     min-height: unset !important;
     height: calc(80px * var(--viewport-koeff));
     font-size: calc(30px * var(--viewport-koeff));
-    
-    >div {
+
+    > div {
       padding: 0 !important;
-      >div {
+
+      > div {
         margin: 0 !important;
-         
+
       }
     }
   }
@@ -70,12 +74,14 @@
     font-size: calc(32px * var(--viewport-koeff));
     line-height: calc(64px * var(--viewport-koeff));
   }
-  .loc_clearIndicator,.loc_dropdownIndicator {
+
+  .loc_clearIndicator, .loc_dropdownIndicator {
     svg {
       width: calc(40px * var(--viewport-koeff));
       height: calc(40px * var(--viewport-koeff));
     }
   }
+
   .loc_input_star {
     right: calc(-12px * var(--viewport-koeff));
     font-size: calc(28px * var(--viewport-koeff));
@@ -83,4 +89,8 @@
     margin-bottom: calc(33px * var(--viewport-koeff));
     top: calc(-4px * var(--viewport-koeff));
   }
+}
+
+.css-1jqq78o-placeholder {
+  color: hsl(0, 0%, 73%) !important;
 }

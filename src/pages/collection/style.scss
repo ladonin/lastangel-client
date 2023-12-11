@@ -51,7 +51,13 @@
           @extend %hoverable;
           color: $c_lagunaDark;
         }
+        .loc_donateButton {
+          background-color: #B75555;
+          &:hover {
+            background-color: #d27575;
 
+          }
+        }
         .loc_redactButton, .loc_donateButton {
           margin-top: 24px;
           margin-left: auto;

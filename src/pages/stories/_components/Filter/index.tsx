@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 
-import { isObjectOptionsIsEmpty } from "helpers/common";
+import { isObjectOptionsEmpty } from "helpers/common";
 import Select from "components/Form/Select";
 import InputText from "components/Form/InputText";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
@@ -58,6 +58,7 @@ const StoriesFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
     inputTitleRef.current?.clearValue();
     immediateRef.current = true;
   };
+
   return (
     <div className="page-stories_filter">
       <div className="loc_wrapper">
@@ -88,7 +89,10 @@ const StoriesFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
           innerRef={inputTitleRef}
         />
         <Button
-          disabled={filterState === null || isObjectOptionsIsEmpty(filterState)}
+          disabled={
+            filterState === null ||
+            isObjectOptionsEmpty({ ...filterState, excludeStatus: undefined })
+          }
           className="loc_resetButton"
           theme={ButtonThemes.GREY}
           size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}

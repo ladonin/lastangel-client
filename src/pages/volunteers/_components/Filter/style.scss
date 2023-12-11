@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 16px;
-    background-color: $c_lagunaBlue;
+    background-color: $c_pistachioDark;
     padding: 16px;
     border-radius: 8px;
 
@@ -23,17 +23,17 @@
     }
 
     .loc_resetButton {
-      background-color: $c_lagunaBlue;
+      background-color: #6d9a6b;
       color: $c_white;
       margin-left: auto;
 
       &:hover {
-        background-color: $c_lagunaBlueLight;
+        background-color: $c_pistachioMediumDark;
       }
 
       &.component-button_disabled {
-        background-color: $c_lagunaBlue;
-        color: $c_lagunaLight;
+        background-color: $c_pistachioDark;
+        color: $c_pistachioDisabled;
       }
     }
   }

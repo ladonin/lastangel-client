@@ -11,7 +11,7 @@ import {
 
 import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
-import { isObjectOptionsIsEmpty } from "helpers/common";
+import { isObjectOptionsEmpty } from "helpers/common";
 import "./style.scss";
 
 type TProps = {
@@ -73,7 +73,7 @@ const CollectionsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
         />
 
         <Button
-          disabled={filterState === null || isObjectOptionsIsEmpty(filterState)}
+          disabled={filterState === null || isObjectOptionsEmpty(filterState)}
           className="loc_resetButton"
           theme={ButtonThemes.GREY}
           size={isMobile ? ButtonSizes.GIANT : ButtonSizes.MEDIUM}
