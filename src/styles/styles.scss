@@ -211,6 +211,6 @@ h3 {
   z-index: 99999 !important;
 }
 
-.clear {
-  clear: both;
+.swiper-button-next, .swiper-button-prev {
+  transform: translate(0%, -25%);
 }
