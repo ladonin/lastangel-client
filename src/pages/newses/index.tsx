@@ -19,6 +19,7 @@ const Newses: React.FC = () => {
     <>
       <Helmet>
         <title>{ 
+          
           metatags.title}</title>
         <meta name="description" content={metatags.description} />
       </Helmet>
