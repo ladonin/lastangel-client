@@ -227,8 +227,7 @@ const Pets: React.FC = () => {
           <div className="loc_donationIcon">
             <PetDonationIcon 
               
-              
-              
+                            
               pet={data} />
           </div>
         )}
