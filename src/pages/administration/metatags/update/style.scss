@@ -1,0 +1,82 @@
+.page-administration_metatags_update {
+
+  h1 {
+    margin: 16px 0 32px 0;
+  }
+
+  .loc_error {
+    color: $c_red;
+    padding: 16px 0px;
+
+  }
+
+  .loc_wrapper_textForm {
+
+    .loc_buttons {
+      display: flex;
+      margin-top: 36px;
+
+      .loc_saveButton {
+        // width: 200px;
+      }
+
+      .loc_cancelButton {
+        margin-left: 24px;
+      }
+
+    }
+
+  }
+
+}
+
+
+.layout.loc--isMobile .page-administration_donations_update {
+  width: 100%;
+  padding: 0;
+
+  h1 {
+    margin: calc(16px * var(--viewport-koeff)) 0 calc(32px * var(--viewport-koeff)) 0;
+  }
+
+  .loc_form {
+    flex-direction: column;
+
+    .loc_left, .loc_right {
+      padding: 0 !important;
+      width: 100%;
+
+      .loc_formInputItem {
+        margin-bottom: calc(48px * var(--viewport-koeff));
+      }
+    }
+  }
+
+  .loc_buttons {
+    margin: calc(64px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff)) 0;
+  }
+
+  .loc_error {
+    padding: calc(32px * var(--viewport-koeff)) 0;
+    font-size: calc(32px * var(--viewport-koeff));
+  }
+
+  .loc_wrapper_updatedSuccess {
+    font-size: calc(40px * var(--viewport-koeff));
+    line-height: calc(56px * var(--viewport-koeff));
+
+  }
+
+  .loc_wrapper_textForm {
+
+    .loc_buttons {
+      margin-top: calc(36px * var(--viewport-koeff));
+
+      .loc_cancelButton {
+        margin-left: calc(24px * var(--viewport-koeff));
+      }
+
+    }
+
+  }
+}

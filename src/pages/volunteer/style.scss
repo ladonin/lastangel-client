@@ -1,0 +1,281 @@
+.page-volunteer {
+  .loc_contentWrapper {
+    position: relative;
+
+    .loc_loader {
+      position: absolute;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.5);
+      z-index: 999;
+      width: 100%;
+    }
+
+    .loc_topWrapper {
+      display: flex;
+      gap: 32px;
+
+      .loc_avatar {
+        height: fit-content;
+        position: relative;
+
+        img {
+          width: 450px;
+          height: 450px;
+
+        }
+      }
+
+      .loc_data {
+        width: 100%;
+        align-self: flex-start;
+
+        .loc_id {
+          margin-top: 16px;
+        }
+
+        .loc_not_published {
+          background-color: $c_yellowLight;
+          padding: 16px;
+          margin: 24px 0;
+        }
+
+        .loc_fio {
+          font-size: 40px;
+          font-weight: 600;
+          margin-left: -2px;
+        }
+
+
+        .loc_parameters {
+          margin-top: 4px;
+          display: flex;
+          gap: 12px;
+          flex-direction: column;
+
+          .loc_birthdate, .loc_phone, .loc_vkLink a, .loc_okLink a, .loc_instLink a {
+            font-size: 16px;
+          }
+
+          .loc_phone, .loc_vkLink a, .loc_okLink a, .loc_instLink a {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            width: fit-content;
+
+            img {
+              height: 26px;
+            }
+          }
+        }
+
+
+      }
+
+      .loc_left {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-content: flex-start;
+        width: 100%;
+
+        .loc_redactButton {
+          margin-top: 24px;
+        }
+
+        .loc_copyLinkToPageButton {
+          width: 100%;
+
+          .loc_copyToBufferStatus {
+            padding: 0;
+            margin-top: 8px;
+          }
+          
+        }
+      }
+
+
+      .loc_description {
+        align-self: flex-start;
+        margin-top: 16px;
+        font-size: 18px;
+        line-height: 28px;
+        width: 100%;
+      }
+
+
+    }
+
+    .loc_bottomWrapper {
+      margin-top: 24px;
+
+      .loc_fakephotoalbum {
+        height: 800px;
+      }
+
+      .loc_slider {
+        width: 100%;
+        margin-bottom: 24px;
+
+        .swiper-slide {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 800px;
+          max-height: 85vh;
+          background-color: $c_greyDark;
+        }
+
+        .loc_image {
+          max-height: 100%;
+        }
+      }
+
+      .loc_video {
+        display: flex;
+        width: 100%;
+        max-height: 600px;
+        margin-bottom: 24px;
+
+        background-color: $c_greyDark;
+      }
+    }
+  }
+}
+
+.layout.loc--isMobile .page-volunteer {
+  .loc_contentWrapper {
+    font-size: calc(24px * var(--viewport-koeff));
+
+    .loc_fio {
+      margin-left: calc(-2px * var(--viewport-koeff));
+      margin-top: 0;
+      margin-bottom: calc(8px * var(--viewport-koeff));
+      font-size: calc(36px * var(--viewport-koeff));
+    }
+
+    .loc_topWrapper .loc_data {
+      width: calc(100% - calc(429px * var(--viewport-koeff)));
+
+      .loc_parameters {
+        margin-top: 0;
+        margin-bottom: calc(8px * var(--viewport-koeff));
+        font-size: calc(28px * var(--viewport-koeff));
+        gap: calc(16px * var(--viewport-koeff));
+        display: flex;
+        flex-direction: column;
+
+        .loc_birthdate, .loc_phone, .loc_vkLink a, .loc_okLink a, .loc_instLink a {
+          font-size: calc(32px * var(--viewport-koeff));
+        }
+
+        .loc_phone, .loc_vkLink a, .loc_okLink a, .loc_instLink a {
+
+          gap: calc(16px * var(--viewport-koeff));
+
+
+          img {
+            height: calc(40px * var(--viewport-koeff));
+          }
+        }
+
+
+      }
+
+
+      .loc_not_published {
+        padding: calc(16px * var(--viewport-koeff));
+        margin: calc(24px * var(--viewport-koeff)) 0;
+      }
+
+
+    }
+
+
+    .loc_topWrapper {
+      flex-wrap: wrap;
+      gap: calc(24px * var(--viewport-koeff));
+
+      .loc_avatar {
+        img {
+          width: calc(405px * var(--viewport-koeff));
+          height: calc(405px * var(--viewport-koeff));
+        }
+      }
+
+      .loc_left {
+        width: 100%;
+        flex-wrap: wrap;
+
+
+        .loc_description {
+          margin-top: 0;
+          margin-bottom: 0;
+          font-size: calc(32px * var(--viewport-koeff));
+          line-height: calc(54px * var(--viewport-koeff));
+          width: 100%;
+        }
+
+      }
+    }
+
+    .loc_bottomWrapper {
+      margin: calc(32px * var(--viewport-koeff)) calc(-24px * var(--viewport-koeff)) 0px calc(-24px * var(--viewport-koeff));
+
+      display: flex;
+      flex-wrap: wrap;
+
+      .loc_redactButton {
+        margin: 0 auto calc(24px * var(--viewport-koeff)) auto;
+      }
+
+      .loc_copyLinkToPageButton {
+        width: 100%;
+
+        .loc_copyLinkButton {
+          font-size: calc(24px * var(--viewport-koeff));
+          height: calc(60px * var(--viewport-koeff));
+          border-radius: calc(30px * var(--viewport-koeff));
+          padding: 0 calc(24px * var(--viewport-koeff));
+          margin: 0 auto calc(40px * var(--viewport-koeff)) auto;
+        }
+
+        .loc_copyToBufferStatus {
+          padding: 0 calc(24px * var(--viewport-koeff));
+          margin: calc(-24px * var(--viewport-koeff)) 0 calc(40px * var(--viewport-koeff)) 0;
+        }
+      }
+
+      .loc_fakephotoalbum {
+        height: 1200px;
+        max-height: 85vh;
+      }
+
+      .loc_slider {
+        width: 100%;
+        margin-bottom: calc(24px * var(--viewport-koeff));
+
+        .swiper-slide {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 1200px;
+          max-height: 85vh;
+          background-color: $c_greyDark;
+        }
+
+        .loc_image {
+          max-height: 100%;
+          max-width: 100%;
+        }
+      }
+
+      .loc_video {
+        display: flex;
+        width: 100%;
+        height: 1200px;
+        max-height: 85vh;
+        margin-bottom: calc(24px * var(--viewport-koeff));
+      }
+    }
+  }
+}

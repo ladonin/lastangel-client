@@ -1,0 +1,187 @@
+.page-finreport_list {
+  width: 50%;
+  margin: 0 auto;
+
+  .component-loaderIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+  }
+
+  .loc_month-year {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    font-weight: 600;
+
+    &:first-child {
+      margin-top: 0 !important;
+    }
+  }
+
+  .loc_item {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 16px;
+    background-color: $c_lagunaWhite;
+    &:hover {
+      background-color: $c_lagunaLighter;
+    }
+
+    &.loc--month {
+      &_0 {
+        border-left: 5px solid #8beeff;
+      }
+
+      &_1 {
+        border-left: 5px solid #b0ffdd;
+      }
+
+      &_2 {
+        border-left: 5px solid #ffead0;
+      }
+
+      &_3 {
+        border-left: 5px solid #ecf8c0;
+      }
+
+      &_4 {
+        border-left: 5px solid #c8ff3e;
+      }
+
+      &_5 {
+        border-left: 5px solid #94ff3c
+      }
+
+      &_6 {
+        border-left: 5px solid #00ec16;
+      }
+
+      &_7 {
+        border-left: 5px solid #65e700;
+      }
+
+      &_8 {
+        border-left: 5px solid #ffea00;
+      }
+
+      &_9 {
+        border-left: 5px solid #c5a758;
+      }
+
+      &_10 {
+        border-left: 5px solid #b7c9c7;
+      }
+
+      &_11 {
+        border-left: 5px solid #c2e8ef;
+      }
+    }
+
+    .loc_name {
+
+      &.loc--hasLink {
+        color: $c_blue;
+        @extend %hoverable;
+      }
+    }
+
+    .loc_delimiter {
+      width: 100%;
+    }
+
+    .loc_created {
+      margin-left: auto;
+      font-style: italic;
+    }
+
+    .loc_sum {
+      margin-left: auto;
+
+      span {
+        font-weight: 600;
+
+      }
+    }
+
+    .loc_target {
+      margin-right: auto;
+
+      .loc--type {
+        &_1, &_2 {
+          font-weight: 600;
+          @extend %hoverable;
+          color: $c_lagunaDark;
+          display: inline-block;
+        }
+
+        &_1 {
+          color: $c_lagunaDark;
+        }
+
+        &_2 {
+          color: $c_orange;
+
+          &:hover {
+            color: $c_orangeLight;
+          }
+        }
+
+        &_3 {
+          color: $c_greenMedium;
+        }
+      }
+
+      .loc_deletedTarget {
+        color: $c_greyMedium;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+
+.layout.loc--isMobile .page-finreport_list {
+  width: 100%;
+
+  .component-loaderIcon {
+    width: calc(50px * var(--viewport-koeff));
+    margin-top: calc(-25px * var(--viewport-koeff));
+    margin-left: calc(-25px * var(--viewport-koeff));
+  }
+
+  .loc_month-year {
+    margin-top: calc(48px * var(--viewport-koeff));
+    margin-bottom: calc(24px * var(--viewport-koeff));
+    font-size: calc(40px * var(--viewport-koeff));
+  }
+
+  .loc_item {
+    padding: calc(24px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
+    line-height: calc(48px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
+    border-radius: 0 calc(8px * var(--viewport-koeff)) calc(8px * var(--viewport-koeff)) 0;
+    gap: calc(8px * var(--viewport-koeff));
+    border-left-width: calc(8px * var(--viewport-koeff));
+
+
+    .loc_name {
+      &.loc--hasLink {
+        color: $c_blue;
+        @extend %hoverable;
+      }
+    }
+
+
+  }
+
+}
+

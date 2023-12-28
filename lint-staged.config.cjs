@@ -22,7 +22,7 @@ module.exports = {
    * В случае, если процесс запущен во время коммита, любая ошибка остановит коммит.
    * @param {string[]}filenames Имена файлов, находящиеся в stage гита
    */
-  "./src/*": async (filenames) => {
+  "src/**/*.{ts,tsx}": async (filenames) => {
     console.log(filenames)
     const filesToLint = await getFilesToLint(filenames);
     return [

@@ -1,0 +1,139 @@
+@import 'src/styles/variables.scss';
+
+.component-inputFileVideo {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .loc_labelTitle {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .loc_error {
+    padding: 16px 0 16px 0 !important;
+    font-size: 14px;
+    color: $c_red;
+
+    margin-left: auto;
+
+    .loc_errorFileName {
+      color: $c_main;
+    }
+  }
+
+
+  .loc_label {
+    input[type=file] {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      display: block;
+      width: 0;
+      height: 0;
+    }
+
+    /* Focus */
+    input[type=file]:focus + .loc_selectFile {
+      box-shadow: 0 0 0 1px $c_blueLight;
+    }
+
+    /* Hover/active */
+    &:hover .loc_selectFile {
+      background-color: $c_green;
+    }
+
+    &:active .loc_selectFile {
+      background-color: $c_greenDark;
+    }
+
+    /* Disabled */
+    input[type=file]:disabled + .loc_selectFile {
+      background-color: $c_greyMedium;
+    }
+
+
+    .loc_selectFile {
+      position: relative;
+      display: inline-block;
+      width: fit-content;
+      cursor: pointer;
+      outline: none;
+      text-decoration: none;
+      font-size: 14px;
+      vertical-align: middle;
+      color: $c_white;
+      text-align: center;
+      border-radius: 4px;
+      background-color: $c_greenMedium;
+      line-height: 24px;
+      padding: 8px 16px;
+      box-sizing: border-box;
+      border: none;
+      transition: $transition;
+    }
+  }
+
+  .form-element-description {
+    text-align: left !important;
+  }
+  .loc_video {
+    padding-top: 8px;
+    margin-left: auto;
+
+    .loc_name {
+
+      color: $c_greenDark;
+
+      &.loc--existed {
+        color: $c_lagunaBlue;
+      }
+    }
+
+    .loc_deleteButton {
+      color: $c_red;
+      width: fit-content;
+      @extend %hoverableRed;
+    }
+  }
+}
+
+
+.layout.loc--isMobile .component-inputFileVideo {
+
+
+  .loc_error {
+    padding: calc(24px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff)) 0 !important;
+    font-size: calc(24px * var(--viewport-koeff));
+  }
+
+
+  .loc_labelTitle {
+    line-height: calc(44px * var(--viewport-koeff));
+    font-size: calc(30px * var(--viewport-koeff));
+  }
+
+  .loc_selectFile {
+    line-height: calc(24px * var(--viewport-koeff));
+    border-radius: calc(16px * var(--viewport-koeff));
+    padding: 0 calc(32px * var(--viewport-koeff));
+    font-size: calc(30px * var(--viewport-koeff));
+    height: calc(80px * var(--viewport-koeff));
+    display: flex;
+    align-items: center;
+  }
+
+  .loc_video {
+    padding-top: calc(16px * var(--viewport-koeff));
+    line-height: calc(44px * var(--viewport-koeff));
+    font-size: calc(30px * var(--viewport-koeff));
+  }
+
+  .loc_input_star {
+    right: calc(-12px * var(--viewport-koeff));
+    font-size: calc(28px * var(--viewport-koeff));
+    font-weight: 900;
+  }
+}

@@ -1,0 +1,271 @@
+.page-collections {
+
+  .loc_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+    position: relative;
+    min-height: 300px;
+
+    .loc_noCollections {
+      margin: 32px auto;
+    }
+
+    .component-loaderIcon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      margin-top: -25px;
+      margin-left: -25px;
+    }
+
+    .loc_wrapper {
+      position: relative;
+      width: calc(25% - 12px);
+      padding: 16px 16px 24px 16px;
+      background: $c_sandYellow;
+      border-radius: 8px;
+
+      &.loc--status {
+        &_3 {
+          background-color: $c_pinkPiggy;
+        }
+
+      }
+
+      .loc_item {
+        line-height: normal;
+        .loc_image {
+          position: relative;
+          > a > img {
+            width: 256px;
+            height: 256px;
+            cursor: pointer;
+          }
+
+          .loc_closed {
+            position: absolute;
+            background-color: $c_greenLight;
+            color: $c_white;
+            font-weight: 600;
+            font-size: 16px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            border-radius: 24px;
+            transform: translate(-50%, 0);
+            width: 175px;
+            bottom: 16px;
+            left: 50%;
+
+            > img {
+              width: 32px;
+              height: 32px;
+            }
+          }
+        }
+
+        .loc_collected, .loc_target_sum, .loc_spent {
+          margin-top: 8px;
+          font-style: Italic;
+          font-size: 18px;
+          .loc_val {
+            font-weight: 600;
+            font-style: normal;
+          }
+        }
+        
+        
+        .loc_collected .loc_val {
+          color: $c_red;
+        }
+        .loc_target_sum .loc_val {
+          color: $c_red;
+        }
+        .loc_spent .loc_val {
+          color: $c_main;
+        }
+
+        .loc_status {
+          font-weight: 600;
+
+          &.loc--status {
+            &_1 {
+              display: none;
+            }
+
+            &_2 {
+              color: $c_red;
+            }
+
+            &_3, &_4 {
+              color: $c_lagunaDark;
+            }
+          }
+
+
+        }
+
+
+        .loc_content {
+          width: 100%;
+          margin-top: 16px;
+          .loc_button {
+            background-color: #B75555;
+            &:hover {
+              background-color: #d27575;
+
+            }
+          }
+          .loc_data {
+            margin-top: 16px;
+            font-weight: 400;
+            font-size: 16px;
+
+            .loc_name {
+              font-weight: 600;
+              display: inline-block;
+              font-size: 18px;
+              margin-bottom: 8px;
+            }
+
+            .loc_age {
+              display: inline-block;
+            }
+
+            .loc_sex {
+              display: inline-block;
+
+              &.loc--male {
+                color: $c_blue
+              }
+
+              &.loc--female {
+                color: $c_pink
+
+              }
+            }
+
+            .loc_parameters {
+              font-style: italic;
+            }
+
+            .loc_description {
+              margin-top: 16px;
+
+              border-top: 1px solid $c_greyDark;
+              padding-top: 16px;
+
+              font-size: 18px
+
+            }
+          }
+
+          .loc_button {
+            margin: 0 auto;
+          }
+        }
+
+
+      }
+
+
+    }
+  }
+
+}
+
+
+.layout.loc--isMobile .page-collections {
+
+
+  width: 100% !important;
+
+
+  .loc_list {
+    padding: 0;
+    gap: calc(16px * var(--viewport-koeff));
+
+    .loc_noCollections {
+      margin: calc(32px * var(--viewport-koeff)) auto;
+      font-size: calc(32px * var(--viewport-koeff));
+    }
+
+    .component-loaderIcon {
+      width: calc(50px * var(--viewport-koeff));
+      margin-top: calc(-25px * var(--viewport-koeff));
+      margin-left: calc(-25px * var(--viewport-koeff));
+    }
+
+    .loc_wrapper {
+      width: calc(50% - calc(8px * var(--viewport-koeff)));
+      padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
+      position: relative;
+      border-radius: calc(8px * var(--viewport-koeff));
+
+      .loc_item {
+        line-height: normal;
+        .loc_image {
+
+
+          > a > img {
+            width: 100%;
+            height: auto;
+          }
+          
+          
+          
+          
+          .loc_closed {
+
+            font-size: calc(32px * var(--viewport-koeff));
+            height: calc(80px * var(--viewport-koeff));
+            gap: calc(16px * var(--viewport-koeff));
+            padding: 0 calc(24px * var(--viewport-koeff));
+            border-radius: calc(40px * var(--viewport-koeff));
+            width: calc(320px * var(--viewport-koeff));
+            bottom: calc(16px * var(--viewport-koeff));
+
+            > img {
+              width: calc(50px * var(--viewport-koeff));
+              height: calc(50px * var(--viewport-koeff));
+            }
+          }
+        }
+
+        .loc_collected, .loc_target_sum, .loc_spent {
+          margin-top: calc(8px * var(--viewport-koeff));
+          font-size: calc(32px * var(--viewport-koeff));
+        }
+
+        .loc_content {
+          margin-top: calc(32px * var(--viewport-koeff));
+
+          .loc_data {
+            margin-top: calc(32px * var(--viewport-koeff));
+
+            .loc_name {
+              font-size: calc(32px * var(--viewport-koeff));
+              margin-bottom: calc(8px * var(--viewport-koeff));
+            }
+
+            .loc_description {
+              font-size: calc(32px * var(--viewport-koeff));
+              padding-top: calc(16px * var(--viewport-koeff));
+              margin-top: calc(24px * var(--viewport-koeff));
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+
+
+}
+

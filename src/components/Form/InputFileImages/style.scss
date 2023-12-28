@@ -1,0 +1,154 @@
+@import 'src/styles/variables.scss';
+
+.component-inputFileImage {
+  margin-top: 24px;
+
+  .loc_labelTitle {
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .loc_error {
+    font-size: 14px;
+    color: $c_red;
+
+    .loc_errorFileName {
+      color: $c_main;
+    }
+  }
+
+  .loc_label {
+    input[type=file] {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      display: block;
+      width: 0;
+      height: 0;
+    }
+
+    /* Focus */
+    input[type=file]:focus + .loc_selectFile {
+      box-shadow: 0 0 0 1px $c_blueLight;
+    }
+
+    /* Hover/active */
+    &:hover .loc_selectFile {
+      background-color: $c_green;
+    }
+
+    &:active .loc_selectFile {
+      background-color: $c_greenDark;
+    }
+
+    /* Disabled */
+    input[type=file]:disabled + .loc_selectFile {
+      background-color: $c_greyMedium;
+    }
+
+
+    .loc_selectFile {
+      margin-bottom: 16px;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      outline: none;
+      text-decoration: none;
+      font-size: 14px;
+      vertical-align: middle;
+      color: $c_white;
+      text-align: center;
+      border-radius: 4px;
+      background-color: $c_greenMedium;
+      line-height: 24px;
+      padding: 8px 16px;
+      box-sizing: border-box;
+      border: none;
+      transition: $transition;
+    }
+
+
+  }
+
+
+  .loc_images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .loc_image,
+    .loc_image img {
+      width: 350px;
+      display: block;
+
+      .loc--deleted {
+        opacity: 0.5;
+      }
+    }
+
+    .loc_image {
+      position: relative;
+
+      .loc_delete, .loc_restore {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+      }
+    }
+  }
+}
+
+.layout.loc--isMobile .component-inputFileImage {
+
+  margin-top: calc(24px * var(--viewport-koeff));
+
+  .loc_labelTitle {
+    margin-bottom: calc(16px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
+    line-height: calc(56px * var(--viewport-koeff));
+  }
+
+
+  
+  
+  
+  
+  
+  
+  .loc_error {
+    font-size: calc(14px * var(--viewport-koeff));
+  }
+
+  .loc_description {
+    font-size: calc(14px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
+  }
+
+  .loc_label {
+    .loc_selectFile {
+      margin-bottom: calc(32px * var(--viewport-koeff));
+      font-size: calc(32px * var(--viewport-koeff));
+      border-radius: calc(4px * var(--viewport-koeff));
+      line-height: calc(56px * var(--viewport-koeff));
+      padding: calc(16px * var(--viewport-koeff)) calc(48px * var(--viewport-koeff));
+    }
+  }
+  
+  .loc_images {
+    gap: calc(16px * var(--viewport-koeff));
+    .loc_image, .loc_image img {
+      width: 100%;
+    }
+    .loc_image {
+      .loc_delete, .loc_restore {
+        top: calc(32px * var(--viewport-koeff));
+        right: calc(32px * var(--viewport-koeff));
+        .component-button, svg {
+          padding: 0 !important;
+          width: calc(60px * var(--viewport-koeff));
+          height: calc(60px * var(--viewport-koeff));
+        }
+      }
+    }
+  }
+}

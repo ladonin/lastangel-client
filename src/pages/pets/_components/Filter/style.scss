@@ -1,0 +1,58 @@
+.page-pets_filter {
+  .loc_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+    background-color: $c_lagunaBlue;
+    padding: 16px;
+    border-radius: 8px;
+
+    .loc_formInputItem,
+    .loc_formSelectItem {
+      width: 28%;
+
+      .loc_label {
+        color: $c_white;
+      }
+
+      input,
+      .loc_select {
+        width: 100%;
+      }
+    }
+
+    .loc_resetButton {
+      background-color: #46658C;
+      color: $c_white;
+      margin-left: auto;
+
+      &:hover {
+        background-color: $c_lagunaBlueLight;
+      }
+
+      &.component-button_disabled {
+        background-color: $c_lagunaBlue;
+        color: $c_lagunaLight;
+      }
+    }
+  }
+}
+
+.layout.loc--isMobile .page-pets_filter {
+  .loc_wrapper {
+    padding: calc(24px * var(--viewport-koeff));
+    gap: calc(24px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
+    border-radius: calc(8px * var(--viewport-koeff));
+
+    .loc_formSelectItem {
+      width: 100%;
+      padding: 0;
+
+      .loc_select {
+        width: 100%;
+      }
+    }
+  }
+}

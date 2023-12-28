@@ -1,0 +1,63 @@
+.component-modal {
+  background: $c_white;
+  color: $c_main;
+  padding: 24px;
+  min-width: 500px;
+
+  &_header {
+    h2 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    &_closeIcon {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 12px;
+      height: 12px;
+      cursor: pointer;
+    }
+  }
+
+  &_content {
+    position: relative;
+    margin-top: 32px;
+  }
+
+  &--isMobile {
+    padding: calc(48px * var(--viewport-koeff));
+    min-width: 100%;
+
+
+    .component-modal_header {
+      padding: 0px;
+
+      h2 {
+        font-size: calc(48px * var(--viewport-koeff));
+        line-height: calc(64px * var(--viewport-koeff));
+      }
+
+      &_closeIcon {
+        width: calc(40px * var(--viewport-koeff));
+        height: calc(40px * var(--viewport-koeff));
+        top: calc(62px * var(--viewport-koeff));
+        right: calc(48px * var(--viewport-koeff));
+      }
+    }
+
+    .component-modal_content {
+      font-size: calc(40px * var(--viewport-koeff));
+      line-height: calc(56px * var(--viewport-koeff));
+      margin-top: calc(32px * var(--viewport-koeff));
+
+      &_buttons {
+        margin-top: calc(48px * var(--viewport-koeff));
+      }
+    }
+  }
+}
+
+.ReactModal__Overlay--after-open {
+  z-index: 9999999999;
+}

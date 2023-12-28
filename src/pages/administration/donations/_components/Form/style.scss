@@ -1,0 +1,60 @@
+$labelWidth: 30%;
+$formElWidth: 70%;
+.page-administration_donations_form_component {
+  .loc_form {
+    display: flex;
+
+    .loc_left {
+      width: 55%;
+      padding-right: 32px;
+    }
+
+    .loc_right {
+      width: 45%;
+      padding-left: 0px;
+    }
+  }
+
+  .loc_formInputItem, .loc_formCheckboxItem {
+    margin-bottom: 24px;
+
+    input, input, .loc_checkbox {
+      width: $formElWidth;
+    }
+
+    label, .loc_label {
+      width: $labelWidth;
+    }
+  }
+
+
+  .loc_formSelectItem {
+    margin-bottom: 24px;
+
+    .loc_select {
+      width: $formElWidth;
+    }
+
+    .loc_label {
+      width: $labelWidth;
+    }
+  }
+
+}
+
+//.layout.loc--isMobile .page-administration_donations_form_component {
+//  .loc_form {
+//
+//    .loc_left {
+//      padding-right: calc(32px * var(--viewport-koeff));
+//    }
+//
+//    .loc_right {
+//      padding-left: calc(32px * var(--viewport-koeff));
+//    }
+//  }
+//}
+
+
+
+

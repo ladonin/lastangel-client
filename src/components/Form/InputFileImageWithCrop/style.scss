@@ -1,0 +1,240 @@
+@import 'src/styles/variables.scss';
+
+.component-inputFileImageWithCrop {
+  margin-top: 24px;
+
+  .loc_labelTitle {
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .loc_error {
+    font-size: 14px;
+    color: $c_red;
+
+    .loc_errorFileName {
+      color: $c_main;
+    }
+  }
+
+  .loc_label {
+    input[type=file] {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      display: block;
+      width: 0;
+      height: 0;
+    }
+
+    /* Focus */
+    input[type=file]:focus + .loc_selectFile {
+      box-shadow: 0 0 0 1px $c_blueLight;
+    }
+
+    /* Hover/active */
+    &:hover .loc_selectFile {
+      background-color: $c_green;
+    }
+
+    &:active .loc_selectFile {
+      background-color: $c_greenDark;
+    }
+
+    /* Disabled */
+    input[type=file]:disabled + .loc_selectFile {
+      background-color: $c_greyMedium;
+    }
+
+
+    .loc_selectFile {
+      margin-bottom: 16px;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      outline: none;
+      text-decoration: none;
+      font-size: 14px;
+      vertical-align: middle;
+      color: $c_white;
+      text-align: center;
+      border-radius: 4px;
+      background-color: $c_greenMedium;
+      line-height: 24px;
+      padding: 8px 16px;
+      box-sizing: border-box;
+      border: none;
+      transition: $transition;
+    }
+
+
+  }
+
+
+  .loc_image,
+  .loc_image img {
+    width: 350px;
+    display: block;
+  }
+
+  &_cropModal {
+    .loc_wrapper {
+      display: flex;
+      flex-direction: column;
+
+      .loc_crop {
+        width: 500px;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $c_greyDark;
+        position: relative;
+        margin-bottom: 24px;
+      }
+
+      .loc_zoom,
+      .loc_rotation {
+        width: 500px;
+        margin-bottom: 24px;
+
+        .loc_lable {
+          font-weight: 600;
+          font-size: 16px;
+          margin-bottom: 16px;
+          text-align: center;
+        }
+      }
+
+      .loc_rotation {
+        margin-bottom: 36px;
+      }
+    }
+
+    .loc_okButton {
+      width: 100%;
+    }
+
+
+  }
+
+
+}
+
+
+.layout.loc--isMobile .component-inputFileImageWithCrop {
+  margin-top: calc(24px * var(--viewport-koeff));
+
+  .loc_labelTitle {
+    margin-bottom: calc(16px * var(--viewport-koeff));
+    font-size: calc(32px * var(--viewport-koeff));
+    line-height: calc(56px * var(--viewport-koeff));
+  }
+
+  .loc_error {
+    font-size: calc(14px * var(--viewport-koeff));
+  }
+
+  .loc_description {
+    font-size: calc(14px * var(--viewport-koeff));
+    margin-bottom: calc(16px * var(--viewport-koeff));
+  }
+
+  .loc_label {
+
+    .loc_selectFile {
+      margin-bottom: calc(32px * var(--viewport-koeff));
+      font-size: calc(32px * var(--viewport-koeff));
+      border-radius: calc(4px * var(--viewport-koeff));
+      line-height: calc(56px * var(--viewport-koeff));
+      padding: calc(16px * var(--viewport-koeff)) calc(48px * var(--viewport-koeff));
+    }
+  }
+
+
+  .loc_image,
+  .loc_image img {
+    width: 100%;
+  }
+}
+
+
+.component-inputFileImageWithCrop_cropModal.loc--isMobile {
+
+  .loc_zoom, .loc_rotation, .loc_crop {
+    width: 100%;
+
+    .loc_lable {
+      font-size: calc(32px * var(--viewport-koeff));
+    }
+  }
+
+  .loc_okButton {
+    margin-bottom: calc(24px * var(--viewport-koeff));
+  }
+
+
+  .loc_crop {
+    height: calc(100vh - (var(--viewport-koeff) * 640px));
+    margin-bottom: calc(56px * var(--viewport-koeff));
+
+    .loc_lable {
+      margin-bottom: calc(40px * var(--viewport-koeff));
+    }
+  }
+
+  .loc_zoom, .loc_rotation {
+    margin-bottom: calc(48px * var(--viewport-koeff));
+
+    .loc_lable {
+      margin-bottom: calc(16px * var(--viewport-koeff));
+    }
+
+    .rc-slider.rc-slider-horizontal {
+      padding: 0px;
+    }
+
+    .rc-slider-rail, .rc-slider-track, .rc-slider.rc-slider-horizontal {
+      height: calc(26px * var(--viewport-koeff));
+
+    }
+
+    .rc-slider-handle {
+      width: calc(38px * var(--viewport-koeff));
+      height: calc(38px * var(--viewport-koeff));
+      margin-top: calc(-6px * var(--viewport-koeff));
+    }
+  }
+
+
+}
+
+@media screen and (max-height: 700px) {
+
+  .component-inputFileImageWithCrop_cropModal {
+    .loc_wrapper {
+      align-items: center !important;
+
+      .loc_crop {
+        width: 400px !important;
+        height: 400px !important;
+        margin-bottom: 16px !important;
+      }
+
+      .loc_zoom,
+      .loc_rotation {
+        width: 400px !important;
+        margin-bottom: 8px !important;
+
+        .loc_lable {
+          font-size: 14px !important;
+          margin-bottom: 4px !important;
+        }
+      }
+
+      .loc_rotation {
+        margin-bottom: 16px !important;
+      }
+    }
+  }
+}

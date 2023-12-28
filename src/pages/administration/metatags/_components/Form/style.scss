@@ -1,0 +1,36 @@
+.page-administration_metatags_form_component {
+  .loc_form {
+    display: flex;
+
+    .loc_left {
+      width: 100%;
+      //padding-right: 32px;
+    }
+
+    .loc_right {
+      width: 0%;
+      //padding-left: 32px;
+    }
+  }
+
+  .loc_formInputItem,.loc_formTextareaItem {
+    margin-bottom: 24px;
+
+    input, textarea {
+      width: 80%;
+    }
+
+    textarea {
+    height: 100px;
+  }
+    label, .loc_label {
+      width: 20%;
+    }
+  }
+
+}
+
+
+
+
+

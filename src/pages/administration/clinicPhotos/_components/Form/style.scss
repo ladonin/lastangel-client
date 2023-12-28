@@ -1,0 +1,36 @@
+.page-administration_clinic-photos_form_component {
+  .loc_form,
+  .loc_photos {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .loc_photos {
+    flex-wrap: wrap;
+    margin-top: 24px;
+
+    h2 {
+      width: 100%
+    }
+
+    .loc_images .loc_image {
+      width: 394px !important;
+
+      img {
+        width: 394px !important;
+      }
+    }
+  }
+}
+
+.layout.loc--isMobile .page-administration_mainphotoalbum_form_component {
+  .loc_photos {
+    .loc_images .loc_image {
+      width: 100% !important;
+
+      img {
+        width: 100% !important;
+      }
+    }
+  }
+}

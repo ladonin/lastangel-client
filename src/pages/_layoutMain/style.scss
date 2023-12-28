@@ -1,0 +1,143 @@
+.layout-main {
+  @extend %desctopCommon;
+  display: flex;
+  flex-direction: column;
+  //align-items: center;
+  width: 100%;
+
+  & > div {
+    width: 100%;
+  }
+
+  .page {
+    margin: 0 auto;
+    width: 1200px;
+    padding: 24px 0 48px 0;
+    min-height: calc(100vh - #{$layout_1_header_height} - #{$layout_1_footer_height});
+
+    .loc_warningMessage {
+      position: relative;
+      padding: 24px;
+      color: #000;
+      background: $c_sandLight;
+      margin: 160px 0 24px 0;
+      border-radius: 8px;
+      border: 1px solid $c_orange;
+
+      img {
+        position: absolute;
+        top: -163px;
+      }
+    }
+
+    & > div[class^='page-'] {
+      max-width: 1200px;
+      margin: 0 auto;
+
+
+    }
+
+    &_administrationMenu {
+      width: 1200px;
+      margin: 0 auto;
+      padding: 0 0 24px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+
+      .loc_addButton {
+        margin-right: auto;
+      }
+
+      .loc_emails {
+        margin-right: auto;
+        position: relative;
+        cursor: pointer;
+
+        .loc_count {
+          background-color: $c_white;
+          padding: 4px 8px;
+          font-size: 12px;
+          font-weight: 600;
+          border-radius: 99px;
+          position: absolute;
+          top: -12px;
+          right: -12px;
+          border: 1px solid $c_red;
+        }
+
+        .loc_emailButton {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+    }
+
+
+  }
+
+
+}
+
+
+.layout-main.loc--isMobile {
+
+  @extend %mobileCommon;
+
+  .page {
+    width: 100%;
+    padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(56px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
+    min-height: calc((100vh - (#{$layout_1_header_height} + #{$layout_1_footer_height} + #{$layout_1_height_addition_mobile}) * var(--viewport-koeff)));
+
+    & > div[class^='page-'] {
+      max-width: 100%;
+    }
+
+    .loc_warningMessage {
+      font-size: calc(32px * var(--viewport-koeff));
+
+      padding: calc(24px * var(--viewport-koeff));
+      margin: calc(160px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff)) 0;
+      border-radius: calc(8px * var(--viewport-koeff));
+
+      img {
+        width: calc(200px * var(--viewport-koeff));
+        height: calc(185px * var(--viewport-koeff));
+        top: calc(-163px * var(--viewport-koeff));
+      }
+    }
+  }
+
+  .page_administrationMenu {
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0 0 calc(48px * var(--viewport-koeff)) 0;
+    gap: calc(40px * var(--viewport-koeff));
+
+
+    .loc_title {
+      line-height: calc(80px * var(--viewport-koeff));
+      font-size: calc(32px * var(--viewport-koeff));
+    }
+
+    .loc_emails {
+      .loc_count {
+        padding: calc(4px * var(--viewport-koeff)) calc(12px * var(--viewport-koeff));
+        font-size: calc(22px * var(--viewport-koeff));
+        top: calc(-20px * var(--viewport-koeff));
+        right: calc(-20px * var(--viewport-koeff));
+      }
+
+      .loc_emailButton {
+        width: calc(80px * var(--viewport-koeff));
+        height: calc(80px * var(--viewport-koeff));
+      }
+
+    }
+  }
+
+
+}
+
+

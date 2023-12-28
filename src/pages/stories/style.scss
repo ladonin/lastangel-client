@@ -1,0 +1,16 @@
+.page-stories {
+  .loc_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+    position: relative;
+    min-height: 300px;
+  }
+}
+
+.layout.loc--isMobile .page-stories {
+  .loc_list {
+    gap: calc(16px * var(--viewport-koeff));
+  }
+}

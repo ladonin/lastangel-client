@@ -1,0 +1,66 @@
+.component-inputText {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  label {
+    line-height: 20px;
+    padding-right: 20px;
+  }
+
+  input {
+    width: 100%;
+    border-radius: 99px;
+    padding: 0 16px;
+    font-size: 18px;
+    height: 40px;
+
+    &:disabled {
+      cursor: default;
+      color: $c_greyLight;
+      background-color: $c_greyLight;
+      border-color: $c_greyMedium;
+    }
+
+  }
+
+  .loc_input_star {
+    position: absolute;
+    margin-bottom: 33px;
+    right: -8px;
+    top: -4px;
+  }
+
+  &.loc--notvalid {
+    input {
+      border-color: $c_red;
+
+    }
+  }
+}
+
+
+.layout.loc--isMobile .component-inputText {
+  label {
+    line-height: calc(44px * var(--viewport-koeff));
+    font-size: calc(30px * var(--viewport-koeff));
+    padding-right: calc(20px * var(--viewport-koeff));
+  }
+
+  input {
+    border-radius: 99px;
+    padding: 0 calc(32px * var(--viewport-koeff));
+    font-size: calc(30px * var(--viewport-koeff));
+    height: calc(80px * var(--viewport-koeff));
+  }
+
+  .loc_input_star {
+    right: calc(-12px * var(--viewport-koeff));
+    font-size: calc(28px * var(--viewport-koeff));
+    font-weight: 900;
+    margin-bottom: calc(33px * var(--viewport-koeff));
+    top: calc(-4px * var(--viewport-koeff));
+  }
+}

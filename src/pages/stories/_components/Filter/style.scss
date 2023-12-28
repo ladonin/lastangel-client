@@ -1,0 +1,61 @@
+.page-stories_filter {
+  .loc_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+    background-color: $c_pistachioDark;
+    padding: 16px;
+    border-radius: 8px;
+
+    .loc_formInputItem, .loc_formSelectItem {
+      .loc_label {
+        color: $c_white;
+      }
+      input, .loc_select {
+        width: 100%;
+      }
+
+
+
+
+    }
+    .loc_formSelectItem.loc--order {
+      width: 28%;
+    }
+    .loc_formInputItem.loc--title {
+      width: 50%;
+    }
+    .loc_resetButton {
+      background-color: #6d9a6b;
+      color: $c_white;
+      margin-left: auto;
+      &:hover {
+        background-color: $c_pistachioMediumDark;
+      }
+      &.component-button_disabled {
+        background-color: $c_pistachioDark;
+        color: $c_pistachioDisabled;
+      }
+    }
+  }
+}
+
+
+.layout.loc--isMobile .page-stories_filter {
+  .loc_wrapper {
+    padding: calc(24px * var(--viewport-koeff));
+    gap: calc(24px * var(--viewport-koeff));
+    margin-bottom: calc(24px * var(--viewport-koeff));
+    border-radius: calc(8px * var(--viewport-koeff));
+    .loc_formSelectItem,.loc_formInputItem {
+      width: 100%;
+      padding: 0;
+
+      .loc_select {
+        width: 100%;
+      }
+    }
+  }
+}
+
