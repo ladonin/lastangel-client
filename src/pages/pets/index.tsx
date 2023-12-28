@@ -230,6 +230,7 @@ const Pets: React.FC = () => {
               
               
               
+              
               pet={data} />
           </div>
         )}
