@@ -1,7 +1,15 @@
-import React, { PropsWithChildren, useMemo } from "react";
+/*
+  import Checkbox from 'components/Form/Checkbox'
+
+  Чекбокс
+ */
+
+import React, { PropsWithChildren } from "react";
+
 import cn from "classnames";
-import { loadItem } from "utils/localStorage";
+
 import CheckIcon from "./icons/checkIcon.svg";
+
 import "./style.scss";
 
 type TProps = {
@@ -58,9 +66,7 @@ export const Checkbox: React.FC<PropsWithChildren<TProps>> = (props) => {
               })}
             />
           </div>
-          
         </div>
-        
       </label>
       {description && <div className="form-element-description">{description}</div>}
     </div>

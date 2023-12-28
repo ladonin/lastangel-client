@@ -1,5 +1,3 @@
-@import 'src/styles/variables.scss';
-
 .component-inputFileImage {
   margin-top: 24px;
 
@@ -46,7 +44,6 @@
       background-color: $c_greyMedium;
     }
 
-
     .loc_selectFile {
       margin-bottom: 16px;
       position: relative;
@@ -66,10 +63,7 @@
       border: none;
       transition: $transition;
     }
-
-
   }
-
 
   .loc_images {
     display: flex;
@@ -99,7 +93,6 @@
 }
 
 .layout.loc--isMobile .component-inputFileImage {
-
   margin-top: calc(24px * var(--viewport-koeff));
 
   .loc_labelTitle {
@@ -108,13 +101,6 @@
     line-height: calc(56px * var(--viewport-koeff));
   }
 
-
-  
-  
-  
-  
-  
-  
   .loc_error {
     font-size: calc(14px * var(--viewport-koeff));
   }
@@ -133,16 +119,19 @@
       padding: calc(16px * var(--viewport-koeff)) calc(48px * var(--viewport-koeff));
     }
   }
-  
+
   .loc_images {
     gap: calc(16px * var(--viewport-koeff));
+
     .loc_image, .loc_image img {
       width: 100%;
     }
+
     .loc_image {
       .loc_delete, .loc_restore {
         top: calc(32px * var(--viewport-koeff));
         right: calc(32px * var(--viewport-koeff));
+
         .component-button, svg {
           padding: 0 !important;
           width: calc(60px * var(--viewport-koeff));

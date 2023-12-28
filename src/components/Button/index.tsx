@@ -1,15 +1,20 @@
 /*
   import { Button, ButtonThemes, ButtonSizes } from 'components/Button'
+
+  Универсальный компонент кнопки
  */
 
 import React, { MouseEvent, ReactNode, useMemo } from "react";
 
 import cn from "classnames";
+
 import LoaderIcon from "components/LoaderIcon";
-import "./style.scss";
+import Tooltip from "components/Tooltip";
+
 import DeleteIcon from "icons/delete.svg";
 import RestoreIcon from "icons/restore.svg";
-import Tooltip from "../Tooltip";
+
+import "./style.scss";
 
 export enum ButtonThemes {
   PRIMARY = "primary",
@@ -38,16 +43,25 @@ type TProps = {
   size?: ButtonSizes;
   children?: ReactNode;
   className?: string;
-  title?: string;
+  // title?: string;
   onClick: () => void;
   disabled?: boolean;
   isLoading?: boolean;
-  icon?: ReactNode | string;
+  // icon?: ReactNode | string;
   tooltip?: string;
 };
 
 export const Button: React.FC<TProps> = (props) => {
-  const { theme, size = ButtonSizes.MEDIUM, children, className, onClick, isLoading, disabled = false, tooltip } = props;
+  const {
+    theme,
+    size = ButtonSizes.MEDIUM,
+    children,
+    className,
+    onClick,
+    isLoading,
+    disabled = false,
+    tooltip,
+  } = props;
 
   const themeIcon = useMemo(() => {
     if (theme === ButtonThemes.DELETE_ICON) return <DeleteIcon />;
@@ -84,5 +98,9 @@ export const Button: React.FC<TProps> = (props) => {
     </div>
   );
 
-  return tooltip ? <Tooltip text={tooltip} className={className} content={renderButton()} /> : renderButton(className);
+  return tooltip ? (
+    <Tooltip text={tooltip} className={className} content={renderButton()} />
+  ) : (
+    renderButton(className)
+  );
 };

@@ -1,14 +1,17 @@
 /*
   import BreadCrumbs from 'components/BreadCrumbs'
+
+  Хлебные крошки
  */
 
-import React, { useMemo } from "react";
+import React from "react";
+
+import { Link, useNavigate } from "react-router-dom";
+
+import PAGES from "routing/routes";
+import ArrowRight from "icons/arrowRight.svg";
 
 import "./style.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { loadItem } from "utils/localStorage";
-import PAGES from "routing/routes";
-import ArrowRight from "../../icons/arrowRight.svg";
 
 type TProps = {
   breadCrumbs?: { name: string; link: string; onClick?: () => void }[];
@@ -17,7 +20,6 @@ type TProps = {
   showTitle?: boolean;
 };
 
-const noTitlePages = [];
 const BreadCrumbs: React.FC<TProps> = (props) => {
   const { breadCrumbs, title, back, showTitle = true } = props;
   const navigate = useNavigate();

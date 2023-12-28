@@ -1,16 +1,27 @@
+/*
+  import InputFileImageWithCrop from 'components/Form/InputFileImageWithCrop'
+
+  Форма загрузки картинки с кропом
+ */
+
 import React, { PropsWithChildren, useEffect, useMemo, useState, useCallback } from "react";
-import Cropper from "react-easy-crop";
+
 import cn from "classnames";
-import { Area } from "react-easy-crop/types";
+import Cropper, { Area } from "react-easy-crop";
 import Slider from "rc-slider";
-import Modal from "components/Modal";
-import { DIMENTIONS } from "constants/photos";
 import "rc-slider/assets/index.css";
-import "./style.scss";
+
+import { DIMENTIONS } from "constants/photos";
+
 import { loadItem } from "utils/localStorage";
-import { Button, ButtonSizes, ButtonThemes } from "../../Button";
-import { useGetImageDataHook, TData as TImageData } from "../../../hooks/useGetImageDataHook";
+
+import { useGetImageDataHook, TData as TImageData } from "hooks/useGetImageDataHook";
+
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import Modal from "components/Modal";
 import getCroppedImg from "./utils";
+
+import "./style.scss";
 
 type TProps = {
   className?: string;
@@ -24,18 +35,11 @@ type TProps = {
 
 type TWrongImageData = TImageData & { error: string };
 type TCrop = { x: number; y: number };
-const CROP_DEFAULT: TCrop = { x: 0, y: 0 };
-const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
-  const {
-    className,
-    setImage,
-    label,
-    required,
-    disabled = false,
-    cropAspect,
-    description,
-  } = props;
 
+const CROP_DEFAULT: TCrop = { x: 0, y: 0 };
+
+const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
+  const { className, setImage, label, required, disabled = false, cropAspect, description } = props;
   const { loadImgs: loadImg, imgsResult: imgResult } = useGetImageDataHook();
   const [imageState, setImageState] = useState<File | null>(null);
   const [croppedImageState, setCroppedImageState] = useState<string | null>(null);
@@ -225,7 +229,7 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
 
         {description && <div className="form-element-description loc--photo">{description}</div>}
       </label>
-      
+
       {/* imageState !== null && cropAspect === 1 && (
         <div className="loc_description">
           Внимание. Фото должно быть строго квадратным.

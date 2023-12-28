@@ -1,12 +1,10 @@
-@import 'src/styles/variables.scss';
-
 .component-checkbox {
   display: flex;
   align-items: center;
   height: 40px;
   flex-wrap: wrap;
-  .loc_label {
 
+  .loc_label {
     padding-right: 20px;
   }
 
@@ -20,9 +18,11 @@
     left: -999px;
     opacity: 0;
   }
+
   .form-element-description {
     text-align: left !important;
   }
+
   .loc_box {
     position: relative;
     width: 24px;
@@ -42,7 +42,6 @@
     svg {
       width: 24px;
       height: 24px;
-
     }
   }
 
@@ -64,7 +63,6 @@
   }
 }
 
-
 .layout.loc--isMobile .component-checkbox {
   height: calc(80px * var(--viewport-koeff));
 
@@ -82,7 +80,6 @@
     svg {
       width: calc(70px * var(--viewport-koeff));
       height: calc(55px * var(--viewport-koeff));
-
     }
   }
 }

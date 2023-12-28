@@ -1,9 +1,19 @@
-import React, { PropsWithChildren, useEffect, useState, useMemo } from "react";
+/*
+  import InputFileImages from 'components/Form/InputFileImages'
+
+  Форма загрузки картинки(ок) без кропа
+ */
+
+import React, { PropsWithChildren, useEffect, useState } from "react";
+
 import cn from "classnames";
+
 import { Button, ButtonThemes } from "components/Button";
+
 import { DIMENTIONS } from "constants/photos";
+
 import { useGetImageDataHook, TData as TImageData } from "hooks/useGetImageDataHook";
-import { loadItem } from "utils/localStorage";
+
 import "./style.scss";
 
 type TProps = {
@@ -34,10 +44,10 @@ const InputFileImages: React.FC<PropsWithChildren<TProps>> = (props) => {
   const { loadImgs, imgsResult } = useGetImageDataHook();
   const [imagesState, setImagesState] = useState<File[] | null>(null);
   const [wrongImagesState, setWrongImagesState] = useState<TWrongImageData[]>([]);
-  // const [canShowMainImageState, setCanShowMainImageState] = useState<boolean>(false);
   const setImageHandler = (photos: File[]) => {
     loadImgs(photos);
   };
+
   useEffect(() => {
     if (imgsResult === null) return;
     const goodImages: File[] = [];
@@ -50,9 +60,8 @@ const InputFileImages: React.FC<PropsWithChildren<TProps>> = (props) => {
       if (!availableExtensions.includes(extension)) {
         wrongImages.push({
           ...data,
-          error: `Текущее расширение файла не поддерживается. Должно быть ${availableExtensions.join(
-            ", "
-          )}`,
+          error: `Текущее расширение файла не поддерживается. 
+          Должно быть ${availableExtensions.join(", ")}`,
         });
       } else if (
         (!noSizeRevision && Number(data.width) < DIMENTIONS.IMAGES_UPLOAD_MIN_WIDTH) ||

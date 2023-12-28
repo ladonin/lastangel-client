@@ -1,5 +1,4 @@
 .component-breadCrumbs {
-
   font-weight: 600;
   margin-bottom: 16px;
   display: flex;
@@ -17,7 +16,6 @@
     font-size: 22px;
     color: $c_lagunaBlueDark;
     @extend %hoverable;
-
   }
 
   .loc_title {
@@ -25,12 +23,10 @@
   }
 
   .loc_title, .loc_breadCrumb, .loc_delimiter, .loc_toMain {
-
     line-height: 32px;
   }
 
   .loc_delimiter {
-
     margin: 0 8px;
   }
 
@@ -45,15 +41,11 @@
       transform: rotate(180deg);
     }
   }
-
 }
 
-
 .layout.loc--isMobile .component-breadCrumbs {
-
   margin-bottom: calc(16px * var(--viewport-koeff));
   gap: calc(24px * var(--viewport-koeff));
-
 
   .loc_breadCrumb, .loc_toMain, .loc_delimiter, .loc_back {
     font-size: calc(36px * var(--viewport-koeff));
@@ -65,19 +57,16 @@
   }
 
   .loc_title, .loc_breadCrumb, .loc_delimiter, .loc_toMain, .loc_back {
-
     line-height: calc(32px * var(--viewport-koeff));
   }
 
   .loc_delimiter {
-
     margin: 0 calc(8px * var(--viewport-koeff));
   }
 
   h3 {
     font-size: calc(32px * var(--viewport-koeff));
   }
-
 
   .loc_back {
     display: flex;

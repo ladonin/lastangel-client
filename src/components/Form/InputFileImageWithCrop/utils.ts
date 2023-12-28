@@ -1,9 +1,11 @@
+// Утилиты для InputFileImageWithCrop
+
 export const createImage = (url: string) =>
   new Promise((resolve, reject) => {
     const image = new Image();
     image.addEventListener("load", () => resolve(image));
     image.addEventListener("error", (error) => reject(error));
-    image.setAttribute("crossOrigin", "anonymous"); // needed to avoid cross-origin issues on CodeSandbox
+    image.setAttribute("crossOrigin", "anonymous");
     image.src = url;
   });
 
@@ -70,7 +72,7 @@ export default async function getCroppedImg(
   // return canvas.toDataURL('image/jpeg');
 
   // As a blob
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve /* , reject */) => {
     canvas.toBlob((file) => {
       file && resolve(file);
     }, "image/jpeg");

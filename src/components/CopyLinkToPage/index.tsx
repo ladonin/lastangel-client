@@ -1,19 +1,25 @@
 /*
   import CopyLinkToPage from 'components/CopyLinkToPage'
+
+  Кнопка копирования ссылки на указанную страницу в буфер
  */
 
 import React, { useEffect, useState, useMemo } from "react";
 
-import "./style.scss";
 import { loadItem } from "utils/localStorage";
+
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+
 import { copyToBuffer } from "helpers/common";
+
+import "./style.scss";
 
 type Props = {
   url: string;
   text?: string;
   targetText?: string;
 };
+
 const CopyLinkToPage: React.FC<Props> = ({ url, text, targetText }) => {
   const [copyToBufferStatusState, setCopyToBufferStatusState] = useState<boolean | null>(null);
   const isMobile = useMemo(() => loadItem("isMobile"), []);

@@ -67,11 +67,13 @@
       height: 32px;
       border-radius: 16px;
       padding: 0 16px;
+
       &.component-button_theme-delete_icon,
       &.component-button_theme-restore_icon {
         height: 32px;
         width: 32px;
       }
+
       .component-loaderIcon {
         height: 20px;
         width: 20px;
@@ -106,8 +108,6 @@
       &:hover {
         background-color: $c_lagunaBlueLight;
       }
-
-
     }
 
     &-danger {
@@ -127,7 +127,7 @@
         background-color: $c_orangeLight;
       }
     }
-    
+
     &-pink {
       background-color: $c_pink;
       color: $c_white;
@@ -136,7 +136,7 @@
         background-color: $c_pinkLight;
       }
     }
-    
+
     &-grey {
       background-color: $c_greyMediumLight;
       color: $c_white;
@@ -151,6 +151,7 @@
       color: $c_lagunaBlueDark;
       padding-right: 0;
       padding-left: 0;
+
       &:hover {
         color: $c_lagunaBlueLight;
       }
@@ -160,6 +161,7 @@
       background-color: transparent;
       color: $c_lagunaBlueDark;
       border: 1px solid $c_lagunaBlueDark;
+
       &:hover {
         color: $c_lagunaBlueLight;
         border: 1px solid $c_lagunaBlueLight;
@@ -189,10 +191,7 @@
         }
       }
     }
-
-
   }
-
 
   &_disabled {
     background-color: $c_greyLight;
@@ -203,21 +202,14 @@
     }
   }
 
-
   .component-loaderIcon {
     display: block;
     color: inherit;
   }
-
-
 }
 
-
-.layout.loc--isMobile,.component-modal--isMobile {
-
+.layout.loc--isMobile, .component-modal--isMobile {
   .component-button {
-
-
     &_size {
       &-giant {
         font-size: calc(32px * var(--viewport-koeff));
