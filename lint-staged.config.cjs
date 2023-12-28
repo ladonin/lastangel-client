@@ -27,7 +27,7 @@ module.exports = {
     const filesToLint = await getFilesToLint(filenames);
     return [
       `eslint ${filesToLint.join(" ")} --rule "{no-console: 1, no-alert:2, no-debugger: 2}"`,
-      `prettier ${filenames.join(" ")} -write`,
+      `prettier ${filenames.join(" ")} --write`,
       "git add",
     ];
   },

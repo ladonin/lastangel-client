@@ -225,13 +225,7 @@ const Pets: React.FC = () => {
 
         {isHere(data.status) && (
           <div className="loc_donationIcon">
-            <PetDonationIcon 
-              
-              
-              
-              
-              
-              pet={data} />
+            <PetDonationIcon pet={data} />
           </div>
         )}
         {data.status === ANIMALS_STATUS.AT_HOME ? (
@@ -290,7 +284,8 @@ const Pets: React.FC = () => {
           </div>
           {data.status !== ANIMALS_STATUS.AT_HOME && data.status !== ANIMALS_STATUS.DIED && (
             <div className="loc_collected">
-              Собрано за месяц: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
+              Собрано за месяц:{" "}
+              <span className="loc_val">{`${numberFriendly(data.collected)} `}</span>
               руб.
             </div>
           )}
