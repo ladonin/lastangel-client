@@ -225,7 +225,11 @@ const Pets: React.FC = () => {
 
         {isHere(data.status) && (
           <div className="loc_donationIcon">
-            <PetDonationIcon pet={data} />
+            <PetDonationIcon 
+              
+              
+              
+              pet={data} />
           </div>
         )}
         {data.status === ANIMALS_STATUS.AT_HOME ? (
