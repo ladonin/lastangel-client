@@ -4,10 +4,11 @@
  */
 import { AxiosResponse } from "axios";
 import { TGetListOutput, TGetListRequest, TGetOutput, TCommonDataRequest } from "api/types/news";
+import { saveFile } from "helpers/common";
 import { apiService } from "./axios";
-import { saveFile } from "../helpers/common";
 
-// const paramsSerializer = (params: any): string => qs.stringify(params, { arrayFormat: "repeat" });
+// const paramsSerializer = (params: any): string => qs.stringify(params,
+// { arrayFormat: "repeat" });
 
 const prepareData = (data: TCommonDataRequest) => {
   const { another_images, video1, video2, video3, ...params } = data;
@@ -29,9 +30,13 @@ const prepareData = (data: TCommonDataRequest) => {
 
 export const NewsApi = {
   getList: (params?: TGetListRequest) =>
-    apiService.get(`get_news_list`, { params }).then((response: AxiosResponse<TGetListOutput>) => response.data),
+    apiService
+      .get(`get_news_list`, { params })
+      .then((response: AxiosResponse<TGetListOutput>) => response.data),
   get: (id: number) =>
-    apiService.get(`get_news`, { params: { id } }).then((response: AxiosResponse<TGetOutput>) => response.data),
+    apiService
+      .get(`get_news`, { params: { id } })
+      .then((response: AxiosResponse<TGetOutput>) => response.data),
   add: (data: TCommonDataRequest) =>
     apiService
       .post(`add_news`, prepareData(data), {
@@ -49,7 +54,10 @@ export const NewsApi = {
         },
       })
       .then((response: AxiosResponse<boolean>) => response.data),
-  remove: (id: number) => apiService.post(`remove_news?id=${id}`).then((response: AxiosResponse<boolean>) => response.data),
+  remove: (id: number) =>
+    apiService
+      .post(`remove_news?id=${id}`)
+      .then((response: AxiosResponse<boolean>) => response.data),
   downloadData: (type: string) =>
     apiService.get(`download_news`, { params: { type } }).then(saveFile),
 };

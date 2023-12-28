@@ -3,7 +3,7 @@
   Работа с метатегами
  */
 import { AxiosResponse } from "axios";
-import { saveFile } from "../helpers/common";
+import { saveFile } from "helpers/common";
 import { apiService } from "./axios";
 
 export const MetatagsApi = {

@@ -23,7 +23,8 @@ const prepareData = (data: TCommonDataRequest) => {
 };
 
 export const DocumentsApi = {
-  get: () => apiService.get(`get_documents`).then((response: AxiosResponse<TGetOutput>) => response.data),
+  get: () =>
+    apiService.get(`get_documents`).then((response: AxiosResponse<TGetOutput>) => response.data),
 
   update: (data: TCommonDataRequest) =>
     apiService

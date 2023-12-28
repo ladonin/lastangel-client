@@ -23,7 +23,10 @@ const prepareData = (data: TCommonDataRequest) => {
 };
 
 export const ClinicPhotosApi = {
-  get: () => apiService.get(`get_clinic_photos`).then((response: AxiosResponse<TGetOutput>) => response.data),
+  get: () =>
+    apiService
+      .get(`get_clinic_photos`)
+      .then((response: AxiosResponse<TGetOutput>) => response.data),
 
   update: (data: TCommonDataRequest) =>
     apiService

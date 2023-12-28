@@ -3,14 +3,12 @@
   Работа со страницей знакомства с приютом
  */
 import { AxiosResponse } from "axios";
-import {
-  TGetOutput,
-  TCommonDataRequest,
-} from "api/types/acquaintanceship";
-import { saveFile } from "../helpers/common";
+import { TGetOutput, TCommonDataRequest } from "api/types/acquaintanceship";
+import { saveFile } from "helpers/common";
 import { apiService } from "./axios";
 
-// const paramsSerializer = (params: any): string => qs.stringify(params, { arrayFormat: "repeat" });
+// const paramsSerializer = (params: any): string => qs.stringify(params,
+// { arrayFormat: "repeat" });
 
 const prepareData = (data: TCommonDataRequest) => {
   const { another_images, video1, video2, video3, ...params } = data;

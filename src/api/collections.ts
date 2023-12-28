@@ -9,10 +9,11 @@ import {
   TGetOutput,
   TCommonDataRequest,
 } from "api/types/collections";
-import { saveFile } from "../helpers/common";
+import { saveFile } from "helpers/common";
 import { apiService } from "./axios";
 
-// const paramsSerializer = (params: any): string => qs.stringify(params, { arrayFormat: "repeat" });
+// const paramsSerializer = (params: any): string => qs.stringify(params,
+// { arrayFormat: "repeat" });
 
 const prepareData = (data: TCommonDataRequest) => {
   const { main_image, another_images, video1, video2, video3, ...params } = data;
