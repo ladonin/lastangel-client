@@ -1,11 +1,9 @@
 import React, { useMemo } from "react";
-// const OtherComponent = React.lazy(() => import('components/header'));
-
-import "./style.scss";
 import { useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import BreadCrumbs from "components/BreadCrumbs";
 import Slider from "./_components/Slider";
+import "./style.scss";
 
 const Documents: React.FC = () => {
   const { getMetatags } = useOutletContext<any>();

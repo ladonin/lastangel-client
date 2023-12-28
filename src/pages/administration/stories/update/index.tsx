@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";
-
 import { useNavigate, useParams } from "react-router-dom";
 import { StoriesApi } from "api/stories";
 import PAGES from "routing/routes";
@@ -10,7 +9,6 @@ import { TCommonDataRequest } from "api/types/stories";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
 import Form, { TResponse, TParams } from "../_components/Form";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
 const StoryUpdate: React.FC = () => {

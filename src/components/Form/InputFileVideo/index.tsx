@@ -6,6 +6,16 @@ import Modal from "components/Modal";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
+
+
+//проолжить отсюда
+
+
+
+
+
+
+
 type TProps = {
   className?: string;
   label?: string;

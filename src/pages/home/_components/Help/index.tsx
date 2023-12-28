@@ -6,13 +6,13 @@ import "react-tabs/style/react-tabs.css";
 import { Link } from "react-router-dom";
 import Image from "icons/help.jpg";
 import ImageMobile from "icons/helpMobile.jpg";
-import SberIcon from "icons/sber.png";
 import DocsIcon from "icons/docs.png";
 import ArrowRight from "icons/arrowRight.svg";
 import PAGES from "routing/routes";
-import { MAIN_CARD, MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "constants/donations";
+import { REKVIZITS } from "constants/donations";
+import { loadItem } from "utils/localStorage";
 import "./style.scss";
-import { loadItem } from "../../../../utils/localStorage";
+
 const Help = () => {
 
   const isMobile = useMemo(() => loadItem("isMobile"), []);

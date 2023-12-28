@@ -5,10 +5,11 @@ import { useLocation } from "react-router";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
 import Footer from "pages/_commonComponents/footer";
-import "./style.scss";
 import { loadItem, saveItem } from "utils/localStorage";
 import PAGES from "routing/routes";
 import Header from "pages/_commonComponents/header";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { quit } from "utils/user";
 import { FeedbacksApi } from "api/feedbacks";
 import { AnimalsApi } from "api/animals";
 import { CollectionsApi } from "api/collections";
@@ -18,11 +19,10 @@ import { DonatorsApi } from "api/donators";
 import { NewsApi } from "api/news";
 import { StoriesApi } from "api/stories";
 import { VolunteersApi } from "api/volunteers";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { quit } from "utils/user";
 import { UserApi } from "api/user";
+import { AcquaintanceshipApi } from "api/acquaintanceship";
 import EmailImage from "icons/email.png";
-import { AcquaintanceshipApi } from "../../api/acquaintanceship";
+import "./style.scss";
 
 const LayoutAdministration: React.FC = () => {
   const { pathname } = useLocation();

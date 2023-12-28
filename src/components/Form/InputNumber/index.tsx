@@ -1,12 +1,11 @@
 /*
   import InputNumber from 'components/Form/InputNumber'
  */
-
 import React, { ChangeEvent, useState, useEffect, useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import cn from "classnames";
+import { numberFriendly } from "helpers/common";
 import "./style.scss";
-import { numberFriendly } from "../../../helpers/common";
 
 type TProps = {
   label?: string;

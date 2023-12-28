@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import cn from "classnames";
+import { Button, ButtonThemes } from "components/Button";
 import "./style.scss";
-import { Button, ButtonThemes } from "../../Button";
 
 type TPrevImagesProps = {
   images: number[];

@@ -3,11 +3,10 @@
  */
 
 import React, { useState, useEffect } from "react";
-
-import "./style.scss";
 import { ANIMALS_KIND } from "constants/animals";
 import { TItem } from "api/types/animals";
 import { loadItem, saveItem } from "utils/localStorage";
+import "./style.scss";
 
 import c1_1Icon from "./icons/cats/1/1.png";
 import c1_2Icon from "./icons/cats/1/2.png";
@@ -51,6 +50,13 @@ import c9_3Icon from "./icons/cats/9/3.png";
 import c9_4Icon from "./icons/cats/9/4.png";
 import c9_5Icon from "./icons/cats/9/5.png";
 import c9_6Icon from "./icons/cats/9/6.png";
+
+import c10_1Icon from "./icons/cats/10/1.png";
+import c10_2Icon from "./icons/cats/10/2.png";
+import c10_3Icon from "./icons/cats/10/3.png";
+import c10_4Icon from "./icons/cats/10/4.png";
+import c10_5Icon from "./icons/cats/10/5.png";
+
 
 import d1_1Icon from "./icons/dogs/1/1.png";
 import d1_2Icon from "./icons/dogs/1/2.png";
@@ -121,6 +127,10 @@ import d9_6Icon from "./icons/dogs/9/6.png";
 import d9_7Icon from "./icons/dogs/9/7.png";
 import d9_8Icon from "./icons/dogs/9/8.png";
 
+import d10_1Icon from "./icons/dogs/10/1.png";
+import d10_2Icon from "./icons/dogs/10/2.png";
+import d10_3Icon from "./icons/dogs/10/3.png";
+
 type TProps = {
   pet: TItem;
 };
@@ -136,6 +146,7 @@ const ICONS = {
     7: [c7_1Icon, c7_2Icon, c7_3Icon],
     8: [c8_1Icon, c8_2Icon, c8_3Icon, c8_4Icon, c8_5Icon],
     9: [c9_1Icon, c9_2Icon, c9_3Icon, c9_4Icon, c9_5Icon, c9_6Icon],
+    10: [c10_1Icon, c10_2Icon, c10_3Icon, c10_4Icon, c10_5Icon],
   },
   dogs: {
     1: [
@@ -172,6 +183,7 @@ const ICONS = {
       d8_11Icon,
     ],
     9: [d9_1Icon, d9_2Icon, d9_3Icon, d9_4Icon, d9_5Icon, d9_6Icon, d9_7Icon, d9_8Icon],
+    10: [d10_1Icon, d10_2Icon, d10_3Icon],
   },
 };
 
@@ -184,7 +196,8 @@ const calcDonationRate = (collected: number) => {
   if (collected < 2500) return 6;
   if (collected < 3000) return 7;
   if (collected < 3500) return 8;
-  return 9;
+  if (collected < 4500) return 9;
+  return 10;
 };
 
 const PetDonationIcon: React.FC<TProps> = (props) => {

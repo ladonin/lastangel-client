@@ -6,28 +6,19 @@ import { Helmet } from "react-helmet";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 import { TItem } from "api/types/volunteers";
 import { VolunteersApi } from "api/volunteers";
-import MediaOriginalLinks from "components/MediaOriginalLinks";
 import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/volunteers";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
 import PAGES from "routing/routes";
 import BreadCrumbs from "components/BreadCrumbs";
-import { getDateYMDFriendly, getDateYMFriendly, getVideoType, textToClient } from "helpers/common";
+import { getDateYMFriendly, getVideoType, textToClient } from "helpers/common";
 import { loadItem, saveItem, removeItem } from "utils/localStorage";
-import VolunteersList from "./_components/VolunteersList";
-// Ленивая загрузка модуля
-// const OtherComponent = React.lazy(() => import('components/header'));
-// import("components/foo").then(math => {
-//     console.log(math.add(16, 26));
-// });
+import VkLogo from "icons/vk_logo.png";
+import OkLogo from "icons/ok_logo.png";
+import InstLogo from "icons/inst_logo.png";
+import PhoneImage from "icons/phone.png";
+import CopyLinkToPage from "components/CopyLinkToPage";
 import "./style.scss";
-import VkLogo from "../../icons/vk_logo.png";
-import OkLogo from "../../icons/ok_logo.png";
-import InstLogo from "../../icons/inst_logo.png";
-import { prepareAge } from "../../helpers/animals";
-import PhoneImage from "../../icons/phone.png";
-import { MAIN_CARD_OWNER, MAIN_PHONE } from "../../constants/donations";
-import CopyLinkToPage from "../../components/CopyLinkToPage";
 
 const Volunteer: React.FC = () => {
   const { id } = useParams();

@@ -29,6 +29,7 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Tabs, { TTabs } from "components/Tabs";
 import { SIZES_MAIN } from "constants/photos";
 import { loadItem } from "utils/localStorage";
+import PetDonationIcon from "components/PetDonationIcon";
 import PuppyImg from "./images/puppy.jpg";
 import KittenImg from "./images/kitten.jpg";
 import DogImg from "./images/dog.jpg";
@@ -36,7 +37,7 @@ import CatImg from "./images/cat.jpg";
 import OldDogImg from "./images/old_dog.jpg";
 import OldCatImg from "./images/old_cat.jpg";
 import "./style.scss";
-import PetDonationIcon from "../../../../components/PetDonationIcon";
+
 
 const OurPets = () => {
   const [tabsListState, setTabsListState] = useState<TTabs[]>([]);

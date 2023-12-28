@@ -3,39 +3,31 @@
  */
 
 import React, { useEffect, useState } from "react";
-
 import { Link } from "react-router-dom";
 import {
   getAnotherImagesUrl as getAnotherImagesUrlAnimals,
   getMainImageUrl as getMainImageUrlAnimals,
   getVideoUrl as getVideoUrlAnimals,
 } from "helpers/animals";
-
 import {
   getAnotherImagesUrl as getAnotherImagesUrlCollections,
   getMainImageUrl as getMainImageUrlCollections,
   getVideoUrl as getVideoUrlCollections,
 } from "helpers/collections";
-
 import { getAnotherImagesUrl as getAnotherImagesUrlDocuments } from "helpers/documents";
-
 import {
   getAnotherImagesUrl as getAnotherImagesUrlNews,
   getVideoUrl as getVideoUrlNews,
 } from "helpers/news";
-
 import {
   getAnotherImagesUrl as getAnotherImagesUrlStories,
   getVideoUrl as getVideoUrlStories,
 } from "helpers/stories";
-
 import { getAnotherImagesUrl as getAnotherImagesUrlMainphotoalbum } from "helpers/mainphotoalbum";
-
 import {
   getAnotherImagesUrl as getAnotherImagesUrlAcquaintanceship,
   getVideoUrl as getVideoUrlAcquaintanceship,
 } from "helpers/acquaintanceship";
-
 import { isAdmin } from "utils/user";
 import "./style.scss";
 

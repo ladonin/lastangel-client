@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination, Lazy } from "swiper";
+import MediaOriginalLinks from "components/MediaOriginalLinks";
 import { getAnotherImagesUrl } from "helpers/mainphotoalbum";
 import { SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/mainphotoalbum";
@@ -14,8 +15,7 @@ import { MainPhotoalbumApi } from "api/mainphotoalbum";
 import albumImg1 from "./images/mainAlbum-1.jpg";
 import albumImg2 from "./images/mainAlbum-2.jpg";
 import albumImg15 from "./images/mainAlbum-15.jpg";
-import { loadItem } from "utils/localStorage";
-import "./style.scss";import MediaOriginalLinks from "../../../../components/MediaOriginalLinks";
+import "./style.scss";
 
 const Slider = () => {
   const [dataState, setDataState] = useState<(TGetResponseItem & { data: number[] }) | null>(null);

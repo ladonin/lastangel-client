@@ -71,7 +71,6 @@ import StoriesFilter, {
   TFilterParams as TStoriesFilterParams,
 } from "./stories/_components/Filter";
 import VolunteersFilter, {
-  DEFAULT_SORT as VOLUNTEERS_DEFAULT_SORT,
   TFilterParams as TVolunteersFilterParams,
 } from "./volunteers/_components/Filter";
 import DonatorsFilter, {
@@ -82,7 +81,6 @@ import DonationsFilter, {
   ORDER_VALUES as DONATION_ORDER_VALUES,
   TFilterParams as TDonationsFilterParams,
 } from "./donations/_components/Filter";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
 const STORIES_PAGESIZE = 20;

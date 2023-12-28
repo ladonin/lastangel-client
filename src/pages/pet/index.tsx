@@ -10,7 +10,7 @@ import Modal from "components/Modal";
 import { DonationsApi } from "api/donations";
 import { TItem } from "api/types/animals";
 import { isAnonym, getDonatorName } from "helpers/donations";
-import { TGetListOutput as TListDonations, TItem as TDonationItem } from "api/types/donations";
+import { TGetListOutput as TListDonations } from "api/types/donations";
 import LoaderIcon from "components/LoaderIcon";
 import { TItem as TCollectionItem } from "api/types/collections";
 import { AnimalsApi } from "api/animals";
@@ -36,12 +36,13 @@ import { getVideoType, numberFriendly, textToClient } from "helpers/common";
 import flowerSrc from "icons/flower1.png";
 import { loadItem, saveItem, removeItem } from "utils/localStorage";
 import PetsList from "./_components/PetsList";
+import "./style.scss";
+
 // Ленивая загрузка модуля
 // const OtherComponent = React.lazy(() => import('components/header'));
 // import("components/foo").then(math => {
 //     console.log(math.add(16, 26));
 // });
-import "./style.scss";
 
 const Pet: React.FC = () => {
   const { id } = useParams();

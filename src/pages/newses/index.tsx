@@ -1,10 +1,9 @@
 import React, { useMemo } from "react";
-import BreadCrumbs from "components/BreadCrumbs";
-import { loadItem } from "utils/localStorage";
-import List from "./_components/List";
-import "./style.scss";
 import { useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import BreadCrumbs from "components/BreadCrumbs";
+import List from "./_components/List";
+import "./style.scss";
 
 const Newses: React.FC = () => {
   const { getMetatags } = useOutletContext<any>();

@@ -1,13 +1,11 @@
 /*
   import InputText from 'components/Form/InputText'
  */
-
 import React, { ChangeEvent, RefObject, useMemo, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import cn from "classnames";
-import { loadItem } from "utils/localStorage";
+import { preparePhoneInputVal } from "helpers/common";
 import "./style.scss";
-import { preparePhoneInputVal } from "../../../helpers/common";
 
 type TProps = {
   label?: string;

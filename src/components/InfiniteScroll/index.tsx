@@ -2,9 +2,8 @@
   import InfiniteScroll from 'components/InfiniteScroll'
  */
 
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import pageUpImage from "icons/pageUp.png";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {

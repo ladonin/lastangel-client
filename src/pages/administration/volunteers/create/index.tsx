@@ -1,5 +1,4 @@
 import React, { useState, useRef, useMemo } from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import { VolunteersApi } from "api/volunteers";
@@ -8,8 +7,6 @@ import { TCommonDataRequest } from "api/types/volunteers";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
 import Form, { TParams } from "../_components/Form";
-// const OtherComponent = React.lazy(() => import('components/header'));
-
 import "./style.scss";
 
 const VolunteerCreate: React.FC = () => {

@@ -11,12 +11,8 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Modal from "components/Modal";
 import { loadItem } from "utils/localStorage";
 import Filter, { TFilterParams } from "./_components/Filter";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
-// TODO
-// сделать цветовую дифференциацию по статусам (фон)
-// сделать фильтр по статусам и пр
-// сделать сортировку по дате рожденияи пр.
+
 const PAGESIZE = 20;
 
 const Feedbacks: React.FC = () => {

@@ -12,10 +12,10 @@ import { VolunteersApi } from "api/volunteers";
 import { getMainImageUrl } from "helpers/volunteers";
 import { TGetListOutput, TItem } from "api/types/volunteers";
 import PAGES from "routing/routes";
-
 import { loadItem } from "utils/localStorage";
-import "./style.scss";
 import { SIZES_MAIN } from "constants/photos";
+import "./style.scss";
+
 
 type TProps = { currentId?: number | null };
 const VolunteersList = ({ currentId = null }: TProps) => {

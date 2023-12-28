@@ -11,15 +11,14 @@ import { AcquaintanceshipApi } from "api/acquaintanceship";
 import { getVideoUrl, getAnotherImagesUrl } from "helpers/acquaintanceship";
 import BreadCrumbs from "components/BreadCrumbs";
 import { isAdmin } from "utils/user";
-import { getDateString, getVideoType } from "helpers/common";
+import { getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import CopyLinkToPage from "components/CopyLinkToPage";
-import MediaOriginalLinks from "../../components/MediaOriginalLinks";
+import MediaOriginalLinks from "components/MediaOriginalLinks";
+import { ACQUAINTANCESHIP_STATUS } from "constants/acquaintanceship";
 import "./style.scss";
-import { ACQUAINTANCESHIP_STATUS } from "../../constants/acquaintanceship";
 
 const Acquaintanceship: React.FC = () => {
   const navigate = useNavigate();

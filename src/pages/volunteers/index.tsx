@@ -1,28 +1,19 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
-
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
-import cn from "classnames";
-
 import { Helmet } from "react-helmet";
 import { TGetListRequest, TItem } from "api/types/volunteers";
 import PAGES from "routing/routes";
 import { VolunteersApi } from "api/volunteers";
-import { getTimestamp, numberFriendly } from "helpers/common";
 import { getMainImageUrl } from "helpers/volunteers";
 import NotFound from "components/NotFound";
-import { useQueryHook } from "hooks/useQueryHook";
 import InfiniteScroll from "components/InfiniteScroll";
 import BreadCrumbs from "components/BreadCrumbs";
-
 import { loadItem, saveItem } from "utils/localStorage";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import LoaderIcon from "components/LoaderIcon";
-
-// const OtherComponent = React.lazy(() => import('components/header'));
-import { TFilterParams } from "../administration/volunteers/_components/Filter";
+import { SIZES_MAIN } from "constants/photos";
+import Filter, { TFilterParams } from "./_components/Filter";
 import "./style.scss";
-import { SIZES_MAIN } from "../../constants/photos";
-import Filter from "./_components/Filter";
 
 const PAGESIZE = 20;
 const Volunteers: React.FC = () => {
@@ -45,11 +36,13 @@ const Volunteers: React.FC = () => {
     list: TItem[] | null;
     page: number;
   } | null>(null);
-
-  const needUsePrint = useRef<boolean>(useMemo(() => loadItem("usePrintInVolunteers"), []));
   const print = useMemo(() => loadItem("volunteersPrint"), []);
+  const needUsePrint = useRef<boolean>(
+    useMemo(() => (print ? loadItem("usePrintInVolunteers") : false), [])
+  );
+
   const [listState, setListState] = useState<TItem[] | null>(
-    needUsePrint.current && print.list ? print.list : null
+    needUsePrint.current && print?.list ? print.list : null
   );
   // <-- Сохранение состояния страницы
 
@@ -101,9 +94,8 @@ const Volunteers: React.FC = () => {
           setIsBlankState(false);
         }, 0);
 
-        setListHeightState(print.listHeight);
-
-        window.scrollTo(0, print.scroll);
+        print && setListHeightState(print.listHeight);
+        print && window.scrollTo(0, print.scroll);
       }
     }, 0);
 

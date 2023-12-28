@@ -1,16 +1,14 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import cn from "classnames";
 import PAGES from "routing/routes";
 import { DonationsApi } from "api/donations";
-import { getDateString, getDateYMD, monthMappings, numberFriendly } from "helpers/common";
-import { TGetListRequest, TItem, TItem as TDonationItem } from "api/types/donations";
+import { getDateYMD, monthMappings, numberFriendly } from "helpers/common";
+import { TGetListRequest, TItem } from "api/types/donations";
 import InfiniteScroll from "components/InfiniteScroll";
 import Tooltip from "components/Tooltip";
 import { prepareType as prepareDonationType, isAnonym, getDonatorName } from "helpers/donations";
 import LoaderIcon from "components/LoaderIcon";
-// const OtherComponent = React.lazy(() => import('components/header'));
-
 import "./style.scss";
 
 const PAGESIZE = 20;

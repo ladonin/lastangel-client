@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
-
 import {
   ANIMALS_CATEGORY,
   ANIMALS_KIND,
@@ -11,7 +10,6 @@ import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
 import { AnimalsApi } from "api/animals";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { transformCategoryToParams } from "helpers/animals";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";

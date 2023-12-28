@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { MetatagsApi } from "api/metatags";
 import PAGES from "routing/routes";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import Form from "../_components/Form";
 import "./style.scss";

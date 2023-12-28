@@ -7,10 +7,8 @@ import { isAdmin } from "utils/user";
 import NotFound from "components/NotFound";
 import { objectsAreEqual } from "helpers/common";
 import { loadItem, saveItem } from "utils/localStorage";
-
 import ListItem from "../ListItem";
 import Filter, { TFilterParams } from "../Filter";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
 type TProps = {

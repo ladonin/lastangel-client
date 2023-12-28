@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { AnimalsApi } from "api/animals";
 import { CollectionsApi } from "api/collections";
 import { DONATIONS_TYPES } from "constants/donations";
@@ -10,8 +9,8 @@ import { Checkbox } from "components/Form/Checkbox";
 import { TGetResponseItem } from "api/types/donations";
 import { ANIMALS_STATUS } from "constants/animals";
 import { isAnonym } from "helpers/donations";
+import { COLLECTIONS_STATUS } from "constants/collections";
 import "./style.scss";
-import { COLLECTIONS_STATUS } from "../../../../../constants/collections";
 
 const TYPES_OPTIONS = [
   { value: String(DONATIONS_TYPES.PET), label: "Содержание животного" },

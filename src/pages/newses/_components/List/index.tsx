@@ -9,7 +9,6 @@ import { loadItem, saveItem } from "utils/localStorage";
 import { objectsAreEqual } from "helpers/common";
 import ListItem from "../ListItem";
 import Filter, { TFilterParams } from "../Filter";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
 type TProps = {

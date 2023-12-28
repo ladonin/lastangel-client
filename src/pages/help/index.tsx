@@ -8,17 +8,15 @@ import { CollectionsApi } from "api/collections";
 import { useQueryHook } from "hooks/useQueryHook";
 import Image from "icons/help.jpg";
 import ImageMobile from "icons/helpMobile.jpg";
-import SberIcon from "icons/sber.png";
 import DocsIcon from "icons/docs.png";
 import PrayIcon from "icons/pray.png";
 import PAGES from "routing/routes";
 import { loadItem } from "utils/localStorage";
-import { MAIN_CARD, MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "../../constants/donations";
+import { MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "constants/donations";
 import InvalidIcon2 from "./icons/2.png";
 import InvalidIcon4 from "./icons/4.png";
 import InvalidIcon7 from "./icons/7.png";
 import InvalidIcon8 from "./icons/8.png";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
 const Help: React.FC = () => {

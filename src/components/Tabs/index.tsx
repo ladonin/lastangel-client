@@ -1,12 +1,11 @@
 /*
   import Tabs from 'components/Tabs'
  */
-
-import React, { ReactElement, ReactNode, useMemo } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
+
 export type TTabs = {
   position: string;
   render: ReactElement;

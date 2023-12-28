@@ -1,14 +1,12 @@
 import React, { ChangeEventHandler, useState, useMemo } from "react";
-
+import { Helmet } from "react-helmet";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import PAGES from "routing/routes";
 import { saveUserData, isAuthorized } from "utils/user";
 import { UserApi } from "api/user";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
-import { Helmet } from "react-helmet";
 
 const Signin: React.FC = () => {
   const [loginState, setLoginState] = useState("");

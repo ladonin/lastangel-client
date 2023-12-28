@@ -8,7 +8,6 @@ import { DONATIONS_TYPES } from "constants/donations";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
 import Form, { TParams } from "../_components/Form";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
 const DonationCreate: React.FC = () => {

@@ -4,12 +4,10 @@ import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { AcquaintanceshipApi } from "api/acquaintanceship";
 import PAGES from "routing/routes";
-import Modal from "components/Modal";
 import { TCommonDataRequest } from "api/types/acquaintanceship";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
 import Form, { TResponse, TParams } from "../_components/Form";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
 const AcquaintanceshipUpdate: React.FC = () => {

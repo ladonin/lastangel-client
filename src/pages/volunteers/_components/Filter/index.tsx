@@ -1,10 +1,8 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 
 import Select from "components/Form/Select";
-
 import { VolunteersApi } from "api/volunteers";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
 

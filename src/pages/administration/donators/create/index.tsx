@@ -1,5 +1,4 @@
 import React, { useState, useRef, useMemo } from "react";
-
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { DonatorsApi } from "api/donators";
@@ -8,7 +7,6 @@ import { TCommonDataRequest } from "api/types/donators";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
 import Form, { TParams } from "../_components/Form";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
 const DonatorCreate: React.FC = () => {

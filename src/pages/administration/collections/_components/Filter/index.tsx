@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import {
   COLLECTIONS_TYPE,
@@ -8,7 +7,6 @@ import {
   TYPES_OPTIONS,
   STATUSES_OPTIONS,
 } from "constants/collections";
-
 import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
 import { isObjectOptionsEmpty } from "helpers/common";

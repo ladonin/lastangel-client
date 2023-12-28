@@ -12,12 +12,11 @@ import { NEWS_STATUS } from "constants/news";
 import { isAdmin } from "utils/user";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import PinIcon from "icons/pin.png";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
-import "./style.scss";
 import CopyLinkToPage from "components/CopyLinkToPage";
-import MediaOriginalLinks from "../../../../components/MediaOriginalLinks";
-import Tooltip from "../../../../components/Tooltip";
+import MediaOriginalLinks from "components/MediaOriginalLinks";
+import Tooltip from "components/Tooltip";
+import "./style.scss";
 
 type TProps = {
   data: TItem;

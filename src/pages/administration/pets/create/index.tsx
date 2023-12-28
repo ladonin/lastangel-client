@@ -1,5 +1,4 @@
 import React, { useState, useRef, useMemo } from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import { AnimalsApi } from "api/animals";
@@ -8,8 +7,6 @@ import { TCommonDataRequest } from "api/types/animals";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
 import Form, { TParams } from "../_components/Form";
-// const OtherComponent = React.lazy(() => import('components/header'));
-
 import "./style.scss";
 
 const PetCreate: React.FC = () => {

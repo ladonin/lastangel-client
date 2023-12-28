@@ -9,21 +9,21 @@ import { DonationsApi } from "api/donations";
 import { TItem } from "api/types/collections";
 import { TGetListOutput as TListDonations } from "api/types/donations";
 import { isAnonym, getDonatorName } from "helpers/donations";
-import LoaderIcon from "components/LoaderIcon";
 import { CollectionsApi } from "api/collections";
 import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/collections";
 import { getVideoType, numberFriendly, textToClient } from "helpers/common";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
-import "./style.scss";
 import { loadItem } from "utils/localStorage";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
 import PAGES from "routing/routes";
 import { COLLECTIONS_STATUS } from "constants/collections";
 import flowerSrc from "icons/flower1.png";
+import LoaderIcon from "components/LoaderIcon";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import BreadCrumbs from "components/BreadCrumbs";
 import CopyLinkToPage from "components/CopyLinkToPage";
-import MediaOriginalLinks from "../../components/MediaOriginalLinks";
+import MediaOriginalLinks from "components/MediaOriginalLinks";
+import "./style.scss";
 
 // Ленивая загрузка модуля
 // const OtherComponent = React.lazy(() => import('components/header'));

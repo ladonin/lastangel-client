@@ -9,7 +9,6 @@ import { TCommonDataRequest } from "api/types/volunteers";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
 import Form, { TResponse, TParams } from "../_components/Form";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
 const VolunteerUpdate: React.FC = () => {

@@ -2,9 +2,8 @@
   import Textarea from 'components/Form/Textarea'
  */
 
-import React, { ChangeEvent, useState, useEffect, useMemo } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import cn from "classnames";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {

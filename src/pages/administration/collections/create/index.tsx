@@ -2,16 +2,13 @@ import React, { useState, useRef, useMemo } from "react";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import { CollectionsApi } from "api/collections";
-import "./style.scss";
-
 import PAGES from "routing/routes";
-
 import { TCommonDataRequest } from "api/types/collections";
 import { COLLECTIONS_TYPE } from "constants/collections";
 import Form, { TParams } from "../_components/Form";
+import "./style.scss";
 
 const CollectionCreate: React.FC = () => {
   const [errorState, setErrorState] = useState("");

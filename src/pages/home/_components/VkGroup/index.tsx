@@ -3,11 +3,9 @@
  */
 
 import React, { useEffect, useMemo } from "react";
-
 import "react-tabs/style/react-tabs.css";
-
-import "./style.scss";
 import { loadItem } from "utils/localStorage";
+import "./style.scss";
 
 const VkGroup = () => {
   const isMobile = useMemo(() => loadItem("isMobile"), []);

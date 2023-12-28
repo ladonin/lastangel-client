@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
-// const OtherComponent = React.lazy(() => import('components/header'));
-
-import { Link, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { MAIN_CARD_OWNER, MAIN_PHONE } from "constants/donations";
 import PhoneImage from "icons/phone.png";
 import VkLogo from "icons/vk_logo.png";
 import OkLogo from "icons/ok_logo.png";
@@ -10,8 +10,6 @@ import VkGroup from "components/socNetsGroup/VkGroup";
 import BreadCrumbs from "components/BreadCrumbs";
 import Form from "./_components/Form";
 import "./style.scss";
-import { MAIN_CARD_OWNER, MAIN_PHONE } from "../../constants/donations";
-import { Helmet } from "react-helmet";
 
 const Contacts: React.FC = () => {
   const { getMetatags } = useOutletContext<any>();

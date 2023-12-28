@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 import InputText from "components/Form/InputText";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
 

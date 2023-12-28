@@ -16,7 +16,6 @@ import "./style.scss";
 
 const LayoutMain: React.FC = () => {
   // const location = useLocation();
-  // console.log(location);
   const [isMobileState, setIsMobileState] = useState<boolean | undefined>(loadItem("isMobile"));
   const { pathname } = useLocation();
   const [prevPathnameState, setPrevPathnameState] = useState<string>("");
@@ -59,7 +58,6 @@ const LayoutMain: React.FC = () => {
     checkMail();
     MetatagsApi.get().then((res) => {
       res && setMetatagsState(JSON.parse(res));
-      console.log(JSON.parse(res))
     });
     timerRef.current = setInterval(() => {
       checkMail();

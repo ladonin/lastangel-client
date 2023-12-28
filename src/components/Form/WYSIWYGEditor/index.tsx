@@ -2,7 +2,7 @@
   import WYSIWYGEditor from 'components/Form/WYSIWYGEditor'
  */
 
-import React, { useRef, useState, useMemo, useEffect } from "react";
+import React, { useRef, useMemo } from "react";
 import SunEditor from "suneditor-react";
 import SunEditorCore from "suneditor/src/lib/core";
 // Не грузит стили из папки suneditor - мешают настройки package.json библиотеки

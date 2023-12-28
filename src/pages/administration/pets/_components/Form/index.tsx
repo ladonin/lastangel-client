@@ -1,7 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-
-// const OtherComponent = React.lazy(() => import('components/header'));
-import "./style.scss";
 import { getVideoUrl, getAnotherImagesUrl, getMainImageUrl } from "helpers/animals";
 import {
   SEX_OPTIONS,
@@ -20,10 +17,9 @@ import DatePicker from "components/Form/DatePicker";
 import Select from "components/Form/Select";
 import Textarea from "components/Form/Textarea";
 import { Checkbox } from "components/Form/Checkbox";
-
 import { TGetResponseItem } from "api/types/animals";
-
 import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
+import "./style.scss";
 
 export type TParams = { [key: string]: any };
 

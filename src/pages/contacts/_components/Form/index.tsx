@@ -5,7 +5,6 @@ import Textarea from "components/Form/Textarea";
 import InputText from "components/Form/InputText";
 import FlowerImage from "icons/flower1.png";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
 

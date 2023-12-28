@@ -13,12 +13,12 @@ import { getMainImageUrl } from "helpers/collections";
 import flowerSrc from "icons/flower1.png";
 import BreadCrumbs from "components/BreadCrumbs";
 import { COLLECTIONS_STATUS } from "constants/collections";
+import { SIZES_MAIN } from "constants/photos";
 import { numberFriendly } from "helpers/common";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
-import "./style.scss";
 import { loadItem } from "utils/localStorage";
-import { SIZES_MAIN } from "../../constants/photos";
+import "./style.scss";
 
 const Collections: React.FC = () => {
   const navigate = useNavigate();

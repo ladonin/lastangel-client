@@ -1,5 +1,4 @@
 import React, { useState, useRef, useMemo } from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import { StoriesApi } from "api/stories";
@@ -7,7 +6,7 @@ import PAGES from "routing/routes";
 import { TCommonDataRequest } from "api/types/stories";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
-import Form, { TParams } from "../_components/Form"; // const OtherComponent = React.lazy(() => import('components/header'));
+import Form, { TParams } from "../_components/Form";
 import "./style.scss";
 
 const StoryCreate: React.FC = () => {

@@ -1,15 +1,10 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
-
-// const OtherComponent = React.lazy(() => import('components/header'));
-import { loadItem } from "utils/localStorage";
-import "./style.scss";
+import React, { useEffect, useState, useRef } from "react";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
 import InputFileImages from "components/Form/InputFileImages";
-
 import { TGetResponseItem } from "api/types/clinicPhotos";
-
 import { getAnotherImagesUrl } from "helpers/clinicPhotos";
 import { SIZES_ANOTHER } from "constants/photos";
+import "./style.scss";
 
 export type TParams = { [key: string]: any };
 

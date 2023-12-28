@@ -4,7 +4,6 @@ import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
-
 import { Helmet } from "react-helmet";
 import List from "pages/stories/_components/List";
 import { TItem } from "api/types/stories";
@@ -17,10 +16,9 @@ import { isAdmin } from "utils/user";
 import { getDateString, getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import CopyLinkToPage from "components/CopyLinkToPage";
-import MediaOriginalLinks from "../../components/MediaOriginalLinks";
+import MediaOriginalLinks from "components/MediaOriginalLinks";
 import "./style.scss";
 
 const Story: React.FC = () => {

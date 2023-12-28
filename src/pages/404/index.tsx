@@ -1,9 +1,8 @@
 import React from "react";
 // const OtherComponent = React.lazy(() => import('components/header'));
-
-import "./style.scss";
 import { Helmet } from "react-helmet";
 import Image from "./icons/image.jpg";
+import "./style.scss";
 
 const Page404: React.FC = () => (
   <>

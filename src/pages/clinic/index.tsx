@@ -1,12 +1,10 @@
 import React, { useMemo } from "react";
-// const OtherComponent = React.lazy(() => import('components/header'));
-
-import "./style.scss";
 import { Helmet } from "react-helmet";
 import { Link, useOutletContext } from "react-router-dom";
 import BreadCrumbs from "components/BreadCrumbs";
 import VkLogo from "../../icons/vk_logo.png";
 import Slider from "./_components/Slider";
+import "./style.scss";
 
 const Clinic: React.FC = () => {
   const { getMetatags } = useOutletContext<any>();

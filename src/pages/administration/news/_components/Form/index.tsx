@@ -1,9 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-
-// const OtherComponent = React.lazy(() => import('components/header'));
-
-import "./style.scss";
-import InputText from "components/Form/InputText";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
 import InputFileImages from "components/Form/InputFileImages";
 import { NEWS_STATUS } from "constants/news";
@@ -15,6 +10,7 @@ import InputFileVideo from "components/Form/InputFileVideo";
 import WYSIWYGEditor from "components/Form/WYSIWYGEditor";
 import { SIZES_ANOTHER } from "constants/photos";
 import Select from "components/Form/Select";
+import "./style.scss";
 
 export type TParams = { [key: string]: any };
 

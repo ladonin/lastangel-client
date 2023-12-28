@@ -8,7 +8,6 @@ import Modal from "components/Modal";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { TCommonDataRequest } from "api/types/donations";
 import { DONATIONS_TYPES } from "constants/donations";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";

@@ -10,14 +10,12 @@ import { Navigation, Pagination, Lazy } from "swiper";
 import { Link } from "react-router-dom";
 import { AnimalsApi } from "api/animals";
 import { getMainImageUrl, prepareStatus, prepareStatusCode } from "helpers/animals";
-
 import { ANIMALS_STATUS } from "constants/animals";
 import { TGetListOutput, TItem } from "api/types/animals";
 import PAGES from "routing/routes";
-
 import { loadItem } from "utils/localStorage";
-import "./style.scss";
 import { SIZES_MAIN } from "constants/photos";
+import "./style.scss";
 
 type TProps = { currentId?: number | null };
 const PetsList = ({ currentId = null }: TProps) => {

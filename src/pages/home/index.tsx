@@ -9,9 +9,9 @@ import Collections from "./_components/Collections";
 import News from "./_components/News";
 import Stories from "./_components/Stories";
 import Help from "./_components/Help";
-import "./style.scss";
 import { useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import "./style.scss";
 
 const Home: React.FC = () => {
   const isMobile = useMemo(() => loadItem("isMobile"), []);

@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,10 +15,9 @@ import { isAdmin } from "utils/user";
 import { getDateString, getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import { loadItem } from "utils/localStorage";
 import CopyLinkToPage from "components/CopyLinkToPage";
-import MediaOriginalLinks from "../../components/MediaOriginalLinks";
+import MediaOriginalLinks from "components/MediaOriginalLinks";
 import "./style.scss";
 
 const News: React.FC = () => {
