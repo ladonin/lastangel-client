@@ -1,17 +1,12 @@
 /*
   import PetDonationIcon from 'components/PetDonationIcon'
- 
   Компонент картинок состояния голода животного, исходя из суммы его донатов 
  */
-
 import React, { useState, useEffect } from "react";
 
 import { ANIMALS_KIND } from "constants/animals";
-
 import { TItem } from "api/types/animals";
-
 import { loadItem, saveItem } from "utils/localStorage";
-
 import "./style.scss";
 
 import c1_1Icon from "./icons/cats/1/1.png";

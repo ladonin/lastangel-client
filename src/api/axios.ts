@@ -1,8 +1,6 @@
 import axios, { AxiosError, InternalAxiosRequestConfig, AxiosResponse } from "axios";
-
 import { toast } from "react-toastify";
 import { quit } from "utils/user";
-
 import { loadItem } from "../utils/localStorage";
 
 const TIMEOUT = 100000;

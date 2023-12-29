@@ -1,18 +1,14 @@
 /*
   import WYSIWYGEditor from 'components/Form/WYSIWYGEditor'
- 
   WYSIWYG редактор
  */
-
 import React, { useRef, useMemo } from "react";
-
 import SunEditor from "suneditor-react";
 import SunEditorCore from "suneditor/src/lib/core";
 import plugins from "suneditor/src/plugins";
 import cn from "classnames";
 
 import { loadItem } from "utils/localStorage";
-
 // Не грузит стили из папки suneditor - мешают настройки package.json библиотеки
 import "./suneditor.min.css";
 import "./style.scss";

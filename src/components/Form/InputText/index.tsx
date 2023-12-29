@@ -1,16 +1,11 @@
 /*
   import InputText from 'components/Form/InputText'
-
   Текстовый инпут
  */
-
 import React, { ChangeEvent, RefObject, useMemo, useEffect, useRef, useState } from "react";
-
 import { v4 as uuidv4 } from "uuid";
 import cn from "classnames";
-
 import { preparePhoneInputVal } from "helpers/common";
-
 import "./style.scss";
 
 type TProps = {

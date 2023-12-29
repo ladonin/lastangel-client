@@ -1,11 +1,8 @@
 /*
   import MediaOriginalLinks from 'components/MediaOriginalLinks'
- 
   Ссылки на оригиналы медиа-файлов
  */
-
 import React, { useEffect, useState } from "react";
-
 import { Link } from "react-router-dom";
 
 import {
@@ -34,7 +31,6 @@ import {
 } from "helpers/acquaintanceship";
 
 import { isAdmin } from "utils/user";
-
 import "./style.scss";
 
 type TData = {

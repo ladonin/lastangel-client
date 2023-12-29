@@ -1,13 +1,9 @@
 /*
   import Textarea from 'components/Form/Textarea'
-
   Текстареа
  */
-
 import React, { ChangeEvent, useState, useEffect } from "react";
-
 import cn from "classnames";
-
 import "./style.scss";
 
 type TProps = {

@@ -23,7 +23,6 @@ module.exports = {
    * @param {string[]}filenames Имена файлов, находящиеся в stage гита
    */
   "src/**/*.{ts,tsx}": async (filenames) => {
-    console.log(filenames)
     const filesToLint = await getFilesToLint(filenames);
     return [
       `eslint ${filesToLint.join(" ")} --rule "{no-console: 1, no-alert:2, no-debugger: 2}"`,

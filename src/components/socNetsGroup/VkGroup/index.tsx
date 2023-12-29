@@ -1,11 +1,8 @@
 /*
   import VkGroup from 'components/socNetsGroup/VkGroup'
-
   Компонент группы VK
  */
-
 import React, { useEffect, useMemo } from "react";
-
 import { loadItem } from "utils/localStorage";
 
 type TProps = {

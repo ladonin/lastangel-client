@@ -7,6 +7,7 @@ export const SIZES_ANOTHER = {
   SIZE_1200: 1,
   SIZE_450: 2,
 } as const;
+
 export const SIZES_MAIN = {
   SQUARE: "square",
   SQUARE2: "square2",

@@ -1,19 +1,13 @@
 /*
   import InputFileImages from 'components/Form/InputFileImages'
-
   Форма загрузки картинки(ок) без кропа
  */
-
 import React, { PropsWithChildren, useEffect, useState } from "react";
-
 import cn from "classnames";
 
 import { Button, ButtonThemes } from "components/Button";
-
 import { DIMENTIONS } from "constants/photos";
-
 import { useGetImageDataHook, TData as TImageData } from "hooks/useGetImageDataHook";
-
 import "./style.scss";
 
 type TProps = {

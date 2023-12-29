@@ -1,14 +1,10 @@
 /* 
   import Tooltip from 'components/Tooltip'
-
   Подсказка (тултип)
  */
-
 import React, { ReactNode, useMemo } from "react";
-
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-
 import "./style.scss";
 
 type TProps = {

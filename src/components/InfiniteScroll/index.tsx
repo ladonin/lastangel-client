@@ -1,13 +1,9 @@
 /*
   import InfiniteScroll from 'components/InfiniteScroll'
- 
   Бесконечный скролл
  */
-
 import React, { useRef, useEffect, useState } from "react";
-
 import pageUpImage from "icons/pageUp.png";
-
 import "./style.scss";
 
 type TProps = {

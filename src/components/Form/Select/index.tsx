@@ -1,14 +1,10 @@
 /*
   import Select from 'components/Form/Select'
-
   Селект с поиском
  */
-
 import React, { Ref, useEffect, useRef } from "react";
-
 import cn from "classnames";
 import SelectComponent, { Props } from "react-select";
-
 import "./style.scss";
 
 type TValue = { value: string; label: string };

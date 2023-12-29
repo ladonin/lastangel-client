@@ -1,14 +1,9 @@
 /*
   import OkGroup from 'components/socNetsGroup/OkGroup'
-
   Компонент группы в ОК
  */
-
 import React, { useEffect, useMemo } from "react";
-
 import { loadItem } from "utils/localStorage";
-
-import "react-tabs/style/react-tabs.css";
 
 type TProps = {
   height?: string;

@@ -1,15 +1,10 @@
 /*
   import Checkbox from 'components/Form/Checkbox'
-
   Чекбокс
  */
-
 import React, { PropsWithChildren } from "react";
-
 import cn from "classnames";
-
 import CheckIcon from "./icons/checkIcon.svg";
-
 import "./style.scss";
 
 type TProps = {

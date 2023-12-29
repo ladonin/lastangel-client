@@ -1,16 +1,12 @@
 /*
   import BreadCrumbs from 'components/BreadCrumbs'
-
   Хлебные крошки
  */
-
 import React from "react";
-
 import { Link, useNavigate } from "react-router-dom";
 
 import PAGES from "routing/routes";
 import ArrowRight from "icons/arrowRight.svg";
-
 import "./style.scss";
 
 type TProps = {

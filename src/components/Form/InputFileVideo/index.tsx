@@ -1,19 +1,14 @@
 /*
   import InputFileVideo from 'components/Form/InputFileVideo'
-
   Форма загрузки видео
  */
-
 import React, { PropsWithChildren, useState, useMemo, useEffect } from "react";
-
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
 
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Modal from "components/Modal";
-
 import { loadItem } from "utils/localStorage";
-
 import "./style.scss";
 
 type TProps = {

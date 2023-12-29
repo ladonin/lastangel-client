@@ -2,7 +2,6 @@
   import { logoutApi, refreshTokenApi } from 'api/user';
   Аутентификация
  */
-
 import { AxiosResponse } from "axios";
 import { UserTypes } from "types/user";
 import { apiService } from "./axios";

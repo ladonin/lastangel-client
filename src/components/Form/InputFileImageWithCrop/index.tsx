@@ -1,26 +1,19 @@
 /*
   import InputFileImageWithCrop from 'components/Form/InputFileImageWithCrop'
-
   Форма загрузки картинки с кропом
  */
-
 import React, { PropsWithChildren, useEffect, useMemo, useState, useCallback } from "react";
-
 import cn from "classnames";
 import Cropper, { Area } from "react-easy-crop";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 import { DIMENTIONS } from "constants/photos";
-
 import { loadItem } from "utils/localStorage";
-
 import { useGetImageDataHook, TData as TImageData } from "hooks/useGetImageDataHook";
-
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Modal from "components/Modal";
 import getCroppedImg from "./utils";
-
 import "./style.scss";
 
 type TProps = {

@@ -1,19 +1,14 @@
 /*
   import { Button, ButtonThemes, ButtonSizes } from 'components/Button'
-
   Универсальный компонент кнопки
  */
-
 import React, { MouseEvent, ReactNode, useMemo } from "react";
-
 import cn from "classnames";
 
 import LoaderIcon from "components/LoaderIcon";
 import Tooltip from "components/Tooltip";
-
 import DeleteIcon from "icons/delete.svg";
 import RestoreIcon from "icons/restore.svg";
-
 import "./style.scss";
 
 export enum ButtonThemes {
