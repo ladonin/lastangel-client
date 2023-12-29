@@ -1,6 +1,7 @@
 /*
   import { getVideoUrl, prepareGraft, prepareSex, 
   prepareStatus, prepareSterilized, getMainImageUrl } from 'helpers/animals';
+  Вспомогательные функции для животных
  */
 import React from "react";
 import {
@@ -9,7 +10,6 @@ import {
   ANIMALS_GRAFTED,
   ANIMALS_SEX,
   ANIMALS_STATUS,
-  KIND_OPTIONS,
   ANIMALS_KIND,
   PUPPY_MAXTIMESTAMP,
   MIDDLEDOG_LITTLE_MAXTIMESTAMP,
@@ -21,7 +21,6 @@ import {
 import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
 import { getCountWord, getTimestamp } from "helpers/common";
 import { TGetResponseItem } from "api/types/animals";
-
 import { ValuesOf } from "types/common";
 
 export const prepareStatusCode = (code: number, need_medicine: number | null) => {
@@ -30,6 +29,7 @@ export const prepareStatusCode = (code: number, need_medicine: number | null) =>
   }
   return code;
 };
+
 export const prepareStatus = (code: number, need_medicine: number | null, sex?: number) => {
   if (need_medicine !== null && need_medicine > 0) {
     return "Нужна медпомощь";
@@ -103,7 +103,21 @@ export const prepareSex = (sex: number) => {
   return "";
 };
 
-export const transformCategoryToParams = (category?: ValuesOf<typeof ANIMALS_CATEGORY>) => {
+// Возвращает возрастные параметры для категории
+// Парметры зависят от размера животного и типа (собака/кошка)
+// NOTE: размер собаки влияет на параметры (кошки - нет)
+// По данным параметрам можно определить, кто это - котенок(щенок)/средняя/старая кошка/собака
+// Применяется обычно для формирования запроса на бэк, чтобы получить нужный список животных
+// @param category - категория животного (размеротип или вострастотип или просто тип) - см. type ANIMALS_CATEGORY
+// @return { kind, minbirthdate, maxbirthdate }
+//   kind - "размеротип" - кошка, мал/сред/бол собака (у кошек нет разделения по размерам)
+//     может быть множественным массивом - связана с minbirthdate и maxbirthdate количеством элементов
+//   minbirthdate - левая часть временного интервала, в котором родилось животное данной категории (уходит в прошлое)
+//     может быть множественным массивом - связана с kind и maxbirthdate количеством элементов
+//   maxbirthdate - правая часть временного интервала, в котором родилось животное данной категории (стремится к настоящему)
+//     может быть множественным массивом - связана с kind и minbirthdate количеством элементов
+//  NOTE: если передана категория по возрасту, то ничего не высчитывается
+export const getCategoryAgeParams = (category?: ValuesOf<typeof ANIMALS_CATEGORY>) => {
   let kind: ValuesOf<typeof ANIMALS_KIND>[] | undefined;
   let minbirthdate: number[] | undefined;
   let maxbirthdate: number[] | undefined;

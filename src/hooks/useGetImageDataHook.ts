@@ -1,9 +1,9 @@
 /*
   import { useGetImageDataHook, TData } from 'hooks/useGetImageDataHook';
+  Хук для работы с изображениями (получение данных об изображении)
  */
-
-import { useState, useEffect, useRef, useMemo } from "react";
-import { DIMENTIONS } from "../constants/photos";
+import { useState, useEffect, useRef } from "react";
+import { DIMENTIONS } from "constants/photos";
 
 export type TData = { file: File; width: string; height: string };
 
@@ -27,7 +27,10 @@ export const useGetImageDataHook = () => {
           // Если это не картинка
           imagesCounterRef.current.current++;
           sizesRef.current = [...sizesRef.current, { file, width: "", height: "" }];
-          if (imagesCounterRef.current.all && imagesCounterRef.current.all === imagesCounterRef.current.current) {
+          if (
+            imagesCounterRef.current.all &&
+            imagesCounterRef.current.all === imagesCounterRef.current.current
+          ) {
             // Все картинки проверены
             setResultState(sizesRef.current);
           }
@@ -38,9 +41,15 @@ export const useGetImageDataHook = () => {
           img.onload = function (this: any) {
             imagesCounterRef.current.current++;
 
-            sizesRef.current = [...sizesRef.current, { file, width: this.width, height: this.height }];
+            sizesRef.current = [
+              ...sizesRef.current,
+              { file, width: this.width, height: this.height },
+            ];
 
-            if (imagesCounterRef.current.all && imagesCounterRef.current.all === imagesCounterRef.current.current) {
+            if (
+              imagesCounterRef.current.all &&
+              imagesCounterRef.current.all === imagesCounterRef.current.current
+            ) {
               // Все картинки проверены
               setResultState(sizesRef.current);
             }

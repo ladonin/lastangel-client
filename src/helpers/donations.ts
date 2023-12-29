@@ -1,8 +1,9 @@
 /*
   import { prepareType } from 'helpers/donations';
+  Вспомогательные функции для донатов
  */
-import { DONATIONS_TYPES } from "../constants/donations";
-import { TItem as TDonationItem } from "../api/types/donations";
+import { DONATIONS_TYPES } from "constants/donations";
+import { TItem as TDonationItem } from "api/types/donations";
 
 export const prepareType = (code: number) => {
   if (code === DONATIONS_TYPES.PET) {

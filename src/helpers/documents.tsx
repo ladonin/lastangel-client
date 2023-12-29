@@ -1,9 +1,9 @@
 /*
   import { getAnotherImagesUrl } from 'helpers/documents';
+  Вспомогательные функции для страницы документов
  */
 import { SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/documents";
-
 import { ValuesOf } from "types/common";
 
 export const getAnotherImagesUrl = (

@@ -10,7 +10,7 @@ import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
 import { AnimalsApi } from "api/animals";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { transformCategoryToParams } from "helpers/animals";
+import { getCategoryAgeParams } from "helpers/animals";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
@@ -109,7 +109,7 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
             setFilterState((state) => ({
               ...state,
               category,
-              ...transformCategoryToParams(category),
+              ...getCategoryAgeParams(category),
             }));
 
             !isLightClear && selectIdRef.current?.lightClear && selectIdRef.current?.lightClear();
@@ -128,8 +128,12 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
               ...state,
               id: val ? Number(val.value) : undefined,
             }));
-            !isLightClear && selectCategoryRef.current?.lightClear && selectCategoryRef.current?.lightClear();
-            !isLightClear && selectStatusRef.current?.lightClear && selectStatusRef.current?.lightClear();
+            !isLightClear &&
+              selectCategoryRef.current?.lightClear &&
+              selectCategoryRef.current?.lightClear();
+            !isLightClear &&
+              selectStatusRef.current?.lightClear &&
+              selectStatusRef.current?.lightClear();
           }}
           className="loc_formSelectItem"
           options={animalsOptionsState}

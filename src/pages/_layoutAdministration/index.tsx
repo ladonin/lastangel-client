@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-
 import { useLocation } from "react-router";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
+
 import Footer from "pages/_commonComponents/footer";
+import Header from "pages/_commonComponents/header";
 import { loadItem, saveItem } from "utils/localStorage";
 import PAGES from "routing/routes";
-import Header from "pages/_commonComponents/header";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { quit } from "utils/user";
 import { FeedbacksApi } from "api/feedbacks";
@@ -26,11 +26,15 @@ import "./style.scss";
 
 const LayoutAdministration: React.FC = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const [isMobileState, setIsMobileState] = useState<boolean | undefined>(loadItem("isMobile"));
+  const [showPageState, setShowPageState] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
   useEffect(() => {
     // react-device-detect выбает всякую помойку иногда и не стоит ожидать,
     // что он отдаст только true или false (еще он отдает null)
@@ -39,11 +43,10 @@ const LayoutAdministration: React.FC = () => {
       setIsMobileState(isMobile);
     }
   }, [isMobile, isMobileState]);
-  const navigate = useNavigate();
-  const [showPageState, setShowPageState] = useState(false);
 
   useEffect(() => {
     UserApi.checkToken("admin").then((res) => {
+      // Ждем именно false
       if (res === false) {
         navigate(PAGES.MAIN);
       } else {
@@ -74,7 +77,6 @@ const LayoutAdministration: React.FC = () => {
     pathname !== PAGES.ADMINISTRATION_VOLUNTEER_CREATE &&
     pathname.indexOf(PAGES.ADMINISTRATION_VOLUNTEER_UPDATE) === -1;
 
-  // тут сделать проверку авторизации на защищенные страницы с применением location.pathname
   const [newFeedbacksState, setNewFeedbacksState] = useState<number>(0);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -339,7 +341,7 @@ const LayoutAdministration: React.FC = () => {
                   html
                 </Button>
               </div>
-              
+
               <div className="loc_block_1">
                 <div className="loc_block_1_title">Скачать данные о донаторах в</div>
                 <Button
@@ -373,7 +375,7 @@ const LayoutAdministration: React.FC = () => {
                 >
                   html
                 </Button>
-{/*                 <Button
+                {/*                 <Button
                   theme={ButtonThemes.GHOST_BORDER}
                   size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
                   onClick={() => NewsApi.downloadData("csv")}
@@ -398,7 +400,7 @@ const LayoutAdministration: React.FC = () => {
                 >
                   html
                 </Button>
-{/*                 <Button
+                {/*                 <Button
                   theme={ButtonThemes.GHOST_BORDER}
                   size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
                   onClick={() => StoriesApi.downloadData("csv")}
@@ -425,7 +427,6 @@ const LayoutAdministration: React.FC = () => {
                 </Button>
               </div>
 
-
               <div className="loc_block_1">
                 <div className="loc_block_1_title">Скачать метатеги в</div>
                 <Button
@@ -440,7 +441,7 @@ const LayoutAdministration: React.FC = () => {
           )}
         </div>
 
-        <Outlet context={{checkMail}} />
+        <Outlet context={{ checkMail }} />
       </div>
       <Footer />
     </div>

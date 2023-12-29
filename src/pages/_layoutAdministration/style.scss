@@ -2,7 +2,6 @@
   @extend %desctopCommon;
   display: flex;
   flex-direction: column;
-  //align-items: center;
   width: 100%;
 
   & > div {
@@ -18,8 +17,6 @@
     & > div[class^='page-'] {
       max-width: 1200px;
       margin: 0 auto;
-
-
     }
 
     &_administrationMenu {
@@ -63,10 +60,17 @@
         }
       }
 
-      .loc_addPetButton, .loc_addCollectionButton, .loc_addDonationButton, .loc_addDonatorButton, .loc_mainPagePhotoalbumButton, .loc_documentsButton, .loc_clinicButton, .loc_acquaintanceshipButton, .loc_addVolutneerButton {
+      .loc_addPetButton,
+      .loc_addCollectionButton,
+      .loc_addDonationButton,
+      .loc_addDonatorButton,
+      .loc_mainPagePhotoalbumButton,
+      .loc_documentsButton,
+      .loc_clinicButton,
+      .loc_acquaintanceshipButton,
+      .loc_addVolutneerButton {
         margin-left: 0;
       }
-
 
       .loc_emails {
         position: relative;
@@ -90,11 +94,7 @@
         }
       }
     }
-
-
   }
-
-
 }
 
 .layout-administration.loc--isMobile {
@@ -109,7 +109,6 @@
       max-width: 100%;
     }
   }
-
 
   .page_administrationMenu {
     flex-wrap: wrap;
@@ -167,6 +166,5 @@
       }
     }
   }
-
 }
 

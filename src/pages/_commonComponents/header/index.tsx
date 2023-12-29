@@ -3,16 +3,16 @@ import { BrowserView, MobileView } from "react-device-detect";
 import { useNavigate, NavLink } from "react-router-dom";
 import cn from "classnames";
 import { useLocation } from "react-router";
+
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import PAGES from "routing/routes";
 import logo from "icons/logo.png";
 import VkLogo from "icons/vk_logo.png";
 import OkLogo from "icons/ok_logo.png";
 import InstLogo from "icons/inst_logo.png";
 import CaretIcon from "icons/triangle16.svg";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import PAGES from "routing/routes";
-
+import flowerSrc from "icons/flower1.png";
 import "./styles.scss";
-import flowerSrc from "../../../icons/flower1.png";
 
 type TMenuItem = {
   title: string;

@@ -3,12 +3,15 @@ import { BrowserView, MobileView } from "react-device-detect";
 import { Link } from "react-router-dom";
 import { isAuthorized } from "utils/user";
 import PAGES from "routing/routes";
-
 import "./styles.scss";
 
 const renderCounter = () => (
   <div className="loc_metrics">
-    <a href="https://metrika.yandex.ru/stat/?id=94884590&amp;from=informer" target="_blank" rel="nofollow noreferrer">
+    <a
+      href="https://metrika.yandex.ru/stat/?id=94884590&amp;from=informer"
+      target="_blank"
+      rel="nofollow noreferrer"
+    >
       <img
         src="https://informer.yandex.ru/informer/94884590/3_1_CCCCCCFF_CCCCCCFF_0_visits"
         style={{ width: "88px", height: "31px", border: 0 }}
@@ -21,6 +24,7 @@ const renderCounter = () => (
     </a>
   </div>
 );
+
 const renderLinksList = () => (
   <>
     <Link to={PAGES.MAIN} className="link_1 loc_link">
@@ -38,7 +42,6 @@ const renderLinksList = () => (
     <Link to={PAGES.STORIES} className="link_1 loc_link">
       Истории
     </Link>
-
     <Link to={PAGES.DOCUMENTS} className="link_1 loc_link">
       Документы
     </Link>
@@ -71,7 +74,6 @@ export default function Index() {
             <br />с 2010г.
           </div>
           <div className="loc_block_2">{renderLinksList()}</div>
-
           <div className="loc_block_3">
             {!isAuthorized() && (
               <Link to={PAGES.SIGNIN} className="link_1 loc_link loc_login">
@@ -80,11 +82,8 @@ export default function Index() {
             )}
             {renderCounter()}
           </div>
-          <div className="loc_block_4">
-            Сайт создан волонтерами на добровольной основе
-          </div>
+          <div className="loc_block_4">Сайт создан волонтерами на добровольной основе</div>
         </div>
-
       </BrowserView>
       <MobileView>
         <div className="component-footer_wrapper_1">
@@ -93,9 +92,7 @@ export default function Index() {
             Приют для животных &copy; "Последний ангел"
             <br />с 2010г.
           </div>
-          <div className="loc_block_4">
-            Сайт создан волонтерами на добровольной основе
-          </div>
+          <div className="loc_block_4">Сайт создан волонтерами на добровольной основе</div>
           <div className="loc_block_3">
             {!isAuthorized() && (
               <Link to={PAGES.SIGNIN} className="link_1 loc_link loc_login">

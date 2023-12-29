@@ -1,23 +1,23 @@
 import React, { useEffect, useMemo, useState } from "react";
-
-import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Helmet } from "react-helmet";
-import { TItem } from "api/types/acquaintanceship";
+
 import PAGES from "routing/routes";
+import { TItem } from "api/types/acquaintanceship";
 import { AcquaintanceshipApi } from "api/acquaintanceship";
 import { getVideoUrl, getAnotherImagesUrl } from "helpers/acquaintanceship";
-import BreadCrumbs from "components/BreadCrumbs";
 import { isAdmin } from "utils/user";
+import { loadItem } from "utils/localStorage";
 import { getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
+import { ACQUAINTANCESHIP_STATUS } from "constants/acquaintanceship";
+import BreadCrumbs from "components/BreadCrumbs";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { loadItem } from "utils/localStorage";
 import CopyLinkToPage from "components/CopyLinkToPage";
 import MediaOriginalLinks from "components/MediaOriginalLinks";
-import { ACQUAINTANCESHIP_STATUS } from "constants/acquaintanceship";
 import "./style.scss";
 
 const Acquaintanceship: React.FC = () => {
@@ -33,11 +33,13 @@ const Acquaintanceship: React.FC = () => {
     };
   }, []);
   const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
+
   useEffect(() => {
     AcquaintanceshipApi.get().then((res) => {
       setDataState(res);
     });
   }, []);
+
   useEffect(() => {
     if (dataState && dataState.another_images) {
       setAnotherImagesState(JSON.parse(dataState.another_images));

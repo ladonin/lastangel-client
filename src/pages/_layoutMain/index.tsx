@@ -3,19 +3,19 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
-import { MetatagsApi } from "api/metatags";
+
 import Header from "pages/_commonComponents/header";
 import Footer from "pages/_commonComponents/footer";
-import EmailImage from "icons/email.png";
 import PAGES from "routing/routes";
 import { isAdmin, quit } from "utils/user";
+import { loadItem, saveItem } from "utils/localStorage";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { FeedbacksApi } from "api/feedbacks";
-import { loadItem, saveItem } from "utils/localStorage";
+import { MetatagsApi } from "api/metatags";
+import EmailImage from "icons/email.png";
 import "./style.scss";
 
 const LayoutMain: React.FC = () => {
-  // const location = useLocation();
   const [isMobileState, setIsMobileState] = useState<boolean | undefined>(loadItem("isMobile"));
   const { pathname } = useLocation();
   const [prevPathnameState, setPrevPathnameState] = useState<string>("");
@@ -67,7 +67,6 @@ const LayoutMain: React.FC = () => {
     };
   }, []);
 
-  // тут сделать проверку авторизации на защищенные страницы с применением location.pathname
   return isMobileState === undefined ? null : (
     <div className={cn("layout-main layout", { "loc--isMobile": isMobileState })}>
       <Header />

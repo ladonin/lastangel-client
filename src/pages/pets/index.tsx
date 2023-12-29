@@ -14,7 +14,7 @@ import {
   prepareGraft,
   prepareSex,
   prepareSterilized,
-  transformCategoryToParams,
+  getCategoryAgeParams,
 } from "helpers/animals";
 import NotFound from "components/NotFound";
 import { useQueryHook } from "hooks/useQueryHook";
@@ -36,9 +36,10 @@ const PAGESIZE = 20;
 const preparePetsSavedFilter = () => {
   const savedFilter = loadItem("pets_filter");
   if (!savedFilter) return undefined;
+
   return {
     ...savedFilter,
-    ...(savedFilter.category ? transformCategoryToParams(savedFilter.category) : {}),
+    ...(savedFilter.category ? getCategoryAgeParams(savedFilter.category) : {}),
   };
 };
 

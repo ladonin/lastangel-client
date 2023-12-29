@@ -1,9 +1,9 @@
 /*
   import { getAnotherImagesUrl } from 'helpers/acquaintanceship';
+  Вспомогательные функции для страницы знакомства с приютом
  */
 import { SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/acquaintanceship";
-
 import { ValuesOf } from "types/common";
 
 export const getAnotherImagesUrl = (

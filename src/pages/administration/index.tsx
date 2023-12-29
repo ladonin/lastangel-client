@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
-
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { useLocation } from "react-router";
+
 import {
   TGetListRequest as TGetCollectionsListRequest,
   TItem as TItemCollection,
@@ -22,8 +22,6 @@ import {
 } from "api/types/donators";
 import { TGetListRequest as TGetNewsListRequest, TItem as TItemNews } from "api/types/news";
 import { TGetListRequest as TGetStoriesListRequest, TItem as TItemStory } from "api/types/stories";
-import PAGES from "routing/routes";
-import InfiniteScroll from "components/InfiniteScroll";
 import { AnimalsApi } from "api/animals";
 import { VolunteersApi } from "api/volunteers";
 import { CollectionsApi } from "api/collections";
@@ -31,7 +29,7 @@ import { DonationsApi } from "api/donations";
 import { DonatorsApi } from "api/donators";
 import { NewsApi } from "api/news";
 import { StoriesApi } from "api/stories";
-import LoaderIcon from "components/LoaderIcon";
+import PAGES from "routing/routes";
 import {
   getMainImageUrl as getPetMainImageUrl,
   prepareStatus as preparePetStatus,
@@ -41,7 +39,7 @@ import {
   prepareSterilized,
   prepareStatusCode as preparePetStatusCode,
   prepareKind,
-  transformCategoryToParams,
+  getCategoryAgeParams,
 } from "helpers/animals";
 import { getMainImageUrl as getVolunteerMainImageUrl } from "helpers/volunteers";
 import { prepareType as prepareDonationType } from "helpers/donations";
@@ -55,6 +53,8 @@ import { loadItem, saveItem } from "utils/localStorage";
 import Tabs from "components/Tabs";
 import NotFound from "components/NotFound";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import InfiniteScroll from "components/InfiniteScroll";
+import LoaderIcon from "components/LoaderIcon";
 import { SIZES_MAIN } from "constants/photos";
 import { ANIMALS_STATUS } from "constants/animals";
 import { COLLECTIONS_STATUS } from "constants/collections";
@@ -105,7 +105,7 @@ const preparePetsSavedFilter = () => {
   if (!savedFilter) return undefined;
   return {
     ...savedFilter,
-    ...(savedFilter.category ? transformCategoryToParams(savedFilter.category) : {}),
+    ...(savedFilter.category ? getCategoryAgeParams(savedFilter.category) : {}),
   };
 };
 
@@ -141,11 +141,6 @@ const Administration: React.FC = () => {
     setSelectedTabIndexState(index);
   };
 
-  useEffect(() => {
-    if (initTabState !== undefined) {
-      setSelectedTabIndexState(initTabState);
-    }
-  }, [initTabState]);
   const [newsPageState, setNewsPageState] = useState<number>(1);
   const [storiesPageState, setStoriesPageState] = useState<number>(1);
   const [petsPageState, setPetsPageState] = useState<number>(1);
@@ -158,7 +153,6 @@ const Administration: React.FC = () => {
       statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
     }
   );
-
   const collectionsFilterRef = useRef<TCollectionsFilterParams>(
     loadItem("admin_collections_filter") || { statusExclude: COLLECTIONS_STATUS.CLOSED }
   );
@@ -182,6 +176,12 @@ const Administration: React.FC = () => {
   const donatorsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const volunteersLoadingStatusRef = useRef({ isLoading: false, isOff: false });
 
+  useEffect(() => {
+    if (initTabState !== undefined) {
+      setSelectedTabIndexState(initTabState);
+    }
+  }, [initTabState]);
+
   const getNewsData = (params?: TGetNewsListRequest) => {
     newsLoadingStatusRef.current.isLoading = true;
     const { order, ...filter } = newsFilterRef.current || {};
@@ -194,6 +194,7 @@ const Administration: React.FC = () => {
       }
     });
   };
+
   const getStoriesData = (params?: TGetStoriesListRequest) => {
     storiesLoadingStatusRef.current.isLoading = true;
     const { order, ...filter } = storiesFilterRef.current || {};
@@ -626,6 +627,7 @@ const Administration: React.FC = () => {
       item.donator_middlename ||
       item.donator_lastname
     );
+
   const getDonatorName = (item: TItemDonation) =>
     (
       item.donator_fullname ||
@@ -651,7 +653,6 @@ const Administration: React.FC = () => {
             ) : (
               <div className="loc_deletedTarget">{data.target_print_name}</div>
             )}
-
             {!data.target_id && (
               <div className={`loc_targetName loc--type_${data.type}`}>
                 {prepareDonationType(data.type)}
@@ -663,9 +664,7 @@ const Administration: React.FC = () => {
             <div className="loc_name">
               {isAnonymDonator(data) ? "Аноним" : getDonatorName(data)}
             </div>
-
             {!!data.donator_card && <div className="loc_card">Карта: {data.donator_card}</div>}
-
             <Button
               className="loc_button"
               theme={ButtonThemes.PRIMARY}
@@ -676,7 +675,6 @@ const Administration: React.FC = () => {
             >
               Редактировать
             </Button>
-
             <div className="loc_created">Создано: {getDateString(data.created)}</div>
             {!!data.updated && (
               <div className="loc_updated">Изменено: {getDateString(data.updated)}</div>
@@ -703,7 +701,6 @@ const Administration: React.FC = () => {
           >
             Редактировать
           </Button>
-
           <div className="loc_created">Создан: {getDateString(data.created)}</div>
           {!!data.updated && (
             <div className="loc_updated">Изменен: {getDateString(data.updated)}</div>
@@ -913,7 +910,6 @@ const Administration: React.FC = () => {
       </>,
       <>
         <NewsFilter filter={newsFilterRef.current} onChange={changeNewsFilter} />
-
         <div className="loc_list">
           {listNewsState === null && <LoaderIcon />}
           {listNewsState &&
@@ -939,7 +935,6 @@ const Administration: React.FC = () => {
 
       <>
         <StoriesFilter filter={storiesFilterRef.current} onChange={changeStoriesFilter} />
-
         <div className="loc_list">
           {listStoriesState === null && <LoaderIcon />}
           {listStoriesState &&

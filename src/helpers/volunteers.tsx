@@ -1,10 +1,9 @@
 /*
-  import { getVideoUrl, 
-  prepareStatus, getMainImageUrl } from 'helpers/volunteers';
+  import { getVideoUrl, prepareStatus, getMainImageUrl } from 'helpers/volunteers';
+  Вспомогательные функции для волонтеров
  */
 import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/volunteers";
-
 import { ValuesOf } from "types/common";
 
 export const getMainImageUrl = (data: TGetResponseItem, size?: ValuesOf<typeof SIZES_MAIN>) =>

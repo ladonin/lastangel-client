@@ -2,7 +2,6 @@
   @extend %desctopCommon;
   display: flex;
   flex-direction: column;
-  //align-items: center;
   width: 100%;
 
   & > div {
@@ -33,8 +32,6 @@
     & > div[class^='page-'] {
       max-width: 1200px;
       margin: 0 auto;
-
-
     }
 
     &_administrationMenu {
@@ -71,18 +68,11 @@
           height: 40px;
         }
       }
-
     }
-
-
   }
-
-
 }
 
-
 .layout-main.loc--isMobile {
-
   @extend %mobileCommon;
 
   .page {
@@ -96,7 +86,6 @@
 
     .loc_warningMessage {
       font-size: calc(32px * var(--viewport-koeff));
-
       padding: calc(24px * var(--viewport-koeff));
       margin: calc(160px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff)) 0;
       border-radius: calc(8px * var(--viewport-koeff));
@@ -115,7 +104,6 @@
     padding: 0 0 calc(48px * var(--viewport-koeff)) 0;
     gap: calc(40px * var(--viewport-koeff));
 
-
     .loc_title {
       line-height: calc(80px * var(--viewport-koeff));
       font-size: calc(32px * var(--viewport-koeff));
@@ -133,11 +121,6 @@
         width: calc(80px * var(--viewport-koeff));
         height: calc(80px * var(--viewport-koeff));
       }
-
     }
   }
-
-
 }
-
-

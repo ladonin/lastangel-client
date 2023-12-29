@@ -186,10 +186,8 @@
 
           &.loc--active {
             color: $c_lagunaBlue;
-
           }
         }
-
       }
 
       .loc_overflow {
@@ -201,7 +199,6 @@
         cursor: default;
       }
     }
-
   }
 
   .loc_leftPart {
@@ -249,8 +246,6 @@
       cursor: pointer;
       height: 100%;
     }
-
-
   }
 
   .loc_rightPart {
@@ -273,7 +268,6 @@
       line-height: calc(48px * var(--viewport-koeff));
     }
   }
-
 
   .loc_bottom {
     display: flex;
@@ -303,7 +297,6 @@
     }
   }
 
-
   .loc_menu {
     display: flex;
     flex-wrap: wrap;
@@ -324,7 +317,6 @@
     }
 
     .loc_else {
-      //margin-left: auto;
       display: flex;
       align-items: center;
       gap: calc(8px * var(--viewport-koeff));
@@ -349,27 +341,28 @@
     gap: calc(36px * var(--viewport-koeff));
     flex-wrap: wrap;
     width: 100%;
+
     .loc_item {
       color: $c_main;
       font-size: calc(29px * var(--viewport-koeff));
       font-weight: 500;
     }
+
     &-1, &-2 {
       display: flex;
       width: 100%;
     }
+
     &-1 {
       justify-content: space-between;
     }
+
     &-2 {
       justify-content: space-between;
-
     }
   }
 
-
   .loc_acquaintanceship {
-
     display: flex;
     justify-content: center;
     width: 100%;

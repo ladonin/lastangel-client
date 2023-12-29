@@ -1,11 +1,11 @@
 /*
   import { prepareType, getMainImageUrl, getAnotherImagesUrl } from 'helpers/collections';
+    Вспомогательные функции для сборов
  */
 import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
+import { COLLECTIONS_STATUS, COLLECTIONS_TYPE } from "constants/collections";
 import { TGetResponseItem } from "api/types/collections";
-
 import { ValuesOf } from "types/common";
-import { COLLECTIONS_STATUS, COLLECTIONS_TYPE } from "../constants/collections";
 
 export const prepareType = (code: number) => {
   if (code === COLLECTIONS_TYPE.MEDICINE) {

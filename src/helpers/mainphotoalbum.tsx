@@ -1,9 +1,9 @@
 /*
   import { getAnotherImagesUrl } from 'helpers/mainphotoalbum';
+  Вспомогательные функции для главного фотоальбома
  */
 import { SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/mainphotoalbum";
-
 import { ValuesOf } from "types/common";
 
 export const getAnotherImagesUrl = (

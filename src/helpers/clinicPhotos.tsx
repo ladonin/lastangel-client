@@ -1,9 +1,9 @@
 /*
   import { getAnotherImagesUrl } from 'helpers/clinicPhotos';
+  Вспомогательные функции для страницы клиники
  */
 import { SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/clinicPhotos";
-
 import { ValuesOf } from "types/common";
 
 export const getAnotherImagesUrl = (

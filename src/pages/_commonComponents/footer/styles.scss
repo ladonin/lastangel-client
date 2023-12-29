@@ -13,6 +13,7 @@
     flex-wrap: wrap;
     display: flex;
     justify-content: flex-start;
+
     .loc_block {
 
       &_1 {
@@ -22,9 +23,7 @@
         align-items: flex-start;
         color: $c_white;
       }
-      
-      
-      
+
       &_2 {
         width: 60%;
         display: flex;
@@ -33,29 +32,32 @@
         flex-wrap: wrap;
         align-content: flex-start;
         gap: 24px;
-        
       }
+
       &_3 {
         width: 20%;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
       }
+
       &_4 {
         width: 100%;
         margin-top: 48px;
         text-align: center;
         color: $c_white;
         font-size: 16px;
-        font-style: italic; 
+        font-style: italic;
       }
     }
   }
+
   .loc_link,
   .loc_metrics {
     display: block;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
+
   .loc_login {
     margin-bottom: 24px;
   }
@@ -69,35 +71,35 @@
   padding: calc(24px * var(--viewport-koeff));
   min-width: 100%;
   height: auto;
+
   .loc_link {
     font-size: calc(32px * var(--viewport-koeff));
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
+
   &_wrapper_1 {
-
     width: 100%;
-    .loc_block {
 
+    .loc_block {
       &_1 {
         width: 100%;
-        display: block; 
-        text-align: center; 
+        display: block;
+        text-align: center;
         font-size: calc(24px * var(--viewport-koeff));
         margin-top: calc(32px * var(--viewport-koeff));
         margin-bottom: calc(24px * var(--viewport-koeff));
       }
 
-
-
       &_2 {
         width: 100%;
         gap: calc(24px * var(--viewport-koeff));
       }
+
       &_3 {
         width: 100%;
         align-items: center;
-        flex-direction: row; 
-        justify-content: center; 
+        flex-direction: row;
+        justify-content: center;
         gap: calc(24px * var(--viewport-koeff));
         margin-top: calc(32px * var(--viewport-koeff));
         margin-bottom: calc(32px * var(--viewport-koeff));
@@ -111,10 +113,9 @@
         font-size: calc(24px * var(--viewport-koeff));
         font-style: italic;
       }
-      
-      
     }
   }
+
   .loc_login {
     margin-bottom: calc(24px * var(--viewport-koeff));
   }
