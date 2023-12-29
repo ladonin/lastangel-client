@@ -11,7 +11,7 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
 import PAGES from "routing/routes";
 import BreadCrumbs from "components/BreadCrumbs";
-import { getDateYMFriendly, getVideoType, textToClient } from "helpers/common";
+import { getDateDMFriendly, getVideoType, textToClient } from "helpers/common";
 import { loadItem, saveItem, removeItem } from "utils/localStorage";
 import VkLogo from "icons/vk_logo.png";
 import OkLogo from "icons/ok_logo.png";
@@ -88,7 +88,7 @@ const Volunteer: React.FC = () => {
         <div className="loc_parameters">
           {dataState.birthdate && (
             <div className="loc_birthdate">
-              День рождения: <span>{getDateYMFriendly(dataState.birthdate)}</span>
+              День рождения: <span>{getDateDMFriendly(dataState.birthdate)}</span>
             </div>
           )}
 
@@ -116,7 +116,8 @@ const Volunteer: React.FC = () => {
           {dataState.inst_link && (
             <div className="loc_instLink">
               <Link target="_blank" to={dataState.inst_link} className="link_3">
-                <img src={InstLogo} alt="загружаю" title="Страница в Instagram" /> Страница в Instagram
+                <img src={InstLogo} alt="загружаю" title="Страница в Instagram" /> Страница в
+                Instagram
               </Link>
             </div>
           )}
