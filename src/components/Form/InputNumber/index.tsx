@@ -1,10 +1,16 @@
 /*
   import InputNumber from 'components/Form/InputNumber'
+
+  Инпут числовой с pretty-форматированием
  */
+
 import React, { ChangeEvent, useState, useEffect, useMemo } from "react";
+
 import { v4 as uuidv4 } from "uuid";
 import cn from "classnames";
+
 import { numberFriendly } from "helpers/common";
+
 import "./style.scss";
 
 type TProps = {
@@ -80,14 +86,6 @@ const InputNumber: React.FC<TProps> = ({
   const renderValue = () => {
     if (valueState === undefined) return "";
     return String(valueState).replace(",", ".");
-    // if (float) {
-    //   const parts = String(valueState).split(",");
-    //   if (parts.length === 2) {
-    //     const decimals = parts[1];
-    //     return `${Number(parts[0]).toLocaleString()},${decimals}`;
-    //   }
-    // }
-    // return Number(valueState).toLocaleString();
   };
 
   return (

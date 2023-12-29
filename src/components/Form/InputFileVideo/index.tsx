@@ -1,20 +1,20 @@
+/*
+  import InputFileVideo from 'components/Form/InputFileVideo'
+
+  Форма загрузки видео
+ */
+
 import React, { PropsWithChildren, useState, useMemo, useEffect } from "react";
+
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
+
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Modal from "components/Modal";
+
 import { loadItem } from "utils/localStorage";
+
 import "./style.scss";
-
-
-
-//проолжить отсюда
-
-
-
-
-
-
 
 type TProps = {
   className?: string;
@@ -45,7 +45,6 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
   const [videoState, setVideoState] = useState<File | null | string>(value || null);
   const [wrongVideoState, setWrongVideoState] = useState<TWrongVideoData | null>(null);
   const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState<boolean>(false);
-  // const { className, setVideo, label, required, disabled = false, multiple = false, noSizeRevision = false } = props;
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
@@ -73,6 +72,7 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
       });
     }
   };
+
   const deleteHandler = () => {
     setVideoState(null);
     setVideo(null);
