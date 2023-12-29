@@ -23,7 +23,6 @@
       background-color: $c_greyLight;
       border-color: $c_greyMedium;
     }
-
   }
 
   .loc_input_star {
@@ -36,7 +35,6 @@
   &.loc--notvalid {
     input {
       border-color: $c_red;
-
     }
   }
 }

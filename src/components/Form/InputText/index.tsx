@@ -1,10 +1,16 @@
 /*
   import InputText from 'components/Form/InputText'
+
+  Текстовый инпут
  */
+
 import React, { ChangeEvent, RefObject, useMemo, useEffect, useRef, useState } from "react";
+
 import { v4 as uuidv4 } from "uuid";
 import cn from "classnames";
+
 import { preparePhoneInputVal } from "helpers/common";
+
 import "./style.scss";
 
 type TProps = {
@@ -67,15 +73,16 @@ const InputText: React.FC<TProps> = ({
       innerRef.current.validate = validateHandler;
     }
   }, []);
+
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (type === "phone") {
       e.target.value = preparePhoneInputVal(e.target.value);
     }
-
     onChange(e.target.value);
     valRef.current = e.target.value;
     needValidate(type) && setValueState(e.target.value);
   };
+
   const clear = () => {
     if (innerRef) {
       innerRef.current.value = "";
@@ -83,6 +90,7 @@ const InputText: React.FC<TProps> = ({
       setValueState("");
     }
   };
+
   useEffect(() => {
     if (innerRef?.current) {
       innerRef.current.clearValue = clear;

@@ -29,9 +29,8 @@
     padding: calc(48px * var(--viewport-koeff));
     min-width: 100%;
 
-
     .component-modal_header {
-      padding: 0px;
+      padding: 0;
 
       h2 {
         font-size: calc(48px * var(--viewport-koeff));

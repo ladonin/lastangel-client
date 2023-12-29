@@ -16,14 +16,12 @@
     min-height: 40px;
     box-shadow: none;
 
-
     &:hover {
-      border-color: $c_greyMedium;//$c_greyDark;
+      border-color: $c_greyMedium; //$c_greyDark;
     }
 
     &.loc--focused {
-      border-color: $c_greyMedium;//$c_blueLight;
-
+      border-color: $c_greyMedium; //$c_blueLight;
     }
   }
 
@@ -41,7 +39,6 @@
   }
 }
 
-
 .layout.loc--isMobile .component-select {
 
   .loc_label {
@@ -51,7 +48,6 @@
     align-items: center;
     padding-right: calc(20px * var(--viewport-koeff));
   }
-
 
   .loc_control {
     border: 1px solid $c_greyMedium;
@@ -65,7 +61,6 @@
 
       > div {
         margin: 0 !important;
-
       }
     }
   }

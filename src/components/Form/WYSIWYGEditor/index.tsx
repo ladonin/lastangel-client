@@ -1,15 +1,20 @@
 /*
   import WYSIWYGEditor from 'components/Form/WYSIWYGEditor'
+ 
+  WYSIWYG редактор
  */
 
 import React, { useRef, useMemo } from "react";
+
 import SunEditor from "suneditor-react";
 import SunEditorCore from "suneditor/src/lib/core";
-// Не грузит стили из папки suneditor - мешают настройки package.json библиотеки
-import "./suneditor.min.css";
 import plugins from "suneditor/src/plugins";
 import cn from "classnames";
+
 import { loadItem } from "utils/localStorage";
+
+// Не грузит стили из папки suneditor - мешают настройки package.json библиотеки
+import "./suneditor.min.css";
 import "./style.scss";
 
 type TProps = {
@@ -33,14 +38,16 @@ const WYSIWYGEditor: React.FC<TProps> = ({
   description,
 }) => {
   const isMobile = useMemo(() => loadItem("isMobile"), []);
-
   const editor = useRef<SunEditorCore>();
+
   const getSunEditorInstance = (sunEditor: SunEditorCore) => {
     editor.current = sunEditor;
   };
+
   const handleChange = (content: string) => {
     onChange(content);
   };
+
   return (
     <div
       id={id}
@@ -74,17 +81,18 @@ const WYSIWYGEditor: React.FC<TProps> = ({
               "/", // Line break
               ["outdent", "indent"],
               ["align", "horizontalRule", "list", "lineHeight"],
-              ["table", "link", "image", "video", "audio" /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
+              // You must add the 'katex' library at options to use the 'math' plugin.
+              ["table", "link", "image", "video", "audio" /** ,'math' */],
               /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
               ["fullScreen", "showBlocks", "codeView"],
               ["preview", "print"],
               ["save" /* , "template" */],
-              /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
+              // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
+              /** ['dir', 'dir_ltr', 'dir_rtl'] */
             ],
           }}
           getSunEditorInstance={getSunEditorInstance}
         />
-        
       </div>
     </div>
   );

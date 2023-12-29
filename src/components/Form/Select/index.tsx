@@ -1,10 +1,14 @@
 /*
   import Select from 'components/Form/Select'
+
+  Селект с поиском
  */
 
 import React, { Ref, useEffect, useRef } from "react";
+
 import cn from "classnames";
 import SelectComponent, { Props } from "react-select";
+
 import "./style.scss";
 
 type TValue = { value: string; label: string };
@@ -37,11 +41,11 @@ const Select: React.FC<TProps> = ({
   const val = value ? options.filter(({ value: v }) => v === value)[0] : undefined;
 
   const lightClearRef = useRef<string | null>(null);
+
   // Если изначально передали значение - храним тут состояние, что значение value инициировано
   const valueIsInitedRef = useRef(false);
 
   const lightClear = () => {
-    // console.log('lightClear')
     lightClearRef.current = "on";
     (innerRef as any).current.clearValue();
     if (innerRef) {

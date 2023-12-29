@@ -10,11 +10,6 @@
     font-weight: 600;
     margin-top: 32px;
   }
-
-  img {
-
-
-  }
 }
 
 .layout.loc--isMobile .component-notFound {
@@ -24,10 +19,10 @@
     font-size: calc(40px * var(--viewport-koeff));
     margin-top: calc(32px * var(--viewport-koeff));
   }
+
   img {
     height: calc(250px * var(--viewport-koeff));
     width: calc(250px * var(--viewport-koeff));
-
   }
 }
 

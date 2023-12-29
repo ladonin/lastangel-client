@@ -1,6 +1,15 @@
+/*
+  import InputPrevLoadedImages from 'components/Form/InputPrevLoadedImages'
+
+  Перечень загруженных ранее изображений с возможностью удаления/восстановления
+ */
+
 import React, { useEffect, useState } from "react";
+
 import cn from "classnames";
+
 import { Button, ButtonThemes } from "components/Button";
+
 import "./style.scss";
 
 type TPrevImagesProps = {

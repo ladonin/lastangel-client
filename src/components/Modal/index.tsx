@@ -1,11 +1,18 @@
 /* 
   import Modal from 'components/Modal'
+ 
+  Модальное окно
  */
+
 import React, { ReactNode, useMemo } from "react";
+
 import cn from "classnames";
 import Modal from "react-modal";
-import CloseIcon from "icons/close12.svg";
+
 import { loadItem } from "utils/localStorage";
+
+import CloseIcon from "icons/close12.svg";
+
 import "./style.scss";
 
 type TProps = {

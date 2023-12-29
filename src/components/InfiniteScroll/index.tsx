@@ -1,19 +1,26 @@
 /*
   import InfiniteScroll from 'components/InfiniteScroll'
+ 
+  Бесконечный скролл
  */
 
 import React, { useRef, useEffect, useState } from "react";
+
 import pageUpImage from "icons/pageUp.png";
+
 import "./style.scss";
 
 type TProps = {
   amendment?: number;
   onReachBottom: () => void;
 };
+
 const InfiniteScroll: React.FC<TProps> = (props) => {
   const { amendment = 0, onReachBottom } = props;
+
   const ref = useRef(null);
   const [showUpState, setShowUpState] = useState<boolean>(false);
+
   const onScroll = () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const { body } = document;
@@ -47,7 +54,6 @@ const InfiniteScroll: React.FC<TProps> = (props) => {
   return (
     <div className="component-infiniteScroll">
       <div ref={ref} />
-
       {showUpState && (
         <img
           alt="загружаю"

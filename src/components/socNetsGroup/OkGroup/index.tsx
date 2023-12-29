@@ -1,21 +1,24 @@
 /*
   import OkGroup from 'components/socNetsGroup/OkGroup'
+
+  Компонент группы в ОК
  */
 
 import React, { useEffect, useMemo } from "react";
+
 import { loadItem } from "utils/localStorage";
+
 import "react-tabs/style/react-tabs.css";
 
 type TProps = {
   height?: string;
   width?: string;
 };
+
 const OkGroup = ({ height = "auto", width = "auto" }: TProps) => {
   const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
-    // @ts-ignore
-    // eslint-disable-next-line no-undef
     isMobile === false &&
       setTimeout(() => {
         // @ts-ignore

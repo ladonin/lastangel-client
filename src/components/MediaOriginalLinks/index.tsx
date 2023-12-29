@@ -1,9 +1,13 @@
 /*
   import MediaOriginalLinks from 'components/MediaOriginalLinks'
+ 
+  Ссылки на оригиналы медиа-файлов
  */
 
 import React, { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
+
 import {
   getAnotherImagesUrl as getAnotherImagesUrlAnimals,
   getMainImageUrl as getMainImageUrlAnimals,
@@ -28,7 +32,9 @@ import {
   getAnotherImagesUrl as getAnotherImagesUrlAcquaintanceship,
   getVideoUrl as getVideoUrlAcquaintanceship,
 } from "helpers/acquaintanceship";
+
 import { isAdmin } from "utils/user";
+
 import "./style.scss";
 
 type TData = {
@@ -39,10 +45,12 @@ type TData = {
   video2?: string;
   video3?: string;
 };
+
 type Props = {
   data: TData;
   type: string;
 };
+
 const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
   const [dataState, setDataState] = useState<null | TData>(null);
   const [typeState, setTypeState] = useState<null | string>(null);
@@ -58,6 +66,7 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
     if (typeState === "acquaintanceship") return () => undefined;
     return () => undefined;
   };
+
   const getAnotherImagesUrl = () => {
     if (typeState === "animals") return getAnotherImagesUrlAnimals;
     if (typeState === "collections") return getAnotherImagesUrlCollections;
@@ -68,6 +77,7 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
     if (typeState === "acquaintanceship") return getAnotherImagesUrlAcquaintanceship;
     return () => undefined;
   };
+
   const getVideoUrl = () => {
     if (typeState === "animals") return getVideoUrlAnimals;
     if (typeState === "collections") return getVideoUrlCollections;
@@ -86,6 +96,7 @@ const MediaOriginalLinks: React.FC<Props> = ({ data, type }) => {
       setAnotherImagesState(JSON.parse(data.another_images).reverse());
     }
   }, [data]);
+
   return !!dataState &&
     typeState &&
     isAdmin() &&

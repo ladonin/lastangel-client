@@ -1,5 +1,6 @@
 Пример c фильтром
-  const PETS_PAGESIZE = 20;
+```
+const PETS_PAGESIZE = 20;
     
   const petsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const petsFilterRef = useRef<TPetsFilterParams>({ statusExclude: ANIMALS_STATUS.AT_HOME });
@@ -39,3 +40,4 @@
   
   {selectedTabIndexState === 0 && <InfiniteScroll onReachBottom={onReachPetsBottomHandler} amendment={100} />}
 
+```

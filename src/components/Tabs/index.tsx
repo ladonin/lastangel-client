@@ -1,9 +1,14 @@
 /*
   import Tabs from 'components/Tabs'
+
+  Табсы
  */
+
 import React, { ReactElement, ReactNode } from "react";
+
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+
 import "./style.scss";
 
 export type TTabs = {
