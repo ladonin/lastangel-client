@@ -2,7 +2,7 @@
   import OkGroup from 'components/socNetsGroup/OkGroup'
   Компонент группы в ОК
  */
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { loadItem } from "utils/localStorage";
 
 type TProps = {
@@ -11,7 +11,7 @@ type TProps = {
 };
 
 const OkGroup = ({ height = "auto", width = "auto" }: TProps) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   useEffect(() => {
     isMobile === false &&

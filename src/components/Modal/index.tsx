@@ -2,7 +2,7 @@
   import Modal from 'components/Modal'
   Модальное окно
  */
-import React, { ReactNode, useMemo } from "react";
+import React, { ReactNode } from "react";
 import cn from "classnames";
 import Modal from "react-modal";
 
@@ -19,7 +19,7 @@ type TProps = {
 };
 
 const ModalComponent = ({ isOpen, onClose, title, children, portalClassName }: TProps) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   return (
     <Modal

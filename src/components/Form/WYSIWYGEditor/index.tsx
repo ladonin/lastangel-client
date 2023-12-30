@@ -2,7 +2,7 @@
   import WYSIWYGEditor from 'components/Form/WYSIWYGEditor'
   WYSIWYG редактор
  */
-import React, { useRef, useMemo } from "react";
+import React, { useRef } from "react";
 import SunEditor from "suneditor-react";
 import SunEditorCore from "suneditor/src/lib/core";
 import plugins from "suneditor/src/plugins";
@@ -33,7 +33,7 @@ const WYSIWYGEditor: React.FC<TProps> = ({
   onChange,
   description,
 }) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
   const editor = useRef<SunEditorCore>();
 
   const getSunEditorInstance = (sunEditor: SunEditorCore) => {

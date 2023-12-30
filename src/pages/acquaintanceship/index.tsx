@@ -9,9 +9,9 @@ import PAGES from "routing/routes";
 import { TItem } from "api/types/acquaintanceship";
 import { AcquaintanceshipApi } from "api/acquaintanceship";
 import { getVideoUrl, getAnotherImagesUrl } from "helpers/acquaintanceship";
+import { getVideoType } from "helpers/common";
 import { isAdmin } from "utils/user";
 import { loadItem } from "utils/localStorage";
-import { getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { ACQUAINTANCESHIP_STATUS } from "constants/acquaintanceship";
 import BreadCrumbs from "components/BreadCrumbs";
@@ -22,7 +22,7 @@ import "./style.scss";
 
 const Acquaintanceship: React.FC = () => {
   const navigate = useNavigate();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
   const [dataState, setDataState] = useState<TItem | null>(null);
   const { getMetatags } = useOutletContext<any>();
   const metatags = useMemo(() => {

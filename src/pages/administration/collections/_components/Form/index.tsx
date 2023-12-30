@@ -1,24 +1,22 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
-import { loadItem } from "utils/localStorage";
-import "./style.scss";
-import { AnimalsApi } from "api/animals";
-import { COLLECTIONS_TYPE, TYPES_OPTIONS, STATUSES_OPTIONS } from "constants/collections";
-import InputText from "components/Form/InputText";
-import InputNumber from "components/Form/InputNumber";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 
+import { COLLECTIONS_TYPE, TYPES_OPTIONS, STATUSES_OPTIONS } from "constants/collections";
+import { ValuesOf } from "types/common";
+import { AnimalsApi } from "api/animals";
+import { TGetResponseItem } from "api/types/collections";
+import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/collections";
+import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
+import { ANIMALS_STATUS } from "constants/animals";
 import InputFileImageWithCrop from "components/Form/InputFileImageWithCrop";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
 import InputFileImages from "components/Form/InputFileImages";
 import Select from "components/Form/Select";
 import Textarea from "components/Form/Textarea";
 import { Checkbox } from "components/Form/Checkbox";
-import { ValuesOf } from "types/common";
-
-import { TGetResponseItem } from "api/types/collections";
-import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/collections";
-import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
+import InputText from "components/Form/InputText";
+import InputNumber from "components/Form/InputNumber";
 import InputFileVideo from "components/Form/InputFileVideo";
-import { ANIMALS_STATUS } from "constants/animals";
+import "./style.scss";
 
 export type TParams = { [key: string]: any };
 
@@ -41,30 +39,19 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [mainImageState, setMainImageState] = useState<{ cropped: Blob; original: Blob } | null>(
     null
   );
-
-  const paramsRef = useRef<TParams>({});
-
   const [mainImagePrevState, setMainImagePrevState] = useState(0);
   const [mainImagePrevIsDeletedState, setMainImagePrevIsDeletedState] = useState<boolean | null>(
     null
   );
-
   const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
   const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(
     null
   );
+
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
-  useEffect(() => {
-    if (data) {
-      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
-      Number(data.main_image) && setMainImagePrevState(Number(data.main_image));
-      setIsMajorState(!!data.ismajor);
 
-      paramsRef.current = data;
-      onChange(paramsRef.current);
-    }
-  }, [data]);
+  const paramsRef = useRef<TParams>({});
 
   const onChangeHandler = (key: string, value: any) => {
     paramsRef.current[key] = value?.value ? Number(value.value) : value;
@@ -75,36 +62,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     setMainImageState({ cropped, original });
     setMainImagePrevState(0);
   };
-  useEffect(() => {
-    AnimalsApi.getList({
-      offset: 0,
-      limit: 999999,
-      order: "name",
-      order_type: "asc",
-      statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
-    }).then((res) => {
-      setAnimalsOptionsState(
-        res.map((animal) => ({ value: String(animal.id), label: `${animal.name} (№${animal.id})` }))
-      );
-    });
-  }, []);
-  useEffect(() => {
-    mainImageState !== null && onChangeHandler("main_image", mainImageState);
-  }, [mainImageState]);
-
-  useEffect(() => {
-    mainImagePrevIsDeletedState !== null &&
-      onChangeHandler("main_image_is_deleted", mainImagePrevIsDeletedState);
-  }, [mainImagePrevIsDeletedState]);
-
-  useEffect(() => {
-    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
-  }, [anotherImagesState]);
-
-  useEffect(() => {
-    anotherImagesForDeleteState !== null &&
-      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
-  }, [anotherImagesForDeleteState]);
 
   const setAnotherImagesHandler = (images: File[]) => {
     setAnotherImagesState(images);
@@ -141,6 +98,50 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     onChangeHandler("video3", val);
   };
   const isCreating = () => data === undefined;
+
+  useEffect(() => {
+    if (data) {
+      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
+      Number(data.main_image) && setMainImagePrevState(Number(data.main_image));
+      setIsMajorState(!!data.ismajor);
+
+      paramsRef.current = data;
+      onChange(paramsRef.current);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    AnimalsApi.getList({
+      offset: 0,
+      limit: 999999,
+      order: "name",
+      order_type: "asc",
+      statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED],
+    }).then((res) => {
+      setAnimalsOptionsState(
+        res.map((animal) => ({ value: String(animal.id), label: `${animal.name} (№${animal.id})` }))
+      );
+    });
+  }, []);
+
+  useEffect(() => {
+    mainImageState !== null && onChangeHandler("main_image", mainImageState);
+  }, [mainImageState]);
+
+  useEffect(() => {
+    mainImagePrevIsDeletedState !== null &&
+      onChangeHandler("main_image_is_deleted", mainImagePrevIsDeletedState);
+  }, [mainImagePrevIsDeletedState]);
+
+  useEffect(() => {
+    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
+  }, [anotherImagesState]);
+
+  useEffect(() => {
+    anotherImagesForDeleteState !== null &&
+      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
+  }, [anotherImagesForDeleteState]);
+
   return (
     <div className="page-administration_collections_form_component">
       <div className="loc_form">
@@ -311,7 +312,11 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
           )}
         </div>
         <div className="loc_right">
-          <InputFileImages label="Дополнительные фото" multiple setImage={setAnotherImagesHandler} />
+          <InputFileImages
+            label="Дополнительные фото"
+            multiple
+            setImage={setAnotherImagesHandler}
+          />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages

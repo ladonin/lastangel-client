@@ -1,20 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 
-// const OtherComponent = React.lazy(() => import('components/header'));
-
-import "./style.scss";
-import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
-import InputFileImages from "components/Form/InputFileImages";
-
-import { Checkbox } from "components/Form/Checkbox";
+import { SIZES_ANOTHER } from "constants/photos";
+import { ACQUAINTANCESHIP_STATUS } from "constants/acquaintanceship";
 import { TGetResponseItem } from "api/types/acquaintanceship";
 import { getAnotherImagesUrl, getVideoUrl } from "helpers/acquaintanceship";
 import InputFileVideo from "components/Form/InputFileVideo";
 import WYSIWYGEditor from "components/Form/WYSIWYGEditor";
-import { SIZES_ANOTHER } from "constants/photos";
+import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
+import InputFileImages from "components/Form/InputFileImages";
+import { Checkbox } from "components/Form/Checkbox";
 import Select from "components/Form/Select";
-
-import { ACQUAINTANCESHIP_STATUS } from "../../../../../constants/acquaintanceship";
+import "./style.scss";
 
 export type TParams = { [key: string]: any };
 
@@ -24,45 +20,28 @@ type TProps = {
   onChange: (data: TParams) => void;
   data?: TGetResponseItem;
 };
+
 export const ACQUAINTANCESHIP_OPTIONS = [
   { value: String(ACQUAINTANCESHIP_STATUS.PUBLISHED), label: "Опубликован" },
   { value: String(ACQUAINTANCESHIP_STATUS.NON_PUBLISHED), label: "Не опубликован" },
 ];
+
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [isAlbumHiddenState, setIsAlbumHiddenState] = useState(!!data?.hide_album);
   const [useMobileDescriptionState, setUseMobileDescriptionState] = useState(
     !!data?.use_mobile_description
   );
   const [anotherImagesState, setAnotherImagesState] = useState<File[] | null>(null);
-
-  const paramsRef = useRef<TParams>({});
-
   const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
   const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(
     null
   );
-
-  useEffect(() => {
-    if (data) {
-      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
-      paramsRef.current = data;
-    }
-  }, [data]);
+  const paramsRef = useRef<TParams>({});
 
   const onChangeHandler = (key: string, value: any) => {
     paramsRef.current[key] = value?.value ? Number(value.value) : value;
     onChange(paramsRef.current);
   };
-
-  useEffect(() => {
-    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
-  }, [anotherImagesState]);
-
-  useEffect(() => {
-    anotherImagesForDeleteState !== null &&
-      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
-  }, [anotherImagesForDeleteState]);
-
   const setVideo1Handler = (val: null | File) => {
     onChangeHandler("video1", val);
   };
@@ -72,23 +51,36 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   const setVideo3Handler = (val: null | File) => {
     onChangeHandler("video3", val);
   };
-
   const setAnotherImagesHandler = (images: File[]) => {
     setAnotherImagesState(images);
   };
-
   const removeAnotherImageHandler = (val: number) => {
     setAnotherImagesForDeleteState(
       anotherImagesForDeleteState === null ? [val] : anotherImagesForDeleteState.concat(val)
     );
   };
-
   const restoreAnotherImageHandler = (val: number) => {
     anotherImagesForDeleteState &&
       setAnotherImagesForDeleteState(
         anotherImagesForDeleteState.filter((id: number) => id !== val)
       );
   };
+
+  useEffect(() => {
+    if (data) {
+      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
+      paramsRef.current = data;
+    }
+  }, [data]);
+
+  useEffect(() => {
+    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
+  }, [anotherImagesState]);
+
+  useEffect(() => {
+    anotherImagesForDeleteState !== null &&
+      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
+  }, [anotherImagesForDeleteState]);
 
   return (
     <div className="page-administration_acquaintanceship_form_component">

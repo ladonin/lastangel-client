@@ -13,24 +13,18 @@
       width: 100%
     }
 
-    .loc_images .loc_image {
+    .loc_images .loc_image,
+    .loc_images .loc_image img {
       width: 394px !important;
-
-      img {
-        width: 394px !important;
-      }
     }
   }
 }
 
 .layout.loc--isMobile .page-administration_mainphotoalbum_form_component {
   .loc_photos {
-    .loc_images .loc_image {
+    .loc_images .loc_image,
+    .loc_images .loc_image img {
       width: 100% !important;
-
-      img {
-        width: 100% !important;
-      }
     }
   }
 }

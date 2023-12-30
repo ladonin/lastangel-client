@@ -1,5 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import React, { useRef, useEffect, useState } from "react";
 import { loadItem } from "utils/localStorage";
 import {
   COLLECTIONS_TYPE,
@@ -7,6 +6,7 @@ import {
   TYPES_OPTIONS,
   STATUSES_OPTIONS,
 } from "constants/collections";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
 import { isObjectOptionsEmpty } from "helpers/common";
@@ -22,11 +22,13 @@ export type TFilterParams = {
   statusExclude?: ValuesOf<typeof COLLECTIONS_STATUS>;
   type?: ValuesOf<typeof COLLECTIONS_TYPE>;
 };
+
 type TSelectRefProps = {
   clearValue: () => void;
 };
+
 const CollectionsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   const selectCategoryRef = useRef<TSelectRefProps>();
   const selectStatusRef = useRef<TSelectRefProps>();
@@ -35,10 +37,12 @@ const CollectionsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   useEffect(() => {
     filterState !== null && onChange(filterState);
   }, [filterState]);
+
   const reset = () => {
     selectCategoryRef.current?.clearValue();
     selectStatusRef.current?.clearValue();
   };
+
   return (
     <div className="page-administration_collections_filter">
       <div className="loc_wrapper">

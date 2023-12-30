@@ -16,10 +16,10 @@ import EmailImage from "icons/email.png";
 import "./style.scss";
 
 const LayoutMain: React.FC = () => {
+  const navigate = useNavigate();
   const [isMobileState, setIsMobileState] = useState<boolean | undefined>(loadItem("isMobile"));
   const { pathname } = useLocation();
   const [prevPathnameState, setPrevPathnameState] = useState<string>("");
-  const navigate = useNavigate();
   const [newFeedbacksState, setNewFeedbacksState] = useState<number>(0);
   const [metatagsState, setMetatagsState] = useState<any>(false);
 

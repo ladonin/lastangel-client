@@ -2,7 +2,7 @@
   import InputFileVideo from 'components/Form/InputFileVideo'
   Форма загрузки видео
  */
-import React, { PropsWithChildren, useState, useMemo, useEffect } from "react";
+import React, { PropsWithChildren, useState, useEffect } from "react";
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
 
@@ -40,7 +40,7 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
   const [videoState, setVideoState] = useState<File | null | string>(value || null);
   const [wrongVideoState, setWrongVideoState] = useState<TWrongVideoData | null>(null);
   const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState<boolean>(false);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   useEffect(() => {
     setVideoState(value);

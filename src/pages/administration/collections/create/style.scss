@@ -1,13 +1,12 @@
 .page-administration_collections_create {
 
   h1 {
-    margin: 16px 0 32px 0px;
+    margin: 16px 0 32px 0;
   }
 
   .loc_error {
     color: $c_red;
-    padding: 16px 0px;
-
+    padding: 16px 0;
   }
 
   .loc_wrapper_textForm {
@@ -24,9 +23,7 @@
       .loc_cancelButton {
         margin-left: auto;
       }
-
     }
-
   }
 
   .loc_wrapper_addedSuccess {
@@ -36,10 +33,7 @@
       margin: 24px 0;
     }
   }
-
-
 }
-
 
 .layout.loc--isMobile .page-administration_collections_create {
   width: 100%;
@@ -51,12 +45,20 @@
 
   .loc_form {
     flex-direction: column;
+
     .loc_left, .loc_right {
       padding: 0 !important;
       width: 100%;
-      .loc_formInputItem, .loc_formCheckboxItem, .loc_formDateItem, .loc_formSelectItem, .loc_formTextareaItem, .loc_formVideoItem {
+
+      .loc_formInputItem,
+      .loc_formCheckboxItem,
+      .loc_formDateItem,
+      .loc_formSelectItem,
+      .loc_formTextareaItem,
+      .loc_formVideoItem {
         margin-bottom: calc(48px * var(--viewport-koeff));
       }
+
       .loc__shortdescription {
         textarea {
           height: 30vh;
@@ -74,8 +76,6 @@
   .loc_photos {
     flex-direction: column;
 
-
-
     .loc_left, .loc_right {
       width: 100%;
       padding: 0 !important;
@@ -85,12 +85,9 @@
         gap: calc(24px * var(--viewport-koeff));
       }
 
-
-
       .component-inputFileImage {
         margin: 0;
       }
-
     }
 
     .loc_error {
@@ -117,7 +114,6 @@
   }
 
   .loc_wrapper_textForm {
-
     .loc_buttons {
       margin-top: calc(36px * var(--viewport-koeff));
     }

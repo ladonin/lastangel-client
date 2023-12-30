@@ -17,7 +17,6 @@
     }
   }
 
-
   .loc_photos {
     flex-wrap: wrap;
     margin-top: 24px;
@@ -25,9 +24,7 @@
     h2 {
       width: 100%
     }
-
   }
-
 
   .loc_formInputItem {
     margin-bottom: 24px;
@@ -40,7 +37,6 @@
       width: 40%;
     }
   }
-
 
   .loc_formTextareaItem {
     margin-bottom: 24px;
@@ -60,7 +56,6 @@
     &.loc__fulldescription {
       width: 100%;
       margin-top: 24px;
-
     }
   }
 
@@ -98,7 +93,6 @@
   }
 
   .loc_formVideoItem {
-
     margin-bottom: 24px;
 
     .loc_label, .loc_error, .loc_video {
@@ -110,6 +104,3 @@
     }
   }
 }
-
-
-

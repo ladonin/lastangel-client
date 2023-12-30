@@ -51,7 +51,7 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
   const setImageHandler = (photo: File) => {
     loadImg([photo]);
   };
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   useEffect(() => {
     if (imgResult === null) return;

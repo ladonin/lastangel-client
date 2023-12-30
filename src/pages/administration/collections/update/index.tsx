@@ -1,36 +1,36 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";
 import { useNavigate, useParams } from "react-router-dom";
-import { CollectionsApi } from "api/collections";
 import PAGES from "routing/routes";
-import Modal from "components/Modal";
+import { loadItem } from "utils/localStorage";
 import { TCommonDataRequest } from "api/types/collections";
+import { CollectionsApi } from "api/collections";
 import { COLLECTIONS_TYPE } from "constants/collections";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { loadItem } from "utils/localStorage";
+import Modal from "components/Modal";
 import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const CollectionUpdate: React.FC = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { id } = useParams();
+  const isMobile = loadItem("isMobile");
+
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
   const [isDeletingState, setIsDeletingState] = useState(false);
   const [isChangedState, setIsChangedState] = useState(false);
   const [isDeletedState, setIsDeletedState] = useState(false);
   const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState(false);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
+
   const paramsRef = useRef<TParams | null>(null);
   const responseRef = useRef<TResponse | undefined>(undefined);
 
-  const navigate = useNavigate();
-
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
-
-  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     id &&
@@ -38,9 +38,6 @@ const CollectionUpdate: React.FC = () => {
         setDataIsLoadedState(true);
         responseRef.current = res;
         forceUpdate();
-        // setIsUpdatingState(false);
-        // setIsChangedState(true);
-        // requestRef.current = EMPTY_REQUEST;
       });
   }, [id]);
 
@@ -129,7 +126,7 @@ const CollectionUpdate: React.FC = () => {
     setModalDeleteIsOpenState(true);
   };
 
-  return dataIsLoadedState !== null ? (
+  return dataIsLoadedState ? (
     <>
       <Helmet>
         <title>Обновление сбора</title>

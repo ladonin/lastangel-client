@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Select from "components/Form/Select";
 import InputText from "components/Form/InputText";
 import { isObjectOptionsEmpty } from "helpers/common";
@@ -38,7 +38,7 @@ export const ORDER_OPTIONS = [
 export const DEFAULT_SORT = "id_desc";
 
 const DonationsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   const inputCardRef = useRef<TInputRefProps>();
   const inputNameRef = useRef<TInputRefProps>();
@@ -68,7 +68,6 @@ const DonationsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   return (
     <div className="page-administration_donations_filter">
       <div className="loc_wrapper">
-       
         <InputText
           initValue={filterState?.card ? String(filterState?.card) : undefined}
           placeholder="№ карты"

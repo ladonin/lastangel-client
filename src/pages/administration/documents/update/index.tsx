@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { DocumentsApi } from "api/documents";
@@ -9,6 +9,7 @@ import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const DocumentsUpdate: React.FC = () => {
+  const navigate = useNavigate();
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
 
@@ -17,13 +18,11 @@ const DocumentsUpdate: React.FC = () => {
   const paramsRef = useRef<TParams | null>(null);
   const responseRef = useRef<TResponse | undefined>(undefined);
 
-  const navigate = useNavigate();
-
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   useEffect(() => {
     DocumentsApi.get().then((res) => {

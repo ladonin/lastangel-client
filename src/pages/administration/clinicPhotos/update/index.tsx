@@ -1,29 +1,28 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { ClinicPhotosApi } from "api/clinicPhotos";
 import PAGES from "routing/routes";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const ClinicPhotosUpdate: React.FC = () => {
+  const navigate = useNavigate();
+
+  const isMobile = loadItem("isMobile");
+
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
-
   const [isChangedState, setIsChangedState] = useState(false);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
 
   const paramsRef = useRef<TParams | null>(null);
   const responseRef = useRef<TResponse | undefined>(undefined);
 
-  const navigate = useNavigate();
-
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
-
-  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   useEffect(() => {
     ClinicPhotosApi.get().then((res) => {

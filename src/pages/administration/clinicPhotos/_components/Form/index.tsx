@@ -17,13 +17,11 @@ type TProps = {
 
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [anotherImagesState, setAnotherImagesState] = useState<File[] | null>(null);
-
-  const paramsRef = useRef<TParams>({});
-
   const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
   const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(
     null
   );
+  const paramsRef = useRef<TParams>({});
 
   useEffect(() => {
     if (data) {

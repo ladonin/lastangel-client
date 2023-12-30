@@ -1,29 +1,30 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
-import { AcquaintanceshipApi } from "api/acquaintanceship";
+
 import PAGES from "routing/routes";
+import { AcquaintanceshipApi } from "api/acquaintanceship";
 import { TCommonDataRequest } from "api/types/acquaintanceship";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const AcquaintanceshipUpdate: React.FC = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
   const [isChangedState, setIsChangedState] = useState(false);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const paramsRef = useRef<TParams | null>(null);
   const responseRef = useRef<TResponse | undefined>(undefined);
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   useEffect(() => {
     AcquaintanceshipApi.get().then((res) => {
@@ -32,9 +33,6 @@ const AcquaintanceshipUpdate: React.FC = () => {
         responseRef.current = res;
         forceUpdate();
       }
-      // setIsUpdatingState(false);
-      // setIsChangedState(true);
-      // requestRef.current = EMPTY_REQUEST;
     });
   }, []);
 
@@ -46,7 +44,6 @@ const AcquaintanceshipUpdate: React.FC = () => {
     forceUpdate();
   };
 
-  // создать в форме общую функцию валидатора
   const updateHandler = () => {
     if (!paramsRef.current) return;
 
@@ -82,7 +79,7 @@ const AcquaintanceshipUpdate: React.FC = () => {
     }
   };
 
-  return dataIsLoadedState !== null ? (
+  return dataIsLoadedState ? (
     <>
       <Helmet>
         <title>Обновление страницы о приюте</title>

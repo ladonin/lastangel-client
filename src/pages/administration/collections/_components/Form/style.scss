@@ -1,8 +1,6 @@
 $labelWidth: 34%;
 $formElWidth: 66%;
 
-
-
 .page-administration_collections_form_component {
   .loc_form,
   .loc_photos {
@@ -11,7 +9,6 @@ $formElWidth: 66%;
   }
 
   .loc_form {
-
     .loc_left {
       width: 45%;
       padding-right: 32px;
@@ -19,7 +16,7 @@ $formElWidth: 66%;
 
     .loc_right {
       width: 55%;
-      padding-left: 0px;
+      padding-left: 0;
     }
   }
 
@@ -98,7 +95,6 @@ $formElWidth: 66%;
   }
 
   .loc_formVideoItem {
-
     margin-bottom: 24px;
 
     .loc_label, .loc_error, .loc_video {
@@ -110,7 +106,6 @@ $formElWidth: 66%;
     }
   }
 
-
   .loc_spending {
     width: 100%;
     padding: 16px;
@@ -120,22 +115,27 @@ $formElWidth: 66%;
     margin-bottom: 24px;
     display: flex;
     gap: 24px;
+
     .loc_new_value {
       width: 48%;
+
       .form-element-description {
         text-align: left;
       }
     }
-    .loc_total_spent,.loc_last_spending {
+
+    .loc_total_spent, .loc_last_spending {
       line-height: 40px;
       width: 26%;
       font-size: 15px;
     }
+
     .loc_last_spending {
       font-style: Italic;
     }
+
     .loc_formInputItem {
-      margin-bottom: 0px;
+      margin-bottom: 0;
 
       input, .loc_description {
         width: calc(100% - 200px);
@@ -145,13 +145,8 @@ $formElWidth: 66%;
         width: 200px;
       }
     }
-
   }
 }
-
-
-
-
 
 .layout.loc--isMobile .page-administration_collections_form_component {
   .loc_spending {
@@ -160,29 +155,31 @@ $formElWidth: 66%;
     padding: calc(24px * var(--viewport-koeff));
     margin-bottom: calc(48px * var(--viewport-koeff));
     border-radius: calc(8px * var(--viewport-koeff));
-    .loc_new_value,.loc_total_spent,.loc_last_spending {
+
+    .loc_new_value, .loc_total_spent, .loc_last_spending {
       width: 100%;
       font-size: calc(32px * var(--viewport-koeff));
       line-height: calc(60px * var(--viewport-koeff));
     }
-    .loc_last_spending b{
-color: $c_blue;
+
+    .loc_last_spending b {
+      color: $c_blue;
     }
+
     .loc_new_value {
       .loc_formInputItem {
         label {
           width: 33%;
         }
+
         input {
           width: 67%;
         }
       }
-
     }
-  
   }
-
 }
+
 //  .loc_form {
 //    .loc_left {
 //      padding-right: calc(32px * var(--viewport-koeff));
@@ -229,5 +226,3 @@ color: $c_blue;
 //    margin-bottom: calc(24px * var(--viewport-koeff));
 //  }
 //}
-
-
