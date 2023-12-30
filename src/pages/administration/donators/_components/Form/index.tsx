@@ -15,17 +15,17 @@ type TProps = {
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const paramsRef = useRef<TParams>({});
 
+  const onChangeHandler = (key: string, value: any) => {
+    paramsRef.current[key] = value.value ? Number(value.value) : value;
+    onChange(paramsRef.current);
+  };
+
   useEffect(() => {
     if (data) {
       paramsRef.current = data;
       onChange(paramsRef.current);
     }
   }, [data]);
-
-  const onChangeHandler = (key: string, value: any) => {
-    paramsRef.current[key] = value.value ? Number(value.value) : value;
-    onChange(paramsRef.current);
-  };
 
   return (
     <div className="page-administration_donators_form_component">

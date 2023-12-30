@@ -11,9 +11,9 @@ import Form, { TParams } from "../_components/Form";
 import "./style.scss";
 
 const CollectionCreate: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const isMobile = loadItem("isMobile");
   const [errorState, setErrorState] = useState("");
   const [isLoadingState, setIsLoadingState] = useState(false);
   const [isAddedState, setIsAddedState] = useState(false);

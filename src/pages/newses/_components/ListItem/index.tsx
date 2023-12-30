@@ -1,21 +1,22 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
-import { TItem } from "api/types/news";
+
 import PAGES from "routing/routes";
+import { TItem } from "api/types/news";
 import { getAnotherImagesUrl, getVideoUrl } from "helpers/news";
 import { getDateString, getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { NEWS_STATUS } from "constants/news";
 import { isAdmin } from "utils/user";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import PinIcon from "icons/pin.png";
 import { loadItem } from "utils/localStorage";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import CopyLinkToPage from "components/CopyLinkToPage";
 import MediaOriginalLinks from "components/MediaOriginalLinks";
 import Tooltip from "components/Tooltip";
+import PinIcon from "icons/pin.png";
 import "./style.scss";
 
 type TProps = {
@@ -23,10 +24,11 @@ type TProps = {
 };
 
 const ListItem = ({ data }: TProps) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
+  const navigate = useNavigate();
   const [isShowedState, setIsShowedState] = useState(false);
   const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
-  const navigate = useNavigate();
+
   useEffect(() => {
     if (data && data.another_images) {
       setAnotherImagesState(JSON.parse(data.another_images));

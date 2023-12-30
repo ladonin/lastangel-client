@@ -1,38 +1,26 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import { MetatagsApi } from "api/metatags";
+import { loadItem } from "utils/localStorage";
 import PAGES from "routing/routes";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { loadItem } from "utils/localStorage";
 import Form from "../_components/Form";
 import "./style.scss";
 
 const MetatagsUpdate: React.FC = () => {
-  const { id } = useParams();
+  const isMobile = loadItem("isMobile");
+  const navigate = useNavigate();
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
   const [isChangedState, setIsChangedState] = useState(false);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const paramsRef = useRef<{ [key: string]: any } | null>(null);
   const responseRef = useRef<string>("{}");
-  const navigate = useNavigate();
 
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
-
-  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
-
-  useEffect(() => {
-    MetatagsApi.get().then((res) => {
-      setDataIsLoadedState(true);
-      responseRef.current = res;
-      forceUpdate();
-      // setIsUpdatingState(false);
-      // setIsChangedState(true);
-      // requestRef.current = EMPTY_REQUEST;
-    });
-  }, []);
 
   const onChange = (data: { [key: string]: any }) => {
     setErrorState("");
@@ -55,7 +43,15 @@ const MetatagsUpdate: React.FC = () => {
       });
   };
 
-  return dataIsLoadedState !== null ? (
+  useEffect(() => {
+    MetatagsApi.get().then((res) => {
+      setDataIsLoadedState(true);
+      responseRef.current = res;
+      forceUpdate();
+    });
+  }, []);
+
+  return dataIsLoadedState ? (
     <>
       <Helmet>
         <title>Обновление метатегов</title>

@@ -1,29 +1,30 @@
 import React, { useEffect, useState, useMemo } from "react";
-
-// const OtherComponent = React.lazy(() => import('components/header'));
-
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import cn from "classnames";
 import { Helmet } from "react-helmet";
-import LoaderIcon from "components/LoaderIcon";
-import { TGetListRequest, TItem as TItemCollection } from "api/types/collections";
+
 import PAGES from "routing/routes";
+import { TGetListRequest, TItem as TItemCollection } from "api/types/collections";
 import { CollectionsApi } from "api/collections";
+import { numberFriendly } from "helpers/common";
 import { getMainImageUrl } from "helpers/collections";
-import flowerSrc from "icons/flower1.png";
-import BreadCrumbs from "components/BreadCrumbs";
 import { COLLECTIONS_STATUS } from "constants/collections";
 import { SIZES_MAIN } from "constants/photos";
-import { numberFriendly } from "helpers/common";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
 import { loadItem } from "utils/localStorage";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import LoaderIcon from "components/LoaderIcon";
+import BreadCrumbs from "components/BreadCrumbs";
+import flowerSrc from "icons/flower1.png";
 import "./style.scss";
 
 const Collections: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const { getMetatags } = useOutletContext<any>();
+
+  const [listCollectionState, setListCollectionsState] = useState<TItemCollection[] | null>(null);
+
   const metatags = useMemo(() => {
     const data = getMetatags();
     return {
@@ -31,21 +32,12 @@ const Collections: React.FC = () => {
       description: data.collections_description || "",
     };
   }, []);
-  const [listCollectionState, setListCollectionsState] = useState<TItemCollection[] | null>(null);
 
   const getData = (filter: TGetListRequest) => {
     CollectionsApi.getList(filter).then((res) => {
       setListCollectionsState(res);
     });
   };
-
-  useEffect(() => {
-    getData({
-      status: COLLECTIONS_STATUS.PUBLISHED,
-      withClosedCollections: true,
-      orderComplex: "ismajor desc, status asc",
-    });
-  }, []);
 
   const renderCollectionsContent = (data: TItemCollection) => (
     <>
@@ -85,7 +77,8 @@ const Collections: React.FC = () => {
           </div>
 
           <div className="loc_collected">
-            Собрано: <span className="loc_val">{numberFriendly(parseFloat(data.collected || '0'))}</span>{" "}
+            Собрано:{" "}
+            <span className="loc_val">{numberFriendly(parseFloat(data.collected || "0"))}</span>{" "}
             руб.
           </div>
 
@@ -100,6 +93,14 @@ const Collections: React.FC = () => {
       </div>
     </>
   );
+
+  useEffect(() => {
+    getData({
+      status: COLLECTIONS_STATUS.PUBLISHED,
+      withClosedCollections: true,
+      orderComplex: "ismajor desc, status asc",
+    });
+  }, []);
 
   return (
     <>

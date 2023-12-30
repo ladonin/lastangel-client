@@ -24,11 +24,11 @@
   }
 
   .loc_name {
+    @extend %hoverableGreydark;
     font-size: 24px;
     margin: 4px 0 16px 0;
     font-weight: 600;
     color: $c_greyDark;
-    @extend %hoverableGreydark;
   }
 
   .loc_copyLinkButton {
@@ -131,7 +131,7 @@
   }
 
   .loc_moreButton {
-    margin-top: 0px;
+    margin-top: 0;
     font-size: 16px;
     margin-bottom: 16px;
     color: $c_pistachioDarkFresh;
@@ -193,7 +193,7 @@
         line-height: calc(42px * var(--viewport-koeff));
       }
 
-      padding-bottom: 0px;
+      padding-bottom: 0;
 
       img {
         max-height: 100%;

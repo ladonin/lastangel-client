@@ -5,12 +5,12 @@
 /**
  * Получение состояния из localStorage по ключу
  * @param key
+ * @param complex
  */
 export const loadItem = (key: any): any => {
   try {
-    const serializedState = localStorage.getItem(key) || "";
-
-    return JSON.parse(serializedState);
+    const value = localStorage.getItem(key) || "";
+    return JSON.parse(value);
   } catch {
     return undefined;
   }
@@ -19,7 +19,7 @@ export const loadItem = (key: any): any => {
 /**
  * Сохранение значения в localStorage по ключу
  * @param key
- * @param item
+ * @param value
  */
 export const saveItem = (key: string, value: any): void => {
   try {

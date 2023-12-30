@@ -85,9 +85,9 @@
     }
 
     .loc_deleteButton {
+      @extend %hoverableRed;
       color: $c_red;
       width: fit-content;
-      @extend %hoverableRed;
     }
   }
 }

@@ -1,22 +1,25 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import cn from "classnames";
+
 import PAGES from "routing/routes";
 import { DonationsApi } from "api/donations";
-import { getDateYMD, monthMappings, numberFriendly } from "helpers/common";
 import { TGetListRequest, TItem } from "api/types/donations";
+import { getDateYMD, monthMappings, numberFriendly } from "helpers/common";
+import { prepareType as prepareDonationType, isAnonym, getDonatorName } from "helpers/donations";
 import InfiniteScroll from "components/InfiniteScroll";
 import Tooltip from "components/Tooltip";
-import { prepareType as prepareDonationType, isAnonym, getDonatorName } from "helpers/donations";
 import LoaderIcon from "components/LoaderIcon";
 import "./style.scss";
 
 const PAGESIZE = 20;
+
 const List = () => {
   const [pageState, setPageState] = useState<number>(1);
   const [listState, setListState] = useState<TItem[] | null>(null);
 
   const loadingStatusRef = useRef({ isLoading: false, isOff: false });
+  const dateRef = useRef<null | number>(null);
 
   const onReachBottomHandler = () => {
     !loadingStatusRef.current.isOff &&
@@ -38,12 +41,11 @@ const List = () => {
   useEffect(() => {
     getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
   }, [pageState]);
-  const dateRef = useRef<null | number>(null);
-  
+
   useEffect(() => {
     dateRef.current = null;
   }, [listState]);
-  
+
   return (
     <div className="page-finreport_list">
       {listState &&

@@ -19,11 +19,11 @@
     }
 
     .loc_name {
+      @extend %hoverable;
       font-size: 24px;
       margin: 4px 0 16px 0;
       font-weight: 600;
       color: $c_lagunaGrey;
-      @extend %hoverable;
     }
 
     .loc_redactButton {

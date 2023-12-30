@@ -12,10 +12,10 @@
   }
 
   .loc_breadCrumb, .loc_toMain, .loc_delimiter, .loc_back {
+    @extend %hoverable;
     font-weight: 600;
     font-size: 22px;
     color: $c_lagunaBlueDark;
-    @extend %hoverable;
   }
 
   .loc_title {

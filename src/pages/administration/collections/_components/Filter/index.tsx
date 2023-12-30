@@ -34,14 +34,14 @@ const CollectionsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   const selectStatusRef = useRef<TSelectRefProps>();
   const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
 
-  useEffect(() => {
-    filterState !== null && onChange(filterState);
-  }, [filterState]);
-
   const reset = () => {
     selectCategoryRef.current?.clearValue();
     selectStatusRef.current?.clearValue();
   };
+
+  useEffect(() => {
+    filterState !== null && onChange(filterState);
+  }, [filterState]);
 
   return (
     <div className="page-administration_collections_filter">

@@ -1,29 +1,24 @@
 /*
   import Slider from 'pages/documents/components/Slider'
  */
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Navigation, Pagination, Lazy } from "swiper";
+import { loadItem } from "utils/localStorage";
 import { getAnotherImagesUrl } from "helpers/documents";
 import { SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/documents";
 import { DocumentsApi } from "api/documents";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 const Slider = () => {
+  const isMobile = loadItem("isMobile");
   const [dataState, setDataState] = useState<(TGetResponseItem & { data: number[] }) | null>(null);
 
-  useEffect(() => {
-    DocumentsApi.get().then((res) => {
-      res && setDataState({ ...res, data: JSON.parse(res.another_images) });
-    });
-  }, []);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const renderButton = (link: string) => (
     <Button
       className="loc_openButton"
@@ -36,6 +31,12 @@ const Slider = () => {
       Открыть
     </Button>
   );
+
+  useEffect(() => {
+    DocumentsApi.get().then((res) => {
+      res && setDataState({ ...res, data: JSON.parse(res.another_images) });
+    });
+  }, []);
 
   return (
     <Swiper

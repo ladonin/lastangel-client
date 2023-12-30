@@ -10,13 +10,11 @@
     align-items: center;
     color: $c_black;
     font-size: 22px;
-
     background-color: $c_greyEF;
 
     .loc_go {
-
-      color: $c_lagunaDark;
       @extend %hoverable;
+      color: $c_lagunaDark;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -27,17 +25,14 @@
       svg {
         height: 16px;
       }
-
     }
   }
 
   .loc_content {
-
     background-color: $c_lagunaLighter;
 
     .loc_image {
-      height: 252px;//252 #REKVIZITS
-
+      height: 252px; //252 #REKVIZITS
     }
 
     .loc_top {
@@ -45,14 +40,12 @@
     }
 
     .loc_right {
-
       .loc_item {
         margin-top: 16px;
         font-size: 18px;
 
         .loc_docs {
           padding: 0 16px;
-
           display: flex;
           flex-wrap: wrap;
           gap: 4px;
@@ -76,9 +69,7 @@
           }
         }
       }
-
     }
-
   }
 
   .loc_item_other {
@@ -101,12 +92,8 @@
         margin-right: 8px;
       }
     }
-
   }
-
-
 }
-
 
 .layout.loc--isMobile .page-home_help {
   margin-left: calc(-24px * var(--viewport-koeff));
@@ -130,7 +117,6 @@
   }
 
 
-
   .loc_item_other {
     padding: calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
 
@@ -138,7 +124,6 @@
       font-size: calc(32px * var(--viewport-koeff));
       line-height: calc(44px * var(--viewport-koeff));
       margin-bottom: calc(16px * var(--viewport-koeff));
-
     }
 
     .loc_item {
@@ -148,19 +133,17 @@
       .loc_name {
         margin-right: calc(8px * var(--viewport-koeff));
       }
-
     }
   }
+
   .loc_content {
     .loc_image {
-      height: calc(414px * var(--viewport-koeff));//444 #REKVIZITS
+      height: calc(414px * var(--viewport-koeff)); //444 #REKVIZITS
     }
-    
   }
+
   .loc_right {
-
     .loc_item {
-
       margin-top: calc(24px * var(--viewport-koeff));
       font-size: calc(28px * var(--viewport-koeff));
       line-height: calc(40px * var(--viewport-koeff));
@@ -174,6 +157,7 @@
           height: calc(40px * var(--viewport-koeff));
           margin-right: calc(8px * var(--viewport-koeff));
         }
+
         .loc_title {
           font-size: calc(32px * var(--viewport-koeff));
           line-height: calc(44px * var(--viewport-koeff));

@@ -1,17 +1,19 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { isObjectOptionsEmpty } from "helpers/common";
+import { loadItem } from "utils/localStorage";
 import InputText from "components/Form/InputText";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {
   onChange: (filter: TFilterParams) => void;
   filter: TFilterParams | null;
 };
+
 type TInputRefProps = {
   clearValue: () => void;
 };
+
 export type TFilterParams = {
   fio?: string;
   phone?: string;
@@ -19,14 +21,17 @@ export type TFilterParams = {
 };
 
 const Filter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
+  const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const inputFioRef = useRef<TInputRefProps>();
   const inputPhoneRef = useRef<TInputRefProps>();
   const inputEmailRef = useRef<TInputRefProps>();
 
-  const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const reset = () => {
+    inputFioRef.current?.clearValue();
+  };
 
   useEffect(() => {
     timeoutRef.current && clearTimeout(timeoutRef.current);
@@ -37,9 +42,7 @@ const Filter: React.FC<TProps> = ({ onChange, filter = null }) => {
       }, 1000);
     }
   }, [filterState]);
-  const reset = () => {
-    inputFioRef.current?.clearValue();
-  };
+
   return (
     <div className="page-administration_feedbacks_filter">
       <div className="loc_wrapper">

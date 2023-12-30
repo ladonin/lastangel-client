@@ -42,6 +42,33 @@ const InputFileImages: React.FC<PropsWithChildren<TProps>> = (props) => {
     loadImgs(photos);
   };
 
+  const renderImages = (images: File[]) =>
+    images.length
+      ? images
+          .slice()
+          .reverse()
+          .map((img: File, index) => (
+            <div className="loc_image" key={index}>
+              <img alt="not found" src={URL.createObjectURL(img)} />
+              <Button
+                theme={ButtonThemes.DELETE_ICON}
+                className={cn("loc_delete")}
+                onClick={() => {
+                  imagesState &&
+                    setImagesState(
+                      imagesState
+                        .slice()
+                        .reverse()
+                        .filter((val: File, ind: number) => ind !== index)
+                        .reverse()
+                    );
+                }}
+                tooltip="Удалить"
+              />
+            </div>
+          ))
+      : null;
+
   useEffect(() => {
     if (imgsResult === null) return;
     const goodImages: File[] = [];
@@ -85,33 +112,6 @@ const InputFileImages: React.FC<PropsWithChildren<TProps>> = (props) => {
   useEffect(() => {
     imagesState && setImage(imagesState);
   }, [imagesState]);
-
-  const renderImages = (images: File[]) =>
-    images.length
-      ? images
-          .slice()
-          .reverse()
-          .map((img: File, index) => (
-            <div className="loc_image" key={index}>
-              <img alt="not found" src={URL.createObjectURL(img)} />
-              <Button
-                theme={ButtonThemes.DELETE_ICON}
-                className={cn("loc_delete")}
-                onClick={() => {
-                  imagesState &&
-                    setImagesState(
-                      imagesState
-                        .slice()
-                        .reverse()
-                        .filter((val: File, ind: number) => ind !== index)
-                        .reverse()
-                    );
-                }}
-                tooltip="Удалить"
-              />
-            </div>
-          ))
-      : null;
 
   return (
     <div className={cn("component-inputFileImage", className)}>

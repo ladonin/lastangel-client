@@ -1,29 +1,30 @@
 /*
   import InfoBlock from 'pages/home/_components/InfoBlock'
  */
-
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import { useNavigate } from "react-router-dom";
 import PAGES from "routing/routes";
-import OurPetsIcon from "icons/ourPetsIcon.png";
-import PetsAtHomeIcon from "icons/petsAtHome.png";
 import { AnimalsApi } from "api/animals";
 import { TGetCountOutput } from "api/types/animals";
 import { loadItem, saveItem } from "utils/localStorage";
 import { ANIMALS_STATUS } from "constants/animals";
+import OurPetsIcon from "icons/ourPetsIcon.png";
+import PetsAtHomeIcon from "icons/petsAtHome.png";
 import "./style.scss";
 
 const InfoBlock = () => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
 
   const [dataState, setDataState] = useState<TGetCountOutput | null>(null);
+
   useEffect(() => {
     AnimalsApi.getCount().then((res) => {
       setDataState(res);
     });
   }, []);
+
   return (
     <div className="page-home_infoBlock">
       <div
@@ -33,7 +34,7 @@ const InfoBlock = () => {
           navigate(PAGES.PETS);
         }}
       >
-        <img src={OurPetsIcon} />{" "}
+        <img alt="загружаю" src={OurPetsIcon} />{" "}
         <div className="loc_right">
           <div className="loc_text">Сейчас {isMobile === false && <br />}в приюте</div>
           <div className="loc_value">{dataState?.at_shelter ? dataState.at_shelter : "-"}</div>
@@ -46,7 +47,7 @@ const InfoBlock = () => {
           navigate(PAGES.PETS);
         }}
       >
-        <img src={PetsAtHomeIcon} />{" "}
+        <img alt="загружаю" src={PetsAtHomeIcon} />{" "}
         <div className="loc_right">
           <div className="loc_text">
             Обрели {isMobile === false && <br />}

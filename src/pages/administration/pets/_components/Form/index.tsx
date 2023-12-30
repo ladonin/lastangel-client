@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { getVideoUrl, getAnotherImagesUrl, getMainImageUrl } from "helpers/animals";
+import { TGetResponseItem } from "api/types/animals";
+import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
 import {
   SEX_OPTIONS,
   GRAFTED_OPTIONS,
@@ -17,8 +19,7 @@ import DatePicker from "components/Form/DatePicker";
 import Select from "components/Form/Select";
 import Textarea from "components/Form/Textarea";
 import { Checkbox } from "components/Form/Checkbox";
-import { TGetResponseItem } from "api/types/animals";
-import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
+
 import "./style.scss";
 
 export type TParams = { [key: string]: any };
@@ -37,17 +38,59 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     null
   );
 
-  const paramsRef = useRef<TParams>({});
-
   const [mainImagePrevState, setMainImagePrevState] = useState(0);
   const [mainImagePrevIsDeletedState, setMainImagePrevIsDeletedState] = useState<boolean | null>(
     null
   );
-
   const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
   const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(
     null
   );
+
+  const paramsRef = useRef<TParams>({});
+
+  const onChangeHandler = (key: string, value: any) => {
+    paramsRef.current[key] = value?.value ? Number(value.value) : value;
+    onChange(paramsRef.current);
+  };
+
+  const setMainImageHandler = (cropped: Blob, original: Blob) => {
+    setMainImageState({ cropped, original });
+    setMainImagePrevState(0);
+  };
+
+  const setAnotherImagesHandler = (images: File[]) => {
+    setAnotherImagesState(images);
+  };
+  const setVideo1Handler = (val: null | File) => {
+    onChangeHandler("video1", val);
+  };
+  const setVideo2Handler = (val: null | File) => {
+    onChangeHandler("video2", val);
+  };
+  const setVideo3Handler = (val: null | File) => {
+    onChangeHandler("video3", val);
+  };
+
+  const removeMainImageHandler = () => {
+    setMainImagePrevIsDeletedState(true);
+  };
+  const restoreMainImageHandler = () => {
+    setMainImagePrevIsDeletedState(false);
+  };
+
+  const removeAnotherImageHandler = (val: number) => {
+    setAnotherImagesForDeleteState(
+      anotherImagesForDeleteState === null ? [val] : anotherImagesForDeleteState.concat(val)
+    );
+  };
+
+  const restoreAnotherImageHandler = (val: number) => {
+    anotherImagesForDeleteState &&
+      setAnotherImagesForDeleteState(
+        anotherImagesForDeleteState.filter((id: number) => id !== val)
+      );
+  };
 
   useEffect(() => {
     if (data) {
@@ -59,16 +102,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       onChange(paramsRef.current);
     }
   }, [data]);
-
-  const onChangeHandler = (key: string, value: any) => {
-    paramsRef.current[key] = value?.value ? Number(value.value) : value;
-    onChange(paramsRef.current);
-  };
-
-  const setMainImageHandler = (cropped: Blob, original: Blob) => {
-    setMainImageState({ cropped, original });
-    setMainImagePrevState(0);
-  };
 
   useEffect(() => {
     mainImageState !== null && onChangeHandler("main_image", mainImageState);
@@ -87,40 +120,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     anotherImagesForDeleteState !== null &&
       onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
   }, [anotherImagesForDeleteState]);
-
-  const setAnotherImagesHandler = (images: File[]) => {
-    setAnotherImagesState(images);
-  };
-  const setVideo1Handler = (val: null | File) => {
-    onChangeHandler("video1", val);
-  };
-  const setVideo2Handler = (val: null | File) => {
-    onChangeHandler("video2", val);
-  };
-  const setVideo3Handler = (val: null | File) => {
-    onChangeHandler("video3", val);
-  };
-
-  const removeMainImageHandler = () => {
-    setMainImagePrevIsDeletedState(true);
-    // setMainImagePrevState(0);
-  };
-  const restoreMainImageHandler = () => {
-    setMainImagePrevIsDeletedState(false);
-  };
-
-  const removeAnotherImageHandler = (val: number) => {
-    setAnotherImagesForDeleteState(
-      anotherImagesForDeleteState === null ? [val] : anotherImagesForDeleteState.concat(val)
-    );
-  };
-
-  const restoreAnotherImageHandler = (val: number) => {
-    anotherImagesForDeleteState &&
-      setAnotherImagesForDeleteState(
-        anotherImagesForDeleteState.filter((id: number) => id !== val)
-      );
-  };
 
   return (
     <div className="page-administration_pets_form_component">
@@ -304,11 +303,13 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
         </div>
         <div className="loc_right">
           <InputFileImages
-                           label="Дополнительные фото" multiple setImage={setAnotherImagesHandler} />
+            label="Дополнительные фото"
+            multiple
+            setImage={setAnotherImagesHandler}
+          />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages
-
               images={anotherImagesPrevState}
               deletedImages={anotherImagesForDeleteState}
               label="Ранее загруженные фото"

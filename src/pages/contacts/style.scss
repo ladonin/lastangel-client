@@ -2,14 +2,11 @@
   display: flex;
   justify-content: center;
 
-
   .loc_left {
     width: 70%;
     padding-right: 24px;
 
-
     .loc_phone {
-
       display: flex;
       align-items: center;
       gap: 16px;
@@ -34,19 +31,15 @@
 
     .loc_vk {
       padding-right: 12px;
-
     }
 
-    .loc_ok,.loc_inst{
+    .loc_ok, .loc_inst {
       padding-left: 12px;
-
     }
 
     .loc_vk, .loc_inst, .loc_ok {
-
       width: 50%;
       margin-top: 24px;
-
       float: left;
 
       img {
@@ -54,6 +47,7 @@
       }
 
       .loc_link {
+        @extend %hoverable;
         display: flex;
         align-items: center;
         gap: 16px;
@@ -61,23 +55,21 @@
         color: $c_lagunaGrey;
         font-size: 18px;
         font-weight: 600;
-        @extend %hoverable;
+
         img {
           width: 40px;
           height: 40px;
         }
       }
     }
+
     .loc_vk .loc_link {
       margin-bottom: 24px;
     }
   }
 
   .loc_right {
-
     width: 30%;
-
-
   }
 }
 
@@ -103,7 +95,6 @@
       font-size: calc(30px * var(--viewport-koeff));
       line-height: calc(40px * var(--viewport-koeff));
     }
-
   }
 
   .loc_left .loc_content_1 {
@@ -117,7 +108,6 @@
     padding: 0 0 0 0;
     margin-top: calc(24px * var(--viewport-koeff));
 
-
     .loc_link {
       font-size: calc(36px * var(--viewport-koeff));
       gap: calc(32px * var(--viewport-koeff));
@@ -127,6 +117,7 @@
   .loc_vk .loc_link {
     margin-bottom: 0;
   }
+
   .loc_phone, .loc_vk, .loc_ok, .loc_inst {
     img {
       height: calc(80px * var(--viewport-koeff));

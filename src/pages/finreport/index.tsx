@@ -7,6 +7,7 @@ import "./style.scss";
 
 const Finreport: React.FC = () => {
   const { getMetatags } = useOutletContext<any>();
+
   const metatags = useMemo(() => {
     const data = getMetatags();
     return {
@@ -14,6 +15,7 @@ const Finreport: React.FC = () => {
       description: data.finreport_description || "",
     };
   }, []);
+
   return (
     <>
       <Helmet>

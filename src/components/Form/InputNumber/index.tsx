@@ -38,10 +38,6 @@ const InputNumber: React.FC<TProps> = ({
     initValue !== undefined ? Number(initValue) : undefined
   );
 
-  useEffect(() => {
-    initValue !== undefined && valueState === undefined && setValueState(initValue);
-  }, [initValue]);
-
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const withMinus = e.target.value.indexOf("-") === 0;
     if (floatNumbers) {
@@ -82,6 +78,10 @@ const InputNumber: React.FC<TProps> = ({
     if (valueState === undefined) return "";
     return String(valueState).replace(",", ".");
   };
+
+  useEffect(() => {
+    initValue !== undefined && valueState === undefined && setValueState(initValue);
+  }, [initValue]);
 
   return (
     <div className={cn("component-inputNumber", className)}>

@@ -1,8 +1,7 @@
 /*
   import VolunteersList from 'pages/home/components/VolunteersList'
  */
-
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,12 +15,11 @@ import { loadItem } from "utils/localStorage";
 import { SIZES_MAIN } from "constants/photos";
 import "./style.scss";
 
-
 type TProps = { currentId?: number | null };
 const VolunteersList = ({ currentId = null }: TProps) => {
+  const isMobile = loadItem("isMobile");
   const [listState, setListState] = useState<TGetListOutput>([]);
   const [initialSlideState, setInitialSlideState] = useState<number | null>(null);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   const itemsNumber = isMobile ? 3 : 7;
 

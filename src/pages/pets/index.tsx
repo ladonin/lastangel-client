@@ -44,8 +44,8 @@ const preparePetsSavedFilter = () => {
 };
 
 const Pets: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const { getMetatags } = useOutletContext<any>();
   const metatags = useMemo(() => {
     const data = getMetatags();
@@ -65,10 +65,8 @@ const Pets: React.FC = () => {
     list: TItem[] | null;
     page: number;
   } | null>(null);
-  const print = useMemo(() => loadItem("petsPrint"), []);
-  const needUsePrint = useRef<boolean>(
-    useMemo(() => (print ? loadItem("usePrintInPets") : false), [])
-  );
+  const print = loadItem("petsPrint");
+  const needUsePrint = useRef<boolean>(print ? loadItem("usePrintInPets") : false);
 
   const [listState, setListState] = useState<TItem[] | null>(
     needUsePrint.current && print?.list ? print.list : null

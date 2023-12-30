@@ -21,15 +21,16 @@ import CopyLinkToPage from "components/CopyLinkToPage";
 import "./style.scss";
 
 const Volunteer: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const { id } = useParams();
   const navigate = useNavigate();
+  const { getMetatags } = useOutletContext<any>();
   const [dataState, setDataState] = useState<TItem | null>(null);
   const [anotherImagesState, setAnotherImagesState] = useState<number[] | null>(null);
 
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
-  const hasBack = useMemo(() => loadItem("backFromVolunteer"), []);
-  const { getMetatags } = useOutletContext<any>();
+  const hasBack = loadItem("backFromVolunteer");
+
   const metatags = useMemo(() => {
     if (!dataState) return false;
     const data = getMetatags();

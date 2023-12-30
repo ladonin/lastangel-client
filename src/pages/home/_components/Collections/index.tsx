@@ -1,26 +1,27 @@
 /*
   import Collections from 'pages/home/components/Collections'
  */
-
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
 import { Link, useNavigate } from "react-router-dom";
+import PAGES from "routing/routes";
 import { CollectionsApi } from "api/collections";
+import { TGetListOutput, TItem } from "api/types/collections";
+import { numberFriendly } from "helpers/common";
 import { getMainImageUrl } from "helpers/collections";
 import { COLLECTIONS_STATUS } from "constants/collections";
-import { TGetListOutput, TItem } from "api/types/collections";
-import ArrowRight from "icons/arrowRight.svg";
-import PAGES from "routing/routes";
-import { numberFriendly } from "helpers/common";
-import { loadItem } from "utils/localStorage";
 import { SIZES_MAIN } from "constants/photos";
+import { loadItem } from "utils/localStorage";
+import ArrowRight from "icons/arrowRight.svg";
 import "./style.scss";
 
 const Collections = () => {
-  const [listState, setListState] = useState<TGetListOutput>([]);
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const [listState, setListState] = useState<TGetListOutput>([]);
+
+  const maxCollections = isMobile ? 4 : 3;
 
   const renderContent = (data: TItem) => (
     <div
@@ -44,14 +45,15 @@ const Collections = () => {
             Надо: <span className="loc_val">{numberFriendly(parseFloat(data.target_sum))}</span> р.
           </div>
           <div className="loc_collected">
-            Собрано: <span className="loc_val">{numberFriendly(parseFloat(data.collected || '0'))}</span> р.
+            Собрано:{" "}
+            <span className="loc_val">{numberFriendly(parseFloat(data.collected || "0"))}</span> р.
           </div>
           <div className="loc_description">{data.short_description}</div>
         </div>
       </div>
     </div>
   );
-  const maxCollections = isMobile ? 4 : 3;
+
   useEffect(() => {
     CollectionsApi.getList({
       status: COLLECTIONS_STATUS.PUBLISHED,
@@ -63,6 +65,7 @@ const Collections = () => {
       setListState(res);
     });
   }, []);
+
   return listState.length ? (
     <div className={cn("page-home_collections", { "loc--isMobile": isMobile })}>
       <Link to={PAGES.COLLECTIONS} className="link_text loc_title">

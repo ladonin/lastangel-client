@@ -15,6 +15,12 @@ type TProps = {
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const paramsRef = useRef<TParams>({});
   const [dataInitState, setDataInitState] = useState<{ [key: string]: string }>({});
+
+  const onChangeHandler = (key: string, value: any) => {
+    paramsRef.current[key] = value.value ? Number(value.value) : value;
+    onChange(paramsRef.current);
+  };
+
   useEffect(() => {
     if (data) {
       const parsedData = JSON.parse(data);
@@ -23,11 +29,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       onChange(paramsRef.current);
     }
   }, [data]);
-
-  const onChangeHandler = (key: string, value: any) => {
-    paramsRef.current[key] = value.value ? Number(value.value) : value;
-    onChange(paramsRef.current);
-  };
 
   return (
     <div className="page-administration_metatags_form_component">
@@ -68,7 +69,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             label="Description Питомцы (список)"
             className="loc_formTextareaItem"
           />
-
           <InputText
             label="Title Питомец"
             initValue={dataInitState ? dataInitState.pet_title : undefined}
@@ -86,7 +86,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             label="Description Питомец"
             className="loc_formTextareaItem"
           />
-
           <InputText
             label="Title Сборы (список)"
             initValue={dataInitState ? dataInitState.collections_title : undefined}
@@ -104,7 +103,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             label="Description Сборы (список)"
             className="loc_formTextareaItem"
           />
-
           <InputText
             label="Title Сбор"
             initValue={dataInitState ? dataInitState.collection_title : undefined}
@@ -122,7 +120,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
             label="Description Сбор"
             className="loc_formTextareaItem"
           />
-
           <InputText
             label="Title Новости (список)"
             initValue={dataInitState ? dataInitState.newses_title : undefined}

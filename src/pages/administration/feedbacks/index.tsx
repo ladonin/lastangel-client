@@ -1,28 +1,30 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import cn from "classnames";
 import { getDateString } from "helpers/common";
-import LoaderIcon from "components/LoaderIcon";
 import { FeedbacksApi } from "api/feedbacks";
-import InfiniteScroll from "components/InfiniteScroll";
 import { TGetListRequest, TItem } from "api/types/feedbacks";
+import { loadItem } from "utils/localStorage";
 import NotFound from "components/NotFound";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Modal from "components/Modal";
-import { loadItem } from "utils/localStorage";
+import LoaderIcon from "components/LoaderIcon";
+import InfiniteScroll from "components/InfiniteScroll";
 import Filter, { TFilterParams } from "./_components/Filter";
 import "./style.scss";
 
 const PAGESIZE = 20;
 
 const Feedbacks: React.FC = () => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
+  const { checkMail } = useOutletContext<any>();
   const [pageState, setPageState] = useState<number>(1);
 
   const [listState, setListState] = useState<TItem[] | null>(null);
   const filterRef = useRef<TFilterParams>({});
 
   const loadingStatusRef = useRef({ isLoading: false, isOff: false });
+
   const getData = (params?: TGetListRequest) => {
     loadingStatusRef.current.isLoading = true;
     FeedbacksApi.getList({ ...filterRef.current, ...params }).then((res) => {
@@ -34,10 +36,6 @@ const Feedbacks: React.FC = () => {
       }
     });
   };
-
-  useEffect(() => {
-    getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
-  }, [pageState]);
 
   const changeFilter = (filter: TFilterParams) => {
     loadingStatusRef.current.isOff = false;
@@ -51,7 +49,6 @@ const Feedbacks: React.FC = () => {
       setPageState(1);
     }
   };
-  const { checkMail } = useOutletContext<any>();
 
   const markAsViewedHandler = (id: number) => {
     FeedbacksApi.setIsViewed(id).then(() => {
@@ -61,6 +58,7 @@ const Feedbacks: React.FC = () => {
       checkMail();
     });
   };
+
   const markAsNewHandler = (id: number) => {
     FeedbacksApi.setIsNew(id).then(() => {
       setListState((curr) =>
@@ -69,13 +67,17 @@ const Feedbacks: React.FC = () => {
       checkMail();
     });
   };
+
   const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState<false | number>(false);
+
   const closeModalDelete = () => {
     setModalDeleteIsOpenState(false);
   };
+
   const openModalDelete = (id: number) => {
     setModalDeleteIsOpenState(id);
   };
+
   const removeHandler = () => {
     if (modalDeleteIsOpenState) {
       const id: number = modalDeleteIsOpenState;
@@ -147,6 +149,10 @@ const Feedbacks: React.FC = () => {
       !loadingStatusRef.current.isLoading &&
       setPageState((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
+  }, [pageState]);
 
   return (
     <div className="page-administration_feedbacks">

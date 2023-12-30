@@ -14,6 +14,7 @@
     padding: 16px;
     cursor: pointer;
     box-shadow: $boxShadow;
+
     &:hover {
       background-color: $c_lagunaLight;
     }
@@ -21,7 +22,6 @@
     .loc_value {
       font-size: 22px;
       font-weight: 700;
-
       color: $c_greyDark;
     }
 
@@ -30,7 +30,6 @@
       font-weight: 600;
       color: $c_greyDark;
       line-height: 18px;
-
     }
 
     img {
@@ -38,9 +37,7 @@
       width: 55px;
       display: inline-block;
     }
-
   }
-
 }
 
 
@@ -54,7 +51,6 @@
     border-radius: calc(8px * var(--viewport-koeff));
     gap: calc(24px * var(--viewport-koeff));
     box-shadow: $boxShadowMobile;
-
 
     img {
       height: calc(100px * var(--viewport-koeff));

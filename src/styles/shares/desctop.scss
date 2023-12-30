@@ -67,13 +67,13 @@
       tr {
         &:first-child {
           & > td {
-            padding-top: 0px !important;
+            padding-top: 0 !important;
           }
         }
 
         &:last-child {
           & > td {
-            padding-bottom: 0px !important;
+            padding-bottom: 0 !important;
           }
         }
 
@@ -82,11 +82,11 @@
         }
 
         td:first-child {
-          padding-left: 0px !important;
+          padding-left: 0 !important;
         }
 
         td:last-child {
-          padding-right: 0px !important;
+          padding-right: 0 !important;
         }
       }
     }

@@ -50,14 +50,14 @@ import {
 } from "helpers/collections";
 import { getDateString, numberFriendly, objectsAreEqual } from "helpers/common";
 import { loadItem, saveItem } from "utils/localStorage";
+import { SIZES_MAIN } from "constants/photos";
+import { ANIMALS_STATUS } from "constants/animals";
+import { COLLECTIONS_STATUS } from "constants/collections";
 import Tabs from "components/Tabs";
 import NotFound from "components/NotFound";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import InfiniteScroll from "components/InfiniteScroll";
 import LoaderIcon from "components/LoaderIcon";
-import { SIZES_MAIN } from "constants/photos";
-import { ANIMALS_STATUS } from "constants/animals";
-import { COLLECTIONS_STATUS } from "constants/collections";
 import PetsFilter, { TFilterParams as TPetsFilterParams } from "./pets/_components/Filter";
 import CollectionsFilter, {
   TFilterParams as TCollectionsFilterParams,
@@ -110,24 +110,11 @@ const preparePetsSavedFilter = () => {
 };
 
 const Administration: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const { search } = useLocation();
-  const [initTabState, setInitTabState] = useState<number | undefined>(undefined);
 
-  useEffect(() => {
-    if (search) {
-      const params = new URLSearchParams(search);
-      const tabName = params.get("tab");
-      if (tabName && TABS_MAP[tabName]) {
-        setInitTabState(TABS_MAP[tabName]);
-      } else {
-        setInitTabState(0);
-      }
-      return;
-    }
-    setInitTabState(0);
-  }, [search]);
+  const [initTabState, setInitTabState] = useState<number | undefined>(undefined);
 
   const [listPetsState, setListPetsState] = useState<TItemPet[] | null>(null);
   const [listVolunteersState, setListVolunteersState] = useState<TItemVolunteer[] | null>(null);
@@ -176,12 +163,6 @@ const Administration: React.FC = () => {
   const donatorsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const volunteersLoadingStatusRef = useRef({ isLoading: false, isOff: false });
 
-  useEffect(() => {
-    if (initTabState !== undefined) {
-      setSelectedTabIndexState(initTabState);
-    }
-  }, [initTabState]);
-
   const getNewsData = (params?: TGetNewsListRequest) => {
     newsLoadingStatusRef.current.isLoading = true;
     const { order, ...filter } = newsFilterRef.current || {};
@@ -224,6 +205,7 @@ const Administration: React.FC = () => {
       setListCollectionsState(res);
     });
   };
+
   const getPetsData = (params?: TGetPetsListRequest) => {
     petsLoadingStatusRef.current.isLoading = true;
 
@@ -242,6 +224,7 @@ const Administration: React.FC = () => {
       }
     });
   };
+
   const getVolunteersData = (params?: TGetVolunteersListRequest) => {
     volunteersLoadingStatusRef.current.isLoading = true;
 
@@ -262,6 +245,7 @@ const Administration: React.FC = () => {
       }
     });
   };
+
   const getDonationsData = (params?: TGetDonationsListRequest) => {
     donationsLoadingStatusRef.current.isLoading = true;
     const { order, ...filter } = donationsFilterRef.current || {};
@@ -283,6 +267,7 @@ const Administration: React.FC = () => {
       }
     });
   };
+
   const getDonatorsData = (params?: TGetDonatorsListRequest) => {
     donatorsLoadingStatusRef.current.isLoading = true;
     DonatorsApi.getList({ ...(donatorsFilterRef.current || {}), ...params }).then((res) => {
@@ -295,38 +280,6 @@ const Administration: React.FC = () => {
       }
     });
   };
-
-  useEffect(() => {
-    getCollectionsData();
-  }, []);
-
-  useEffect(() => {
-    getPetsData({ offset: (petsPageState - 1) * PETS_PAGESIZE, limit: PETS_PAGESIZE });
-  }, [petsPageState]);
-  useEffect(() => {
-    getNewsData({ offset: (newsPageState - 1) * NEWS_PAGESIZE, limit: NEWS_PAGESIZE });
-  }, [newsPageState]);
-  useEffect(() => {
-    getStoriesData({ offset: (storiesPageState - 1) * STORIES_PAGESIZE, limit: STORIES_PAGESIZE });
-  }, [storiesPageState]);
-  useEffect(() => {
-    getDonationsData({
-      offset: (donationsPageState - 1) * DONATIONS_PAGESIZE,
-      limit: DONATIONS_PAGESIZE,
-    });
-  }, [donationsPageState]);
-  useEffect(() => {
-    getDonatorsData({
-      offset: (donatorsPageState - 1) * DONATORS_PAGESIZE,
-      limit: DONATORS_PAGESIZE,
-    });
-  }, [donatorsPageState]);
-  useEffect(() => {
-    getVolunteersData({
-      offset: (volunteersPageState - 1) * VOLUNTEERS_PAGESIZE,
-      limit: VOLUNTEERS_PAGESIZE,
-    });
-  }, [volunteersPageState]);
 
   const changePetsFilter = (filter: TPetsFilterParams) => {
     if (objectsAreEqual(filter, petsFilterRef.current)) return;
@@ -345,6 +298,7 @@ const Administration: React.FC = () => {
       setPetsPageState(1);
     }
   };
+
   const changeVolunteersFilter = (filter: TVolunteersFilterParams) => {
     if (objectsAreEqual(filter, volunteersFilterRef.current)) return;
 
@@ -370,6 +324,7 @@ const Administration: React.FC = () => {
       setNewsPageState(1);
     }
   };
+
   const changeStoriesFilter = (filter: TStoriesFilterParams) => {
     if (objectsAreEqual(filter, storiesFilterRef.current)) return;
     storiesLoadingStatusRef.current.isOff = false;
@@ -381,6 +336,7 @@ const Administration: React.FC = () => {
       setStoriesPageState(1);
     }
   };
+
   const changeCollectionsFilter = (filter: TCollectionsFilterParams) => {
     if (objectsAreEqual(filter, collectionsFilterRef.current)) return;
     collectionsFilterRef.current = {
@@ -390,6 +346,7 @@ const Administration: React.FC = () => {
     saveItem("admin_collections_filter", collectionsFilterRef.current);
     getCollectionsData();
   };
+
   const changeDonationsFilter = (filter: TDonationsFilterParams) => {
     if (objectsAreEqual(filter, donationsFilterRef.current)) return;
 
@@ -402,6 +359,7 @@ const Administration: React.FC = () => {
       setDonationsPageState(1);
     }
   };
+
   const changeDonatorsFilter = (filter: TDonatorsFilterParams) => {
     if (objectsAreEqual(filter, donatorsFilterRef.current)) return;
     donatorsLoadingStatusRef.current.isOff = false;
@@ -474,6 +432,7 @@ const Administration: React.FC = () => {
       </div>
     </div>
   );
+
   const renderVolunteerContent = (data: TItemVolunteer) => (
     <div className="loc_volunteerItem">
       <img alt="загружаю" src={getVolunteerMainImageUrl(data, SIZES_MAIN.SQUARE)} />
@@ -969,6 +928,63 @@ const Administration: React.FC = () => {
       selectedTabIndexState,
     ]
   );
+
+  useEffect(() => {
+    getCollectionsData();
+  }, []);
+
+  useEffect(() => {
+    if (initTabState !== undefined) {
+      setSelectedTabIndexState(initTabState);
+    }
+  }, [initTabState]);
+
+  useEffect(() => {
+    if (search) {
+      const params = new URLSearchParams(search);
+      const tabName = params.get("tab");
+      if (tabName && TABS_MAP[tabName]) {
+        setInitTabState(TABS_MAP[tabName]);
+      } else {
+        setInitTabState(0);
+      }
+      return;
+    }
+    setInitTabState(0);
+  }, [search]);
+
+  useEffect(() => {
+    getPetsData({ offset: (petsPageState - 1) * PETS_PAGESIZE, limit: PETS_PAGESIZE });
+  }, [petsPageState]);
+
+  useEffect(() => {
+    getNewsData({ offset: (newsPageState - 1) * NEWS_PAGESIZE, limit: NEWS_PAGESIZE });
+  }, [newsPageState]);
+
+  useEffect(() => {
+    getStoriesData({ offset: (storiesPageState - 1) * STORIES_PAGESIZE, limit: STORIES_PAGESIZE });
+  }, [storiesPageState]);
+
+  useEffect(() => {
+    getDonationsData({
+      offset: (donationsPageState - 1) * DONATIONS_PAGESIZE,
+      limit: DONATIONS_PAGESIZE,
+    });
+  }, [donationsPageState]);
+
+  useEffect(() => {
+    getDonatorsData({
+      offset: (donatorsPageState - 1) * DONATORS_PAGESIZE,
+      limit: DONATORS_PAGESIZE,
+    });
+  }, [donatorsPageState]);
+
+  useEffect(() => {
+    getVolunteersData({
+      offset: (volunteersPageState - 1) * VOLUNTEERS_PAGESIZE,
+      limit: VOLUNTEERS_PAGESIZE,
+    });
+  }, [volunteersPageState]);
 
   return initTabState !== undefined ? (
     <div className="page-administration">

@@ -1,18 +1,15 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
-
-import InputText from "components/Form/InputText";
-import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
-import InputFileImages from "components/Form/InputFileImages";
-import { STORIES_STATUS } from "constants/stories";
-import Textarea from "components/Form/Textarea";
-import { Checkbox } from "components/Form/Checkbox";
+import React, { useEffect, useState, useRef } from "react";
 import { TGetResponseItem } from "api/types/stories";
 import { getAnotherImagesUrl, getVideoUrl } from "helpers/stories";
-import WYSIWYGEditor from "components/Form/WYSIWYGEditor";
 import { SIZES_ANOTHER } from "constants/photos";
+import { STORIES_STATUS } from "constants/stories";
+import WYSIWYGEditor from "components/Form/WYSIWYGEditor";
+import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
+import InputFileImages from "components/Form/InputFileImages";
 import Select from "components/Form/Select";
+import Textarea from "components/Form/Textarea";
+import { Checkbox } from "components/Form/Checkbox";
 import InputFileVideo from "components/Form/InputFileVideo";
-// const OtherComponent = React.lazy(() => import('components/header'));
 import "./style.scss";
 
 export type TParams = { [key: string]: any };
@@ -23,10 +20,12 @@ type TProps = {
   onChange: (data: TParams) => void;
   data?: TGetResponseItem;
 };
+
 export const STORIES_OPTIONS = [
   { value: String(STORIES_STATUS.PUBLISHED), label: "Опубликован" },
   { value: String(STORIES_STATUS.NON_PUBLISHED), label: "Не опубликован" },
 ];
+
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [isMajorState, setIsMajorState] = useState(!!data?.ismajor);
   const [isAlbumHiddenState, setIsAlbumHiddenState] = useState(!!data?.hide_album);
@@ -34,37 +33,16 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     !!data?.use_mobile_description
   );
   const [anotherImagesState, setAnotherImagesState] = useState<File[] | null>(null);
-
-  const paramsRef = useRef<TParams>({});
-
   const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
   const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(
     null
   );
-
-  useEffect(() => {
-    if (data) {
-      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
-      setIsMajorState(!!data.ismajor);
-
-      paramsRef.current = data;
-      onChange(paramsRef.current);
-    }
-  }, [data]);
+  const paramsRef = useRef<TParams>({});
 
   const onChangeHandler = (key: string, value: any) => {
     paramsRef.current[key] = value?.value ? Number(value.value) : value;
     onChange(paramsRef.current);
   };
-
-  useEffect(() => {
-    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
-  }, [anotherImagesState]);
-
-  useEffect(() => {
-    anotherImagesForDeleteState !== null &&
-      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
-  }, [anotherImagesForDeleteState]);
 
   const setVideo1Handler = (val: null | File) => {
     onChangeHandler("video1", val);
@@ -92,6 +70,25 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
         anotherImagesForDeleteState.filter((id: number) => id !== val)
       );
   };
+
+  useEffect(() => {
+    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
+  }, [anotherImagesState]);
+
+  useEffect(() => {
+    if (data) {
+      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
+      setIsMajorState(!!data.ismajor);
+
+      paramsRef.current = data;
+      onChange(paramsRef.current);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    anotherImagesForDeleteState !== null &&
+      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
+  }, [anotherImagesForDeleteState]);
 
   return (
     <div className="page-administration_stories_form_component">

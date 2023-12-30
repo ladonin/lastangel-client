@@ -7,6 +7,7 @@ import "./style.scss";
 
 const Documents: React.FC = () => {
   const { getMetatags } = useOutletContext<any>();
+
   const metatags = useMemo(() => {
     const data = getMetatags();
     return {
@@ -14,6 +15,7 @@ const Documents: React.FC = () => {
       description: data.documents_description || "",
     };
   }, []);
+
   return (
     <>
       <Helmet>

@@ -30,9 +30,6 @@ const InputPrevLoadedImages = ({
 }: TPrevImagesProps) => {
   const [imagesState, setImagesState] = useState<number[]>([]);
 
-  useEffect(() => {
-    images && setImagesState(images);
-  }, [images]);
   const isDeleted = (img: number) => deletedImages && deletedImages.includes(img);
 
   const renderImages = () =>
@@ -72,6 +69,10 @@ const InputPrevLoadedImages = ({
             </div>
           ))
       : null;
+
+  useEffect(() => {
+    images && setImagesState(images);
+  }, [images]);
 
   return (
     <div className={cn("component-inputPrevLoadedImages", className)}>

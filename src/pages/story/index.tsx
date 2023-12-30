@@ -22,12 +22,13 @@ import MediaOriginalLinks from "components/MediaOriginalLinks";
 import "./style.scss";
 
 const Story: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
-  const [idState, setIdState] = useState<number | null>(null);
-  const [dataState, setDataState] = useState<TItem | null>(null);
   const { id } = useParams();
   const { getMetatags } = useOutletContext<any>();
+  const [idState, setIdState] = useState<number | null>(null);
+  const [dataState, setDataState] = useState<TItem | null>(null);
+
   const metatags = useMemo(() => {
     if (!dataState) return false;
     const data = getMetatags();

@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
-import { AnimalsApi } from "api/animals";
-import { CollectionsApi } from "api/collections";
 import { DONATIONS_TYPES } from "constants/donations";
+import { COLLECTIONS_STATUS } from "constants/collections";
+import { ANIMALS_STATUS } from "constants/animals";
 import InputText from "components/Form/InputText";
 import InputNumber from "components/Form/InputNumber";
 import Select from "components/Form/Select";
 import { Checkbox } from "components/Form/Checkbox";
 import { TGetResponseItem } from "api/types/donations";
-import { ANIMALS_STATUS } from "constants/animals";
+import { AnimalsApi } from "api/animals";
+import { CollectionsApi } from "api/collections";
 import { isAnonym } from "helpers/donations";
-import { COLLECTIONS_STATUS } from "constants/collections";
 import "./style.scss";
 
 const TYPES_OPTIONS = [

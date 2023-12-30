@@ -31,30 +31,6 @@ const LayoutAdministration: React.FC = () => {
   const [isMobileState, setIsMobileState] = useState<boolean | undefined>(loadItem("isMobile"));
   const [showPageState, setShowPageState] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  useEffect(() => {
-    // react-device-detect выбает всякую помойку иногда и не стоит ожидать,
-    // что он отдаст только true или false (еще он отдает null)
-    if ((isMobile === true || isMobile === false) && isMobileState === undefined) {
-      saveItem("isMobile", isMobile);
-      setIsMobileState(isMobile);
-    }
-  }, [isMobile, isMobileState]);
-
-  useEffect(() => {
-    UserApi.checkToken("admin").then((res) => {
-      // Ждем именно false
-      if (res === false) {
-        navigate(PAGES.MAIN);
-      } else {
-        setShowPageState(true);
-      }
-    });
-  }, []);
-
   const showAddButton = () =>
     pathname !== PAGES.ADMINISTRATION_PET_CREATE &&
     pathname.indexOf(PAGES.ADMINISTRATION_PET_UPDATE) === -1 &&
@@ -95,6 +71,30 @@ const LayoutAdministration: React.FC = () => {
     return () => {
       timerRef.current && clearInterval(timerRef.current);
     };
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  useEffect(() => {
+    // react-device-detect выбает всякую помойку иногда и не стоит ожидать,
+    // что он отдаст только true или false (еще он отдает null)
+    if ((isMobile === true || isMobile === false) && isMobileState === undefined) {
+      saveItem("isMobile", isMobile);
+      setIsMobileState(isMobile);
+    }
+  }, [isMobile, isMobileState]);
+
+  useEffect(() => {
+    UserApi.checkToken("admin").then((res) => {
+      // Ждем именно false
+      if (res === false) {
+        navigate(PAGES.MAIN);
+      } else {
+        setShowPageState(true);
+      }
+    });
   }, []);
 
   return isMobileState !== undefined && showPageState ? (

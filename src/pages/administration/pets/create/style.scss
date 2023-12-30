@@ -1,13 +1,12 @@
 .page-administration_pets_create {
 
   h1 {
-    margin: 16px 0 32px 0px;
+    margin: 16px 0 32px 0;
   }
 
   .loc_error {
     color: $c_red;
-    padding: 16px 0px;
-
+    padding: 16px 0;
   }
 
   .loc_wrapper_textForm {
@@ -17,16 +16,10 @@
       display: flex;
       margin-top: 36px;
 
-      .loc_saveButton {
-        // width: 200px;
-      }
-
       .loc_cancelButton {
         margin-left: auto;
       }
-
     }
-
   }
 
   .loc_wrapper_addedSuccess {
@@ -36,17 +29,14 @@
       margin: 24px 0;
     }
   }
-
-
 }
-
 
 .layout.loc--isMobile .page-administration_pets_create {
   width: 100%;
   padding: 0;
 
   h1 {
-    margin: calc(16px * var(--viewport-koeff)) 0 calc(32px * var(--viewport-koeff)) 0px;
+    margin: calc(16px * var(--viewport-koeff)) 0 calc(32px * var(--viewport-koeff)) 0;
   }
 
   .loc_form {
@@ -56,25 +46,25 @@
       padding: 0 !important;
       width: 100%;
 
-      .loc_formInputItem, .loc_formCheckboxItem, .loc_formDateItem, .loc_formSelectItem, .loc_formTextareaItem, .loc_formVideoItem {
+      .loc_formInputItem,
+      .loc_formCheckboxItem,
+      .loc_formDateItem,
+      .loc_formSelectItem,
+      .loc_formTextareaItem,
+      .loc_formVideoItem {
         margin-bottom: calc(48px * var(--viewport-koeff));
       }
-
 
       .loc__shortdescription {
         textarea {
           height: 30vh;
-
         }
-
       }
 
       .loc__fulldescription {
         textarea {
           height: 50vh;
-
         }
-
       }
     }
   }
@@ -91,19 +81,13 @@
       padding: 0 !important;
       margin-top: calc(48px * var(--viewport-koeff));
 
- 
-
- 
-
       .loc_images {
         gap: calc(24px * var(--viewport-koeff));
       }
 
-
       .component-inputFileImage {
         margin: 0;
       }
-
     }
 
     .loc_error {
@@ -120,7 +104,6 @@
     font-size: calc(32px * var(--viewport-koeff));
   }
 
-
   .loc_wrapper_addedSuccess {
     font-size: calc(40px * var(--viewport-koeff));
     line-height: calc(56px * var(--viewport-koeff));
@@ -129,6 +112,4 @@
       margin: calc(48px * var(--viewport-koeff)) 0;
     }
   }
-
-
 }

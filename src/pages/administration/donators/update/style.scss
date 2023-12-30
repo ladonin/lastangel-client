@@ -6,8 +6,7 @@
 
   .loc_error {
     color: $c_red;
-    padding: 16px 0px;
-
+    padding: 16px 0;
   }
 
   .loc_wrapper_textForm {
@@ -16,11 +15,6 @@
       display: flex;
       margin-top: 36px;
 
-      .loc_saveButton {
-        // width: 200px;
-      }
-
-
       .loc_deleteButton {
         margin-left: auto;
       }
@@ -28,9 +22,7 @@
       .loc_cancelButton {
         margin-left: 24px;
       }
-
     }
-
   }
 
   .loc_wrapper_updatedSuccess {
@@ -52,7 +44,6 @@
       justify-content: space-between;
       margin-top: 32px;
     }
-
   }
 }
 
@@ -75,7 +66,6 @@
       .loc_formInputItem {
         margin-bottom: calc(48px * var(--viewport-koeff));
       }
-
     }
   }
 

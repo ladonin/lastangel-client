@@ -16,6 +16,21 @@ export const useGetImageDataHook = () => {
   const imagesCounterRef = useRef({ ...DEFAULT_COUNTER });
   const sizesRef = useRef<TData[]>([]);
 
+  const reset = () => {
+    imagesCounterRef.current = { ...DEFAULT_COUNTER };
+    sizesRef.current = [];
+  };
+
+  const loadImgs = (imgs: File[]) => {
+    reset();
+    setSrcsState(
+      imgs.map((img) => ({
+        file: img,
+        url: URL.createObjectURL(img),
+      }))
+    );
+  };
+
   useEffect(() => {
     if (srcsState) {
       imagesCounterRef.current.all = srcsState.length;
@@ -58,21 +73,6 @@ export const useGetImageDataHook = () => {
       });
     }
   }, [srcsState]);
-
-  const reset = () => {
-    imagesCounterRef.current = { ...DEFAULT_COUNTER };
-    sizesRef.current = [];
-  };
-
-  const loadImgs = (imgs: File[]) => {
-    reset();
-    setSrcsState(
-      imgs.map((img) => ({
-        file: img,
-        url: URL.createObjectURL(img),
-      }))
-    );
-  };
 
   return {
     loadImgs,

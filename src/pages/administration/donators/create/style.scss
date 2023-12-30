@@ -1,13 +1,12 @@
 .page-administration_donators_create {
 
   h1 {
-    margin: 16px 0 32px 0px;
+    margin: 16px 0 32px 0;
   }
 
   .loc_error {
     color: $c_red;
-    padding: 16px 0px;
-
+    padding: 16px 0;
   }
 
   .loc_wrapper_textForm {
@@ -17,16 +16,10 @@
       display: flex;
       margin-top: 36px;
 
-      .loc_saveButton {
-        // width: 200px;
-      }
-
       .loc_cancelButton {
         margin-left: auto;
       }
-
     }
-
   }
 
   .loc_wrapper_addedSuccess {
@@ -36,8 +29,6 @@
       margin: 24px 0;
     }
   }
-
-
 }
 
 
@@ -46,7 +37,7 @@
   padding: 0;
 
   h1 {
-    margin: calc(16px * var(--viewport-koeff)) 0 calc(32px * var(--viewport-koeff)) 0px;
+    margin: calc(16px * var(--viewport-koeff)) 0 calc(32px * var(--viewport-koeff)) 0;
   }
 
   .loc_form {
@@ -79,6 +70,4 @@
       margin: calc(48px * var(--viewport-koeff)) 0;
     }
   }
-
-
 }

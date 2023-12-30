@@ -1,13 +1,14 @@
 .page-home_ourPets {
   .loc_wrapper {
     position: relative;
-
   }
 
   .react-tabs__tab-panel {
     padding-bottom: 0;
+
     .swiper {
       padding-bottom: 16px;
+
       .swiper-slide {
         box-shadow: $boxShadowEnabled;
       }
@@ -16,20 +17,20 @@
 
   .loc_title {
     font-weight: 600;
-    padding: 0 0 12px 0px;
+    padding: 0 0 12px 0;
     display: flex;
     align-items: center;
 
     .loc_link {
+      @extend %hoverable;
       color: $c_lagunaGrey;
       font-size: 24px;
       font-weight: 700;
-      @extend %hoverable;
     }
 
     .loc_seeAll {
-      color: $c_lagunaDark;
       @extend %hoverable;
+      color: $c_lagunaDark;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -61,8 +62,8 @@
         width: 100%;
         margin-bottom: 24px;
         max-width: 100%;
-        // cursor: pointer;
       }
+
       .loc_donationIcon {
         position: absolute;
         bottom: 8px;
@@ -75,6 +76,7 @@
           height: 100%;
         }
       }
+
       .loc_name {
         position: absolute;
         top: 16px;
@@ -94,13 +96,10 @@
 
         &.loc--female {
           //color: $c_pink
-
         }
-
       }
 
       .loc_status {
-
         &.loc--status {
           &_1 {
             display: none;
@@ -126,8 +125,6 @@
           &_3, &_4 {
             color: $c_lagunaDark;
           }
-
-
         }
       }
     }
@@ -140,9 +137,7 @@
         font-weight: 400;
         font-size: 16px;
 
-
         .loc_age {
-          // font-style: Italic;
           display: inline-block;
 
           .loc--undefined {
@@ -150,7 +145,6 @@
             font-style: Italic;
             font-size: 13px;
           }
-
         }
 
         .loc_sex {
@@ -163,7 +157,6 @@
 
           &.loc--female {
             color: $c_pink
-
           }
         }
 
@@ -187,8 +180,6 @@
             font-style: normal;
           }
         }
-
-
       }
 
       .loc_button {
@@ -198,10 +189,9 @@
       }
     }
 
-
     .loc_seeAll {
-      color: $c_lagunaDark;
       @extend %hoverable;
+      color: $c_lagunaDark;
       font-size: 20px;
       font-weight: 600;
       display: flex;
@@ -215,8 +205,6 @@
     max-width: 70px;
     font-size: 14px;
     margin-left: 8px;
-
-
   }
 
   .react-tabs__tab {
@@ -224,38 +212,30 @@
       border-top-right-radius: 0;
     }
   }
-
-
 }
-
 
 .layout.loc--isMobile .page-home_ourPets {
   .react-tabs__tab-panel {
     padding-bottom: 0;
+
     .swiper {
       padding-bottom: calc(24px * var(--viewport-koeff));
+
       .swiper-slide {
         box-shadow: $boxShadowMobileImportant;
       }
     }
   }
+
   .loc_title {
     padding: 0;
+    margin-bottom: calc(16px * var(--viewport-koeff));
 
     .loc_link {
-
       font-size: calc(42px * var(--viewport-koeff));
-
-    }
-
-    span {
-      font-size: calc(36px * var(--viewport-koeff));
-      color: $c_lagunaGrey;
-      font-weight: 700;
     }
 
     .loc_seeAll {
-
       gap: calc(16px * var(--viewport-koeff));
       font-size: calc(32px * var(--viewport-koeff));
 
@@ -264,7 +244,11 @@
       }
     }
 
-    margin-bottom: calc(16px * var(--viewport-koeff));
+    span {
+      font-size: calc(36px * var(--viewport-koeff));
+      color: $c_lagunaGrey;
+      font-weight: 700;
+    }
   }
 
   .react-tabs__tab-list {
@@ -281,7 +265,6 @@
   .loc_slider {
     height: calc(930px * var(--viewport-koeff));
 
-
     .loc_image {
       position: relative;
 
@@ -289,6 +272,7 @@
         margin-bottom: calc(32px * var(--viewport-koeff));
         min-height: calc(280px * var(--viewport-koeff));
       }
+
       .loc_donationIcon {
         position: absolute;
         bottom: calc(8px * var(--viewport-koeff));
@@ -301,6 +285,7 @@
           height: 100%;
         }
       }
+
       .loc_status {
 
         &.loc--status {
@@ -313,8 +298,6 @@
             line-height: calc(60px * var(--viewport-koeff));
             font-weight: 600;
           }
-
-
         }
       }
 
@@ -326,7 +309,6 @@
         top: calc(16px * var(--viewport-koeff));
         right: calc(16px * var(--viewport-koeff));
       }
-
     }
 
     .swiper-slide .loc_content .loc_data {
@@ -336,20 +318,17 @@
 
       .loc_age .loc--undefined {
         font-size: calc(20px * var(--viewport-koeff));
-
       }
 
       .loc_description {
         margin-top: calc(16px * var(--viewport-koeff));
-        max-height: 100%; //calc(128px * var(--viewport-koeff));
+        max-height: 100%;
         line-height: calc(38px * var(--viewport-koeff));
-        //overflow: auto;
       }
 
       .loc_collected {
         margin-top: calc(8px * var(--viewport-koeff));
       }
-
     }
 
     .loc_seeAll {
@@ -361,5 +340,3 @@
 
   }
 }
-
-

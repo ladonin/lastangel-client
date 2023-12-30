@@ -1,4 +1,5 @@
 .page-home_collections {
+  margin-bottom: 24px;
 
   .loc_block {
     //background-color: $c_pistachioLight;
@@ -14,12 +15,12 @@
   }
 
   .loc_title {
-    margin: 0 0 8px 0px;
+    @extend %hoverable;
+    margin: 0 0 8px 0;
     display: inline-block;
     font-size: 24px;
     font-weight: 700;
     color: $c_lagunaGrey;
-    @extend %hoverable;
   }
 
   .loc_item {
@@ -36,7 +37,6 @@
         width: 192px;
         height: 192px;
       }
-
     }
 
     .loc_name {
@@ -45,6 +45,7 @@
       cursor: pointer;
       color: $c_lagunaGrey;
       display: block;
+
       &:hover {
         color: $c_lagunaBlue;
       }
@@ -57,12 +58,12 @@
 
       .loc_data {
         font-weight: 400;
-        
 
         .loc_collected, .loc_need {
           margin-top: 4px;
           font-style: Italic;
           font-size: 14px;
+
           .loc_val {
             font-weight: 600;
             color: $c_orange;
@@ -78,7 +79,6 @@
 
         .loc_description {
           margin-top: 8px;
-          
           font-size: 14px;
           line-height: 20px;
           -webkit-line-clamp: 4;
@@ -87,16 +87,12 @@
           overflow: hidden;
         }
       }
-
-
     }
-
-
   }
 
   .loc_seeAll {
-    color: $c_lagunaDark;
     @extend %hoverable;
+    color: $c_lagunaDark;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -108,10 +104,7 @@
       height: 12px;
     }
   }
-
-  margin-bottom: 24px;
 }
-
 
 .layout.loc--isMobile .page-home_collections {
   margin-bottom: calc(16px * var(--viewport-koeff));
@@ -122,7 +115,6 @@
   }
 
   .loc_block {
-
     display: flex;
     flex-wrap: wrap;
 
@@ -132,12 +124,9 @@
       .loc_content {
         width: calc(100% - calc(260px * var(--viewport-koeff)));
         padding-right: calc(24px * var(--viewport-koeff));
-
         padding-left: calc(16px * var(--viewport-koeff));
 
         .loc_data {
-          
-
           .loc_collected, .loc_need {
             font-size: calc(28px * var(--viewport-koeff));
             margin-top: calc(4px * var(--viewport-koeff));
@@ -145,7 +134,6 @@
           }
 
           .loc_name {
-            
             font-size: calc(32px * var(--viewport-koeff));
           }
 
@@ -167,7 +155,6 @@
         }
       }
     }
-
   }
 
   .loc_wrapper {
@@ -175,7 +162,6 @@
   }
 
   .loc_seeAll {
-
     gap: calc(16px * var(--viewport-koeff));
     font-size: calc(32px * var(--viewport-koeff));
     margin-top: calc(8px * var(--viewport-koeff));

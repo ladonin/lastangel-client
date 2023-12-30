@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
-import InputFileImages from "components/Form/InputFileImages";
 import { TGetResponseItem } from "api/types/documents";
 import { getAnotherImagesUrl } from "helpers/documents";
 import { SIZES_ANOTHER } from "constants/photos";
+import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
+import InputFileImages from "components/Form/InputFileImages";
 import "./style.scss";
 
 export type TParams = { [key: string]: any };
@@ -21,7 +21,9 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   const paramsRef = useRef<TParams>({});
 
   const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
-  const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(null);
+  const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(
+    null
+  );
 
   useEffect(() => {
     if (data) {
@@ -29,15 +31,6 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       paramsRef.current = data;
     }
   }, [data]);
-  // продолжить с удаления фото - главного и дополнительного на бэке - ПРОДОЛЖЕНИЕ
-  //
-  // главное фото
-  // на бэке просто пересохраняется фото в базе (ничего не меняется) и перезапись главного фото на новое (автозамена файла)
-  //
-  // потом добавление дополнительных фоток another
-  // на бэке удаляем из базы номера и из хранилища файлы
-  // сохранение с новыми инкрементированными номерами в базе и хранилище
-  //
 
   const onChangeHandler = (key: string, value: any) => {
     paramsRef.current[key] = value.value ? Number(value.value) : value;
@@ -49,7 +42,8 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   }, [anotherImagesState]);
 
   useEffect(() => {
-    anotherImagesForDeleteState !== null && onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
+    anotherImagesForDeleteState !== null &&
+      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
   }, [anotherImagesForDeleteState]);
 
   const setAnotherImagesHandler = (images: File[]) => {
@@ -57,11 +51,16 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   };
 
   const removeAnotherImageHandler = (val: number) => {
-    setAnotherImagesForDeleteState(anotherImagesForDeleteState === null ? [val] : anotherImagesForDeleteState.concat(val));
+    setAnotherImagesForDeleteState(
+      anotherImagesForDeleteState === null ? [val] : anotherImagesForDeleteState.concat(val)
+    );
   };
 
   const restoreAnotherImageHandler = (val: number) => {
-    anotherImagesForDeleteState && setAnotherImagesForDeleteState(anotherImagesForDeleteState.filter((id: number) => id !== val));
+    anotherImagesForDeleteState &&
+      setAnotherImagesForDeleteState(
+        anotherImagesForDeleteState.filter((id: number) => id !== val)
+      );
   };
 
   return (
@@ -78,7 +77,9 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
               label="Ранее загруженные фото"
               removeImage={removeAnotherImageHandler}
               restoreImage={restoreAnotherImageHandler}
-              prepareUrlFunc={(img: number) => (data ? getAnotherImagesUrl(data, img, SIZES_ANOTHER.SIZE_1200) : "")}
+              prepareUrlFunc={(img: number) =>
+                data ? getAnotherImagesUrl(data, img, SIZES_ANOTHER.SIZE_1200) : ""
+              }
             />
           )}
         </div>

@@ -59,9 +59,7 @@
         &_viewed {
           background: $c_pistachioLighter;
         }
-
       }
-
 
       .loc_created {
         margin-bottom: 8px;
@@ -69,11 +67,7 @@
         color: $c_greyDark;
         font-size: 14px;
       }
-
-
     }
-
-
   }
 
   &_deleteModal {
@@ -82,7 +76,6 @@
       justify-content: space-between;
       margin-top: 32px;
     }
-
   }
 }
 
@@ -129,7 +122,6 @@
         font-size: calc(32px * var(--viewport-koeff));
         margin-bottom: calc(16px * var(--viewport-koeff));
       }
-
     }
   }
 }

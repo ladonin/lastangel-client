@@ -1,24 +1,23 @@
 /*
   import News from 'pages/home/_components/News'
  */
-
 import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
 import { Link, useNavigate } from "react-router-dom";
 import { NewsApi } from "api/news";
-import { getDateString } from "helpers/common";
 import { TGetListOutput, TItem } from "api/types/news";
-import ArrowRight from "icons/arrowRight.svg";
+import { getDateString } from "helpers/common";
 import PAGES from "routing/routes";
 import { NEWS_STATUS } from "constants/news";
 import Tooltip from "components/Tooltip";
+import ArrowRight from "icons/arrowRight.svg";
 import PinIcon from "icons/pin.png";
 import "./style.scss";
 
 const News = () => {
-  const [listState, setListState] = useState<TGetListOutput>([]);
   const navigate = useNavigate();
+  const [listState, setListState] = useState<TGetListOutput>([]);
 
   const renderContent = (data: TItem) => (
     <div
@@ -60,6 +59,7 @@ const News = () => {
       setListState(res);
     });
   }, []);
+
   return listState.length ? (
     <div className="page-home_news">
       <Link to={`${PAGES.NEWS}`} className="link_text loc_title">

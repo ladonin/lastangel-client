@@ -22,14 +22,13 @@
       .loc_wait {
         background-color: $c_greyDark;
       }
-
-
     }
 
     .component-mediaOriginalLinks {
       padding: 24px 12px 0 12px;
     }
   }
+
   .component-mediaOriginalLinks {
     padding: 12px 0 0 12px;
   }
@@ -49,6 +48,7 @@
       }
     }
   }
+
   .component-mediaOriginalLinks {
     padding: calc(24px * var(--viewport-koeff)) 0 0 0;
   }

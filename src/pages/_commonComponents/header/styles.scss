@@ -137,6 +137,7 @@
     justify-content: space-between;
 
     .loc_item, .loc_else {
+      @extend %hoverableLagunaMiddle;
       font-size: 15px;
       text-transform: uppercase;
       font-weight: $font_semi_bold;
@@ -144,7 +145,6 @@
       display: flex;
       align-items: center;
       color: $c_white;
-      @extend %hoverableLagunaMiddle;
 
       &.loc--active {
         color: $c_lagunaMiddle;
@@ -306,10 +306,10 @@
     box-shadow: $boxShadowMobile;
 
     .loc_item, .loc_else {
+      @extend %hoverableLagunaBlueDark;
       color: $c_main;
       font-size: calc(36px * var(--viewport-koeff));
       font-weight: 600;
-      @extend %hoverableLagunaBlueDark;
 
       &.loc--active {
         color: $c_lagunaBlueDark;

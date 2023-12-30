@@ -6,7 +6,7 @@
 
   .loc_error {
     color: $c_red;
-    padding: 16px 0px;
+    padding: 16px 0;
 
   }
 
@@ -16,18 +16,11 @@
       display: flex;
       margin-top: 36px;
 
-      .loc_saveButton {
-        // width: 200px;
-      }
-
       .loc_cancelButton {
         margin-left: 24px;
       }
-
     }
-
   }
-
 }
 
 
@@ -64,19 +57,15 @@
   .loc_wrapper_updatedSuccess {
     font-size: calc(40px * var(--viewport-koeff));
     line-height: calc(56px * var(--viewport-koeff));
-
   }
 
   .loc_wrapper_textForm {
-
     .loc_buttons {
       margin-top: calc(36px * var(--viewport-koeff));
 
       .loc_cancelButton {
         margin-left: calc(24px * var(--viewport-koeff));
       }
-
     }
-
   }
 }

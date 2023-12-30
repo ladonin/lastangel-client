@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
-import Select from "components/Form/Select";
+import React, { useRef, useEffect, useState } from "react";
 import { VolunteersApi } from "api/volunteers";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
+import Select from "components/Form/Select";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import "./style.scss";
 
 type TProps = {
@@ -16,32 +16,35 @@ export type TFilterParams = {
   minbirthdate?: number[];
   maxbirthdate?: number[];
 };
+
 type TSelectRefProps = {
   clearValue: () => void;
   lightClear: () => void;
 };
 
-export const DEFAULT_SORT = "desc";
-
 const VolunteersFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
+  const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
 
   const selectIdRef = useRef<TSelectRefProps>();
   const selectStatusRef = useRef<TSelectRefProps>();
-  const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
-
-  useEffect(() => {
-    filterState !== null && onChange(filterState);
-  }, [filterState]);
 
   const reset = () => {
     selectStatusRef.current?.clearValue();
     selectIdRef.current?.clearValue();
   };
 
+  const getInputStatusValue = () => (filterState?.notPublished === 1 ? "not_published" : undefined);
+
+  const getInputIdValue = () => (filterState?.id ? String(filterState?.id) : undefined);
+
   const [volunteersOptionsState, setVolunteersOptionsState] = useState<
     { value: string; label: string }[]
   >([]);
+
+  useEffect(() => {
+    filterState !== null && onChange(filterState);
+  }, [filterState]);
 
   useEffect(() => {
     VolunteersApi.getList({
@@ -59,11 +62,6 @@ const VolunteersFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
       );
     });
   }, []);
-
-  const getInputStatusValue = () =>
-    filterState?.notPublished === 1 ? "not_published" : undefined;
-
-  const getInputIdValue = () => (filterState?.id ? String(filterState?.id) : undefined);
 
   return (
     <div className="page-administration_volunteers_filter">
@@ -92,11 +90,10 @@ const VolunteersFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
             {
               value: "not_published",
               label: "Не опубликован",
-            }
+            },
           ]}
           innerRef={selectStatusRef}
         />
-        
 
         <Select
           value={getInputIdValue()}
@@ -107,7 +104,9 @@ const VolunteersFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
               ...state,
               id: val ? Number(val.value) : undefined,
             }));
-            !isLightClear && selectStatusRef.current?.lightClear && selectStatusRef.current?.lightClear();
+            !isLightClear &&
+              selectStatusRef.current?.lightClear &&
+              selectStatusRef.current?.lightClear();
           }}
           className="loc_formSelectItem loc--fio"
           options={volunteersOptionsState}

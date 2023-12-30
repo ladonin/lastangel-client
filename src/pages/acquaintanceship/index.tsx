@@ -21,10 +21,12 @@ import MediaOriginalLinks from "components/MediaOriginalLinks";
 import "./style.scss";
 
 const Acquaintanceship: React.FC = () => {
-  const navigate = useNavigate();
   const isMobile = loadItem("isMobile");
-  const [dataState, setDataState] = useState<TItem | null>(null);
+  const navigate = useNavigate();
   const { getMetatags } = useOutletContext<any>();
+  const [dataState, setDataState] = useState<TItem | null>(null);
+  const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
+
   const metatags = useMemo(() => {
     const data = getMetatags();
     return {
@@ -32,7 +34,6 @@ const Acquaintanceship: React.FC = () => {
       description: data.acquaintanceship_description || "",
     };
   }, []);
-  const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
 
   useEffect(() => {
     AcquaintanceshipApi.get().then((res) => {

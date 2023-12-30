@@ -31,12 +31,6 @@ const Textarea: React.FC<TProps> = ({
 }) => {
   const [valueState, setValueState] = useState(value || "");
 
-  useEffect(() => {
-    if (value !== undefined && value !== null && value !== valueState) {
-      setValueState(value);
-    }
-  }, [value]);
-
   const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value;
 
@@ -45,6 +39,12 @@ const Textarea: React.FC<TProps> = ({
       onChange(val);
     }
   };
+
+  useEffect(() => {
+    if (value !== undefined && value !== null && value !== valueState) {
+      setValueState(value);
+    }
+  }, [value]);
 
   return (
     <div className={cn("component-textarea", className)}>

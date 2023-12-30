@@ -1,9 +1,9 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { loadItem } from "utils/localStorage";
 import { isObjectOptionsEmpty } from "helpers/common";
 import Select from "components/Form/Select";
 import InputText from "components/Form/InputText";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {
@@ -11,16 +11,19 @@ type TProps = {
   filter: TFilterParams | null;
 };
 
+type TSelectRefProps = {
+  clearValue: () => void;
+};
+
+type TInputRefProps = {
+  clearValue: () => void;
+};
+
 export type TFilterParams = {
   order?: string;
   title?: string;
 };
-type TSelectRefProps = {
-  clearValue: () => void;
-};
-type TInputRefProps = {
-  clearValue: () => void;
-};
+
 export const ORDER_OPTIONS = [
   { value: "desc", label: "Сначала новые" },
   { value: "asc", label: "Сначала старые" },
@@ -29,14 +32,20 @@ export const ORDER_OPTIONS = [
 export const DEFAULT_SORT = "desc";
 
 const StoriesFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
+  const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
 
   const selectOrderRef = useRef<TSelectRefProps>();
   const inputTitleRef = useRef<TInputRefProps>();
-  const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
-
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const immediateRef = useRef(false);
+
+  const reset = () => {
+    selectOrderRef.current?.clearValue();
+    inputTitleRef.current?.clearValue();
+    immediateRef.current = true;
+  };
+
   useEffect(() => {
     timeoutRef.current && clearTimeout(timeoutRef.current);
 
@@ -51,11 +60,6 @@ const StoriesFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
     }
   }, [filterState]);
 
-  const reset = () => {
-    selectOrderRef.current?.clearValue();
-    inputTitleRef.current?.clearValue();
-    immediateRef.current = true;
-  };
   return (
     <div className="page-administration_stories_filter">
       <div className="loc_wrapper">

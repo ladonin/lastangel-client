@@ -1,9 +1,9 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { isObjectOptionsEmpty } from "helpers/common";
+import { loadItem } from "utils/localStorage";
 import Select from "components/Form/Select";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import InputText from "components/Form/InputText";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {
@@ -26,17 +26,22 @@ export const ORDER_OPTIONS = [
   { value: "id asc", label: "Сначала старые" },
 ];
 
-export const DEFAULT_SORT = "desc";
-
 const NewsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
+
+  const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
 
   const selectOrderRef = useRef<TSelectRefProps>();
   const inputTitleRef = useRef<TInputRefProps>();
-  const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
-
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const immediateRef = useRef(false);
+
+  const reset = () => {
+    selectOrderRef.current?.clearValue();
+    inputTitleRef.current?.clearValue();
+    immediateRef.current = true;
+  };
+
   useEffect(() => {
     timeoutRef.current && clearTimeout(timeoutRef.current);
 
@@ -51,11 +56,6 @@ const NewsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
     }
   }, [filterState]);
 
-  const reset = () => {
-    selectOrderRef.current?.clearValue();
-    inputTitleRef.current?.clearValue();
-    immediateRef.current = true;
-  };
   return (
     <div className="page-newses_filter">
       <div className="loc_wrapper">

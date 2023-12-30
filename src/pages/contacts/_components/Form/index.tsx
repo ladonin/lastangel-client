@@ -1,14 +1,15 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { FeedbacksApi } from "api/feedbacks";
+import { loadItem } from "utils/localStorage";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Textarea from "components/Form/Textarea";
 import InputText from "components/Form/InputText";
 import FlowerImage from "icons/flower1.png";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 const Form: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const [topicState, setTopicState] = useState<string>("");
   const [fioState, setFioState] = useState<string>("");
   const [phoneState, setPhoneState] = useState<string>("");
@@ -17,8 +18,6 @@ const Form: React.FC = () => {
   const [captchaState, setCaptchaState] = useState<boolean>(false);
   const [errorTextState, setErrorTextState] = useState("");
   const [isSentState, setIsSentState] = useState(false);
-
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   const emailRef = useRef<any>(null);
   const phoneRef = useRef<any>(null);
@@ -108,14 +107,21 @@ const Form: React.FC = () => {
           />
           {errorTextState && <div className="loc_error">{errorTextState}</div>}
           {false && isMobile === false && (
-            <ReCAPTCHA sitekey="6Ldvqv0mAAAAADuVHYfsejSXeL-eH9Ko3WAerhzm" onChange={() => setCaptchaState(true)} />
+            <ReCAPTCHA
+              sitekey="6Ldvqv0mAAAAADuVHYfsejSXeL-eH9Ko3WAerhzm"
+              onChange={() => setCaptchaState(true)}
+            />
           )}
 
           <Button
             theme={ButtonThemes.PRIMARY}
             size={isMobile ? ButtonSizes.GIANT : ButtonSizes.LARGE}
             disabled={
-              !topicState || !fioState || !phoneState || !textState || (false && isMobile === false && !captchaState)
+              !topicState ||
+              !fioState ||
+              !phoneState ||
+              !textState ||
+              (false && isMobile === false && !captchaState)
             }
             onClick={sendHandler}
           >

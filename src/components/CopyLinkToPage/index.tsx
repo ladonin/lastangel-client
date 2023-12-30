@@ -15,8 +15,8 @@ type Props = {
 };
 
 const CopyLinkToPage: React.FC<Props> = ({ url, text, targetText }) => {
-  const [copyToBufferStatusState, setCopyToBufferStatusState] = useState<boolean | null>(null);
   const isMobile = loadItem("isMobile");
+  const [copyToBufferStatusState, setCopyToBufferStatusState] = useState<boolean | null>(null);
 
   useEffect(() => {
     if (copyToBufferStatusState !== null) {

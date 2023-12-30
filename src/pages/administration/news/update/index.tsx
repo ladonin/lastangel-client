@@ -1,57 +1,34 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";
 import { useNavigate, useParams } from "react-router-dom";
-import { NewsApi } from "api/news";
+
 import PAGES from "routing/routes";
-import Modal from "components/Modal";
-import { TCommonDataRequest } from "api/types/news";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
+import { NewsApi } from "api/news";
+import { TCommonDataRequest } from "api/types/news";
+import Modal from "components/Modal";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const NewsUpdate: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const { id } = useParams();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
   const [isDeletingState, setIsDeletingState] = useState(false);
   const [isChangedState, setIsChangedState] = useState(false);
   const [isDeletedState, setIsDeletedState] = useState(false);
   const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState(false);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const paramsRef = useRef<TParams | null>(null);
   const responseRef = useRef<TResponse | undefined>(undefined);
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
-
-  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
-
-  useEffect(() => {
-    id &&
-      NewsApi.get(Number(id)).then((res) => {
-        if (res !== null) {
-          setDataIsLoadedState(true);
-          responseRef.current = res;
-          forceUpdate();
-        }
-        // setIsUpdatingState(false);
-        // setIsChangedState(true);
-        // requestRef.current = EMPTY_REQUEST;
-      });
-  }, [id]);
-
-  useEffect(() => {}, [dataIsLoadedState]);
-
-  //
-  // продолжить с фото
-  // сделать общий валидатор формы для создания и редактирования
-
-  //
-  //
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -73,7 +50,6 @@ const NewsUpdate: React.FC = () => {
     });
   };
 
-  // создать в форме общую функцию валидатора
   const updateHandler = () => {
     if (!paramsRef.current) return;
 
@@ -113,7 +89,20 @@ const NewsUpdate: React.FC = () => {
     setModalDeleteIsOpenState(true);
   };
 
-  return dataIsLoadedState !== null ? (
+  useEffect(() => {}, [dataIsLoadedState]);
+
+  useEffect(() => {
+    id &&
+      NewsApi.get(Number(id)).then((res) => {
+        if (res !== null) {
+          setDataIsLoadedState(true);
+          responseRef.current = res;
+          forceUpdate();
+        }
+      });
+  }, [id]);
+
+  return dataIsLoadedState ? (
     <>
       <Helmet>
         <title>Обновление новости</title>

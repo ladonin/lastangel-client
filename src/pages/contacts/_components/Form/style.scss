@@ -34,12 +34,12 @@
   }
 
   .component-textarea {
+    margin-bottom: 16px;
+
     textarea {
       width: 100%;
       height: 239px;
     }
-
-    margin-bottom: 16px;
   }
 
   .loc_error {
@@ -51,9 +51,7 @@
   .component-button {
     margin-top: 16px;
   }
-
 }
-
 
 .layout.loc--isMobile .page-contacts_form {
   width: 100%;
@@ -63,9 +61,11 @@
     margin-top: calc(40px * var(--viewport-koeff));
     margin-bottom: calc(32px * var(--viewport-koeff));
   }
+
   .component-button {
     margin-top: calc(16px * var(--viewport-koeff));
   }
+
   .loc_error {
     font-size: calc(26px * var(--viewport-koeff));
     margin-bottom: calc(32px * var(--viewport-koeff));
@@ -78,6 +78,7 @@
     justify-content: center;
     margin-top: calc(48px * var(--viewport-koeff));
     margin-bottom: calc(32px * var(--viewport-koeff));
+
     img {
       height: calc(30px * var(--viewport-koeff));
     }
@@ -86,13 +87,16 @@
   img {
     height: calc(50px * var(--viewport-koeff));
   }
+
   .component-textarea {
     textarea {
       width: 100%;
       height: 40vh;
     }
+
     margin-bottom: calc(16px * var(--viewport-koeff));
   }
+
   input {
     margin-bottom: calc(32px * var(--viewport-koeff));
   }

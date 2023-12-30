@@ -12,6 +12,7 @@ import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const AcquaintanceshipUpdate: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [errorState, setErrorState] = useState("");
@@ -23,20 +24,6 @@ const AcquaintanceshipUpdate: React.FC = () => {
 
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
-
-  const isMobile = loadItem("isMobile");
-
-  useEffect(() => {
-    AcquaintanceshipApi.get().then((res) => {
-      if (res !== null) {
-        setDataIsLoadedState(true);
-        responseRef.current = res;
-        forceUpdate();
-      }
-    });
-  }, []);
-
-  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -78,6 +65,18 @@ const AcquaintanceshipUpdate: React.FC = () => {
         });
     }
   };
+
+  useEffect(() => {
+    AcquaintanceshipApi.get().then((res) => {
+      if (res !== null) {
+        setDataIsLoadedState(true);
+        responseRef.current = res;
+        forceUpdate();
+      }
+    });
+  }, []);
+
+  useEffect(() => {}, [dataIsLoadedState]);
 
   return dataIsLoadedState ? (
     <>

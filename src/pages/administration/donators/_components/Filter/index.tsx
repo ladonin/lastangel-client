@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
+import { loadItem } from "utils/localStorage";
 import InputText from "components/Form/InputText";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 type TProps = {
@@ -15,9 +15,11 @@ export type TFilterParams = {
   order?: string;
   order_type?: string;
 };
+
 type TSelectRefProps = {
   clearValue: () => void;
 };
+
 type TInputRefProps = {
   clearValue: () => void;
 };
@@ -31,6 +33,17 @@ const DonatorsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const immediateRef = useRef(false);
+
+  const reset = () => {
+    inputCardRef.current?.clearValue();
+    inputNameRef.current?.clearValue();
+    selectOrderRef.current?.clearValue();
+    immediateRef.current = true;
+  };
+
+  const getInputCardValue = () => (filterState?.card ? String(filterState?.card) : undefined);
+  const getInputFioValue = () => (filterState?.fio ? String(filterState?.fio) : undefined);
+
   useEffect(() => {
     timeoutRef.current && clearTimeout(timeoutRef.current);
 
@@ -44,15 +57,6 @@ const DonatorsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
       );
     }
   }, [filterState]);
-  const reset = () => {
-    inputCardRef.current?.clearValue();
-    inputNameRef.current?.clearValue();
-    selectOrderRef.current?.clearValue();
-    immediateRef.current = true;
-  };
-
-  const getInputCardValue = () => (filterState?.card ? String(filterState?.card) : undefined);
-  const getInputFioValue = () => (filterState?.fio ? String(filterState?.fio) : undefined);
 
   return (
     <div className="page-administration_donators_filter">

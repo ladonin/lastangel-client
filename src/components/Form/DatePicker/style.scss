@@ -101,14 +101,14 @@
       font-size: calc(47px * var(--viewport-koeff));
 
       &--previous::before {
-        top: 0px;
+        top: 0;
         left: 0;
         width: calc(30px * var(--viewport-koeff));
         height: calc(30px * var(--viewport-koeff));
       }
 
       &--next::before {
-        top: 0px;
+        top: 0;
         left: calc(-30px * var(--viewport-koeff));
         width: calc(30px * var(--viewport-koeff));
         height: calc(30px * var(--viewport-koeff));

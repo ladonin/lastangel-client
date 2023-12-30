@@ -4,29 +4,32 @@ import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Helmet } from "react-helmet";
-import List from "pages/newses/_components/List";
-import { TItem } from "api/types/news";
+
 import PAGES from "routing/routes";
+import { TItem } from "api/types/news";
 import { NewsApi } from "api/news";
-import { getVideoUrl, getAnotherImagesUrl } from "helpers/news";
-import BreadCrumbs from "components/BreadCrumbs";
-import { NEWS_STATUS } from "constants/news";
-import { isAdmin } from "utils/user";
 import { getDateString, getVideoType } from "helpers/common";
-import { SIZES_ANOTHER } from "constants/photos";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { getVideoUrl, getAnotherImagesUrl } from "helpers/news";
+import { NEWS_STATUS } from "constants/news";
 import { loadItem } from "utils/localStorage";
+import { isAdmin } from "utils/user";
+import { SIZES_ANOTHER } from "constants/photos";
+import List from "pages/newses/_components/List";
+import BreadCrumbs from "components/BreadCrumbs";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import CopyLinkToPage from "components/CopyLinkToPage";
 import MediaOriginalLinks from "components/MediaOriginalLinks";
 import "./style.scss";
 
 const News: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
-  const [idState, setIdState] = useState<number | null>(null);
-  const [dataState, setDataState] = useState<TItem | null>(null);
   const { id } = useParams();
   const { getMetatags } = useOutletContext<any>();
+
+  const [idState, setIdState] = useState<number | null>(null);
+  const [dataState, setDataState] = useState<TItem | null>(null);
+
   const metatags = useMemo(() => {
     if (!dataState) return false;
     const data = getMetatags();
@@ -35,6 +38,7 @@ const News: React.FC = () => {
       description: data.news_description || "",
     };
   }, [dataState]);
+
   const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
 
   useEffect(() => {

@@ -1,16 +1,10 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
-import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
-import InputFileImages from "components/Form/InputFileImages";
+import React, { useEffect, useState, useRef } from "react";
 import { TGetResponseItem } from "api/types/mainphotoalbum";
 import { getAnotherImagesUrl } from "helpers/mainphotoalbum";
 import { SIZES_ANOTHER } from "constants/photos";
-// const OtherComponent = React.lazy(() => import('components/header'));
-import { loadItem } from "utils/localStorage";
+import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
+import InputFileImages from "components/Form/InputFileImages";
 import "./style.scss";
-// TODO
-// сделать цветовую дифференциацию по статусам (фон)
-// сделать фильтр по статусам и пр
-// сделать сортировку по дате рожденияи пр.
 
 export type TParams = { [key: string]: any };
 
@@ -23,11 +17,17 @@ type TProps = {
 
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [anotherImagesState, setAnotherImagesState] = useState<File[] | null>(null);
+  const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
+  const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(
+    null
+  );
 
   const paramsRef = useRef<TParams>({});
 
-  const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
-  const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(null);
+  const onChangeHandler = (key: string, value: any) => {
+    paramsRef.current[key] = value.value ? Number(value.value) : value;
+    onChange(paramsRef.current);
+  };
 
   useEffect(() => {
     if (data) {
@@ -36,27 +36,14 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       onChange(paramsRef.current);
     }
   }, [data]);
-  // продолжить с удаления фото - главного и дополнительного на бэке - ПРОДОЛЖЕНИЕ
-  //
-  // главное фото
-  // на бэке просто пересохраняется фото в базе (ничего не меняется) и перезапись главного фото на новое (автозамена файла)
-  //
-  // потом добавление дополнительных фоток another
-  // на бэке удаляем из базы номера и из хранилища файлы
-  // сохранение с новыми инкрементированными номерами в базе и хранилище
-  //
-
-  const onChangeHandler = (key: string, value: any) => {
-    paramsRef.current[key] = value.value ? Number(value.value) : value;
-    onChange(paramsRef.current);
-  };
 
   useEffect(() => {
     anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
   }, [anotherImagesState]);
 
   useEffect(() => {
-    anotherImagesForDeleteState !== null && onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
+    anotherImagesForDeleteState !== null &&
+      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
   }, [anotherImagesForDeleteState]);
 
   const setAnotherImagesHandler = (images: File[]) => {
@@ -64,11 +51,16 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   };
 
   const removeAnotherImageHandler = (val: number) => {
-    setAnotherImagesForDeleteState(anotherImagesForDeleteState === null ? [val] : anotherImagesForDeleteState.concat(val));
+    setAnotherImagesForDeleteState(
+      anotherImagesForDeleteState === null ? [val] : anotherImagesForDeleteState.concat(val)
+    );
   };
 
   const restoreAnotherImageHandler = (val: number) => {
-    anotherImagesForDeleteState && setAnotherImagesForDeleteState(anotherImagesForDeleteState.filter((id: number) => id !== val));
+    anotherImagesForDeleteState &&
+      setAnotherImagesForDeleteState(
+        anotherImagesForDeleteState.filter((id: number) => id !== val)
+      );
   };
 
   return (
@@ -85,7 +77,9 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
               label="Ранее загруженные фото"
               removeImage={removeAnotherImageHandler}
               restoreImage={restoreAnotherImageHandler}
-              prepareUrlFunc={(img: number) => (data ? getAnotherImagesUrl(data, img, SIZES_ANOTHER.SIZE_450) : "")}
+              prepareUrlFunc={(img: number) =>
+                data ? getAnotherImagesUrl(data, img, SIZES_ANOTHER.SIZE_450) : ""
+              }
             />
           )}
         </div>

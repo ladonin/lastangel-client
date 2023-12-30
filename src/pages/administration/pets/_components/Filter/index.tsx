@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   ANIMALS_CATEGORY,
   ANIMALS_KIND,
@@ -6,12 +6,12 @@ import {
   CATEGORY_OPTIONS,
   STATUS_OPTIONS_FILTER,
 } from "constants/animals";
-import Select from "components/Form/Select";
 import { ValuesOf } from "types/common";
 import { AnimalsApi } from "api/animals";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
 import { getCategoryAgeParams } from "helpers/animals";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import Select from "components/Form/Select";
 import "./style.scss";
 
 type TProps = {
@@ -30,22 +30,19 @@ export type TFilterParams = {
   minbirthdate?: number[];
   maxbirthdate?: number[];
 };
+
 type TSelectRefProps = {
   clearValue: () => void;
   lightClear: () => void;
 };
 
 const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
+  const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
 
   const selectCategoryRef = useRef<TSelectRefProps>();
   const selectIdRef = useRef<TSelectRefProps>();
   const selectStatusRef = useRef<TSelectRefProps>();
-  const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
-
-  useEffect(() => {
-    filterState !== null && onChange(filterState);
-  }, [filterState]);
 
   const reset = () => {
     selectCategoryRef.current?.clearValue();
@@ -56,6 +53,25 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   const [animalsOptionsState, setAnimalsOptionsState] = useState<
     { value: string; label: string }[]
   >([]);
+
+  const getInputStatusValue = () =>
+    filterState?.status
+      ? String(filterState?.status)
+      : filterState?.notPublished === 1
+      ? "not_published"
+      : filterState?.isMajor === 1
+      ? "is_major"
+      : undefined;
+
+  const getInputCategoryValue = () =>
+    filterState?.category ? String(filterState?.category) : undefined;
+
+  const getInputIdValue = () => (filterState?.id ? String(filterState?.id) : undefined);
+
+  useEffect(() => {
+    filterState !== null && onChange(filterState);
+  }, [filterState]);
+
   useEffect(() => {
     AnimalsApi.getList({
       offset: 0,
@@ -70,18 +86,6 @@ const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
       );
     });
   }, []);
-
-  const getInputStatusValue = () =>
-    filterState?.status
-      ? String(filterState?.status)
-      : filterState?.notPublished === 1
-      ? "not_published"
-      : filterState?.isMajor === 1
-      ? "is_major"
-      : undefined;
-  const getInputCategoryValue = () =>
-    filterState?.category ? String(filterState?.category) : undefined;
-  const getInputIdValue = () => (filterState?.id ? String(filterState?.id) : undefined);
 
   return (
     <div className="page-administration_pets_filter">

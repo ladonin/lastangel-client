@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   ANIMALS_CATEGORY,
   ANIMALS_KIND,
@@ -32,7 +32,7 @@ type TSelectRefProps = {
   lightClear: () => void;
 };
 const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   const selectCategoryRef = useRef<TSelectRefProps>();
   const selectIdRef = useRef<TSelectRefProps>();

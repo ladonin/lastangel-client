@@ -50,12 +50,6 @@ const Select: React.FC<TProps> = ({
     }
   };
 
-  useEffect(() => {
-    if (innerRef) {
-      (innerRef as any).current.lightClear = lightClear;
-    }
-  }, [innerRef]);
-
   const onChangeHandler = (val: any) => {
     if (lightClearRef.current === "on") {
       // При легком сбрасывании мы просто сбрасываем значения в селекте
@@ -74,6 +68,12 @@ const Select: React.FC<TProps> = ({
       onChangeHandler(val);
     }
   }, [val, value, options]);
+
+  useEffect(() => {
+    if (innerRef) {
+      (innerRef as any).current.lightClear = lightClear;
+    }
+  }, [innerRef]);
 
   return (
     <div className={cn("component-select", className)}>

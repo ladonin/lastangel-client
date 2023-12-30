@@ -167,10 +167,10 @@
           }
 
           .loc_additionally {
+            @extend %hoverable;
             margin-top: 8px;
             text-align: right;
             font-style: Italic;
-            @extend %hoverable;
             color: $c_lagunaDark;
           }
 
@@ -318,8 +318,8 @@
 
           .loc_name {
             &.loc--hasLink {
-              color: $c_blue;
               @extend %hoverable;
+              color: $c_blue;
             }
           }
 
@@ -448,7 +448,7 @@
 
           .loc_additionally {
             margin-left: auto;
-            margin-top: 0px;
+            margin-top: 0;
             font-weight: 600;
             font-size: calc(32px * var(--viewport-koeff));
           }
@@ -496,7 +496,7 @@
         }
 
         .loc_redactButton {
-          margin: calc(24px * var(--viewport-koeff)) auto 0px auto;
+          margin: calc(24px * var(--viewport-koeff)) auto 0 auto;
         }
 
 
@@ -529,7 +529,7 @@
     }
 
     .loc_bottomWrapper {
-      margin: calc(32px * var(--viewport-koeff)) calc(-24px * var(--viewport-koeff)) 0px calc(-24px * var(--viewport-koeff));
+      margin: calc(32px * var(--viewport-koeff)) calc(-24px * var(--viewport-koeff)) 0 calc(-24px * var(--viewport-koeff));
 
       display: flex;
       flex-wrap: wrap;

@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-
-// const OtherComponent = React.lazy(() => import('components/header'));
-import "./style.scss";
 import { getVideoUrl, getAnotherImagesUrl, getMainImageUrl } from "helpers/volunteers";
+import { TGetResponseItem } from "api/types/volunteers";
 import { IS_PUBLISHED_OPTIONS } from "constants/volunteers";
+import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
 import InputText from "components/Form/InputText";
 import InputFileImageWithCrop from "components/Form/InputFileImageWithCrop";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
@@ -12,11 +11,7 @@ import InputFileVideo from "components/Form/InputFileVideo";
 import DatePicker from "components/Form/DatePicker";
 import Select from "components/Form/Select";
 import Textarea from "components/Form/Textarea";
-import { Checkbox } from "components/Form/Checkbox";
-
-import { TGetResponseItem } from "api/types/volunteers";
-
-import { SIZES_MAIN, SIZES_ANOTHER } from "constants/photos";
+import "./style.scss";
 
 export type TParams = { [key: string]: any };
 
@@ -28,34 +23,19 @@ type TProps = {
 };
 
 const Form: React.FC<TProps> = ({ onChange, data }) => {
-  const [isMajorState, setIsMajorState] = useState(false);
   const [anotherImagesState, setAnotherImagesState] = useState<File[] | null>(null);
   const [mainImageState, setMainImageState] = useState<{ cropped: Blob; original: Blob } | null>(
     null
   );
-
-  const paramsRef = useRef<TParams>({});
-
   const [mainImagePrevState, setMainImagePrevState] = useState(0);
   const [mainImagePrevIsDeletedState, setMainImagePrevIsDeletedState] = useState<boolean | null>(
     null
   );
-
   const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
   const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(
     null
   );
-
-  useEffect(() => {
-    if (data) {
-      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
-      Number(data.main_image) && setMainImagePrevState(Number(data.main_image));
-      setIsMajorState(!!data.ismajor);
-
-      paramsRef.current = data;
-      onChange(paramsRef.current);
-    }
-  }, [data]);
+  const paramsRef = useRef<TParams>({});
 
   const onChangeHandler = (key: string, value: any) => {
     paramsRef.current[key] = value?.value ? Number(value.value) : value;
@@ -67,27 +47,10 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     setMainImagePrevState(0);
   };
 
-  useEffect(() => {
-    mainImageState !== null && onChangeHandler("main_image", mainImageState);
-  }, [mainImageState]);
-
-  useEffect(() => {
-    mainImagePrevIsDeletedState !== null &&
-      onChangeHandler("main_image_is_deleted", mainImagePrevIsDeletedState);
-  }, [mainImagePrevIsDeletedState]);
-
-  useEffect(() => {
-    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
-  }, [anotherImagesState]);
-
-  useEffect(() => {
-    anotherImagesForDeleteState !== null &&
-      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
-  }, [anotherImagesForDeleteState]);
-
   const setAnotherImagesHandler = (images: File[]) => {
     setAnotherImagesState(images);
   };
+
   const setVideo1Handler = (val: null | File) => {
     onChangeHandler("video1", val);
   };
@@ -118,6 +81,34 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
         anotherImagesForDeleteState.filter((id: number) => id !== val)
       );
   };
+
+  useEffect(() => {
+    if (data) {
+      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
+      Number(data.main_image) && setMainImagePrevState(Number(data.main_image));
+
+      paramsRef.current = data;
+      onChange(paramsRef.current);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    mainImageState !== null && onChangeHandler("main_image", mainImageState);
+  }, [mainImageState]);
+
+  useEffect(() => {
+    mainImagePrevIsDeletedState !== null &&
+      onChangeHandler("main_image_is_deleted", mainImagePrevIsDeletedState);
+  }, [mainImagePrevIsDeletedState]);
+
+  useEffect(() => {
+    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
+  }, [anotherImagesState]);
+
+  useEffect(() => {
+    anotherImagesForDeleteState !== null &&
+      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
+  }, [anotherImagesForDeleteState]);
 
   return (
     <div className="page-administration_volunteers_form_component">

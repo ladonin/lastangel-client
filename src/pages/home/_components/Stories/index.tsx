@@ -1,16 +1,15 @@
 /*
   import Stories from 'pages/home/_components/Stories'
  */
-
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import cn from "classnames";
 import { Link, useNavigate } from "react-router-dom";
-import { StoriesApi } from "api/stories";
+import PAGES from "routing/routes";
 import { getDateString } from "helpers/common";
+import { StoriesApi } from "api/stories";
 import { TGetListOutput, TItem } from "api/types/stories";
 import ArrowRight from "icons/arrowRight.svg";
-import PAGES from "routing/routes";
 import { STORIES_STATUS } from "constants/stories";
 import { loadItem } from "utils/localStorage";
 import Tooltip from "components/Tooltip";
@@ -18,9 +17,9 @@ import PinIcon from "icons/pin.png";
 import "./style.scss";
 
 const Stories = () => {
-  const [listState, setListState] = useState<TGetListOutput>([]);
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const [listState, setListState] = useState<TGetListOutput>([]);
 
   const renderContent = (data: TItem) => (
     <div
@@ -62,6 +61,7 @@ const Stories = () => {
       setListState(res);
     });
   }, []);
+
   return listState.length ? (
     <div className="page-home_stories">
       <Link to={`${PAGES.STORIES}`} className="link_text loc_title">

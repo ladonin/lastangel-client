@@ -26,7 +26,7 @@
 
       .loc_name {
         position: absolute;
-        top: 0px;
+        top: 0;
         right: 0;
         background-color: rgba(255, 255, 255, 0.9);
         padding: 4px 8px;
@@ -51,7 +51,7 @@
           &_3,
           &_4 {
             position: absolute;
-            bottom: 0px;
+            bottom: 0;
             left: 0;
             background-color: rgba(255, 255, 255, 0.9);
             padding: 4px 4px;

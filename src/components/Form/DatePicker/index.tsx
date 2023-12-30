@@ -33,14 +33,14 @@ const DatePicker: React.FC<TProps> = ({
 }) => {
   const [valueState, setValueState] = useState<Date | null>(value || null);
 
-  useEffect(() => {
-    value && value !== valueState && setValueState(value);
-  }, [value]);
-
   const onChangeHandler = (date: Date | null) => {
     setValueState(date);
     onChange(date ? getTimestamp(date) : 0);
   };
+
+  useEffect(() => {
+    value && value !== valueState && setValueState(value);
+  }, [value]);
 
   return (
     <div className={cn("component-datePicker", className)}>

@@ -1,5 +1,4 @@
 .page-newses {
-
   .loc_list {
     display: flex;
     flex-wrap: wrap;
@@ -7,22 +6,12 @@
     gap: 16px;
     position: relative;
     min-height: 300px;
-
-
   }
-
 }
 
 
 .layout.loc--isMobile .page-newses {
-
   .loc_list {
-
     gap: calc(16px * var(--viewport-koeff));
-
-
   }
-
-
 }
-

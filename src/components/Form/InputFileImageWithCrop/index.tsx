@@ -33,6 +33,7 @@ const CROP_DEFAULT: TCrop = { x: 0, y: 0 };
 
 const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
   const { className, setImage, label, required, disabled = false, cropAspect, description } = props;
+  const isMobile = loadItem("isMobile");
   const { loadImgs: loadImg, imgsResult: imgResult } = useGetImageDataHook();
   const [imageState, setImageState] = useState<File | null>(null);
   const [croppedImageState, setCroppedImageState] = useState<string | null>(null);
@@ -48,10 +49,48 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
   const [cropMaxZoomState, setCropMaxZoomState] = useState(1);
   const [cropRotationState, setCropRotationState] = useState(0);
   const [wrongImageState, setWrongImageState] = useState<TWrongImageData | null>(null);
+
   const setImageHandler = (photo: File) => {
     loadImg([photo]);
   };
-  const isMobile = loadItem("isMobile");
+
+  const onCropComplete = useCallback(
+    (croppedArea: Area, croppedAreaPixels: Area) => {
+      setImageWasCroppedState(true);
+      setCropResultState({ pixels: croppedAreaPixels, percents: croppedArea });
+    },
+    [imageState]
+  );
+
+  const urlForCrop = useMemo(
+    () => (imageState ? URL.createObjectURL(imageState) : ""),
+    [imageState]
+  );
+
+  const createCroppedImage = useCallback(async () => {
+    if (!imageState || !cropResultState) return;
+
+    const croppedImage: Blob | null = await getCroppedImg(
+      URL.createObjectURL(imageState),
+      cropResultState.pixels,
+      cropRotationState
+    );
+    if (croppedImage === null) return;
+
+    setCropState(CROP_DEFAULT);
+    setCropRotationState(0);
+    setCropZoomState(1);
+
+    setCroppedImageState(URL.createObjectURL(croppedImage));
+    setCroppedImageBlobState(croppedImage);
+  }, [cropResultState, 0, imageState]);
+
+  const saveCrop = () => {
+    setOpenCropModalState(false);
+    createCroppedImage();
+  };
+
+  const needRenderCropModal = () => !!urlForCrop;
 
   useEffect(() => {
     if (imgResult === null) return;
@@ -101,44 +140,6 @@ const InputFileImageWithCrop: React.FC<PropsWithChildren<TProps>> = (props) => {
   useEffect(() => {
     imageState && setOpenCropModalState(true);
   }, [imageState]);
-
-  const onCropComplete = useCallback(
-    (croppedArea: Area, croppedAreaPixels: Area) => {
-      setImageWasCroppedState(true);
-      setCropResultState({ pixels: croppedAreaPixels, percents: croppedArea });
-    },
-    [imageState]
-  );
-
-  const urlForCrop = useMemo(
-    () => (imageState ? URL.createObjectURL(imageState) : ""),
-    [imageState]
-  );
-
-  const createCroppedImage = useCallback(async () => {
-    if (!imageState || !cropResultState) return;
-
-    const croppedImage: Blob | null = await getCroppedImg(
-      URL.createObjectURL(imageState),
-      cropResultState.pixels,
-      cropRotationState
-    );
-    if (croppedImage === null) return;
-
-    setCropState(CROP_DEFAULT);
-    setCropRotationState(0);
-    setCropZoomState(1);
-
-    setCroppedImageState(URL.createObjectURL(croppedImage));
-    setCroppedImageBlobState(croppedImage);
-  }, [cropResultState, 0, imageState]);
-
-  const saveCrop = () => {
-    setOpenCropModalState(false);
-    createCroppedImage();
-  };
-
-  const needRenderCropModal = () => !!urlForCrop;
 
   return (
     <div className={cn("component-inputFileImageWithCrop", className)}>

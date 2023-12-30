@@ -9,9 +9,8 @@ import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const ClinicPhotosUpdate: React.FC = () => {
-  const navigate = useNavigate();
-
   const isMobile = loadItem("isMobile");
+  const navigate = useNavigate();
 
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
@@ -23,16 +22,6 @@ const ClinicPhotosUpdate: React.FC = () => {
 
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
-
-  useEffect(() => {
-    ClinicPhotosApi.get().then((res) => {
-      setDataIsLoadedState(true);
-      responseRef.current = res;
-      forceUpdate();
-    });
-  }, []);
-
-  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -56,6 +45,16 @@ const ClinicPhotosUpdate: React.FC = () => {
         setIsUpdatingState(false);
       });
   };
+
+  useEffect(() => {
+    ClinicPhotosApi.get().then((res) => {
+      setDataIsLoadedState(true);
+      responseRef.current = res;
+      forceUpdate();
+    });
+  }, []);
+
+  useEffect(() => {}, [dataIsLoadedState]);
 
   return (
     <>

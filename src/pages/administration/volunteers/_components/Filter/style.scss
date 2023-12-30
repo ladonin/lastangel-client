@@ -9,32 +9,33 @@
     border-radius: 8px;
 
     .loc_formInputItem, .loc_formSelectItem {
-      
+
       .loc_label {
         color: $c_white;
       }
+
       input, .loc_select {
         width: 100%;
       }
 
-      
-
-     &.loc--fio {
-       width: 50%;
-     }
-     &.loc--status {
-        width: 25%;
+      &.loc--fio {
+        width: 50%;
       }
 
-
+      &.loc--status {
+        width: 25%;
+      }
     }
+
     .loc_resetButton {
       background-color: $c_lagunaBlue;
       color: $c_white;
       margin-left: auto;
+
       &:hover {
         background-color: $c_lagunaBlueLight;
       }
+
       &.component-button_disabled {
         background-color: $c_lagunaBlue;
         color: $c_lagunaLight;
@@ -43,13 +44,13 @@
   }
 }
 
-
 .layout.loc--isMobile .page-administration_volunteers_filter {
   .loc_wrapper {
     margin-bottom: calc(16px * var(--viewport-koeff));
     border-radius: calc(8px * var(--viewport-koeff));
     padding: calc(24px * var(--viewport-koeff));
     gap: calc(24px * var(--viewport-koeff));
+
     .loc_formSelectItem {
       width: 100%;
       padding: 0;
@@ -60,4 +61,3 @@
     }
   }
 }
-

@@ -1,18 +1,21 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";
 import { useNavigate, useParams } from "react-router-dom";
 import { DonationsApi } from "api/donations";
-import PAGES from "routing/routes";
-import Modal from "components/Modal";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { TCommonDataRequest } from "api/types/donations";
+import PAGES from "routing/routes";
 import { DONATIONS_TYPES } from "constants/donations";
 import { loadItem } from "utils/localStorage";
+import Modal from "components/Modal";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const DonationUpdate: React.FC = () => {
+  const isMobile = loadItem("isMobile");
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { id } = useParams();
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
@@ -22,28 +25,11 @@ const DonationUpdate: React.FC = () => {
   const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState(false);
   const paramsRef = useRef<TParams | null>(null);
   const responseRef = useRef<TResponse | undefined>(undefined);
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
-
-  useEffect(() => {
-    id &&
-      DonationsApi.get(Number(id)).then((res) => {
-        setDataIsLoadedState(true);
-        responseRef.current = res;
-        forceUpdate();
-        // setIsUpdatingState(false);
-        // setIsChangedState(true);
-        // requestRef.current = EMPTY_REQUEST;
-      });
-  }, [id]);
-
-  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -97,7 +83,21 @@ const DonationUpdate: React.FC = () => {
     setModalDeleteIsOpenState(true);
   };
 
-  return dataIsLoadedState !== null ? (
+  useEffect(() => {
+    id &&
+      DonationsApi.get(Number(id)).then((res) => {
+        setDataIsLoadedState(true);
+        responseRef.current = res;
+        forceUpdate();
+        // setIsUpdatingState(false);
+        // setIsChangedState(true);
+        // requestRef.current = EMPTY_REQUEST;
+      });
+  }, [id]);
+
+  useEffect(() => {}, [dataIsLoadedState]);
+
+  return dataIsLoadedState ? (
     <>
       <Helmet>
         <title>Обновление доната</title>

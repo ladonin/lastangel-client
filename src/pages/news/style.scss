@@ -8,6 +8,7 @@
     border-radius: 8px;
     padding: 24px 24px 0 24px;
     box-shadow: $boxShadowImportant;
+
     &.loc--non_published {
       background-color: $c_yellowLight;
     }
@@ -18,35 +19,33 @@
     }
 
     .loc_name {
+      @extend %hoverable;
       font-size: 24px;
       margin: 4px 0 16px 0;
       font-weight: 600;
       color: $c_lagunaGrey;
-      @extend %hoverable;
     }
 
     .loc_redactButton {
       margin: 0 0 16px 0;
     }
+
     .component-mediaOriginalLinks {
       margin-bottom: 16px;
     }
+
     .loc_nonpublished {
       margin-bottom: 16px;
     }
 
     .loc_description {
-      .loc_content {
-        padding-bottom: 4px;
-      }
-
       color: $c_greyDark;
       font-size: 18px;
       line-height: 26px;
-      //padding: 0 16px;
-      //background-color: $c_pistachioLighter;
-      //padding-bottom: 16px;
-      //border: 1px solid $c_pistachio;
+
+      .loc_content {
+        padding-bottom: 4px;
+      }
 
       .loc_slider {
         margin-bottom: 24px;
@@ -58,6 +57,7 @@
           justify-content: center;
           max-height: 85vh;
           height: 600px;
+
           img {
             max-height: 100%;
             max-width: 100%;
@@ -114,6 +114,7 @@
     padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff));
     border-radius: calc(16px * var(--viewport-koeff));
     box-shadow: $boxShadowMobileImportant;
+
     .loc_created {
       font-size: calc(24px * var(--viewport-koeff));
     }
@@ -138,7 +139,9 @@
           font-size: calc(32px * var(--viewport-koeff));
           line-height: calc(42px * var(--viewport-koeff));
         }
+
         padding-bottom: calc(8px * var(--viewport-koeff));
+
         img {
           max-height: 100%;
           max-width: 100%;
@@ -154,6 +157,7 @@
 
         .swiper-slide {
           max-height: 85vh;
+
           img {
             max-height: 100%;
             max-width: 100%;

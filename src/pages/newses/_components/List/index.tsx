@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-import LoaderIcon from "components/LoaderIcon";
 import { NewsApi } from "api/news";
 import { TGetListRequest, TItem } from "api/types/news";
-import InfiniteScroll from "components/InfiniteScroll";
 import { isAdmin } from "utils/user";
-import NotFound from "components/NotFound";
 import { loadItem, saveItem } from "utils/localStorage";
 import { objectsAreEqual } from "helpers/common";
+import InfiniteScroll from "components/InfiniteScroll";
+import NotFound from "components/NotFound";
+import LoaderIcon from "components/LoaderIcon";
 import ListItem from "../ListItem";
 import Filter, { TFilterParams } from "../Filter";
 import "./style.scss";
@@ -14,7 +14,9 @@ import "./style.scss";
 type TProps = {
   excludeId?: number;
 };
+
 const PAGESIZE = 20;
+
 const List = ({ excludeId }: TProps) => {
   const [pageState, setPageState] = useState<number>(1);
   const [listState, setListState] = useState<TItem[] | null>(null);
@@ -25,6 +27,7 @@ const List = ({ excludeId }: TProps) => {
     excludeId: excludeId || undefined,
     excludeStatus: isAdmin() ? undefined : 2,
   });
+
   const onReachBottomHandler = () => {
     !loadingStatusRef.current.isOff &&
       !loadingStatusRef.current.isLoading &&
@@ -46,10 +49,6 @@ const List = ({ excludeId }: TProps) => {
     });
   };
 
-  useEffect(() => {
-    getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
-  }, [pageState]);
-
   const changeFilter = (filter: TFilterParams) => {
     if (objectsAreEqual(filter, filterRef.current)) return;
     loadingStatusRef.current.isOff = false;
@@ -61,6 +60,10 @@ const List = ({ excludeId }: TProps) => {
       setPageState(1);
     }
   };
+
+  useEffect(() => {
+    getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
+  }, [pageState]);
 
   return (
     <div className="page-news_list">

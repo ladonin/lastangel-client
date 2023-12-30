@@ -1,15 +1,14 @@
 /*
   import OurPets from 'pages/home/components/OurPets'
  */
-
-import React, { useEffect, useState, ReactElement, useMemo } from "react";
-
+import React, { useEffect, useState, ReactElement } from "react";
 import "react-tabs/style/react-tabs.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
 import { Link, useNavigate } from "react-router-dom";
 import cn from "classnames";
 
+import { capitalizeFirtsLetter, getViewportKoeff, numberFriendly } from "helpers/common";
 import {
   getMainImageUrl,
   prepareSex,
@@ -19,17 +18,15 @@ import {
   getCategoryCode,
 } from "helpers/animals";
 import { AnimalsApi } from "api/animals";
-
-import { ANIMALS_CATEGORY, ANIMALS_STATUS } from "constants/animals";
 import { TItem } from "api/types/animals";
-import PAGES from "routing/routes";
-import ArrowRight from "icons/arrowRight.svg";
-import { capitalizeFirtsLetter, getViewportKoeff, numberFriendly } from "helpers/common";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import Tabs, { TTabs } from "components/Tabs";
+import { ANIMALS_CATEGORY, ANIMALS_STATUS } from "constants/animals";
 import { SIZES_MAIN } from "constants/photos";
+import PAGES from "routing/routes";
 import { loadItem } from "utils/localStorage";
 import PetDonationIcon from "components/PetDonationIcon";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import Tabs, { TTabs } from "components/Tabs";
+import ArrowRight from "icons/arrowRight.svg";
 import PuppyImg from "./images/puppy.jpg";
 import KittenImg from "./images/kitten.jpg";
 import DogImg from "./images/dog.jpg";
@@ -38,13 +35,15 @@ import OldDogImg from "./images/old_dog.jpg";
 import OldCatImg from "./images/old_cat.jpg";
 import "./style.scss";
 
-
 const OurPets = () => {
+  const isMobile = loadItem("isMobile");
+  const navigate = useNavigate();
+
   const [tabsListState, setTabsListState] = useState<TTabs[]>([]);
   const [panelsListState, setPanelsListState] = useState<ReactElement[]>([]);
-  const navigate = useNavigate();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+
   const itemsNumber = isMobile ? 2 : 4;
+
   const renderContent = (data: TItem, index: number) => (
     <div className="loc_wrapper">
       <div className="loc_image">
@@ -97,8 +96,7 @@ const OurPets = () => {
           </div>
           , <div className="loc_age">{prepareAge(data.birthdate)}</div>
           <div className="loc_collected">
-            Собрано за месяц: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
-            р.
+            Собрано за месяц: <span className="loc_val">{numberFriendly(data.collected)}</span> р.
           </div>
           <div className="loc_description">{data.short_description}</div>
         </div>
@@ -109,7 +107,7 @@ const OurPets = () => {
   const renderPanel = (list: TItem[]) => (
     <div>
       <Swiper
-        spaceBetween={isMobile ? (getViewportKoeff() * 24) : 16}
+        spaceBetween={isMobile ? getViewportKoeff() * 24 : 16}
         initialSlide={0}
         lazy={{
           enabled: true,
@@ -131,6 +129,7 @@ const OurPets = () => {
       </Swiper>
     </div>
   );
+
   useEffect(() => {
     if (isMobile === null) return;
     const tabsList: TTabs[] = [];
@@ -248,6 +247,7 @@ const OurPets = () => {
       setPanelsListState(panelsList);
     });
   }, []);
+
   return (
     <div className={cn("page-home_ourPets", { "loc--isMobile": isMobile })}>
       <div className="loc_title">

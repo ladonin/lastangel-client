@@ -23,26 +23,10 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
   );
   const paramsRef = useRef<TParams>({});
 
-  useEffect(() => {
-    if (data) {
-      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
-      paramsRef.current = data;
-    }
-  }, [data]);
-
   const onChangeHandler = (key: string, value: any) => {
     paramsRef.current[key] = value.value ? Number(value.value) : value;
     onChange(paramsRef.current);
   };
-
-  useEffect(() => {
-    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
-  }, [anotherImagesState]);
-
-  useEffect(() => {
-    anotherImagesForDeleteState !== null &&
-      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
-  }, [anotherImagesForDeleteState]);
 
   const setAnotherImagesHandler = (images: File[]) => {
     setAnotherImagesState(images);
@@ -60,6 +44,22 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
         anotherImagesForDeleteState.filter((id: number) => id !== val)
       );
   };
+
+  useEffect(() => {
+    if (data) {
+      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
+      paramsRef.current = data;
+    }
+  }, [data]);
+
+  useEffect(() => {
+    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
+  }, [anotherImagesState]);
+
+  useEffect(() => {
+    anotherImagesForDeleteState !== null &&
+      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
+  }, [anotherImagesForDeleteState]);
 
   return (
     <div className="page-administration_clinic-photos_form_component">

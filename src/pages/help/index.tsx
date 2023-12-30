@@ -1,18 +1,18 @@
 import React, { useEffect, useMemo, useState } from "react";
-
 import { Link, useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import BreadCrumbs from "components/BreadCrumbs";
+
 import { AnimalsApi } from "api/animals";
 import { CollectionsApi } from "api/collections";
+import PAGES from "routing/routes";
+import { loadItem } from "utils/localStorage";
+import { MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "constants/donations";
 import { useQueryHook } from "hooks/useQueryHook";
+import BreadCrumbs from "components/BreadCrumbs";
 import Image from "icons/help.jpg";
 import ImageMobile from "icons/helpMobile.jpg";
 import DocsIcon from "icons/docs.png";
 import PrayIcon from "icons/pray.png";
-import PAGES from "routing/routes";
-import { loadItem } from "utils/localStorage";
-import { MAIN_CARD_OWNER, MAIN_PHONE, REKVIZITS } from "constants/donations";
 import InvalidIcon2 from "./icons/2.png";
 import InvalidIcon4 from "./icons/4.png";
 import InvalidIcon7 from "./icons/7.png";
@@ -20,10 +20,22 @@ import InvalidIcon8 from "./icons/8.png";
 import "./style.scss";
 
 const Help: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const query = useQueryHook();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [targetState, setTargetState] = useState("");
   const [targetTypeState, setTargetTypeState] = useState("");
+  const [targetDataState, setTargetDataState] = useState<{ name: string; id: number } | null>(null);
+
+  const { getMetatags } = useOutletContext<any>();
+
+  const metatags = useMemo(() => {
+    const data = getMetatags();
+    return {
+      title: data.help_title || "",
+      description: data.help_description || "",
+    };
+  }, []);
+
   useEffect(() => {
     if (query) {
       const target = query.get("target");
@@ -33,15 +45,6 @@ const Help: React.FC = () => {
       }
     }
   }, [query]);
-  const { getMetatags } = useOutletContext<any>();
-  const metatags = useMemo(() => {
-    const data = getMetatags();
-    return {
-      title: data.help_title || "",
-      description: data.help_description || "",
-    };
-  }, []);
-  const [targetDataState, setTargetDataState] = useState<{ name: string; id: number } | null>(null);
 
   useEffect(() => {
     if (targetState && targetTypeState && !targetDataState) {
@@ -103,10 +106,11 @@ const Help: React.FC = () => {
             на что они должны пойти. Это может быть кличка животного или его номер (либо номер или
             название сбора, если это сбор). Если Вы не укажете эту информацию, то средства пойдут на
             тех животных, кому они наиболее необходимы в данный момент. <br />
-            Это инвалиды <img alt="загружаю" className="loc_invalidIcon" src={InvalidIcon7} /> и те, кому
-            требуется срочное лечение <img alt="загружаю" className="loc_invalidIcon" src={InvalidIcon4} />{" "}
-            <img alt="загружаю" className="loc_invalidIcon" src={InvalidIcon2} />. В нашем приюте они
-            всегда есть
+            Это инвалиды <img alt="загружаю" className="loc_invalidIcon" src={InvalidIcon7} /> и те,
+            кому требуется срочное лечение{" "}
+            <img alt="загружаю" className="loc_invalidIcon" src={InvalidIcon4} />{" "}
+            <img alt="загружаю" className="loc_invalidIcon" src={InvalidIcon2} />. В нашем приюте
+            они всегда есть
             <img alt="загружаю" className="loc_invalidIcon" src={InvalidIcon8} />
             .
             <br />

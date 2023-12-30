@@ -10,8 +10,7 @@
 
   .loc_error {
     color: $c_red;
-    padding: 16px 0px;
-
+    padding: 16px 0;
   }
 
   .loc_wrapper_textForm {
@@ -20,11 +19,6 @@
       display: flex;
       margin-top: 36px;
 
-      .loc_saveButton {
-        // width: 200px;
-      }
-
-
       .loc_deleteButton {
         margin-left: auto;
       }
@@ -32,9 +26,7 @@
       .loc_cancelButton {
         margin-left: 24px;
       }
-
     }
-
   }
 
   .loc_wrapper_updatedSuccess {
@@ -44,7 +36,6 @@
   }
 
   .loc_wrapper_removedSuccess {
-
     .loc_addElseButton {
       margin: 24px 0;
     }
@@ -56,10 +47,8 @@
       justify-content: space-between;
       margin-top: 32px;
     }
-
   }
 }
-
 
 .layout.loc--isMobile .page-administration_mainphotoalbum_update {
   width: 100%;
@@ -81,25 +70,24 @@
       padding: 0;
       width: 100%;
 
-      .loc_formInputItem, .loc_formCheckboxItem, .loc_formDateItem, .loc_formSelectItem, .loc_formTextareaItem {
+      .loc_formInputItem,
+      .loc_formCheckboxItem,
+      .loc_formDateItem,
+      .loc_formSelectItem,
+      .loc_formTextareaItem {
         margin-bottom: calc(48px * var(--viewport-koeff));
       }
-
 
       .loc__shortdescription {
         textarea {
           height: 30vh;
-
         }
-
       }
 
       .loc__fulldescription {
         textarea {
           height: 50vh;
-
         }
-
       }
     }
   }
@@ -107,25 +95,18 @@
   .loc_photos {
     flex-direction: column;
 
-
-
     .loc_left, .loc_right {
       width: 100%;
       padding: 0 !important;
       margin-top: calc(48px * var(--viewport-koeff));
 
-
-
       .loc_images {
         gap: calc(24px * var(--viewport-koeff));
       }
 
-
-
       .component-inputFileImage {
         margin: 0;
       }
-
     }
 
     .loc_error {
@@ -155,7 +136,6 @@
     }
   }
 }
-
 
 .page-administration_mainphotoalbum_update_deleteModal .component-modal--isMobile {
   .loc_buttons {

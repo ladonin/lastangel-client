@@ -5,13 +5,14 @@
   position: relative;
   flex-direction: column;
   cursor: pointer;
-  //background-color: $c_greyF5;
   border: 1px solid $c_lagunaGreyLight;
   border-radius: 8px;
   padding: 24px 24px 0 24px;
+
   &:hover:not(.loc--isShowed) {
     background-color: $c_lagunaWhite;
   }
+
   &.loc--non_published {
     background-color: $c_yellowLight;
   }
@@ -22,57 +23,54 @@
   }
 
   .loc_name {
+    @extend %hoverable;
     font-size: 24px;
     margin: 4px 0 16px 0;
     font-weight: 600;
     color: $c_lagunaGrey;
-    @extend %hoverable;
   }
 
   .loc_redactButton {
     margin: 0 0 16px 0;
   }
+
   .component-mediaOriginalLinks {
     margin-bottom: 16px;
   }
+
   .loc_short_description {
     color: $c_greyDark;
     font-size: 18px;
     line-height: 26px;
-
-
   }
 
   .loc_nonpublished {
     margin-bottom: 16px;
   }
+
   .loc_pin {
     position: absolute;
     top: 16px;
     right: 16px;
     cursor: default;
+
     img {
       height: 32px;
       width: 32px;
     }
   }
+
   .loc_description {
     color: $c_greyDark;
     font-size: 18px;
     line-height: 26px;
+    cursor: default;
 
     .loc_content {
       padding-bottom: 4px;
     }
 
-    //padding: 0 16px;
-    //background-color: $c_pistachioLighter;
-    //padding-bottom: 16px;
-    //border: 1px solid $c_pistachio;
-    cursor: default;
-
     .loc_slider {
-
       margin-bottom: 24px;
 
       .swiper-slide {
@@ -118,21 +116,15 @@
   }
 
   .loc_moreButton {
-    margin-top: 0px;
+    margin-top: 0;
     font-size: 16px;
     margin-bottom: 16px;
   }
 
   &.loc--isShowed {
     box-shadow: $boxShadowImportant;
-    .loc_name {
-      //text-decoration: underline;
-      //color: $c_lagunaBlue;
-    }
-
   }
 }
-
 
 .layout.loc--isMobile .page-news_listItem {
   border-radius: calc(16px * var(--viewport-koeff));
@@ -157,30 +149,34 @@
     font-size: calc(26px * var(--viewport-koeff));
     margin-bottom: calc(16px * var(--viewport-koeff));
   }
-  .loc_pin {
 
+  .loc_pin {
     top: calc(24px * var(--viewport-koeff));
     right: calc(24px * var(--viewport-koeff));
+
     img {
       height: calc(40px * var(--viewport-koeff));
       width: calc(40px * var(--viewport-koeff));
     }
   }
+
   .loc_description {
+    font-size: calc(32px * var(--viewport-koeff));
+    line-height: calc(42px * var(--viewport-koeff));
+
     .loc_content {
+      padding-bottom: calc(8px * var(--viewport-koeff));
+
       p {
         font-size: calc(32px * var(--viewport-koeff));
         line-height: calc(42px * var(--viewport-koeff));
       }
-      padding-bottom: calc(8px * var(--viewport-koeff));
+
       img {
         max-height: 100%;
         max-width: 100%;
       }
     }
-
-    font-size: calc(32px * var(--viewport-koeff));
-    line-height: calc(42px * var(--viewport-koeff));
 
     .loc_slider {
       margin-top: calc(24px * var(--viewport-koeff));
@@ -188,6 +184,7 @@
 
       .swiper-slide {
         max-height: 85vh;
+
         img {
           max-height: 100%;
           max-width: 100%;
@@ -224,6 +221,7 @@
   .loc_redactButton {
     margin: 0 0 calc(24px * var(--viewport-koeff)) 0;
   }
+
   &.loc--isShowed {
     box-shadow: $boxShadowMobileImportant;
   }

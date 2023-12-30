@@ -32,13 +32,14 @@
         &_3 {
           background-color: $c_pinkPiggy;
         }
-
       }
 
       .loc_item {
         line-height: normal;
+
         .loc_image {
           position: relative;
+
           > a > img {
             width: 256px;
             height: 256px;
@@ -73,19 +74,21 @@
           margin-top: 8px;
           font-style: Italic;
           font-size: 18px;
+
           .loc_val {
             font-weight: 600;
             font-style: normal;
           }
         }
-        
-        
+
         .loc_collected .loc_val {
           color: $c_red;
         }
+
         .loc_target_sum .loc_val {
           color: $c_red;
         }
+
         .loc_spent .loc_val {
           color: $c_main;
         }
@@ -106,21 +109,20 @@
               color: $c_lagunaDark;
             }
           }
-
-
         }
-
 
         .loc_content {
           width: 100%;
           margin-top: 16px;
+
           .loc_button {
             background-color: #B75555;
+
             &:hover {
               background-color: #d27575;
-
             }
           }
+
           .loc_data {
             margin-top: 16px;
             font-weight: 400;
@@ -146,7 +148,6 @@
 
               &.loc--female {
                 color: $c_pink
-
               }
             }
 
@@ -156,12 +157,9 @@
 
             .loc_description {
               margin-top: 16px;
-
               border-top: 1px solid $c_greyDark;
               padding-top: 16px;
-
               font-size: 18px
-
             }
           }
 
@@ -169,22 +167,14 @@
             margin: 0 auto;
           }
         }
-
-
       }
-
-
     }
   }
-
 }
 
 
 .layout.loc--isMobile .page-collections {
-
-
   width: 100% !important;
-
 
   .loc_list {
     padding: 0;
@@ -209,19 +199,14 @@
 
       .loc_item {
         line-height: normal;
+
         .loc_image {
-
-
           > a > img {
             width: 100%;
             height: auto;
           }
-          
-          
-          
-          
-          .loc_closed {
 
+          .loc_closed {
             font-size: calc(32px * var(--viewport-koeff));
             height: calc(80px * var(--viewport-koeff));
             gap: calc(16px * var(--viewport-koeff));
@@ -261,11 +246,6 @@
           }
         }
       }
-
     }
-
   }
-
-
 }
-

@@ -46,10 +46,9 @@ const LINKS_BELONGINGS = {
 
 export default function Index() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [openDesctopSubmenuState, setOpenDesctopSubmenuState] = useState(false);
   const [openMobileSubmenuState, setOpenMobileSubmenuState] = useState(true);
-
-  const { pathname } = useLocation();
 
   const checkActive = (item: TMenuItem, isActive: boolean) => {
     if (isActive) return true;
@@ -70,6 +69,7 @@ export default function Index() {
     }
     return false;
   };
+
   const renderMenuItem = (item: TMenuItem, index: number) => (
     <NavLink
       to={item.link}
@@ -79,6 +79,7 @@ export default function Index() {
       {item.title}
     </NavLink>
   );
+
   const renderMenu = (mobile: boolean) => (
     <>
       {!mobile && (
@@ -167,6 +168,7 @@ export default function Index() {
       </NavLink>
     </div>
   );
+
   return (
     <>
       <BrowserView>

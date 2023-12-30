@@ -4,41 +4,38 @@ import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Helmet } from "react-helmet";
-import Modal from "components/Modal";
+
+import PAGES from "routing/routes";
 import { DonationsApi } from "api/donations";
 import { TItem } from "api/types/collections";
 import { TGetListOutput as TListDonations } from "api/types/donations";
-import { isAnonym, getDonatorName } from "helpers/donations";
 import { CollectionsApi } from "api/collections";
+import { isAnonym, getDonatorName } from "helpers/donations";
 import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/collections";
 import { getVideoType, numberFriendly, textToClient } from "helpers/common";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
+import { COLLECTIONS_STATUS } from "constants/collections";
 import { loadItem } from "utils/localStorage";
 import { isAdmin } from "utils/user";
-import PAGES from "routing/routes";
-import { COLLECTIONS_STATUS } from "constants/collections";
-import flowerSrc from "icons/flower1.png";
 import LoaderIcon from "components/LoaderIcon";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import BreadCrumbs from "components/BreadCrumbs";
 import CopyLinkToPage from "components/CopyLinkToPage";
 import MediaOriginalLinks from "components/MediaOriginalLinks";
+import Modal from "components/Modal";
+import flowerSrc from "icons/flower1.png";
 import "./style.scss";
 
-// Ленивая загрузка модуля
-// const OtherComponent = React.lazy(() => import('components/header'));
-// import("components/foo").then(math => {
-//     console.log(math.add(16, 26));
-// });
 const Collection: React.FC = () => {
+  const isMobile = loadItem("isMobile");
+  const { getMetatags } = useOutletContext<any>();
   const { id } = useParams();
   const navigate = useNavigate();
   const [dataState, setDataState] = useState<TItem | null>(null);
   const [anotherImagesState, setAnotherImagesState] = useState<number[] | null>(null);
   const [donationsListModalOpenedState, setDonationsListModalOpenedState] = useState(false);
   const [donationsListState, setDonationsListState] = useState<TListDonations | null>(null);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
-  const { getMetatags } = useOutletContext<any>();
+
   const metatags = useMemo(() => {
     if (!dataState) return false;
     const data = getMetatags();
@@ -47,18 +44,6 @@ const Collection: React.FC = () => {
       description: data.collection_description || "",
     };
   }, [dataState]);
-
-  useEffect(() => {
-    id &&
-      CollectionsApi.get(Number(id)).then((res) => {
-        if (res === null) {
-          navigate(PAGES.PAGE_404);
-        }
-
-        res && setDataState(res);
-        res && res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
-      });
-  }, [id]);
 
   const getDonationsList = () => {
     if (donationsListState === null) {
@@ -132,6 +117,7 @@ const Collection: React.FC = () => {
         )}
       </div>
     );
+
   const renderData = () =>
     dataState && (
       <div className="loc_data">
@@ -164,6 +150,18 @@ const Collection: React.FC = () => {
       </div>
     );
 
+  useEffect(() => {
+    id &&
+      CollectionsApi.get(Number(id)).then((res) => {
+        if (res === null) {
+          navigate(PAGES.PAGE_404);
+        }
+
+        res && setDataState(res);
+        res && res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
+      });
+  }, [id]);
+
   return (
     <>
       {metatags && (
@@ -179,7 +177,7 @@ const Collection: React.FC = () => {
               <BreadCrumbs
                 breadCrumbs={[{ name: "Сборы", link: PAGES.COLLECTIONS }]}
                 title={dataState.name}
-                showTitle = {false}
+                showTitle={false}
               />
               <div className="loc_topWrapper">
                 <div className="loc_avatar">

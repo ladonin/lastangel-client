@@ -1,14 +1,13 @@
 /*
   import VkGroup from 'pages/home/_components/VkGroup'
  */
-
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import "react-tabs/style/react-tabs.css";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 const VkGroup = () => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   useEffect(() => {
     if (isMobile === false) {
@@ -23,6 +22,7 @@ const VkGroup = () => {
       }, 0);
     }
   }, []);
+
   return isMobile ? null : (
     <div className="page-home_vkGroup">
       <div className="loc_title">Наша группа Вконтакте</div>

@@ -40,6 +40,7 @@ const InfiniteScroll: React.FC<TProps> = (props) => {
       onReachBottom();
     }
   };
+
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
     return () => {

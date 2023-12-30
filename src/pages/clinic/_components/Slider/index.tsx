@@ -1,7 +1,7 @@
 /*
   import Slider from 'pages/clinic/components/Slider'
  */
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -11,7 +11,6 @@ import { getAnotherImagesUrl } from "helpers/clinicPhotos";
 import { SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/clinicPhotos";
 import { ClinicPhotosApi } from "api/clinicPhotos";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 const Slider = () => {
@@ -22,7 +21,6 @@ const Slider = () => {
       setDataState({ ...res, data: JSON.parse(res.another_images) });
     });
   }, []);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   return (
     <Swiper

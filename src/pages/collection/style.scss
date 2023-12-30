@@ -1,7 +1,5 @@
 .page-collection {
-
   .loc_contentWrapper {
-
     .loc_topWrapper {
       display: flex;
       gap: 32px;
@@ -11,7 +9,6 @@
           width: 450px;
           height: 450px;
         }
-
       }
 
       .loc_donation {
@@ -39,25 +36,29 @@
             font-size: 26px;
           }
         }
+
         .loc_spent {
           text-align: right;
           margin-top: 8px;
           font-style: Italic;
         }
+
         .loc_additionally {
+          @extend %hoverable;
           margin-top: 8px;
           text-align: right;
           font-style: Italic;
-          @extend %hoverable;
           color: $c_lagunaDark;
         }
+
         .loc_donateButton {
           background-color: #B75555;
+
           &:hover {
             background-color: #d27575;
-
           }
         }
+
         .loc_redactButton, .loc_donateButton {
           margin-top: 24px;
           margin-left: auto;
@@ -86,7 +87,6 @@
         flex-wrap: wrap;
         justify-content: space-between;
         width: 100%;
-
         align-content: flex-start;
 
         .loc_data {
@@ -109,9 +109,8 @@
             margin: 8px 0;
 
             a {
-              color: $c_lagunaBlueDark;
-
               @extend %hoverable;
+              color: $c_lagunaBlueDark;
             }
           }
 
@@ -134,8 +133,6 @@
               height: 32px;
             }
           }
-
-
         }
 
         .loc_description {
@@ -155,6 +152,7 @@
         .loc_value {
           display: inline-block;
           color: $c_main;
+
           span {
             color: $c_orange;
           }
@@ -182,7 +180,6 @@
         }
       }
 
-
       .loc_video {
         display: flex;
         width: 100%;
@@ -190,8 +187,6 @@
         margin-bottom: 24px;
         background-color: $c_greyDark;
       }
-
-
     }
   }
 
@@ -226,8 +221,8 @@
 
           .loc_name {
             &.loc--hasLink {
-              color: $c_blue;
               @extend %hoverable;
+              color: $c_blue;
             }
           }
 
@@ -240,7 +235,6 @@
             }
           }
         }
-
       }
     }
 
@@ -277,9 +271,8 @@
         margin: 0 0 calc(8px * var(--viewport-koeff)) 0;
 
         span {
-          color: $c_lagunaBlueDark;
-
           @extend %hoverable;
+          color: $c_lagunaBlueDark;
         }
       }
 
@@ -292,17 +285,13 @@
         font-size: calc(28px * var(--viewport-koeff));
       }
 
-
       .loc_id {
-
         margin-top: calc(24px * var(--viewport-koeff));
         margin-bottom: calc(24px * var(--viewport-koeff));
       }
 
-
       .loc_targetSum .loc_value span {
         color: $c_lagunaDark;
-
       }
 
       .loc_parameters {
@@ -376,7 +365,6 @@
       }
     }
 
-
     .loc_topWrapper {
       flex-wrap: wrap;
       gap: calc(24px * var(--viewport-koeff));
@@ -390,7 +378,6 @@
 
       .loc_right {
         width: 100%;
-
 
         .loc_description {
           margin-top: 0;
@@ -414,7 +401,6 @@
             padding: calc(8px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
             border-radius: calc(99px * var(--viewport-koeff));
           }
-
         }
       }
     }
@@ -425,11 +411,13 @@
       align-items: flex-start;
       flex-wrap: wrap;
       margin-top: 0;
+
       .loc_spent {
         text-align: left;
         margin-top: calc(8px * var(--viewport-koeff));
         width: 100%;
       }
+
       .loc_title {
         justify-content: flex-start;
         height: auto;
@@ -440,7 +428,6 @@
       .loc_value {
         margin-left: calc(16px * var(--viewport-koeff));
         font-size: calc(28px * var(--viewport-koeff));
-
         align-items: flex-start;
 
         span {
@@ -455,13 +442,10 @@
         font-weight: 600;
         font-size: calc(28px * var(--viewport-koeff));
       }
-
-
     }
 
     .loc_bottomWrapper {
-      margin: calc(32px * var(--viewport-koeff)) calc(-24px * var(--viewport-koeff)) 0px calc(-24px * var(--viewport-koeff));
-
+      margin: calc(32px * var(--viewport-koeff)) calc(-24px * var(--viewport-koeff)) 0 calc(-24px * var(--viewport-koeff));
       display: flex;
       flex-wrap: wrap;
 
@@ -498,7 +482,6 @@
       margin: calc(24px * var(--viewport-koeff)) 0;
     }
   }
-
 }
 
 
@@ -520,13 +503,10 @@
       margin-left: calc(-25px * var(--viewport-koeff));
     }
 
-
     .loc_list {
       .loc_item {
         margin-bottom: calc(16px * var(--viewport-koeff));
       }
     }
-
-
   }
 }

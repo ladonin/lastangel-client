@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-
 import { SIZES_ANOTHER } from "constants/photos";
 import { ACQUAINTANCESHIP_STATUS } from "constants/acquaintanceship";
 import { TGetResponseItem } from "api/types/acquaintanceship";
@@ -42,23 +41,29 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     paramsRef.current[key] = value?.value ? Number(value.value) : value;
     onChange(paramsRef.current);
   };
+
   const setVideo1Handler = (val: null | File) => {
     onChangeHandler("video1", val);
   };
+
   const setVideo2Handler = (val: null | File) => {
     onChangeHandler("video2", val);
   };
+
   const setVideo3Handler = (val: null | File) => {
     onChangeHandler("video3", val);
   };
+
   const setAnotherImagesHandler = (images: File[]) => {
     setAnotherImagesState(images);
   };
+
   const removeAnotherImageHandler = (val: number) => {
     setAnotherImagesForDeleteState(
       anotherImagesForDeleteState === null ? [val] : anotherImagesForDeleteState.concat(val)
     );
   };
+
   const restoreAnotherImageHandler = (val: number) => {
     anotherImagesForDeleteState &&
       setAnotherImagesForDeleteState(

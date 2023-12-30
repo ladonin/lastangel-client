@@ -219,7 +219,7 @@
     }
 
     .loc_bottomWrapper {
-      margin: calc(32px * var(--viewport-koeff)) calc(-24px * var(--viewport-koeff)) 0px calc(-24px * var(--viewport-koeff));
+      margin: calc(32px * var(--viewport-koeff)) calc(-24px * var(--viewport-koeff)) 0 calc(-24px * var(--viewport-koeff));
 
       display: flex;
       flex-wrap: wrap;

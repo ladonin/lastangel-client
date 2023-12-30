@@ -6,8 +6,7 @@
 
   .loc_error {
     color: $c_red;
-    padding: 16px 0px;
-
+    padding: 16px 0;
   }
 
   .loc_wrapper_textForm {
@@ -16,11 +15,6 @@
       display: flex;
       margin-top: 36px;
 
-      .loc_saveButton {
-        // width: 200px;
-      }
-
-
       .loc_deleteButton {
         margin-left: auto;
       }
@@ -28,9 +22,7 @@
       .loc_cancelButton {
         margin-left: 24px;
       }
-
     }
-
   }
 
   .loc_wrapper_updatedSuccess {
@@ -40,7 +32,6 @@
   }
 
   .loc_wrapper_removedSuccess {
-
     .loc_addElseButton {
       margin: 24px 0;
     }
@@ -52,7 +43,6 @@
       justify-content: space-between;
       margin-top: 32px;
     }
-
   }
 }
 
@@ -104,14 +94,12 @@
       .loc_cancelButton {
         margin-left: calc(24px * var(--viewport-koeff));
       }
-
     }
-
   }
 }
-.page-administration_donations_update_deleteModal .component-modal--isMobile{
+
+.page-administration_donations_update_deleteModal .component-modal--isMobile {
   .loc_buttons {
     margin-top: calc(32px * var(--viewport-koeff));
   }
 }
-

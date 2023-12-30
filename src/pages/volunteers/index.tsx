@@ -17,8 +17,8 @@ import "./style.scss";
 
 const PAGESIZE = 20;
 const Volunteers: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const { getMetatags } = useOutletContext<any>();
   const metatags = useMemo(() => {
     const data = getMetatags();
@@ -36,10 +36,8 @@ const Volunteers: React.FC = () => {
     list: TItem[] | null;
     page: number;
   } | null>(null);
-  const print = useMemo(() => loadItem("volunteersPrint"), []);
-  const needUsePrint = useRef<boolean>(
-    useMemo(() => (print ? loadItem("usePrintInVolunteers") : false), [])
-  );
+  const print = loadItem("volunteersPrint");
+  const needUsePrint = useRef<boolean>(print ? loadItem("usePrintInVolunteers") : false);
 
   const [listState, setListState] = useState<TItem[] | null>(
     needUsePrint.current && print?.list ? print.list : null

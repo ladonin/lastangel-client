@@ -55,20 +55,6 @@ const InputText: React.FC<TProps> = ({
     return true;
   };
 
-  useEffect(() => {
-    // Валидация, когда значение помечено красным
-    // Чтобы попытаться проверить на "корректность" и вернуть на Valid
-    if (!validState && needValidate(type)) {
-      validateHandler();
-    }
-  }, [valueState, validState]);
-
-  useEffect(() => {
-    if (innerRef?.current) {
-      innerRef.current.validate = validateHandler;
-    }
-  }, []);
-
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (type === "phone") {
       e.target.value = preparePhoneInputVal(e.target.value);
@@ -89,6 +75,20 @@ const InputText: React.FC<TProps> = ({
   useEffect(() => {
     if (innerRef?.current) {
       innerRef.current.clearValue = clear;
+    }
+  }, []);
+
+  useEffect(() => {
+    // Валидация, когда значение помечено красным
+    // Чтобы попытаться проверить на "корректность" и вернуть на Valid
+    if (!validState && needValidate(type)) {
+      validateHandler();
+    }
+  }, [valueState, validState]);
+
+  useEffect(() => {
+    if (innerRef?.current) {
+      innerRef.current.validate = validateHandler;
     }
   }, []);
 

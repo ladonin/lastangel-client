@@ -1,21 +1,22 @@
 import React, { useMemo } from "react";
+import { useOutletContext } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
+import { loadItem } from "utils/localStorage";
 import VkGroup from "pages/home/_components/VkGroup";
 import InfoBlock from "pages/home/_components/InfoBlock";
-import { loadItem } from "utils/localStorage";
 import Slider from "./_components/Slider";
 import OurPets from "./_components/OurPets";
 import Collections from "./_components/Collections";
 import News from "./_components/News";
 import Stories from "./_components/Stories";
 import Help from "./_components/Help";
-import { useOutletContext } from "react-router-dom";
-import { Helmet } from "react-helmet";
 import "./style.scss";
 
 const Home: React.FC = () => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
   const { getMetatags } = useOutletContext<any>();
+
   const metatags = useMemo(() => {
     const data = getMetatags();
     return {
@@ -23,6 +24,7 @@ const Home: React.FC = () => {
       description: data.main_description || "",
     };
   }, []);
+
   return (
     <>
       <Helmet>

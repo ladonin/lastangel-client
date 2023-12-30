@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
+
+import { isObjectOptionsEmpty } from "helpers/common";
 import Select from "components/Form/Select";
 import InputText from "components/Form/InputText";
-import { isObjectOptionsEmpty } from "helpers/common";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
@@ -16,9 +17,11 @@ export type TFilterParams = {
   fio?: string;
   order?: string;
 };
+
 type TSelectRefProps = {
   clearValue: () => void;
 };
+
 type TInputRefProps = {
   clearValue: () => void;
 };
@@ -29,12 +32,14 @@ export const ORDER_VALUES: { [key: string]: { field: string; type: string } } = 
   sum_desc: { field: "sum", type: "desc" },
   sum_asc: { field: "sum", type: "asc" },
 };
+
 export const ORDER_OPTIONS = [
   { value: "id_desc", label: "Сначала новые" },
   { value: "id_asc", label: "Сначала старые" },
   { value: "sum_desc", label: "От больших сумм" },
   { value: "sum_asc", label: "От меньших сумм" },
 ];
+
 export const DEFAULT_SORT = "id_desc";
 
 const DonationsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
@@ -46,6 +51,13 @@ const DonationsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   const [filterState, setFilterState] = useState<TFilterParams | null>(filter);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const immediateRef = useRef(false);
+
+  const reset = () => {
+    inputCardRef.current?.clearValue();
+    inputNameRef.current?.clearValue();
+    selectOrderRef.current?.clearValue();
+    immediateRef.current = true;
+  };
 
   useEffect(() => {
     timeoutRef.current && clearTimeout(timeoutRef.current);
@@ -59,12 +71,7 @@ const DonationsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
       );
     }
   }, [filterState]);
-  const reset = () => {
-    inputCardRef.current?.clearValue();
-    inputNameRef.current?.clearValue();
-    selectOrderRef.current?.clearValue();
-    immediateRef.current = true;
-  };
+
   return (
     <div className="page-administration_donations_filter">
       <div className="loc_wrapper">

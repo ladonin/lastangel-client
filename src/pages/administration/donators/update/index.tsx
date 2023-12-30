@@ -1,48 +1,33 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";
 import { useNavigate, useParams } from "react-router-dom";
+import { loadItem } from "utils/localStorage";
 import { DonatorsApi } from "api/donators";
+import { TCommonDataRequest } from "api/types/donators";
 import PAGES from "routing/routes";
 import Modal from "components/Modal";
-import { TCommonDataRequest } from "api/types/donators";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { loadItem } from "utils/localStorage";
 import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const DonatorUpdate: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const { id } = useParams();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
   const [isDeletingState, setIsDeletingState] = useState(false);
   const [isChangedState, setIsChangedState] = useState(false);
   const [isDeletedState, setIsDeletedState] = useState(false);
   const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState(false);
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const paramsRef = useRef<TParams | null>(null);
   const responseRef = useRef<TResponse | undefined>(undefined);
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
-
-  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
-
-  useEffect(() => {
-    id &&
-      DonatorsApi.get(Number(id)).then((res) => {
-        setDataIsLoadedState(true);
-        responseRef.current = res;
-        forceUpdate();
-        // setIsUpdatingState(false);
-        // setIsChangedState(true);
-        // requestRef.current = EMPTY_REQUEST;
-      });
-  }, [id]);
-
-  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -92,7 +77,21 @@ const DonatorUpdate: React.FC = () => {
     setModalDeleteIsOpenState(true);
   };
 
-  return dataIsLoadedState !== null ? (
+  useEffect(() => {
+    id &&
+      DonatorsApi.get(Number(id)).then((res) => {
+        setDataIsLoadedState(true);
+        responseRef.current = res;
+        forceUpdate();
+        // setIsUpdatingState(false);
+        // setIsChangedState(true);
+        // requestRef.current = EMPTY_REQUEST;
+      });
+  }, [id]);
+
+  useEffect(() => {}, [dataIsLoadedState]);
+
+  return dataIsLoadedState ? (
     <>
       <Helmet>
         <title>Обновление данных о донаторе</title>

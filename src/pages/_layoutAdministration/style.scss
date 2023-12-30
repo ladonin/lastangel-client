@@ -32,10 +32,10 @@
       }
 
       .loc_title {
+        @extend %hoverable;
         font-size: 20px;
         line-height: 32px;
         color: $c_lagunaDark;
-        @extend %hoverable;
       }
 
       .loc_buttons {

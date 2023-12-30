@@ -1,8 +1,4 @@
 .page-clinic {
-  .loc_content {
-
-  }
-
   .loc_vkGroup {
     margin-top: 8px;
 
@@ -18,13 +14,9 @@
       }
     }
   }
-
 }
 
-
 .layout.loc--isMobile .page-clinic {
-
   font-size: calc(34px * var(--viewport-koeff));
   line-height: calc(56px * var(--viewport-koeff));
 }
-

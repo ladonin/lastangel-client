@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 import Select from "components/Form/Select";
 import { VolunteersApi } from "api/volunteers";
@@ -19,7 +19,7 @@ type TSelectRefProps = {
   lightClear: () => void;
 };
 const VolunteersFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
 
   const selectCategoryRef = useRef<TSelectRefProps>();
   const selectIdRef = useRef<TSelectRefProps>();

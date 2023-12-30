@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useState, useMemo } from "react";
+import React, { ChangeEventHandler, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import PAGES from "routing/routes";
@@ -9,15 +9,12 @@ import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 const Signin: React.FC = () => {
+  const isMobile = loadItem("isMobile");
+  const navigate = useNavigate();
+  const { checkMail } = useOutletContext<any>();
   const [loginState, setLoginState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [errorTextState, setErrorTextState] = useState("");
-  const navigate = useNavigate();
-  // import("components/foo").then(math => {
-  //     console.log(math.add(16, 26));
-  // });
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
-  const { checkMail } = useOutletContext<any>();
 
   const setLogin: ChangeEventHandler<HTMLInputElement> = (e) => {
     setLoginState(e.target.value);

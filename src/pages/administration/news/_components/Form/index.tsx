@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
-import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
-import InputFileImages from "components/Form/InputFileImages";
 import { NEWS_STATUS } from "constants/news";
-import Textarea from "components/Form/Textarea";
-import { Checkbox } from "components/Form/Checkbox";
+import { SIZES_ANOTHER } from "constants/photos";
 import { TGetResponseItem } from "api/types/news";
 import { getAnotherImagesUrl, getVideoUrl } from "helpers/news";
 import InputFileVideo from "components/Form/InputFileVideo";
 import WYSIWYGEditor from "components/Form/WYSIWYGEditor";
-import { SIZES_ANOTHER } from "constants/photos";
+import Textarea from "components/Form/Textarea";
+import { Checkbox } from "components/Form/Checkbox";
+import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
+import InputFileImages from "components/Form/InputFileImages";
 import Select from "components/Form/Select";
 import "./style.scss";
 
@@ -20,10 +20,12 @@ type TProps = {
   onChange: (data: TParams) => void;
   data?: TGetResponseItem;
 };
+
 export const NEWS_OPTIONS = [
   { value: String(NEWS_STATUS.PUBLISHED), label: "Опубликован" },
   { value: String(NEWS_STATUS.NON_PUBLISHED), label: "Не опубликован" },
 ];
+
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [isMajorState, setIsMajorState] = useState(!!data?.ismajor);
   const [isAlbumHiddenState, setIsAlbumHiddenState] = useState(!!data?.hide_album);
@@ -31,37 +33,17 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
     !!data?.use_mobile_description
   );
   const [anotherImagesState, setAnotherImagesState] = useState<File[] | null>(null);
-
-  const paramsRef = useRef<TParams>({});
-
   const [anotherImagesPrevState, setAnotherImagesPrevState] = useState([]);
   const [anotherImagesForDeleteState, setAnotherImagesForDeleteState] = useState<number[] | null>(
     null
   );
 
-  useEffect(() => {
-    if (data) {
-      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
-      setIsMajorState(!!data.ismajor);
-
-      paramsRef.current = data;
-      onChange(paramsRef.current);
-    }
-  }, [data]);
+  const paramsRef = useRef<TParams>({});
 
   const onChangeHandler = (key: string, value: any) => {
     paramsRef.current[key] = value?.value ? Number(value.value) : value;
     onChange(paramsRef.current);
   };
-
-  useEffect(() => {
-    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
-  }, [anotherImagesState]);
-
-  useEffect(() => {
-    anotherImagesForDeleteState !== null &&
-      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
-  }, [anotherImagesForDeleteState]);
 
   const setVideo1Handler = (val: null | File) => {
     onChangeHandler("video1", val);
@@ -89,6 +71,25 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
         anotherImagesForDeleteState.filter((id: number) => id !== val)
       );
   };
+
+  useEffect(() => {
+    anotherImagesState !== null && onChangeHandler("another_images", anotherImagesState);
+  }, [anotherImagesState]);
+
+  useEffect(() => {
+    anotherImagesForDeleteState !== null &&
+      onChangeHandler("another_images_for_delete", anotherImagesForDeleteState);
+  }, [anotherImagesForDeleteState]);
+
+  useEffect(() => {
+    if (data) {
+      data.another_images && setAnotherImagesPrevState(JSON.parse(data.another_images));
+      setIsMajorState(!!data.ismajor);
+
+      paramsRef.current = data;
+      onChange(paramsRef.current);
+    }
+  }, [data]);
 
   return (
     <div className="page-administration_news_form_component">
@@ -211,8 +212,7 @@ const Form: React.FC<TProps> = ({ onChange, data }) => {
       <div className="loc_photos">
         <h2>Фото</h2>
         <div className="loc_left">
-          <InputFileImages
-            multiple setImage={setAnotherImagesHandler} />
+          <InputFileImages multiple setImage={setAnotherImagesHandler} />
 
           {anotherImagesPrevState && !!anotherImagesPrevState.length && (
             <InputPrevLoadedImages

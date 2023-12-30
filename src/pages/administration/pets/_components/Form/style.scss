@@ -14,10 +14,9 @@ $formElWidth: 67%;
 
     .loc_right {
       width: 60%;
-      padding-left: 0px;
+      padding-left: 0;
     }
   }
-
 
   .loc_photos {
     flex-wrap: wrap;
@@ -37,7 +36,6 @@ $formElWidth: 67%;
       padding-left: 32px;
     }
   }
-
 
   .loc_formInputItem {
     margin-bottom: 24px;

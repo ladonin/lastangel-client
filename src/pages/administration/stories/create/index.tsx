@@ -1,22 +1,23 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
-import { StoriesApi } from "api/stories";
 import PAGES from "routing/routes";
+import { StoriesApi } from "api/stories";
 import { TCommonDataRequest } from "api/types/stories";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Form, { TParams } from "../_components/Form";
 import "./style.scss";
 
 const StoryCreate: React.FC = () => {
+  const isMobile = loadItem("isMobile");
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [errorState, setErrorState] = useState("");
   const [isLoadingState, setIsLoadingState] = useState(false);
   const [isAddedState, setIsAddedState] = useState(false);
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
+
   const paramsRef = useRef<TParams>({});
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -47,7 +48,9 @@ const StoryCreate: React.FC = () => {
         .then(() => {
           setIsLoadingState(false);
           setIsAddedState(true);
-          setTimeout(() => (paramsRef.current = {}), 0);
+          setTimeout(() => {
+            paramsRef.current = {};
+          }, 0);
         })
         .catch(() => {
           setIsLoadingState(false);

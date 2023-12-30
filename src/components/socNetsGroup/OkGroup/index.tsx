@@ -42,6 +42,7 @@ const OkGroup = ({ height = "auto", width = "auto" }: TProps) => {
         go(document, "ok_group_widget", "565776551254", `{"width":${width},"height":${height}}`);
       });
   }, []);
+
   return isMobile === false ? <div id="ok_group_widget" /> : null;
 };
 

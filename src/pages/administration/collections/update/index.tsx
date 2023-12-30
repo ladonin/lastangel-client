@@ -13,10 +13,10 @@ import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const CollectionUpdate: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();
-  const isMobile = loadItem("isMobile");
 
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
@@ -31,17 +31,6 @@ const CollectionUpdate: React.FC = () => {
 
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
-
-  useEffect(() => {
-    id &&
-      CollectionsApi.get(Number(id)).then((res) => {
-        setDataIsLoadedState(true);
-        responseRef.current = res;
-        forceUpdate();
-      });
-  }, [id]);
-
-  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -125,6 +114,17 @@ const CollectionUpdate: React.FC = () => {
   const openModalDelete = () => {
     setModalDeleteIsOpenState(true);
   };
+
+  useEffect(() => {
+    id &&
+      CollectionsApi.get(Number(id)).then((res) => {
+        setDataIsLoadedState(true);
+        responseRef.current = res;
+        forceUpdate();
+      });
+  }, [id]);
+
+  useEffect(() => {}, [dataIsLoadedState]);
 
   return dataIsLoadedState ? (
     <>

@@ -1,18 +1,21 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
+
 import { DocumentsApi } from "api/documents";
 import PAGES from "routing/routes";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Form, { TResponse, TParams } from "../_components/Form";
 import "./style.scss";
 
 const DocumentsUpdate: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
+
   const [errorState, setErrorState] = useState("");
   const [isUpdatingState, setIsUpdatingState] = useState(false);
-
+  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
   const [isChangedState, setIsChangedState] = useState(false);
 
   const paramsRef = useRef<TParams | null>(null);
@@ -20,19 +23,6 @@ const DocumentsUpdate: React.FC = () => {
 
   const [, updateState] = useState<{}>();
   const forceUpdate = useCallback(() => updateState({}), []);
-
-  const [dataIsLoadedState, setDataIsLoadedState] = useState<boolean>(false);
-  const isMobile = loadItem("isMobile");
-
-  useEffect(() => {
-    DocumentsApi.get().then((res) => {
-      setDataIsLoadedState(true);
-      responseRef.current = res;
-      forceUpdate();
-    });
-  }, []);
-
-  useEffect(() => {}, [dataIsLoadedState]);
 
   const onChange = (data: TParams) => {
     setErrorState("");
@@ -56,6 +46,16 @@ const DocumentsUpdate: React.FC = () => {
         setIsUpdatingState(false);
       });
   };
+
+  useEffect(() => {
+    DocumentsApi.get().then((res) => {
+      setDataIsLoadedState(true);
+      responseRef.current = res;
+      forceUpdate();
+    });
+  }, []);
+
+  useEffect(() => {}, [dataIsLoadedState]);
 
   return (
     <>

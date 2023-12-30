@@ -38,24 +38,19 @@ import { loadItem, saveItem, removeItem } from "utils/localStorage";
 import PetsList from "./_components/PetsList";
 import "./style.scss";
 
-// Ленивая загрузка модуля
-// const OtherComponent = React.lazy(() => import('components/header'));
-// import("components/foo").then(math => {
-//     console.log(math.add(16, 26));
-// });
-
 const Pet: React.FC = () => {
+  const isMobile = loadItem("isMobile");
   const { id } = useParams();
   const navigate = useNavigate();
+  const { getMetatags } = useOutletContext<any>();
   const [dataState, setDataState] = useState<TItem | null>(null);
   const [collectionsState, setCollectionsState] = useState<TCollectionItem[] | null>(null);
   const [anotherImagesState, setAnotherImagesState] = useState<number[] | null>(null);
   const [donationsListModalOpenedState, setDonationsListModalOpenedState] = useState(false);
   const [donationsListState, setDonationsListState] = useState<TListDonations | null>(null);
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
   const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
-  const hasBack = useMemo(() => loadItem("backFromPet"), []);
-  const { getMetatags } = useOutletContext<any>();
+  const hasBack = loadItem("backFromPet");
+
   const metatags = useMemo(() => {
     if (!dataState) return false;
     const data = getMetatags();
@@ -163,7 +158,9 @@ const Pet: React.FC = () => {
                 dataState.need_medicine
               )}`}
             >
-              {dataState.status === ANIMALS_STATUS.AT_HOME && <img alt="загружаю" src={flowerSrc} />}
+              {dataState.status === ANIMALS_STATUS.AT_HOME && (
+                <img alt="загружаю" src={flowerSrc} />
+              )}
               {prepareStatus(dataState.status, dataState.need_medicine, dataState.sex)}
             </div>
           </>

@@ -1,8 +1,7 @@
 .page-documents_photoSlider {
 
-
   .swiper-slide {
-    position: relative; 
+    position: relative;
     height: 900px;
     display: flex;
     background-color: $c_greyDark;
@@ -16,8 +15,7 @@
     }
 
     .loc_openButton {
-
-      position: absolute; 
+      position: absolute;
       top: 12px;
       right: 24px;
     }
@@ -34,13 +32,15 @@
   .swiper-slide {
     height: 1200px;
     max-height: 85vh;
+
     img {
-      max-height: calc(100% - calc(48px* var(--viewport-koeff)));
-      max-width: calc(100% - calc(48px* var(--viewport-koeff)));
+      max-height: calc(100% - calc(48px * var(--viewport-koeff)));
+      max-width: calc(100% - calc(48px * var(--viewport-koeff)));
     }
+
     .loc_openButton {
-      top: calc(32px* var(--viewport-koeff));
-      right: calc(32px* var(--viewport-koeff));
+      top: calc(32px * var(--viewport-koeff));
+      right: calc(32px * var(--viewport-koeff));
     }
   }
 }

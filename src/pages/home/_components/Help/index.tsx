@@ -1,22 +1,21 @@
 /*
   import Help from 'pages/home/components/Help'
  */
-import React, { useMemo } from "react";
+import React from "react";
 import "react-tabs/style/react-tabs.css";
 import { Link } from "react-router-dom";
+import PAGES from "routing/routes";
+import { REKVIZITS } from "constants/donations";
+import { loadItem } from "utils/localStorage";
 import Image from "icons/help.jpg";
 import ImageMobile from "icons/helpMobile.jpg";
 import DocsIcon from "icons/docs.png";
 import ArrowRight from "icons/arrowRight.svg";
-import PAGES from "routing/routes";
-import { REKVIZITS } from "constants/donations";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 const Help = () => {
+  const isMobile = loadItem("isMobile");
 
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
-  
   return (
     <div className="page-home_help">
       <div className="loc_title">

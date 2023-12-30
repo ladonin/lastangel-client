@@ -9,14 +9,11 @@
     padding: 8px 16px;
     border-radius: 8px;
 
-
     .loc_formInputItem, .loc_formSelectItem {
 
       .loc_label, label {
         color: $c_white;
       }
-
-
     }
 
     .loc--card {
@@ -25,7 +22,6 @@
       input {
         width: 100%;
       }
-
     }
 
     .loc--name {
@@ -34,15 +30,8 @@
       input {
         width: 100%;
       }
-
     }
 
-    //.loc--order {
-    //  .loc_select {
-    //    width: 270px;
-    //  }
-    //
-    //}
     .loc_resetButton {
       background-color: $c_lagunaBlue;
       color: $c_white;
@@ -60,7 +49,6 @@
   }
 }
 
-
 .layout.loc--isMobile .page-administration_donators_filter {
   .loc_wrapper {
     border-radius: calc(8px * var(--viewport-koeff));
@@ -77,4 +65,3 @@
     }
   }
 }
-

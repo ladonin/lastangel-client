@@ -37,14 +37,10 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
     value = "",
     description,
   } = props;
+  const isMobile = loadItem("isMobile");
   const [videoState, setVideoState] = useState<File | null | string>(value || null);
   const [wrongVideoState, setWrongVideoState] = useState<TWrongVideoData | null>(null);
   const [modalDeleteIsOpenState, setModalDeleteIsOpenState] = useState<boolean>(false);
-  const isMobile = loadItem("isMobile");
-
-  useEffect(() => {
-    setVideoState(value);
-  }, [value]);
 
   const setVideoHandler = (file: File) => {
     const parts = file.name.split(".");
@@ -124,6 +120,10 @@ const InputFileVideo: React.FC<PropsWithChildren<TProps>> = (props) => {
       </div>
     );
   };
+
+  useEffect(() => {
+    setVideoState(value);
+  }, [value]);
 
   return (
     <div className={cn("component-inputFileVideo", className)}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { useNavigate } from "react-router-dom";
@@ -23,10 +23,11 @@ type TProps = {
 };
 
 const ListItem = ({ data }: TProps) => {
-  const isMobile = useMemo(() => loadItem("isMobile"), []);
+  const isMobile = loadItem("isMobile");
+  const navigate = useNavigate();
   const [isShowedState, setIsShowedState] = useState(false);
   const [anotherImagesState, setAnotherImagesState] = useState<false | number[]>(false);
-  const navigate = useNavigate();
+
   useEffect(() => {
     if (data && data.another_images) {
       setAnotherImagesState(JSON.parse(data.another_images));
