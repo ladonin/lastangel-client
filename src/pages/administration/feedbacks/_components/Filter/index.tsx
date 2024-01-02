@@ -1,9 +1,19 @@
+/*
+  import Filter from 'pages/administration/feedbacks/_components/Filter'
+  Компонент фильтра для списка (страница писем). Админка.
+ */
 import React, { useRef, useEffect, useState } from "react";
 import { isObjectOptionsEmpty } from "helpers/common";
 import { loadItem } from "utils/localStorage";
 import InputText from "components/Form/InputText";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import "./style.scss";
+
+export type TFilterParams = {
+  fio?: string;
+  phone?: string;
+  email?: string;
+};
 
 type TProps = {
   onChange: (filter: TFilterParams) => void;
@@ -12,12 +22,6 @@ type TProps = {
 
 type TInputRefProps = {
   clearValue: () => void;
-};
-
-export type TFilterParams = {
-  fio?: string;
-  phone?: string;
-  email?: string;
 };
 
 const Filter: React.FC<TProps> = ({ onChange, filter = null }) => {

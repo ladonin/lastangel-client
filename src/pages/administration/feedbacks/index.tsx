@@ -1,3 +1,7 @@
+/*
+  import Filter from 'pages/administration/feedbacks'
+  Страница просмотра/управления письмами от клиентов. Админка.
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import cn from "classnames";

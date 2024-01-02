@@ -1,3 +1,7 @@
+/*
+  import Create from 'pages/administration/volunteers/create'
+  Страница добавления волотера. Админка.
+ */
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";

@@ -1,12 +1,16 @@
+/*
+  import List from 'pages/stories/_components/List'
+  Компонент списка историй
+ */
 import React, { useEffect, useState, useRef } from "react";
-import LoaderIcon from "components/LoaderIcon";
 import { StoriesApi } from "api/stories";
 import { TGetListRequest, TItem } from "api/types/stories";
-import InfiniteScroll from "components/InfiniteScroll";
-import { isAdmin } from "utils/user";
-import NotFound from "components/NotFound";
-import { objectsAreEqual } from "helpers/common";
 import { loadItem, saveItem } from "utils/localStorage";
+import { isAdmin } from "utils/user";
+import { objectsAreEqual } from "helpers/common";
+import NotFound from "components/NotFound";
+import InfiniteScroll from "components/InfiniteScroll";
+import LoaderIcon from "components/LoaderIcon";
 import ListItem from "../ListItem";
 import Filter, { TFilterParams } from "../Filter";
 import "./style.scss";
@@ -14,7 +18,9 @@ import "./style.scss";
 type TProps = {
   excludeId?: number;
 };
+
 const PAGESIZE = 20;
+
 const List = ({ excludeId }: TProps) => {
   const [pageState, setPageState] = useState<number>(1);
   const [listState, setListState] = useState<TItem[] | null>(null);
@@ -25,6 +31,7 @@ const List = ({ excludeId }: TProps) => {
     excludeId: excludeId || undefined,
     excludeStatus: isAdmin() ? undefined : 2,
   });
+
   const onReachBottomHandler = () => {
     !loadingStatusRef.current.isOff &&
       !loadingStatusRef.current.isLoading &&
@@ -46,10 +53,6 @@ const List = ({ excludeId }: TProps) => {
     });
   };
 
-  useEffect(() => {
-    getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
-  }, [pageState]);
-
   const changeFilter = (filter: TFilterParams) => {
     if (objectsAreEqual(filter, filterRef.current)) return;
     loadingStatusRef.current.isOff = false;
@@ -61,6 +64,10 @@ const List = ({ excludeId }: TProps) => {
       setPageState(1);
     }
   };
+
+  useEffect(() => {
+    getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
+  }, [pageState]);
 
   return (
     <div className="page-stories_list">

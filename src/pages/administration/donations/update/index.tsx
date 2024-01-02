@@ -1,3 +1,7 @@
+/*
+  import Update from 'pages/administration/donations/update'
+  Страница редактирования донатов приюта. Админка.
+ */
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";

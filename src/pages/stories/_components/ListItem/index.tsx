@@ -1,21 +1,26 @@
+/*
+  import ListItem from 'pages/stories/_components/ListItem'
+  Компонент элемента списка историй
+ */
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
-import { TItem } from "api/types/stories";
+
 import PAGES from "routing/routes";
+import { TItem } from "api/types/stories";
 import { getVideoUrl, getAnotherImagesUrl } from "helpers/stories";
 import { getDateString, getVideoType } from "helpers/common";
 import { SIZES_ANOTHER } from "constants/photos";
 import { STORIES_STATUS } from "constants/stories";
 import { isAdmin } from "utils/user";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import PinIcon from "icons/pin.png";
 import { loadItem } from "utils/localStorage";
 import CopyLinkToPage from "components/CopyLinkToPage";
 import MediaOriginalLinks from "components/MediaOriginalLinks";
 import Tooltip from "components/Tooltip";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import PinIcon from "icons/pin.png";
 import "./style.scss";
 
 type TProps = {

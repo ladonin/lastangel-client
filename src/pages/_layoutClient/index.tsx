@@ -1,3 +1,7 @@
+/*
+  import LayoutClient from 'pages/_layoutClient'
+  Layout клиента
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
@@ -15,7 +19,7 @@ import { MetatagsApi } from "api/metatags";
 import EmailImage from "icons/email.png";
 import "./style.scss";
 
-const LayoutMain: React.FC = () => {
+const LayoutClient: React.FC = () => {
   const navigate = useNavigate();
   const [isMobileState, setIsMobileState] = useState<boolean | undefined>(loadItem("isMobile"));
   const { pathname } = useLocation();
@@ -120,4 +124,4 @@ const LayoutMain: React.FC = () => {
   );
 };
 
-export default LayoutMain;
+export default LayoutClient;

@@ -11,7 +11,6 @@
     z-index: 999999;
   }
 
-
   .loc_list {
     display: flex;
     flex-wrap: wrap;
@@ -33,12 +32,10 @@
       position: relative;
       width: calc(25% - 12px);
       padding: 16px 16px 24px 16px;
-      background: #d6e8d1;//$c_pistachioLemon;
+      background: #d6e8d1;
       border-radius: 8px;
 
-
       .loc_item {
-
         line-height: normal;
 
         .loc_image {
@@ -49,20 +46,20 @@
             height: 256px;
             cursor: pointer;
           }
-
-
         }
-
 
         .loc_content {
           width: 100%;
           margin-top: 16px;
+
           .loc_button {
-background-color: $c_pistachioDark;
+            background-color: $c_pistachioDark;
+
             &:hover {
               background-color: $c_pistachioMediumDark;
             }
           }
+
           .loc_data {
             margin-top: 16px;
             font-weight: 400;
@@ -72,11 +69,11 @@ background-color: $c_pistachioDark;
               font-weight: 600;
               display: inline-block;
               font-size: 18px;
+
               &:hover {
                 color: #246024;
               }
             }
-
 
             .loc_parameters {
               font-style: italic;
@@ -94,22 +91,14 @@ background-color: $c_pistachioDark;
             margin: 0 auto;
           }
         }
-
-
       }
-
-
     }
   }
-
 }
 
 
 .layout.loc--isMobile .page-volunteers {
-
-
   width: 100% !important;
-
 
   .loc_list {
     padding: 0;
@@ -127,22 +116,15 @@ background-color: $c_pistachioDark;
       padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
       position: relative;
 
-
       .loc_item {
         line-height: normal;
 
-
         .loc_image {
-
-
           > a > img {
             width: 100%;
             height: auto;
           }
-
-
         }
-
 
         .loc_content {
           margin-top: calc(32px * var(--viewport-koeff));
@@ -164,12 +146,6 @@ background-color: $c_pistachioDark;
           }
         }
       }
-
     }
-
   }
-
-
 }
-
-

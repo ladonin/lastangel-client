@@ -1,3 +1,7 @@
+/*
+  import App from 'pages/App'
+  Общий компонент приложения
+ */
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import PAGES from "routing/routes";
@@ -68,12 +72,11 @@ import AdministrationFeedbacks from "pages/administration/feedbacks";
 
 import AdministrationMetatagsUpdate from "pages/administration/metatags/update";
 
-import LayoutMain from "pages/_layoutMain";
+import LayoutClient from "pages/_layoutClient";
 import LayoutAdministration from "pages/_layoutAdministration";
+
 import "styles/styles.scss";
 
-// по реакт руту https://github.com/remix-run/react-router/tree/dev/examples
-// https://reactrouter.com/en/main/start/tutorial
 const App: React.FC = () => (
   <Routes>
     <Route path={PAGES.ADMINISTRATION} element={<LayoutAdministration />}>
@@ -160,7 +163,7 @@ const App: React.FC = () => (
       />
     </Route>
 
-    <Route path="/" element={<LayoutMain />}>
+    <Route path="/" element={<LayoutClient />}>
       <Route index element={<Home />} />
       <Route path={PAGES.SIGNIN} element={<Signin />} />
       <Route path={PAGES.PETS} element={<Pets />} />

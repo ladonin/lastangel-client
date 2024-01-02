@@ -1,22 +1,24 @@
+/*
+  import Pet from 'pages/pet'
+  Страница питомца
+ */
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
 import { Helmet } from "react-helmet";
+
+import PAGES from "routing/routes";
 import { ANIMALS_STATUS } from "constants/animals";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
-import Modal from "components/Modal";
-import { DonationsApi } from "api/donations";
-import { TItem } from "api/types/animals";
-import { isAnonym, getDonatorName } from "helpers/donations";
-import { TGetListOutput as TListDonations } from "api/types/donations";
-import LoaderIcon from "components/LoaderIcon";
 import { TItem as TCollectionItem } from "api/types/collections";
 import { AnimalsApi } from "api/animals";
-import CopyLinkToPage from "components/CopyLinkToPage";
-import PetDonationIcon from "components/PetDonationIcon";
-import MediaOriginalLinks from "components/MediaOriginalLinks";
+import { DonationsApi } from "api/donations";
+import { TItem } from "api/types/animals";
+import { TGetListOutput as TListDonations } from "api/types/donations";
+import { getVideoType, numberFriendly, textToClient } from "helpers/common";
+import { isAnonym, getDonatorName } from "helpers/donations";
 import {
   getMainImageUrl,
   prepareAge,
@@ -28,13 +30,16 @@ import {
   getAnotherImagesUrl,
   getVideoUrl,
 } from "helpers/animals";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
-import PAGES from "routing/routes";
-import BreadCrumbs from "components/BreadCrumbs";
-import { getVideoType, numberFriendly, textToClient } from "helpers/common";
-import flowerSrc from "icons/flower1.png";
 import { loadItem, saveItem, removeItem } from "utils/localStorage";
+import LoaderIcon from "components/LoaderIcon";
+import CopyLinkToPage from "components/CopyLinkToPage";
+import PetDonationIcon from "components/PetDonationIcon";
+import MediaOriginalLinks from "components/MediaOriginalLinks";
+import Modal from "components/Modal";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import BreadCrumbs from "components/BreadCrumbs";
+import flowerSrc from "icons/flower1.png";
 import PetsList from "./_components/PetsList";
 import "./style.scss";
 
@@ -43,13 +48,15 @@ const Pet: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getMetatags } = useOutletContext<any>();
+
+  const hasBack = loadItem("backFromPet");
+
   const [dataState, setDataState] = useState<TItem | null>(null);
   const [collectionsState, setCollectionsState] = useState<TCollectionItem[] | null>(null);
   const [anotherImagesState, setAnotherImagesState] = useState<number[] | null>(null);
   const [donationsListModalOpenedState, setDonationsListModalOpenedState] = useState(false);
   const [donationsListState, setDonationsListState] = useState<TListDonations | null>(null);
   const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
-  const hasBack = loadItem("backFromPet");
 
   const metatags = useMemo(() => {
     if (!dataState) return false;
@@ -59,36 +66,14 @@ const Pet: React.FC = () => {
       description: data.pet_description || "",
     };
   }, [dataState]);
-  useEffect(() => {
-    if (id) {
-      setIsLoadingState(true);
-      AnimalsApi.get(Number(id)).then((res) => {
-        if (res === null) {
-          navigate(PAGES.PAGE_404);
-        }
-        res && setIsLoadingState(false);
-        res && setDataState(res);
-        res && res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
-      });
-
-      AnimalsApi.getCollections(Number(id)).then((res) => {
-        setCollectionsState(res);
-      });
-    }
-  }, [id]);
 
   const destroyBack = () => {
     removeItem("backFromPet");
   };
+
   const createNeedUsePrint = () => {
     saveItem("usePrintInPets", true);
   };
-  useEffect(
-    () => () => {
-      destroyBack();
-    },
-    []
-  );
 
   const getDonationsList = () => {
     if (donationsListState === null) {
@@ -97,6 +82,7 @@ const Pet: React.FC = () => {
       );
     }
   };
+
   const renderRedactButton = (data: TItem) =>
     isAdmin() ? (
       <Button
@@ -110,6 +96,7 @@ const Pet: React.FC = () => {
         Редактировать
       </Button>
     ) : null;
+
   const isHere = (status: number) =>
     status !== ANIMALS_STATUS.AT_HOME && status !== ANIMALS_STATUS.DIED;
 
@@ -130,6 +117,7 @@ const Pet: React.FC = () => {
         ))}
       </div>
     );
+
   const renderData = () =>
     dataState && (
       <div
@@ -214,6 +202,31 @@ const Pet: React.FC = () => {
       медицинский осмотр, оплату электричества, отопления (в холодное время), воды и пр. расходы.
     </div>
   );
+
+  useEffect(
+    () => () => {
+      destroyBack();
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (id) {
+      setIsLoadingState(true);
+      AnimalsApi.get(Number(id)).then((res) => {
+        if (res === null) {
+          navigate(PAGES.PAGE_404);
+        }
+        res && setIsLoadingState(false);
+        res && setDataState(res);
+        res && res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
+      });
+
+      AnimalsApi.getCollections(Number(id)).then((res) => {
+        setCollectionsState(res);
+      });
+    }
+  }, [id]);
 
   return (
     <>

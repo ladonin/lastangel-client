@@ -1,3 +1,7 @@
+/*
+  import Filter from 'pages/administration/pets/_components/Filter'
+  Компонент фильтра для списка (страница питомцев). Админка.
+ */
 import React, { useRef, useEffect, useState } from "react";
 import {
   ANIMALS_CATEGORY,
@@ -14,11 +18,6 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import Select from "components/Form/Select";
 import "./style.scss";
 
-type TProps = {
-  onChange: (filter: TFilterParams) => void;
-  filter: TFilterParams | null;
-};
-
 export type TFilterParams = {
   status?: ValuesOf<typeof ANIMALS_STATUS>;
   notPublished?: 1 | 0;
@@ -34,6 +33,11 @@ export type TFilterParams = {
 type TSelectRefProps = {
   clearValue: () => void;
   lightClear: () => void;
+};
+
+type TProps = {
+  onChange: (filter: TFilterParams) => void;
+  filter: TFilterParams | null;
 };
 
 const PetsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {

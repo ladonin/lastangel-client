@@ -1,19 +1,23 @@
+/*
+  import Filter from 'pages/administration/donators/_components/Filter'
+  Компонент фильтра для списка (страница донаторов). Админка.
+ */
 import React, { useRef, useEffect, useState } from "react";
 import { loadItem } from "utils/localStorage";
 import InputText from "components/Form/InputText";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import "./style.scss";
 
-type TProps = {
-  onChange: (filter: TFilterParams) => void;
-  filter: TFilterParams | null;
-};
-
 export type TFilterParams = {
   card?: string;
   fio?: string;
   order?: string;
   order_type?: string;
+};
+
+type TProps = {
+  onChange: (filter: TFilterParams) => void;
+  filter: TFilterParams | null;
 };
 
 type TSelectRefProps = {

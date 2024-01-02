@@ -1,3 +1,7 @@
+/*
+  import Newses from 'pages/newses'
+  Страница списка новостей
+ */
 import React, { useMemo } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";

@@ -1,5 +1,8 @@
+/*
+  import Filter from 'pages/administration/donations/_components/Filter'
+  Компонент фильтра для списка (страница донатов). Админка.
+ */
 import React, { useRef, useEffect, useState } from "react";
-
 import { isObjectOptionsEmpty } from "helpers/common";
 import Select from "components/Form/Select";
 import InputText from "components/Form/InputText";
@@ -7,23 +10,10 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
-type TProps = {
-  onChange: (filter: TFilterParams) => void;
-  filter: TFilterParams | null;
-};
-
 export type TFilterParams = {
   card?: string;
   fio?: string;
   order?: string;
-};
-
-type TSelectRefProps = {
-  clearValue: () => void;
-};
-
-type TInputRefProps = {
-  clearValue: () => void;
 };
 
 export const ORDER_VALUES: { [key: string]: { field: string; type: string } } = {
@@ -41,6 +31,19 @@ export const ORDER_OPTIONS = [
 ];
 
 export const DEFAULT_SORT = "id_desc";
+
+type TProps = {
+  onChange: (filter: TFilterParams) => void;
+  filter: TFilterParams | null;
+};
+
+type TSelectRefProps = {
+  clearValue: () => void;
+};
+
+type TInputRefProps = {
+  clearValue: () => void;
+};
 
 const DonationsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   const isMobile = loadItem("isMobile");

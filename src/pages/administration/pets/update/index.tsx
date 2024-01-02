@@ -1,3 +1,7 @@
+/*
+  import Update from 'pages/administration/pets/update'
+  Страница редактирования данных и питомце. Админка.
+ */
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";

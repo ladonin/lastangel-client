@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/volunteers/_components/Form'
+  Форма заполнения данных (страница волонтеров). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { getVideoUrl, getAnotherImagesUrl, getMainImageUrl } from "helpers/volunteers";
 import { TGetResponseItem } from "api/types/volunteers";

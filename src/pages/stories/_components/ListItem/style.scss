@@ -5,7 +5,6 @@
   position: relative;
   flex-direction: column;
   cursor: pointer;
-  //background-color: $c_greyF5;
   border: 1px solid $c_pistachioMedium;
   border-radius: 8px;
   padding: 24px 24px 0 24px;
@@ -71,18 +70,14 @@
   }
 
   .loc_description {
-    .loc_content {
-      padding-bottom: 4px;
-    }
-
     color: $c_greyDark;
     font-size: 18px;
     line-height: 26px;
-    //padding: 0 16px;
-    //background-color: $c_pistachioLighter;
-    //padding-bottom: 16px;
-    //border: 1px solid $c_pistachio;
     cursor: default;
+
+    .loc_content {
+      padding-bottom: 4px;
+    }
 
     .loc_slider {
       margin-top: 24px;
@@ -143,11 +138,6 @@
 
   &.loc--isShowed {
     box-shadow: $boxShadowImportant;
-
-    .loc_name {
-      //text-decoration: underline;
-      //color: $c_lagunaBlue;
-    }
   }
 }
 
@@ -176,7 +166,6 @@
   }
 
   .loc_pin {
-
     top: calc(24px * var(--viewport-koeff));
     right: calc(24px * var(--viewport-koeff));
 
@@ -187,22 +176,22 @@
   }
 
   .loc_description {
+    font-size: calc(32px * var(--viewport-koeff));
+    line-height: calc(42px * var(--viewport-koeff));
+
     .loc_content {
+      padding-bottom: 0;
+
       p {
         font-size: calc(32px * var(--viewport-koeff));
         line-height: calc(42px * var(--viewport-koeff));
       }
-
-      padding-bottom: 0;
 
       img {
         max-height: 100%;
         max-width: 100%;
       }
     }
-
-    font-size: calc(32px * var(--viewport-koeff));
-    line-height: calc(42px * var(--viewport-koeff));
 
     .loc_slider {
       margin-top: calc(24px * var(--viewport-koeff));

@@ -11,6 +11,7 @@ html {
 * {
   max-height: 9001em;
   font-family: $font_main;
+  scrollbar-width: thin;
 
   &::-webkit-scrollbar-track {
     border-radius: 5px;
@@ -26,8 +27,6 @@ html {
   &::-webkit-scrollbar-thumb {
     background-color: rgba(157, 161, 158, 0.4);
   }
-
-  scrollbar-width: thin;
 }
 
 html, body {

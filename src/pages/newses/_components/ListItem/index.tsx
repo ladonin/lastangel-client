@@ -1,3 +1,7 @@
+/*
+  import ListItem from 'pages/newses/_components/ListItem'
+  Компонент элемента списка новостей
+ */
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";

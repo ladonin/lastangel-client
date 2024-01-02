@@ -1,3 +1,7 @@
+/*
+  import Update from 'pages/administration/metatags/update'
+  Страница редактирования метатэгов сайта. Админка.
+ */
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";

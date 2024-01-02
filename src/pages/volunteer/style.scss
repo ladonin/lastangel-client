@@ -45,7 +45,6 @@
           margin-left: -2px;
         }
 
-
         .loc_parameters {
           margin-top: 4px;
           display: flex;
@@ -67,8 +66,6 @@
             }
           }
         }
-
-
       }
 
       .loc_left {
@@ -89,10 +86,8 @@
             padding: 0;
             margin-top: 8px;
           }
-          
         }
       }
-
 
       .loc_description {
         align-self: flex-start;
@@ -101,8 +96,6 @@
         line-height: 28px;
         width: 100%;
       }
-
-
     }
 
     .loc_bottomWrapper {
@@ -135,7 +128,6 @@
         width: 100%;
         max-height: 600px;
         margin-bottom: 24px;
-
         background-color: $c_greyDark;
       }
     }
@@ -169,27 +161,19 @@
         }
 
         .loc_phone, .loc_vkLink a, .loc_okLink a, .loc_instLink a {
-
           gap: calc(16px * var(--viewport-koeff));
-
 
           img {
             height: calc(40px * var(--viewport-koeff));
           }
         }
-
-
       }
-
 
       .loc_not_published {
         padding: calc(16px * var(--viewport-koeff));
         margin: calc(24px * var(--viewport-koeff)) 0;
       }
-
-
     }
-
 
     .loc_topWrapper {
       flex-wrap: wrap;
@@ -206,7 +190,6 @@
         width: 100%;
         flex-wrap: wrap;
 
-
         .loc_description {
           margin-top: 0;
           margin-bottom: 0;
@@ -214,13 +197,11 @@
           line-height: calc(54px * var(--viewport-koeff));
           width: 100%;
         }
-
       }
     }
 
     .loc_bottomWrapper {
       margin: calc(32px * var(--viewport-koeff)) calc(-24px * var(--viewport-koeff)) 0 calc(-24px * var(--viewport-koeff));
-
       display: flex;
       flex-wrap: wrap;
 

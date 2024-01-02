@@ -1,3 +1,7 @@
+/*
+  import Home from 'pages/home'
+  Главная (домашняя) страница
+ */
 import React, { useMemo } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -5,7 +9,7 @@ import { Helmet } from "react-helmet";
 import { loadItem } from "utils/localStorage";
 import VkGroup from "pages/home/_components/VkGroup";
 import InfoBlock from "pages/home/_components/InfoBlock";
-import Slider from "./_components/Slider";
+import MainPhotoalbum from "./_components/MainPhotoalbum";
 import OurPets from "./_components/OurPets";
 import Collections from "./_components/Collections";
 import News from "./_components/News";
@@ -35,7 +39,7 @@ const Home: React.FC = () => {
         <div className="loc_top">
           <div className="loc_left">
             {isMobile === true && <InfoBlock />}
-            <Slider />
+            <MainPhotoalbum />
             <div className="loc_textMain">
               У животных есть Душа. Её можно увидеть в их глазах.
               <br />

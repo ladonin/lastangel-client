@@ -1,5 +1,6 @@
 /**
  import { UserTypes } from 'src/types/user';
+ Параметры авторизованного пользователя
  */
 import { ROLES } from "constants/user";
 

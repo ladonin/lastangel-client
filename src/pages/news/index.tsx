@@ -1,3 +1,7 @@
+/*
+  import News from 'pages/news'
+  Страница просмотра новости
+ */
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import cn from "classnames";

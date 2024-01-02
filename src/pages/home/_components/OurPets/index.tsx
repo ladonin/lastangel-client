@@ -1,5 +1,6 @@
 /*
-  import OurPets from 'pages/home/components/OurPets'
+  import OurPets from 'pages/home/_components/OurPets'
+  Компонент "Наши питомцы" для домашней страницы
  */
 import React, { useEffect, useState, ReactElement } from "react";
 import "react-tabs/style/react-tabs.css";

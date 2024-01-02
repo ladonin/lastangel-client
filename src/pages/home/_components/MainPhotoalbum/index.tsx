@@ -1,5 +1,6 @@
 /*
-  import Slider from 'pages/home/components/Slider'
+  import MainPhotoalbum from 'pages/home/_components/MainPhotoalbum'
+  Компонент "Главный фотоальбом" для домашней страницы
  */
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";

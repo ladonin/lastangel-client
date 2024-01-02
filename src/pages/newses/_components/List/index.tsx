@@ -1,3 +1,7 @@
+/*
+  import List from 'pages/newses/_components/List'
+  Компонент списка новостей
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { NewsApi } from "api/news";
 import { TGetListRequest, TItem } from "api/types/news";

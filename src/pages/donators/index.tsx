@@ -1,3 +1,7 @@
+/*
+  import Donators from 'pages/donators'
+  Страница списка донаторов (не реализован пока)
+ */
 import React from "react";
 // const OtherComponent = React.lazy(() => import('components/header'));
 

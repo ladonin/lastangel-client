@@ -1,5 +1,6 @@
 .page-pets {
   position: relative;
+
   .loc_blank {
     position: fixed;
     top: 0;
@@ -9,6 +10,7 @@
     background-color: white;
     z-index: 999999;
   }
+
   .loc_forCurator {
     margin-bottom: 16px;
     padding: 16px;
@@ -27,22 +29,24 @@
       align-items: center;
       flex-wrap: wrap;
       flex-direction: column;
+
       .loc_buttonSelectPet {
         margin-top: 16px;
       }
-
     }
   }
-  
+
   .loc_buttonOpenCuratory {
     margin-left: auto;
     position: absolute;
     top: 0;
     right: 0;
   }
+
   .loc_buttonCompact {
     margin-top: 16px;
   }
+
   .loc_list, .loc_myPet {
     display: flex;
     flex-wrap: wrap;
@@ -68,7 +72,6 @@
       border-radius: 8px;
 
       &.loc--status {
-
         &_5 {
           background-color: $c_pinkPiggy;
         }
@@ -80,20 +83,20 @@
             border: 5px solid $c_greyDark;
           }
         }
-
       }
 
       .loc_item {
-
         line-height: normal;
 
         .loc_image {
           position: relative;
-            > a > img {
-              width: 256px;
-              height: 256px;
-              cursor: pointer;
-            }
+
+          > a > img {
+            width: 256px;
+            height: 256px;
+            cursor: pointer;
+          }
+
           .loc_donationIcon {
             position: absolute;
             bottom: 8px;
@@ -147,13 +150,13 @@
           margin-top: 16px;
           font-style: Italic;
           font-weight: 600;
+
           .loc_val {
             font-weight: 600;
             font-style: normal;
             color: $c_red;
           }
         }
-
 
         .loc_status {
           font-weight: 600;
@@ -176,10 +179,7 @@
               color: $c_black;
             }
           }
-
-
         }
-
 
         .loc_content {
           width: 100%;
@@ -209,7 +209,6 @@
 
               &.loc--female {
                 color: $c_pink
-
               }
             }
 
@@ -229,19 +228,15 @@
             margin: 0 auto;
           }
         }
-
-
       }
-
-
     }
   }
 
   .loc_myPet {
-
     flex-direction: column;
     align-items: center;
     gap: 0;
+
     .loc_title {
       margin: 16px 0;
       font-weight: 600;
@@ -249,12 +244,8 @@
   }
 }
 
-
 .layout.loc--isMobile .page-pets {
-
-
   width: 100% !important;
-
 
   .loc_list, .loc_myPet {
     padding: 0;
@@ -272,7 +263,6 @@
       padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
       position: relative;
 
-
       .loc_item {
         line-height: normal;
 
@@ -286,13 +276,11 @@
           padding: calc(16px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
 
           &_6 {
-
             .loc_image {
               border: calc(5px * var(--viewport-koeff)) solid $c_greyDark;
             }
           }
         }
-
 
         .loc_image {
           .loc_donationIcon {
@@ -318,10 +306,7 @@
             font-size: calc(24px * var(--viewport-koeff));
             padding: calc(8px * var(--viewport-koeff)) calc(16px * var(--viewport-koeff));
           }
-
-
         }
-
 
         .loc_atHome {
           border-radius: calc(40px * var(--viewport-koeff));
@@ -330,7 +315,6 @@
           gap: calc(16px * var(--viewport-koeff));
           padding: 0 calc(24px * var(--viewport-koeff));
           width: fit-content;
-
           bottom: calc(16px * var(--viewport-koeff));
 
           > img {
@@ -359,9 +343,7 @@
           }
         }
       }
-
     }
-
   }
 
   .loc_forCurator {
@@ -370,17 +352,19 @@
     padding: calc(24px * var(--viewport-koeff));
     border-radius: calc(8px * var(--viewport-koeff));
     line-height: calc(52px * var(--viewport-koeff));
+
     .loc_buttonCompact {
       margin-top: calc(24px * var(--viewport-koeff));
     }
+
     .loc_myPet {
       margin-top: calc(24px * var(--viewport-koeff));
       gap: 0;
+
       .loc_title {
         margin-top: 0;
         margin-bottom: calc(16px * var(--viewport-koeff));
       }
-
     }
 
     .loc_buttonWrapper {
@@ -389,9 +373,8 @@
       }
     }
   }
+
   .loc_buttonOpenCuratory {
     margin-top: calc(-4px * var(--viewport-koeff));;
   }
 }
-
-

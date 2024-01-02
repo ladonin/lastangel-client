@@ -1,3 +1,7 @@
+/*
+  import Header from 'pages/_commonComponents/header'
+  Шапка сайта
+ */
 import React, { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { useNavigate, NavLink } from "react-router-dom";

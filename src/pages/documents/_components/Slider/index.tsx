@@ -1,5 +1,6 @@
 /*
-  import Slider from 'pages/documents/components/Slider'
+  import Slider from 'pages/documents/_components/Slider'
+  Слайдер для страницы "Документы"
  */
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";

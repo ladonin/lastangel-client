@@ -1,3 +1,7 @@
+/*
+  import Footer from 'pages/_commonComponents/footer'
+  Футер сайта
+ */
 import React from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Link } from "react-router-dom";

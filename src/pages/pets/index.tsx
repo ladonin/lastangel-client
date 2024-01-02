@@ -1,9 +1,14 @@
+/*
+  import Pets from 'pages/pets'
+  Страница списка питомцев
+ */
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import cn from "classnames";
 import { Helmet } from "react-helmet";
-import { TGetListRequest, TItem } from "api/types/animals";
+
 import PAGES from "routing/routes";
+import { TGetListRequest, TItem } from "api/types/animals";
 import { AnimalsApi } from "api/animals";
 import { getTimestamp, numberFriendly, objectsAreEqual } from "helpers/common";
 import {
@@ -16,17 +21,17 @@ import {
   prepareSterilized,
   getCategoryAgeParams,
 } from "helpers/animals";
-import NotFound from "components/NotFound";
 import { useQueryHook } from "hooks/useQueryHook";
-import InfiniteScroll from "components/InfiniteScroll";
-import BreadCrumbs from "components/BreadCrumbs";
-import flowerSrc from "icons/flower1.png";
+import { SIZES_MAIN } from "constants/photos";
 import { ANIMALS_STATUS } from "constants/animals";
 import { loadItem, saveItem } from "utils/localStorage";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import LoaderIcon from "components/LoaderIcon";
 import PetDonationIcon from "components/PetDonationIcon";
-import { SIZES_MAIN } from "constants/photos";
+import NotFound from "components/NotFound";
+import InfiniteScroll from "components/InfiniteScroll";
+import BreadCrumbs from "components/BreadCrumbs";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import flowerSrc from "icons/flower1.png";
 import { TFilterParams } from "../administration/pets/_components/Filter";
 import Filter from "./_components/Filter";
 import "./style.scss";
@@ -47,6 +52,7 @@ const Pets: React.FC = () => {
   const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
   const { getMetatags } = useOutletContext<any>();
+
   const metatags = useMemo(() => {
     const data = getMetatags();
     return {
@@ -54,8 +60,8 @@ const Pets: React.FC = () => {
       description: data.pets_description || "",
     };
   }, []);
-  const loadingStatusRef = useRef({ isLoading: false, isOff: false });
 
+  const loadingStatusRef = useRef({ isLoading: false, isOff: false });
   const filterRef = useRef<TFilterParams>(
     preparePetsSavedFilter() || { statusExclude: [ANIMALS_STATUS.AT_HOME, ANIMALS_STATUS.DIED] }
   );
@@ -67,7 +73,6 @@ const Pets: React.FC = () => {
   } | null>(null);
   const print = loadItem("petsPrint");
   const needUsePrint = useRef<boolean>(print ? loadItem("usePrintInPets") : false);
-
   const [listState, setListState] = useState<TItem[] | null>(
     needUsePrint.current && print?.list ? print.list : null
   );
@@ -81,7 +86,6 @@ const Pets: React.FC = () => {
 
   // --> Сохранение состояния страницы
   const initRef = useRef<boolean>(true);
-
   const [isBlankState, setIsBlankState] = useState<boolean>(needUsePrint.current);
   const [listHeightState, setListHeightState] = useState<number | undefined>(
     (needUsePrint.current && print?.listHeight) || 0
@@ -96,7 +100,6 @@ const Pets: React.FC = () => {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
-
   const createPrint = () => {
     saveItem("petsPrint", {
       ...printRef.current,
@@ -114,7 +117,6 @@ const Pets: React.FC = () => {
       page: pageState,
     };
   }, [listState, pageState]);
-
   useEffect(() => {
     setTimeout(() => {
       if (needUsePrint.current && printRef.current) {
@@ -126,7 +128,6 @@ const Pets: React.FC = () => {
         print && window.scrollTo(0, print.scroll);
       }
     }, 0);
-
     return () => {
       saveItem("usePrintInPets", false);
     };
@@ -136,25 +137,6 @@ const Pets: React.FC = () => {
   const query = useQueryHook();
   const [compactCuratoryState, setCompactCuratoryState] = useState<boolean>(
     loadItem("compactForCurator") || false
-  );
-
-  useEffect(() => {
-    if (loadItem("myPet") && loadItem("myPet").created > getTimestamp(new Date()) - 3600 * 1000) {
-      setMyPetState(loadItem("myPet").data);
-    }
-  }, []);
-
-  useEffect(() => {
-    query.get("curator") !== null &&
-      typeof query.get("curator") !== "undefined" &&
-      setCompactCuratoryState(false);
-  }, [query]);
-
-  useEffect(
-    () => () => {
-      saveItem("pets_filter", filterRef.current);
-    },
-    []
   );
 
   const getData = (params?: TGetListRequest) => {
@@ -175,14 +157,6 @@ const Pets: React.FC = () => {
       }
     );
   };
-
-  useEffect(() => {
-    // --> Сохранение состояния страницы
-    if (initRef.current && needUsePrint.current) return;
-    // <-- Сохранение состояния страницы
-
-    getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
-  }, [pageState]);
 
   const changeFilter = (filter: TFilterParams) => {
     if (objectsAreEqual(filter, filterRef.current)) return;
@@ -212,6 +186,7 @@ const Pets: React.FC = () => {
 
   const isHere = (status: number) =>
     status !== ANIMALS_STATUS.AT_HOME && status !== ANIMALS_STATUS.DIED;
+
   const renderContent = (data: TItem) => (
     <>
       <div className="loc_image">
@@ -318,6 +293,33 @@ const Pets: React.FC = () => {
       navigate(PAGES.PETS);
     }
   }, [compactCuratoryState]);
+
+  useEffect(() => {
+    if (loadItem("myPet") && loadItem("myPet").created > getTimestamp(new Date()) - 3600 * 1000) {
+      setMyPetState(loadItem("myPet").data);
+    }
+  }, []);
+
+  useEffect(() => {
+    query.get("curator") !== null &&
+      typeof query.get("curator") !== "undefined" &&
+      setCompactCuratoryState(false);
+  }, [query]);
+
+  useEffect(
+    () => () => {
+      saveItem("pets_filter", filterRef.current);
+    },
+    []
+  );
+
+  useEffect(() => {
+    // --> Сохранение состояния страницы
+    if (initRef.current && needUsePrint.current) return;
+    // <-- Сохранение состояния страницы
+
+    getData({ offset: (pageState - 1) * PAGESIZE, limit: PAGESIZE });
+  }, [pageState]);
 
   return (
     <>

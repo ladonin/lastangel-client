@@ -1,3 +1,7 @@
+/*
+  import Create from 'pages/administration/news/create'
+  Страница добавления новости. Админка.
+ */
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";

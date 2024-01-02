@@ -17,6 +17,7 @@
       .loc_avatar {
         height: fit-content;
         position: relative;
+
         img {
           width: 450px;
           height: 450px;
@@ -25,12 +26,14 @@
             border: 10px solid $c_greyDark;
           }
         }
+
         .loc_donationIcon {
           position: absolute;
           bottom: 16px;
           right: 16px;
           width: 100px;
           height: 100px;
+
           img {
             width: 100%;
             height: 100%;
@@ -160,6 +163,7 @@
             text-align: right;
             font-weight: 600;
             font-size: 18px;
+
             span {
               color: $c_orange;
               font-size: 26px;
@@ -240,12 +244,11 @@
         font-size: 18px;
         line-height: 28px;
       }
-
-
     }
 
     .loc_bottomWrapper {
       margin-top: 24px;
+
       .loc_disclaimer {
         width: 100%;
         font-style: Italic;
@@ -254,6 +257,7 @@
         margin: 24px 0;
         align-self: flex-start;
       }
+
       .loc_fakephotoalbum {
         height: 800px;
       }
@@ -281,7 +285,6 @@
         width: 100%;
         max-height: 600px;
         margin-bottom: 24px;
-
         background-color: $c_greyDark;
       }
     }
@@ -441,6 +444,7 @@
             margin-left: calc(16px * var(--viewport-koeff));
             font-size: calc(32px * var(--viewport-koeff));
             line-height: calc(40px * var(--viewport-koeff));
+
             span {
               font-size: calc(40px * var(--viewport-koeff));
             }
@@ -458,12 +462,12 @@
 
             .loc_donationIcon {
               margin: calc(48px * var(--viewport-koeff)) auto 0 auto;
-
               width: 100px; // Так надо
               height: 100px; // Так надо
               .component-petDonationIcon {
                 padding: 0;
               }
+
               img {
                 width: 100%;
                 height: 100%;
@@ -499,7 +503,6 @@
           margin: calc(24px * var(--viewport-koeff)) auto 0 auto;
         }
 
-
         .loc_description {
           margin-top: 0;
           margin-bottom: calc(24px * var(--viewport-koeff));
@@ -530,11 +533,8 @@
 
     .loc_bottomWrapper {
       margin: calc(32px * var(--viewport-koeff)) calc(-24px * var(--viewport-koeff)) 0 calc(-24px * var(--viewport-koeff));
-
       display: flex;
       flex-wrap: wrap;
-
-
 
       .loc_fakephotoalbum {
         height: 1200px;

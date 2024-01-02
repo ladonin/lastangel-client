@@ -1,3 +1,7 @@
+/*
+  import List from 'pages/finreport/_components/List'
+  Список донатов для страницы "Финансовая отчетность"
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import cn from "classnames";

@@ -1,3 +1,7 @@
+/*
+  import Filter from 'pages/administration/collections/_components/Filter'
+  Компонент фильтра для списка (страница сборов). Админка.
+ */
 import React, { useRef, useEffect, useState } from "react";
 import { loadItem } from "utils/localStorage";
 import {
@@ -12,15 +16,15 @@ import { ValuesOf } from "types/common";
 import { isObjectOptionsEmpty } from "helpers/common";
 import "./style.scss";
 
-type TProps = {
-  onChange: (filter: TFilterParams) => void;
-  filter: TFilterParams | null;
-};
-
 export type TFilterParams = {
   status?: ValuesOf<typeof COLLECTIONS_STATUS>;
   statusExclude?: ValuesOf<typeof COLLECTIONS_STATUS>;
   type?: ValuesOf<typeof COLLECTIONS_TYPE>;
+};
+
+type TProps = {
+  onChange: (filter: TFilterParams) => void;
+  filter: TFilterParams | null;
 };
 
 type TSelectRefProps = {

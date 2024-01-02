@@ -1,5 +1,6 @@
 /*
-  import Slider from 'pages/clinic/components/Slider'
+  import Slider from 'pages/clinic/_components/Slider'
+  Слайдер для страницы "Клиника"
  */
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";

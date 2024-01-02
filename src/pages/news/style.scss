@@ -134,22 +134,22 @@
     }
 
     .loc_description {
+      font-size: calc(32px * var(--viewport-koeff));
+      line-height: calc(42px * var(--viewport-koeff));
+
       .loc_content {
+        padding-bottom: calc(8px * var(--viewport-koeff));
+
         p {
           font-size: calc(32px * var(--viewport-koeff));
           line-height: calc(42px * var(--viewport-koeff));
         }
-
-        padding-bottom: calc(8px * var(--viewport-koeff));
 
         img {
           max-height: 100%;
           max-width: 100%;
         }
       }
-
-      font-size: calc(32px * var(--viewport-koeff));
-      line-height: calc(42px * var(--viewport-koeff));
 
       .loc_slider {
         margin-top: calc(24px * var(--viewport-koeff));

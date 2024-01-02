@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/stories/_components/Form'
+  Форма заполнения данных (страница историй). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { TGetResponseItem } from "api/types/stories";
 import { getAnotherImagesUrl, getVideoUrl } from "helpers/stories";

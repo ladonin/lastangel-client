@@ -1,3 +1,7 @@
+/*
+  import Update from 'pages/administration/volunteers/update'
+  Страница редактирования данных о волонтере. Админка.
+ */
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";

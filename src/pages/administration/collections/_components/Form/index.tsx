@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/collections/_components/Form'
+  Форма заполнения данных (страница сборов). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useState, useRef, useCallback } from "react";
 
 import { COLLECTIONS_TYPE, TYPES_OPTIONS, STATUSES_OPTIONS } from "constants/collections";

@@ -13,7 +13,6 @@
     display: flex;
     background-color: $c_white;
     flex-direction: column;
-
     cursor: pointer;
 
     .loc_image {
@@ -43,8 +42,6 @@
     }
   }
 
-
-
   .react-tabs__tab {
     &-panel {
       border-top-right-radius: 0;
@@ -54,7 +51,7 @@
 
 .layout.loc--isMobile .page-volunteer_volunteersList {
   height: auto;
-  min-height: calc((100vw - calc(48px*var(--viewport-koeff)) - 24px)/3);
+  min-height: calc((100vw - calc(48px * var(--viewport-koeff)) - 24px) / 3);
   margin-bottom: calc(24px * var(--viewport-koeff));
 
   .loc_slider {

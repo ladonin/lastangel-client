@@ -1,3 +1,7 @@
+/*
+  import Page404 from 'pages/404'
+  Страница 404
+ */
 import React from "react";
 import { Helmet } from "react-helmet";
 import Image from "./icons/image.jpg";

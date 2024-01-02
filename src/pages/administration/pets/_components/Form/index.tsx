@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/pets/_components/Form'
+  Форма заполнения данных (страница питомцев). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { getVideoUrl, getAnotherImagesUrl, getMainImageUrl } from "helpers/animals";
 import { TGetResponseItem } from "api/types/animals";

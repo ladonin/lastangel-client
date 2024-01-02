@@ -4,7 +4,6 @@
     max-height: 85vh;
   }
 
-
   // --> wysiwyg
   .sun-editor, .wysiwyg_description {
     .se-component {
@@ -50,10 +49,8 @@
           display: flex;
           justify-content: center;
         }
-
       }
     }
-
 
     table {
       margin-bottom: 16px;
@@ -90,7 +87,6 @@
         }
       }
     }
-
 
     p {
       display: block;
@@ -186,17 +182,15 @@
     }
   }
 
-  
   // <-- wysiwyg
 
   .form-element-description {
     @extend %formElementDescription;
+
     &.loc--photo {
       text-align: left !important;
       margin-top: -12px !important;
       margin-bottom: 16px !important;
     }
   }
-  
 }
-

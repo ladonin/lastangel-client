@@ -1,3 +1,7 @@
+/*
+  import Finreport from 'pages/finreport'
+  Страница финансового отчета приюта
+ */
 import React, { useMemo } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";

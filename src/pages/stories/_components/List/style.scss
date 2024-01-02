@@ -9,13 +9,10 @@
   }
 }
 
-
 .layout.loc--isMobile .page-stories_list {
-
   .component-loaderIcon {
     width: calc(50px * var(--viewport-koeff));
     margin-top: calc(-25px * var(--viewport-koeff));
     margin-left: calc(-25px * var(--viewport-koeff));
   }
 }
-

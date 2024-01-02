@@ -1,3 +1,7 @@
+/*
+  import Update from 'pages/administration/mainPagePhotoalbum/update'
+  Страница редактирования главного фотоальбома приюта. Админка.
+ */
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";

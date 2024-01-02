@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/mainPagePhotoalbum/_components/Form'
+  Форма заполнения данных (страница главного фотоальбома). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { TGetResponseItem } from "api/types/mainphotoalbum";
 import { getAnotherImagesUrl } from "helpers/mainphotoalbum";

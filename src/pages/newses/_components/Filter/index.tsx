@@ -1,3 +1,7 @@
+/*
+  import Filter from 'pages/newses/_components/Filter'
+  Компонент фильтра для страницы списка новостей
+ */
 import React, { useRef, useEffect, useState } from "react";
 import { isObjectOptionsEmpty } from "helpers/common";
 import { loadItem } from "utils/localStorage";
@@ -6,25 +10,28 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import InputText from "components/Form/InputText";
 import "./style.scss";
 
+export type TFilterParams = {
+  orderComplex?: string;
+  title?: string;
+};
+
+export const ORDER_OPTIONS = [
+  { value: "id desc", label: "Сначала новые" },
+  { value: "id asc", label: "Сначала старые" },
+];
+
 type TProps = {
   onChange: (filter: TFilterParams) => void;
   filter: TFilterParams | null;
 };
 
-export type TFilterParams = {
-  orderComplex?: string;
-  title?: string;
-};
 type TSelectRefProps = {
   clearValue: () => void;
 };
+
 type TInputRefProps = {
   clearValue: () => void;
 };
-export const ORDER_OPTIONS = [
-  { value: "id desc", label: "Сначала новые" },
-  { value: "id asc", label: "Сначала старые" },
-];
 
 const NewsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   const isMobile = loadItem("isMobile");

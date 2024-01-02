@@ -1,3 +1,7 @@
+/*
+  import Clinic from 'pages/clinic'
+  Страница "Клиника"
+ */
 import React, { useMemo } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useOutletContext } from "react-router-dom";

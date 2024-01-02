@@ -1,5 +1,6 @@
 /*
   import { loadItem, saveItem, removeItem } fro "utils/localStorage";
+  Работа с локальным хранилищем
  */
 
 /**

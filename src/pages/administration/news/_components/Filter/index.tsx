@@ -1,5 +1,8 @@
+/*
+  import Filter from 'pages/administration/news/_components/Filter'
+  Компонент фильтра для списка (страница новостей). Админка.
+ */
 import React, { useRef, useEffect, useState } from "react";
-
 import { isObjectOptionsEmpty } from "helpers/common";
 import { loadItem } from "utils/localStorage";
 import Select from "components/Form/Select";
@@ -7,14 +10,21 @@ import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import InputText from "components/Form/InputText";
 import "./style.scss";
 
-type TProps = {
-  onChange: (filter: TFilterParams) => void;
-  filter: TFilterParams | null;
-};
-
 export type TFilterParams = {
   order?: string;
   title?: string;
+};
+
+export const ORDER_OPTIONS = [
+  { value: "desc", label: "Сначала новые" },
+  { value: "asc", label: "Сначала старые" },
+];
+
+export const DEFAULT_SORT = "desc";
+
+type TProps = {
+  onChange: (filter: TFilterParams) => void;
+  filter: TFilterParams | null;
 };
 
 type TSelectRefProps = {
@@ -24,13 +34,6 @@ type TSelectRefProps = {
 type TInputRefProps = {
   clearValue: () => void;
 };
-
-export const ORDER_OPTIONS = [
-  { value: "desc", label: "Сначала новые" },
-  { value: "asc", label: "Сначала старые" },
-];
-
-export const DEFAULT_SORT = "desc";
 
 const NewsFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   const isMobile = loadItem("isMobile");

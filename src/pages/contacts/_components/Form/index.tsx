@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/contacts/_components/Form'
+  Форма отправки письма клиентом
+ */
 import React, { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { FeedbacksApi } from "api/feedbacks";

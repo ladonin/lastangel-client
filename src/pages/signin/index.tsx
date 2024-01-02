@@ -1,17 +1,22 @@
+/*
+  import SignIn from 'pages/signin'
+  Страница авторизации
+ */
 import React, { ChangeEventHandler, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import PAGES from "routing/routes";
 import { saveUserData, isAuthorized } from "utils/user";
+import { loadItem } from "utils/localStorage";
 import { UserApi } from "api/user";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
-import { loadItem } from "utils/localStorage";
 import "./style.scss";
 
 const Signin: React.FC = () => {
   const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
   const { checkMail } = useOutletContext<any>();
+
   const [loginState, setLoginState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [errorTextState, setErrorTextState] = useState("");

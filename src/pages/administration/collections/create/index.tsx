@@ -1,3 +1,7 @@
+/*
+  import Create from 'pages/administration/collections/create'
+  Страница создания сбора. Админка.
+ */
 import React, { useState, useRef } from "react";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";

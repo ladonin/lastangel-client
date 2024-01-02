@@ -1,5 +1,6 @@
 /*
   import Stories from 'pages/home/_components/Stories'
+  Компонент "Истории" для домашней страницы
  */
 import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";

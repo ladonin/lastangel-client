@@ -1,3 +1,7 @@
+/*
+  import Contacts from 'pages/contacts'
+  Страница контактов
+ */
 import React, { useMemo } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";

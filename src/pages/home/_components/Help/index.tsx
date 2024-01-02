@@ -1,5 +1,6 @@
 /*
-  import Help from 'pages/home/components/Help'
+  import Help from 'pages/home/_components/Help'
+  Компонент "Помощь" для домашней страницы
  */
 import React from "react";
 import "react-tabs/style/react-tabs.css";

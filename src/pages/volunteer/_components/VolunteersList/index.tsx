@@ -1,5 +1,6 @@
 /*
   import VolunteersList from 'pages/home/components/VolunteersList'
+  Компонент общего минисписка всех волонтеров на странице волонтера
  */
 import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
@@ -7,35 +8,24 @@ import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Lazy } from "swiper";
 import { Link } from "react-router-dom";
-import { VolunteersApi } from "api/volunteers";
-import { getMainImageUrl } from "helpers/volunteers";
-import { TGetListOutput, TItem } from "api/types/volunteers";
+
 import PAGES from "routing/routes";
+import { VolunteersApi } from "api/volunteers";
+import { TGetListOutput, TItem } from "api/types/volunteers";
+import { getMainImageUrl } from "helpers/volunteers";
 import { loadItem } from "utils/localStorage";
 import { SIZES_MAIN } from "constants/photos";
 import "./style.scss";
 
 type TProps = { currentId?: number | null };
+
 const VolunteersList = ({ currentId = null }: TProps) => {
   const isMobile = loadItem("isMobile");
+
   const [listState, setListState] = useState<TGetListOutput>([]);
   const [initialSlideState, setInitialSlideState] = useState<number | null>(null);
 
   const itemsNumber = isMobile ? 3 : 7;
-
-  useEffect(() => {
-    let initialSlide = 0;
-    let i = 0;
-    if (listState.length && currentId !== null) {
-      listState.map(({ id }) => {
-        if (id === currentId) {
-          initialSlide = i;
-        }
-        i++;
-      });
-      setInitialSlideState(initialSlide);
-    }
-  }, [listState]);
 
   const renderContent = (data: TItem, index: number) => (
     <div className="loc_wrapper">
@@ -63,6 +53,20 @@ const VolunteersList = ({ currentId = null }: TProps) => {
       </div>
     </div>
   );
+
+  useEffect(() => {
+    let initialSlide = 0;
+    let i = 0;
+    if (listState.length && currentId !== null) {
+      listState.map(({ id }) => {
+        if (id === currentId) {
+          initialSlide = i;
+        }
+        i++;
+      });
+      setInitialSlideState(initialSlide);
+    }
+  }, [listState]);
 
   useEffect(() => {
     VolunteersApi.getList({

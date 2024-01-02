@@ -1,3 +1,7 @@
+/*
+  import Filter from 'pages/administration/stories/_components/Filter'
+  Компонент фильтра для списка (страница историй). Админка.
+ */
 import React, { useRef, useEffect, useState } from "react";
 import { loadItem } from "utils/localStorage";
 import { isObjectOptionsEmpty } from "helpers/common";
@@ -5,6 +9,18 @@ import Select from "components/Form/Select";
 import InputText from "components/Form/InputText";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import "./style.scss";
+
+export type TFilterParams = {
+  order?: string;
+  title?: string;
+};
+
+export const ORDER_OPTIONS = [
+  { value: "desc", label: "Сначала новые" },
+  { value: "asc", label: "Сначала старые" },
+];
+
+export const DEFAULT_SORT = "desc";
 
 type TProps = {
   onChange: (filter: TFilterParams) => void;
@@ -18,18 +34,6 @@ type TSelectRefProps = {
 type TInputRefProps = {
   clearValue: () => void;
 };
-
-export type TFilterParams = {
-  order?: string;
-  title?: string;
-};
-
-export const ORDER_OPTIONS = [
-  { value: "desc", label: "Сначала новые" },
-  { value: "asc", label: "Сначала старые" },
-];
-
-export const DEFAULT_SORT = "desc";
 
 const StoriesFilter: React.FC<TProps> = ({ onChange, filter = null }) => {
   const isMobile = loadItem("isMobile");

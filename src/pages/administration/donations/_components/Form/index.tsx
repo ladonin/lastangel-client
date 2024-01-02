@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/donations/_components/Form'
+  Форма заполнения данных (страница донатов). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { DONATIONS_TYPES } from "constants/donations";
 import { COLLECTIONS_STATUS } from "constants/collections";

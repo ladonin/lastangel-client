@@ -1,5 +1,6 @@
 /*
   import News from 'pages/home/_components/News'
+  Компонент "Новости" для домашней страницы
  */
 import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";

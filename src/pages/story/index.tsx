@@ -1,23 +1,27 @@
+/*
+  import Story from 'pages/story'
+  Страница просмотра истории
+ */
 import React, { useEffect, useState, useMemo } from "react";
-
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Helmet } from "react-helmet";
+
+import PAGES from "routing/routes";
 import List from "pages/stories/_components/List";
 import { TItem } from "api/types/stories";
-import PAGES from "routing/routes";
 import { StoriesApi } from "api/stories";
-import { getVideoUrl, getAnotherImagesUrl } from "helpers/stories";
-import BreadCrumbs from "components/BreadCrumbs";
-import { STORIES_STATUS } from "constants/stories";
-import { isAdmin } from "utils/user";
 import { getDateString, getVideoType } from "helpers/common";
+import { getVideoUrl, getAnotherImagesUrl } from "helpers/stories";
+import { STORIES_STATUS } from "constants/stories";
 import { SIZES_ANOTHER } from "constants/photos";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import { isAdmin } from "utils/user";
 import { loadItem } from "utils/localStorage";
 import CopyLinkToPage from "components/CopyLinkToPage";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import BreadCrumbs from "components/BreadCrumbs";
 import MediaOriginalLinks from "components/MediaOriginalLinks";
 import "./style.scss";
 
@@ -26,6 +30,7 @@ const Story: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { getMetatags } = useOutletContext<any>();
+
   const [idState, setIdState] = useState<number | null>(null);
   const [dataState, setDataState] = useState<TItem | null>(null);
 

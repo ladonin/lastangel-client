@@ -1,35 +1,41 @@
+/*
+  import Volunteer from 'pages/volunteer'
+  Страница волонтера
+ */
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Lazy, Navigation, Pagination } from "swiper";
 import { Helmet } from "react-helmet";
+
+import PAGES from "routing/routes";
 import { SIZES_ANOTHER, SIZES_MAIN } from "constants/photos";
 import { TItem } from "api/types/volunteers";
 import { VolunteersApi } from "api/volunteers";
 import { getMainImageUrl, getAnotherImagesUrl, getVideoUrl } from "helpers/volunteers";
-import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import { isAdmin } from "utils/user";
-import PAGES from "routing/routes";
-import BreadCrumbs from "components/BreadCrumbs";
 import { getDateDMFriendly, getVideoType, textToClient } from "helpers/common";
 import { loadItem, saveItem, removeItem } from "utils/localStorage";
+import { Button, ButtonSizes, ButtonThemes } from "components/Button";
+import BreadCrumbs from "components/BreadCrumbs";
+import CopyLinkToPage from "components/CopyLinkToPage";
 import VkLogo from "icons/vk_logo.png";
 import OkLogo from "icons/ok_logo.png";
 import InstLogo from "icons/inst_logo.png";
 import PhoneImage from "icons/phone.png";
-import CopyLinkToPage from "components/CopyLinkToPage";
 import "./style.scss";
 
 const Volunteer: React.FC = () => {
   const isMobile = loadItem("isMobile");
+  const hasBack = loadItem("backFromVolunteer");
   const { id } = useParams();
   const navigate = useNavigate();
   const { getMetatags } = useOutletContext<any>();
+
   const [dataState, setDataState] = useState<TItem | null>(null);
   const [anotherImagesState, setAnotherImagesState] = useState<number[] | null>(null);
 
   const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
-  const hasBack = loadItem("backFromVolunteer");
 
   const metatags = useMemo(() => {
     if (!dataState) return false;
@@ -39,32 +45,14 @@ const Volunteer: React.FC = () => {
       description: data.volunteer_description || "",
     };
   }, [dataState]);
-  useEffect(() => {
-    if (id) {
-      setIsLoadingState(true);
-      VolunteersApi.get(Number(id)).then((res) => {
-        if (res === null) {
-          navigate(PAGES.PAGE_404);
-        }
-        res && setIsLoadingState(false);
-        res && setDataState(res);
-        res && res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
-      });
-    }
-  }, [id]);
 
   const destroyBack = () => {
     removeItem("backFromVolunteer");
   };
+
   const createNeedUsePrint = () => {
     saveItem("usePrintInVolunteers", true);
   };
-  useEffect(
-    () => () => {
-      destroyBack();
-    },
-    []
-  );
 
   const renderRedactButton = (data: TItem) =>
     isAdmin() ? (
@@ -142,6 +130,27 @@ const Volunteer: React.FC = () => {
         <img alt="not found" src={getMainImageUrl(dataState, SIZES_MAIN.SQUARE)} />
       </div>
     );
+
+  useEffect(
+    () => () => {
+      destroyBack();
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (id) {
+      setIsLoadingState(true);
+      VolunteersApi.get(Number(id)).then((res) => {
+        if (res === null) {
+          navigate(PAGES.PAGE_404);
+        }
+        res && setIsLoadingState(false);
+        res && setDataState(res);
+        res && res.another_images && setAnotherImagesState(JSON.parse(res.another_images));
+      });
+    }
+  }, [id]);
 
   return (
     <>

@@ -1,3 +1,7 @@
+/*
+  import LayoutAdministration from 'pages/_layoutAdministration'
+  Layout админки
+ */
 import React, { useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";

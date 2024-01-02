@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/donators/_components/Form'
+  Форма заполнения данных (страница донаторов). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useRef } from "react";
 import InputText from "components/Form/InputText";
 import { TGetResponseItem } from "api/types/donators";

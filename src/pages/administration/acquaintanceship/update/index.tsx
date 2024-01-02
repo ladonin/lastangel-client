@@ -1,3 +1,7 @@
+/*
+  import Update from 'pages/administration/acquaintanceship/update'
+  Страница редактирования данных (знакомство с приютом). Админка.
+ */
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";

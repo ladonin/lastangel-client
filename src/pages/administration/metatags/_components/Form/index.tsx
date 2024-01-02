@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/metatags/_components/Form'
+  Форма заполнения данных (страница метатегов сайта). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useRef, useState } from "react";
 import InputText from "components/Form/InputText";
 import Textarea from "components/Form/Textarea";

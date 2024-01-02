@@ -1,3 +1,7 @@
+/*
+  import Collection from 'pages/collection'
+  Страница просмотра сбора
+ */
 import React, { useEffect, useState, useMemo } from "react";
 import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
 import cn from "classnames";

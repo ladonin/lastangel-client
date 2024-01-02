@@ -1,25 +1,32 @@
+/*
+  import Volunteers from 'pages/volunteers'
+  Страница списка волонтеров
+ */
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { TGetListRequest, TItem } from "api/types/volunteers";
+
 import PAGES from "routing/routes";
+import { TGetListRequest, TItem } from "api/types/volunteers";
+import { SIZES_MAIN } from "constants/photos";
 import { VolunteersApi } from "api/volunteers";
 import { getMainImageUrl } from "helpers/volunteers";
+import { loadItem, saveItem } from "utils/localStorage";
 import NotFound from "components/NotFound";
 import InfiniteScroll from "components/InfiniteScroll";
 import BreadCrumbs from "components/BreadCrumbs";
-import { loadItem, saveItem } from "utils/localStorage";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import LoaderIcon from "components/LoaderIcon";
-import { SIZES_MAIN } from "constants/photos";
 import Filter, { TFilterParams } from "./_components/Filter";
 import "./style.scss";
 
 const PAGESIZE = 20;
+
 const Volunteers: React.FC = () => {
   const isMobile = loadItem("isMobile");
   const navigate = useNavigate();
   const { getMetatags } = useOutletContext<any>();
+
   const metatags = useMemo(() => {
     const data = getMetatags();
 
@@ -28,6 +35,7 @@ const Volunteers: React.FC = () => {
       description: data.volunteers_description || "",
     };
   }, []);
+
   const loadingStatusRef = useRef({ isLoading: false, isOff: false });
   const filterRef = useRef<TFilterParams>(loadItem("volunteers_filter") || {});
 
@@ -65,7 +73,6 @@ const Volunteers: React.FC = () => {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
-
   const createPrint = () => {
     saveItem("volunteersPrint", {
       ...printRef.current,
@@ -83,7 +90,6 @@ const Volunteers: React.FC = () => {
       page: pageState,
     };
   }, [listState, pageState]);
-
   useEffect(() => {
     setTimeout(() => {
       if (needUsePrint.current && printRef.current) {
@@ -96,7 +102,6 @@ const Volunteers: React.FC = () => {
         print && window.scrollTo(0, print.scroll);
       }
     }, 0);
-
     return () => {
       saveItem("usePrintInVolunteers", false);
     };

@@ -1,3 +1,7 @@
+/*
+  import help from 'pages/help'
+  Страница помощи
+ */
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";

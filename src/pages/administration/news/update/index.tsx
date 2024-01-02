@@ -1,3 +1,7 @@
+/*
+  import Update from 'pages/administration/news/update'
+  Страница редактирования новости. Админка.
+ */
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router";

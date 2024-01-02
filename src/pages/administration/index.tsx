@@ -1,3 +1,7 @@
+/*
+  import Administration from 'pages/administration'
+  Общая страница админки.
+ */
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import cn from "classnames";
@@ -124,9 +128,6 @@ const Administration: React.FC = () => {
   const [listNewsState, setListNewsState] = useState<TItemNews[] | null>(null);
   const [listStoriesState, setListStoriesState] = useState<TItemStory[] | null>(null);
   const [selectedTabIndexState, setSelectedTabIndexState] = useState<number>(0);
-  const onSelectTabHandler = (index: number) => {
-    setSelectedTabIndexState(index);
-  };
 
   const [newsPageState, setNewsPageState] = useState<number>(1);
   const [storiesPageState, setStoriesPageState] = useState<number>(1);
@@ -162,6 +163,10 @@ const Administration: React.FC = () => {
   const storiesLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const donatorsLoadingStatusRef = useRef({ isLoading: false, isOff: false });
   const volunteersLoadingStatusRef = useRef({ isLoading: false, isOff: false });
+
+  const onSelectTabHandler = (index: number) => {
+    setSelectedTabIndexState(index);
+  };
 
   const getNewsData = (params?: TGetNewsListRequest) => {
     newsLoadingStatusRef.current.isLoading = true;

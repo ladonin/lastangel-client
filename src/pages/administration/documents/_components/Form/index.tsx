@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/documents/_components/Form'
+  Форма заполнения данных (страница документов клиники). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { TGetResponseItem } from "api/types/documents";
 import { getAnotherImagesUrl } from "helpers/documents";

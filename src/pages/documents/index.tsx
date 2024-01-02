@@ -1,3 +1,7 @@
+/*
+  import Documents from 'pages/documents'
+  Страница документов
+ */
 import React, { useMemo } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet";

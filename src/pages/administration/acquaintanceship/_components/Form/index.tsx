@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/acquaintanceship/_components/Form'
+  Форма заполнения данных (страница знакомства с приютом). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { SIZES_ANOTHER } from "constants/photos";
 import { ACQUAINTANCESHIP_STATUS } from "constants/acquaintanceship";

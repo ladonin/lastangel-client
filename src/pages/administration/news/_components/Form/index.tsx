@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/news/_components/Form'
+  Форма заполнения данных (страница новостей). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useState, useRef } from "react";
 import { NEWS_STATUS } from "constants/news";
 import { SIZES_ANOTHER } from "constants/photos";
@@ -16,15 +20,15 @@ export type TParams = { [key: string]: any };
 
 export type TResponse = TGetResponseItem;
 
-type TProps = {
-  onChange: (data: TParams) => void;
-  data?: TGetResponseItem;
-};
-
 export const NEWS_OPTIONS = [
   { value: String(NEWS_STATUS.PUBLISHED), label: "Опубликован" },
   { value: String(NEWS_STATUS.NON_PUBLISHED), label: "Не опубликован" },
 ];
+
+type TProps = {
+  onChange: (data: TParams) => void;
+  data?: TGetResponseItem;
+};
 
 const Form: React.FC<TProps> = ({ onChange, data }) => {
   const [isMajorState, setIsMajorState] = useState(!!data?.ismajor);

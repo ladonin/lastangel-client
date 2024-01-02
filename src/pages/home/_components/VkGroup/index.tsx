@@ -1,5 +1,6 @@
 /*
   import VkGroup from 'pages/home/_components/VkGroup'
+  Компонент "Наша группа вконтакте" для домашней страницы
  */
 import React, { useEffect } from "react";
 import "react-tabs/style/react-tabs.css";

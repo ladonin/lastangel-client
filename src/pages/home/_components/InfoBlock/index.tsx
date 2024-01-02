@@ -1,5 +1,6 @@
 /*
   import InfoBlock from 'pages/home/_components/InfoBlock'
+  Компонент "Инфоблок" для домашней страницы. Цифры - кто в приюте и кто уже обрел дом.
  */
 import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";

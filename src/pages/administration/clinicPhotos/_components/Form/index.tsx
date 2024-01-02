@@ -1,3 +1,7 @@
+/*
+  import Form from 'pages/administration/clinicPhotos/_components/Form'
+  Форма заполнения данных (страница фотографий клиники). Админка. Создание/редактирование.
+ */
 import React, { useEffect, useState, useRef } from "react";
 import InputPrevLoadedImages from "components/Form/InputPrevLoadedImages";
 import InputFileImages from "components/Form/InputFileImages";

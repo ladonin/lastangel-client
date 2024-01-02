@@ -1,3 +1,7 @@
+/*
+  import Acquaintanceship from 'pages/acquaintanceship'
+  Страница знакомства с приютом
+ */
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import cn from "classnames";

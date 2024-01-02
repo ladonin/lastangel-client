@@ -1,14 +1,13 @@
+/*
+  import Filter from 'pages/administration/volunteers/_components/Filter'
+  Компонент фильтра для списка (страница волонтеров). Админка.
+ */
 import React, { useRef, useEffect, useState } from "react";
 import { VolunteersApi } from "api/volunteers";
 import { loadItem } from "utils/localStorage";
 import Select from "components/Form/Select";
 import { Button, ButtonSizes, ButtonThemes } from "components/Button";
 import "./style.scss";
-
-type TProps = {
-  onChange: (filter: TFilterParams) => void;
-  filter: TFilterParams | null;
-};
 
 export type TFilterParams = {
   notPublished?: 1 | 0;
@@ -20,6 +19,11 @@ export type TFilterParams = {
 type TSelectRefProps = {
   clearValue: () => void;
   lightClear: () => void;
+};
+
+type TProps = {
+  onChange: (filter: TFilterParams) => void;
+  filter: TFilterParams | null;
 };
 
 const VolunteersFilter: React.FC<TProps> = ({ onChange, filter = null }) => {

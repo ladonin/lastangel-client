@@ -1,3 +1,7 @@
+/*
+  import Create from 'pages/administration/donators/create'
+  Страница создания донатора. Админка.
+ */
 import React, { useState, useRef } from "react";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";

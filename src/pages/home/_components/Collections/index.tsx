@@ -1,5 +1,6 @@
 /*
-  import Collections from 'pages/home/components/Collections'
+  import Collections from 'pages/home/_components/Collections'
+  Компонент "Сборы" для домашней страницы
  */
 import React, { useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";

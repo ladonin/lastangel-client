@@ -1,8 +1,6 @@
-$layout_1_header_height:197px;
-$layout_1_footer_height:197px;
-$layout_1_height_addition_mobile:700px;
-
-
+$layout_1_header_height: 197px;
+$layout_1_footer_height: 197px;
+$layout_1_height_addition_mobile: 700px;
 
 //####### --> шрифт #######
 $font_main: 'OpenSans';
@@ -27,9 +25,6 @@ $c_greyMedium: #999;
 $c_grey: #666;
 $c_greyDark: #333;
 
-
-
-
 $c_pistachioLighter: #f3fcf3;
 $c_pistachioLight: #eff6ee;
 $c_pistachioMiddleLighter: #e8f1e8;
@@ -46,7 +41,6 @@ $c_pistachioDark: #91b990;
 $c_pistachioDarkGrey: #5a775a;
 $c_pistachioDarkFreshLMedium: #6d9d6d;
 $c_pistachioDarkFresh: #4f7e4f;
-
 
 $c_pink: #ec01c7;
 $c_pinkLight: #ff29dc;
@@ -69,7 +63,6 @@ $c_sandYellow: #f7f6ce;
 $c_sand: #f8f7e2;
 $c_sandLight: #fffaef;
 
-
 $c_lagunaWhite: #f7fafb;
 $c_lagunaGreyLighter: #eaf4f4;
 $c_lagunaGreyLight: #e2ecec;
@@ -83,15 +76,13 @@ $c_lagunaBlueLight: #7096c7;
 $c_lagunaGrey: #305d77;
 $c_lagunaDark: #006199;
 
-
-
 $c_red: #FF0000;
 $c_redLight: #ff5e5e;
 
 $transition: all .2s linear;
-$boxShadow: none;//4px 4px 12px $c_greyDF;
+$boxShadow: none; //4px 4px 12px $c_greyDF;
 $boxShadowEnabled: 4px 4px 12px $c_greyDF;
 $boxShadowImportant: 6px 6px 18px $c_greyDF;
-$boxShadowMobile: none;//calc(6px * var(--viewport-koeff)) calc(6px * var(--viewport-koeff)) calc(18px * var(--viewport-koeff)) $c_greyEF;
+$boxShadowMobile: none; //calc(6px * var(--viewport-koeff)) calc(6px * var(--viewport-koeff)) calc(18px * var(--viewport-koeff)) $c_greyEF;
 $boxShadowMobileEnabled: calc(6px * var(--viewport-koeff)) calc(6px * var(--viewport-koeff)) calc(18px * var(--viewport-koeff)) $c_greyEF;
 $boxShadowMobileImportant: calc(8px * var(--viewport-koeff)) calc(8px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) $c_greyDF;

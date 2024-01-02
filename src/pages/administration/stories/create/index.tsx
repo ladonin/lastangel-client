@@ -1,3 +1,7 @@
+/*
+  import Create from 'pages/administration/stories/create'
+  Страница добавления истории. Админка.
+ */
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
