@@ -128,37 +128,37 @@ const News: React.FC = () => {
                   ))}
                 </Swiper>
               )}
+              {dataState.video1 && (
+                <video className="loc_video" controls>
+                  <source
+                    src={getVideoUrl(dataState, dataState.video1)}
+                    type={getVideoType(dataState.video1)}
+                  />
+                </video>
+              )}
+              {dataState.video2 && (
+                <video className="loc_video" controls>
+                  <source
+                    src={getVideoUrl(dataState, dataState.video2)}
+                    type={getVideoType(dataState.video2)}
+                  />
+                </video>
+              )}
+              {dataState.video3 && (
+                <video className="loc_video" controls>
+                  <source
+                    src={getVideoUrl(dataState, dataState.video3)}
+                    type={getVideoType(dataState.video3)}
+                  />
+                </video>
+              )}
+              <MediaOriginalLinks type="news" data={dataState} />
+              <CopyLinkToPage
+                targetText="на новость"
+                text="Поделиться этой новостью с друзьями"
+                url={`${window.location.origin + PAGES.NEWS}/${dataState.id}`}
+              />
             </div>
-            {dataState.video1 && (
-              <video className="loc_video" controls>
-                <source
-                  src={getVideoUrl(dataState, dataState.video1)}
-                  type={getVideoType(dataState.video1)}
-                />
-              </video>
-            )}
-            {dataState.video2 && (
-              <video className="loc_video" controls>
-                <source
-                  src={getVideoUrl(dataState, dataState.video2)}
-                  type={getVideoType(dataState.video2)}
-                />
-              </video>
-            )}
-            {dataState.video3 && (
-              <video className="loc_video" controls>
-                <source
-                  src={getVideoUrl(dataState, dataState.video3)}
-                  type={getVideoType(dataState.video3)}
-                />
-              </video>
-            )}
-            <MediaOriginalLinks type="news" data={dataState} />
-            <CopyLinkToPage
-              targetText="на новость"
-              text="Поделиться этой новостью с друзьями"
-              url={`${window.location.origin + PAGES.NEWS}/${dataState.id}`}
-            />
           </div>
         )}
         <div className="loc_anotherTitle">Другие новости:</div>

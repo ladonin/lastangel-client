@@ -12,6 +12,7 @@ html {
   max-height: 9001em;
   font-family: $font_main;
   scrollbar-width: thin;
+  box-sizing: border-box;
 
   &::-webkit-scrollbar-track {
     border-radius: 5px;
@@ -29,13 +30,14 @@ html {
   }
 }
 
+br {
+  display: block;
+  //margin-bottom: 16px;
+}
+
 html, body {
   padding: 0;
   margin: 0;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 img {
@@ -69,6 +71,12 @@ strong {
   font-weight: 600;
 }
 
+textarea {
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 16px;
+}
+
 textarea, input {
   border: 1px solid $c_greyMedium;
   outline: none;
@@ -93,12 +101,6 @@ input[placeholder] {
 input::-webkit-input-placeholder,
 ::-webkit-input-placeholder {
   color: hsl(0, 0%, 72%) !important;
-}
-
-textarea {
-  border-radius: 8px;
-  padding: 16px;
-  font-size: 16px;
 }
 
 .link_1 {

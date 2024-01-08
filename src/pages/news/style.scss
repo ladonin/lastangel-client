@@ -44,10 +44,11 @@
       line-height: 26px;
 
       .loc_content {
-        padding-bottom: 4px;
+        // padding-bottom: 4px;
       }
 
       .loc_slider {
+        margin-top: 24px;
         margin-bottom: 24px;
 
         .swiper-slide {
@@ -69,6 +70,7 @@
     .loc_video {
       display: flex;
       width: 100%;
+      margin-top: 24px;
       margin-bottom: 24px;
       max-height: 85vh;
       height: 600px;
