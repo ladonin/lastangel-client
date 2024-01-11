@@ -223,3 +223,7 @@ h3 {
 .swiper-button-next, .swiper-button-prev {
   transform: translate(0%, -25%);
 }
+
+.loc_content.wysiwyg_description p a {
+  color: $c_blueLight;
+}
