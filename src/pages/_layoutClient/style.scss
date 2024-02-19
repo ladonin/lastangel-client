@@ -77,7 +77,7 @@
 
   .page {
     width: 100%;
-    padding: calc(24px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(56px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
+    padding: calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff)) calc(56px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
     min-height: calc((100vh - (#{$layout_1_header_height} + #{$layout_1_footer_height} + #{$layout_1_height_addition_mobile}) * var(--viewport-koeff)));
 
     & > div[class^='page-'] {

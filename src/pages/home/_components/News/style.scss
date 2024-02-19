@@ -87,9 +87,8 @@
 }
 
 .layout.loc--isMobile .page-home_news {
-  margin: 0 calc(-24px * var(--viewport-koeff));
+  margin: 0 calc(-24px * var(--viewport-koeff)) 0 calc(-24px * var(--viewport-koeff));
   padding: calc(24px * var(--viewport-koeff));
-  margin-bottom: calc(32px * var(--viewport-koeff));
 
   .loc_title {
     font-size: calc(42px * var(--viewport-koeff));

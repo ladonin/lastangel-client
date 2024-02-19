@@ -446,8 +446,8 @@ const Pet: React.FC = () => {
               <LoaderIcon />
             ) : (
               <div className="loc_list">
-                {donationsListState.map((item) => (
-                  <div className="loc_item">
+                {donationsListState.map((item, index) => (
+                  <div className="loc_item" key={index}>
                     <div className={cn("loc_name", { "loc--hasLink": !!item.donator_outer_link })}>
                       {isAnonym(item) ? (
                         "Добрый помощник приюта"

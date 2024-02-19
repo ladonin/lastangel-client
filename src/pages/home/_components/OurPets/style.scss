@@ -215,6 +215,7 @@
 }
 
 .layout.loc--isMobile .page-home_ourPets {
+  padding-top: calc(24px * var(--viewport-koeff));
   .react-tabs__tab-panel {
     padding-bottom: 0;
 

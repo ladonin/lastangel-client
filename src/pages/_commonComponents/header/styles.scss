@@ -223,7 +223,7 @@
 .component-headerMobile {
   width: 100%;
   background-color: $c_lagunaLightMiddle;
-  margin-bottom: calc(16px * var(--viewport-koeff));
+  margin-bottom: 0;
 
   .loc_wrapper {
     display: flex;

@@ -359,10 +359,16 @@
     .loc_status {
       font-size: calc(32px * var(--viewport-koeff));
 
-      img {
-        height: calc(40px * var(--viewport-koeff));
-        width: calc(40px * var(--viewport-koeff));
-        margin-right: calc(8px * var(--viewport-koeff));
+      &.loc--status_5 {
+        display: flex;
+        align-items: center;
+        padding-bottom: calc(16px * var(--viewport-koeff));
+
+        img {
+          height: calc(50px * var(--viewport-koeff));
+          width: calc(50px * var(--viewport-koeff));
+          margin-right: calc(8px * var(--viewport-koeff));
+        }
       }
     }
 
@@ -571,7 +577,7 @@
   }
 }
 
-.page-pet_donationsListModal {
+.page-pet_donationsListModal .component-modal--isMobile {
   .loc_title {
     padding-bottom: calc(24px * var(--viewport-koeff));
   }

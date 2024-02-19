@@ -98,9 +98,10 @@
 .layout.loc--isMobile .page-home_help {
   margin-left: calc(-24px * var(--viewport-koeff));
   margin-right: calc(-24px * var(--viewport-koeff));
-  margin-top: calc(8px * var(--viewport-koeff));
+  margin-top: 0;
   width: auto;
-  margin-bottom: calc(16px * var(--viewport-koeff));
+  margin-bottom: 0;
+  padding-bottom: calc(24px * var(--viewport-koeff));
 
   > .loc_title {
     font-size: calc(40px * var(--viewport-koeff));
@@ -117,7 +118,7 @@
   }
 
   .loc_item_other {
-    padding: calc(32px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
+    padding: calc(24px * var(--viewport-koeff));
 
     .loc_title {
       font-size: calc(32px * var(--viewport-koeff));

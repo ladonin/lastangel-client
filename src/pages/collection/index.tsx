@@ -138,6 +138,11 @@ const Collection: React.FC = () => {
             </Link>
           </div>
         )}
+        {dataState.status === COLLECTIONS_STATUS.CLOSED && (
+          <div className="loc_closed">
+            Сбор закрыт <img alt="загружаю" src={flowerSrc} />
+          </div>
+        )}
         <div className="loc_id">ID: С{dataState.id} </div>
         <div className="loc_targetSum">
           Надо{isMobile === false && <> собрать</>}:{" "}
@@ -146,11 +151,6 @@ const Collection: React.FC = () => {
           </div>
         </div>
         {isMobile === true && renderDonation(dataState)}
-        {dataState.status === COLLECTIONS_STATUS.CLOSED && (
-          <div className="loc_closed">
-            Сбор закрыт <img alt="загружаю" src={flowerSrc} />
-          </div>
-        )}
       </div>
     );
 
@@ -290,8 +290,8 @@ const Collection: React.FC = () => {
               <LoaderIcon />
             ) : (
               <div className="loc_list">
-                {donationsListState.map((item) => (
-                  <div className="loc_item">
+                {donationsListState.map((item, index) => (
+                  <div className="loc_item" key={index}>
                     <div className={cn("loc_name", { "loc--hasLink": !!item.donator_outer_link })}>
                       {isAnonym(item) ? (
                         "Добрый помощник приюта"

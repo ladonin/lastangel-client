@@ -308,21 +308,21 @@
       }
 
       .loc_closed {
-        margin-top: calc(24px * var(--viewport-koeff));
+        margin-top: calc(16px * var(--viewport-koeff));
         background-color: $c_greenLight;
         color: $c_white;
         font-weight: 600;
-        font-size: calc(16px * var(--viewport-koeff));
+        font-size: calc(32px * var(--viewport-koeff));
         display: flex;
         align-items: center;
         gap: calc(8px * var(--viewport-koeff));
-        padding: calc(8px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
+        padding: calc(16px * var(--viewport-koeff)) calc(24px * var(--viewport-koeff));
         border-radius: calc(99px * var(--viewport-koeff));
         width: fit-content;
 
         > img {
-          width: calc(48px * var(--viewport-koeff));
-          height: calc(48px * var(--viewport-koeff));
+          width: calc(50px * var(--viewport-koeff));
+          height: calc(50px * var(--viewport-koeff));
         }
       }
     }
