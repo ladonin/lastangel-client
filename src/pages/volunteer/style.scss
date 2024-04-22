@@ -202,8 +202,6 @@
 
     .loc_bottomWrapper {
       margin: calc(32px * var(--viewport-koeff)) calc(-24px * var(--viewport-koeff)) 0 calc(-24px * var(--viewport-koeff));
-      display: flex;
-      flex-wrap: wrap;
 
       .loc_redactButton {
         margin: 0 auto calc(24px * var(--viewport-koeff)) auto;
@@ -256,6 +254,7 @@
         height: 1200px;
         max-height: 85vh;
         margin-bottom: calc(24px * var(--viewport-koeff));
+        margin-top: calc(24px * var(--viewport-koeff));
       }
     }
   }

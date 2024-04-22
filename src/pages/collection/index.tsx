@@ -213,7 +213,10 @@ const Collection: React.FC = () => {
                   )}
 
                   {isMobile === false && (
-                    <div className="loc_description">{dataState.description}</div>
+                    <div
+                      className="loc_description"
+                      dangerouslySetInnerHTML={{ __html: textToClient(dataState.description) }}
+                    />
                   )}
                 </div>
               </div>

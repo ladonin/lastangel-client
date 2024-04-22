@@ -180,6 +180,7 @@
       height: 1200px;
       max-height: 85vh;
       margin-bottom: calc(24px * var(--viewport-koeff));
+      margin-top: calc(24px * var(--viewport-koeff));
     }
 
     .component-copyLinkToPage {
