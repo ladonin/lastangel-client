@@ -7,6 +7,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 import { Link } from "react-router-dom";
 import { isAuthorized } from "utils/user";
 import PAGES from "routing/routes";
+import LessHomelessImage from "./friends/lesshomeless.png";
 import "./styles.scss";
 
 const renderCounter = () => (
@@ -29,8 +30,21 @@ const renderCounter = () => (
   </div>
 );
 
+const renderFriendsList = () => (
+  <div className="loc_friends">
+    <div className="loc_content">
+      <div className="loc_title">Наши друзья</div>
+      <div className="loc_list">
+        <a href="https://less-homeless.com/" target="_blank" rel="noreferrer">
+          <img alt="загружаю" src={LessHomelessImage} />
+        </a>
+      </div>
+    </div>
+  </div>
+);
+
 const renderLinksList = () => (
-  <>
+  <div className="loc_links">
     <Link to={PAGES.MAIN} className="link_1 loc_link">
       Главная
     </Link>
@@ -64,7 +78,7 @@ const renderLinksList = () => (
     <Link to={PAGES.CONTACTS} className="link_1 loc_link">
       Контакты
     </Link>
-  </>
+  </div>
 );
 
 export default function Index() {
@@ -77,7 +91,10 @@ export default function Index() {
             &copy; "Последний ангел"
             <br />с 2010г.
           </div>
-          <div className="loc_block_2">{renderLinksList()}</div>
+          <div className="loc_block_2">
+            {renderLinksList()}
+            {renderFriendsList()}
+          </div>
           <div className="loc_block_3">
             {!isAuthorized() && (
               <Link to={PAGES.SIGNIN} className="link_1 loc_link loc_login">
@@ -91,7 +108,11 @@ export default function Index() {
       </BrowserView>
       <MobileView>
         <div className="component-footer_wrapper_1">
-          <div className="loc_block_2">{renderLinksList()}</div>
+          <div className="loc_block_2">
+            {renderLinksList()}
+
+            {renderFriendsList()}
+          </div>
           <div className="loc_block_1">
             Приют для животных &copy; "Последний ангел"
             <br />с 2010г.

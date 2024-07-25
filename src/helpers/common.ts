@@ -63,7 +63,7 @@ export const monthMappings = [
   "Сентябрь",
   "Октябрь",
   "Ноябрь",
-  "Декабрь",
+  "Декабрь"
 ];
 export const monthMappingsRodit = [
   "Января",
@@ -77,7 +77,7 @@ export const monthMappingsRodit = [
   "Сентября",
   "Октября",
   "Ноября",
-  "Декабря",
+  "Декабря"
 ];
 
 // => 25 марта
@@ -248,3 +248,165 @@ export const preparePhoneInputVal = (val: string) => {
 // Не хочу ради этого ставить lodash
 export const objectsAreEqual = (obj1: any, obj2: any) =>
   JSON.stringify(obj1) === JSON.stringify(obj2);
+
+
+/*
+Клонируем объект
+var object = {
+  prop1: 1,
+  prop2: 'aaa',
+  prop3: [1,2,3,'rrr', function foo1(){console.log('foo1')}],
+  prop4: function foo2(){console.log('foo2')},
+  prop5: new Set(['set1','set2','set3']),
+  prop6: null,
+  prop7: false,
+  prop8: 0,
+  prop9: [
+    {
+    prop9_1: 1,
+    prop9_2: '9_aaa',
+    prop9_3: [1,2,3,'9_rrr', function foo9_1(){console.log('foo9_1')}],
+    prop9_4: function foo9_2(){console.log('foo9_2'); console.log(this.a);},
+    prop9_5: new Set(['set9_1','set9_2','set9_3']),
+    prop9_6: null,
+    prop9_7: false,
+    prop9_8: 0,
+    prop9_9: [
+      {
+        prop9_9_1: 1,
+        prop9_9_2: '9_9_aaa',
+        prop9_9_3: [1,2,3,'9_9_rrr', function foo9_9_1(){console.log('foo9_9_1')}],
+        prop9_9_4: function foo9_9_2(){console.log('foo9_9_2')},
+        prop9_9_5: new Set(['set_99_1','set_99_2','set_99_3']),
+        prop9_9_6: null,
+        prop9_9_7: false,
+        prop9_9_8: 0,
+        prop9_9_9: [
+          111,222
+        ]
+      },
+      99,
+      new Set(['set9_9_1','set9_9_2','set9_9_3']),
+    ],
+    prop9_10: {
+      prop9_10_1: 1,
+      prop9_10_2: '9_10_aaa',
+      prop9_10_3: [1,2,3,'9_10_rrr', function foo9_10_1(){console.log('foo9_10_1')}],
+      prop9_10_4: function foo9_10_2(){console.log('foo9_10_2')},
+      prop9_10_5: new Set(['set_910_1','set_910_2','set_910_3']),
+      prop9_10_6: null,
+      prop9_10_7: false,
+      prop9_10_8: 0,
+      prop9_10_9: [
+        1111,2222, new Set(['set9_10_1','set9_10_2','set9_10_3']),
+      ]
+    }
+  },
+  9
+  ],
+  prop10: {
+        prop10_1: 1,
+        prop10_2: '10_aaa',
+        prop10_3: [1,2,3,'10_rrr', function foo10_1(){console.log('foo10_1')}],
+        prop10_4: function foo10_2(){console.log('foo10_2')},
+        prop10_5: new Set(['set_10_1','set_10_2','set_10_3']),
+        prop10_6: null,
+        prop10_7: false,
+        prop10_8: 0,
+        prop10_9: [
+          1111,2222, new Set(['set10_1','set10_2','set10_3'])
+        ]
+      }
+}
+
+function clone(obj) {
+  
+  const isObject = (obj) => ({}).toString.apply(obj) === "[object Object]";
+  const isSet = (set) => ({}).toString.apply(set) === "[object Set]";
+  const isMap = (map) => ({}).toString.apply(map) === "[object Map]";
+  const isFunction = (func) => ({}).toString.apply(func) === "[object Function]";
+  const isDate = (date) => ({}).toString.apply(date) === "[object Date]";
+  
+  Function.prototype.clone = function() {
+    let that = this;
+    let clonedFunc = {[that.name]: function() { return that.apply(this, arguments)}}
+    Object.defineProperties(clonedFunc[that.name], Object.getOwnPropertyDescriptors(that))
+    return clonedFunc[that.name];
+  }
+  
+ // let clonedObject = Array.isArray(obj) 
+  //? Object.defineProperties([], Object.getOwnPropertyDescriptors(obj))
+  //: Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj))
+  
+  let clonedObject = Object.defineProperties( Array.isArray(obj) ? [] : {}, Object.getOwnPropertyDescriptors(obj));
+  clonedObject.__proto__ = Object.getPrototypeOf(obj);
+  
+  Object.entries(clonedObject).forEach(([prop, value]) => {
+    if (Array.isArray(value) || isObject(value)) {
+      clonedObject[prop] = clone(value)
+    } else if (isSet(value)) {
+      clonedObject[prop] = new Set(value)
+    } else if (isMap(value)) {
+      clonedObject[prop] = new Map(value)
+    } else if (isFunction(value)) {
+      clonedObject[prop] = value.clone()
+    } else if (isDate(value)) {
+      clonedObject[prop] = new Date(value)
+    }
+  })
+  return clonedObject;
+};
+
+
+
+
+//-->proto test 1
+var proto_proto_test = {
+  a: 'protoprotoprotoproto'
+}
+var obj_proto_test = {
+  __proto__: proto_proto_test
+};
+
+object.prop9[0].prop9_10.__proto__ = obj_proto_test
+//<--proto test 1
+
+
+// proto test 2
+object.prop9.__proto__ = {a: 'array proto'}
+// proto test 2
+
+
+object.prop4.changgggeddddd='changed'; // function prop test 1
+var clonedObject = clone(object);
+object.prop4.changgggeddddd='changed2222222222222222'; // function prop test 1
+
+//-->proto test 1
+object.prop9[0].prop9_10.__proto__.a= 'channnnnggggeeeeddd';
+//<--proto test 1
+
+
+
+// proto test 2
+object.prop9.__proto__.a= 'array proto channnngeeeeedddd';
+// proto test 2
+
+
+
+
+object.prop1='changed';
+
+object.prop9[0].prop9_7='changed';
+object.prop9[0].prop9_9[2].add('changed');
+object.prop9.changgggeddddd='changed';
+object.prop10.prop10_3[3]=23432424234;
+object.prop10.prop10_3[4].channngeeeeddddd=1111111111111111111111111;
+console.log(object)
+console.log(clonedObject)
+
+
+
+
+
+
+ */
