@@ -110,7 +110,6 @@ export default function Index() {
         <div className="component-footer_wrapper_1">
           <div className="loc_block_2">
             {renderLinksList()}
-
             {renderFriendsList()}
           </div>
           <div className="loc_block_1">

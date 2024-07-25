@@ -117,6 +117,7 @@
   .loc_block {
     display: flex;
     flex-wrap: wrap;
+    gap: calc(24px * var(--viewport-koeff));
 
     .loc_item {
       width: 100%;
