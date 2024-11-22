@@ -116,7 +116,7 @@ const Story: React.FC = () => {
                   modules={[Autoplay, Pagination, Navigation]}
                   className="loc_slider"
                 >
-                  {anotherImagesState.map((item, index) => (
+                  {[...anotherImagesState].reverse().map((item, index) => (
                     <SwiperSlide key={index}>
                       <img
                         alt="_"
