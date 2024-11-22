@@ -11,6 +11,10 @@
     line-height: calc(64px * var(--viewport-koeff));
   }
 
+  ul {
+    padding-left: calc(32px * var(--viewport-koeff));
+  }
+
   .swiper-button-prev,
   .swiper-button-next {
     height: calc(100px * var(--viewport-koeff));
@@ -90,6 +94,7 @@
       margin: 0 0 calc(24px * var(--viewport-koeff)) !important;
     }
   }
+
   // <-- wysiwyg
 
   .form-element-description {

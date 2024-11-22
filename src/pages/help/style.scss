@@ -189,7 +189,7 @@
         line-height: calc(40px * var(--viewport-koeff));
 
         .loc_docs {
-          padding: 0 calc(24px * var(--viewport-koeff)) 0 calc(16px * var(--viewport-koeff));
+          padding: 0 0 0 calc(16px * var(--viewport-koeff));
           gap: calc(4px * var(--viewport-koeff));
 
           img {
@@ -207,7 +207,7 @@
     }
 
     .loc_image {
-      height: calc(414px * var(--viewport-koeff)); //444 #REKVIZITS
+      height: calc(450px * var(--viewport-koeff)); //444 #REKVIZITS
     }
   }
 

@@ -14,7 +14,7 @@ export const DONATIONS_TYPES = {
   CREDIT: 4,
 } as const;
 
-export const MAIN_CARD = "4276100013474736";
+export const MAIN_CARD = "4276 1000 1347 4736";
 export const MAIN_PHONE = "8 (996) 442-24-16";
 export const MAIN_CARD_OWNER = (
   <Link target="_blank" to="https://vk.com/id512018972" className="link_3">
@@ -29,7 +29,7 @@ export const REKVIZITS = (
       Pеквизиты <span style={{ color: "rgb(13, 174, 0)" }}>Сбербанк</span>{" "}
     </span>
     <div className="loc_desc">
-      <span> т. {MAIN_PHONE}</span>
+      <div> т. {MAIN_PHONE}</div>
       <b>{MAIN_CARD_OWNER}</b>
       <br />№ карты: {MAIN_CARD}
       <br />
