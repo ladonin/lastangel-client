@@ -11,7 +11,7 @@
     line-height: calc(64px * var(--viewport-koeff));
   }
 
-  ul {
+  ul:not(.react-tabs__tab-list) {
     padding-left: calc(32px * var(--viewport-koeff));
   }
 

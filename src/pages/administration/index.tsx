@@ -104,6 +104,9 @@ const TABS_MAP: { [key: string]: number } = {
   story: 6,
 };
 
+const isHere = (status: number) =>
+  status !== ANIMALS_STATUS.AT_HOME && status !== ANIMALS_STATUS.DIED;
+
 const preparePetsSavedFilter = () => {
   const savedFilter = loadItem("admin_pets_filter");
   if (!savedFilter) return undefined;
@@ -411,7 +414,11 @@ const Administration: React.FC = () => {
           <div className={`loc_sex ${data.sex === 1 ? "loc--male" : "loc--female"}`}>
             {prepareSex(data.sex)}
           </div>
-          , <div className="loc_age">{prepareAge(data.birthdate)}</div>
+          {isHere(data.status) && (
+            <>
+              , <div className="loc_age">{prepareAge(data.birthdate)}</div>
+            </>
+          )}
           <div className="loc_parameters">
             {prepareGraft(data.grafted, data.sex)}, {prepareSterilized(data.sterilized, data.sex)},{" "}
             {data.breed || "порода неизвестна"}, {prepareKind(data.kind, data.sex)}
@@ -425,9 +432,12 @@ const Administration: React.FC = () => {
             {preparePetStatus(data.status, data.need_medicine)}
           </div>
           {data.need_medicine !== null && <span>({preparePetStatus(data.status, null)})</span>}
-          <div className="loc_collected">
-            Собрано за месяц: <span className="loc_val">{numberFriendly(data.collected)}</span> руб.
-          </div>
+          {isHere(data.status) && (
+            <div className="loc_collected">
+              Собрано за месяц: <span className="loc_val">{numberFriendly(data.collected)}</span>{" "}
+              руб.
+            </div>
+          )}
           <div className="loc_description">{data.short_description}</div>
           <div className="loc_created">Создано: {getDateString(data.created)}</div>
           {!!data.updated && (

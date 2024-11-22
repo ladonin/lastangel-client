@@ -236,7 +236,11 @@ const Pets: React.FC = () => {
           <div className={`loc_sex ${data.sex === 1 ? "loc--male" : "loc--female"}`}>
             {prepareSex(data.sex)}
           </div>
-          , <div className="loc_age">{prepareAge(data.birthdate)}</div>
+          {isHere(data.status) && (
+            <>
+              , <div className="loc_age">{prepareAge(data.birthdate)}</div>
+            </>
+          )}
           <div className="loc_parameters">
             {data.status !== ANIMALS_STATUS.AT_HOME && data.status !== ANIMALS_STATUS.DIED && (
               <>

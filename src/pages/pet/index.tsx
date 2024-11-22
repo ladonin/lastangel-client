@@ -155,12 +155,12 @@ const Pet: React.FC = () => {
         )}
 
         {isHere(dataState.status) && <div className="loc_id">№: {dataState.id} </div>}
-        {dataState.birthdate && (
+        {dataState.birthdate && isHere(dataState.status) && (
           <div className="loc_age">
             Возраст: <span>{prepareAge(dataState.birthdate)}</span>
           </div>
         )}
-        {!dataState.birthdate && (
+        {!dataState.birthdate && isHere(dataState.status) && (
           <div className="loc_age">
             Возраст: <span>(точный возраст неизвестен)</span>
           </div>
@@ -347,7 +347,7 @@ const Pet: React.FC = () => {
               </div>
 
               <div className="loc_bottomWrapper">
-                {renderDisclaimer()}
+                {isHere(dataState.status) && renderDisclaimer()}
                 {!!anotherImagesState && !!anotherImagesState.length && !!dataState && (
                   <>
                     {isLoadingState ? (

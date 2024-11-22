@@ -71,6 +71,10 @@
   .loc_form {
     flex-direction: column;
 
+    .loc_right .loc_formSelectItem.loc--status {
+      z-index: 6;
+    }
+
     .loc_left, .loc_right {
       padding: 0 !important;
       width: 100%;
