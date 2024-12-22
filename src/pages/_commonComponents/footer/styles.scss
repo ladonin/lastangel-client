@@ -54,7 +54,7 @@
             margin-top: 8px;
             gap: 24px;
 
-            img {
+            img, svg {
               box-sizing: content-box;
               padding: 8px;
               background: $c_white;
@@ -136,7 +136,7 @@
             margin-top: calc(24px * var(--viewport-koeff));
             gap: calc(24px * var(--viewport-koeff));
 
-            img {
+            img, svg {
               padding: calc(16px * var(--viewport-koeff));
               border-radius: calc(4px * var(--viewport-koeff));
               height: calc(100px * var(--viewport-koeff));
