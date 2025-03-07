@@ -124,7 +124,7 @@ const OurPets = () => {
         ))}
         <SwiperSlide>
           <Link to={`${PAGES.PETS}`} className="loc_seeAll link_text">
-            Смотреть все
+            Еще
           </Link>
         </SwiperSlide>
       </Swiper>
@@ -256,7 +256,7 @@ const OurPets = () => {
           Наши питомцы
         </Link>
         <Link to={PAGES.PETS} className="link_text loc_seeAll">
-          Смотреть все
+          Еще
           <ArrowRight />
         </Link>
       </div>

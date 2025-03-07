@@ -72,6 +72,8 @@ import AdministrationFeedbacks from "pages/administration/feedbacks";
 
 import AdministrationMetatagsUpdate from "pages/administration/metatags/update";
 
+import AdministrationWatersignCreate from "pages/administration/watersign/create";
+
 import LayoutClient from "pages/_layoutClient";
 import LayoutAdministration from "pages/_layoutAdministration";
 
@@ -160,6 +162,10 @@ const App: React.FC = () => (
       <Route
         path={`${PAGES.ADMINISTRATION_METATAGS_UPDATE}`}
         element={<AdministrationMetatagsUpdate />}
+      />
+      <Route
+        path={`${PAGES.ADMINISTRATION_WATERSIGN_CREATE}`}
+        element={<AdministrationWatersignCreate />}
       />
     </Route>
 

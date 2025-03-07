@@ -188,7 +188,7 @@ export default function Index() {
                 <div className="loc_logoText">
                   <h1 className="loc_1">Последний ангел</h1>
                   <h2 className="loc_2">
-                    приют для бездомных животных и инвалидов <br /> в г. Александров
+                    Приют для бездомных животных и инвалидов <br /> в г. Александров
                   </h2>
                 </div>
 

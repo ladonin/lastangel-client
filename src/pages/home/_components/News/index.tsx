@@ -15,10 +15,13 @@ import Tooltip from "components/Tooltip";
 import ArrowRight from "icons/arrowRight.svg";
 import PinIcon from "icons/pin.png";
 import "./style.scss";
+import { CollectionsApi } from "api/collections";
+import { COLLECTIONS_STATUS } from "constants/collections";
 
 const News = () => {
   const navigate = useNavigate();
   const [listState, setListState] = useState<TGetListOutput>([]);
+  const [limitListState, setLimitListState] = useState<number | null>(null);
 
   const renderContent = (data: TItem) => (
     <div
@@ -51,15 +54,30 @@ const News = () => {
   );
 
   useEffect(() => {
-    NewsApi.getList({
+    // Узнаем сколько коллекций будем показывать
+    // Если мало, то выведем побольше новостей в таком случае
+    CollectionsApi.getList({
+      status: COLLECTIONS_STATUS.PUBLISHED,
       offset: 0,
-      limit: 4,
-      orderComplex: "ismajor desc, id desc",
-      excludeStatus: 2 /* isAdmin() ? undefined : 2 */,
+      limit: 3,
+      order: "ismajor",
+      order_type: "desc",
     }).then((res) => {
-      setListState(res);
+      setLimitListState(7 - res.length);
     });
   }, []);
+
+  useEffect(() => {
+    limitListState &&
+      NewsApi.getList({
+        offset: 0,
+        limit: limitListState,
+        orderComplex: "ismajor desc, id desc",
+        excludeStatus: 2 /* isAdmin() ? undefined : 2 */,
+      }).then((res) => {
+        setListState(res);
+      });
+  }, [limitListState]);
 
   return listState.length ? (
     <div className="page-home_news">

@@ -114,7 +114,7 @@
     .loc_selectFile {
       margin-bottom: calc(32px * var(--viewport-koeff));
       font-size: calc(32px * var(--viewport-koeff));
-      border-radius: calc(4px * var(--viewport-koeff));
+      border-radius: calc(16px * var(--viewport-koeff));
       line-height: calc(56px * var(--viewport-koeff));
       padding: calc(16px * var(--viewport-koeff)) calc(48px * var(--viewport-koeff));
     }

@@ -63,7 +63,7 @@ export const monthMappings = [
   "Сентябрь",
   "Октябрь",
   "Ноябрь",
-  "Декабрь"
+  "Декабрь",
 ];
 export const monthMappingsRodit = [
   "Января",
@@ -77,7 +77,7 @@ export const monthMappingsRodit = [
   "Сентября",
   "Октября",
   "Ноября",
-  "Декабря"
+  "Декабря",
 ];
 
 // => 25 марта
@@ -113,7 +113,7 @@ export const capitalizeFirtsLetter = (word: string) => word.charAt(0).toUpperCas
 // 1234567.99 => 1 234 567.99
 // 1234567,99 => 1 234 567.99
 export const numberFriendly = (value?: string | number) => {
-  if (!value) return 0;
+  if (!value) return "";
 
   if (typeof value === "number") value = String(value);
 
@@ -248,7 +248,6 @@ export const preparePhoneInputVal = (val: string) => {
 // Не хочу ради этого ставить lodash
 export const objectsAreEqual = (obj1: any, obj2: any) =>
   JSON.stringify(obj1) === JSON.stringify(obj2);
-
 
 /*
 Клонируем объект

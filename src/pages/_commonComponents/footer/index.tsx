@@ -9,6 +9,7 @@ import { isAuthorized } from "utils/user";
 import PAGES from "routing/routes";
 import LessHomelessImage from "./friends/lesshomeless.png";
 import ZoozavrImage from "./friends/zoozavr.svg";
+import DomdobraImage from "./friends/domdobra.svg";
 import DetmirImage from "./friends/detmir.jpg";
 import "./styles.scss";
 
@@ -40,11 +41,14 @@ const renderFriendsList = () => (
         <a href="https://zoozavr.ru" target="_blank" rel="noreferrer">
           <ZoozavrImage />
         </a>
-        <a href="https://bf.detmir.ru/" target="_blank" rel="noreferrer">
+        <a href="https://bf.detmir.ru" target="_blank" rel="noreferrer">
           <img alt="загружаю" src={DetmirImage} />
         </a>
-        <a href="https://less-homeless.com/" target="_blank" rel="noreferrer">
+        <a href="https://less-homeless.com" target="_blank" rel="noreferrer">
           <img alt="загружаю" src={LessHomelessImage} />
+        </a>
+        <a href="https://domdobra.org" target="_blank" rel="noreferrer">
+          <DomdobraImage />
         </a>
       </div>
     </div>

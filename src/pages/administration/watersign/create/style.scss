@@ -1,0 +1,103 @@
+.page-administration_watersign_create {
+
+  h1 {
+    margin: 16px 0 32px 0;
+  }
+
+  .loc_wrapper_textForm {
+    input[type=file] {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      display: block;
+      width: 0;
+      height: 0;
+    }
+
+    .loc_selectFile {
+      position: relative;
+      display: inline-block;
+      width: fit-content;
+      cursor: pointer;
+      outline: none;
+      text-decoration: none;
+      font-size: 14px;
+      vertical-align: middle;
+      color: $c_white;
+      text-align: center;
+      border-radius: 4px;
+      background-color: $c_greenMedium;
+      line-height: 24px;
+      padding: 8px 16px;
+      box-sizing: border-box;
+      border: none;
+      transition: $transition;
+
+      &.loc_isBusy {
+        background-color: $c_lagunaGreyLight;
+      }
+    }
+
+    .loc_formInputItem {
+      margin-bottom: 24px;
+      width: 26%;
+
+      input {
+        width: 20%;
+      }
+
+      label {
+        width: 80%;
+      }
+    }
+
+    .loc_buttons {
+      display: flex;
+      margin-top: 36px;
+    }
+  }
+}
+
+
+.layout.loc--isMobile .page-administration_watersign_create {
+  width: 100%;
+  padding: 0;
+
+  h1 {
+    margin: calc(16px * var(--viewport-koeff)) 0 calc(32px * var(--viewport-koeff)) 0;
+  }
+
+  .loc_buttons {
+    margin: calc(64px * var(--viewport-koeff)) 0 calc(24px * var(--viewport-koeff)) 0;
+  }
+
+  .loc_wrapper_textForm {
+
+    .loc_label {
+      .loc_selectFile {
+        margin-bottom: calc(32px * var(--viewport-koeff));
+        font-size: calc(32px * var(--viewport-koeff));
+        border-radius: calc(16px * var(--viewport-koeff));
+        line-height: calc(56px * var(--viewport-koeff));
+        padding: calc(16px * var(--viewport-koeff)) calc(48px * var(--viewport-koeff));
+      }
+    }
+
+    .loc_formInputItem {
+      margin-bottom: calc(32px * var(--viewport-koeff));
+      width: 55%;
+
+      input {
+        width: 20%;
+      }
+
+      label {
+        width: 80%;
+      }
+    }
+
+    .loc_buttons {
+      margin-top: calc(36px * var(--viewport-koeff));
+    }
+  }
+}

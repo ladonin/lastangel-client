@@ -54,6 +54,7 @@ const LayoutAdministration: React.FC = () => {
     pathname !== PAGES.ADMINISTRATION_CLINIC_PHOTOS_UPDATE &&
     pathname !== PAGES.ADMINISTRATION_ACQUAINTANCESHIP_UPDATE &&
     pathname !== PAGES.ADMINISTRATION_METATAGS_UPDATE &&
+    pathname !== PAGES.ADMINISTRATION_WATERSIGN_CREATE &&
     pathname !== PAGES.ADMINISTRATION_VOLUNTEER_CREATE &&
     pathname.indexOf(PAGES.ADMINISTRATION_VOLUNTEER_UPDATE) === -1;
 
@@ -140,6 +141,16 @@ const LayoutAdministration: React.FC = () => {
           </Button>
           {showAddButton() && (
             <div className="loc_buttons">
+              <Button
+                theme={ButtonThemes.GHOST_BORDER}
+                size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
+                className="loc_addWaterSignButton"
+                onClick={() => {
+                  navigate(PAGES.ADMINISTRATION_WATERSIGN_CREATE);
+                }}
+              >
+                Добавить водяной знак
+              </Button>
               <Button
                 theme={ButtonThemes.GHOST_BORDER}
                 size={isMobileState ? ButtonSizes.GIANT : ButtonSizes.SMALL}
@@ -444,7 +455,6 @@ const LayoutAdministration: React.FC = () => {
             </div>
           )}
         </div>
-
         <Outlet context={{ checkMail }} />
       </div>
       <Footer />

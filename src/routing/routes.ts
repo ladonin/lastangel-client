@@ -50,6 +50,8 @@ const PAGES = {
   ADMINISTRATION_ACQUAINTANCESHIP_UPDATE: "/administration/acquaintanceship/update",
   ADMINISTRATION_METATAGS_UPDATE: "/administration/metatags/update",
 
+  ADMINISTRATION_WATERSIGN_CREATE: "/administration/watersign/create",
+
   ADMINISTRATION_FEEDBACKS: "/administration/feedbacks",
 };
 
