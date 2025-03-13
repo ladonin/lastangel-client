@@ -35,7 +35,7 @@ const InfoBlock = () => {
           navigate(PAGES.PETS);
         }}
       >
-        <img alt="загружаю" src={OurPetsIcon} />{" "}
+        <img alt="загружаю" src={PetsAtHomeIcon} />{" "}
         <div className="loc_right">
           <div className="loc_text">Сейчас {isMobile === false && <br />}в приюте</div>
           <div className="loc_value">{dataState?.at_shelter ? dataState.at_shelter : "-"}</div>
@@ -48,7 +48,7 @@ const InfoBlock = () => {
           navigate(PAGES.PETS);
         }}
       >
-        <img alt="загружаю" src={PetsAtHomeIcon} />{" "}
+        <img alt="загружаю" src={OurPetsIcon} />{" "}
         <div className="loc_right">
           <div className="loc_text">
             Обрели {isMobile === false && <br />}

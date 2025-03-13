@@ -59,7 +59,7 @@ const InputNumber: React.FC<TProps> = ({
       }
 
       onChange(value);
-      setValueState(numberFriendly(value));
+      setValueState(numberFriendly(value, false));
       return;
     }
 
@@ -71,7 +71,7 @@ const InputNumber: React.FC<TProps> = ({
 
     if (withMinus && min < 0) value = `-${value}`;
     onChange(value);
-    setValueState(numberFriendly(value));
+    setValueState(numberFriendly(value, false));
   };
 
   const renderValue = () => {

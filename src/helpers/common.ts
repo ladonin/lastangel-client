@@ -112,8 +112,8 @@ export const capitalizeFirtsLetter = (word: string) => word.charAt(0).toUpperCas
 // 1234567 => 1 234 567
 // 1234567.99 => 1 234 567.99
 // 1234567,99 => 1 234 567.99
-export const numberFriendly = (value?: string | number) => {
-  if (!value) return "";
+export const numberFriendly = (value?: string | number, numberRequired = true) => {
+  if (!value) return numberRequired ? 0 : "";
 
   if (typeof value === "number") value = String(value);
 
