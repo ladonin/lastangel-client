@@ -31,12 +31,12 @@ const MENU_ITEMS: TMenuItem[] = [
   { title: "Сборы", link: PAGES.COLLECTIONS, inMobileSubMenu: false, inDesctopSubMenu: false },
   { title: "Новости", link: PAGES.NEWS, inMobileSubMenu: 1, inDesctopSubMenu: false },
   { title: "Истории", link: PAGES.STORIES, inMobileSubMenu: 1, inDesctopSubMenu: false },
-  { title: "Документы", link: PAGES.DOCUMENTS, inMobileSubMenu: 1, inDesctopSubMenu: true },
   { title: "Помощь", link: PAGES.HELP, inMobileSubMenu: 1, inDesctopSubMenu: false },
   { title: "Фин. отчет", link: PAGES.FINREPORT, inMobileSubMenu: 1, inDesctopSubMenu: false },
   { title: "Клиника", link: PAGES.CLINIC, inMobileSubMenu: 2, inDesctopSubMenu: true },
+  { title: "Документы", link: PAGES.DOCUMENTS, inMobileSubMenu: 1, inDesctopSubMenu: false },
   { title: "Контакты", link: PAGES.CONTACTS, inMobileSubMenu: false, inDesctopSubMenu: false },
-  { title: "Волонтеры", link: PAGES.VOLUNTEERS, inMobileSubMenu: 2, inDesctopSubMenu: false },
+  { title: "Волонтеры", link: PAGES.VOLUNTEERS, inMobileSubMenu: 2, inDesctopSubMenu: true },
 ];
 
 const LINKS_BELONGINGS = {

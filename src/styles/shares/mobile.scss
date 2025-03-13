@@ -13,6 +13,8 @@
 
   ul:not(.react-tabs__tab-list) {
     padding-left: calc(32px * var(--viewport-koeff));
+    margin-top: calc(24px * var(--viewport-koeff));
+    margin-bottom: calc(24px * var(--viewport-koeff));
   }
 
   .swiper-button-prev,

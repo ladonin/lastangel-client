@@ -72,7 +72,7 @@
 
   .loc_rekviz {
     .loc_image {
-      height: 206px; // 228 #REKVIZITS
+      height: 228px;
     }
 
     .loc_top {
@@ -84,10 +84,6 @@
 
       .loc_item {
         font-size: 17px;
-
-        &:first-child {
-          margin-bottom: 16px;
-        }
 
         .loc_docs {
           padding: 0 16px;
@@ -117,7 +113,7 @@
     }
   }
 
-  .loc_item_other {
+  .loc_item_other, .loc_item_building {
     margin-top: 16px;
     width: 100%;
 
@@ -136,6 +132,22 @@
       .loc_name {
         font-weight: 600;
         margin-right: 4px;
+      }
+    }
+  }
+
+  .loc_item_building {
+    padding: 16px;
+    background-color: $c_pistachioLighter;
+    border-radius: 8px;
+    border: 1px solid $c_pistachioMediumDark;
+
+    .loc_title {
+      img {
+        display: inline-block;
+        height: 25px;
+        vertical-align: bottom;
+        margin-right: 8px;
       }
     }
   }
@@ -211,7 +223,7 @@
     }
   }
 
-  .loc_item_other {
+  .loc_item_other, .loc_item_building {
     padding: calc(32px * var(--viewport-koeff)) 0;
     margin-top: 0;
 
@@ -230,5 +242,10 @@
         margin-right: calc(8px * var(--viewport-koeff));
       }
     }
+  }
+
+  .loc_item_building {
+    padding: calc(24px * var(--viewport-koeff));
+    border-radius: calc(8px * var(--viewport-koeff));
   }
 }

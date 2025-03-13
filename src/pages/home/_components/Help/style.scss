@@ -72,7 +72,8 @@
     }
   }
 
-  .loc_item_other {
+
+  .loc_item_other, .loc_item_building {
     padding: 16px;
     width: 100%;
     background-color: $c_sand;
@@ -89,6 +90,19 @@
 
       .loc_name {
         font-weight: 600;
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .loc_item_building {
+    background-color: $c_pistachioLighter;
+
+    .loc_title {
+      img {
+        display: inline-block;
+        height: 25px;
+        vertical-align: bottom;
         margin-right: 8px;
       }
     }
@@ -117,7 +131,7 @@
     }
   }
 
-  .loc_item_other {
+  .loc_item_other, .loc_item_building {
     padding: calc(24px * var(--viewport-koeff));
 
     .loc_title {
@@ -135,6 +149,17 @@
       }
     }
   }
+
+
+  .loc_item_building {
+    .loc_title {
+      img {
+        height: calc(40px * var(--viewport-koeff));
+        margin-right: calc(8px * var(--viewport-koeff));
+      }
+    }
+  }
+
 
   .loc_content {
     .loc_image {

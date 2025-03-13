@@ -12,6 +12,7 @@ import Image from "icons/help.jpg";
 import ImageMobile from "icons/helpMobile.jpg";
 import DocsIcon from "icons/docs.png";
 import ArrowRight from "icons/arrowRight.svg";
+import WarningIcon from "icons/warning.png";
 import "./style.scss";
 
 const Help = () => {
@@ -48,6 +49,21 @@ const Help = () => {
             <span>
               расскажите о нас в социальных сетях, поделитесь любой нашей записью или дайте ссылку
               на сайт, расскажите о нас знакомым и друзьям.
+            </span>
+          </div>
+        </div>
+
+        <div className="loc_item_building">
+          <div className="loc_title">
+            <img alt="загружаю" src={WarningIcon} /> Информация по вопросам строительства нового
+            приюта:
+          </div>
+          <div className="loc_item">
+            <span>
+              На сегодняшний момент финансовым директором приюта является{" "}
+              <b>Шибаева Галина Александровна</b> и все вопросы по строительству ведет она.
+              <br />
+              Тел.: 8 (910) 099-07-57
             </span>
           </div>
         </div>

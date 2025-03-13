@@ -17,6 +17,7 @@ import Image from "icons/help.jpg";
 import ImageMobile from "icons/helpMobile.jpg";
 import DocsIcon from "icons/docs.png";
 import PrayIcon from "icons/pray.png";
+import WarningIcon from "icons/warning.png";
 import InvalidIcon2 from "./icons/2.png";
 import InvalidIcon4 from "./icons/4.png";
 import InvalidIcon7 from "./icons/7.png";
@@ -193,6 +194,20 @@ const Help: React.FC = () => {
               <span>
                 расскажите о нас в социальных сетях, поделитесь любой нашей записью или дайте ссылку
                 на сайт, расскажите о нас знакомым и друзьям.
+              </span>
+            </div>
+          </div>
+          <div className="loc_item_building">
+            <div className="loc_title">
+              <img alt="загружаю" src={WarningIcon} /> Информация по вопросам строительства нового
+              приюта:
+            </div>
+            <div className="loc_item">
+              <span>
+                На сегодняшний момент финансовым директором приюта является{" "}
+                <b>Шибаева Галина Александровна</b> и все вопросы по строительству ведет она.
+                <br />
+                Тел.: 8 (910) 099-07-57
               </span>
             </div>
           </div>
