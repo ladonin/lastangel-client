@@ -5,4 +5,3 @@
 - Typescript 5
 - Redux
 - Redux-toolkit
-- Redux-saga
